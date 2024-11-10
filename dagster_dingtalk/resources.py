@@ -99,7 +99,7 @@ class DingTalkMultiClient:
 
 
 # noinspection NonAsciiCharacters
-class DingTalkResource(ConfigurableResource):
+class DingTalkAPIResource(ConfigurableResource):
     """
     [钉钉服务端 API](https://open.dingtalk.com/document/orgapp/api-overview) 企业内部应用部分的第三方封装。
     通过此资源，可以调用部分钉钉服务端API。
