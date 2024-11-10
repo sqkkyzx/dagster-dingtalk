@@ -107,12 +107,12 @@ class DingTalkAPIResource(ConfigurableResource):
     注意：不包含全部的API端点。
     """
 
-    AppID: Optional[str] = Field(default=None, description="应用应用唯一标识 AppID，作为缓存标识符使用。不传入则不缓存鉴权。")
+    AppID: str = Field(description="应用应用唯一标识 AppID，作为缓存标识符使用。不传入则不缓存鉴权。")
     AgentID: Optional[int] = Field(default=None, description="原企业内部应用AgentId ，部分API会使用到。")
     AppName: Optional[str] = Field(default=None, description="应用名。")
     ClientId: str = Field(description="应用的 Client ID (原 AppKey 和 SuiteKey)")
     ClientSecret: str = Field(description="应用的 Client Secret (原 AppSecret 和 SuiteSecret)")
-    RobotCode: str = Field(description="应用的机器人 RobotCode")
+    RobotCode: Optional[str] = Field(default=None, description="应用的机器人 RobotCode")
 
     _client: DingTalkMultiClient = PrivateAttr()
 
