@@ -1,4 +1,4 @@
-from dagster import In, OpExecutionContext
+from dagster import In, OpExecutionContext, op
 from pydantic import Field
 
 
