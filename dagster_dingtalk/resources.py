@@ -12,19 +12,19 @@ import httpx
 
 from dagster import (
     ConfigurableResource,
-    InitResourceContext,
+    InitResourceContext, ResourceDependency,
 )
 from httpx import Client
-from pydantic import Field, PrivateAttr
+from pydantic import Field, PrivateAttr, BaseModel
 
 
 class DingTalkWebhookResource(ConfigurableResource):
-    base_url: str = Field(default="https://oapi.dingtalk.com/robot/send", description="Webhook的通用地址，无需更改")
     access_token: str = Field(description="Webhook地址中的 access_token 部分")
     secret: Optional[str] = Field(default=None, description="如使用加签安全配置，需传签名密钥")
+    alias: Optional[str] = Field(default=None, description="如提供别名，将来可以使用别名进行选择")
+    base_url: str = Field(default="https://oapi.dingtalk.com/robot/send", description="Webhook的通用地址，无需更改")
 
     def _sign_webhook_url(self):
-
         if self.secret is None:
             return self.webhook_url
         else:
@@ -88,7 +88,60 @@ class DingTalkWebhookResource(ConfigurableResource):
         httpx.post(url=self.webhook_url, json={"msgtype": "feedCard", "feedCard": {"links": links_data}})
 
 
-class DingTalkMultiClient:
+# noinspection NonAsciiCharacters
+class MultiDingTalkWebhookResource(ConfigurableResource):
+    """
+    该资源提供了预先定义多个 webhook 资源，并在运行时动态选择的方法。
+
+    使用示例：
+
+    ```
+    from dagster_dingtalk import DingTalkResource, MultiDingTalkResource
+
+    app_apple = DingTalkResource(AppID="apple", ClientId="", ClientSecret="")
+    app_book = DingTalkResource(AppID="book", ClientId="", ClientSecret="")
+
+    @op(required_resource_keys={"dingtalk"}, ins={"app_id":In(str)})
+    def print_app_id(context:OpExecutionContext, app_id):
+        dingtalk:DingTalkResource = context.resources.dingtalk
+        select_app = dingtalk.select_app(app_id)
+        context.log.info(dingtalk_app.AppName)
+
+    @job
+    def print_app_id_job():
+        print_app_id()
+
+    defs = Definitions(
+        jobs=[print_app_id_job],
+        resources={
+            "dingtalk": MultiDingTalkResource(
+                Apps=[app_apple, app_book]
+            )
+        },
+    )
+    ```
+
+    """
+
+    Webhooks: ResourceDependency[List[DingTalkWebhookResource]] = Field(description="多个 Webhook 资源的列表")
+
+    _webhooks = PrivateAttr()
+
+    def setup_for_execution(self, context: InitResourceContext) -> None:
+        _webhooks_token_key = {webhook.access_token:webhook for webhook in self.Webhooks}
+        _webhooks_alias_key = {webhook.alias:webhook for webhook in self.Webhooks if webhook.alias}
+        self._webhooks = _webhooks_token_key | _webhooks_alias_key
+
+    def select(self, key:str = "_FIRST_"):
+        try:
+            if key == "_FIRST_":
+                return self.Webhooks[0]
+            return self._webhooks[key]
+        except KeyError:
+            raise f"该 AccessToken 或 别名 <{key}> 不存在于提供的 Webhooks 中。请使用 DingTalkWebhookResource 定义单个 Webhook 后，将其加入 Webhooks 。"
+
+
+class DingTalkClient:
     def __init__(self, access_token: str, app_id: str, agent_id: int, robot_code: str) -> None:
         self.access_token: str = access_token
         self.app_id: str = app_id
@@ -99,7 +152,7 @@ class DingTalkMultiClient:
 
 
 # noinspection NonAsciiCharacters
-class DingTalkAPIResource(ConfigurableResource):
+class DingTalkResource(ConfigurableResource):
     """
     [钉钉服务端 API](https://open.dingtalk.com/document/orgapp/api-overview) 企业内部应用部分的第三方封装。
     通过此资源，可以调用部分钉钉服务端API。
@@ -112,29 +165,30 @@ class DingTalkAPIResource(ConfigurableResource):
     AppName: Optional[str] = Field(default=None, description="应用名。")
     ClientId: str = Field(description="应用的 Client ID (原 AppKey 和 SuiteKey)")
     ClientSecret: str = Field(description="应用的 Client Secret (原 AppSecret 和 SuiteSecret)")
-    RobotCode: Optional[str] = Field(default=None, description="应用的机器人 RobotCode")
+    RobotCode: Optional[str] = Field(default=None, description="应用的机器人 RobotCode，不传时使用 self.ClientId ")
 
-    _client: DingTalkMultiClient = PrivateAttr()
+    _client: DingTalkClient = PrivateAttr()
 
     @classmethod
     def _is_dagster_maintained(cls) -> bool:
         return False
 
-    def _get_access_token(self, context: InitResourceContext) -> str:
-        access_token_cache = Path("~/.dingtalk_cache")
+    def _get_access_token(self) -> str:
+        access_token_cache = Path("/tmp/.dingtalk_cache")
 
-        if access_token_cache.exists():
+        try:
             with open(access_token_cache, 'rb') as f:
                 all_access_token: Dict[str, Tuple[str, int]] = pickle.loads(f.read())
-        else:
+                access_token, expire_in = all_access_token.get(self.AppID, ('', 0))
+        except Exception as e:
+            print(e)
             all_access_token = {}
-
-        access_token, expire_in = all_access_token.get(self.AppID, ('', 0))
+            access_token, expire_in = all_access_token.get(self.AppID, ('', 0))
 
         if access_token and expire_in < int(time.time()):
             return access_token
         else:
-            context.log.info(f"应用{self.AppName}<{self.AppID}> 鉴权缓存过期或不存在，正在重新获取...")
+            print(f"应用{self.AppName}<{self.AppID}> 鉴权缓存过期或不存在，正在重新获取...")
             response = httpx.post(
                 url="https://api.dingtalk.com/v1.0/oauth2/accessToken",
                 json={"appKey": self.ClientId, "appSecret": self.ClientSecret},
@@ -143,34 +197,92 @@ class DingTalkAPIResource(ConfigurableResource):
             expire_in:int = response.json().get("expireIn") + int(time.time()) - 60
             with open(access_token_cache, 'wb') as f:
                 all_access_token[self.AppID] = (access_token, expire_in)
-                f.write(pickle.dumps(access_token_cache))
+                f.write(pickle.dumps(all_access_token))
             return access_token
 
+    def _init_client(self):
+        if not hasattr(self, '_client'):
+            self._client = DingTalkClient(
+                self._get_access_token(),
+                self.AppID,
+                self.AgentID,
+                self.RobotCode or self.ClientId
+            )
+
     def setup_for_execution(self, context: InitResourceContext) -> None:
-        self._client = DingTalkMultiClient(
-            self._get_access_token(context),
-            self.AppID,
-            self.AgentID,
-            self.RobotCode,
-        )
+        self._init_client()
 
     def teardown_after_execution(self, context: InitResourceContext) -> None:
         self._client.api.close()
         self._client.oapi.close()
 
     def 智能人事(self):
+        self._init_client()
         return API_智能人事(self._client)
 
     def 通讯录管理(self):
+        self._init_client()
         return API_通讯录管理(self._client)
 
     def 文档文件(self):
+        self._init_client()
         return API_文档文件(self._client)
 
 
 # noinspection NonAsciiCharacters
+class MultiDingTalkResource(ConfigurableResource):
+    """
+    该资源提供了预先定义多个应用资源，并在运行时动态选择的方法。
+
+    使用示例：
+
+    ```
+    from dagster_dingtalk import DingTalkResource, MultiDingTalkResource
+
+    app_apple = DingTalkResource(AppID="apple", ClientId="", ClientSecret="")
+    app_book = DingTalkResource(AppID="book", ClientId="", ClientSecret="")
+
+    @op(required_resource_keys={"dingtalk"}, ins={"app_id":In(str)})
+    def print_app_id(context:OpExecutionContext, app_id):
+        dingtalk:DingTalkResource = context.resources.dingtalk
+        select_app = dingtalk.select_app(app_id)
+        context.log.info(dingtalk_app.AppName)
+
+    @job
+    def print_app_id_job():
+        print_app_id()
+
+    defs = Definitions(
+        jobs=[print_app_id_job],
+        resources={
+            "dingtalk": MultiDingTalkResource(
+                Apps=[app_apple, app_book]
+            )
+        },
+    )
+    ```
+
+    """
+
+    Apps: ResourceDependency[List[DingTalkResource]] = Field(description="多个单应用资源的列表")
+
+    _apps = PrivateAttr()
+
+    def setup_for_execution(self, context: InitResourceContext) -> None:
+        self._apps = {app.AppID:app for app in self.Apps}
+
+    def select(self, app_id:str = "_FIRST_"):
+        try:
+            if app_id == "_FIRST_":
+                return self.Apps[0]
+            return self._apps[app_id]
+        except KeyError:
+            raise f"该 AppID <{app_id}> 不存在于提供的 AppLists 中。请使用 DingTalkResource 定义单个 App 后，将其加入 AppLists 。"
+
+
+# noinspection NonAsciiCharacters
 class API_智能人事:
-    def __init__(self, _client:DingTalkMultiClient):
+    def __init__(self, _client:DingTalkClient):
         self._client = _client
 
     def 花名册_获取花名册元数据(self):
@@ -228,7 +340,7 @@ class API_智能人事:
 
 # noinspection NonAsciiCharacters
 class API_通讯录管理:
-    def __init__(self, _client:DingTalkMultiClient):
+    def __init__(self, _client:DingTalkClient):
         self._client = _client
 
     def 查询用户详情(self, user_id:str, language:str = "zh_CN"):
@@ -245,7 +357,7 @@ class API_通讯录管理:
 
 # noinspection NonAsciiCharacters
 class API_文档文件:
-    def __init__(self, _client:DingTalkMultiClient):
+    def __init__(self, _client:DingTalkClient):
         self._client = _client
 
     def 媒体文件_上传媒体文件(self, file_path:Path|str, media_type:Literal['image', 'voice', 'video', 'file']):
