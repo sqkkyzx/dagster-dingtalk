@@ -138,7 +138,7 @@ class MultiDingTalkWebhookResource(ConfigurableResource):
                 webhook = self.Webhooks[0]
             else:
                 webhook = self._webhooks[key]
-            webhook.init_webhook_url()
+            webhook.webhook_url()
             return webhook
         except KeyError:
             raise f"该 AccessToken 或 别名 <{key}> 不存在于提供的 Webhooks 中。请使用 DingTalkWebhookResource 定义单个 Webhook 后，将其加入 Webhooks 。"
