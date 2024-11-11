@@ -14,17 +14,7 @@ Resource 和若干 Dagster Op 的封装。
 [钉钉开放平台 | 自定义机器人发送消息的消息类型](https://open.dingtalk.com/document/orgapp/custom-bot-send-message-type) 。
 
 
-### DingTalkAPIResource
+### DingTalkResource
 
 该 Dagster 资源允许定义一个钉钉的 API Client，更加便捷地调用钉钉服务端 API (
 仅企业内部应用)
-
-
-### DingTalkWebhookOp
-
-该类提供一些预定义的 Dagster Op ，以便于快速调用。
-
-需要注意的是，这些 Op 都没有静态声明 `required_resource_keys`，而是需要根据
-上下文配置 `context.op_config` 中的 `dingtalk_webhook_key` 键来动态查找
-资源。在使用时，必须在 Job 中提供 `resource_defs` ，或在 `User Code` 全局
-定义会使用到的 `dingtalk_webhook_key`。
