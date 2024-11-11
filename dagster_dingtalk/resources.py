@@ -15,7 +15,7 @@ from dagster import (
     InitResourceContext, ResourceDependency,
 )
 from httpx import Client
-from pydantic import Field, PrivateAttr, BaseModel
+from pydantic import Field, PrivateAttr
 
 
 class DingTalkWebhookResource(ConfigurableResource):
@@ -24,9 +24,9 @@ class DingTalkWebhookResource(ConfigurableResource):
     alias: Optional[str] = Field(default=None, description="如提供别名，将来可以使用别名进行选择")
     base_url: str = Field(default="https://oapi.dingtalk.com/robot/send", description="Webhook的通用地址，无需更改")
 
-    def _sign_webhook_url(self):
+    def webhook_url(self):
         if self.secret is None:
-            return self.webhook_url
+            return f"{self.base_url}?access_token={self.access_token}"
         else:
             timestamp = round(time.time() * 1000)
             hmac_code = hmac.new(
@@ -46,12 +46,12 @@ class DingTalkWebhookResource(ConfigurableResource):
             at["atUserIds"] = at_user_ids
         if at_mobiles:
             at["atMobiles"] = at_mobiles
-        httpx.post(url=self.webhook_url, json={"msgtype": "text", "text": {"content": text}, "at": at})
+        httpx.post(url=self.webhook_url(), json={"msgtype": "text", "text": {"content": text}, "at": at})
 
     def send_link(self, text: str, message_url:str, title:str|None = None, pic_url:str = ""):
         title = title or self._gen_title(text)
         httpx.post(
-            url=self.webhook_url,
+            url=self.webhook_url(),
             json={"msgtype": "link", "link": {"title": title, "text": text, "picUrl": pic_url, "messageUrl": message_url}}
         )
 
@@ -64,7 +64,7 @@ class DingTalkWebhookResource(ConfigurableResource):
             at["atUserIds"] = at_user_ids
         if at_mobiles:
             at["atMobiles"] = at_mobiles
-        httpx.post(url=self.webhook_url,json={"msgtype": "markdown", "markdown": {"title": title, "text": text}, "at": at})
+        httpx.post(url=self.webhook_url(),json={"msgtype": "markdown", "markdown": {"title": title, "text": text}, "at": at})
 
     def send_action_card(self, text: List[str]|str, title:str|None = None, btn_orientation:Literal["0","1"] = "0",
                          single_jump:Tuple[str,str]|None = None, btns_jump:List[Tuple[str,str]]|None = None):
@@ -73,10 +73,10 @@ class DingTalkWebhookResource(ConfigurableResource):
         action_card = {"title": title, "text": text, "btnOrientation": btn_orientation}
         if btns_jump:
             action_card["btns"] = [{"title": action_title, "actionURL": action_url} for action_title, action_url in btns_jump]
-            httpx.post(url=self.webhook_url, json={"msgtype": "actionCard", "actionCard": action_card})
+            httpx.post(url=self.webhook_url(), json={"msgtype": "actionCard", "actionCard": action_card})
         elif single_jump:
             action_card["singleTitle"], action_card["singleURL"] = single_jump
-            httpx.post(url=self.webhook_url, json={"msgtype": "actionCard", "actionCard": action_card})
+            httpx.post(url=self.webhook_url(), json={"msgtype": "actionCard", "actionCard": action_card})
         else:
             pass
 
@@ -85,7 +85,7 @@ class DingTalkWebhookResource(ConfigurableResource):
             {"title": title, "messageURL": message_url, "picURL": pic_url}
             for title, message_url, pic_url in links
         ]
-        httpx.post(url=self.webhook_url, json={"msgtype": "feedCard", "feedCard": {"links": links_data}})
+        httpx.post(url=self.webhook_url(), json={"msgtype": "feedCard", "feedCard": {"links": links_data}})
 
 
 # noinspection NonAsciiCharacters
@@ -134,9 +134,12 @@ class MultiDingTalkWebhookResource(ConfigurableResource):
 
     def select(self, key:str = "_FIRST_"):
         try:
-            if key == "_FIRST_":
-                return self.Webhooks[0]
-            return self._webhooks[key]
+            if key == "_FIRST_" or key is None:
+                webhook = self.Webhooks[0]
+            else:
+                webhook = self._webhooks[key]
+            webhook.init_webhook_url()
+            return webhook
         except KeyError:
             raise f"该 AccessToken 或 别名 <{key}> 不存在于提供的 Webhooks 中。请使用 DingTalkWebhookResource 定义单个 Webhook 后，将其加入 Webhooks 。"
 
@@ -200,7 +203,7 @@ class DingTalkResource(ConfigurableResource):
                 f.write(pickle.dumps(all_access_token))
             return access_token
 
-    def _init_client(self):
+    def init_client(self):
         if not hasattr(self, '_client'):
             self._client = DingTalkClient(
                 self._get_access_token(),
@@ -210,22 +213,19 @@ class DingTalkResource(ConfigurableResource):
             )
 
     def setup_for_execution(self, context: InitResourceContext) -> None:
-        self._init_client()
+        self.init_client()
 
     def teardown_after_execution(self, context: InitResourceContext) -> None:
         self._client.api.close()
         self._client.oapi.close()
 
     def 智能人事(self):
-        self._init_client()
         return API_智能人事(self._client)
 
     def 通讯录管理(self):
-        self._init_client()
         return API_通讯录管理(self._client)
 
     def 文档文件(self):
-        self._init_client()
         return API_文档文件(self._client)
 
 
@@ -273,9 +273,12 @@ class MultiDingTalkResource(ConfigurableResource):
 
     def select(self, app_id:str = "_FIRST_"):
         try:
-            if app_id == "_FIRST_":
-                return self.Apps[0]
-            return self._apps[app_id]
+            if app_id == "_FIRST_" or app_id is None:
+                app = self.Apps[0]
+            else:
+                app = self._apps[app_id]
+            app.init_client()
+            return app
         except KeyError:
             raise f"该 AppID <{app_id}> 不存在于提供的 AppLists 中。请使用 DingTalkResource 定义单个 App 后，将其加入 AppLists 。"
 
@@ -285,14 +288,14 @@ class API_智能人事:
     def __init__(self, _client:DingTalkClient):
         self._client = _client
 
-    def 花名册_获取花名册元数据(self):
+    def 花名册_获取花名册元数据(self) -> dict:
         response = self._client.oapi.post(
             url="/topapi/smartwork/hrm/roster/meta/get",
             json={"agentid": self._client.agent_id},
         )
         return response.json()
 
-    def 花名册_获取员工花名册字段信息(self, user_id_list:List[str], field_filter_list:List[str]|None = None, text_to_select_convert:bool|None = None):
+    def 花名册_获取员工花名册字段信息(self, user_id_list:List[str], field_filter_list:List[str]|None = None, text_to_select_convert:bool|None = None) -> dict:
         body_dict = {"userIdList": user_id_list, "appAgentId": self._client.agent_id}
         if field_filter_list is not None:
             body_dict["fieldFilterList"] = field_filter_list
@@ -309,28 +312,28 @@ class API_智能人事:
         待离职: '5'
         无状态: '-1'
 
-    def 员工管理_获取待入职员工列表(self, offset:int, size:int):
+    def 员工管理_获取待入职员工列表(self, offset:int, size:int) -> dict:
         response = self._client.oapi.post(
             "/topapi/smartwork/hrm/employee/querypreentry",
             json={"offset": offset, "size": size},
         )
         return response.json()
 
-    def 员工管理_获取在职员工列表(self, status_list:List[在职员工状态], offset:int, size:int):
+    def 员工管理_获取在职员工列表(self, status_list:List[在职员工状态], offset:int, size:int) -> dict:
         response = self._client.oapi.post(
             "/topapi/smartwork/hrm/employee/querypreentry",
             json={"status_list": status_list, "offset": offset, "size": size},
         )
         return response.json()
 
-    def 员工管理_获取离职员工列表(self, next_token:int, max_results:int):
+    def 员工管理_获取离职员工列表(self, next_token:int, max_results:int) -> dict:
         response = self._client.api.get(
             "/v1.0/hrm/employees/dismissions",
             params={"nextToken": next_token, "maxResults": max_results},
         )
         return response.json()
 
-    def 员工管理_批量获取员工离职信息(self, user_id_list:List[str]):
+    def 员工管理_批量获取员工离职信息(self, user_id_list:List[str]) -> dict:
         response = self._client.api.get(
             "/v1.0/hrm/employees/dimissionInfo",
             params={"userIdList": user_id_list},
@@ -343,11 +346,11 @@ class API_通讯录管理:
     def __init__(self, _client:DingTalkClient):
         self._client = _client
 
-    def 查询用户详情(self, user_id:str, language:str = "zh_CN"):
+    def 查询用户详情(self, user_id:str, language:str = "zh_CN") -> dict:
         response = self._client.oapi.post(url="/topapi/v2/user/get", json={"language": language, "userid": user_id})
         return response.json()
 
-    def 查询离职记录列表(self, start_time:datetime, end_time:datetime|None, next_token:str, max_results:int):
+    def 查询离职记录列表(self, start_time:datetime, end_time:datetime|None, next_token:str, max_results:int) -> dict:
         params = {"startTime": start_time.strftime("%Y-%m-%dT%H:%M:%SZ"), "nextToken": next_token, "maxResults": max_results}
         if end_time is not None:
             params["endTime"] = end_time.strftime("%Y-%m-%dT%H:%M:%SZ")
@@ -360,7 +363,7 @@ class API_文档文件:
     def __init__(self, _client:DingTalkClient):
         self._client = _client
 
-    def 媒体文件_上传媒体文件(self, file_path:Path|str, media_type:Literal['image', 'voice', 'video', 'file']):
+    def 媒体文件_上传媒体文件(self, file_path:Path|str, media_type:Literal['image', 'voice', 'video', 'file']) -> dict:
         with open(file_path, 'rb') as f:
             response = self._client.oapi.post(url=f"/media/upload?type={media_type}", files={'media': f})
         return response.json()
