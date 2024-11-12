@@ -19,7 +19,7 @@
 - **secret** (str, optional):
     如使用加签安全配置，则需传签名密钥。默认值为 None。
 - **alias** (str, optional):
-    如提供别名，可以在使用 `MultiDingTalkWebhookResource` 中使用别名进行 webhook 选择。默认值为 None。
+    别名，仅用作标记。默认值为 None。
 - **base_url** (str, optional):
     通用地址，一般无需更改。默认值为 “https://oapi.dingtalk.com/robot/send”。
 
