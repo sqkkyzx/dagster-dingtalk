@@ -44,7 +44,7 @@ class DingTalkWebhookResource(ConfigurableResource):
     ### 配置项:
 
     - **access_token** (str):
-        机器人 Webhook 地址中的 access_token 值。
+            机器人 Webhook 地址中的 access_token 值。
     - **secret** (str, optional):
         如使用加签安全配置，则需传签名密钥。默认值为 None。
     - **alias** (str, optional):
@@ -54,46 +54,50 @@ class DingTalkWebhookResource(ConfigurableResource):
 
     ### 用例:
 
-    1. 使用单个资源：
-
+    ##### 1. 使用单个资源：
     ```python
     from dagster_dingtalk import DingTalkWebhookResource
+    from dagster import op, In, OpExecutionContext, job, Definitions
 
     @op(required_resource_keys={"dingtalk_webhook"}, ins={"text": In(str)})
     def op_send_text(context:OpExecutionContext, text:str):
         dingtalk_webhook:DingTalkWebhookResource = context.resources.dingtalk_webhook
-        result = dingtalk.send_text(text)
+        dingtalk_webhook.send_text(text)
 
     @job
     def job_send_text():
-        op_send_text
+        op_send_text()
 
     defs = Definitions(
-        jobs=job_user_info,
+        jobs=[job_send_text],
         resources={"dingtalk_webhook": DingTalkWebhookResource(access_token = "<access_token>", secret = "<secret>")}
     )
     ```
 
-    2. 启动时动态构建企业内部应用资源, 可参考 [Dagster文档 | 在启动时配置资源](https://docs.dagster.io/concepts/resources#configuring-resources-at-launch-time)
+    ##### 2. 启动时动态构建企业内部应用资源, 可参考 [Dagster文档 | 在启动时配置资源](https://docs.dagster.io/concepts/resources#configuring-resources-at-launch-time)
 
     ```python
     from dagster_dingtalk import DingTalkWebhookResource
+    from dagster import op, In, OpExecutionContext, job, Definitions, schedule, RunRequest, RunConfig
 
     @op(required_resource_keys={"dingtalk_webhook"}, ins={"text": In(str)})
     def op_send_text(context:OpExecutionContext, text:str):
         dingtalk_webhook:DingTalkWebhookResource = context.resources.dingtalk_webhook
-        result = dingtalk.send_text(text)
+        dingtalk_webhook.send_text(text)
 
     @job
     def job_send_text():
-        op_send_text
+        op_send_text()
 
     dingtalk_webhooks = {
         "Group1" : DingTalkWebhookResource(access_token="<access_token>", secret="<secret>", alias="Group1"),
         "Group2" : DingTalkWebhookResource(access_token="<access_token>", secret="<secret>", alias="Group2")
     }
 
-    defs = Definitions(jobs=job_send_text, resources={"dingtalk_webhook": DingTalkWebhookResource.configure_at_launch()})
+    defs = Definitions(
+        jobs=[job_send_text],
+        resources={"dingtalk_webhook": DingTalkWebhookResource.configure_at_launch()}
+    )
 
     @schedule(cron_schedule="20 9 * * *", job=job_send_text)
     def schedule_user_info():
@@ -109,16 +113,17 @@ class DingTalkWebhookResource(ConfigurableResource):
     应当从环境变量中读取密钥。你可以在代码中注册临时的环境变量，或从系统中引入环境变量。
 
     ```python
+
     import os
+    from dagster import EnvVar
     from dagster_dingtalk import DingTalkWebhookResource
 
     # 直接在代码中注册临时的环境变量
-    os.environ.update({'access_token': "<access_token>"})
-    os.environ.update({'secret': "<secret>"})
+    os.environ.update({'access_token_name': "<your-access_token>"})
+    os.environ.update({'secret_name': "<your-secret>"})
 
-    webhook = DingTalkWebhookResource(access_token=EnvVar("access_token"), secret=EnvVar("secret"))
-
-
+    webhook = DingTalkWebhookResource(access_token=EnvVar("access_token_name"), secret=EnvVar("secret_name"))
+    ```
     """
 
     access_token: str = Field(description="Webhook地址中的 access_token 部分")
@@ -298,94 +303,100 @@ class DingTalkWebhookResource(ConfigurableResource):
 
 class DingTalkAppResource(ConfigurableResource):
     """
-    [钉钉服务端 API](https://open.dingtalk.com/document/orgapp/api-overview) 企业内部应用部分的第三方封装。
+该 Dagster 资源允许定义一个钉钉的 API Client，更加便捷地调用钉钉服务端企业内部应用 API
 
-    通过此资源，可以调用部分钉钉服务端 API。具体封装的 API 可以在 IDE 中通过引入 `DingTalkAppClient` 类来查看 IDE 提示：
+[钉钉服务端 API](https://open.dingtalk.com/document/orgapp/api-overview) 企业内部应用部分的第三方封装。
 
-    `from dagster_dingtalk import DingTalkAppClient`
+通过此资源，可以调用部分钉钉服务端 API。具体封装的 API 可以在 IDE 中通过引入 `DingTalkAppClient` 类来查看 IDE 提示：
 
-    ### 配置项:
+```python
+from dagster_dingtalk import DingTalkAppClient
 
-    - **AppID** (str):
-        应用应用唯一标识 AppID，作为缓存标识符使用。不传入则不缓存鉴权。
-    - **AgentID** (int, optional):
-        原企业内部应用 AgentId ，部分 API 会使用到。默认值为 None
-    - **AppName** (str, optional):
-        应用名。
-    - **ClientId** (str):
-        应用的 Client ID ，原 AppKey 和 SuiteKey
-    - **ClientSecret** (str):
-        应用的 Client Secret ，原 AppSecret 和 SuiteSecret
+dingtalk: DingTalkAppClient
+```
 
-    ### 用例:
+### 配置项:
 
-    1. 使用单一的企业内部应用资源。
+- **AppID** (str):
+    应用应用唯一标识 AppID，作为缓存标识符使用。不传入则不缓存鉴权。
+- **AgentID** (int, optional):
+    原企业内部应用 AgentId ，部分 API 会使用到。默认值为 None
+- **AppName** (str, optional):
+    应用名。
+- **ClientId** (str):
+    应用的 Client ID ，原 AppKey 和 SuiteKey
+- **ClientSecret** (str):
+    应用的 Client Secret ，原 AppSecret 和 SuiteSecret
 
-    ```python
-    from dagster_dingtalk import DingTalkAppResource
+### 用例
 
-    @op(required_resource_keys={"dingtalk"}, ins={"user_id": In(str)})
-    def op_user_info(context:OpExecutionContext, user_id:str):
-        dingtalk:DingTalkAppClient = context.resources.dingtalk
-        result = dingtalk.通讯录管理.用户管理.查询用户详情(user_id).get('result')
-        context.log.info(result)
+##### 1. 使用单一的企业内部应用资源。
 
-    @job
-    def job_user_info():
-        op_user_info
+```python
+from dagster_dingtalk import DingTalkAppResource, DingTalkAppClient
+from dagster import op, In, OpExecutionContext, job, Definitions, EnvVar
 
-    defs = Definitions(jobs=job_user_info, resources={
-        "dingtalk": DingTalkAppResource(
-            AppID = "<the-app-id>",
-            ClientId = "<the-client-id>",
-            ClientSecret = EnvVar("<the-client-secret-env-name>"),
-        )
-    })
-    ```
+@op(required_resource_keys={"dingtalk"}, ins={"user_id": In(str)})
+def op_user_info(context:OpExecutionContext, user_id:str):
+    dingtalk:DingTalkAppClient = context.resources.dingtalk
+    result = dingtalk.通讯录管理.用户管理.查询用户详情(user_id).get('result')
+    context.log.info(result)
 
-    2. 启动时动态构建企业内部应用资源, 可参考 [Dagster文档 | 在启动时配置资源](https://docs.dagster.io/concepts/resources#configuring-resources-at-launch-time)
+@job
+def job_user_info():
+    op_user_info()
 
-    ```python
-    from dagster_dingtalk import DingTalkAppResource
+defs = Definitions(
+    jobs=[job_user_info],
+    resources={"dingtalk": DingTalkAppResource(
+        AppID = "<the-app-id>",
+        ClientId = "<the-client-id>",
+        ClientSecret = EnvVar("<the-client-secret-env-name>"),
+    )})
+```
 
-    @op(required_resource_keys={"dingtalk"}, ins={"user_id": In(str)})
-    def op_user_info(context:OpExecutionContext, user_id:str):
-        dingtalk:DingTalkAppClient = context.resources.dingtalk
-        result = dingtalk.通讯录管理.用户管理.查询用户详情(user_id).get('result')
-        context.log.info(result)
+##### 2. 启动时动态构建企业内部应用资源, 可参考 [Dagster文档 | 在启动时配置资源](https://docs.dagster.io/concepts/resources#configuring-resources-at-launch-time)
 
-    @job
-    def job_user_info():
-        op_user_info()
+```python
+from dagster_dingtalk import DingTalkAppResource, DingTalkAppClient
+from dagster import op, In, OpExecutionContext, job, Definitions, schedule, RunRequest, RunConfig, EnvVar
 
-    dingtalk_apps = {
-        "App1" : DingTalkAppResource(
-            AppID = "<app-1-app-id>",
-            ClientId = "<app-1-client-id>",
-            ClientSecret = EnvVar("<app-1-client-secret-env-name>"),
-        ),
-        "App2" : DingTalkAppResource(
-            AppID = "<app-2-app-id>",
-            ClientId = "<app-2-client-id>",
-            ClientSecret = EnvVar("<app-2-client-secret-env-name>"),
-        )
-    }
+@op(required_resource_keys={"dingtalk"}, ins={"user_id": In(str)})
+def op_user_info(context:OpExecutionContext, user_id:str):
+    dingtalk:DingTalkAppClient = context.resources.dingtalk
+    result = dingtalk.通讯录管理.用户管理.查询用户详情(user_id).get('result')
+    context.log.info(result)
 
-    defs = Definitions(jobs=job_user_info, resources={"dingtalk": DingTalkAppResource.configure_at_launch()})
+@job
+def job_user_info():
+    op_user_info()
 
-    @schedule(cron_schedule="20 9 * * *", job=job_user_info)
-    def schedule_user_info():
-        return RunRequest(run_config=RunConfig(
-            ops={"op_user_info": {"inputs": {"user_id": "<the-user-id>"}}},
-            resources={"dingtalk": dingtalk_apps["App1"]},
-        ))
-    ```
+dingtalk_apps = {
+    "App1" : DingTalkAppResource(
+        AppID = "<app-1-app-id>",
+        ClientId = "<app-1-client-id>",
+        ClientSecret = EnvVar("<app-1-client-secret-env-name>"),
+    ),
+    "App2" : DingTalkAppResource(
+        AppID = "<app-2-app-id>",
+        ClientId = "<app-2-client-id>",
+        ClientSecret = EnvVar("<app-2-client-secret-env-name>"),
+    )
+}
 
-    ### 注意:
+defs = Definitions(jobs=[job_user_info], resources={"dingtalk": DingTalkAppResource.configure_at_launch()})
 
-    应该永远避免直接将密钥字符串直接配置给资源，这会导致在 dagster 前端用户界面暴露密钥。
-    应当从环境变量中读取密钥。你可以在代码中注册临时的环境变量，或从系统中引入环境变量。
+@schedule(cron_schedule="20 9 * * *", job=job_user_info)
+def schedule_user_info():
+    return RunRequest(run_config=RunConfig(
+        ops={"op_user_info": {"inputs": {"user_id": "<the-user-id>"}}},
+        resources={"dingtalk": dingtalk_apps["App1"]},
+    ))
+```
 
+### 注意:
+
+应该永远避免直接将密钥字符串直接配置给资源，这会导致在 dagster 前端用户界面暴露密钥。你可以在代码中注册临时的环境变量，或从系统中引入环境变量。
     """
 
     AppID: str = Field(description="应用应用唯一标识 AppID，作为缓存标识符使用。不传入则不缓存鉴权。")

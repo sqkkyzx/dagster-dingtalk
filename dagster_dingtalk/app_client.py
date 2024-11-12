@@ -40,17 +40,10 @@ class DingTalkClient:
         else:
             try:
                 with open(access_token_cache, 'rb') as f:
-                    cache_file = f.read()
+                    all_access_token = pickle.loads(f.read())
             except Exception as e:
                 logging.error(e)
-                cache_file = None
-                renew_reason = "鉴权缓存读取错误"
-
-        if cache_file:
-            try:
-                all_access_token = pickle.loads(cache_file)
-            except pickle.PickleError:
-                renew_reason = f"鉴权缓存解析错误"
+                renew_reason = "鉴权缓存读取或解析错误"
 
         if all_access_token:
             app_access_token = all_access_token.get(self.app_id)
