@@ -109,6 +109,18 @@ from dagster_dingtalk import DingTalkAppClient
 dingtalk: DingTalkAppClient
 ```
 
+
+> **特别注意：`DingTalkAppClient` 采用了 ASCII 字符来命名实例方法。** 
+> 
+> 这是为了与
+> [钉钉服务端 API 文档](https://open.dingtalk.com/document/orgapp/api-overview) 里的中文 API 
+> 保持完全一致命名，以便于更符合直觉地进行调用和快速查阅文档。因此，可以按 
+> [钉钉服务端 API 文档](https://open.dingtalk.com/document/orgapp/api-overview) 
+> 中的层级，通过链式调用来发起 API 请求。例如：
+> 
+> `dingtalk.智能人事.花名册.获取花名册元数据()`
+
+
 ### 配置项:
 
 - **AppID** (str):
