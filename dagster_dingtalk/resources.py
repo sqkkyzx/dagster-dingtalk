@@ -303,8 +303,6 @@ class DingTalkWebhookResource(ConfigurableResource):
 
 class DingTalkAppResource(ConfigurableResource):
     """
-该 Dagster 资源允许定义一个钉钉的 API Client，更加便捷地调用钉钉服务端企业内部应用 API
-
 [钉钉服务端 API](https://open.dingtalk.com/document/orgapp/api-overview) 企业内部应用部分的第三方封装。
 
 通过此资源，可以调用部分钉钉服务端 API。具体封装的 API 可以在 IDE 中通过引入 `DingTalkAppClient` 类来查看 IDE 提示：
