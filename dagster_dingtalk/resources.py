@@ -38,7 +38,8 @@ class DingTalkWebhookException(Exception):
 
 class DingTalkWebhookResource(ConfigurableResource):
     """
-    定义一个钉钉群 Webhook 机器人资源，可以用来发送各类通知。相关信息可以查看 [钉钉API文档 | 自定义机器人发送消息的消息类型](https://open.dingtalk.com/document/orgapp/custom-bot-send-message-type)
+    该资源允许定义单个钉钉自定义机器人的 Webhook 端点，以便于发送文本、Markdown、Link、 ActionCard、FeedCard 消息，消息具体样式可参考
+    [钉钉开放平台 | 自定义机器人发送消息的消息类型](https://open.dingtalk.com/document/orgapp/custom-bot-send-message-type)。
 
     ### 配置项:
 
@@ -51,10 +52,78 @@ class DingTalkWebhookResource(ConfigurableResource):
     - **base_url** (str, optional):
         通用地址，一般无需更改。默认值为 “https://oapi.dingtalk.com/robot/send”。
 
+    ### 用例:
+
+    1. 使用单个资源：
+
+    ```python
+    from dagster_dingtalk import DingTalkWebhookResource
+
+    @op(required_resource_keys={"dingtalk_webhook"}, ins={"text": In(str)})
+    def op_send_text(context:OpExecutionContext, text:str):
+        dingtalk_webhook:DingTalkWebhookResource = context.resources.dingtalk_webhook
+        result = dingtalk.send_text(text)
+
+    @job
+    def job_send_text():
+        op_send_text
+
+    defs = Definitions(
+        jobs=job_user_info,
+        resources={"dingtalk_webhook": DingTalkWebhookResource(access_token = "<access_token>", secret = "<secret>")}
+    )
+    ```
+
+    2. 启动时动态构建企业内部应用资源, 可参考 [Dagster文档 | 在启动时配置资源](https://docs.dagster.io/concepts/resources#configuring-resources-at-launch-time)
+
+    ```python
+    from dagster_dingtalk import DingTalkWebhookResource
+
+    @op(required_resource_keys={"dingtalk_webhook"}, ins={"text": In(str)})
+    def op_send_text(context:OpExecutionContext, text:str):
+        dingtalk_webhook:DingTalkWebhookResource = context.resources.dingtalk_webhook
+        result = dingtalk.send_text(text)
+
+    @job
+    def job_send_text():
+        op_send_text
+
+    dingtalk_webhooks = {
+        "Group1" : DingTalkWebhookResource(access_token="<access_token>", secret="<secret>", alias="Group1"),
+        "Group2" : DingTalkWebhookResource(access_token="<access_token>", secret="<secret>", alias="Group2")
+    }
+
+    defs = Definitions(jobs=job_send_text, resources={"dingtalk_webhook": DingTalkWebhookResource.configure_at_launch()})
+
+    @schedule(cron_schedule="20 9 * * *", job=job_send_text)
+    def schedule_user_info():
+        return RunRequest(run_config=RunConfig(
+            ops={"op_send_text": {"inputs": {"text": "This a test text."}}},
+            resources={"dingtalk": dingtalk_webhooks["Group1"]},
+        ))
+    ```
+
+    ### 注意:
+
+    应该永远避免直接将密钥字符串直接配置给资源，这会导致在 dagster 前端用户界面暴露密钥。
+    应当从环境变量中读取密钥。你可以在代码中注册临时的环境变量，或从系统中引入环境变量。
+
+    ```python
+    import os
+    from dagster_dingtalk import DingTalkWebhookResource
+
+    # 直接在代码中注册临时的环境变量
+    os.environ.update({'access_token': "<access_token>"})
+    os.environ.update({'secret': "<secret>"})
+
+    webhook = DingTalkWebhookResource(access_token=EnvVar("access_token"), secret=EnvVar("secret"))
+
+
     """
+
     access_token: str = Field(description="Webhook地址中的 access_token 部分")
     secret: Optional[str] = Field(default=None, description="如使用加签安全配置，需传签名密钥")
-    alias: Optional[str] = Field(default=None, description="如提供别名，将来可以使用别名进行选择")
+    alias: Optional[str] = Field(default=None, description="别名，标记用，无实际意义")
     base_url: str = Field(default="https://oapi.dingtalk.com/robot/send", description="Webhook的通用地址，无需更改")
 
     def webhook_url(self):
@@ -302,13 +371,7 @@ class DingTalkAppResource(ConfigurableResource):
         )
     }
 
-    defs = Definitions(jobs=job_user_info, resources={
-        "dingtalk": DingTalkAppResource(
-            AppID = "<the-app-id>",
-            ClientId = "<the-client-id>",
-            ClientSecret = EnvVar("<the-client-secret-env-name>"),
-        )
-    })
+    defs = Definitions(jobs=job_user_info, resources={"dingtalk": DingTalkAppResource.configure_at_launch()})
 
     @schedule(cron_schedule="20 9 * * *", job=job_user_info)
     def schedule_user_info():
@@ -317,6 +380,11 @@ class DingTalkAppResource(ConfigurableResource):
             resources={"dingtalk": dingtalk_apps["App1"]},
         ))
     ```
+
+    ### 注意:
+
+    应该永远避免直接将密钥字符串直接配置给资源，这会导致在 dagster 前端用户界面暴露密钥。
+    应当从环境变量中读取密钥。你可以在代码中注册临时的环境变量，或从系统中引入环境变量。
 
     """
 
