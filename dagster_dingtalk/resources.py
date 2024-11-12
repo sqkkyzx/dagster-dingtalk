@@ -170,7 +170,7 @@ class DingTalkWebhookResource(ConfigurableResource):
 
         :param response: 钉钉Webhook API响应的JSON数据
         """
-        errcode = response.json().get("errcode")
+        errcode = str(response.json().get("errcode"))
         errmsg = response.json().get("errmsg")
 
         if errcode == "0":
