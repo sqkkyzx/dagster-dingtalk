@@ -11,18 +11,45 @@ from .app_client import DingTalkClient
 from dagster import ConfigurableResource, InitResourceContext
 
 
+DINGTALK_WEBHOOK_EXCEPTION_SOLUTIONS = {
+    "-1": "\n系统繁忙，请稍后重试",
+    "40035": "\n缺少参数 json，请补充消息json",
+    "43004": "\n无效的HTTP HEADER Content-Type，请设置具体的消息参数",
+    "400013": "\n群已被解散，请向其他群发消息",
+    "400101": "\naccess_token不存在，请确认access_token拼写是否正确",
+    "400102": "\n机器人已停用，请联系管理员启用机器人",
+    "400105": "\n不支持的消息类型，请使用文档中支持的消息类型",
+    "400106": "\n机器人不存在，请确认机器人是否在群中",
+    "410100": "\n发送速度太快而限流，请降低发送速度",
+    "430101": "\n含有不安全的外链，请确认发送的内容合法",
+    "430102": "\n含有不合适的文本，请确认发送的内容合法",
+    "430103": "\n含有不合适的图片，请确认发送的内容合法",
+    "430104": "\n含有不合适的内容，请确认发送的内容合法",
+    "310000": "\n消息校验未通过，请查看机器人的安全设置",
+}
+
+
+class DingTalkWebhookException(Exception):
+    def __init__(self, errcode, errmsg):
+        self.errcode = errcode
+        self.errmsg = errmsg
+        super().__init__(f"DingTalkWebhookError {errcode}: {errmsg} {DINGTALK_WEBHOOK_EXCEPTION_SOLUTIONS.get(errcode)}")
+
+
 class DingTalkWebhookResource(ConfigurableResource):
     """
-    定义一个钉钉群 Webhook 机器人资源，可以用来发送各类通知。
+    定义一个钉钉群 Webhook 机器人资源，可以用来发送各类通知。相关信息可以查看 [钉钉API文档 | 自定义机器人发送消息的消息类型](https://open.dingtalk.com/document/orgapp/custom-bot-send-message-type)
 
-    钉钉API文档：
-    https://open.dingtalk.com/document/orgapp/custom-bot-send-message-type
+    ### 配置项:
 
-    Args:
-        access_token (str): 机器人 Webhook 地址中的 access_token 值。
-        secret (str, optional): 如使用加签安全配置，则需传签名密钥。默认值为 None。
-        alias (str, optional): 如提供别名，可以在使用 `MultiDingTalkWebhookResource` 中使用别名进行 webhook 选择。默认值为 None。
-        base_url (str, optional): 通用地址，一般无需更改。默认值为 “https://oapi.dingtalk.com/robot/send”。
+    - **access_token** (str):
+        机器人 Webhook 地址中的 access_token 值。
+    - **secret** (str, optional):
+        如使用加签安全配置，则需传签名密钥。默认值为 None。
+    - **alias** (str, optional):
+        如提供别名，可以在使用 `MultiDingTalkWebhookResource` 中使用别名进行 webhook 选择。默认值为 None。
+    - **base_url** (str, optional):
+        通用地址，一般无需更改。默认值为 “https://oapi.dingtalk.com/robot/send”。
 
     """
     access_token: str = Field(description="Webhook地址中的 access_token 部分")
@@ -37,7 +64,7 @@ class DingTalkWebhookResource(ConfigurableResource):
         钉钉API文档：
         https://open.dingtalk.com/document/robots/custom-robot-access
 
-        Returns:
+        :return:
             str: Webhook URL
         """
         if self.secret is None:
@@ -55,13 +82,27 @@ class DingTalkWebhookResource(ConfigurableResource):
         """
         从文本截取前12个字符作为标题，并清理其中的 Markdown 格式字符。
 
-        Args:
-            text: 原文
+        :param text: 原文
 
-        Returns:
+        :return:
             str: 标题
         """
         return re.sub(r'[\n#>* ]', '', text[:12])
+
+    @staticmethod
+    def __handle_response(response):
+        """
+        处理钉钉 Webhook API 响应，根据 errcode 抛出相应的异常
+
+        :param response: 钉钉Webhook API响应的JSON数据
+        """
+        errcode = response.json().get("errcode")
+        errmsg = response.json().get("errmsg")
+
+        if errcode == "0":
+            return True
+        else:
+            raise DingTalkWebhookException(errcode, errmsg)
 
     def send_text(self, text: str,
                   at_mobiles:List[str]|None = None, at_user_ids:List[str]|None = None, at_all:bool = False):
@@ -71,18 +112,21 @@ class DingTalkWebhookResource(ConfigurableResource):
         钉钉API文档：
         https://open.dingtalk.com/document/orgapp/custom-bot-send-message-type
 
-        Args:
-            text (str): 待发送文本
-            at_mobiles (List[str], optional): 需要 @ 的用户手机号。默认值为 None
-            at_user_ids (List[str], optional): 需要 @ 的用户 UserID。默认值为 None
-            at_all (bool, optional): 是否 @ 所有人。默认值为 False
+        :param str text: 待发送文本
+        :param List[str],optional at_mobiles: 需要 @ 的用户手机号。默认值为 None
+        :param List[str],optional at_user_ids: 需要 @ 的用户 UserID。默认值为 None
+        :param bool,optional at_all: 是否 @ 所有人。默认值为 False
+
+        :raise DingTalkWebhookException:
+
         """
         at = {"isAtAll": at_all}
         if at_user_ids:
             at["atUserIds"] = at_user_ids
         if at_mobiles:
             at["atMobiles"] = at_mobiles
-        httpx.post(url=self.webhook_url(), json={"msgtype": "text", "text": {"content": text}, "at": at})
+        response = httpx.post(url=self.webhook_url(), json={"msgtype": "text", "text": {"content": text}, "at": at})
+        self.__handle_response(response)
 
     def send_link(self, text: str, message_url:str, title:str|None = None, pic_url:str = ""):
         """
@@ -91,31 +135,26 @@ class DingTalkWebhookResource(ConfigurableResource):
         钉钉API文档：
         https://open.dingtalk.com/document/orgapp/custom-bot-send-message-type
 
-        Args:
-            text (str): 待发送文本
-            message_url (str): 链接的 Url
-            title (str, optional): 标题，在通知和被引用时显示的简短信息。默认从文本中生成。
-            pic_url (str, optional): 图片的 Url，默认为 None
+        :param str text: 待发送文本
+        :param str message_url: 链接的 Url
+        :param str,optional title: 标题，在通知和被引用时显示的简短信息。默认从文本中生成。
+        :param str,optional pic_url: 图片的 Url，默认为 None
+
+        :raise DingTalkWebhookException:
         """
         title = title or self._gen_title(text)
-        httpx.post(
+        response = httpx.post(
             url=self.webhook_url(),
             json={"msgtype": "link", "link": {"title": title, "text": text, "picUrl": pic_url, "messageUrl": message_url}}
         )
+        self.__handle_response(response)
 
     def send_markdown(self, text: List[str]|str, title:str|None = None,
                       at_mobiles:List[str]|None = None, at_user_ids:List[str]|None = None, at_all:bool = False):
         """
         发送 Markdown 消息。支持的语法有：
-            # 一级标题
-            ## 二级标题
-            ### 三级标题
-            #### 四级标题
-            ##### 五级标题
-            ###### 六级标题
-            > 引用
-            **加粗**
-            *斜体*
+            # 一级标题  ## 二级标题  ### 三级标题  #### 四级标题  ##### 五级标题  ###### 六级标题
+            > 引用  **加粗**  *斜体*
             [链接跳转](https://example.com/doc.html)
             ![图片预览](https://example.com/pic.jpg)
             - 无序列表
@@ -124,12 +163,13 @@ class DingTalkWebhookResource(ConfigurableResource):
         钉钉API文档：
         https://open.dingtalk.com/document/orgapp/custom-bot-send-message-type
 
-        Args:
-            text (str): 待发送文本
-            title (str, optional): 标题，在通知和被引用时显示的简短信息。默认从文本中生成。
-            at_mobiles (List[str], optional): 需要 @ 的用户手机号。默认值为 None
-            at_user_ids (List[str], optional): 需要 @ 的用户 UserID。默认值为 None
-            at_all (bool, optional): 是否 @ 所有人。默认值为 False
+        :param str text: 待发送文本
+        :param str,optional title: 标题，在通知和被引用时显示的简短信息。默认从文本中生成。
+        :param List[str],optional at_mobiles: 需要 @ 的用户手机号。默认值为 None
+        :param List[str],optional at_user_ids: 需要 @ 的用户 UserID。默认值为 None
+        :param bool,optional at_all: 是否 @ 所有人。默认值为 False
+
+        :raise DingTalkWebhookException:
         """
         text = text if isinstance(text, str) else "\n\n".join(text)
         title = title or self._gen_title(text)
@@ -138,43 +178,44 @@ class DingTalkWebhookResource(ConfigurableResource):
             at["atUserIds"] = at_user_ids
         if at_mobiles:
             at["atMobiles"] = at_mobiles
-        httpx.post(url=self.webhook_url(),json={"msgtype": "markdown", "markdown": {"title": title, "text": text}, "at": at})
+        response = httpx.post(url=self.webhook_url(),json={"msgtype": "markdown", "markdown": {"title": title, "text": text}, "at": at})
+        self.__handle_response(response)
 
     def send_action_card(self, text: List[str]|str, title:str|None = None, btn_orientation:Literal["0","1"] = "0",
                          single_jump:Tuple[str,str]|None = None, btns_jump:List[Tuple[str,str]]|None = None):
         """
         发送跳转 ActionCard 消息。
 
-        Args:
-            text (str): 待发送文本，支持 Markdown 部分语法。
-            title (str, optional): 标题，在通知和被引用时显示的简短信息。默认从文本中生成。
-            btn_orientation (str, optional):  按钮排列方式，0-按钮竖直排列，1-按钮横向排列。默认值为 "0"
-            single_jump(Tuple[str,str], optional): 传此参数为单个按钮，元组内第一项为按钮的标题，第二项为按钮链接。
-            btns_jump(Tuple[str,str], optional): 传此参数为多个按钮，元组内第一项为按钮的标题，第二项为按钮链接。
+        **注意：**
+        同时传 `single_jump` 和 `btns_jump`，仅 `single_jump` 生效。
 
-        Notes:
-            同时传 single_jump 和 btns_jump，仅 single_jump 生效。
+        :param str text: 待发送文本，支持 Markdown 部分语法。
+        :param str,optional title: 标题，在通知和被引用时显示的简短信息。默认从文本中生成。
+        :param str,optional btn_orientation: 按钮排列方式，0-按钮竖直排列，1-按钮横向排列。默认值为 "0"
+        :param Tuple[str,str],optional single_jump: 传此参数为单个按钮，元组内第一项为按钮的标题，第二项为按钮链接。
+        :param Tuple[str,str],optional btns_jump: 传此参数为多个按钮，元组内第一项为按钮的标题，第二项为按钮链接。
 
+        :raise DingTalkWebhookException:
         """
         text = text if isinstance(text, str) else "\n\n".join(text)
         title = title or self._gen_title(text)
         action_card = {"title": title, "text": text, "btnOrientation": str(btn_orientation)}
+
         if single_jump:
             action_card["singleTitle"], action_card["singleURL"] = single_jump
-            httpx.post(url=self.webhook_url(), json={"msgtype": "actionCard", "actionCard": action_card})
-        elif btns_jump:
+        if btns_jump:
             action_card["btns"] = [{"title": action_title, "actionURL": action_url} for action_title, action_url in btns_jump]
-            httpx.post(url=self.webhook_url(), json={"msgtype": "actionCard", "actionCard": action_card})
-        else:
-            pass
+
+        response = httpx.post(url=self.webhook_url(), json={"msgtype": "actionCard", "actionCard": action_card})
+        self.__handle_response(response)
 
     def send_feed_card(self, *args:Tuple[str,str,str]):
         """
         发送 FeedCard 消息。
 
-        Args:
-            args (Tuple[str,str,str]): 可以传入任意个具有三个元素的元组，分别为 (标题, 跳转链接, 缩略图链接)
+        :param Tuple[str,str,str],optional args: 可以传入任意个具有三个元素的元组，分别为 `(标题, 跳转链接, 缩略图链接)`
 
+        :raise DingTalkWebhookException:
         """
         for a in args:
             print(a)
@@ -182,23 +223,101 @@ class DingTalkWebhookResource(ConfigurableResource):
             {"title": title, "messageURL": message_url, "picURL": pic_url}
             for title, message_url, pic_url in args
         ]
-        httpx.post(url=self.webhook_url(), json={"msgtype": "feedCard", "feedCard": {"links": links_data}})
+        response = httpx.post(url=self.webhook_url(), json={"msgtype": "feedCard", "feedCard": {"links": links_data}})
+        self.__handle_response(response)
 
 
 class DingTalkAppResource(ConfigurableResource):
     """
     [钉钉服务端 API](https://open.dingtalk.com/document/orgapp/api-overview) 企业内部应用部分的第三方封装。
-    通过此资源，可以调用部分钉钉服务端API。
 
-    Notes:
-        不包含全部的API端点。
+    通过此资源，可以调用部分钉钉服务端 API。具体封装的 API 可以在 IDE 中通过引入 `DingTalkAppClient` 类来查看 IDE 提示：
 
-    Args:
-        AppID (str): 应用应用唯一标识 AppID，作为缓存标识符使用。不传入则不缓存鉴权。
-        AgentID (int, optional): 原企业内部应用 AgentId ，部分 API 会使用到。默认值为 None
-        AppName (str, optional): 应用名。
-        ClientId (str): 应用的 Client ID ，原 AppKey 和 SuiteKey
-        ClientSecret (str): 应用的 Client Secret ，原 AppSecret 和 SuiteSecret
+    `from dagster_dingtalk import DingTalkAppClient`
+
+    ### 配置项:
+
+    - **AppID** (str):
+        应用应用唯一标识 AppID，作为缓存标识符使用。不传入则不缓存鉴权。
+    - **AgentID** (int, optional):
+        原企业内部应用 AgentId ，部分 API 会使用到。默认值为 None
+    - **AppName** (str, optional):
+        应用名。
+    - **ClientId** (str):
+        应用的 Client ID ，原 AppKey 和 SuiteKey
+    - **ClientSecret** (str):
+        应用的 Client Secret ，原 AppSecret 和 SuiteSecret
+
+    ### 用例:
+
+    1. 使用单一的企业内部应用资源。
+
+    ```python
+    from dagster_dingtalk import DingTalkAppResource
+
+    @op(required_resource_keys={"dingtalk"}, ins={"user_id": In(str)})
+    def op_user_info(context:OpExecutionContext, user_id:str):
+        dingtalk:DingTalkAppClient = context.resources.dingtalk
+        result = dingtalk.通讯录管理.用户管理.查询用户详情(user_id).get('result')
+        context.log.info(result)
+
+    @job
+    def job_user_info():
+        op_user_info
+
+    defs = Definitions(jobs=job_user_info, resources={
+        "dingtalk": DingTalkAppResource(
+            AppID = "<the-app-id>",
+            ClientId = "<the-client-id>",
+            ClientSecret = EnvVar("<the-client-secret-env-name>"),
+        )
+    })
+    ```
+
+    2. 启动时动态构建企业内部应用资源, 可参考 [Dagster文档 | 在启动时配置资源](https://docs.dagster.io/concepts/resources#configuring-resources-at-launch-time)
+
+    ```python
+    from dagster_dingtalk import DingTalkAppResource
+
+    @op(required_resource_keys={"dingtalk"}, ins={"user_id": In(str)})
+    def op_user_info(context:OpExecutionContext, user_id:str):
+        dingtalk:DingTalkAppClient = context.resources.dingtalk
+        result = dingtalk.通讯录管理.用户管理.查询用户详情(user_id).get('result')
+        context.log.info(result)
+
+    @job
+    def job_user_info():
+        op_user_info()
+
+    dingtalk_apps = {
+        "App1" : DingTalkAppResource(
+            AppID = "<app-1-app-id>",
+            ClientId = "<app-1-client-id>",
+            ClientSecret = EnvVar("<app-1-client-secret-env-name>"),
+        ),
+        "App2" : DingTalkAppResource(
+            AppID = "<app-2-app-id>",
+            ClientId = "<app-2-client-id>",
+            ClientSecret = EnvVar("<app-2-client-secret-env-name>"),
+        )
+    }
+
+    defs = Definitions(jobs=job_user_info, resources={
+        "dingtalk": DingTalkAppResource(
+            AppID = "<the-app-id>",
+            ClientId = "<the-client-id>",
+            ClientSecret = EnvVar("<the-client-secret-env-name>"),
+        )
+    })
+
+    @schedule(cron_schedule="20 9 * * *", job=job_user_info)
+    def schedule_user_info():
+        return RunRequest(run_config=RunConfig(
+            ops={"op_user_info": {"inputs": {"user_id": "<the-user-id>"}}},
+            resources={"dingtalk": dingtalk_apps["App1"]},
+        ))
+    ```
+
     """
 
     AppID: str = Field(description="应用应用唯一标识 AppID，作为缓存标识符使用。不传入则不缓存鉴权。")
@@ -212,6 +331,11 @@ class DingTalkAppResource(ConfigurableResource):
         return False
 
     def create_resource(self, context: InitResourceContext) -> DingTalkClient:
+        """
+        返回一个 `DingTalkClient` 实例。
+        :param context:
+        :return:
+        """
         return DingTalkClient(
             app_id=self.AppID,
             agent_id=self.AgentID,
