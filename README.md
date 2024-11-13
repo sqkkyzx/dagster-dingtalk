@@ -1,18 +1,24 @@
 # 钉钉与 Dagster 集成
 
----
-
-## 介绍
-
 该 Dagster 集成是为了更便捷的调用钉钉（DingTalk）的API，集成提供了两个 Dagster Resource。
 
+## 安装
+要安装库，请在现有的Dagster环境中使用pip。
 
-## DingTalkWebhookResource
+```bash
+pip install dagster-dingtalk
+```
+
+## 资源
+
+### DingTalkWebhookResource
+
+---
 
 该资源允许定义单个钉钉自定义机器人的 Webhook 端点，以便于发送文本、Markdown、Link、 ActionCard、FeedCard 消息，消息具体样式可参考
 [钉钉开放平台 | 自定义机器人发送消息的消息类型](https://open.dingtalk.com/document/orgapp/custom-bot-send-message-type)。
 
-### 配置项:
+#### 配置:
 
 - **access_token** (str):
         机器人 Webhook 地址中的 access_token 值。
@@ -23,9 +29,8 @@
 - **base_url** (str, optional):
     通用地址，一般无需更改。默认值为 “https://oapi.dingtalk.com/robot/send”。
 
-### 用例:
+#### 用例 1：使用单个资源
 
-##### 1. 使用单个资源：
 ```python
 from dagster_dingtalk import DingTalkWebhookResource
 from dagster import op, In, OpExecutionContext, job, Definitions
@@ -45,7 +50,10 @@ defs = Definitions(
 )
 ```
 
-##### 2. 启动时动态构建 Webhook 资源, 可参考 [Dagster文档 | 在启动时配置资源](https://docs.dagster.io/concepts/resources#configuring-resources-at-launch-time)
+#### 用例 2：启动时动态构建 Webhook 资源
+
+如果你事先不确定会用到哪个 webhook 机器人，或是需要根据代码逻辑动态选择 webhook ，dagster 提供了一种 [在运行时配置资源](https://docs.dagster.io/concepts/resources#configuring-resources-at-launch-time) 
+的原生支持。以下是示例：
 
 ```python
 from dagster_dingtalk import DingTalkWebhookResource
@@ -79,12 +87,12 @@ def schedule_user_info():
 ```
 
 
-## DingTalkAppResource
+### DingTalkAppResource
 
-该 Dagster 资源允许定义一个钉钉的 API Client，更加便捷地调用钉钉服务端企业内部应用 API。
+---
 
-该资源是 [钉钉服务端 API](https://open.dingtalk.com/document/orgapp/api-overview) 企业内部应用部分常用 HTTP API 的第三方封装，
-未采用官方 SDK 。具体封装的 API 可以在 IDE 中通过引入 `DingTalkAppClient` 类来查看 IDE 提示：
+该 Dagster 资源允许定义一个可以调用 [钉钉服务端 API](https://open.dingtalk.com/document/orgapp/api-overview) 的 Client，
+具有一些常用 HTTP API 的封装。你可以在 IDE 中通过引入 `DingTalkAppClient` 类来查看 IDE 提示：
 
 ```python
 from dagster_dingtalk import DingTalkAppClient
@@ -92,8 +100,7 @@ from dagster_dingtalk import DingTalkAppClient
 dingtalk: DingTalkAppClient
 ```
 
-
-**特别注意：`DingTalkAppClient` 采用了 ASCII 字符来命名实例方法。** 
+**请注意：`DingTalkAppClient` 未使用钉钉官方 SDK 实现，并采用了 ASCII 字符来命名实例方法。** 
 
 > 这是为了与
 > [钉钉服务端 API 文档](https://open.dingtalk.com/document/orgapp/api-overview) 里的中文 API 
@@ -104,7 +111,7 @@ dingtalk: DingTalkAppClient
 > `dingtalk.智能人事.花名册.获取花名册元数据()`
 
 
-### 配置项:
+#### 配置:
 
 - **AppID** (str):
     应用应用唯一标识 AppID，作为缓存标识符使用。不传入则不缓存鉴权。
@@ -117,9 +124,7 @@ dingtalk: DingTalkAppClient
 - **ClientSecret** (str):
     应用的 Client Secret ，原 AppSecret 和 SuiteSecret
 
-### 用例
-
-##### 1. 使用单一的企业内部应用资源。
+#### 用例 1：使用确定的企业内部应用配置资源
 
 ```python
 from dagster_dingtalk import DingTalkAppResource, DingTalkAppClient
@@ -144,7 +149,9 @@ defs = Definitions(
     )})
 ```
 
-##### 2. 启动时动态构建企业内部应用资源, 可参考 [Dagster文档 | 在启动时配置资源](https://docs.dagster.io/concepts/resources#configuring-resources-at-launch-time)
+#### 用例 2：运行时动态构建企业内部应用资源
+
+可参考 [Dagster文档 | 在启动时配置资源](https://docs.dagster.io/concepts/resources#configuring-resources-at-launch-time)
 
 ```python
 from dagster_dingtalk import DingTalkAppResource, DingTalkAppClient
