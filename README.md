@@ -78,22 +78,6 @@ def schedule_user_info():
     ))
 ```
 
-### 注意:
-
-应该永远避免直接将密钥字符串直接配置给资源，这会导致在 dagster 前端用户界面暴露密钥。
-应当从环境变量中读取密钥。你可以在代码中注册临时的环境变量，或从系统中引入环境变量。
-
-```python
-import os
-from dagster import EnvVar
-from dagster_dingtalk import DingTalkWebhookResource
-
-# 直接在代码中注册临时的环境变量
-os.environ.update({'access_token_name': "<your-access_token>"})
-os.environ.update({'secret_name': "<your-secret>"})
-
-webhook = DingTalkWebhookResource(access_token=EnvVar("access_token_name"), secret=EnvVar("secret_name"))
-```
 
 ## DingTalkAppResource
 
@@ -199,6 +183,21 @@ def schedule_user_info():
     ))
 ```
 
-### 注意:
 
-应该永远避免直接将密钥字符串直接配置给资源，这会导致在 dagster 前端用户界面暴露密钥。你可以在代码中注册临时的环境变量，或从系统中引入环境变量。
+## 提醒:
+
+应该永远避免直接将密钥字符串直接配置给资源，这会导致在 dagster 前端用户界面暴露密钥。
+应当从环境变量中读取密钥。你可以在代码中注册临时的环境变量，或从系统中引入环境变量。
+
+```python
+import os
+from dagster import EnvVar
+from dagster_dingtalk import DingTalkWebhookResource
+
+# 直接在代码中注册临时的环境变量
+os.environ.update({'access_token_name': "<your-access_token>"})
+os.environ.update({'secret_name': "<your-secret>"})
+
+webhook = DingTalkWebhookResource(access_token=EnvVar("access_token_name"), secret=EnvVar("secret_name"))
+```
+
