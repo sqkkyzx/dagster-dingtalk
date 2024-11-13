@@ -45,7 +45,7 @@ defs = Definitions(
 )
 ```
 
-##### 2. 启动时动态构建企业内部应用资源, 可参考 [Dagster文档 | 在启动时配置资源](https://docs.dagster.io/concepts/resources#configuring-resources-at-launch-time)
+##### 2. 启动时动态构建 Webhook 资源, 可参考 [Dagster文档 | 在启动时配置资源](https://docs.dagster.io/concepts/resources#configuring-resources-at-launch-time)
 
 ```python
 from dagster_dingtalk import DingTalkWebhookResource
@@ -97,11 +97,10 @@ webhook = DingTalkWebhookResource(access_token=EnvVar("access_token_name"), secr
 
 ## DingTalkAppResource
 
-该 Dagster 资源允许定义一个钉钉的 API Client，更加便捷地调用钉钉服务端企业内部应用 API
+该 Dagster 资源允许定义一个钉钉的 API Client，更加便捷地调用钉钉服务端企业内部应用 API。
 
-[钉钉服务端 API](https://open.dingtalk.com/document/orgapp/api-overview) 企业内部应用部分的第三方封装。
-
-通过此资源，可以调用部分钉钉服务端 API。具体封装的 API 可以在 IDE 中通过引入 `DingTalkAppClient` 类来查看 IDE 提示：
+该资源是 [钉钉服务端 API](https://open.dingtalk.com/document/orgapp/api-overview) 企业内部应用部分常用 HTTP API 的第三方封装，
+未采用官方 SDK 。具体封装的 API 可以在 IDE 中通过引入 `DingTalkAppClient` 类来查看 IDE 提示：
 
 ```python
 from dagster_dingtalk import DingTalkAppClient
@@ -110,8 +109,8 @@ dingtalk: DingTalkAppClient
 ```
 
 
-> **特别注意：`DingTalkAppClient` 采用了 ASCII 字符来命名实例方法。** 
-> 
+**特别注意：`DingTalkAppClient` 采用了 ASCII 字符来命名实例方法。** 
+
 > 这是为了与
 > [钉钉服务端 API 文档](https://open.dingtalk.com/document/orgapp/api-overview) 里的中文 API 
 > 保持完全一致命名，以便于更符合直觉地进行调用和快速查阅文档。因此，可以按 
