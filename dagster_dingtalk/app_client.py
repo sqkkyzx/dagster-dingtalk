@@ -5,7 +5,10 @@ from datetime import datetime
 from enum import Enum
 from pathlib import Path
 from typing import List, Literal, Dict, Tuple
+
+import httpx
 from httpx import Client
+from pydantic import BaseModel, Field
 
 
 # noinspection NonAsciiCharacters
@@ -26,6 +29,7 @@ class DingTalkClient:
         self.通讯录管理 = 通讯录管理_API(self)
         self.文档文件 = 文档文件_API(self)
         self.互动卡片 = 互动卡片_API(self)
+        self.OA审批 = OA审批_API(self)
 
     def __get_access_token(self) -> str:
         access_token_cache = Path("/tmp/.dingtalk_cache")
@@ -210,6 +214,7 @@ class 文档文件_API:
     def __init__(self, _client:DingTalkClient):
         self.__client:DingTalkClient = _client
         self.媒体文件 = 文档文件_媒体文件_API(_client)
+        self.文件传输 = 文档文件_文件传输_API(_client)
 
 # noinspection NonAsciiCharacters
 class 文档文件_媒体文件_API:
@@ -236,6 +241,84 @@ class 文档文件_媒体文件_API:
         """
         with open(file_path, 'rb') as f:
             response = self.__client.oapi.post(url=f"/media/upload?type={media_type}", files={'media': f})
+        return response.json()
+
+# noinspection NonAsciiCharacters
+class 文档文件_文件传输_API:
+    def __init__(self, _client:DingTalkClient):
+        self.__client:DingTalkClient = _client
+
+    def 获取文件上传信息(self, space_id:int, union_id:str, multi_part:bool = False) -> dict:
+        """
+        调用本接口，上传图片、语音媒体资源文件以及普通文件，接口返回媒体资源标识 media_id。
+
+        https://open.dingtalk.com/document/orgapp/upload-media-files
+
+        :param space_id: 空间Id。
+        :param union_id: 操作者unionId。
+        :param multi_part: 是否需要分片上传。默认值为 False
+
+        :return:
+            {
+                "uploadKey": str,
+                "storageDriver": str,
+                "protocol": str,
+                "headerSignatureInfo": {
+                    "resourceUrls" : ["resourceUrl"],
+                    "headers" : {
+                      "key" : "header_value"
+                    },
+                }
+            }
+        """
+        response = self.__client.api.post(
+            url=f"/v1.0/storage/spaces/{space_id}/files/uploadInfos/query",
+            params={'unionId': union_id},
+            json={
+                "protocol": "HEADER_SIGNATURE",
+                "multipart": multi_part
+            }
+        )
+        return response.json()
+
+    def 提交文件(self, url:str, headers:dict, file_path:Path|str, space_id:int, union_id:str,
+                 upload_key:str, convert_to_online_doc:bool = False) -> dict:
+        """
+        调用本接口，上传图片、语音媒体资源文件以及普通文件，接口返回媒体资源标识 media_id。
+
+        https://open.dingtalk.com/document/orgapp/upload-media-files
+
+        :param url: 获取文件上传信息得到的 resourceUrl。
+        :param headers: 获取文件上传信息得到的 headers。
+        :param file_path: 文件路径
+        :param space_id: 空间Id。
+        :param union_id: 操作者unionId。
+        :param upload_key: 添加文件唯一标识。
+        :param convert_to_online_doc: 是否转换成在线文档。默认值 False
+
+        :return:
+            {
+                "uploadKey": str,
+                "storageDriver": str,
+                "protocol": str,
+                "headerSignatureInfo": dict,
+            }
+        """
+        with open(file_path, 'rb') as f:
+            httpx.put(
+                url=url,
+                files={"file":f},
+                headers=headers
+            )
+
+        response = self.__client.api.post(
+            url = f"/v2.0/storage/spaces/files/{space_id}/commit?unionId={union_id}",
+            json = {
+                "uploadKey": upload_key,
+                "name": file_path.split("/")[-1],
+                "convertToOnlineDoc": convert_to_online_doc
+            }
+        )
         return response.json()
 
 # noinspection NonAsciiCharacters
@@ -324,4 +407,172 @@ class 互动卡片_API:
             }
         )
 
+        return response.json()
+
+# noinspection NonAsciiCharacters
+class OA审批_API:
+    def __init__(self, _client:DingTalkClient):
+        self.__client:DingTalkClient = _client
+        self.审批实例 = OA审批_审批实例_API(_client)
+        self.审批钉盘 = OA审批_审批钉盘_API(_client)
+
+# noinspection NonAsciiCharacters
+class OA审批_审批实例_API:
+    def __init__(self, _client:DingTalkClient):
+        self.__client:DingTalkClient = _client
+
+    class CommentAttachment(BaseModel):
+        spaceId: str = Field(description="钉盘空间ID")
+        fileSize: str = Field(description="文件大小")
+        fileId: str = Field(description="文件ID")
+        fileName: str = Field(description="文件名称")
+        fileType: str = Field(description="文件类型")
+
+    def 获取单个审批实例详情(self, instance_id:str) -> dict:
+        """
+        调用本接口可以获取审批实例详情数据，根据审批实例ID，获取审批实例详情，包括审批实例标题、发起人的userId、审批人userId、操作记录列表等内容。
+
+        https://open.dingtalk.com/document/orgapp/obtains-the-details-of-a-single-approval-instance-pop
+
+        :param instance_id: 审批实例ID。
+
+        :return:
+            {
+                "success": boolean,
+                "result": {}
+            }
+        """
+        response = self.__client.api.get(url="/v1.0/workflow/processInstances", params={'processInstanceId': instance_id})
+        return response.json()
+
+    def 撤销审批实例(self, instance_id:str, is_system:bool = True, remark:str|None = None, operating_user_id:str = None) -> dict:
+        """
+        撤销发起的处于流程中的审批实例。审批发起15秒内不能撤销审批流程。本接口只能撤销流程中的审批实例，不能撤销已审批完成的审批实例。
+
+        https://open.dingtalk.com/document/orgapp/revoke-an-approval-instance
+
+        :param instance_id: 审批实例ID。
+        :param is_system: 是否通过系统操作。默认为 True。当为 false 时，需要传发起人才能撤销。
+        :param remark: 终止说明。
+        :param operating_user_id: 操作人的userId。is_system 为 false 时必填。
+
+        :return:
+            {
+                "success": boolean,
+                "result": {}
+            }
+        """
+        response = self.__client.api.post(
+            url="/v1.0/workflow/processInstances",
+            json={
+              "processInstanceId" : instance_id,
+              "isSystem" : is_system,
+              "remark" : remark,
+              "operatingUserId" : operating_user_id
+            }
+        )
+        return response.json()
+
+    def 添加审批评论(
+            self, instance_id:str, text:str, comment_user_id: str,
+            photos: List[str]|None = None, attachments: List[CommentAttachment]|None = None
+    ) -> dict:
+        """
+        调用本接口可以获取审批实例详情数据，根据审批实例ID，获取审批实例详情，包括审批实例标题、发起人的userId、审批人userId、操作记录列表等内容。
+
+        其中，添加审批评论附件需调用获取审批钉盘空间信息接口，获取钉盘空间的上传权限，并获取审批钉盘空间spaceId。
+
+        https://open.dingtalk.com/document/orgapp/obtains-the-details-of-a-single-approval-instance-pop
+
+        :param instance_id: 审批实例 ID。
+        :param text: 评论的内容。
+        :param comment_user_id: 评论人的 UserId
+        :param photos: 图片的 URL 链接的列表，默认为 None。
+        :param attachments: 附件列表，默认为 None。添加审批评论附件需将文件上传至审批钉盘空间，可以获取到相关接口参数。
+
+        :return:
+            {
+                "success": boolean,
+                "result": boolean
+            }
+        """
+
+        data = {
+            'processInstanceId': instance_id,
+            'text': text,
+            'commentUserId': comment_user_id,
+        }
+
+        if photos or attachments:
+            data.update({'file': {"photos": photos, "attachments": attachments}})
+
+        response = self.__client.api.post(
+            url="/v1.0/workflow/processInstances/comments",
+            json=data
+        )
+        return response.json()
+
+    def 获取审批实例ID列表(
+            self, process_code:str, start_time:datetime, end_time:datetime, next_token: int = 0, max_results: int = 20,
+            statuses: Literal["RUNNING", "TERMINATED", "COMPLETED"]|None = None, user_ids = List[str]
+    ) -> dict:
+        """
+        获取权限范围内的相关部门审批实例ID列表。
+
+        https://open.dingtalk.com/document/orgapp/obtain-an-approval-list-of-instance-ids
+
+        :param user_ids:
+        :param process_code: 审批流模板的 code。
+        :param start_time: 审批实例开始时间。
+        :param end_time: 审批实例结束时间。
+        :param next_token: 分页游标, 首次调用传 0, 默认值为 0
+        :param max_results: 分页小，最多传20，默认值为 20
+        :param statuses: 筛选流程实例状态，默认为 None，表示不筛选。 RUNNING-审批中 TERMINATED-已撤销 COMPLETED-审批完成
+
+        :return:
+            {
+                "success": boolean,
+                "result": {}
+            }
+        """
+        response = self.__client.api.post(
+            url="/v1.0/workflow/processes/instanceIds/query",
+            json={
+              "processCode" : process_code,
+              "startTime" : int(start_time.timestamp()*1000),
+              "endTime" : int(end_time.timestamp()*1000),
+              "nextToken" : next_token,
+              "maxResults" : max_results,
+              "userIds" : user_ids,
+              "statuses" : statuses
+            })
+        return response.json()
+
+# noinspection NonAsciiCharacters
+class OA审批_审批钉盘_API:
+    def __init__(self, _client:DingTalkClient):
+        self.__client:DingTalkClient = _client
+
+    def 获取审批钉盘空间信息(self, user_id:str) -> dict:
+        """
+        获取审批钉盘空间的ID并授予当前用户上传附件的权限。
+
+        https://open.dingtalk.com/document/orgapp/obtains-the-information-about-approval-nail-disk
+
+        :param user_id: 用户的userId。
+
+        :return:
+            {
+                "success": bool,
+                "result": {
+                    "spaceId": int
+                }
+            }
+        """
+        response = self.__client.api.post(
+            url="/v1.0/workflow/processInstances/spaces/infos/query",
+            json={
+              "userId" : user_id,
+              "agentId" : self.__client.agent_id
+            })
         return response.json()
