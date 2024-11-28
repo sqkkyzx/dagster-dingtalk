@@ -4,7 +4,7 @@ import time
 from datetime import datetime
 from enum import Enum
 from pathlib import Path
-from typing import List, Literal, Dict, Tuple
+from typing import List, Literal
 
 import httpx
 from httpx import Client
@@ -30,6 +30,7 @@ class DingTalkClient:
         self.文档文件 = 文档文件_API(self)
         self.互动卡片 = 互动卡片_API(self)
         self.OA审批 = OA审批_API(self)
+        self.即时通信 = 即时通信_API(self)
 
     def __get_access_token(self) -> str:
         access_token_cache = Path("/tmp/.dingtalk_cache")
@@ -574,5 +575,41 @@ class OA审批_审批钉盘_API:
             json={
               "userId" : user_id,
               "agentId" : self.__client.agent_id
+            })
+        return response.json()
+
+# noinspection NonAsciiCharacters
+class 即时通信_API:
+    def __init__(self, _client:DingTalkClient):
+        self.__client:DingTalkClient = _client
+
+# noinspection NonAsciiCharacters
+class 即时通信_工作通知_API:
+    def __init__(self, _client:DingTalkClient):
+        self.__client:DingTalkClient = _client
+
+    def 发送工作通知(self, msg:dict, to_all_user:bool=True, user_list:List[str]|None=None, dept_id_list:List[str]|None=None) -> dict:
+        """
+        工作通知消息是以某个应用的名义推送到员工的工作通知消息，例如生日祝福、入职提醒等。可以发送文本、语音、链接等。
+
+        注意：
+        1. 企业内部应用发送消息单次最多只能给5000人发送。
+        2. 企业内部应用每天给每个员工最多可发送500条消息通知。
+        3. 该接口是异步发送消息，接口返回成功并不表示用户一定会收到消息，需要通过获取工作通知消息的发送结果接口查询是否给用户发送成功。
+
+        :param msg:  消息数据格式参考 https://open.dingtalk.com/document/orgapp/message-types-and-data-format?spm=ding_open_doc.document.0.0.74742580198aRf
+        :param to_all_user: 是否发送给企业全部用户。如果为否，则必须传入 user_list 或 dept_id_list
+        :param user_list: 接收者的 userid 列表，最大用户列表长度 100。
+        :param dept_id_list: 接收者的部门 id 列表，最大列表长度 20 。接收者是部门 ID 时，包括子部门下的所有用户。
+        :return:
+        """
+        response = self.__client.oapi.post(
+            url="/topapi/message/corpconversation/asyncsend_v2",
+            json={
+                "agent_id" : self.__client.agent_id,
+                "to_all_user": to_all_user,
+                "userid_list" : ','.join(user_list) if user_list else None,
+                "dept_id_list" : ','.join(dept_id_list) if dept_id_list else None,
+                "msg": msg
             })
         return response.json()

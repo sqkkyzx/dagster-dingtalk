@@ -6,7 +6,7 @@
 要安装库，请在现有的Dagster环境中使用pip。
 
 ```bash
-pip install dagster-dingtalk
+pip install dagster-dingtalk -U
 ```
 
 ## 资源

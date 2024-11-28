@@ -1,19 +1,15 @@
 from dagster import In, OpExecutionContext, op, Out
-
-# noinspection PyProtectedMember
-from dagster._annotations import experimental
-
 from .app_client import DingTalkClient
 from .resources import DingTalkWebhookResource
 
-@experimental
+
 @op(description="钉钉Webhook发送文本消息",
     required_resource_keys={'dingtalk_webhook'},
     ins={
         "text": In(str),
         "at": In(default_value=None, description="@列表，传List[str]解析为userId,传List[int]解析为phone，传ALL解析为全部。")
     })
-def op_send_simple_text(context: OpExecutionContext, text, at):
+def op_send_text(context: OpExecutionContext, text, at):
     webhook:DingTalkWebhookResource = context.resources.dingtalk_webhook
     if isinstance(at, str) and at == 'ALL':
         webhook.send_text(text=text, at_all=True)
@@ -29,9 +25,9 @@ def op_send_simple_text(context: OpExecutionContext, text, at):
 @op(description="钉钉Webhook发送Markdown消息",
     required_resource_keys={'dingtalk_webhook'},
     ins={
-        "text": In(str),
-        "title": In(str, default_value=''),
-        "at": In(default_value=None, description="@列表，传List[str]解析为userId,传List[int]解析为phone，传ALL解析为全部。")
+        "text": In(str, description="Markdown 内容"),
+        "title": In(str, default_value='', description="标题"),
+        "at": In(default_value=None, description="传 List[str] @userIds ，传 List[int] @mobiles ，传 \"ALL\" @所有人。")
     })
 def op_send_markdown(context: OpExecutionContext, text, title, at):
     webhook:DingTalkWebhookResource = context.resources.dingtalk_webhook
