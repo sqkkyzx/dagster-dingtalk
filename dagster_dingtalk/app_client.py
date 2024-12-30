@@ -5,6 +5,7 @@ from datetime import datetime
 from enum import Enum
 from pathlib import Path
 from typing import List, Literal
+import platform
 
 import httpx
 from httpx import Client
@@ -33,7 +34,7 @@ class DingTalkClient:
         self.即时通信 = 即时通信_API(self)
 
     def __get_access_token(self) -> str:
-        access_token_cache = Path("/tmp/.dingtalk_cache")
+        access_token_cache = Path.home() / ".dingtalk_cache"
         all_access_token: dict = {}
         access_token: str|None = None
         expire_in: int = 0
