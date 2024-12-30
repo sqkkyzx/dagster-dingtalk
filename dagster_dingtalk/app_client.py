@@ -583,6 +583,7 @@ class OA审批_审批钉盘_API:
 class 即时通信_API:
     def __init__(self, _client:DingTalkClient):
         self.__client:DingTalkClient = _client
+        self.工作通知 = 即时通信_工作通知_API(_client)
 
 # noinspection NonAsciiCharacters
 class 即时通信_工作通知_API:
