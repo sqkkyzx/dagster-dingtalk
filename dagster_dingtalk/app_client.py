@@ -99,6 +99,30 @@ class 智能人事_花名册_API:
         )
         return response.json()
 
+    def 获取花名册字段组详情(self) -> dict:
+        response = self.__client.oapi.post(
+            url="/topapi/smartwork/hrm/employee/field/grouplist",
+            json={"agentid": self.__client.agent_id},
+        )
+        return response.json()
+
+    def 更新员工花名册信息(self, user_id: str, groups: List[dict]) -> dict:
+        """
+        花名册分组数据结构查看 https://open.dingtalk.com/document/orgapp/intelligent-personnel-update-employee-file-information
+        :param user_id: 被更新字段信息的员工userid
+        :param groups: 花名册分组
+        :return:
+        """
+        response = self.__client.oapi.post(
+            url="/topapi/smartwork/hrm/employee/v2/update",
+            json={
+                "agentid": self.__client.agent_id,
+                "param": {"groups": groups},
+                "user_id": user_id
+            },
+        )
+        return response.json()
+
     def 获取员工花名册字段信息(self, user_id_list:List[str], field_filter_list:List[str]|None = None, text_to_select_convert:bool|None = None) -> dict:
         body_dict = {"userIdList": user_id_list, "appAgentId": self.__client.agent_id}
         if field_filter_list is not None:
@@ -174,6 +198,15 @@ class 通讯录管理_用户管理_API:
             params["endTime"] = end_time.strftime("%Y-%m-%dT%H:%M:%SZ")
         response = self.__client.api.get(url="/v1.0/contact/empLeaveRecords", params=params)
         return response.json()
+
+    def 获取部门用户userid列表(self, dept_id: int):
+        response = self.__client.oapi.post(url="/topapi/user/listid", json={"dept_id": dept_id})
+        return response.json()
+
+    def 根据unionid获取用户userid(self, unionid: str):
+        response = self.__client.oapi.post(url="/topapi/user/getbyunionid", json={"unionid": unionid})
+        return response.json()
+
 
 # noinspection NonAsciiCharacters
 class 通讯录管理_部门管理_API:
