@@ -5,7 +5,6 @@ from datetime import datetime
 from enum import Enum
 from pathlib import Path
 from typing import List, Literal
-import platform
 
 import httpx
 from httpx import Client
@@ -208,6 +207,20 @@ class 通讯录管理_部门管理_API:
         response = self.__client.oapi.post(
             url="/topapi/v2/department/listsub",
             json={"language": language, "dept_id": dept_id}
+        )
+        return response.json()
+
+    def 获取子部门ID列表(self, dept_id: int):
+        """
+        调用本接口，获取下一级部门基础信息。
+
+        https://open.dingtalk.com/document/orgapp/obtain-a-sub-department-id-list-v2
+
+        :param dept_id: 部门 ID ，根部门 ID 为 1。
+        """
+        response = self.__client.oapi.post(
+            url="/topapi/v2/department/listsubid",
+            json={"dept_id": dept_id}
         )
         return response.json()
 
