@@ -3,7 +3,9 @@
 该 Dagster 集成是为了更便捷的调用钉钉（DingTalk）的API，集成提供了两个 Dagster Resource。
 
 ## 安装
-要安装库，请在现有的Dagster环境中使用pip。
+要安装库，请在 Dagster 环境中使用 pip 。
+
+
 
 ```bash
 pip install dagster-dingtalk -U
