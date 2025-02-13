@@ -44,6 +44,7 @@ class DingTalkClient:
         self.互动卡片 = 互动卡片__(self)
         self.OA审批 = OA审批__(self)
         self.即时通信 = 即时通信__(self)
+        self.待办任务 = 待办任务__(self)
 
 
     def __init_clients(self):
@@ -360,7 +361,7 @@ class 通讯录管理__部门管理:
 
 
 # noinspection NonAsciiCharacters, PyPep8Naming
-class 待办任务:
+class 待办任务__:
     def __init__(self, _client:DingTalkClient):
         self.__client:DingTalkClient = _client
 
