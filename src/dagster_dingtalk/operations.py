@@ -1,6 +1,6 @@
 from dagster import In, OpExecutionContext, op, Out
-from .app_client import DingTalkClient
-from .resources import DingTalkWebhookResource
+from dagster_dingtalk.app_client import DingTalkClient
+from dagster_dingtalk.resources import DingTalkWebhookResource
 
 
 @op(description="钉钉Webhook发送文本消息",
