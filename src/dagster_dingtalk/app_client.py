@@ -72,12 +72,11 @@ class DingTalkClient:
             return {}
 
     def __file_cache_write(self):
-        with self.__token_lock:
-            try:
-                with open(self.__access_token_file_cache, 'wb') as f:
-                    f.write(pickle.dumps(self.__access_token_cache))
-            except Exception as e:
-                logging.error(f"AccessToken 缓存写入失败: {e}")
+        try:
+            with open(self.__access_token_file_cache, 'wb') as f:
+                f.write(pickle.dumps(self.__access_token_cache))
+        except Exception as e:
+            logging.error(f"AccessToken 缓存写入失败: {e}")
 
     def __get_access_token(self) -> str:
         with self.__token_lock:
