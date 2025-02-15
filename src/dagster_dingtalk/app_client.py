@@ -71,10 +71,10 @@ class DingTalkClient:
         else:
             return {}
 
-    def __file_cache_write(self):
+    def __file_cache_write(self, access_token_cache: dict):
         try:
             with open(self.__access_token_file_cache, 'wb') as f:
-                f.write(pickle.dumps(self.__access_token_cache))
+                f.write(pickle.dumps(access_token_cache))
         except Exception as e:
             logging.error(f"AccessToken 缓存写入失败: {e}")
 
@@ -93,16 +93,17 @@ class DingTalkClient:
                         json={"appKey": self.__client_id, "appSecret": self.__client_secret},
                     ).json()
                     # 提前 1 分钟进行续期
-                    self.__access_token_cache = {
+                    access_token_cache = {
                         "access_token": response.get("accessToken"),
                         "expire_in": response.get("expireIn") + int(time.time()) - 60
                     }
-                    self.__file_cache_write()
+                    self.__access_token_cache = access_token_cache
+                    self.__file_cache_write(self.__access_token_cache)
                 except Exception as e:
                     logging.error(f"AccessToken 获取失败: {e}")
                     raise
 
-        return self.__access_token_cache["access_token"]
+        return access_token_cache["access_token"]
 
     def oapi(self, method: str, path: str, **kwargs) -> httpx.Response:
         params = kwargs.get("params", {})
