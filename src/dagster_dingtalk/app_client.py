@@ -20,11 +20,11 @@ class DingTalkClient:
             client_id: str,
             client_secret: str,
             app_name: str|None = None,
-            agent_id: int|None = None,
+            agent_id: int|str|None = None,
     ):
         self.app_id: str = app_id
         self.app_name: str|None = app_name
-        self.agent_id: int|None = agent_id
+        self.agent_id: int|None = int(agent_id) if agent_id else None
         self.robot_code: str = client_id
         self.__client_id: str = client_id
         self.__client_secret: str = client_secret
