@@ -162,6 +162,10 @@ class 智能人事__花名册:
         self.__client:DingTalkClient = _client
 
     def 获取花名册元数据(self) -> dict:
+        """
+        https://open.dingtalk.com/document/orgapp/intelligent-personnel-roster-metadata-query
+        :return:
+        """
         response = self.__client.oapi(
             method="POST",
             path="/topapi/smartwork/hrm/roster/meta/get",
@@ -170,6 +174,10 @@ class 智能人事__花名册:
         return response.json()
 
     def 获取花名册字段组详情(self) -> dict:
+        """
+        https://open.dingtalk.com/document/orgapp/get-roster-field-group-details
+        :return:
+        """
         response = self.__client.oapi(
             method="POST",
             path="/topapi/smartwork/hrm/employee/field/grouplist",
@@ -178,6 +186,13 @@ class 智能人事__花名册:
         return response.json()
 
     def 获取员工花名册字段信息(self, user_id_list:List[str], field_filter_list:List[str]|None = None, text_to_select_convert:bool|None = None) -> dict:
+        """
+        https://open.dingtalk.com/document/orgapp/api-getemployeerosterbyfield
+        :param user_id_list: 员工的 userId 列表，一次最多支持传100个值。
+        :param field_filter_list: 需要获取的花名册字段 field_code 值列表
+        :param text_to_select_convert: 如果设置为true，岗位职级字段的 label 返回的名称，value返回的对应id
+        :return:
+        """
         body_dict = {"userIdList": user_id_list, "appAgentId": self.__client.agent_id}
         if field_filter_list is not None:
             body_dict["fieldFilterList"] = field_filter_list
@@ -186,7 +201,7 @@ class 智能人事__花名册:
 
         response = self.__client.api(
             method="POST",
-            path="/topapi/smartwork/hrm/roster/meta/get", json=body_dict, )
+            path="/v1.0/hrm/rosters/lists/query", json=body_dict, )
         return response.json()
 
     def 更新员工花名册信息(self, user_id: str, groups: List[dict]) -> dict:
@@ -221,6 +236,12 @@ class 智能人事__员工管理:
         无状态: '-1'
 
     def 获取待入职员工列表(self, offset:int, size:int) -> dict:
+        """
+        https://open.dingtalk.com/document/orgapp/intelligent-personnel-query-the-list-of-employees-to-be-hired
+        :param offset:
+        :param size:
+        :return:
+        """
         response = self.__client.oapi(
             method="POST",
             path="/topapi/smartwork/hrm/employee/querypreentry",
@@ -229,6 +250,13 @@ class 智能人事__员工管理:
         return response.json()
 
     def 获取在职员工列表(self, status_list:List[在职员工状态], offset:int, size:int) -> dict:
+        """
+        https://open.dingtalk.com/document/orgapp/intelligent-personnel-query-the-list-of-on-the-job-employees-of-the
+        :param status_list:
+        :param offset:
+        :param size:
+        :return:
+        """
         response = self.__client.oapi(
             method="POST",
             path="/topapi/smartwork/hrm/employee/querypreentry",
@@ -237,6 +265,12 @@ class 智能人事__员工管理:
         return response.json()
 
     def 获取离职员工列表(self, next_token:int, max_results:int) -> dict:
+        """
+        https://open.dingtalk.com/document/orgapp/obtain-the-list-of-employees-who-have-left
+        :param next_token:
+        :param max_results:
+        :return:
+        """
         response = self.__client.api(
             method="GET",
             path="/v1.0/hrm/employees/dismissions",
@@ -245,6 +279,11 @@ class 智能人事__员工管理:
         return response.json()
 
     def 批量获取员工离职信息(self, user_id_list:List[str]) -> dict:
+        """
+        https://open.dingtalk.com/document/orgapp/obtain-resignation-information-of-employees-new-version
+        :param user_id_list: 员工 userId 列表，最大长度 50 。
+        :return:
+        """
         response = self.__client.api(
             method="GET",
             path="/v1.0/hrm/employees/dimissionInfo",
