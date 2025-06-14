@@ -531,8 +531,168 @@ class 待办任务__:
 class 文档文件__:
     def __init__(self, _client:DingTalkClient):
         self.__client:DingTalkClient = _client
+        self.群文件 = 文档文件__群文件(_client)
         self.媒体文件 = 文档文件__媒体文件(_client)
+        self.存储管理 = 文档文件__存储管理(_client)
         self.文件传输 = 文档文件__存储管理__文件传输(_client)
+
+
+# noinspection NonAsciiCharacters, PyPep8Naming
+class 文档文件__群文件:
+    def __init__(self, _client:DingTalkClient):
+        self.__client:DingTalkClient = _client
+
+    def 获取群存储空间信息(self, unionId:str, openConversationId:str) -> dict:
+        """
+        接口版本：2025-01-14
+
+        调用本接口，可获取某个指定群的存储空间信息，包括群存储空间的ID、群存储空间创建的时间和修改时间等。
+
+        https://open.dingtalk.com/document/orgapp/obtain-group-storage-space-information
+
+        :param unionId: 操作人的unionId。
+        :param openConversationId: 会话openConversationId。
+
+        :return:
+            {
+              "space" : {
+                "spaceId" : "798****",
+                "corpId" : "ding1234****",
+                "createTime" : "2022-01-01T10:00:00Z",
+                "modifiedTime" : "2022-01-01T10:00:00Z"
+              }
+            }
+        """
+        response = self.__client.api(
+            method="POST",
+            path=f"/v1.0/convFile/conversations/spaces/query?unionId={unionId}",
+            json={'openConversationId': openConversationId}
+        )
+        return response.json()
+
+    def 以应用身份发送文件给指定用户(self, unionId:str, spaceId:str, dentryId:str) -> dict:
+        """
+        接口版本：2023-01-18
+
+        调用本接口可以把存储空间内的文件发送给用户。例如，以当前应用的身份给接收人发送一条工作通知。
+
+        https://open.dingtalk.com/document/orgapp/sends-a-storage-file-to-a-specified-user
+
+        :param unionId: 操作人的unionId。
+        :param spaceId: 文件所在空间ID。
+        :param dentryId: 文件ID。
+
+        :return:
+            {
+              "file" : {
+                "id" : "674****",
+                "conversationId" : "cidB1*****",
+                "spaceId" : "864*****",
+                "parentId" : "0",
+                "type" : "FILE",
+                "name" : "测试文件.xls",
+                "size" : 256,
+                "path" : "/测试文件.xls",
+                "version" : 1,
+                "status" : "NORMAL",
+                "extension" : "xls",
+                "creatorId" : "cHtUY****",
+                "modifierId" : "cHtUY****",
+                "createTime" : "2022-01-01T10:00:00Z",
+                "modifiedTime" : "2022-01-01T10:00:00Z"
+              }
+            }
+        """
+        response = self.__client.api(
+            method="POST",
+            path=f"/v1.0/convFile/apps/conversations/files/send?unionId={unionId}",
+            json={"spaceId" : spaceId, "dentryId" : dentryId}
+        )
+        return response.json()
+
+    def 发送文件到指定会话(self, unionId:str, spaceId:str, dentryId:str, openConversationId:str) -> dict:
+        """
+        接口版本：2023-01-18
+
+        调用本接口，可实现将存储空间内的文件发送到指定群内。
+
+        https://open.dingtalk.com/document/orgapp/send-file-to-specified-session
+
+        :param unionId: 操作人的unionId。
+        :param spaceId: 文件所在空间ID。
+        :param dentryId: 文件ID。
+        :param openConversationId: 会话openConversationId。
+
+        :return:
+            {
+              "file" : {
+                "id" : "897*****",
+                "conversationId" : "cid+vIrz*****",
+                "spaceId" : "865*****",
+                "parentId" : "parent_id",
+                "type" : "FILE",
+                "name" : "测试文件.txt",
+                "size" : 256,
+                "path" : "./测试文件.txt",
+                "version" : 1,
+                "status" : "NORMAL",
+                "extension" : "txt",
+                "creatorId" : "chy*****",
+                "modifierId" : "chy*****",
+                "createTime" : "2022-01-01T10:00:00Z",
+                "modifiedTime" : "2022-01-01T10:00:00Z",
+                "uuid" : "123*****"
+              }
+            }
+        """
+        response = self.__client.api(
+            method="POST",
+            path=f"/v1.0/convFile/conversations/files/send?unionId={unionId}",
+            json={"spaceId": spaceId, "dentryId": dentryId, "openConversationId": openConversationId}
+        )
+        return response.json()
+
+    def 发送文件链接到指定会话(self, unionId:str, spaceId:str, dentryId:str, openConversationId:str) -> dict:
+        """
+        接口版本：2023-01-18
+
+        调用本接口，可实现发送文件链接到指定群内。
+
+        https://open.dingtalk.com/document/orgapp/send-a-file-link-to-the-specified-session
+
+        :param unionId: 操作人的unionId。
+        :param spaceId: 文件所在空间ID。
+        :param dentryId: 文件ID。
+        :param openConversationId: 会话openConversationId。
+
+        :return:
+            {
+              "file" : {
+                "id" : "file_id",
+                "conversationId" : "open_conversation_id",
+                "spaceId" : "space_id",
+                "parentId" : "parent_id",
+                "type" : "file",
+                "name" : "file_name",
+                "size" : 256,
+                "path" : "file_path",
+                "version" : 1,
+                "status" : "NORMAL",
+                "extension" : "txt",
+                "creatorId" : "creator_id",
+                "modifierId" : "modified_id",
+                "createTime" : "2022-01-01T10:00:00Z",
+                "modifiedTime" : "2022-01-01T10:00:00Z",
+                "uuid" : "uuid"
+              }
+            }
+        """
+        response = self.__client.api(
+            method="POST",
+            path=f"/v1.0/convFile/conversations/files/links/send?unionId={unionId}",
+            json={"spaceId": spaceId, "dentryId": dentryId, "openConversationId": openConversationId}
+        )
+        return response.json()
 
 
 # noinspection NonAsciiCharacters, PyPep8Naming
@@ -542,6 +702,8 @@ class 文档文件__媒体文件:
 
     def 上传媒体文件(self, file_path:Path|str, media_type:Literal['image', 'voice', 'video', 'file']) -> dict:
         """
+        接口版本：2023-05-24
+
         调用本接口，上传图片、语音媒体资源文件以及普通文件，接口返回媒体资源标识 media_id。
 
         https://open.dingtalk.com/document/orgapp/upload-media-files
@@ -566,58 +728,72 @@ class 文档文件__媒体文件:
 
 
 # noinspection NonAsciiCharacters, PyPep8Naming
+class 文档文件__存储管理:
+    def __init__(self, _client:DingTalkClient):
+        self.__client:DingTalkClient = _client
+        self.文件传输 = 文档文件__存储管理__文件传输(self.__client)
+
+
+# noinspection NonAsciiCharacters, PyPep8Naming
 class 文档文件__存储管理__文件传输:
     def __init__(self, _client:DingTalkClient):
         self.__client:DingTalkClient = _client
 
-    def 获取文件上传信息(self, space_id:int, union_id:str, multi_part:bool = False) -> dict:
+    def 获取文件上传信息(self, parentDentryUuid:str, union_id:str) -> dict:
         """
-        调用本接口，上传图片、语音媒体资源文件以及普通文件，接口返回媒体资源标识 media_id。
+        接口版本：2024-01-05
 
-        https://open.dingtalk.com/document/orgapp/upload-media-files
+        调用本接口，获取文件上传信息。
 
-        :param space_id: 空间Id。
+        https://open.dingtalk.com/document/orgapp/obtain-file-upload-informations
+
         :param union_id: 操作者unionId。
-        :param multi_part: 是否需要分片上传。默认值为 False
+        :param parentDentryUuid: 父节点 dentryUuid，如果是空间根目录, 填空间根目录的dentryUuid。
 
         :return:
             {
-                "uploadKey": str,
-                "storageDriver": str,
-                "protocol": str,
-                "headerSignatureInfo": {
-                    "resourceUrls" : ["resourceUrl"],
-                    "headers" : {
-                      "key" : "header_value"
-                    },
-                }
+              "uploadKey" : "upload_key",
+              "storageDriver" : "DINGTALK",
+              "protocol" : "HEADER_SIGNATURE",
+              "headerSignatureInfo" : {
+                "resourceUrls" : [ "resourceUrl" ],
+                "headers" : {
+                  "key" : "header_value"
+                },
+                "expirationSeconds" : 900,
+                "region" : "ZHANGJIAKOU",
+                "internalResourceUrls" : [ "internalResourceUrl" ]
+              }
             }
         """
         response = self.__client.api(
             method="POST",
-            path=f"/v1.0/storage/spaces/{space_id}/files/uploadInfos/query",
+            path=f"/v2.0/storage/spaces/files/{parentDentryUuid}/uploadInfos/query",
             params={'unionId': union_id},
-            json={
-                "protocol": "HEADER_SIGNATURE",
-                "multipart": multi_part
-            }
+            json={"protocol" : "HEADER_SIGNATURE"}
         )
         return response.json()
 
-    def 提交文件(self, url:str, headers:dict, file_path:Path|str, space_id:int, union_id:str,
-                 upload_key:str, convert_to_online_doc:bool = False) -> dict:
+    def 提交文件(
+            self, parentDentryUuid:str, upload_key:str, url:str, headers:dict, file_content: bytes,
+            file_path:Path|str, union_id:str, convert_to_online_doc:bool = False,
+            conflictStrategy:Literal['AUTO_RENAME', 'OVERWRITE', 'RETURN_DENTRY_IF_EXISTS', 'RETURN_ERROR_IF_EXISTS'] = 'AUTO_RENAME'
+    ) -> dict:
         """
+        接口版本：2023-07-06
+
         调用本接口，上传图片、语音媒体资源文件以及普通文件，接口返回媒体资源标识 media_id。
 
         https://open.dingtalk.com/document/orgapp/upload-media-files
-
+        :param parentDentryUuid: 父节点 dentryUuid。如果是空间根目录，填空间根目录的dentryUuid。
+        :param upload_key: 添加文件唯一标识。
         :param url: 获取文件上传信息得到的 resourceUrl。
         :param headers: 获取文件上传信息得到的 headers。
-        :param file_path: 文件路径
-        :param space_id: 空间Id。
+        :param file_content: 文件字节内容，如果提供了 file_content，则忽略 file_path。
+        :param file_path: 文件路径，如果提供了 file_content，则忽略 file_path。
         :param union_id: 操作者unionId。
-        :param upload_key: 添加文件唯一标识。
         :param convert_to_online_doc: 是否转换成在线文档。默认值 False
+        :param conflictStrategy: 文件名称冲突策略。AUTO_RENAME：自动重命名，默认值 OVERWRITE：覆盖 RETURN_DENTRY_IF_EXISTS：返回已存在文件 RETURN_ERROR_IF_EXISTS：文件已存在时报错
 
         :return:
             {
@@ -627,20 +803,28 @@ class 文档文件__存储管理__文件传输:
                 "headerSignatureInfo": dict,
             }
         """
-        with open(file_path, 'rb') as f:
-            httpx.put(
-                url=url,
-                files={"file":f},
-                headers=headers
-            )
+
+        if file_content:
+            file_content = file_path.read_bytes()
+            httpx.put(url=url, content=file_content, headers=headers)
+        elif file_path:
+            file_path = Path(file_path)
+            if not file_path.exists():
+                raise FileNotFoundError(f"文件路径不存在: {file_path}")
+            else:
+                with open(file_path, 'rb') as f:
+                    httpx.put(url=url, files={"file": f}, headers=headers)
+        else:
+            raise FileNotFoundError(f"未提供任何文件路径或文件内容")
 
         response = self.__client.api(
             method="POST",
-            path=f"/v2.0/storage/spaces/files/{space_id}/commit?unionId={union_id}",
+            path=f"/v2.0/storage/spaces/files/{parentDentryUuid}/commit?unionId={union_id}",
             json={
                 "uploadKey": upload_key,
                 "name": file_path.split("/")[-1],
-                "convertToOnlineDoc": convert_to_online_doc
+                "convertToOnlineDoc": convert_to_online_doc,
+                "option": {"conflictStrategy": conflictStrategy}
             }
         )
         return response.json()
