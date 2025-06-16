@@ -5,7 +5,7 @@ import time
 from datetime import datetime
 from enum import Enum
 from pathlib import Path
-from typing import List, Literal
+from typing import List, Literal, Tuple
 
 import httpx
 from httpx import Client
@@ -533,6 +533,7 @@ class 文档文件__:
         self.__client:DingTalkClient = _client
         self.群文件 = 文档文件__群文件(_client)
         self.媒体文件 = 文档文件__媒体文件(_client)
+        self.搜索 = 文档文件__搜索(_client)
         self.存储管理 = 文档文件__存储管理(_client)
         self.文件传输 = 文档文件__存储管理__文件传输(_client)
 
@@ -728,10 +729,119 @@ class 文档文件__媒体文件:
 
 
 # noinspection NonAsciiCharacters, PyPep8Naming
+class 文档文件__搜索:
+    def __init__(self, _client:DingTalkClient):
+        self.__client:DingTalkClient = _client
+
+    def 搜索文件(
+            self, operatorId:str, keyword:str, nextToken:str=None, maxResults:int=50,
+            dentryCategories:List[str]=None, creatorIds:List[str]=None, modifierIds:List[str]=None,
+            createTimeRange:Tuple[datetime, datetime]=None, visitTimeRange:Tuple[datetime, datetime]=None
+    ) -> dict:
+        """
+        接口版本：2023-06-06
+
+        调用本接口，根据操作者unionId和关键词信息，获取文件信息。
+
+        https://open.dingtalk.com/document/orgapp/search-for-files
+
+        :param nextToken:
+        :param operatorId: 操作人unionId。
+        :param keyword: 搜索关键词。
+        :param nextToken: 分页游标。首次拉取不用传。
+        :param maxResults: 分页大小，默认值50。最大值50。
+        :param dentryCategories: 限定文件类别。
+        :param creatorIds: 限定创建者。
+        :param modifierIds: 限定修改者。
+        :param createTimeRange: 限定创建时间范围。
+        :param visitTimeRange: 限定访问时间范围。
+
+        :return:
+            {
+              "items" : [ {
+                "dentryUuid" : "*****",
+                "name" : "name",
+                "creator" : {
+                  "userId" : "01472825524039877041",
+                  "name" : "user_name"
+                },
+                "modifier" : {
+                  "userId" : "01472825524039877041",
+                  "name" : "user_name"
+                }
+              } ],
+              "nextToken" : "next_token"
+            }
+        """
+        option = {}
+        if nextToken:
+            option["nextToken"] = nextToken
+        if maxResults:
+            option["maxResults"] = maxResults
+        if dentryCategories:
+            option["dentryCategories"] = dentryCategories
+        if creatorIds:
+            option["creatorIds"] = creatorIds
+        if modifierIds:
+            option["modifierIds"] = modifierIds
+        if createTimeRange:
+            option["createTimeRange"] = {"createTimeRange": {"startTime": createTimeRange[0].timestamp(), "endTime": createTimeRange[1].timestamp()}}
+        if visitTimeRange:
+            option["visitTimeRange"] = {"visitTimeRange": {"startTime": visitTimeRange[0].timestamp(), "endTime": visitTimeRange[1].timestamp()}}
+
+        response = self.__client.api(
+            method="POST",
+            path=f"/v2.0/storage/dentries/search",
+            params={"operatorId": operatorId},
+            json={"keyword": keyword, "option": option}
+        )
+        return response.json()
+
+    def 搜索知识库(self,  operatorId:str, keyword:str, nextToken:str=None, maxResults:int=50):
+        """
+        接口版本：2023-06-06
+
+        调用本接口，根据操作人unionId和关键词信息，搜索知识库信息。
+
+        https://open.dingtalk.com/document/orgapp/search-knowledge-base
+
+        :param nextToken:
+        :param operatorId: 操作人unionId。
+        :param keyword: 搜索关键词。
+        :param nextToken: 分页游标。首次拉取不用传。
+        :param maxResults: 分页大小，默认值50。最大值50。
+
+        :return:
+            {
+              "items" : [ {
+                "workspaceId" : "By8jQS1ZYjGn5b0M",
+                "name" : "workspace_name",
+                "url" : "workspace_url"
+              } ],
+              "nextToken" : "next_token"
+            }
+        """
+        option = {}
+        if nextToken:
+            option["nextToken"] = nextToken
+        if maxResults:
+            option["maxResults"] = maxResults
+
+        response = self.__client.api(
+            method="POST",
+            path=f"/v2.0/storage/workspaces/search",
+            params={"operatorId": operatorId},
+            json={"keyword": keyword, "option": option}
+        )
+        return response.json()
+
+
+# noinspection NonAsciiCharacters, PyPep8Naming
 class 文档文件__存储管理:
     def __init__(self, _client:DingTalkClient):
         self.__client:DingTalkClient = _client
         self.文件传输 = 文档文件__存储管理__文件传输(self.__client)
+        self.文件管理 = 文档文件__存储管理__文件管理(self.__client)
 
 
 # noinspection NonAsciiCharacters, PyPep8Naming
@@ -776,7 +886,7 @@ class 文档文件__存储管理__文件传输:
 
     def 提交文件(
             self, parentDentryUuid:str, upload_key:str, url:str, headers:dict, file_content: bytes,
-            file_path:Path|str, union_id:str, convert_to_online_doc:bool = False,
+            file_name:str, union_id:str, convert_to_online_doc:bool = False,
             conflictStrategy:Literal['AUTO_RENAME', 'OVERWRITE', 'RETURN_DENTRY_IF_EXISTS', 'RETURN_ERROR_IF_EXISTS'] = 'AUTO_RENAME'
     ) -> dict:
         """
@@ -784,13 +894,14 @@ class 文档文件__存储管理__文件传输:
 
         调用本接口，上传图片、语音媒体资源文件以及普通文件，接口返回媒体资源标识 media_id。
 
-        https://open.dingtalk.com/document/orgapp/upload-media-files
+        https://open.dingtalk.com/document/orgapp/submittal-file
+
         :param parentDentryUuid: 父节点 dentryUuid。如果是空间根目录，填空间根目录的dentryUuid。
         :param upload_key: 添加文件唯一标识。
         :param url: 获取文件上传信息得到的 resourceUrl。
         :param headers: 获取文件上传信息得到的 headers。
-        :param file_content: 文件字节内容，如果提供了 file_content，则忽略 file_path。
-        :param file_path: 文件路径，如果提供了 file_content，则忽略 file_path。
+        :param file_content: 文件字节内容。
+        :param file_name: 文件的名称，带后缀。
         :param union_id: 操作者unionId。
         :param convert_to_online_doc: 是否转换成在线文档。默认值 False
         :param conflictStrategy: 文件名称冲突策略。AUTO_RENAME：自动重命名，默认值 OVERWRITE：覆盖 RETURN_DENTRY_IF_EXISTS：返回已存在文件 RETURN_ERROR_IF_EXISTS：文件已存在时报错
@@ -804,28 +915,79 @@ class 文档文件__存储管理__文件传输:
             }
         """
 
-        if file_content:
-            file_content = file_path.read_bytes()
-            httpx.put(url=url, content=file_content, headers=headers)
-        elif file_path:
-            file_path = Path(file_path)
-            if not file_path.exists():
-                raise FileNotFoundError(f"文件路径不存在: {file_path}")
-            else:
-                with open(file_path, 'rb') as f:
-                    httpx.put(url=url, files={"file": f}, headers=headers)
-        else:
-            raise FileNotFoundError(f"未提供任何文件路径或文件内容")
-
+        httpx.put(url=url, content=file_content, headers=headers)
         response = self.__client.api(
             method="POST",
             path=f"/v2.0/storage/spaces/files/{parentDentryUuid}/commit?unionId={union_id}",
             json={
                 "uploadKey": upload_key,
-                "name": file_path.split("/")[-1],
+                "name": file_name,
                 "convertToOnlineDoc": convert_to_online_doc,
-                "option": {"conflictStrategy": conflictStrategy}
+                "option": {
+                    "conflictStrategy": conflictStrategy
+                }
             }
+        )
+        return response.json()
+
+
+# noinspection NonAsciiCharacters, PyPep8Naming
+class 文档文件__存储管理__文件管理:
+    def __init__(self, _client:DingTalkClient):
+        self.__client:DingTalkClient = _client
+
+    def 添加文件夹(
+            self, spaceId:str, parentId:str, union_id:str, name:str,
+            conflictStrategy:Literal['AUTO_RENAME', 'OVERWRITE', 'RETURN_DENTRY_IF_EXISTS', 'RETURN_ERROR_IF_EXISTS'] = 'OVERWRITE'
+    ) -> dict:
+        """
+        接口版本：2023-06-06
+
+        调用本接口，在存储空间内添加文件夹。
+
+        https://open.dingtalk.com/document/orgapp/add-folder
+
+        :param spaceId: 空间Id。
+        :param parentId: 父目录Id。根目录时，该参数是0。
+        :param union_id: 操作者unionId。
+        :param name: 文件夹的名称。
+        :param conflictStrategy: 文件名称冲突策略。AUTO_RENAME：自动重命名，默认值 OVERWRITE：覆盖 RETURN_DENTRY_IF_EXISTS：返回已存在文件 RETURN_ERROR_IF_EXISTS：文件已存在时报错
+
+        :return:
+        """
+        response = self.__client.api(
+            method="POST",
+            path=f"/v1.0/storage/spaces/{spaceId}/dentries/{parentId}/folders",
+            params={'unionId': union_id},
+            json={
+                "name": name,
+                "option": {
+                    "conflictStrategy": conflictStrategy
+                }
+            }
+        )
+        return response.json()
+
+    def 重命名文件或文件夹(self, spaceId:str, dentryId:str, union_id:str, new_name:str) -> dict:
+        """
+        接口版本：2023-06-06
+
+        调用本接口，在存储空间内添加文件夹。
+
+        https://open.dingtalk.com/document/orgapp/add-folder
+
+        :param spaceId: 空间Id。
+        :param dentryId: 文件或文件夹Id。
+        :param union_id: 操作者unionId。
+        :param new_name: 文件或文件夹的新名称。
+
+        :return:
+        """
+        response = self.__client.api(
+            method="POST",
+            path=f"/v1.0/storage/spaces/{spaceId}/dentries/{dentryId}/rename",
+            params={'unionId': union_id},
+            json={"newName": new_name}
         )
         return response.json()
 
@@ -859,7 +1021,7 @@ class 互动卡片__:
 
         open_space_id = f"dtv1.card//{';'.join(open_space_ids)}"
 
-        payload = {
+        payload:dict = {
             "cardTemplateId": card_template_id,
             "outTrackId": out_track_id,
             "openSpaceId": open_space_id,
@@ -1013,7 +1175,7 @@ class OA审批_审批实例__:
             }
         """
 
-        data = {
+        data: dict = {
             'processInstanceId': instance_id,
             'text': text,
             'commentUserId': comment_user_id,
