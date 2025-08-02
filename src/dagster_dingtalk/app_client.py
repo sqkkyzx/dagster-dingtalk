@@ -1089,6 +1089,7 @@ class OA审批__:
         self.__client:DingTalkClient = _client
         self.审批实例 = OA审批_审批实例__(_client)
         self.审批钉盘 = OA审批_审批钉盘__(_client)
+        self.审批任务 = OA审批_审批任务__(_client)
 
 
 # noinspection NonAsciiCharacters, PyPep8Naming
@@ -1256,6 +1257,44 @@ class OA审批_审批钉盘__:
             json={
               "userId" : user_id,
               "agentId" : self.__client.agent_id
+            })
+        return response.json()
+
+
+# noinspection NonAsciiCharacters, PyPep8Naming
+class OA审批_审批任务__:
+    def __init__(self, _client:DingTalkClient):
+        self.__client:DingTalkClient = _client
+
+    def 同意或拒绝审批任务(self, process_instance_id:str, result:bool, actioner_user_id:str, task_id:str|int, remark:str="") -> dict:
+        """
+        调用本接口，根据指定模板ID、审批实例ID、任务节点ID和操作人userId，对单个审批任务进行处理。
+
+        https://open.dingtalk.com/document/orgapp/approve-or-reject-the-approval-task
+
+        :param process_instance_id: 审批实例 ID。
+        :param result: 审批操作, 同意或拒绝。
+        :param remark: 审批意见，可为空。
+        :param actioner_user_id: 操作人 userId。
+        :param task_id: 任务 ID。
+
+        :return:
+            {
+                "success": bool,
+                "result": {
+                    "spaceId": int
+                }
+            }
+        """
+        response = self.__client.api(
+            method="POST",
+            path="/v1.0/workflow/processInstances/execute",
+            json={
+              "processInstanceId" : process_instance_id,
+              "remark" : remark,
+              "result" : "agree" if result else "refuse",
+              "actionerUserId" : actioner_user_id,
+              "taskId" : int(task_id)
             })
         return response.json()
 
