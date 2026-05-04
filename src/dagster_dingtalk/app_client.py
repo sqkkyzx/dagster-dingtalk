@@ -1000,23 +1000,29 @@ class 互动卡片__:
     def 创建并投放卡片(
             self, search_type_name: str, search_desc: str, card_template_id: str, card_param_map: dict,
             alert_content: str, open_space_ids: List[str], out_track_id: str, support_forward: bool = True,
-            call_back_type: str = "STREAM", expired_time_millis:int = 0
+            call_back_type: str = "STREAM", expired_time_millis:int = 0, call_back_route_key: str = None,
+            private_card_param_map: dict[str, dict] = None, card_at_user_ids: List[str] = None
     ) -> dict:
         """
         创建并投放卡片。当前仅支持 IM群聊, IM机器人单聊, 吊顶 三种场域类型。
 
-        https://open.dingtalk.com/document/orgapp/create-and-deliver-cards
+        https://open.dingtalk.com/document/development/create-and-deliver-cards
 
         :param card_template_id: 卡片模板 ID
-        :param open_space_ids: 卡片投放场域 Id
         :param out_track_id: 卡片唯一标识
+        :param call_back_type: 回调模式
+        :param call_back_route_key: 回调模式
+        :param open_space_ids: 卡片投放场域 Id
         :param card_param_map: 卡片数据
+        :param private_card_param_map: 卡片用户私有数据
         :param search_type_name: 卡片类型名
         :param search_desc: 卡片消息展示
         :param alert_content: 通知内容
-        :param call_back_type: 回调模式
         :param support_forward: 是否支持转发
         :param expired_time_millis: 吊顶投放过期时间。当投放内容为吊顶时必须传参。
+        :param card_at_user_ids: 被@人的userId列表,同时需要在卡片的 markdown 内容中添加：<a atId=example_user_id> 用户昵称<a> ；
+
+        更新于 2026-04-24
         """
 
         open_space_id = f"dtv1.card//{';'.join(open_space_ids)}"
@@ -1026,14 +1032,21 @@ class 互动卡片__:
             "outTrackId": out_track_id,
             "openSpaceId": open_space_id,
             "callbackType": call_back_type,
+            "callbackRouteKey": call_back_route_key,
             "cardData": {"cardParamMap": card_param_map}
         }
+
+        if private_card_param_map:
+            payload["privateData"] = private_card_param_map
+
+        if card_at_user_ids:
+            payload["cardAtUserIds"] = card_at_user_ids
 
         open_space_model = {
                 "supportForward": support_forward,
                 "searchSupport": {"searchTypeName": search_type_name, "searchDesc": search_desc},
                 "notification": {"alertContent": alert_content, "notificationOff": False}
-            }
+        }
 
         if 'IM_GROUP' in open_space_id.upper():
             payload["imGroupOpenSpaceModel"] = open_space_model
