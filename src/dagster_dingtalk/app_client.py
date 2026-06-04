@@ -5,11 +5,21 @@ import time
 from datetime import datetime
 from enum import Enum
 from pathlib import Path
-from typing import List, Literal, Tuple
+from typing import List, Literal, Tuple, Dict
 
 import httpx
 from httpx import Client
 from pydantic import BaseModel, Field
+
+
+def _remove_none_values(data):
+    if isinstance(data, dict):
+        # 使用字典推导式，严格判断 v is not None
+        return {k: _remove_none_values(v) for k, v in data.items() if v is not None}
+    elif isinstance(data, list):
+        # 如果字典中包含列表（例如 formComponents），递归处理列表中的元素
+        return [_remove_none_values(item) for item in data]
+    return data
 
 
 # noinspection NonAsciiCharacters
@@ -19,16 +29,16 @@ class DingTalkClient:
             app_id: str,
             client_id: str,
             client_secret: str,
-            app_name: str|None = None,
-            agent_id: int|str|None = None,
+            app_name: str | None = None,
+            agent_id: int | str | None = None,
     ):
         self.app_id: str = app_id
-        self.app_name: str|None = app_name
-        self.agent_id: int|None = int(agent_id) if agent_id else None
+        self.app_name: str | None = app_name
+        self.agent_id: int | None = int(agent_id) if agent_id else None
         self.robot_code: str = client_id
         self.__client_id: str = client_id
         self.__client_secret: str = client_secret
-        
+
         # 令牌缓存信息
         self.__access_token_file_cache = Path.home() / f".dagster_dingtalk_cache_{self.app_id}"
         self.__access_token_cache: dict = {}
@@ -45,7 +55,6 @@ class DingTalkClient:
         self.OA审批 = OA审批__(self)
         self.即时通信 = 即时通信__(self)
         self.待办任务 = 待办任务__(self)
-
 
     def __init_clients(self):
         self.__oapi_client = httpx.Client(
@@ -130,7 +139,6 @@ class DingTalkClient:
         self.__api_client.close()
 
 
-
 # 智能人事模块
 # https://open.dingtalk.com/document/orgapp/intelligent-personnel-call-description
 # todo 职位管理/获取企业职位列表
@@ -150,16 +158,16 @@ class DingTalkClient:
 
 # noinspection NonAsciiCharacters, PyPep8Naming
 class 智能人事__:
-    def __init__(self, _client:DingTalkClient):
-        self.__client:DingTalkClient = _client
+    def __init__(self, _client: DingTalkClient):
+        self.__client: DingTalkClient = _client
         self.花名册 = 智能人事__花名册(_client)
         self.员工管理 = 智能人事__员工管理(_client)
 
 
 # noinspection NonAsciiCharacters, PyPep8Naming
 class 智能人事__花名册:
-    def __init__(self, _client:DingTalkClient):
-        self.__client:DingTalkClient = _client
+    def __init__(self, _client: DingTalkClient):
+        self.__client: DingTalkClient = _client
 
     def 获取花名册元数据(self) -> dict:
         """
@@ -185,7 +193,8 @@ class 智能人事__花名册:
         )
         return response.json()
 
-    def 获取员工花名册字段信息(self, user_id_list:List[str], field_filter_list:List[str]|None = None, text_to_select_convert:bool|None = None) -> dict:
+    def 获取员工花名册字段信息(self, user_id_list: List[str], field_filter_list: List[str] | None = None,
+                               text_to_select_convert: bool | None = None) -> dict:
         """
         https://open.dingtalk.com/document/orgapp/api-getemployeerosterbyfield
         :param user_id_list: 员工的 userId 列表，一次最多支持传100个值。
@@ -225,8 +234,8 @@ class 智能人事__花名册:
 
 # noinspection NonAsciiCharacters, PyPep8Naming
 class 智能人事__员工管理:
-    def __init__(self, _client:DingTalkClient):
-        self.__client:DingTalkClient = _client
+    def __init__(self, _client: DingTalkClient):
+        self.__client: DingTalkClient = _client
 
     # noinspection NonAsciiCharacters, PyPep8Naming
     class 在职员工状态(Enum):
@@ -235,7 +244,7 @@ class 智能人事__员工管理:
         待离职: '5'
         无状态: '-1'
 
-    def 获取待入职员工列表(self, offset:int, size:int) -> dict:
+    def 获取待入职员工列表(self, offset: int, size: int) -> dict:
         """
         https://open.dingtalk.com/document/orgapp/intelligent-personnel-query-the-list-of-employees-to-be-hired
         :param offset:
@@ -249,7 +258,7 @@ class 智能人事__员工管理:
         )
         return response.json()
 
-    def 获取在职员工列表(self, status_list:List[在职员工状态], offset:int, size:int) -> dict:
+    def 获取在职员工列表(self, status_list: List[在职员工状态], offset: int, size: int) -> dict:
         """
         https://open.dingtalk.com/document/orgapp/intelligent-personnel-query-the-list-of-on-the-job-employees-of-the
         :param status_list:
@@ -264,7 +273,7 @@ class 智能人事__员工管理:
         )
         return response.json()
 
-    def 获取离职员工列表(self, next_token:int, max_results:int) -> dict:
+    def 获取离职员工列表(self, next_token: int, max_results: int) -> dict:
         """
         https://open.dingtalk.com/document/orgapp/obtain-the-list-of-employees-who-have-left
         :param next_token:
@@ -278,7 +287,7 @@ class 智能人事__员工管理:
         )
         return response.json()
 
-    def 批量获取员工离职信息(self, user_id_list:List[str]) -> dict:
+    def 批量获取员工离职信息(self, user_id_list: List[str]) -> dict:
         """
         https://open.dingtalk.com/document/orgapp/obtain-resignation-information-of-employees-new-version
         :param user_id_list: 员工 userId 列表，最大长度 50 。
@@ -299,28 +308,30 @@ class 智能人事__员工管理:
 
 # noinspection NonAsciiCharacters, PyPep8Naming
 class 通讯录管理__:
-    def __init__(self, _client:DingTalkClient):
-        self.__client:DingTalkClient = _client
+    def __init__(self, _client: DingTalkClient):
+        self.__client: DingTalkClient = _client
         self.用户管理 = 通讯录管理__用户管理(_client)
         self.部门管理 = 通讯录管理__部门管理(_client)
 
-    def 查询用户详情(self, user_id:str, language:str = "zh_CN"):
+    def 查询用户详情(self, user_id: str, language: str = "zh_CN"):
         return self.用户管理.查询用户详情(user_id, language)
 
 
 # noinspection NonAsciiCharacters, PyPep8Naming
 class 通讯录管理__用户管理:
-    def __init__(self, _client:DingTalkClient):
-        self.__client:DingTalkClient = _client
+    def __init__(self, _client: DingTalkClient):
+        self.__client: DingTalkClient = _client
 
-    def 查询用户详情(self, user_id:str, language:str = "zh_CN") -> dict:
+    def 查询用户详情(self, user_id: str, language: str = "zh_CN") -> dict:
         response = self.__client.oapi(
             method="POST",
             path="/topapi/v2/user/get", json={"language": language, "userid": user_id})
         return response.json()
 
-    def 查询离职记录列表(self, start_time:datetime, end_time:datetime|None, next_token:str, max_results:int) -> dict:
-        params = {"startTime": start_time.strftime("%Y-%m-%dT%H:%M:%SZ"), "nextToken": next_token, "maxResults": max_results}
+    def 查询离职记录列表(self, start_time: datetime, end_time: datetime | None, next_token: str,
+                         max_results: int) -> dict:
+        params = {"startTime": start_time.strftime("%Y-%m-%dT%H:%M:%SZ"), "nextToken": next_token,
+                  "maxResults": max_results}
         if end_time is not None:
             params["endTime"] = end_time.strftime("%Y-%m-%dT%H:%M:%SZ")
         response = self.__client.api(
@@ -343,10 +354,10 @@ class 通讯录管理__用户管理:
 
 # noinspection NonAsciiCharacters, PyPep8Naming
 class 通讯录管理__部门管理:
-    def __init__(self, _client:DingTalkClient):
-        self.__client:DingTalkClient = _client
+    def __init__(self, _client: DingTalkClient):
+        self.__client: DingTalkClient = _client
 
-    def 获取部门详情(self, dept_id: int, language:str = "zh_CN") -> dict:
+    def 获取部门详情(self, dept_id: int, language: str = "zh_CN") -> dict:
         """
         调用本接口，根据部门ID获取指定部门详情。
 
@@ -362,7 +373,7 @@ class 通讯录管理__部门管理:
         )
         return response.json()
 
-    def 获取部门列表(self, dept_id: int, language:str = "zh_CN"):
+    def 获取部门列表(self, dept_id: int, language: str = "zh_CN"):
         """
         调用本接口，获取下一级部门基础信息。
 
@@ -401,15 +412,15 @@ class 通讯录管理__部门管理:
 
 # noinspection NonAsciiCharacters, PyPep8Naming
 class 待办任务__:
-    def __init__(self, _client:DingTalkClient):
-        self.__client:DingTalkClient = _client
+    def __init__(self, _client: DingTalkClient):
+        self.__client: DingTalkClient = _client
 
     def 创建钉钉待办任务(
-            self, owner_union_id:str, source_id:str, subject:str, description: str = None,
-            operator_union_id:str = None, due_time: datetime|int = None, is_only_show_executor = False,
-            executor_union_ids:List[str] = None, participant_union_ids:List[str] = None,
-            priority: Literal[10, 20, 30, 40] = None, ding_notify:bool = False,
-            app_url:str = None, pc_url:str = None
+            self, owner_union_id: str, source_id: str, subject: str, description: str = None,
+            operator_union_id: str = None, due_time: datetime | int = None, is_only_show_executor=False,
+            executor_union_ids: List[str] = None, participant_union_ids: List[str] = None,
+            priority: Literal[10, 20, 30, 40] = None, ding_notify: bool = False,
+            app_url: str = None, pc_url: str = None
     ) -> dict:
 
         query = f"operatorId={operator_union_id}" if operator_union_id else ""
@@ -418,23 +429,23 @@ class 待办任务__:
             due_time = int(due_time.timestamp() * 1000)
 
         payload = {
-            "sourceId" : source_id,
-            "subject" : subject,
-            "creatorId" : owner_union_id,
-            "description" : description,
-            "dueTime" : due_time,
-            "executorIds" : executor_union_ids,
-            "participantIds" : participant_union_ids,
-            "detailUrl" : {
-                "appUrl" : app_url,
-                "pcUrl" : pc_url
+            "sourceId": source_id,
+            "subject": subject,
+            "creatorId": owner_union_id,
+            "description": description,
+            "dueTime": due_time,
+            "executorIds": executor_union_ids,
+            "participantIds": participant_union_ids,
+            "detailUrl": {
+                "appUrl": app_url,
+                "pcUrl": pc_url
             },
-            "priority" : priority,
-            "isOnlyShowExecutor" : is_only_show_executor
-            }
+            "priority": priority,
+            "isOnlyShowExecutor": is_only_show_executor
+        }
 
         if ding_notify:
-            payload["notifyConfigs"] = {"dingNotify" : "1"}
+            payload["notifyConfigs"] = {"dingNotify": "1"}
 
         response = self.__client.api(
             method="POST",
@@ -444,7 +455,7 @@ class 待办任务__:
         return response.json()
 
     def 删除钉钉待办任务(
-            self, owner_union_id:str,task_id:str, operator_union_id:str = None
+            self, owner_union_id: str, task_id: str, operator_union_id: str = None
     ) -> dict:
 
         query = f"operatorId={operator_union_id}" if operator_union_id else ""
@@ -456,9 +467,9 @@ class 待办任务__:
         return response.json()
 
     def 更新钉钉待办任务(
-            self, owner_union_id:str, task_id:str, operator_union_id:str = None,
-            subject:str = None, description: str = None, due_time: datetime|int = None, done:bool = None,
-            executor_union_ids:List[str] = None, participant_union_ids:List[str] = None,
+            self, owner_union_id: str, task_id: str, operator_union_id: str = None,
+            subject: str = None, description: str = None, due_time: datetime | int = None, done: bool = None,
+            executor_union_ids: List[str] = None, participant_union_ids: List[str] = None,
     ) -> dict:
 
         query = f"operatorId={operator_union_id}" if operator_union_id else ""
@@ -470,19 +481,19 @@ class 待办任务__:
             method="PUT",
             path=f"/v1.0/todo/users/{owner_union_id}/tasks/{task_id}?{query}",
             json={
-                "subject" : subject,
-                "description" : description,
-                "dueTime" : due_time,
-                "done" : done,
-                "executorIds" : executor_union_ids,
-                "participantIds" : participant_union_ids,
+                "subject": subject,
+                "description": description,
+                "dueTime": due_time,
+                "done": done,
+                "executorIds": executor_union_ids,
+                "participantIds": participant_union_ids,
             }
         )
         return response.json()
 
     def 更新钉钉待办执行者状态(
-            self, owner_union_id:str, task_id:str, operator_union_id:str=None,
-            done_executor_union_ids:List[str] = None, not_done_executor_union_ids:List[str] = None,
+            self, owner_union_id: str, task_id: str, operator_union_id: str = None,
+            done_executor_union_ids: List[str] = None, not_done_executor_union_ids: List[str] = None,
     ) -> dict:
 
         executor_status_list = []
@@ -498,21 +509,21 @@ class 待办任务__:
             method="PUT",
             path=f"/v1.0/todo/users/{owner_union_id}/tasks/{task_id}/executorStatus?{query}",
             json={
-                "executorStatusList" : executor_status_list
+                "executorStatusList": executor_status_list
             }
         )
         return response.json()
 
     def 查询企业下用户待办列表(
-            self, owner_union_id:str, next_token:str, is_down:bool, role_types:List[List[str]] = None
+            self, owner_union_id: str, next_token: str, is_down: bool, role_types: List[List[str]] = None
     ) -> dict:
 
         response = self.__client.api(
             method="POST",
             path=f"/v1.0/todo/users/{owner_union_id}/org/tasks/query",
             json={
-                "nextToken" : next_token,
-                "isDone" : is_down,
+                "nextToken": next_token,
+                "isDone": is_down,
                 "roleTypes": role_types
             }
         )
@@ -529,8 +540,8 @@ class 待办任务__:
 
 # noinspection NonAsciiCharacters, PyPep8Naming
 class 文档文件__:
-    def __init__(self, _client:DingTalkClient):
-        self.__client:DingTalkClient = _client
+    def __init__(self, _client: DingTalkClient):
+        self.__client: DingTalkClient = _client
         self.群文件 = 文档文件__群文件(_client)
         self.媒体文件 = 文档文件__媒体文件(_client)
         self.搜索 = 文档文件__搜索(_client)
@@ -540,10 +551,10 @@ class 文档文件__:
 
 # noinspection NonAsciiCharacters, PyPep8Naming
 class 文档文件__群文件:
-    def __init__(self, _client:DingTalkClient):
-        self.__client:DingTalkClient = _client
+    def __init__(self, _client: DingTalkClient):
+        self.__client: DingTalkClient = _client
 
-    def 获取群存储空间信息(self, unionId:str, openConversationId:str) -> dict:
+    def 获取群存储空间信息(self, unionId: str, openConversationId: str) -> dict:
         """
         接口版本：2025-01-14
 
@@ -571,7 +582,7 @@ class 文档文件__群文件:
         )
         return response.json()
 
-    def 以应用身份发送文件给指定用户(self, unionId:str, spaceId:str, dentryId:str) -> dict:
+    def 以应用身份发送文件给指定用户(self, unionId: str, spaceId: str, dentryId: str) -> dict:
         """
         接口版本：2023-01-18
 
@@ -607,11 +618,11 @@ class 文档文件__群文件:
         response = self.__client.api(
             method="POST",
             path=f"/v1.0/convFile/apps/conversations/files/send?unionId={unionId}",
-            json={"spaceId" : spaceId, "dentryId" : dentryId}
+            json={"spaceId": spaceId, "dentryId": dentryId}
         )
         return response.json()
 
-    def 发送文件到指定会话(self, unionId:str, spaceId:str, dentryId:str, openConversationId:str) -> dict:
+    def 发送文件到指定会话(self, unionId: str, spaceId: str, dentryId: str, openConversationId: str) -> dict:
         """
         接口版本：2023-01-18
 
@@ -653,7 +664,7 @@ class 文档文件__群文件:
         )
         return response.json()
 
-    def 发送文件链接到指定会话(self, unionId:str, spaceId:str, dentryId:str, openConversationId:str) -> dict:
+    def 发送文件链接到指定会话(self, unionId: str, spaceId: str, dentryId: str, openConversationId: str) -> dict:
         """
         接口版本：2023-01-18
 
@@ -698,10 +709,10 @@ class 文档文件__群文件:
 
 # noinspection NonAsciiCharacters, PyPep8Naming
 class 文档文件__媒体文件:
-    def __init__(self, _client:DingTalkClient):
-        self.__client:DingTalkClient = _client
+    def __init__(self, _client: DingTalkClient):
+        self.__client: DingTalkClient = _client
 
-    def 上传媒体文件(self, file_path:Path|str, media_type:Literal['image', 'voice', 'video', 'file']) -> dict:
+    def 上传媒体文件(self, file_path: Path | str, media_type: Literal['image', 'voice', 'video', 'file']) -> dict:
         """
         接口版本：2023-05-24
 
@@ -723,20 +734,20 @@ class 文档文件__媒体文件:
         """
         with open(file_path, 'rb') as f:
             response = self.__client.oapi(
-            method="POST",
-            path=f"/media/upload?type={media_type}", files={'media': f})
+                method="POST",
+                path=f"/media/upload?type={media_type}", files={'media': f})
         return response.json()
 
 
 # noinspection NonAsciiCharacters, PyPep8Naming
 class 文档文件__搜索:
-    def __init__(self, _client:DingTalkClient):
-        self.__client:DingTalkClient = _client
+    def __init__(self, _client: DingTalkClient):
+        self.__client: DingTalkClient = _client
 
     def 搜索文件(
-            self, operatorId:str, keyword:str, nextToken:str=None, maxResults:int=50,
-            dentryCategories:List[str]=None, creatorIds:List[str]=None, modifierIds:List[str]=None,
-            createTimeRange:Tuple[datetime, datetime]=None, visitTimeRange:Tuple[datetime, datetime]=None
+            self, operatorId: str, keyword: str, nextToken: str = None, maxResults: int = 50,
+            dentryCategories: List[str] = None, creatorIds: List[str] = None, modifierIds: List[str] = None,
+            createTimeRange: Tuple[datetime, datetime] = None, visitTimeRange: Tuple[datetime, datetime] = None
     ) -> dict:
         """
         接口版本：2023-06-06
@@ -785,9 +796,11 @@ class 文档文件__搜索:
         if modifierIds:
             option["modifierIds"] = modifierIds
         if createTimeRange:
-            option["createTimeRange"] = {"createTimeRange": {"startTime": createTimeRange[0].timestamp(), "endTime": createTimeRange[1].timestamp()}}
+            option["createTimeRange"] = {"createTimeRange": {"startTime": createTimeRange[0].timestamp(),
+                                                             "endTime": createTimeRange[1].timestamp()}}
         if visitTimeRange:
-            option["visitTimeRange"] = {"visitTimeRange": {"startTime": visitTimeRange[0].timestamp(), "endTime": visitTimeRange[1].timestamp()}}
+            option["visitTimeRange"] = {"visitTimeRange": {"startTime": visitTimeRange[0].timestamp(),
+                                                           "endTime": visitTimeRange[1].timestamp()}}
 
         response = self.__client.api(
             method="POST",
@@ -797,7 +810,7 @@ class 文档文件__搜索:
         )
         return response.json()
 
-    def 搜索知识库(self,  operatorId:str, keyword:str, nextToken:str=None, maxResults:int=50):
+    def 搜索知识库(self, operatorId: str, keyword: str, nextToken: str = None, maxResults: int = 50):
         """
         接口版本：2023-06-06
 
@@ -838,18 +851,18 @@ class 文档文件__搜索:
 
 # noinspection NonAsciiCharacters, PyPep8Naming
 class 文档文件__存储管理:
-    def __init__(self, _client:DingTalkClient):
-        self.__client:DingTalkClient = _client
+    def __init__(self, _client: DingTalkClient):
+        self.__client: DingTalkClient = _client
         self.文件传输 = 文档文件__存储管理__文件传输(self.__client)
         self.文件管理 = 文档文件__存储管理__文件管理(self.__client)
 
 
 # noinspection NonAsciiCharacters, PyPep8Naming
 class 文档文件__存储管理__文件传输:
-    def __init__(self, _client:DingTalkClient):
-        self.__client:DingTalkClient = _client
+    def __init__(self, _client: DingTalkClient):
+        self.__client: DingTalkClient = _client
 
-    def 获取文件上传信息(self, parentDentryUuid:str, union_id:str) -> dict:
+    def 获取文件上传信息(self, parentDentryUuid: str, union_id: str) -> dict:
         """
         接口版本：2024-01-05
 
@@ -880,14 +893,15 @@ class 文档文件__存储管理__文件传输:
             method="POST",
             path=f"/v2.0/storage/spaces/files/{parentDentryUuid}/uploadInfos/query",
             params={'unionId': union_id},
-            json={"protocol" : "HEADER_SIGNATURE"}
+            json={"protocol": "HEADER_SIGNATURE"}
         )
         return response.json()
 
     def 提交文件(
-            self, parentDentryUuid:str, upload_key:str, url:str, headers:dict, file_content: bytes,
-            file_name:str, union_id:str, convert_to_online_doc:bool = False,
-            conflictStrategy:Literal['AUTO_RENAME', 'OVERWRITE', 'RETURN_DENTRY_IF_EXISTS', 'RETURN_ERROR_IF_EXISTS'] = 'AUTO_RENAME'
+            self, parentDentryUuid: str, upload_key: str, url: str, headers: dict, file_content: bytes,
+            file_name: str, union_id: str, convert_to_online_doc: bool = False,
+            conflictStrategy: Literal[
+                'AUTO_RENAME', 'OVERWRITE', 'RETURN_DENTRY_IF_EXISTS', 'RETURN_ERROR_IF_EXISTS'] = 'AUTO_RENAME'
     ) -> dict:
         """
         接口版本：2023-07-06
@@ -933,12 +947,13 @@ class 文档文件__存储管理__文件传输:
 
 # noinspection NonAsciiCharacters, PyPep8Naming
 class 文档文件__存储管理__文件管理:
-    def __init__(self, _client:DingTalkClient):
-        self.__client:DingTalkClient = _client
+    def __init__(self, _client: DingTalkClient):
+        self.__client: DingTalkClient = _client
 
     def 添加文件夹(
-            self, spaceId:str, parentId:str, union_id:str, name:str,
-            conflictStrategy:Literal['AUTO_RENAME', 'OVERWRITE', 'RETURN_DENTRY_IF_EXISTS', 'RETURN_ERROR_IF_EXISTS'] = 'OVERWRITE'
+            self, spaceId: str, parentId: str, union_id: str, name: str,
+            conflictStrategy: Literal[
+                'AUTO_RENAME', 'OVERWRITE', 'RETURN_DENTRY_IF_EXISTS', 'RETURN_ERROR_IF_EXISTS'] = 'OVERWRITE'
     ) -> dict:
         """
         接口版本：2023-06-06
@@ -968,7 +983,7 @@ class 文档文件__存储管理__文件管理:
         )
         return response.json()
 
-    def 重命名文件或文件夹(self, spaceId:str, dentryId:str, union_id:str, new_name:str) -> dict:
+    def 重命名文件或文件夹(self, spaceId: str, dentryId: str, union_id: str, new_name: str) -> dict:
         """
         接口版本：2023-06-06
 
@@ -994,13 +1009,13 @@ class 文档文件__存储管理__文件管理:
 
 # noinspection NonAsciiCharacters, PyPep8Naming
 class 互动卡片__:
-    def __init__(self, _client:DingTalkClient):
-        self.__client:DingTalkClient = _client
+    def __init__(self, _client: DingTalkClient):
+        self.__client: DingTalkClient = _client
 
     def 创建并投放卡片(
             self, search_type_name: str, search_desc: str, card_template_id: str, card_param_map: dict,
             alert_content: str, open_space_ids: List[str], out_track_id: str, support_forward: bool = True,
-            call_back_type: str = "STREAM", expired_time_millis:int = 0, call_back_route_key: str = None,
+            call_back_type: str = "STREAM", expired_time_millis: int = 0, call_back_route_key: str = None,
             private_card_param_map: dict[str, dict] = None, card_at_user_ids: List[str] = None
     ) -> dict:
         """
@@ -1027,7 +1042,7 @@ class 互动卡片__:
 
         open_space_id = f"dtv1.card//{';'.join(open_space_ids)}"
 
-        payload:dict = {
+        payload: dict = {
             "cardTemplateId": card_template_id,
             "outTrackId": out_track_id,
             "openSpaceId": open_space_id,
@@ -1043,9 +1058,9 @@ class 互动卡片__:
             payload["cardAtUserIds"] = card_at_user_ids
 
         open_space_model = {
-                "supportForward": support_forward,
-                "searchSupport": {"searchTypeName": search_type_name, "searchDesc": search_desc},
-                "notification": {"alertContent": alert_content, "notificationOff": False}
+            "supportForward": support_forward,
+            "searchSupport": {"searchTypeName": search_type_name, "searchDesc": search_desc},
+            "notification": {"alertContent": alert_content, "notificationOff": False}
         }
 
         if 'IM_GROUP' in open_space_id.upper():
@@ -1058,9 +1073,10 @@ class 互动卡片__:
 
         if 'ONE_BOX' in open_space_id.upper():
             if expired_time_millis == 0:
-                expired_time_millis = int(time.time()+3600)*1000
+                expired_time_millis = int(time.time() + 3600) * 1000
             payload["topOpenSpaceModel"] = {"spaceType": "ONE_BOX"}
-            payload["topOpenDeliverModel"] = {"platforms": ["android","ios","win","mac"], "expiredTimeMillis": expired_time_millis,}
+            payload["topOpenDeliverModel"] = {"platforms": ["android", "ios", "win", "mac"],
+                                              "expiredTimeMillis": expired_time_millis, }
 
         response = self.__client.api(
             method="POST",
@@ -1070,7 +1086,7 @@ class 互动卡片__:
 
         return response.json()
 
-    def 更新卡片(self, out_track_id: str, card_param_map: dict, update_card_data_by_key:bool=True) -> dict:
+    def 更新卡片(self, out_track_id: str, card_param_map: dict, update_card_data_by_key: bool = True) -> dict:
         """
         调用本接口，实现主动更新卡片数据。
 
@@ -1098,17 +1114,99 @@ class 互动卡片__:
 
 # noinspection NonAsciiCharacters, PyPep8Naming
 class OA审批__:
-    def __init__(self, _client:DingTalkClient):
-        self.__client:DingTalkClient = _client
+    def __init__(self, _client: DingTalkClient):
+        self.__client: DingTalkClient = _client
+        self.审批表单 = OA审批_审批表单__(_client)
         self.审批实例 = OA审批_审批实例__(_client)
         self.审批钉盘 = OA审批_审批钉盘__(_client)
         self.审批任务 = OA审批_审批任务__(_client)
 
 
 # noinspection NonAsciiCharacters, PyPep8Naming
+class OA审批_审批表单__:
+    def __init__(self, _client: DingTalkClient):
+        self.__client: DingTalkClient = _client
+
+    def 创建或更新审批表单模板(
+            self,
+            name: str,
+            form_components: List[Dict],
+            description: str = None,
+            process_code: str = None,
+            template_config__disable_stop_process_button: bool = None,
+            template_config__hidden: bool = None,
+            template_config__disable_delete_process: bool = None,
+            template_config__disable_form_edit: bool = None,
+            template_config__disable_resubmit: bool = None,
+            template_config__disable_homepage: bool = None,
+            template_config__dir_id: str = None,
+            template_config__origin_dir_id: str = None,
+    ) -> dict:
+        """
+        调用本接口，创建或更新一个OA审批的流程表单模板，可指定表单控件列表并生成默认审批流程。创建过程类似于在钉钉管理后台 > OA审批 > 表单管理中编辑并发布审批表单。
+
+        https://open.dingtalk.com/document/development/create-an-approval-form-template
+        :param name: 表单模板名称，最大长度200字符。
+        :param description: 表单模板描述，最大长度300字符。
+        :param process_code: 未填写该参数，表示新建一个模板。填写该参数，表示更新所传值对应的审批模板。
+        :param form_components: 表单控件列表，单一表单最大组件个数不超过200。FormComponent参数说明: https://open.dingtalk.com/document/development/create-an-approval-form-template
+        :param template_config__disable_stop_process_button: 表单全局属性配置: 管理列表页是否禁用停用按钮
+        :param template_config__hidden: 表单全局属性配置: 是否全局隐藏流程模板入口
+        :param template_config__disable_delete_process: 表单全局属性配置: 是否禁用模板删除按钮
+        :param template_config__disable_form_edit: 表单全局属性配置: 是否禁止表单编辑功能
+        :param template_config__disable_resubmit: 表单全局属性配置: 是否禁用详情页再次发起按钮
+        :param template_config__disable_homepage: 表单全局属性配置: 是否在首页隐藏模板
+        :param template_config__dir_id: 表单全局属性配置: 模板的目录ID，创建模板目录时指定
+        :param template_config__origin_dir_id: 表单全局属性配置: 原目录ID，更新模板目录时，需指定源目录ID
+
+        :return:
+            {
+              "result" : {
+                "processCode" : "PROC-abcdef-example"
+              }
+            }
+        """
+        payload = {
+            "name": name,
+            "processCode": process_code,
+            "formComponents": form_components,
+            "description": description,
+            "templateConfig": {
+                "disableStopProcessButton": template_config__disable_stop_process_button,
+                "hidden": template_config__hidden,
+                "disableDeleteProcess": template_config__disable_delete_process,
+                "disableFormEdit": template_config__disable_form_edit,
+                "disableResubmit": template_config__disable_resubmit,
+                "disableHomepage": template_config__disable_homepage,
+                "dirId": template_config__dir_id,
+                "originDirId": template_config__origin_dir_id
+            }
+        }
+        payload = _remove_none_values(payload)
+        response = self.__client.api(method="POST", path="/v1.0/workflow/forms", json=payload)
+        return response.json()
+
+    def 获取表单schema(self, process_code: str) -> dict:
+        """
+        调用本接口，通过 processCode，获取对应表单的 schema 信息。
+
+        https://open.dingtalk.com/document/development/obtain-the-form-schema
+
+        :param process_code: 表单的唯一码，，调用创建或更新审批表单模板接口或OA审批概述-名词解释获取。
+
+        :return:
+            {
+                "result": {...}
+            }
+        """
+        response = self.__client.api(method="GET", path="/v1.0/workflow/forms/schemas/processCodes", params={"processCode": process_code})
+        return response.json()
+
+
+# noinspection NonAsciiCharacters, PyPep8Naming
 class OA审批_审批实例__:
-    def __init__(self, _client:DingTalkClient):
-        self.__client:DingTalkClient = _client
+    def __init__(self, _client: DingTalkClient):
+        self.__client: DingTalkClient = _client
 
     class CommentAttachment(BaseModel):
         spaceId: str = Field(description="钉盘空间ID")
@@ -1117,7 +1215,7 @@ class OA审批_审批实例__:
         fileName: str = Field(description="文件名称")
         fileType: str = Field(description="文件类型")
 
-    def 获取单个审批实例详情(self, instance_id:str) -> dict:
+    def 获取单个审批实例详情(self, instance_id: str) -> dict:
         """
         调用本接口可以获取审批实例详情数据，根据审批实例ID，获取审批实例详情，包括审批实例标题、发起人的userId、审批人userId、操作记录列表等内容。
 
@@ -1136,7 +1234,8 @@ class OA审批_审批实例__:
             path="/v1.0/workflow/processInstances", params={'processInstanceId': instance_id})
         return response.json()
 
-    def 撤销审批实例(self, instance_id:str, is_system:bool = True, remark:str|None = None, operating_user_id:str = None) -> dict:
+    def 撤销审批实例(self, instance_id: str, is_system: bool = True, remark: str | None = None,
+                     operating_user_id: str = None) -> dict:
         """
         撤销发起的处于流程中的审批实例。审批发起15秒内不能撤销审批流程。本接口只能撤销流程中的审批实例，不能撤销已审批完成的审批实例。
 
@@ -1157,17 +1256,17 @@ class OA审批_审批实例__:
             method="POST",
             path="/v1.0/workflow/processInstances",
             json={
-              "processInstanceId" : instance_id,
-              "isSystem" : is_system,
-              "remark" : remark,
-              "operatingUserId" : operating_user_id
+                "processInstanceId": instance_id,
+                "isSystem": is_system,
+                "remark": remark,
+                "operatingUserId": operating_user_id
             }
         )
         return response.json()
 
     def 添加审批评论(
-            self, instance_id:str, text:str, comment_user_id: str,
-            photos: List[str]|None = None, attachments: List[CommentAttachment]|None = None
+            self, instance_id: str, text: str, comment_user_id: str,
+            photos: List[str] | None = None, attachments: List[CommentAttachment] | None = None
     ) -> dict:
         """
         调用本接口可以获取审批实例详情数据，根据审批实例ID，获取审批实例详情，包括审批实例标题、发起人的userId、审批人userId、操作记录列表等内容。
@@ -1206,8 +1305,9 @@ class OA审批_审批实例__:
         return response.json()
 
     def 获取审批实例ID列表(
-            self, process_code:str, start_time:datetime, end_time:datetime, next_token: int = 0, max_results: int = 20,
-            statuses: Literal["RUNNING", "TERMINATED", "COMPLETED"]|None = None, user_ids = List[str]
+            self, process_code: str, start_time: datetime, end_time: datetime, next_token: int = 0,
+            max_results: int = 20,
+            statuses: Literal["RUNNING", "TERMINATED", "COMPLETED"] | None = None, user_ids=List[str]
     ) -> dict:
         """
         获取权限范围内的相关部门审批实例ID列表。
@@ -1232,23 +1332,23 @@ class OA审批_审批实例__:
             method="POST",
             path="/v1.0/workflow/processes/instanceIds/query",
             json={
-              "processCode" : process_code,
-              "startTime" : int(start_time.timestamp()*1000),
-              "endTime" : int(end_time.timestamp()*1000),
-              "nextToken" : next_token,
-              "maxResults" : max_results,
-              "userIds" : user_ids,
-              "statuses" : statuses
+                "processCode": process_code,
+                "startTime": int(start_time.timestamp() * 1000),
+                "endTime": int(end_time.timestamp() * 1000),
+                "nextToken": next_token,
+                "maxResults": max_results,
+                "userIds": user_ids,
+                "statuses": statuses
             })
         return response.json()
 
 
 # noinspection NonAsciiCharacters, PyPep8Naming
 class OA审批_审批钉盘__:
-    def __init__(self, _client:DingTalkClient):
-        self.__client:DingTalkClient = _client
+    def __init__(self, _client: DingTalkClient):
+        self.__client: DingTalkClient = _client
 
-    def 获取审批钉盘空间信息(self, user_id:str) -> dict:
+    def 获取审批钉盘空间信息(self, user_id: str) -> dict:
         """
         获取审批钉盘空间的ID并授予当前用户上传附件的权限。
 
@@ -1268,18 +1368,19 @@ class OA审批_审批钉盘__:
             method="POST",
             path="/v1.0/workflow/processInstances/spaces/infos/query",
             json={
-              "userId" : user_id,
-              "agentId" : self.__client.agent_id
+                "userId": user_id,
+                "agentId": self.__client.agent_id
             })
         return response.json()
 
 
 # noinspection NonAsciiCharacters, PyPep8Naming
 class OA审批_审批任务__:
-    def __init__(self, _client:DingTalkClient):
-        self.__client:DingTalkClient = _client
+    def __init__(self, _client: DingTalkClient):
+        self.__client: DingTalkClient = _client
 
-    def 同意或拒绝审批任务(self, process_instance_id:str, result:bool, actioner_user_id:str, task_id:str|int, remark:str="") -> dict:
+    def 同意或拒绝审批任务(self, process_instance_id: str, result: bool, actioner_user_id: str, task_id: str | int,
+                           remark: str = "") -> dict:
         """
         调用本接口，根据指定模板ID、审批实例ID、任务节点ID和操作人userId，对单个审批任务进行处理。
 
@@ -1303,28 +1404,29 @@ class OA审批_审批任务__:
             method="POST",
             path="/v1.0/workflow/processInstances/execute",
             json={
-              "processInstanceId" : process_instance_id,
-              "remark" : remark,
-              "result" : "agree" if result else "refuse",
-              "actionerUserId" : actioner_user_id,
-              "taskId" : int(task_id)
+                "processInstanceId": process_instance_id,
+                "remark": remark,
+                "result": "agree" if result else "refuse",
+                "actionerUserId": actioner_user_id,
+                "taskId": int(task_id)
             })
         return response.json()
 
 
 # noinspection NonAsciiCharacters, PyPep8Naming
 class 即时通信__:
-    def __init__(self, _client:DingTalkClient):
-        self.__client:DingTalkClient = _client
+    def __init__(self, _client: DingTalkClient):
+        self.__client: DingTalkClient = _client
         self.工作通知 = 即时通信_工作通知__(_client)
 
 
 # noinspection NonAsciiCharacters, PyPep8Naming
 class 即时通信_工作通知__:
-    def __init__(self, _client:DingTalkClient):
-        self.__client:DingTalkClient = _client
+    def __init__(self, _client: DingTalkClient):
+        self.__client: DingTalkClient = _client
 
-    def 发送工作通知(self, msg:dict, to_all_user:bool=True, user_list:List[str]|None=None, dept_id_list:List[str]|None=None) -> dict:
+    def 发送工作通知(self, msg: dict, to_all_user: bool = True, user_list: List[str] | None = None,
+                     dept_id_list: List[str] | None = None) -> dict:
         """
         工作通知消息是以某个应用的名义推送到员工的工作通知消息，例如生日祝福、入职提醒等。可以发送文本、语音、链接等。
 
@@ -1343,10 +1445,10 @@ class 即时通信_工作通知__:
             method="POST",
             path="/topapi/message/corpconversation/asyncsend_v2",
             json={
-                "agent_id" : self.__client.agent_id,
+                "agent_id": self.__client.agent_id,
                 "to_all_user": to_all_user,
-                "userid_list" : ','.join(user_list) if user_list else None,
-                "dept_id_list" : ','.join(dept_id_list) if dept_id_list else None,
+                "userid_list": ','.join(user_list) if user_list else None,
+                "dept_id_list": ','.join(dept_id_list) if dept_id_list else None,
                 "msg": msg
             })
         return response.json()

@@ -1,0 +1,17 @@
+# 发版版本号规则
+
+发布新版本前，先确定当前 Dagster 官方版本与库版本的对应关系。
+
+1. 打开 <https://docs.dagster.io/about/changelog>，查看页面中 `ul.table-of-contents.table-of-contents__left-border` 的第一个 `li` 内 `a` 标签文本。
+
+   例如：`1.13.8 (core) / 0.29.8 (libraries)`。
+
+2. 更新 [pyproject.toml](pyproject.toml) 时：
+
+   - `dagster` 依赖版本使用 `core` 版本，例如 `1.13.8`。
+   - 项目自身 `version` 使用 `libraries` 版本作为前三段，并追加项目内小版本号，即 `0.29.8.x`。
+   - `.x` 用于本项目自己的小版本修复和功能新增。
+
+3. 更新 [version.py](src/dagster_dingtalk/version.py) 时：
+
+   - `__version__` 使用 `libraries` 版本的三段号，例如 `0.29.8`。
