@@ -1,0 +1,385 @@
+<!DOCTYPE html><html><head><meta charset="utf8" / /><meta name="gmtModify" content="2025-09-11 21:02:16" / /><meta name="searchtitle" content="" / /><meta name="keywords" content="" / /><meta name="author" content="" / /><title>查询考勤机信息</title><meta name="gmtModify" content="2026-06-02 09:24:51" / /></head><body data-tag="topic" id="doc-api-dingtalk-GetMachine" class="topic"><main id="34993c0d770oj" data-init-id="doc-api-dingtalk_GetMachine"><h1 data-tag="title" id="h1-lyo-ele-d75" class="title">查询考勤机信息</h1><p data-tag="shortdesc" id="845640951cfu9" class="shortdesc">调用本接口，可根据考勤机设备ID查询考勤机信息，包括考勤机设备ID、设备名称、设备类型名称、固件版本等。</p><div data-tag="conbody" outputclass="icms-api-reference" class="icms-api-reference conbody"><section id="section-request-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-request-1" data-tag="h2" class="h2">请求</h2><section id="section-request-basic-info" class="section"><h3 id="heading-request-basic-info" data-tag="h3" class="h3">基本信息</h3><table id="04f70cf19d72i" tablewidth="648" tablecolswidth="216 432" autofit="false" class="table"><colgroup colwidth="0.67*" style="width:33.33%"></colgroup><colgroup colwidth="1.33*" style="width:66.67%"></colgroup><tbody class="tbody"><tr id="6d78245dbcy7n"><td id="5fd77c6dfdqd3" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="6b8ad5361arek">字段</p></td><td id="6958161a91k9m" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="ce36e52fablgo">值</p></td></tr><tr id="b0b94fb403bcc"><td id="cdb0db2582mf9" rowspan="1" colspan="1"><p id="057221b8b54bn">HTTP URL</p></td><td id="78964b5b99jnf" rowspan="1" colspan="1"><p id="f3ec815f471fa">https://api.dingtalk.com/v1.0/attendance/machines/{devId}</p></td></tr><tr id="c7d8204f23vpf"><td id="7a5ea838709b2" rowspan="1" colspan="1"><p id="f9655784267w3">HTTP Method</p></td><td id="41c049fbb4gik" rowspan="1" colspan="1"><p id="26de808ce6qt5">GET</p></td></tr><tr id="7d2804eb89vvt"><td id="4e565d95f4nh3" rowspan="1" colspan="1"><p id="c63b4c14179vc">支持的应用类型</p></td><td id="1880c0ad92zbt" rowspan="1" colspan="1"><p id="d187dea18buel"><span data-tag="ph" id="ph-request-basic-app-type-apptype-0" class="ph ph-app-type" data-ph-raw-text="appType-企业内部应用">appType-企业内部应用</span>　<span data-tag="ph" id="ph-request-basic-app-type-apptype-1" class="ph ph-app-type" data-ph-raw-text="appType-第三方企业应用">appType-第三方企业应用</span></p></td></tr><tr id="6af8fa21941mk"><td id="8073886617t0i" rowspan="1" colspan="1"><p id="44c1305c57ms7">权限要求</p></td><td id="e9ca4ccabccky" rowspan="1" colspan="1"><p id="62b2a36ad77up"><span data-tag="ph" id="ph-request-basic-permission-permission-qyapi-attendance-group-read-0" class="ph-permission ph" data-ph-raw-text="permission-qyapi_attendance_group_read-考勤组查询权限" data-permission-id="permission-qyapi_attendance_group_read" data-permission-code="qyapi_attendance_group_read" data-permission-detail-api="/document/api/permission/detail" data-permission-query-param="code">permission-qyapi_attendance_group_read-考勤组查询权限</span></p></td></tr></tbody></table></section><section id="section-request-header-parameter" class="section"><h3 data-tag="h3" id="h2-6wi-wnf-cgs" class="h3 title">请求头</h3><table id="07f96ab0e7iwj" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="a06f1953aap9u"><td id="7fd0ac30b3avu" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="677212346f7nf">名称</p></td><td id="bea145f2192x1" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="79e7fe9ce0bq6">类型</p></td><td id="cebaa12f17ozi" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="40dceb1607k8p">是否必填</p></td><td id="9b2c0770963x5" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="bf59cd7731bcf">描述</p></td></tr><tr id="adbb4162a3hkh"><td id="bee24b6f53j9a" rowspan="1" colspan="1"><p id="9a9ec5077dev1">x-acs-dingtalk-access-token</p></td><td id="33deef683aifc" rowspan="1" colspan="1"><p id="7e5d42aee4p50">String</p></td><td id="ebc4a5290b4q9" rowspan="1" colspan="1"><p id="4182eff0dd2ek">是</p></td><td id="a880deb17dhki" rowspan="1" colspan="1"><p id="6b7f3c7e1ea18">调用该接口的访问凭证，通过以下获取：</p><ul id="8fba8ccbectnj"><li id="dace943c20vbe"><p id="ca09404059yfy">企业内部应用，调用<a href="https://open.dingtalk.com/document/development/obtain-the-access-token-of-an-internal-app#" id="fed68e9dd1g98" class="xref">获取企业内部应用的accessToken</a>接口获取。</p></li><li id="4198465b2bgql"><p id="65bfc18266teh">第三方企业应用，调用<a href="https://open.dingtalk.com/document/development/obtain-the-access-token-of-the-authorized-enterprise-1#" id="1625cebedb6ti" class="xref">获取第三方应用授权企业的accessToken</a>接口获取。</p></li></ul></td></tr></tbody></table></section><section id="section-request-path-parameter" class="section"><h3 data-tag="h3" id="h2-vlp-jaa-ijl" class="h3 title">路径参数</h3><table id="6452433c19dah" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="b1af0c65bd120"><td id="2d8567e1bf15p" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="d394ee59f8ele">名称</p></td><td id="ac93ffbed5057" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="c711e3658069u">类型</p></td><td id="3e6268656boyd" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="19f5b52545v0l">是否必填</p></td><td id="524ad5f41deoh" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="7fc9cdff27nth">描述</p></td></tr><tr id="8220fa7a4711y"><td id="43e05fde1449e" rowspan="1" colspan="1"><p id="7ced86ca91c3j">devId</p></td><td id="7797a71abcrf1" rowspan="1" colspan="1"><p id="61be630a57pun">Long</p></td><td id="0ffdb748b54tm" rowspan="1" colspan="1"><p id="bed4e4d1caw6i">是</p></td><td id="32a1b3fbde2fs" rowspan="1" colspan="1"><p id="120f932cd8s9q">考勤机设备ID，可调用<a href="https://open.dingtalk.com/document/development/intelligent-hardware-list-query#" id="6360dd1435wl8" class="xref">查询设备列表</a>接口获取device_id参数值。</p></td></tr></tbody></table></section><section id="section-request-body-example" class="section"><h3 id="h3-request-body-example" data-tag="h3" class="h3">请求示例</h3><div outputclass="tabbed-codeblock" data-tag="fig" id="figure-gzl-muy-dcr" class="tabbed-codeblock-box"><div class="tab-box"></div><input type="radio" name="check-figure-gzl-muy-dcr" id="figure-gzl-muy-dcr-HTTP-tab" checked="checked" /><label for="figure-gzl-muy-dcr-HTTP-tab">HTTP</label><div class="codeblock-item"><pre id="codeblock-pu5-ibk-rzz" outputclass="language-HTTP" code-type="xCode" data-tag="codeblock" class="pre codeblock language-HTTP"><code>GET /v1.0/attendance/machines/236847095 HTTP/1.1
+Host:api.dingtalk.com
+x-acs-dingtalk-access-token:7ed0axxx
+Content-Type:application/json</code></pre></div><input type="radio" name="check-figure-gzl-muy-dcr" id="figure-gzl-muy-dcr-java-tab" /><label for="figure-gzl-muy-dcr-java-tab">Java</label><div class="codeblock-item"><pre id="codeblock-5bh-psm-hqn" outputclass="language-java" code-type="xCode" data-tag="codeblock" class="pre codeblock language-java"><code>// This file is auto-generated, don't edit it. Thanks.
+package com.aliyun.sample;
+
+import com.aliyun.tea.*;
+import com.aliyun.teautil.*;
+import com.aliyun.teautil.models.*;
+import com.aliyun.dingtalkattendance_1_0.*;
+import com.aliyun.dingtalkattendance_1_0.models.*;
+import com.aliyun.teaopenapi.*;
+import com.aliyun.teaopenapi.models.*;
+
+public class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Client
+     * @throws Exception
+     */
+    public static com.aliyun.dingtalkattendance_1_0.Client createClient() throws Exception {
+        Config config = new Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        return new com.aliyun.dingtalkattendance_1_0.Client(config);
+    }
+
+    public static void main(String[] args_) throws Exception {
+        java.util.List&lt;String&gt; args = java.util.Arrays.asList(args_);
+        com.aliyun.dingtalkattendance_1_0.Client client = Sample.createClient();
+        GetMachineHeaders getMachineHeaders = new GetMachineHeaders();
+        getMachineHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        try {
+            client.getMachineWithOptions("236847095", getMachineHeaders, new RuntimeOptions());
+        } catch (TeaException err) {
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        } catch (Exception _err) {
+            TeaException err = new TeaException(_err.getMessage(), _err);
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        }        
+    }
+}</code></pre></div><input type="radio" name="check-figure-gzl-muy-dcr" id="figure-gzl-muy-dcr-python-tab" /><label for="figure-gzl-muy-dcr-python-tab">Python</label><div class="codeblock-item"><pre id="codeblock-yuz-vee-4si" outputclass="language-python" code-type="xCode" data-tag="codeblock" class="pre codeblock language-python"><code># -*- coding: utf-8 -*-
+# This file is auto-generated, don't edit it. Thanks.
+import sys
+
+from typing import List
+
+from alibabacloud_dingtalk.attendance_1_0.client import Client as dingtalkattendance_1_0Client
+from alibabacloud_tea_openapi import models as open_api_models
+from alibabacloud_dingtalk.attendance_1_0 import models as dingtalkattendance__1__0_models
+from alibabacloud_tea_util import models as util_models
+from alibabacloud_tea_util.client import Client as UtilClient
+
+
+class Sample:
+    def __init__(self):
+        pass
+
+    @staticmethod
+    def create_client() -&gt; dingtalkattendance_1_0Client:
+        """
+        使用 Token 初始化账号Client
+        @return: Client
+        @throws Exception
+        """
+        config = open_api_models.Config()
+        config.protocol = 'https'
+        config.region_id = 'central'
+        return dingtalkattendance_1_0Client(config)
+
+    @staticmethod
+    def main(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        get_machine_headers = dingtalkattendance__1__0_models.GetMachineHeaders()
+        get_machine_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        try:
+            client.get_machine_with_options('236847095', get_machine_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+    @staticmethod
+    async def main_async(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        get_machine_headers = dingtalkattendance__1__0_models.GetMachineHeaders()
+        get_machine_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        try:
+            await client.get_machine_with_options_async('236847095', get_machine_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+
+if __name__ == '__main__':
+    Sample.main(sys.argv[1:])</code></pre></div><input type="radio" name="check-figure-gzl-muy-dcr" id="figure-gzl-muy-dcr-php-tab" /><label for="figure-gzl-muy-dcr-php-tab">PHP</label><div class="codeblock-item"><pre id="codeblock-nsu-1fe-yci" outputclass="language-php" code-type="xCode" data-tag="codeblock" class="pre codeblock language-php"><code>&lt;?php
+
+// This file is auto-generated, don't edit it. Thanks.
+namespace AlibabaCloud\SDK\Sample;
+
+use AlibabaCloud\SDK\Dingtalk\Vattendance_1_0\Dingtalk;
+use \Exception;
+use AlibabaCloud\Tea\Exception\TeaError;
+use AlibabaCloud\Tea\Utils\Utils;
+
+use Darabonba\OpenApi\Models\Config;
+use AlibabaCloud\SDK\Dingtalk\Vattendance_1_0\Models\GetMachineHeaders;
+use AlibabaCloud\Tea\Utils\Utils\RuntimeOptions;
+
+class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Dingtalk Client
+     */
+    public static function createClient(){
+        $config = new Config([]);
+        $config-&gt;protocol = "https";
+        $config-&gt;regionId = "central";
+        return new Dingtalk($config);
+    }
+
+    /**
+     * @param string[] $args
+     * @return void
+     */
+    public static function main($args){
+        $client = self::createClient();
+        $getMachineHeaders = new GetMachineHeaders([]);
+        $getMachineHeaders-&gt;xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        try {
+            $client-&gt;getMachineWithOptions("236847095", $getMachineHeaders, new RuntimeOptions([]));
+        }
+        catch (Exception $err) {
+            if (!($err instanceof TeaError)) {
+                $err = new TeaError([], $err-&gt;getMessage(), $err-&gt;getCode(), $err);
+            }
+            if (!Utils::empty_($err-&gt;code) &amp;&amp; !Utils::empty_($err-&gt;message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+        }
+    }
+}
+$path = __DIR__ . \DIRECTORY_SEPARATOR . '..' . \DIRECTORY_SEPARATOR . 'vendor' . \DIRECTORY_SEPARATOR . 'autoload.php';
+if (file_exists($path)) {
+    require_once $path;
+}
+Sample::main(array_slice($argv, 1));</code></pre></div><input type="radio" name="check-figure-gzl-muy-dcr" id="figure-gzl-muy-dcr-go-tab" /><label for="figure-gzl-muy-dcr-go-tab">Go</label><div class="codeblock-item"><pre id="codeblock-auv-xfm-hkv" outputclass="language-go" code-type="xCode" data-tag="codeblock" class="pre codeblock language-go"><code>// This file is auto-generated, don't edit it. Thanks.
+package main
+
+import (
+  "os"
+  util  "github.com/alibabacloud-go/tea-utils/service"
+  dingtalkattendance_1_0  "github.com/alibabacloud-go/dingtalk/attendance_1_0"
+  openapi  "github.com/alibabacloud-go/darabonba-openapi/client"
+  "github.com/alibabacloud-go/tea/tea"
+)
+
+
+/**
+ * 使用 Token 初始化账号Client
+ * @return Client
+ * @throws Exception
+ */
+func CreateClient () (_result *dingtalkattendance_1_0.Client, _err error) {
+  config := &amp;openapi.Config{}
+  config.Protocol = tea.String("https")
+  config.RegionId = tea.String("central")
+  _result = &amp;dingtalkattendance_1_0.Client{}
+  _result, _err = dingtalkattendance_1_0.NewClient(config)
+  return _result, _err
+}
+
+func _main (args []*string) (_err error) {
+  client, _err := CreateClient()
+  if _err != nil {
+    return _err
+  }
+
+  getMachineHeaders := &amp;dingtalkattendance_1_0.GetMachineHeaders{}
+  getMachineHeaders.XAcsDingtalkAccessToken = tea.String("&lt;your access token&gt;")
+  tryErr := func()(_e error) {
+    defer func() {
+      if r := tea.Recover(recover()); r != nil {
+        _e = r
+      }
+    }()
+    _, _err = client.GetMachineWithOptions(tea.String("236847095"), getMachineHeaders, &amp;util.RuntimeOptions{})
+    if _err != nil {
+      return _err
+    }
+
+    return nil
+  }()
+
+  if tryErr != nil {
+    var err = &amp;tea.SDKError{}
+    if _t, ok := tryErr.(*tea.SDKError); ok {
+      err = _t
+    } else {
+      err.Message = tea.String(tryErr.Error())
+    }
+    if !tea.BoolValue(util.Empty(err.Code)) &amp;&amp; !tea.BoolValue(util.Empty(err.Message)) {
+      // err 中含有 code 和 message 属性，可帮助开发定位问题
+    }
+
+  }
+  return _err
+}
+
+
+func main() {
+  err := _main(tea.StringSlice(os.Args[1:]))
+  if err != nil {
+    panic(err)
+  }
+}</code></pre></div><input type="radio" name="check-figure-gzl-muy-dcr" id="figure-gzl-muy-dcr-nodejs-tab" /><label for="figure-gzl-muy-dcr-nodejs-tab">Node.js</label><div class="codeblock-item"><pre id="codeblock-h7r-igl-gly" outputclass="language-nodejs" code-type="xCode" data-tag="codeblock" class="pre codeblock language-nodejs"><code>// This file is auto-generated, don't edit it
+import Util, * as $Util from '@alicloud/tea-util';
+import dingtalkattendance_1_0, * as $dingtalkattendance_1_0 from '@alicloud/dingtalk/attendance_1_0';
+import OpenApi, * as $OpenApi from '@alicloud/openapi-client';
+import * as $tea from '@alicloud/tea-typescript';
+
+
+export default class Client {
+
+  /**
+   * 使用 Token 初始化账号Client
+   * @return Client
+   * @throws Exception
+   */
+  static createClient(): dingtalkattendance_1_0 {
+    let config = new $OpenApi.Config({ });
+    config.protocol = "https";
+    config.regionId = "central";
+    return new dingtalkattendance_1_0(config);
+  }
+
+  static async main(args: string[]): Promise&lt;void&gt; {
+    let client = Client.createClient();
+    let getMachineHeaders = new $dingtalkattendance_1_0.GetMachineHeaders({ });
+    getMachineHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+    try {
+      await client.getMachineWithOptions("236847095", getMachineHeaders, new $Util.RuntimeOptions({ }));
+    } catch (err) {
+      if (!Util.empty(err.code) &amp;&amp; !Util.empty(err.message)) {
+        // err 中含有 code 和 message 属性，可帮助开发定位问题
+      }
+
+    }    
+  }
+
+}
+
+Client.main(process.argv.slice(2));</code></pre></div><input type="radio" name="check-figure-gzl-muy-dcr" id="figure-gzl-muy-dcr-csharp-tab" /><label for="figure-gzl-muy-dcr-csharp-tab">C#</label><div class="codeblock-item"><pre id="codeblock-iop-hcx-jg2" outputclass="language-csharp" code-type="xCode" data-tag="codeblock" class="pre codeblock language-csharp"><code>// This file is auto-generated, don't edit it. Thanks.
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
+
+using Tea;
+using Tea.Utils;
+
+
+namespace AlibabaCloud.SDK.Sample
+{
+    public class Sample 
+    {
+
+        /**
+         * 使用 Token 初始化账号Client
+         * @return Client
+         * @throws Exception
+         */
+        public static AlibabaCloud.SDK.Dingtalkattendance_1_0.Client CreateClient()
+        {
+            AlibabaCloud.OpenApiClient.Models.Config config = new AlibabaCloud.OpenApiClient.Models.Config();
+            config.Protocol = "https";
+            config.RegionId = "central";
+            return new AlibabaCloud.SDK.Dingtalkattendance_1_0.Client(config);
+        }
+
+        public static void Main(string[] args)
+        {
+            AlibabaCloud.SDK.Dingtalkattendance_1_0.Client client = CreateClient();
+            AlibabaCloud.SDK.Dingtalkattendance_1_0.Models.GetMachineHeaders getMachineHeaders = new AlibabaCloud.SDK.Dingtalkattendance_1_0.Models.GetMachineHeaders();
+            getMachineHeaders.XAcsDingtalkAccessToken = "&lt;your access token&gt;";
+            try
+            {
+                client.GetMachineWithOptions("236847095", getMachineHeaders, new AlibabaCloud.TeaUtil.Models.RuntimeOptions());
+            }
+            catch (TeaException err)
+            {
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+            catch (Exception _err)
+            {
+                TeaException err = new TeaException(new Dictionary&lt;string, object&gt;
+                {
+                    { "message", _err.Message }
+                });
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+        }
+
+
+    }
+}</code></pre></div><input type="radio" name="check-figure-gzl-muy-dcr" id="figure-gzl-muy-dcr-cpp-tab" /><label for="figure-gzl-muy-dcr-cpp-tab">C++</label><div class="codeblock-item"><pre id="codeblock-unw-jmu-mvr" outputclass="language-cpp" code-type="xCode" data-tag="codeblock" class="pre codeblock language-cpp"><code>// This file is auto-generated, don't edit it. Thanks.
+
+#include &lt;alibabacloud/dingtalkattendance__1__0.hpp&gt;
+#include &lt;alibabacloud/open_api.hpp&gt;
+#include &lt;darabonba/core.hpp&gt;
+#include &lt;darabonba/util.hpp&gt;
+#include &lt;iostream&gt;
+
+using namespace std;
+
+Alibabacloud_Dingtalkattendance_1_0::Client createClient() {
+  shared_ptr&lt;Alibabacloud_OpenApi::Config&gt; config = make_shared&lt;Alibabacloud_OpenApi::Config&gt;();
+  config-&gt;protocol = make_shared&lt;string&gt;("https");
+  config-&gt;regionId = make_shared&lt;string&gt;("central");
+  return Alibabacloud_Dingtalkattendance_1_0::Client(config);
+}
+
+int main(int argc, char *args[]) {
+  args++;
+  shared_ptr&lt;Alibabacloud_Dingtalkattendance_1_0::Client&gt; client = make_shared&lt;Alibabacloud_Dingtalkattendance_1_0::Client&gt;(createClient());
+  shared_ptr&lt;Alibabacloud_Dingtalkattendance_1_0::GetMachineHeaders&gt; getMachineHeaders = make_shared&lt;Alibabacloud_Dingtalkattendance_1_0::GetMachineHeaders&gt;();
+  getMachineHeaders-&gt;xAcsDingtalkAccessToken = make_shared&lt;string&gt;("&lt;your access token&gt;");
+  try {
+    client-&gt;getMachineWithOptions(make_shared&lt;string&gt;("236847095"), getMachineHeaders, make_shared&lt;Darabonba_Util::RuntimeOptions&gt;(Darabonba_Util::RuntimeOptions()));
+  }
+  catch (std::exception &amp;err) {
+    if (!Darabonba_Util::Client::empty(err.code) &amp;&amp; !Darabonba_Util::Client::empty(err.message)) {
+      // err 中含有 code 和 message 属性，可帮助开发定位问题
+    }
+  }
+}</code></pre></div></div></section></section><section id="section-response-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-response-1" data-tag="h2" class="h2">响应</h2><section id="section-response-parameter" class="section"><h3 data-tag="h3" id="h2-492-8wo-ctw" class="h3 title">响应体</h3><table id="92e9644b3bqj1" tablewidth="710" tablecolswidth="213 142 355" autofit="false" class="table"><colgroup colwidth="0.9*" style="width:30.00%"></colgroup><colgroup colwidth="0.6*" style="width:20.00%"></colgroup><colgroup colwidth="1.5*" style="width:50.00%"></colgroup><tbody class="tbody"><tr id="5d34c7ba15vgk"><td id="2bd66ec1ab9vp" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="eec21d4f7cbbq">名称</p></td><td id="dcf43df622q8k" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="404760cbc7g2m">类型</p></td><td id="10f325987br80" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="e02154e8c2xnf">描述</p></td></tr><tr outputclass="row row-level-1 has-child" id="8e12de644726g" class="row row-level-1 has-child"><td id="2a1915c80brc2" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="7b75a2b3bc2qm">result</p></td><td id="42e7de23fbbhs" rowspan="1" colspan="1"><p id="b69a252ccf6te">Object</p></td><td id="7732ff21e8l7b" rowspan="1" colspan="1"><p id="0094de86b6uu6">考勤机的相关信息。</p></td></tr><tr outputclass="row row-level-1-1" id="eafa188eb7u35" class="row row-level-1-1"><td id="91a5ae14dal62" rowspan="1" colspan="1"><p id="744ac1f474x34">deviceId</p></td><td id="5b5bb40af96xa" rowspan="1" colspan="1"><p id="2b307abd0a2bm">String</p></td><td id="3d0d44db2cc10" rowspan="1" colspan="1"><p id="590f08084es3o">加密后的考勤机设备ID。</p></td></tr><tr outputclass="row row-level-1-2" id="b024c3b962pbb" class="row row-level-1-2"><td id="e49e367cf3ldh" rowspan="1" colspan="1"><p id="5febcb3e66zds">devId</p></td><td id="637ef2f047cf8" rowspan="1" colspan="1"><p id="56c34d5f13j3x">Long</p></td><td id="e1e037298cmdd" rowspan="1" colspan="1"><p id="542545da7fjz5">考勤机设备ID。</p></td></tr><tr outputclass="row row-level-1-3" id="c2d190ad96m1n" class="row row-level-1-3"><td id="d6e5f95c36imp" rowspan="1" colspan="1"><p id="7e6e8811c2zxi">deviceName</p></td><td id="133895900ea5f" rowspan="1" colspan="1"><p id="5dec79d280fie">String</p></td><td id="6c1e7426128cs" rowspan="1" colspan="1"><p id="c345b1aa51xs1">设备名称。</p></td></tr><tr outputclass="row row-level-1-4" id="34f4f5c8c7l9h" class="row row-level-1-4"><td id="b5b55659e0xqq" rowspan="1" colspan="1"><p id="fae0cbc6e91wm">productName</p></td><td id="23d4c8db92z53" rowspan="1" colspan="1"><p id="206655e8c4wht">String</p></td><td id="99d8a126advx6" rowspan="1" colspan="1"><p id="539780beb5hrk">设备类型名称。</p></td></tr><tr outputclass="row row-level-1-5" id="715cf3cc15mye" class="row row-level-1-5"><td id="caca51faffueu" rowspan="1" colspan="1"><p id="833f9230509xf">netStatus</p></td><td id="7bde7e5a7ey36" rowspan="1" colspan="1"><p id="4ef47c4cc7pfb">String</p></td><td id="0b2538358852d" rowspan="1" colspan="1"><p id="f99a2acc109dr">网络状态，取值。</p><ul id="b151af345fq68"><li id="8f9bae0fbdj1d"><p id="e0f2422561oar"><b>1</b>：激活</p></li><li id="fa789a34cf52m"><p id="e5a67dd96c0rt"><b>2</b>：未激活</p></li><li id="3bce6c2ac1i3u"><p id="25a9690a1f1us"><b>3</b>：已连接</p></li><li id="42f577b20bpys"><p id="fe05cee8c8bqz"><b>4</b>：已断开</p></li></ul></td></tr><tr outputclass="row row-level-1-6" id="c1da6f5d19tre" class="row row-level-1-6"><td id="9f1c6fc123153" rowspan="1" colspan="1"><p id="af32b2c6d2rp7">productVersion</p></td><td id="b988057c83dd6" rowspan="1" colspan="1"><p id="2d7080775a87d">String</p></td><td id="dd92b7b7ea1bo" rowspan="1" colspan="1"><p id="fc647ce1da2br">固件版本。</p></td></tr><tr outputclass="row row-level-1-7" id="4f818043f5fnj" class="row row-level-1-7"><td id="42d1d34c797mu" rowspan="1" colspan="1"><p id="f7fd2118bdihb">deviceSn</p></td><td id="a555f243f8vuh" rowspan="1" colspan="1"><p id="f33ae7e305hut">String</p></td><td id="2b59a08598tc9" rowspan="1" colspan="1"><p id="8f2f68f83920t">设备序列号。</p></td></tr><tr outputclass="row row-level-1-8" id="9dc5345e8d5c6" class="row row-level-1-8"><td id="08dfb28749yev" rowspan="1" colspan="1"><p id="62b84c7726kv0">maxFace</p></td><td id="d610afe254ko9" rowspan="1" colspan="1"><p id="8521f2fe59uja">Integer</p></td><td id="eb4dd6328cgum" rowspan="1" colspan="1"><p id="e244b3530d900">人脸容量。</p></td></tr><tr outputclass="row row-level-1-9" id="b445987726bxz" class="row row-level-1-9"><td id="f3a43bc585up3" rowspan="1" colspan="1"><p id="f104f284d48qa">voiceMode</p></td><td id="3165f089ceil5" rowspan="1" colspan="1"><p id="48d980c5b55xm">Integer</p></td><td id="74b1a786bdbkm" rowspan="1" colspan="1"><p id="a76f8c35805ro">音量模式。</p></td></tr><tr outputclass="row row-level-1-10" id="622487851f2dl" class="row row-level-1-10"><td id="d42693c21bt5p" rowspan="1" colspan="1"><p id="4b9831398e9ws">atmManagerList</p></td><td id="39e985cdf532n" rowspan="1" colspan="1"><p id="15e497c815660">Array of String</p></td><td id="dc78c0c20fwk5" rowspan="1" colspan="1"><p id="22d4f9cadcrk8">设备管理员列表。</p></td></tr><tr outputclass="row row-level-1-11 has-child" id="5dc9d3a620ng1" class="row row-level-1-11 has-child"><td id="6ec0a8c6adttb" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="4bfc01bbd97cr">machineBluetoothVO</p></td><td id="6a75235006bwe" rowspan="1" colspan="1"><p id="ed737dc1b3as3">Object</p></td><td id="7dec019f3fezt" rowspan="1" colspan="1"><p id="be47b09f709mh">考勤机蓝牙相关设置信息。</p></td></tr><tr outputclass="row row-level-1-11-1" id="b51d40d40f7in" class="row row-level-1-11-1"><td id="f581d97826vei" rowspan="1" colspan="1"><p id="dc4c8df724sgk">bluetoothValue</p></td><td id="7d3a4f800bdi8" rowspan="1" colspan="1"><p id="df9263621a3mb">Boolean</p></td><td id="383040523an2w" rowspan="1" colspan="1"><p id="08ef348fd8bnj">蓝牙是否打开打卡。</p><ul id="df33dc2d897d1"><li id="2f960488dat2h"><p id="f185c6eccer9a"><b>true</b>：打开</p></li><li id="7cf0da5ce7jji"><p id="b3ed7d7b71r1p"><b>false</b>：未打开</p></li></ul></td></tr><tr outputclass="row row-level-1-11-2" id="7d8bbebdd1h6q" class="row row-level-1-11-2"><td id="342af30e51thp" rowspan="1" colspan="1"><p id="0265fa717boj4">bluetoothCheckWithFace</p></td><td id="4cb90d43a2k0y" rowspan="1" colspan="1"><p id="786d1126cd3qt">Boolean</p></td><td id="a5c7fb4ea1ied" rowspan="1" colspan="1"><p id="31b00fb0158jj">蓝牙是否打开打卡人脸识别。</p><ul id="892c423735fvn"><li id="fa98cdba76z7r"><p id="d8b5850b5cea4"><b>true</b>：打开</p></li><li id="22e93d4b83z9h"><p id="50cf606f22lr6"><b>false</b>：未打开</p></li></ul></td></tr><tr outputclass="row row-level-1-11-3" id="e6b04c56e76gi" class="row row-level-1-11-3"><td id="e964e1cd44ebx" rowspan="1" colspan="1"><p id="b72a856991obw">bluetoothDistanceMode</p></td><td id="e03a9d70a5n2p" rowspan="1" colspan="1"><p id="ad22ef05d1vp4">String</p></td><td id="fcbed19c535mw" rowspan="1" colspan="1"><p id="f43c7f0183ia1">蓝牙打卡范围。</p></td></tr><tr outputclass="row row-level-1-11-4" id="f9ace02db67w3" class="row row-level-1-11-4"><td id="5eb153c015maf" rowspan="1" colspan="1"><p id="781b26f1183sr">bluetoothDistanceModeDesc</p></td><td id="dcd64b7094d9b" rowspan="1" colspan="1"><p id="c121ebe4786tp">String</p></td><td id="992ca26a925cj" rowspan="1" colspan="1"><p id="da31eef526keq">蓝牙打卡范围描述。</p></td></tr><tr outputclass="row row-level-1-11-5" id="ca92bf1133u2b" class="row row-level-1-11-5"><td id="4f2a317569mrx" rowspan="1" colspan="1"><p id="83e6d9d0936tv">monitorLocationAbnormal</p></td><td id="3e87513d243v0" rowspan="1" colspan="1"><p id="f84513e27dou4">Boolean</p></td><td id="aef3c42c37897" rowspan="1" colspan="1"><p id="b9101e640ff96">是否打开位置异常监控。</p><ul id="5c2c33fc0ci8j"><li id="0125359490164"><p id="7cda1fe5bdl42"><b>true</b>：打开</p></li><li id="8890223317bqz"><p id="438dd2e5b9pma"><b>false</b>：未打开</p></li></ul></td></tr><tr outputclass="row row-level-1-11-6" id="319033ef6donp" class="row row-level-1-11-6"><td id="8833d30c35ho4" rowspan="1" colspan="1"><p id="555c40610376e">address</p></td><td id="1c8a23886cthy" rowspan="1" colspan="1"><p id="fa9a0946d6jln">String</p></td><td id="03f6b6e7b7wzp" rowspan="1" colspan="1"><p id="02c195e637exr">地址位置描述。</p></td></tr><tr outputclass="row row-level-1-11-7" id="4394b65451af6" class="row row-level-1-11-7"><td id="a86b87f31dnny" rowspan="1" colspan="1"><p id="ad73a948a9kzy">longitude</p></td><td id="b385bb469e1eq" rowspan="1" colspan="1"><p id="1fbf565f6bj83">double</p></td><td id="301869a376d52" rowspan="1" colspan="1"><p id="6ba7140762ed4">经度。</p></td></tr><tr outputclass="row row-level-1-11-8" id="5d3a9ec97bhmn" class="row row-level-1-11-8"><td id="b2a6cc27fa8ds" rowspan="1" colspan="1"><p id="b2b2c11dd5abq">latitude</p></td><td id="48b2109c50afs" rowspan="1" colspan="1"><p id="65800936edszy">double</p></td><td id="ef6a735464wgq" rowspan="1" colspan="1"><p id="e6485d40a19bt">纬度。</p></td></tr><tr outputclass="row row-level-1-11-9" id="2b177ba846s7r" class="row row-level-1-11-9"><td id="ad6b914d3cm4l" rowspan="1" colspan="1"><p id="690b38ee830ec">limitUserDeviceCount</p></td><td id="aae4f4b88cegy" rowspan="1" colspan="1"><p id="300f5f7bed314">Boolean</p></td><td id="c344b2af08612" rowspan="1" colspan="1"><p id="21a04f8dd64u2">是否限制员工常用手机。</p><ul id="3da7f8ca150ku"><li id="f219b06834axr"><p id="c943fb4d6cf9d"><b>true</b>：限制</p></li><li id="c18d833d00qws"><p id="35373902de2mc"><b>false</b>：不限制</p></li></ul></td></tr><tr outputclass="row row-level-1-11-10" id="87b931ab93ap6" class="row row-level-1-11-10"><td id="df8cf26a76uaa" rowspan="1" colspan="1"><p id="b48a9b9507rnc">userDeviceCount</p></td><td id="e6c07da53awtm" rowspan="1" colspan="1"><p id="14aa5bd32ckc8">Integer</p></td><td id="fa5ec15e3anrg" rowspan="1" colspan="1"><p id="a4fbce42f3dqm">员工常用手机数量。</p></td></tr></tbody></table></section><section id="section-response-body-example" class="section"><h3 id="h3-response-body-example" data-tag="h3" class="h3">响应体示例</h3><pre id="3d57e5f763enc" outputclass="language-json" code-type="xCode" data-tag="codeblock" class="pre codeblock language-json"><code>HTTP/1.1 200 OK
+Content-Type:application/json
+
+{
+  "result" : {
+    "deviceId" : "2078053438",
+    "devId" : 1406333705,
+    "deviceName" : "泱云❄️的体00056",
+    "productName" : "M1F",
+    "netStatus" : "4",
+    "productVersion" : "1.0.1-R-20200326.1543",
+    "deviceSn" : "0601IFW201001N000056",
+    "maxFace" : 10000,
+    "voiceMode" : 2,
+    "atmManagerList" : [ "013139614537671030352" ],
+    "machineBluetoothVO" : {
+      "bluetoothValue" : true,
+      "bluetoothCheckWithFace" : true,
+      "bluetoothDistanceMode" : "default",
+      "bluetoothDistanceModeDesc" : "默认 (最远5-10米)",
+      "monitorLocationAbnormal" : true,
+      "address" : "绿城-未来park",
+      "longitude" : 120.01757758246528,
+      "latitude" : 30.285871310763888,
+      "limitUserDeviceCount" : true,
+      "userDeviceCount" : 1
+    }
+  }
+}</code></pre></section><section id="section-error-code-1" class="section"><h3 id="h3-error-code-1" data-tag="h3" class="h3">错误码</h3><p data-tag="p" id="p-error-code-global-guide" class="p">若调用该接口报错，可根据错误信息在<a href="https://open.dingtalk.com/document/development/server-api-error-codes-1" id="a-error-code-global-guide">全局错误码</a>文档中查找解决方案。</p><table id="905e5a481cxxn" tablewidth="709" tablecolswidth="142 177 177 213" autofit="false" class="table"><colgroup colwidth="0.8*" style="width:20.03%"></colgroup><colgroup colwidth="1*" style="width:24.96%"></colgroup><colgroup colwidth="1*" style="width:24.96%"></colgroup><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><tbody class="tbody"><tr id="e044e2dd0707q"><td id="b6d487c1432ny" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="a5c65ca7404ae">HttpCode</p></td><td id="c1ae723dad14p" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="26aa4918e3mmp">错误码</p></td><td id="c8520075578d1" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="1cbb7660b4aa7">错误信息</p></td><td id="6edfbae27e5ht" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="113ae7730amif">说明</p></td></tr><tr id="64b7321486u9k"><td id="e0137f76d2vta" rowspan="1" colspan="1"><p id="17c9f6557bz2o">400</p></td><td id="a61ed112c9ubc" rowspan="1" colspan="1"><p id="cbee98963fr2a">invalidParameter</p></td><td id="ce3f19c318r8f" rowspan="1" colspan="1"><p id="c87b7b6cddjdh">参数错误</p></td><td id="4f661aba4c4h5" rowspan="1" colspan="1"><p id="a54ee22c23eqq">参数错误</p></td></tr><tr id="49aead2846pmq"><td id="7d117c23558x3" rowspan="1" colspan="1"><p id="afdf8b8270cfu">500</p></td><td id="8543f745ccck2" rowspan="1" colspan="1"><p id="db12798a58kw5">systemError</p></td><td id="a61ca48ffdpvh" rowspan="1" colspan="1"><p id="c6770dfef399o">系统异常</p></td><td id="4f73fef377ncq" rowspan="1" colspan="1"><p id="11408680799ed">系统异常</p></td></tr></tbody></table></section></section></div></main></body></html>

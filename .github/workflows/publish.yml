@@ -23,10 +23,21 @@ jobs:
       - name: Install build tools
         run: python -m pip install --upgrade build
 
-      - name: Build package
-        run: python -m build
+      - name: Build dingtalk-oapi-zhcn
+        run: python -m build packages/dingtalk-oapi-zhcn
 
-      - name: Publish package
+      - name: Publish dingtalk-oapi-zhcn
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
           password: ${{ secrets.PYPI_API_TOKEN }}
+          packages-dir: packages/dingtalk-oapi-zhcn/dist
+          skip-existing: true
+
+      - name: Build dagster-dingtalk
+        run: python -m build
+
+      - name: Publish dagster-dingtalk
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          password: ${{ secrets.PYPI_API_TOKEN }}
+          skip-existing: true

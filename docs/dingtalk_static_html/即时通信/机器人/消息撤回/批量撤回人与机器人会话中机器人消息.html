@@ -1,0 +1,418 @@
+<!DOCTYPE html><html><head><meta charset="utf8" / /><meta name="gmtModify" content="2026-04-22 20:32:06" / /><meta name="searchtitle" content="" / /><meta name="keywords" content="" / /><meta name="author" content="" / /><title>批量撤回人与机器人会话中机器人消息</title><meta name="gmtModify" content="2026-06-05 13:49:03" / /></head><body data-tag="topic" id="doc-api-dingtalk-BatchRecallOTO" class="topic"><main id="d66f5eb0deh1u"><h1 data-tag="title" id="h1-or6-1yw-upi" class="title">批量撤回人与机器人会话中机器人消息</h1><p data-tag="shortdesc" id="d67be1d0dei8m" class="shortdesc">用于批量撤回人与机器人会话中机器人消息。调用时通过 POST 请求提交 robotCode、processQueryKeys 等业务字段。本接口<span style="color:rgb(23, 26, 29)">适用于企业24小时内撤回错误发送的通知消息等场景。</span></p><div data-tag="conbody" outputclass="icms-api-reference" class="icms-api-reference conbody"><section id="section-request-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-request-1" data-tag="h2" class="h2">请求</h2><section id="section-request-basic-info" class="section"><h3 id="heading-request-basic-info" data-tag="h3" class="h3">基本信息</h3><table id="7e16a56ff380b" tablewidth="648" tablecolswidth="216 432" autofit="false" class="table"><colgroup colwidth="0.67*" style="width:33.33%"></colgroup><colgroup colwidth="1.33*" style="width:66.67%"></colgroup><tbody class="tbody"><tr id="99bb1290acsco"><td id="51885b76f2v4y" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="1b02b224dbdzw">字段</p></td><td id="f4ccbbd7ee3cv" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="ac4330ac340ni">值</p></td></tr><tr id="8e35bee85ey0a"><td id="a2f4cefd0c9oz" rowspan="1" colspan="1"><p id="28b3b2771cur9">HTTP URL</p></td><td id="9056f868e088a" rowspan="1" colspan="1"><p id="a450aadf9fwlp">https://api.dingtalk.com/v1.0/robot/otoMessages/batchRecall</p></td></tr><tr id="9305970e77ucz"><td id="5fe4838a99ej0" rowspan="1" colspan="1"><p id="38e2f1816c57q">HTTP Method</p></td><td id="307ee166780fp" rowspan="1" colspan="1"><p id="8d79374a05xrg">POST</p></td></tr><tr id="33687f63d61oh"><td id="75ba644a74t9k" rowspan="1" colspan="1"><p id="346f56dea9nlu">支持的应用类型</p></td><td id="54020bbfa6pd1" rowspan="1" colspan="1"><p id="2b4f07a6a6wrn"><span data-tag="ph" id="ph-request-basic-app-type-apptype-0" class="ph ph-app-type" data-ph-raw-text="appType-企业内部应用">appType-企业内部应用</span>　<span data-tag="ph" id="ph-request-basic-app-type-apptype-1" class="ph ph-app-type" data-ph-raw-text="appType-第三方企业应用">appType-第三方企业应用</span></p></td></tr><tr id="7ea014eb49yir"><td id="775e7f060367p" rowspan="1" colspan="1"><p id="fd7e646cc9xxd">权限要求</p></td><td id="8fe30e5d1ec4l" rowspan="1" colspan="1"><p id="c8b44f32aewsa"><span data-tag="ph" id="ph-request-basic-permission-permission-qyapi-robot-sendmsg-0" class="ph-permission ph" data-ph-raw-text="permission-qyapi_robot_sendmsg-企业内机器人发送消息权限" data-permission-id="permission-qyapi_robot_sendmsg" data-permission-code="qyapi_robot_sendmsg" data-permission-detail-api="/document/api/permission/detail" data-permission-query-param="code">permission-qyapi_robot_sendmsg-企业内机器人发送消息权限</span></p></td></tr></tbody></table></section><section id="section-request-header-parameter" class="section"><h3 data-tag="h3" id="h2-dsk-v8u-k8x" class="h3 title">请求头</h3><table id="d67c3000de8ce" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="d67c3001der8h"><td id="d67c3002debjs" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="d67c3003dec5s">名称</p></td><td id="d67c3004delzr" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="d67c3005de18s">类型</p></td><td id="d67c5700deg3y" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="d67c5701deywr">是否必填</p></td><td id="d67c5702dezr7" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="d67c5703dex2c">描述</p></td></tr><tr id="d67c5704dez1h"><td id="d67c5705dejzg" rowspan="1" colspan="1"><p id="d67c5706des4l">x-acs-dingtalk-access-token</p></td><td id="d67c5707deuav" rowspan="1" colspan="1"><p id="d67c5708demag">String</p></td><td id="d67c5709desd9" rowspan="1" colspan="1"><p id="d67c570adeh48">是</p></td><td id="d67c570bdeicb" rowspan="1" colspan="1"><p id="6b7f3c7e1ea18">调用该接口的访问凭证，通过以下获取：</p><ul id="8fba8ccbectnj"><li id="dace943c20vbe"><p id="ca09404059yfy">企业内部应用，调用<a href="https://open.dingtalk.com/document/development/obtain-the-access-token-of-an-internal-app#" id="cba4f34640g43" class="xref">获取企业内部应用的accessToken</a>接口获取。</p></li><li id="4198465b2bgql"><p id="65bfc18266teh">第三方企业应用，调用<a href="https://open.dingtalk.com/document/development/obtain-the-access-token-of-the-authorized-enterprise-1#" id="a1573ee52dgfz" class="xref">获取第三方应用授权企业的accessToken</a>接口获取。</p></li></ul></td></tr></tbody></table></section><section id="section-request-body-parameter" class="section"><h3 data-tag="h3" id="h2-hdq-72a-gsm" class="h3 title">请求体</h3><table id="d67c7e12debta" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="d67c7e13deplq"><td id="d67c7e14dekmt" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="d67c7e15dexrx">名称</p></td><td id="d67c7e16dei2p" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="d67c7e17de97h">类型</p></td><td id="d67c7e18de2wj" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="d67c7e19dec7j">是否必填</p></td><td id="d67c7e1adeph5" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="d67c7e1bdey86">描述</p></td></tr><tr outputclass="row row-level-1" id="d67c7e1cdescb" class="row row-level-1"><td id="d67c7e1dde69a" rowspan="1" colspan="1"><p id="d67c7e1ederxa">robotCode</p></td><td id="d67c7e1fdedeh" rowspan="1" colspan="1"><p id="d67c7e20dejue">String</p></td><td id="d67c7e21de5r9" rowspan="1" colspan="1"><p id="d67c7e22de6n0">是</p></td><td id="d67ca520derat" rowspan="1" colspan="1"><p id="6dfb8833775vn">机器人的编码，详情参考<a href="https://open.dingtalk.com/document/development/development-robot-overview#447ec33014hrl" id="2d544e51f3s68" class="xref">机器人 ID</a>。</p><blockquote id="d307bd40366en">需要与<a href="https://open.dingtalk.com/document/development/the-robot-sends-a-group-message#" id="0368cb7314eu1" class="xref">机器人发送群聊消息</a>接口时使用的robotCode一致。</blockquote></td></tr><tr outputclass="row row-level-2" id="d67ca527delb6" class="row row-level-2"><td id="d67ca528dermb" rowspan="1" colspan="1"><p id="d67ca529de5vp">processQueryKeys</p></td><td id="d67ca52adevql" rowspan="1" colspan="1"><p id="d67ca52bdeqhs">Array of String</p></td><td id="d67ca52cded6m" rowspan="1" colspan="1"><p id="d67ca52ddegmu">是</p></td><td id="d67ccc30den8a" rowspan="1" colspan="1"><p id="d67ccc31der1a">消息唯一标识列表，可通过<a href="https://open.dingtalk.com/document/development/chatbots-send-one-on-one-chat-messages-in-batches#" id="1c452b67745ms" class="xref">批量发送人与机器人会话中机器人消息</a>接口获取。</p><p class="note-icon-wrapper" id="0ae45dfce501k"></p><section data-tag="p" id="d67ccc38de1j0" class="p section"><ul id="d67ccc39deof4"><li id="d67ccc3adefu4"><p id="d67ccc3bde5qj">每次最多传20个。</p></li><li id="d67ccc3cdegdr"><p id="d67ccc3ddewdg">在发送消息24小时内可以通过processQueryKey撤回消息，超过24小时则无法撤回消息。</p></li></ul></section></td></tr></tbody></table></section><section id="section-request-body-example" class="section"><h3 id="h3-request-body-example" data-tag="h3" class="h3">请求示例</h3><div outputclass="tabbed-codeblock" data-tag="fig" id="figure-zzy-tfg-qk2" class="tabbed-codeblock-box"><div class="tab-box"></div><input type="radio" name="check-figure-zzy-tfg-qk2" id="figure-zzy-tfg-qk2-HTTP-tab" checked="checked" /><label for="figure-zzy-tfg-qk2-HTTP-tab">HTTP</label><div class="codeblock-item"><pre id="codeblock-5zh-gbn-rek" outputclass="language-HTTP" code-type="xCode" data-tag="codeblock" class="pre codeblock language-HTTP"><code>POST /v1.0/robot/otoMessages/batchRecall HTTP/1.1
+Host:api.dingtalk.com
+x-acs-dingtalk-access-token:8ca04016xxx
+Content-Type:application/json
+
+{
+  "robotCode" : "dingXXXXXX",
+  "processQueryKeys" : [ "b5fe1xxx" ]
+}</code></pre></div><input type="radio" name="check-figure-zzy-tfg-qk2" id="figure-zzy-tfg-qk2-java-tab" /><label for="figure-zzy-tfg-qk2-java-tab">Java</label><div class="codeblock-item"><pre id="codeblock-iso-syz-ad5" outputclass="language-java" code-type="xCode" data-tag="codeblock" class="pre codeblock language-java"><code>// This file is auto-generated, don't edit it. Thanks.
+package com.aliyun.sample;
+
+import com.aliyun.tea.*;
+import com.aliyun.teautil.*;
+import com.aliyun.teautil.models.*;
+import com.aliyun.dingtalkrobot_1_0.*;
+import com.aliyun.dingtalkrobot_1_0.models.*;
+import com.aliyun.teaopenapi.*;
+import com.aliyun.teaopenapi.models.*;
+
+public class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Client
+     * @throws Exception
+     */
+    public static com.aliyun.dingtalkrobot_1_0.Client createClient() throws Exception {
+        Config config = new Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        return new com.aliyun.dingtalkrobot_1_0.Client(config);
+    }
+
+    public static void main(String[] args_) throws Exception {
+        java.util.List&lt;String&gt; args = java.util.Arrays.asList(args_);
+        com.aliyun.dingtalkrobot_1_0.Client client = Sample.createClient();
+        BatchRecallOTOHeaders batchRecallOTOHeaders = new BatchRecallOTOHeaders();
+        batchRecallOTOHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        BatchRecallOTORequest batchRecallOTORequest = new BatchRecallOTORequest()
+                .setRobotCode("dingXXXXXX")
+                .setProcessQueryKeys(java.util.Arrays.asList(
+                    "b5fe1xxx"
+                ));
+        try {
+            client.batchRecallOTOWithOptions(batchRecallOTORequest, batchRecallOTOHeaders, new RuntimeOptions());
+        } catch (TeaException err) {
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        } catch (Exception _err) {
+            TeaException err = new TeaException(_err.getMessage(), _err);
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        }        
+    }
+}</code></pre></div><input type="radio" name="check-figure-zzy-tfg-qk2" id="figure-zzy-tfg-qk2-python-tab" /><label for="figure-zzy-tfg-qk2-python-tab">Python</label><div class="codeblock-item"><pre id="codeblock-gpw-b4p-l92" outputclass="language-python" code-type="xCode" data-tag="codeblock" class="pre codeblock language-python"><code># -*- coding: utf-8 -*-
+# This file is auto-generated, don't edit it. Thanks.
+import sys
+
+from typing import List
+
+from alibabacloud_dingtalk.robot_1_0.client import Client as dingtalkrobot_1_0Client
+from alibabacloud_tea_openapi import models as open_api_models
+from alibabacloud_dingtalk.robot_1_0 import models as dingtalkrobot__1__0_models
+from alibabacloud_tea_util import models as util_models
+from alibabacloud_tea_util.client import Client as UtilClient
+
+
+class Sample:
+    def __init__(self):
+        pass
+
+    @staticmethod
+    def create_client() -&gt; dingtalkrobot_1_0Client:
+        """
+        使用 Token 初始化账号Client
+        @return: Client
+        @throws Exception
+        """
+        config = open_api_models.Config()
+        config.protocol = 'https'
+        config.region_id = 'central'
+        return dingtalkrobot_1_0Client(config)
+
+    @staticmethod
+    def main(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        batch_recall_otoheaders = dingtalkrobot__1__0_models.BatchRecallOTOHeaders()
+        batch_recall_otoheaders.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        batch_recall_otorequest = dingtalkrobot__1__0_models.BatchRecallOTORequest(
+            robot_code='dingXXXXXX',
+            process_query_keys=[
+                'b5fe1xxx'
+            ]
+        )
+        try:
+            client.batch_recall_otowith_options(batch_recall_otorequest, batch_recall_otoheaders, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+    @staticmethod
+    async def main_async(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        batch_recall_otoheaders = dingtalkrobot__1__0_models.BatchRecallOTOHeaders()
+        batch_recall_otoheaders.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        batch_recall_otorequest = dingtalkrobot__1__0_models.BatchRecallOTORequest(
+            robot_code='dingXXXXXX',
+            process_query_keys=[
+                'b5fe1xxx'
+            ]
+        )
+        try:
+            await client.batch_recall_otowith_options_async(batch_recall_otorequest, batch_recall_otoheaders, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+
+if __name__ == '__main__':
+    Sample.main(sys.argv[1:])</code></pre></div><input type="radio" name="check-figure-zzy-tfg-qk2" id="figure-zzy-tfg-qk2-php-tab" /><label for="figure-zzy-tfg-qk2-php-tab">PHP</label><div class="codeblock-item"><pre id="codeblock-nns-58t-vcy" outputclass="language-php" code-type="xCode" data-tag="codeblock" class="pre codeblock language-php"><code>&lt;?php
+
+// This file is auto-generated, don't edit it. Thanks.
+namespace AlibabaCloud\SDK\Sample;
+
+use AlibabaCloud\SDK\Dingtalk\Vrobot_1_0\Dingtalk;
+use \Exception;
+use AlibabaCloud\Tea\Exception\TeaError;
+use AlibabaCloud\Tea\Utils\Utils;
+
+use Darabonba\OpenApi\Models\Config;
+use AlibabaCloud\SDK\Dingtalk\Vrobot_1_0\Models\BatchRecallOTOHeaders;
+use AlibabaCloud\SDK\Dingtalk\Vrobot_1_0\Models\BatchRecallOTORequest;
+use AlibabaCloud\Tea\Utils\Utils\RuntimeOptions;
+
+class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Dingtalk Client
+     */
+    public static function createClient(){
+        $config = new Config([]);
+        $config-&gt;protocol = "https";
+        $config-&gt;regionId = "central";
+        return new Dingtalk($config);
+    }
+
+    /**
+     * @param string[] $args
+     * @return void
+     */
+    public static function main($args){
+        $client = self::createClient();
+        $batchRecallOTOHeaders = new BatchRecallOTOHeaders([]);
+        $batchRecallOTOHeaders-&gt;xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        $batchRecallOTORequest = new BatchRecallOTORequest([
+            "robotCode" =&gt; "dingXXXXXX",
+            "processQueryKeys" =&gt; [
+                "b5fe1xxx"
+            ]
+        ]);
+        try {
+            $client-&gt;batchRecallOTOWithOptions($batchRecallOTORequest, $batchRecallOTOHeaders, new RuntimeOptions([]));
+        }
+        catch (Exception $err) {
+            if (!($err instanceof TeaError)) {
+                $err = new TeaError([], $err-&gt;getMessage(), $err-&gt;getCode(), $err);
+            }
+            if (!Utils::empty_($err-&gt;code) &amp;&amp; !Utils::empty_($err-&gt;message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+        }
+    }
+}
+$path = __DIR__ . \DIRECTORY_SEPARATOR . '..' . \DIRECTORY_SEPARATOR . 'vendor' . \DIRECTORY_SEPARATOR . 'autoload.php';
+if (file_exists($path)) {
+    require_once $path;
+}
+Sample::main(array_slice($argv, 1));</code></pre></div><input type="radio" name="check-figure-zzy-tfg-qk2" id="figure-zzy-tfg-qk2-go-tab" /><label for="figure-zzy-tfg-qk2-go-tab">Go</label><div class="codeblock-item"><pre id="codeblock-glj-8uy-z2e" outputclass="language-go" code-type="xCode" data-tag="codeblock" class="pre codeblock language-go"><code>// This file is auto-generated, don't edit it. Thanks.
+package main
+
+import (
+  "os"
+  util  "github.com/alibabacloud-go/tea-utils/service"
+  dingtalkrobot_1_0  "github.com/alibabacloud-go/dingtalk/robot_1_0"
+  openapi  "github.com/alibabacloud-go/darabonba-openapi/client"
+  "github.com/alibabacloud-go/tea/tea"
+)
+
+
+/**
+ * 使用 Token 初始化账号Client
+ * @return Client
+ * @throws Exception
+ */
+func CreateClient () (_result *dingtalkrobot_1_0.Client, _err error) {
+  config := &amp;openapi.Config{}
+  config.Protocol = tea.String("https")
+  config.RegionId = tea.String("central")
+  _result = &amp;dingtalkrobot_1_0.Client{}
+  _result, _err = dingtalkrobot_1_0.NewClient(config)
+  return _result, _err
+}
+
+func _main (args []*string) (_err error) {
+  client, _err := CreateClient()
+  if _err != nil {
+    return _err
+  }
+
+  batchRecallOTOHeaders := &amp;dingtalkrobot_1_0.BatchRecallOTOHeaders{}
+  batchRecallOTOHeaders.XAcsDingtalkAccessToken = tea.String("&lt;your access token&gt;")
+  batchRecallOTORequest := &amp;dingtalkrobot_1_0.BatchRecallOTORequest{
+    RobotCode: tea.String("dingXXXXXX"),
+    ProcessQueryKeys: []*string{tea.String("b5fe1xxx")},
+  }
+  tryErr := func()(_e error) {
+    defer func() {
+      if r := tea.Recover(recover()); r != nil {
+        _e = r
+      }
+    }()
+    _, _err = client.BatchRecallOTOWithOptions(batchRecallOTORequest, batchRecallOTOHeaders, &amp;util.RuntimeOptions{})
+    if _err != nil {
+      return _err
+    }
+
+    return nil
+  }()
+
+  if tryErr != nil {
+    var err = &amp;tea.SDKError{}
+    if _t, ok := tryErr.(*tea.SDKError); ok {
+      err = _t
+    } else {
+      err.Message = tea.String(tryErr.Error())
+    }
+    if !tea.BoolValue(util.Empty(err.Code)) &amp;&amp; !tea.BoolValue(util.Empty(err.Message)) {
+      // err 中含有 code 和 message 属性，可帮助开发定位问题
+    }
+
+  }
+  return _err
+}
+
+
+func main() {
+  err := _main(tea.StringSlice(os.Args[1:]))
+  if err != nil {
+    panic(err)
+  }
+}</code></pre></div><input type="radio" name="check-figure-zzy-tfg-qk2" id="figure-zzy-tfg-qk2-nodejs-tab" /><label for="figure-zzy-tfg-qk2-nodejs-tab">Node.js</label><div class="codeblock-item"><pre id="codeblock-8ma-als-w6o" outputclass="language-nodejs" code-type="xCode" data-tag="codeblock" class="pre codeblock language-nodejs"><code>// This file is auto-generated, don't edit it
+import Util, * as $Util from '@alicloud/tea-util';
+import dingtalkrobot_1_0, * as $dingtalkrobot_1_0 from '@alicloud/dingtalk/robot_1_0';
+import OpenApi, * as $OpenApi from '@alicloud/openapi-client';
+import * as $tea from '@alicloud/tea-typescript';
+
+
+export default class Client {
+
+  /**
+   * 使用 Token 初始化账号Client
+   * @return Client
+   * @throws Exception
+   */
+  static createClient(): dingtalkrobot_1_0 {
+    let config = new $OpenApi.Config({ });
+    config.protocol = "https";
+    config.regionId = "central";
+    return new dingtalkrobot_1_0(config);
+  }
+
+  static async main(args: string[]): Promise&lt;void&gt; {
+    let client = Client.createClient();
+    let batchRecallOTOHeaders = new $dingtalkrobot_1_0.BatchRecallOTOHeaders({ });
+    batchRecallOTOHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+    let batchRecallOTORequest = new $dingtalkrobot_1_0.BatchRecallOTORequest({
+      robotCode: "dingXXXXXX",
+      processQueryKeys: [
+        "b5fe1xxx"
+      ],
+    });
+    try {
+      await client.batchRecallOTOWithOptions(batchRecallOTORequest, batchRecallOTOHeaders, new $Util.RuntimeOptions({ }));
+    } catch (err) {
+      if (!Util.empty(err.code) &amp;&amp; !Util.empty(err.message)) {
+        // err 中含有 code 和 message 属性，可帮助开发定位问题
+      }
+
+    }    
+  }
+
+}
+
+Client.main(process.argv.slice(2));</code></pre></div><input type="radio" name="check-figure-zzy-tfg-qk2" id="figure-zzy-tfg-qk2-csharp-tab" /><label for="figure-zzy-tfg-qk2-csharp-tab">C#</label><div class="codeblock-item"><pre id="codeblock-rhx-jhz-ega" outputclass="language-csharp" code-type="xCode" data-tag="codeblock" class="pre codeblock language-csharp"><code>// This file is auto-generated, don't edit it. Thanks.
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
+
+using Tea;
+using Tea.Utils;
+
+
+namespace AlibabaCloud.SDK.Sample
+{
+    public class Sample 
+    {
+
+        /**
+         * 使用 Token 初始化账号Client
+         * @return Client
+         * @throws Exception
+         */
+        public static AlibabaCloud.SDK.Dingtalkrobot_1_0.Client CreateClient()
+        {
+            AlibabaCloud.OpenApiClient.Models.Config config = new AlibabaCloud.OpenApiClient.Models.Config();
+            config.Protocol = "https";
+            config.RegionId = "central";
+            return new AlibabaCloud.SDK.Dingtalkrobot_1_0.Client(config);
+        }
+
+        public static void Main(string[] args)
+        {
+            AlibabaCloud.SDK.Dingtalkrobot_1_0.Client client = CreateClient();
+            AlibabaCloud.SDK.Dingtalkrobot_1_0.Models.BatchRecallOTOHeaders batchRecallOTOHeaders = new AlibabaCloud.SDK.Dingtalkrobot_1_0.Models.BatchRecallOTOHeaders();
+            batchRecallOTOHeaders.XAcsDingtalkAccessToken = "&lt;your access token&gt;";
+            AlibabaCloud.SDK.Dingtalkrobot_1_0.Models.BatchRecallOTORequest batchRecallOTORequest = new AlibabaCloud.SDK.Dingtalkrobot_1_0.Models.BatchRecallOTORequest
+            {
+                RobotCode = "dingXXXXXX",
+                ProcessQueryKeys = new List&lt;string&gt;
+                {
+                    "b5fe1xxx"
+                },
+            };
+            try
+            {
+                client.BatchRecallOTOWithOptions(batchRecallOTORequest, batchRecallOTOHeaders, new AlibabaCloud.TeaUtil.Models.RuntimeOptions());
+            }
+            catch (TeaException err)
+            {
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+            catch (Exception _err)
+            {
+                TeaException err = new TeaException(new Dictionary&lt;string, object&gt;
+                {
+                    { "message", _err.Message }
+                });
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+        }
+
+
+    }
+}</code></pre></div><input type="radio" name="check-figure-zzy-tfg-qk2" id="figure-zzy-tfg-qk2-cpp-tab" /><label for="figure-zzy-tfg-qk2-cpp-tab">C++</label><div class="codeblock-item"><pre id="codeblock-4ha-gzx-slj" outputclass="language-cpp" code-type="xCode" data-tag="codeblock" class="pre codeblock language-cpp"><code>// This file is auto-generated, don't edit it. Thanks.
+
+#include &lt;alibabacloud/dingtalkrobot__1__0.hpp&gt;
+#include &lt;alibabacloud/open_api.hpp&gt;
+#include &lt;boost/any.hpp&gt;
+#include &lt;darabonba/core.hpp&gt;
+#include &lt;darabonba/util.hpp&gt;
+#include &lt;iostream&gt;
+#include &lt;map&gt;
+
+using namespace std;
+
+Alibabacloud_Dingtalkrobot_1_0::Client createClient() {
+  shared_ptr&lt;Alibabacloud_OpenApi::Config&gt; config = make_shared&lt;Alibabacloud_OpenApi::Config&gt;();
+  config-&gt;protocol = make_shared&lt;string&gt;("https");
+  config-&gt;regionId = make_shared&lt;string&gt;("central");
+  return Alibabacloud_Dingtalkrobot_1_0::Client(config);
+}
+
+int main(int argc, char *args[]) {
+  args++;
+  shared_ptr&lt;Alibabacloud_Dingtalkrobot_1_0::Client&gt; client = make_shared&lt;Alibabacloud_Dingtalkrobot_1_0::Client&gt;(createClient());
+  shared_ptr&lt;Alibabacloud_Dingtalkrobot_1_0::BatchRecallOTOHeaders&gt; batchRecallOTOHeaders = make_shared&lt;Alibabacloud_Dingtalkrobot_1_0::BatchRecallOTOHeaders&gt;();
+  batchRecallOTOHeaders-&gt;xAcsDingtalkAccessToken = make_shared&lt;string&gt;("&lt;your access token&gt;");
+  shared_ptr&lt;Alibabacloud_Dingtalkrobot_1_0::BatchRecallOTORequest&gt; batchRecallOTORequest = make_shared&lt;Alibabacloud_Dingtalkrobot_1_0::BatchRecallOTORequest&gt;(map&lt;string, boost::any&gt;({
+    {"robotCode", boost::any(string("dingXXXXXX"))},
+    {"processQueryKeys", boost::any(vector&lt;string&gt;({
+      "b5fe1xxx"
+    }))}
+  }));
+  try {
+    client-&gt;batchRecallOTOWithOptions(batchRecallOTORequest, batchRecallOTOHeaders, make_shared&lt;Darabonba_Util::RuntimeOptions&gt;(Darabonba_Util::RuntimeOptions()));
+  }
+  catch (std::exception &amp;err) {
+    if (!Darabonba_Util::Client::empty(err.code) &amp;&amp; !Darabonba_Util::Client::empty(err.message)) {
+      // err 中含有 code 和 message 属性，可帮助开发定位问题
+    }
+  }
+}</code></pre></div></div></section></section><section id="section-response-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-response-1" data-tag="h2" class="h2">响应</h2><section id="section-response-parameter" class="section"><h3 data-tag="h3" id="h2-8ti-2h8-qsm" class="h3 title">响应体</h3><table id="d67ccc3ede8gq" tablewidth="710" tablecolswidth="213 142 355" autofit="false" class="table"><colgroup colwidth="0.9*" style="width:30.00%"></colgroup><colgroup colwidth="0.6*" style="width:20.00%"></colgroup><colgroup colwidth="1.5*" style="width:50.00%"></colgroup><tbody class="tbody"><tr id="d67ccc3fde4td"><td id="d67ccc40desn8" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="d67cf340de4z3">名称</p></td><td id="d67cf341deark" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="d67cf342deeyw">类型</p></td><td id="d67cf343dee4j" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="d67cf344dey28">描述</p></td></tr><tr outputclass="row row-level-1" id="d67cf345denaj" class="row row-level-1"><td id="d67cf346de6xu" rowspan="1" colspan="1"><p id="d67cf347de0k7">successResult</p></td><td id="d67cf348de6d1" rowspan="1" colspan="1"><p id="d67cf349dew8t">Array of String</p></td><td id="d67cf34adefld" rowspan="1" colspan="1"><p id="d67cf34bdelfb">撤回成功的消息发送任务ID列表。</p><div type="note" id="189fdeede0han" class="note note-note"><div class="note-icon-wrapper"><i class="icon-note note note"></i></div><div class="noteContentSpan"><strong>说明 </strong><p id="60e768e4a9a4l"><span style="color:rgb(24, 28, 31)">撤回机器人发送的消息，在聊天框中没有提示。</span></p></div></div></td></tr><tr outputclass="row row-level-2" id="d67cf34cdeyos" class="row row-level-2"><td id="d67cf34dde0ag" rowspan="1" colspan="1"><p id="d67cf34edel3i">failedResult</p></td><td id="d67cf34fdek4k" rowspan="1" colspan="1"><p id="d67cf350deail">Map&lt;String, String&gt;</p></td><td id="d67cf351de38n" rowspan="1" colspan="1"><p id="d67cf352dewyc">撤回失败的消息发送任务ID列表及对应的失败原因。</p></td></tr></tbody></table></section><section id="section-response-body-example" class="section"><h3 id="h3-response-body-example" data-tag="h3" class="h3">响应体示例</h3><pre id="d66f5eb2de8el" outputclass="language-json" code-type="xCode" data-tag="codeblock" class="pre codeblock language-json"><code>HTTP/1.1 200 OK
+Content-Type:application/json
+
+{
+  "successResult" : [ "b5fe1xxx" ],
+  "failedResult" : { }
+}</code></pre></section><section id="section-error-code-1" class="section"><h3 id="h3-error-code-1" data-tag="h3" class="h3">错误码</h3><p data-tag="p" id="p-error-code-global-guide" class="p">若调用该接口报错，可根据错误信息在<a href="https://open.dingtalk.com/document/development/server-api-error-codes-1" id="a-error-code-global-guide">全局错误码</a>文档中查找解决方案。</p><table id="d67d1a51demcm" tablewidth="709" tablecolswidth="142 177 177 213" autofit="false" class="table"><colgroup colwidth="0.8*" style="width:20.03%"></colgroup><colgroup colwidth="1*" style="width:24.96%"></colgroup><colgroup colwidth="1*" style="width:24.96%"></colgroup><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><tbody class="tbody"><tr id="d67d1a52de3nn"><td id="d67d1a53de0hj" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="d67d1a54derk8">HttpCode</p></td><td id="d67d1a55den6j" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="d67d1a56dee7n">错误码</p></td><td id="d67d1a57deoiu" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="d67d1a58deyly">错误信息</p></td><td id="d67d1a59de8vd" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="d67d1a5adenpj">说明</p></td></tr><tr id="d67d1a5bdeet0"><td id="d67d1a5cdehsi" rowspan="1" colspan="1"><p id="d67d1a5ddedgm">400</p></td><td id="d67d1a5edeaqy" rowspan="1" colspan="1"><p id="d67d1a5fdeu09">invalidParameter.robotCode</p></td><td id="d67d4160dea49" rowspan="1" colspan="1"><p id="d67d4161desqt">%s</p></td><td id="d67d4162deisj" rowspan="1" colspan="1"><p id="d67d4163delsv">机器人不存在，请检查企业内是否安装了robotCode对应的机器人</p></td></tr><tr id="d67d4164dekp8"><td id="d67d4165decjw" rowspan="1" colspan="1"><p id="d67d4166deono">400</p></td><td id="d67d4167dekcf" rowspan="1" colspan="1"><p id="d67d4168de3ch">invalidParameter.processQueryKeys.overMax</p></td><td id="d67d4169demol" rowspan="1" colspan="1"><p id="d67d416aded99">%s</p></td><td id="d67d416bdenl3" rowspan="1" colspan="1"><p id="d67d416cdeu9v">processQueryKeys超过数量上限20，请将processQueryKeys拆分成多个长度不超过20的数组，分批次调用此接口</p></td></tr><tr id="d67d416dde9wj"><td id="d67d416edeuqx" rowspan="1" colspan="1"><p id="d67d416fde63m">400</p></td><td id="d67d4170de6t7" rowspan="1" colspan="1"><p id="d67d4171de0u4">not.allowed.robotCode</p></td><td id="d67d4172dei7y" rowspan="1" colspan="1"><p id="d67d4173deshu">%s</p></td><td id="d67d4174de110" rowspan="1" colspan="1"><p id="d67d6870deh4a">待撤回的消息不是robotCode对应的机器人发出的，无权限撤回消息，请传入正确的robotCode</p></td></tr><tr id="d67d6871den0f"><td id="d67d6872def40" rowspan="1" colspan="1"><p id="d67d6873de51t">400</p></td><td id="d67d6874defc9" rowspan="1" colspan="1"><p id="d67d6875depwl">invalidParameter.param.invalid</p></td><td id="d67d6876desxy" rowspan="1" colspan="1"><p id="d67d6877derka">%s</p></td><td id="d67d6878de3aa" rowspan="1" colspan="1"><p id="d67d6879den3s">参数不合法，请检查参数是否为空</p></td></tr><tr id="d67d687adenvv"><td id="d67d687bdewmc" rowspan="1" colspan="1"><p id="d67d687cde4sh">400</p></td><td id="d67d687ddehop" rowspan="1" colspan="1"><p id="d67d687ede1zr">invalidParameter.processQueryKey.missing</p></td><td id="d67d687fdezys" rowspan="1" colspan="1"><p id="d67d6880de353">%s</p></td><td id="d67d6881de3vt" rowspan="1" colspan="1"><p id="d67d6882dem4j">缺少processQueryKey</p></td></tr><tr id="d67d8f80dehai"><td id="d67d8f81de0dv" rowspan="1" colspan="1"><p id="d67d8f82dekfx">400</p></td><td id="d67d8f83defyj" rowspan="1" colspan="1"><p id="d67d8f84de1rv">invalid.processQueryKey</p></td><td id="d67d8f85decan" rowspan="1" colspan="1"><p id="d67d8f86de9q4">%s</p></td><td id="d67d8f87de9o6" rowspan="1" colspan="1"><p id="d67d8f88detr8">无效的processQueryKey，请检查processQueryKey是否正确</p></td></tr><tr id="d67d8f89demrn"><td id="d67d8f8ade7h8" rowspan="1" colspan="1"><p id="d67d8f8bdewz3">400</p></td><td id="d67d8f8cdewuo" rowspan="1" colspan="1"><p id="d67d8f8ddef58">robot.processQueryKey.expired</p></td><td id="d67d8f8ededz6" rowspan="1" colspan="1"><p id="d67d8f8fdejrj">%s</p></td><td id="d67d8f90de9kc" rowspan="1" colspan="1"><p id="d67d8f91de3sd">processQueryKey已过期，无法撤回消息</p></td></tr><tr id="d67db690de715"><td id="d67db691debbp" rowspan="1" colspan="1"><p id="d67db692dekfk">400</p></td><td id="d67db693deexw" rowspan="1" colspan="1"><p id="d67db694dedvs">notRevoke.all.messages</p></td><td id="d67db695de785" rowspan="1" colspan="1"><p id="d67db696dez8s">%s</p></td><td id="d67db697dedg0" rowspan="1" colspan="1"><p id="d67db698deqxx">消息未能全部撤回</p></td></tr><tr id="d67db699delnm"><td id="d67db69adect6" rowspan="1" colspan="1"><p id="d67db69bde83x">500</p></td><td id="d67db69cde01i" rowspan="1" colspan="1"><p id="d67db69ddecht">system.error</p></td><td id="d67db69edev0e" rowspan="1" colspan="1"><p id="d67db69fde4oi">%s</p></td><td id="d67db6a0des75" rowspan="1" colspan="1"><p id="d67db6a1deu30">未知的系统错误</p></td></tr></tbody></table></section></section></div></main></body></html>

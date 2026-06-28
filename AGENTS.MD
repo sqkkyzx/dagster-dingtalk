@@ -15,3 +15,14 @@
 3. 更新 [version.py](src/dagster_dingtalk/version.py) 时：
 
    - `__version__` 使用 `libraries` 版本的三段号，例如 `0.29.8`。
+
+# 钉钉开放平台API文档本地存档
+
+本地存档依据 `docs/docinfolist_{date}.json` 进行抓取，date 是 docinfolist 的生成日期。有三类生成产物：
+
+1. 目录列表 `docs/dingtalk_static_html_catalog.yaml`：
+    - 已完成树结构
+    - 更新日期从HTML中的 meta name="gmtModify" 解析，是真实的线上文档更新日志，可以信任。
+
+2. 已抓取的静态文档 `docs/dingtalk_static_html` :
+    - 按树结构逐级目录存储

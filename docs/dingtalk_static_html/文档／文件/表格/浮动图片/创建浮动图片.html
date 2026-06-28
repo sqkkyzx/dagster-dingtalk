@@ -1,0 +1,818 @@
+<!DOCTYPE html><html lang="zh-CN"><head>
+    <meta charset="utf8" / />
+    <title>创建浮动图片</title>
+<meta name="gmtModify" content="2026-04-17 15:05:09" / /><meta name="gmtModify" content="2026-06-02 18:43:00" / /></head>
+<body data-tag="topic" id="doc-api-dingtalk-CreateFloatImage" class="topic">
+    <main id="doc-api-dingtalk-CreateFloatImage">
+        <h1 data-tag="title" id="h1-cyq-rgs-cle" class="title">创建浮动图片</h1>
+        <p data-tag="shortdesc" class="shortdesc">调用本接口，可获取钉钉表格指定工作表中所有浮动图片的列表信息。适用于需要批量读取工作表内浮动图片的场景，如导出、同步或审计等。返回结果包含每张图片的唯一标识、图片地址、锚点位置及尺寸偏移信息。</p>
+        <div data-tag="conbody" outputclass="icms-api-reference" class="icms-api-reference conbody"><section id="section-request-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-request-1" data-tag="h2" class="h2">请求</h2><section id="section-request-basic-info" class="section"><h3 id="heading-request-basic-info" data-tag="h3" class="h3">基本信息</h3><table tablewidth="648" tablecolswidth="216 432" autofit="false" class="table"><colgroup colwidth="1*" style="width:33.33%"></colgroup><colgroup colwidth="2*" style="width:66.67%"></colgroup><tbody class="tbody"><tr><td rowspan="1" style="background-color:#e5e5e5" colspan="1"><p>字段</p></td><td rowspan="1" style="background-color:#e5e5e5" colspan="1"><p>值</p></td></tr><tr><td rowspan="1" colspan="1"><p>HTTP URL</p></td><td rowspan="1" colspan="1"><p>https://api.dingtalk.com/v1.0/doc/workbooks/{workbookId}/sheets/{sheetId}/floatImages</p></td></tr><tr><td rowspan="1" colspan="1"><p>HTTP Method</p></td><td rowspan="1" colspan="1"><p>POST</p></td></tr><tr><td rowspan="1" colspan="1"><p>支持的应用类型</p></td><td rowspan="1" colspan="1"><p><span data-tag="ph" id="ph-request-basic-app-type-apptype-0" class="ph ph-app-type" data-ph-raw-text="appType-企业内部应用">appType-企业内部应用</span></p></td></tr><tr><td rowspan="1" colspan="1"><p>权限要求</p></td><td rowspan="1" colspan="1"><p><span data-tag="ph" id="ph-request-basic-permission-permission-document-workbook-write-0" class="ph-permission ph" data-ph-raw-text="permission-Document.Workbook.Write-钉钉表格写权限" data-permission-id="permission-Document.Workbook.Write" data-permission-code="Document.Workbook.Write" data-permission-detail-api="/document/api/permission/detail" data-permission-query-param="code">permission-Document.Workbook.Write-钉钉表格写权限</span></p></td></tr></tbody></table></section><section id="section-request-header-parameter" class="section">
+                    <h3 data-tag="h3" id="h2-jkc-bsf-35u" class="h3 title">请求头</h3>
+                    <table class="table">
+                        <colgroup colnum="1" colname="col1" colwidth="3*" style="width:30%"></colgroup>
+                        <colgroup colnum="2" colname="col2" colwidth="1.5*" style="width:15%"></colgroup>
+                        <colgroup colnum="3" colname="col3" colwidth="1.5*" style="width:15%"></colgroup>
+                        <colgroup colnum="4" colname="col4" colwidth="4*" style="width:40%"></colgroup>
+                        <thead class="thead">
+                        <tr>
+                            <th><p>名称</p></th>
+                            <th><p>类型</p></th>
+                            <th><p>是否必填</p></th>
+                            <th><p>描述</p></th>
+                        </tr>
+                        </thead>
+                        <tbody class="tbody">
+                            <tr>
+                                <td><p>x-acs-dingtalk-access-token</p></td>
+                                <td><p>String</p></td>
+                                <td><p>是</p></td>
+                                <td><p>调用该接口的访问凭证，可调用<a href="https://open.dingtalk.com/document/development/obtain-the-access-token-of-an-internal-app">获取企业内部应用的accessToken</a>接口获取。</p>
+</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section><section id="section-request-path-parameter" class="section">
+        <h3 data-tag="h3" id="h2-5jc-ypo-hve" class="h3 title">路径参数</h3>
+        <table class="table">
+            <colgroup colnum="1" colname="col1" colwidth="3*" style="width:30%"></colgroup>
+            <colgroup colnum="2" colname="col2" colwidth="1.5*" style="width:15%"></colgroup>
+            <colgroup colnum="3" colname="col3" colwidth="1.5*" style="width:15%"></colgroup>
+            <colgroup colnum="4" colname="col4" colwidth="4*" style="width:40%"></colgroup>
+            <thead class="thead">
+            <tr>
+                <th><p>名称</p></th>
+                <th><p>类型</p></th>
+                <th><p>是否必填</p></th>
+                <th><p>描述</p></th>
+            </tr>
+            </thead>
+            <tbody class="tbody">
+                    <tr>
+                        <td><p>workbookId</p></td>
+                        <td><p>String</p></td>
+                        <td><p>是</p></td>
+                        <td><p>表格文件&nbsp;ID ，<a href="https://open.dingtalk.com/document/development/knowledge-base-overview">知识库 API</a> 返回的<code>nodeId(dentryUuid)</code>即是表格<code>workbookId</code>，可通过调用<a href="https://open.dingtalk.com/document/development/get-node">获取节点</a>和<a href="https://open.dingtalk.com/document/development/create-team-space-document">创建知识库文档</a>接口获取。</p>
+</td>
+                    </tr>
+                    <tr>
+                        <td><p>sheetId</p></td>
+                        <td><p>String</p></td>
+                        <td><p>是</p></td>
+                        <td><p>工作表ID或标题，可调用<a href="https://open.dingtalk.com/document/development/obtain-all-worksheets">获取所有工作表</a>接口获取id和工作表的标题。</p>
+</td>
+                    </tr>
+            </tbody>
+        </table>
+    </section><section id="section-request-query-parameter" class="section">
+        <h3 data-tag="h3" id="h2-jcu-heh-4co" class="h3 title">查询参数</h3>
+        <table class="table">
+            <colgroup colnum="1" colname="col1" colwidth="3*" style="width:30%"></colgroup>
+            <colgroup colnum="2" colname="col2" colwidth="1.5*" style="width:15%"></colgroup>
+            <colgroup colnum="3" colname="col3" colwidth="1.5*" style="width:15%"></colgroup>
+            <colgroup colnum="4" colname="col4" colwidth="4*" style="width:40%"></colgroup>
+            <thead class="thead">
+            <tr>
+                <th><p>名称</p></th>
+                <th><p>类型</p></th>
+                <th><p>是否必填</p></th>
+                <th><p>描述</p></th>
+            </tr>
+            </thead>
+            <tbody class="tbody">
+                    <tr>
+                        <td><p>operatorId</p></td>
+                        <td><p>String</p></td>
+                        <td><p>是</p></td>
+                        <td><p>操作人的unionId，可调用<a href="https://open.dingtalk.com/document/development/query-user-details">查询用户详情</a>接口获取。</p>
+<div type="note" class="note note-note"><div class="note-icon-wrapper"><i class="icon-note note note"></i></div><div class="noteContentSpan"><p data-tag="p" class="p">
+</p><p>若操作人无权限，接口会报错 <code>The operator has no permission</code>。</p>
+<p></p></div></div>
+</td>
+                    </tr>
+            </tbody>
+        </table>
+    </section><section id="section-request-body-parameter" class="section">
+                <h3 data-tag="h3" id="h2-8gx-wse-elt" class="h3 title">请求体</h3>
+                <table class="table">
+                    <colgroup colnum="1" colname="col1" colwidth="3*" style="width:30%"></colgroup>
+                    <colgroup colnum="2" colname="col2" colwidth="1.5*" style="width:15%"></colgroup>
+                    <colgroup colnum="3" colname="col3" colwidth="1.5*" style="width:15%"></colgroup>
+                    <colgroup colnum="4" colname="col4" colwidth="4*" style="width:40%"></colgroup>
+                    <thead class="thead">
+                        <tr>
+                            <th><p>名称</p></th>
+                            <th><p>类型</p></th>
+                            <th><p>是否必填</p></th>
+                            <th><p>描述</p></th>
+                        </tr>
+                    </thead>
+                    <tbody class="tbody">
+    <tr outputclass="row row-level-4" class="row-level-4 row row row-level-4">
+        <td><p>src</p></td>
+        <td><p>String</p></td>
+            <td><p>是</p></td>
+        <td><p>浮动图片资源地址，需要通过调用<a href="https://open.dingtalk.com/document/development/api-getresourceuploadinfo">获取资源上传信息</a>接口获得 <code>resourceUrl</code>。</p>
+</td>
+    </tr>
+    <tr outputclass="row row-level-5 has-child" class="has-child row-level-5 row row row-level-5 has-child">
+        <td><span class="icms-tree-table-trigger" type="checkbox"></span><span class="icms-tree-table-trigger" type="checkbox"></span><p>anchor</p></td>
+        <td><p>Object</p></td>
+            <td><p>是</p></td>
+        <td><p>浮动图片定位信息。</p>
+</td>
+    </tr>
+    <tr outputclass="row row-level-5-1" class="row-level-5-1 row row row-level-5-1">
+        <td><p>row</p></td>
+        <td><p>Integer</p></td>
+            <td><p>是</p></td>
+        <td><p>相对第几行定位，游标从 0 开始。</p>
+</td>
+    </tr>
+    <tr outputclass="row row-level-5-2" class="row row-level-5-2 row-level-5-2 row">
+        <td><p>col</p></td>
+        <td><p>Integer</p></td>
+            <td><p>是</p></td>
+        <td><p>相对第几列定位，游标从 0 开始。</p>
+</td>
+    </tr>
+    <tr outputclass="row row-level-6 has-child" class="has-child row-level-6 row row row-level-6 has-child">
+        <td><span class="icms-tree-table-trigger" type="checkbox"></span><span class="icms-tree-table-trigger" type="checkbox"></span><p>coordinate</p></td>
+        <td><p>Object</p></td>
+            <td><p>是</p></td>
+        <td><p>设置几何信息。</p>
+</td>
+    </tr>
+    <tr outputclass="row row-level-6-1" class="row row-level-6-1 row-level-6-1 row">
+        <td><p>width</p></td>
+        <td><p>double</p></td>
+            <td><p>是</p></td>
+        <td><p>指定图片宽度，单位：像素。</p>
+</td>
+    </tr>
+    <tr outputclass="row row-level-6-2" class="row row-level-6-2 row-level-6-2 row">
+        <td><p>height</p></td>
+        <td><p>double</p></td>
+            <td><p>是</p></td>
+        <td><p>指定图片高度，单位：像素。</p>
+</td>
+    </tr>
+    <tr outputclass="row row-level-6-3" class="row row-level-6-3 row row-level-6-3">
+        <td><p>offsetX</p></td>
+        <td><p>double</p></td>
+            <td><p>是</p></td>
+        <td><p>相对定位坐标的横向偏移量，单位：像素。</p>
+</td>
+    </tr>
+    <tr outputclass="row row-level-6-4" class="row row-level-6-4 row row-level-6-4">
+        <td><p>offsetY</p></td>
+        <td><p>double</p></td>
+            <td><p>是</p></td>
+        <td><p>相对定位坐标的纵向偏移量，单位：像素。</p>
+</td>
+    </tr>
+                    </tbody>
+                </table>
+            </section><section id="section-request-body-example" class="section"><h3 id="h3-request-body-example" data-tag="h3" class="h3">请求示例</h3><div id="figure-ada-dxl-2cc" outputclass="tabbed-codeblock" data-tag="fig" class="tabbed-codeblock-box"><div class="tab-box"></div><input type="radio" name="check-figure-ada-dxl-2cc" id="figure-ada-dxl-2cc-HTTP-tab" checked="checked" /><label for="figure-ada-dxl-2cc-HTTP-tab">HTTP</label><div class="codeblock-item"><pre id="codeblock-uno-e69-lvm" outputclass="language-HTTP" data-tag="codeblock" code-type="xCode" class="pre codeblock language-HTTP"><code>POST /v1.0/doc/workbooks/e54Lqxxxxx/sheets/Sheet1/floatImages?operatorId=ppgAQuxxxxx HTTP/1.1
+Host:api.dingtalk.com
+x-acs-dingtalk-access-token:f86e0bxxx
+Content-Type:application/json
+
+{
+  "src" : "/core/api/resources/img/xxx",
+  "anchor" : {
+    "row" : 1,
+    "col" : 1
+  },
+  "coordinate" : {
+    "width" : 300.0,
+    "height" : 300.0,
+    "offsetX" : 8.0,
+    "offsetY" : 8.0
+  }
+}</code></pre></div><input type="radio" name="check-figure-ada-dxl-2cc" id="figure-ada-dxl-2cc-java-tab" /><label for="figure-ada-dxl-2cc-java-tab">Java</label><div class="codeblock-item"><pre id="codeblock-4eh-zx1-asf" outputclass="language-java" data-tag="codeblock" code-type="xCode" class="pre codeblock language-java"><code>package com.aliyun.sample;
+
+import com.aliyun.tea.*;
+
+public class Sample {
+
+    /**
+     * &lt;b&gt;description&lt;/b&gt; :
+     * &lt;p&gt;使用 Token 初始化账号Client&lt;/p&gt;
+     * @return Client
+     * 
+     * @throws Exception
+     */
+    public static com.aliyun.dingtalkdoc_1_0.Client createClient() throws Exception {
+        com.aliyun.teaopenapi.models.Config config = new com.aliyun.teaopenapi.models.Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        return new com.aliyun.dingtalkdoc_1_0.Client(config);
+    }
+
+    public static void main(String[] args_) throws Exception {
+        
+        com.aliyun.dingtalkdoc_1_0.Client client = Sample.createClient();
+        com.aliyun.dingtalkdoc_1_0.models.CreateFloatImageHeaders createFloatImageHeaders = new com.aliyun.dingtalkdoc_1_0.models.CreateFloatImageHeaders();
+        createFloatImageHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        com.aliyun.dingtalkdoc_1_0.models.CreateFloatImageRequest.CreateFloatImageRequestCoordinate coordinate = new com.aliyun.dingtalkdoc_1_0.models.CreateFloatImageRequest.CreateFloatImageRequestCoordinate()
+                .setWidth(300D)
+                .setHeight(300D)
+                .setOffsetX(8D)
+                .setOffsetY(8D);
+        com.aliyun.dingtalkdoc_1_0.models.CreateFloatImageRequest.CreateFloatImageRequestAnchor anchor = new com.aliyun.dingtalkdoc_1_0.models.CreateFloatImageRequest.CreateFloatImageRequestAnchor()
+                .setRow(1)
+                .setCol(1);
+        com.aliyun.dingtalkdoc_1_0.models.CreateFloatImageRequest createFloatImageRequest = new com.aliyun.dingtalkdoc_1_0.models.CreateFloatImageRequest()
+                .setOperatorId("ppgAQuxxxxx")
+                .setSrc("/core/api/resources/img/xxx")
+                .setAnchor(anchor)
+                .setCoordinate(coordinate);
+        try {
+            client.createFloatImageWithOptions("e54Lqxxxxx", "Sheet1", createFloatImageRequest, createFloatImageHeaders, new com.aliyun.teautil.models.RuntimeOptions());
+        } catch (TeaException err) {
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        } catch (Exception _err) {
+            TeaException err = new TeaException(_err.getMessage(), _err);
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        }        
+    }
+}</code></pre></div><input type="radio" name="check-figure-ada-dxl-2cc" id="figure-ada-dxl-2cc-python-tab" /><label for="figure-ada-dxl-2cc-python-tab">Python</label><div class="codeblock-item"><pre id="codeblock-vzm-lkl-9y3" outputclass="language-python" data-tag="codeblock" code-type="xCode" class="pre codeblock language-python"><code># -*- coding: utf-8 -*-
+# This file is auto-generated, don't edit it. Thanks.
+import os
+import sys
+import json
+
+from typing import List
+
+from alibabacloud_dingtalk.doc_1_0.client import Client as dingtalkdoc_1_0Client
+from alibabacloud_tea_openapi import models as open_api_models
+from alibabacloud_dingtalk.doc_1_0 import models as dingtalkdoc__1__0_models
+from alibabacloud_tea_util import models as util_models
+from alibabacloud_tea_util.client import Client as UtilClient
+
+
+class Sample:
+    def __init__(self):
+        pass
+
+    @staticmethod
+    def create_client() -&gt; dingtalkdoc_1_0Client:
+        """
+        使用 Token 初始化账号Client
+        @return: Client
+        @throws Exception
+        """
+        config = open_api_models.Config()
+        config.protocol = 'https'
+        config.region_id = 'central'
+        return dingtalkdoc_1_0Client(config)
+
+    @staticmethod
+    def main(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        create_float_image_headers = dingtalkdoc__1__0_models.CreateFloatImageHeaders()
+        create_float_image_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        coordinate = dingtalkdoc__1__0_models.CreateFloatImageRequestCoordinate(
+            width=300,
+            height=300,
+            offset_x=8,
+            offset_y=8
+        )
+        anchor = dingtalkdoc__1__0_models.CreateFloatImageRequestAnchor(
+            row=1,
+            col=1
+        )
+        create_float_image_request = dingtalkdoc__1__0_models.CreateFloatImageRequest(
+            operator_id='ppgAQuxxxxx',
+            src='/core/api/resources/img/xxx',
+            anchor=anchor,
+            coordinate=coordinate
+        )
+        try:
+            client.create_float_image_with_options('e54Lqxxxxx', 'Sheet1', create_float_image_request, create_float_image_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+    @staticmethod
+    async def main_async(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        create_float_image_headers = dingtalkdoc__1__0_models.CreateFloatImageHeaders()
+        create_float_image_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        coordinate = dingtalkdoc__1__0_models.CreateFloatImageRequestCoordinate(
+            width=300,
+            height=300,
+            offset_x=8,
+            offset_y=8
+        )
+        anchor = dingtalkdoc__1__0_models.CreateFloatImageRequestAnchor(
+            row=1,
+            col=1
+        )
+        create_float_image_request = dingtalkdoc__1__0_models.CreateFloatImageRequest(
+            operator_id='ppgAQuxxxxx',
+            src='/core/api/resources/img/xxx',
+            anchor=anchor,
+            coordinate=coordinate
+        )
+        try:
+            await client.create_float_image_with_options_async('e54Lqxxxxx', 'Sheet1', create_float_image_request, create_float_image_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+
+if __name__ == '__main__':
+    Sample.main(sys.argv[1:])</code></pre></div><input type="radio" name="check-figure-ada-dxl-2cc" id="figure-ada-dxl-2cc-php-tab" /><label for="figure-ada-dxl-2cc-php-tab">PHP</label><div class="codeblock-item"><pre id="codeblock-rar-tzt-s4l" outputclass="language-php" data-tag="codeblock" code-type="xCode" class="pre codeblock language-php"><code>&lt;?php
+
+// This file is auto-generated, don't edit it. Thanks.
+namespace AlibabaCloud\SDK\Sample;
+
+use AlibabaCloud\SDK\Dingtalk\Vdoc_1_0\Dingtalk;
+use \Exception;
+use AlibabaCloud\Tea\Exception\TeaError;
+use AlibabaCloud\Tea\Utils\Utils;
+
+use Darabonba\OpenApi\Models\Config;
+use AlibabaCloud\SDK\Dingtalk\Vdoc_1_0\Models\CreateFloatImageHeaders;
+use AlibabaCloud\SDK\Dingtalk\Vdoc_1_0\Models\CreateFloatImageRequest\coordinate;
+use AlibabaCloud\SDK\Dingtalk\Vdoc_1_0\Models\CreateFloatImageRequest\anchor;
+use AlibabaCloud\SDK\Dingtalk\Vdoc_1_0\Models\CreateFloatImageRequest;
+use AlibabaCloud\Tea\Utils\Utils\RuntimeOptions;
+
+class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Dingtalk Client
+     */
+    public static function createClient(){
+        $config = new Config([]);
+        $config-&gt;protocol = "https";
+        $config-&gt;regionId = "central";
+        return new Dingtalk($config);
+    }
+
+    /**
+     * @param string[] $args
+     * @return void
+     */
+    public static function main($args){
+        $client = self::createClient();
+        $createFloatImageHeaders = new CreateFloatImageHeaders([]);
+        $createFloatImageHeaders-&gt;xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        $coordinate = new coordinate([
+            "width" =&gt; 300,
+            "height" =&gt; 300,
+            "offsetX" =&gt; 8,
+            "offsetY" =&gt; 8
+        ]);
+        $anchor = new anchor([
+            "row" =&gt; 1,
+            "col" =&gt; 1
+        ]);
+        $createFloatImageRequest = new CreateFloatImageRequest([
+            "operatorId" =&gt; "ppgAQuxxxxx",
+            "src" =&gt; "/core/api/resources/img/xxx",
+            "anchor" =&gt; $anchor,
+            "coordinate" =&gt; $coordinate
+        ]);
+        try {
+            $client-&gt;createFloatImageWithOptions("e54Lqxxxxx", "Sheet1", $createFloatImageRequest, $createFloatImageHeaders, new RuntimeOptions([]));
+        }
+        catch (Exception $err) {
+            if (!($err instanceof TeaError)) {
+                $err = new TeaError([], $err-&gt;getMessage(), $err-&gt;getCode(), $err);
+            }
+            if (!Utils::empty_($err-&gt;code) &amp;&amp; !Utils::empty_($err-&gt;message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+        }
+    }
+}
+$path = __DIR__ . \DIRECTORY_SEPARATOR . '..' . \DIRECTORY_SEPARATOR . 'vendor' . \DIRECTORY_SEPARATOR . 'autoload.php';
+if (file_exists($path)) {
+    require_once $path;
+}
+Sample::main(array_slice($argv, 1));</code></pre></div><input type="radio" name="check-figure-ada-dxl-2cc" id="figure-ada-dxl-2cc-go-tab" /><label for="figure-ada-dxl-2cc-go-tab">Go</label><div class="codeblock-item"><pre id="codeblock-w0y-8vh-eh8" outputclass="language-go" data-tag="codeblock" code-type="xCode" class="pre codeblock language-go"><code>package main
+
+import (
+  "encoding/json"
+  "strings"
+  "fmt"
+  "os"
+  util  "github.com/alibabacloud-go/tea-utils/v2/service"
+  dingtalkdoc_1_0  "github.com/alibabacloud-go/dingtalk/doc_1_0"
+  openapi  "github.com/alibabacloud-go/darabonba-openapi/v2/client"
+  "github.com/alibabacloud-go/tea/tea"
+)
+
+
+// Description:
+// 
+// 使用 Token 初始化账号Client
+// 
+// @return Client
+// 
+// @throws Exception
+func CreateClient () (_result *dingtalkdoc_1_0.Client, _err error) {
+  config := &amp;openapi.Config{}
+  config.Protocol = tea.String("https")
+  config.RegionId = tea.String("central")
+  _result = &amp;dingtalkdoc_1_0.Client{}
+  _result, _err = dingtalkdoc_1_0.NewClient(config)
+  return _result, _err
+}
+
+func _main (args []*string) (_err error) {
+  client, _err := CreateClient()
+  if _err != nil {
+    return _err
+  }
+
+  createFloatImageHeaders := &amp;dingtalkdoc_1_0.CreateFloatImageHeaders{}
+  createFloatImageHeaders.XAcsDingtalkAccessToken = tea.String("&lt;your access token&gt;")
+  coordinate := &amp;dingtalkdoc_1_0.CreateFloatImageRequestCoordinate{
+    Width: tea.Float64(300),
+    Height: tea.Float64(300),
+    OffsetX: tea.Float64(8),
+    OffsetY: tea.Float64(8),
+  }
+  anchor := &amp;dingtalkdoc_1_0.CreateFloatImageRequestAnchor{
+    Row: tea.Int32(1),
+    Col: tea.Int32(1),
+  }
+  createFloatImageRequest := &amp;dingtalkdoc_1_0.CreateFloatImageRequest{
+    OperatorId: tea.String("ppgAQuxxxxx"),
+    Src: tea.String("/core/api/resources/img/xxx"),
+    Anchor: anchor,
+    Coordinate: coordinate,
+  }
+  tryErr := func()(_e error) {
+    defer func() {
+      if r := tea.Recover(recover()); r != nil {
+        _e = r
+      }
+    }()
+    _, _err = client.CreateFloatImageWithOptions(tea.String("e54Lqxxxxx"), tea.String("Sheet1"), createFloatImageRequest, createFloatImageHeaders, &amp;util.RuntimeOptions{})
+    if _err != nil {
+      return _err
+    }
+
+    return nil
+  }()
+
+  if tryErr != nil {
+    var err = &amp;tea.SDKError{}
+    if _t, ok := tryErr.(*tea.SDKError); ok {
+      err = _t
+    } else {
+      err.Message = tea.String(tryErr.Error())
+    }
+    if !tea.BoolValue(util.Empty(err.Code)) &amp;&amp; !tea.BoolValue(util.Empty(err.Message)) {
+      // err 中含有 code 和 message 属性，可帮助开发定位问题
+    }
+
+  }
+  return _err
+}
+
+
+func main() {
+  err := _main(tea.StringSlice(os.Args[1:]))
+  if err != nil {
+    panic(err)
+  }
+}</code></pre></div><input type="radio" name="check-figure-ada-dxl-2cc" id="figure-ada-dxl-2cc-nodejs-tab" /><label for="figure-ada-dxl-2cc-nodejs-tab">Node.js</label><div class="codeblock-item"><pre id="codeblock-esj-ycn-xg8" outputclass="language-nodejs" data-tag="codeblock" code-type="xCode" class="pre codeblock language-nodejs"><code>'use strict';
+// This file is auto-generated, don't edit it
+const Util = require('@alicloud/tea-util');
+const dingtalkdoc_1_0 = require('@alicloud/dingtalk/doc_1_0');
+const OpenApi = require('@alicloud/openapi-client');
+const Tea = require('@alicloud/tea-typescript');
+
+class Client {
+
+  /**
+   * 使用 Token 初始化账号Client
+   * @return Client
+   * @throws Exception
+   */
+  static createClient() {
+    let config = new OpenApi.Config({ });
+    config.protocol = 'https';
+    config.regionId = 'central';
+    return new dingtalkdoc_1_0.default(config);
+  }
+
+  static async main(args) {
+    let client = Client.createClient();
+    let createFloatImageHeaders = new dingtalkdoc_1_0.CreateFloatImageHeaders({ });
+    createFloatImageHeaders.xAcsDingtalkAccessToken = '&lt;your access token&gt;';
+    let coordinate = new dingtalkdoc_1_0.CreateFloatImageRequestCoordinate({
+      width: 300,
+      height: 300,
+      offsetX: 8,
+      offsetY: 8,
+    });
+    let anchor = new dingtalkdoc_1_0.CreateFloatImageRequestAnchor({
+      row: 1,
+      col: 1,
+    });
+    let createFloatImageRequest = new dingtalkdoc_1_0.CreateFloatImageRequest({
+      operatorId: 'ppgAQuxxxxx',
+      src: '/core/api/resources/img/xxx',
+      anchor: anchor,
+      coordinate: coordinate,
+    });
+    try {
+      await client.createFloatImageWithOptions('e54Lqxxxxx', 'Sheet1', createFloatImageRequest, createFloatImageHeaders, new Util.RuntimeOptions({ }));
+    } catch (err) {
+      if (!Util.default.empty(err.code) &amp;&amp; !Util.default.empty(err.message)) {
+        // err 中含有 code 和 message 属性，可帮助开发定位问题
+      }
+
+    }    
+  }
+
+}
+
+exports.Client = Client;
+Client.main(process.argv.slice(2));</code></pre></div><input type="radio" name="check-figure-ada-dxl-2cc" id="figure-ada-dxl-2cc-csharp-tab" /><label for="figure-ada-dxl-2cc-csharp-tab">C#</label><div class="codeblock-item"><pre id="codeblock-ow8-oko-hzn" outputclass="language-csharp" data-tag="codeblock" code-type="xCode" class="pre codeblock language-csharp"><code>using Newtonsoft.Json;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
+
+using Tea;
+using Tea.Utils;
+
+
+namespace AlibabaCloud.SDK.Sample
+{
+    public class Sample 
+    {
+
+        /// &lt;term&gt;&lt;b&gt;Description:&lt;/b&gt;&lt;/term&gt;
+        /// &lt;description&gt;
+        /// &lt;para&gt;使用 Token 初始化账号Client&lt;/para&gt;
+        /// &lt;/description&gt;
+        /// 
+        /// &lt;returns&gt;
+        /// Client
+        /// &lt;/returns&gt;
+        /// 
+        /// &lt;term&gt;&lt;b&gt;Exception:&lt;/b&gt;&lt;/term&gt;
+        /// Exception
+        public static AlibabaCloud.SDK.Dingtalkdoc_1_0.Client CreateClient()
+        {
+            AlibabaCloud.OpenApiClient.Models.Config config = new AlibabaCloud.OpenApiClient.Models.Config();
+            config.Protocol = "https";
+            config.RegionId = "central";
+            return new AlibabaCloud.SDK.Dingtalkdoc_1_0.Client(config);
+        }
+
+        public static void Main(string[] args)
+        {
+            AlibabaCloud.SDK.Dingtalkdoc_1_0.Client client = CreateClient();
+            AlibabaCloud.SDK.Dingtalkdoc_1_0.Models.CreateFloatImageHeaders createFloatImageHeaders = new AlibabaCloud.SDK.Dingtalkdoc_1_0.Models.CreateFloatImageHeaders();
+            createFloatImageHeaders.XAcsDingtalkAccessToken = "&lt;your access token&gt;";
+            AlibabaCloud.SDK.Dingtalkdoc_1_0.Models.CreateFloatImageRequest.CreateFloatImageRequestCoordinate coordinate = new AlibabaCloud.SDK.Dingtalkdoc_1_0.Models.CreateFloatImageRequest.CreateFloatImageRequestCoordinate
+            {
+                Width = 300,
+                Height = 300,
+                OffsetX = 8,
+                OffsetY = 8,
+            };
+            AlibabaCloud.SDK.Dingtalkdoc_1_0.Models.CreateFloatImageRequest.CreateFloatImageRequestAnchor anchor = new AlibabaCloud.SDK.Dingtalkdoc_1_0.Models.CreateFloatImageRequest.CreateFloatImageRequestAnchor
+            {
+                Row = 1,
+                Col = 1,
+            };
+            AlibabaCloud.SDK.Dingtalkdoc_1_0.Models.CreateFloatImageRequest createFloatImageRequest = new AlibabaCloud.SDK.Dingtalkdoc_1_0.Models.CreateFloatImageRequest
+            {
+                OperatorId = "ppgAQuxxxxx",
+                Src = "/core/api/resources/img/xxx",
+                Anchor = anchor,
+                Coordinate = coordinate,
+            };
+            try
+            {
+                client.CreateFloatImageWithOptions("e54Lqxxxxx", "Sheet1", createFloatImageRequest, createFloatImageHeaders, new AlibabaCloud.TeaUtil.Models.RuntimeOptions());
+            }
+            catch (TeaException err)
+            {
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+            catch (Exception _err)
+            {
+                TeaException err = new TeaException(new Dictionary&lt;string, object&gt;
+                {
+                    { "message", _err.Message }
+                });
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+        }
+
+
+    }
+}</code></pre></div></div></section></section><section id="section-response-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-response-1" data-tag="h2" class="h2">响应</h2><section id="section-response-parameter" class="section">
+                <h3 data-tag="h3" id="h2-lzj-sfg-jsi" class="h3 title">响应体</h3>
+                <table class="table">
+                    <colgroup colnum="1" colname="col1" colwidth="3*" style="width:30%"></colgroup>
+                    <colgroup colnum="2" colname="col2" colwidth="2*" style="width:20%"></colgroup>
+                    <colgroup colnum="3" colname="col3" colwidth="5*" style="width:50%"></colgroup>
+                    <thead class="thead">
+                    <tr>
+                        <th><p>名称</p></th>
+                        <th><p>类型</p></th>
+                        <th><p>描述</p></th>
+                    </tr>
+                    </thead>
+                    <tbody class="tbody">
+    <tr outputclass="row row-level-1 has-child" class="has-child row row-level-1 has-child row-level-1 row">
+        <td><span class="icms-tree-table-trigger" type="checkbox"></span><span class="icms-tree-table-trigger" type="checkbox"></span><p>result</p></td>
+        <td><p>Object</p></td>
+        <td><p>浮动图片信息。</p>
+</td>
+    </tr>
+    <tr outputclass="row row-level-1-1" class="row-level-1-1 row row row-level-1-1">
+        <td><p>id</p></td>
+        <td><p>String</p></td>
+        <td><p>浮动图片的 id。</p>
+</td>
+    </tr>
+    <tr outputclass="row row-level-1-2" class="row-level-1-2 row row row-level-1-2">
+        <td><p>src</p></td>
+        <td><p>String</p></td>
+        <td><p>浮动图片的资源地址。</p>
+</td>
+    </tr>
+    <tr outputclass="row row-level-1-3 has-child" class="has-child row-level-1-3 row row-level-1-3 has-child row">
+        <td><span class="icms-tree-table-trigger" type="checkbox"></span><span class="icms-tree-table-trigger" type="checkbox"></span><p>anchor</p></td>
+        <td><p>Object</p></td>
+        <td><p>锚点位置，指定图片固定在哪个单元格。</p>
+</td>
+    </tr>
+    <tr outputclass="row row-level-1-3-1" class="row-level-1-3-1 row row-level-1-3-1 row">
+        <td><p>row</p></td>
+        <td><p>Integer</p></td>
+        <td><p>相对第几行定位，游标从 0 开始。</p>
+</td>
+    </tr>
+    <tr outputclass="row row-level-1-3-2" class="row row-level-1-3-2 row row-level-1-3-2">
+        <td><p>col</p></td>
+        <td><p>Integer</p></td>
+        <td><p>相对第几列定位，游标从 0 开始。</p>
+</td>
+    </tr>
+    <tr outputclass="row row-level-1-4 has-child" class="row-level-1-4 has-child row row-level-1-4 has-child row">
+        <td><span class="icms-tree-table-trigger" type="checkbox"></span><span class="icms-tree-table-trigger" type="checkbox"></span><p>coordinate</p></td>
+        <td><p>Object</p></td>
+        <td><p>图片尺寸与相对锚点单元格的偏移量。</p>
+</td>
+    </tr>
+    <tr outputclass="row row-level-1-4-1" class="row row-level-1-4-1 row row-level-1-4-1">
+        <td><p>width</p></td>
+        <td><p>double</p></td>
+        <td><p>浮动图片的宽度。</p>
+</td>
+    </tr>
+    <tr outputclass="row row-level-1-4-2" class="row row-level-1-4-2 row-level-1-4-2 row">
+        <td><p>height</p></td>
+        <td><p>double</p></td>
+        <td><p>浮动图片的高度。</p>
+</td>
+    </tr>
+    <tr outputclass="row row-level-1-4-3" class="row row-level-1-4-3 row-level-1-4-3 row">
+        <td><p>offsetX</p></td>
+        <td><p>double</p></td>
+        <td><p>相对锚点单元格左上角的水平偏移量，单位：像素。</p>
+</td>
+    </tr>
+    <tr outputclass="row row-level-1-4-4" class="row row-level-1-4-4 row-level-1-4-4 row">
+        <td><p>offsetY</p></td>
+        <td><p>double</p></td>
+        <td><p>相对锚点单元格左上角的垂直偏移量，单位：像素。</p>
+</td>
+    </tr>
+    <tr outputclass="row row-level-2" class="row row-level-2 row-level-2 row">
+        <td><p>success</p></td>
+        <td><p>Boolean</p></td>
+        <td><p>成功状态。</p>
+</td>
+    </tr>
+                    </tbody>
+                </table>
+            </section><section id="section-response-body-example" class="section"><h3 id="h3-response-body-example" data-tag="h3" class="h3">响应体示例</h3><pre outputclass="language-json" data-tag="codeblock" code-type="xCode" class="pre codeblock language-json"><code>HTTP/1.1 200 OK
+Content-Type:application/json
+
+{
+  "result" : {
+    "id" : "xxx",
+    "src" : "/core/api/resources/img/xxx",
+    "anchor" : {
+      "row" : 1,
+      "col" : 1
+    },
+    "coordinate" : {
+      "width" : 300,
+      "height" : 300,
+      "offsetX" : 1,
+      "offsetY" : 1
+    }
+  },
+  "success" : true
+}</code></pre></section><section id="section-error-code-1" class="section"><h3 id="h3-error-code-1" data-tag="h3" class="h3">错误码</h3><p data-tag="p" id="p-error-code-global-guide" class="p">若调用该接口报错，可根据错误信息在<a id="a-error-code-global-guide" href="https://open.dingtalk.com/document/development/server-api-error-codes-1">全局错误码</a>文档中查找解决方案。</p><table class="table"> 
+  <colgroup colnum="1" colname="col1" colwidth="2*" style="width:20%"></colgroup> 
+  <colgroup colnum="2" colname="col2" colwidth="2.5*" style="width:25%"></colgroup> 
+  <colgroup colnum="3" colname="col3" colwidth="2.5*" style="width:25%"></colgroup> 
+  <colgroup colnum="4" colname="col4" colwidth="3*" style="width:30%"></colgroup> 
+  <thead class="thead"> 
+   <tr> 
+    <th><p>HttpCode</p></th> 
+    <th><p>错误码</p></th> 
+    <th><p>错误信息</p></th> 
+    <th><p>说明</p></th> 
+   </tr> 
+  </thead> 
+  <tbody class="tbody"> 
+   <tr> 
+    <td><p>400</p></td> 
+    <td><p>invalidRequest.inputArgs.invalid</p></td> 
+    <td><p>%s</p></td> 
+    <td><p>请求参数不合法，请查看错误信息。</p></td> 
+   </tr> 
+   <tr> 
+    <td><p>400</p></td> 
+    <td><p>invalidRequest.inputArgs.workbookIdIllegal</p></td> 
+    <td><p>The workbookId is illegal.</p></td> 
+    <td><p>workbookId不合法。</p></td> 
+   </tr> 
+   <tr> 
+    <td><p>400</p></td> 
+    <td><p>invalidRequest.resource.notWorkbook</p></td> 
+    <td><p>%s</p></td> 
+    <td><p>不支持的文档类型，请检查workbookId。</p></td> 
+   </tr> 
+   <tr> 
+    <td><p>403</p></td> 
+    <td><p>forbidden.accessDenied</p></td> 
+    <td><p>The operator has no permission.</p></td> 
+    <td><p>当前用户无此操作权限。</p></td> 
+   </tr> 
+   <tr> 
+    <td><p>403</p></td> 
+    <td><p>forbidden.acrossOrg</p></td> 
+    <td><p>%s</p></td> 
+    <td><p>请求操作不合法，请查看错误信息。</p></td> 
+   </tr> 
+   <tr> 
+    <td><p>403</p></td> 
+    <td><p>forbidden.document.sizeOverLimit</p></td> 
+    <td><p>The document size is over limit and the server is unable to complete your request. Retry is unlikely to work unless the document size is decreased.</p></td> 
+    <td><p>表格内容过大，请尝试缩减表格内容。</p></td> 
+   </tr> 
+   <tr> 
+    <td><p>404</p></td> 
+    <td><p>invalidRequest.resource.notFound</p></td> 
+    <td><p>%s</p></td> 
+    <td><p>请求失败，无法找到要访问的资源。</p></td> 
+   </tr> 
+   <tr> 
+    <td><p>500</p></td> 
+    <td><p>internalError</p></td> 
+    <td><p>The server encountered an internal error and was unable to complete your request. Please try again later.</p></td> 
+    <td><p>服务内部错误，请稍后再试。</p></td> 
+   </tr> 
+   <tr> 
+    <td><p>500</p></td> 
+    <td><p>serviceBusy</p></td> 
+    <td><p>The server is busy and unable to complete your request. Please try again later.</p></td> 
+    <td><p>服务繁忙，请稍后重试。</p></td> 
+   </tr> 
+  </tbody> 
+ </table></section></section></div>
+    </main>
+
+
+
+</body></html>

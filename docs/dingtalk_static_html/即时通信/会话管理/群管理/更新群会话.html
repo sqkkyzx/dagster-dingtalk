@@ -1,0 +1,820 @@
+<!DOCTYPE html><html lang="zh-CN"><head>
+    <meta charset="utf8" / />
+    <title>更新群会话</title>
+<meta name="gmtModify" content="2026-05-10 00:49:58" / /><meta name="gmtModify" content="2026-06-02 19:00:12" / /></head>
+<body data-tag="topic" id="doc-api-dingtalk-UpdateGroup" class="topic">
+    <main id="doc-api-dingtalk-UpdateGroup">
+        <h1 data-tag="title" id="h1-xf8-ops-dvq" class="title">更新群会话</h1>
+        <p data-tag="shortdesc" class="shortdesc">调用本接口，通过群chatid更新指定群会话的基本信息及成员。可用于修改群相关信息，包括群名称、群主、成员列表、群头像等，适用于群管理员修改群设置、调整群成员等场景。</p>
+        <div data-tag="conbody" outputclass="icms-api-reference" class="icms-api-reference conbody"><section id="section-request-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-request-1" data-tag="h2" class="h2">请求</h2><section id="section-request-basic-info" class="section"><h3 id="heading-request-basic-info" data-tag="h3" class="h3">基本信息</h3><table tablewidth="648" tablecolswidth="216 432" autofit="false" class="table"><colgroup colwidth="1*" style="width:33.33%"></colgroup><colgroup colwidth="2*" style="width:66.67%"></colgroup><tbody class="tbody"><tr><td rowspan="1" style="background-color:#e5e5e5" colspan="1"><p>字段</p></td><td rowspan="1" style="background-color:#e5e5e5" colspan="1"><p>值</p></td></tr><tr><td rowspan="1" colspan="1"><p>HTTP URL</p></td><td rowspan="1" colspan="1"><p>https://api.dingtalk.com/v1.0/im/group/update</p></td></tr><tr><td rowspan="1" colspan="1"><p>HTTP Method</p></td><td rowspan="1" colspan="1"><p>POST</p></td></tr><tr><td rowspan="1" colspan="1"><p>支持的应用类型</p></td><td rowspan="1" colspan="1"><p><span data-tag="ph" id="ph-request-basic-app-type-apptype-0" class="ph ph-app-type" data-ph-raw-text="appType-企业内部应用">appType-企业内部应用</span></p></td></tr><tr><td rowspan="1" colspan="1"><p>权限要求</p></td><td rowspan="1" colspan="1"><p><span data-tag="ph" id="ph-request-basic-permission-permission-qyapi-chat-manage-0" class="ph-permission ph" data-ph-raw-text="permission-qyapi_chat_manage-钉钉群基础信息管理权限" data-permission-id="permission-qyapi_chat_manage" data-permission-code="qyapi_chat_manage" data-permission-detail-api="/document/api/permission/detail" data-permission-query-param="code">permission-qyapi_chat_manage-钉钉群基础信息管理权限</span></p></td></tr></tbody></table></section><section id="section-request-header-parameter" class="section">
+                    <h3 data-tag="h3" id="h2-tp2-my7-dwi" class="h3 title">请求头</h3>
+                    <table class="table">
+                        <colgroup colnum="1" colname="col1" colwidth="3*" style="width:30%"></colgroup>
+                        <colgroup colnum="2" colname="col2" colwidth="1.5*" style="width:15%"></colgroup>
+                        <colgroup colnum="3" colname="col3" colwidth="1.5*" style="width:15%"></colgroup>
+                        <colgroup colnum="4" colname="col4" colwidth="4*" style="width:40%"></colgroup>
+                        <thead class="thead">
+                        <tr>
+                            <th><p>名称</p></th>
+                            <th><p>类型</p></th>
+                            <th><p>是否必填</p></th>
+                            <th><p>描述</p></th>
+                        </tr>
+                        </thead>
+                        <tbody class="tbody">
+                            <tr>
+                                <td><p>x-acs-dingtalk-access-token</p></td>
+                                <td><p>String</p></td>
+                                <td><p>是</p></td>
+                                <td><p>调用该接口的访问凭证，可通过<a href="https://open.dingtalk.com/document/development/obtain-the-access-token-of-an-internal-app">获取企业内部应用的accessToken
+</a>接口获取。</p>
+</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section><section id="section-request-body-parameter" class="section">
+                <h3 data-tag="h3" id="h2-bnc-anw-rns" class="h3 title">请求体</h3>
+                <table class="table">
+                    <colgroup colnum="1" colname="col1" colwidth="3*" style="width:30%"></colgroup>
+                    <colgroup colnum="2" colname="col2" colwidth="1.5*" style="width:15%"></colgroup>
+                    <colgroup colnum="3" colname="col3" colwidth="1.5*" style="width:15%"></colgroup>
+                    <colgroup colnum="4" colname="col4" colwidth="4*" style="width:40%"></colgroup>
+                    <thead class="thead">
+                        <tr>
+                            <th><p>名称</p></th>
+                            <th><p>类型</p></th>
+                            <th><p>是否必填</p></th>
+                            <th><p>描述</p></th>
+                        </tr>
+                    </thead>
+                    <tbody class="tbody">
+    <tr outputclass="row row-level-1" class="row row-level-1 row-level-1 row">
+        <td><p>chatid</p></td>
+        <td><p>String</p></td>
+            <td><p>是</p></td>
+        <td><p>群会话ID，可通过调用<a href="https://open.dingtalk.com/document/development/create-common-group-new-version-v2">创建群会话</a>接口获取的chatid参数值。</p>
+<div type="note" class="note note-note"><div class="note-icon-wrapper"><i class="icon-note note note"></i></div><div class="noteContentSpan"><p data-tag="p" class="p">
+</p><p>不支持通过调用前端JSAPI获取的chatid。</p>
+<p></p></div></div>
+</td>
+    </tr>
+    <tr outputclass="row row-level-2" class="row row-level-2 row-level-2 row">
+        <td><p>name</p></td>
+        <td><p>String</p></td>
+            <td><p>否</p></td>
+        <td><p>群名称，长度限制为1~20个字符。</p>
+</td>
+    </tr>
+    <tr outputclass="row row-level-3" class="row row-level-3 row row-level-3">
+        <td><p>owner</p></td>
+        <td><p>String</p></td>
+            <td><p>否</p></td>
+        <td><p>群主的userId，可通过<a href="https://open.dingtalk.com/document/development/query-users-by-phone-number">根据手机号查询用户</a>接口获取userId。</p>
+<div type="note" class="note note-note"><div class="note-icon-wrapper"><i class="icon-note note note"></i></div><div class="noteContentSpan"><p data-tag="p" class="p">
+</p><p>该员工必须为会话useridlist的成员之一。</p>
+<p></p></div></div>
+</td>
+    </tr>
+    <tr outputclass="row row-level-4" class="row-level-4 row row row-level-4">
+        <td><p>ownerType</p></td>
+        <td><p>String</p></td>
+            <td><p>否</p></td>
+        <td><p>群主类型。</p>
+<ul>
+<li><b>emp</b>：企业员工</li>
+<li><b>ext</b>：外部联系人</li>
+</ul>
+</td>
+    </tr>
+    <tr outputclass="row row-level-5" class="row-level-5 row row-level-5 row">
+        <td><p>add_useridlist</p></td>
+        <td><p>Array of String</p></td>
+            <td><p>否</p></td>
+        <td><p>userId列表。</p>
+</td>
+    </tr>
+    <tr outputclass="row row-level-6" class="row-level-6 row row row-level-6">
+        <td><p>del_useridlist</p></td>
+        <td><p>Array of String</p></td>
+            <td><p>否</p></td>
+        <td><p>userId列表。</p>
+</td>
+    </tr>
+    <tr outputclass="row row-level-7" class="row-level-7 row row row-level-7">
+        <td><p>add_extidlist</p></td>
+        <td><p>Array of String</p></td>
+            <td><p>否</p></td>
+        <td><p>unionid列表，可通过<a href="https://open.dingtalk.com/document/development/query-users-by-phone-number">查询用户详情</a>接口获取。</p>
+</td>
+    </tr>
+    <tr outputclass="row row-level-8" class="row-level-8 row row row-level-8">
+        <td><p>del_extidlist</p></td>
+        <td><p>Array of String</p></td>
+            <td><p>否</p></td>
+        <td><p>unionId列表，可通过<a href="https://open.dingtalk.com/document/development/query-users-by-phone-number">查询用户详情</a>接口获取。</p>
+</td>
+    </tr>
+    <tr outputclass="row row-level-9" class="row-level-9 row row row-level-9">
+        <td><p>icon</p></td>
+        <td><p>String</p></td>
+            <td><p>否</p></td>
+        <td><p>群头像的mediaId，可通过<a href="https://open.dingtalk.com/document/development/upload-media-files">上传媒体文件</a>接口获取media_id参数值。</p>
+</td>
+    </tr>
+    <tr outputclass="row row-level-10 has-child" class="has-child row row-level-10 has-child row-level-10 row">
+        <td><span class="icms-tree-table-trigger" type="checkbox"></span><span class="icms-tree-table-trigger" type="checkbox"></span><p>managementOptions</p></td>
+        <td><p>Object</p></td>
+            <td><p>否</p></td>
+        <td><p>群属性。</p>
+</td>
+    </tr>
+    <tr outputclass="row row-level-10-1" class="row row-level-10-1 row row-level-10-1">
+        <td><p>mentionAllAuthority</p></td>
+        <td><p>Integer</p></td>
+            <td><p>否</p></td>
+        <td><p>@all 使用范围。</p>
+<ul>
+<li><b>0</b>（默认）：所有人可使用</li>
+<li><b>1</b>：仅群主可@all</li>
+</ul>
+</td>
+    </tr>
+    <tr outputclass="row row-level-10-2" class="row-level-10-2 row row-level-10-2 row">
+        <td><p>showHistoryType</p></td>
+        <td><p>Integer</p></td>
+            <td><p>否</p></td>
+        <td><p>新成员是否可查看100条历史消息。</p>
+<ul>
+<li><b>1</b>：可查看</li>
+<li><b>0</b>：不可查看</li>
+</ul>
+<div type="note" class="note note-note"><div class="note-icon-wrapper"><i class="icon-note note note"></i></div><div class="noteContentSpan"><p data-tag="p" class="p">
+</p><p>如果不传值，代表不可查看。</p>
+<p></p></div></div>
+</td>
+    </tr>
+    <tr outputclass="row row-level-10-3" class="row-level-10-3 row row row-level-10-3">
+        <td><p>validationType</p></td>
+        <td><p>Integer</p></td>
+            <td><p>否</p></td>
+        <td><p>入群是否需要验证。</p>
+<ul>
+<li><b>0</b>（默认）：不验证</li>
+<li><b>1</b>：入群验证</li>
+</ul>
+</td>
+    </tr>
+    <tr outputclass="row row-level-10-4" class="row-level-10-4 row row-level-10-4 row">
+        <td><p>searchable</p></td>
+        <td><p>Integer</p></td>
+            <td><p>否</p></td>
+        <td><p>群是否可以被搜索。</p>
+<ul>
+<li>0（默认）：不可搜索</li>
+<li>1：可搜索</li>
+</ul>
+</td>
+    </tr>
+    <tr outputclass="row row-level-10-5" class="row-level-10-5 row row-level-10-5 row">
+        <td><p>chatBannedType</p></td>
+        <td><p>Integer</p></td>
+            <td><p>否</p></td>
+        <td><p>是否开启群禁言。</p>
+<ul>
+<li><b>0</b>（默认）：不禁言</li>
+<li><b>1</b>：全员禁言</li>
+</ul>
+</td>
+    </tr>
+    <tr outputclass="row row-level-10-6" class="row-level-10-6 row row-level-10-6 row">
+        <td><p>managementType</p></td>
+        <td><p>Integer</p></td>
+            <td><p>否</p></td>
+        <td><p>群管理类型。</p>
+<ul>
+<li><b>0</b>（默认）：所有人可管理</li>
+<li><b>1</b>：仅群主可管理</li>
+</ul>
+</td>
+    </tr>
+                    </tbody>
+                </table>
+            </section><section id="section-request-body-example" class="section"><h3 id="h3-request-body-example" data-tag="h3" class="h3">请求示例</h3><div id="figure-suh-tfg-d35" outputclass="tabbed-codeblock" data-tag="fig" class="tabbed-codeblock-box"><div class="tab-box"></div><input type="radio" name="check-figure-suh-tfg-d35" id="figure-suh-tfg-d35-HTTP-tab" checked="checked" /><label for="figure-suh-tfg-d35-HTTP-tab">HTTP</label><div class="codeblock-item"><pre id="codeblock-x5u-fxv-uuf" outputclass="language-HTTP" data-tag="codeblock" code-type="xCode" class="pre codeblock language-HTTP"><code>POST /v1.0/im/group/update HTTP/1.1
+Host:api.dingtalk.com
+x-acs-dingtalk-access-token:6d1bxxxx
+Content-Type:application/json
+
+{
+  "chatid" : "chatxxxx",
+  "name" : "全员群。",
+  "owner" : "04201724372xxxx",
+  "ownerType" : "emp",
+  "add_useridlist" : [ "userid1" ],
+  "del_useridlist" : [ "userid1" ],
+  "add_extidlist" : [ "unionId" ],
+  "del_extidlist" : [ "unionId" ],
+  "icon" : "@mediaId",
+  "managementOptions" : {
+    "mentionAllAuthority" : 0,
+    "showHistoryType" : 0,
+    "validationType" : 0,
+    "searchable" : 0,
+    "chatBannedType" : 0,
+    "managementType" : 0
+  }
+}</code></pre></div><input type="radio" name="check-figure-suh-tfg-d35" id="figure-suh-tfg-d35-java-tab" /><label for="figure-suh-tfg-d35-java-tab">Java</label><div class="codeblock-item"><pre id="codeblock-9vo-set-sat" outputclass="language-java" data-tag="codeblock" code-type="xCode" class="pre codeblock language-java"><code>package com.aliyun.sample;
+
+import com.aliyun.tea.*;
+
+public class Sample {
+
+    /**
+     * &lt;b&gt;description&lt;/b&gt; :
+     * &lt;p&gt;使用 Token 初始化账号Client&lt;/p&gt;
+     * @return Client
+     * 
+     * @throws Exception
+     */
+    public static com.aliyun.dingtalkim_1_0.Client createClient() throws Exception {
+        com.aliyun.teaopenapi.models.Config config = new com.aliyun.teaopenapi.models.Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        return new com.aliyun.dingtalkim_1_0.Client(config);
+    }
+
+    public static void main(String[] args_) throws Exception {
+        
+        com.aliyun.dingtalkim_1_0.Client client = Sample.createClient();
+        com.aliyun.dingtalkim_1_0.models.UpdateGroupHeaders updateGroupHeaders = new com.aliyun.dingtalkim_1_0.models.UpdateGroupHeaders();
+        updateGroupHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        com.aliyun.dingtalkim_1_0.models.UpdateGroupRequest.UpdateGroupRequestManagementOptions managementOptions = new com.aliyun.dingtalkim_1_0.models.UpdateGroupRequest.UpdateGroupRequestManagementOptions()
+                .setMentionAllAuthority(0)
+                .setShowHistoryType(0)
+                .setValidationType(0)
+                .setSearchable(0)
+                .setChatBannedType(0)
+                .setManagementType(0);
+        com.aliyun.dingtalkim_1_0.models.UpdateGroupRequest updateGroupRequest = new com.aliyun.dingtalkim_1_0.models.UpdateGroupRequest()
+                .setChatid("chatxxxx")
+                .setName("全员群。")
+                .setOwner("04201724372xxxx")
+                .setOwnerType("emp")
+                .setAddUseridlist(java.util.Arrays.asList(
+                    "userid1"
+                ))
+                .setDelUseridlist(java.util.Arrays.asList(
+                    "userid1"
+                ))
+                .setAddExtidlist(java.util.Arrays.asList(
+                    "unionId"
+                ))
+                .setDelExtidlist(java.util.Arrays.asList(
+                    "unionId"
+                ))
+                .setIcon("@mediaId")
+                .setManagementOptions(managementOptions);
+        try {
+            client.updateGroupWithOptions(updateGroupRequest, updateGroupHeaders, new com.aliyun.teautil.models.RuntimeOptions());
+        } catch (TeaException err) {
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        } catch (Exception _err) {
+            TeaException err = new TeaException(_err.getMessage(), _err);
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        }        
+    }
+}</code></pre></div><input type="radio" name="check-figure-suh-tfg-d35" id="figure-suh-tfg-d35-python-tab" /><label for="figure-suh-tfg-d35-python-tab">Python</label><div class="codeblock-item"><pre id="codeblock-bah-ya5-vn7" outputclass="language-python" data-tag="codeblock" code-type="xCode" class="pre codeblock language-python"><code># -*- coding: utf-8 -*-
+# This file is auto-generated, don't edit it. Thanks.
+import os
+import sys
+import json
+
+from typing import List
+
+from alibabacloud_dingtalk.im_1_0.client import Client as dingtalkim_1_0Client
+from alibabacloud_tea_openapi import models as open_api_models
+from alibabacloud_dingtalk.im_1_0 import models as dingtalkim__1__0_models
+from alibabacloud_tea_util import models as util_models
+from alibabacloud_tea_util.client import Client as UtilClient
+
+
+class Sample:
+    def __init__(self):
+        pass
+
+    @staticmethod
+    def create_client() -&gt; dingtalkim_1_0Client:
+        """
+        使用 Token 初始化账号Client
+        @return: Client
+        @throws Exception
+        """
+        config = open_api_models.Config()
+        config.protocol = 'https'
+        config.region_id = 'central'
+        return dingtalkim_1_0Client(config)
+
+    @staticmethod
+    def main(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        update_group_headers = dingtalkim__1__0_models.UpdateGroupHeaders()
+        update_group_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        management_options = dingtalkim__1__0_models.UpdateGroupRequestManagementOptions(
+            mention_all_authority=0,
+            show_history_type=0,
+            validation_type=0,
+            searchable=0,
+            chat_banned_type=0,
+            management_type=0
+        )
+        update_group_request = dingtalkim__1__0_models.UpdateGroupRequest(
+            chatid='chatxxxx',
+            name='全员群。',
+            owner='04201724372xxxx',
+            owner_type='emp',
+            add_useridlist=[
+                'userid1'
+            ],
+            del_useridlist=[
+                'userid1'
+            ],
+            add_extidlist=[
+                'unionId'
+            ],
+            del_extidlist=[
+                'unionId'
+            ],
+            icon='@mediaId',
+            management_options=management_options
+        )
+        try:
+            client.update_group_with_options(update_group_request, update_group_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+    @staticmethod
+    async def main_async(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        update_group_headers = dingtalkim__1__0_models.UpdateGroupHeaders()
+        update_group_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        management_options = dingtalkim__1__0_models.UpdateGroupRequestManagementOptions(
+            mention_all_authority=0,
+            show_history_type=0,
+            validation_type=0,
+            searchable=0,
+            chat_banned_type=0,
+            management_type=0
+        )
+        update_group_request = dingtalkim__1__0_models.UpdateGroupRequest(
+            chatid='chatxxxx',
+            name='全员群。',
+            owner='04201724372xxxx',
+            owner_type='emp',
+            add_useridlist=[
+                'userid1'
+            ],
+            del_useridlist=[
+                'userid1'
+            ],
+            add_extidlist=[
+                'unionId'
+            ],
+            del_extidlist=[
+                'unionId'
+            ],
+            icon='@mediaId',
+            management_options=management_options
+        )
+        try:
+            await client.update_group_with_options_async(update_group_request, update_group_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+
+if __name__ == '__main__':
+    Sample.main(sys.argv[1:])</code></pre></div><input type="radio" name="check-figure-suh-tfg-d35" id="figure-suh-tfg-d35-php-tab" /><label for="figure-suh-tfg-d35-php-tab">PHP</label><div class="codeblock-item"><pre id="codeblock-jh3-wrx-3e8" outputclass="language-php" data-tag="codeblock" code-type="xCode" class="pre codeblock language-php"><code>&lt;?php
+
+// This file is auto-generated, don't edit it. Thanks.
+namespace AlibabaCloud\SDK\Sample;
+
+use AlibabaCloud\SDK\Dingtalk\Vim_1_0\Dingtalk;
+use \Exception;
+use AlibabaCloud\Tea\Exception\TeaError;
+use AlibabaCloud\Tea\Utils\Utils;
+
+use Darabonba\OpenApi\Models\Config;
+use AlibabaCloud\SDK\Dingtalk\Vim_1_0\Models\UpdateGroupHeaders;
+use AlibabaCloud\SDK\Dingtalk\Vim_1_0\Models\UpdateGroupRequest\managementOptions;
+use AlibabaCloud\SDK\Dingtalk\Vim_1_0\Models\UpdateGroupRequest;
+use AlibabaCloud\Tea\Utils\Utils\RuntimeOptions;
+
+class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Dingtalk Client
+     */
+    public static function createClient(){
+        $config = new Config([]);
+        $config-&gt;protocol = "https";
+        $config-&gt;regionId = "central";
+        return new Dingtalk($config);
+    }
+
+    /**
+     * @param string[] $args
+     * @return void
+     */
+    public static function main($args){
+        $client = self::createClient();
+        $updateGroupHeaders = new UpdateGroupHeaders([]);
+        $updateGroupHeaders-&gt;xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        $managementOptions = new managementOptions([
+            "mentionAllAuthority" =&gt; 0,
+            "showHistoryType" =&gt; 0,
+            "validationType" =&gt; 0,
+            "searchable" =&gt; 0,
+            "chatBannedType" =&gt; 0,
+            "managementType" =&gt; 0
+        ]);
+        $updateGroupRequest = new UpdateGroupRequest([
+            "chatid" =&gt; "chatxxxx",
+            "name" =&gt; "全员群。",
+            "owner" =&gt; "04201724372xxxx",
+            "ownerType" =&gt; "emp",
+            "addUseridlist" =&gt; [
+                "userid1"
+            ],
+            "delUseridlist" =&gt; [
+                "userid1"
+            ],
+            "addExtidlist" =&gt; [
+                "unionId"
+            ],
+            "delExtidlist" =&gt; [
+                "unionId"
+            ],
+            "icon" =&gt; "@mediaId",
+            "managementOptions" =&gt; $managementOptions
+        ]);
+        try {
+            $client-&gt;updateGroupWithOptions($updateGroupRequest, $updateGroupHeaders, new RuntimeOptions([]));
+        }
+        catch (Exception $err) {
+            if (!($err instanceof TeaError)) {
+                $err = new TeaError([], $err-&gt;getMessage(), $err-&gt;getCode(), $err);
+            }
+            if (!Utils::empty_($err-&gt;code) &amp;&amp; !Utils::empty_($err-&gt;message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+        }
+    }
+}
+$path = __DIR__ . \DIRECTORY_SEPARATOR . '..' . \DIRECTORY_SEPARATOR . 'vendor' . \DIRECTORY_SEPARATOR . 'autoload.php';
+if (file_exists($path)) {
+    require_once $path;
+}
+Sample::main(array_slice($argv, 1));</code></pre></div><input type="radio" name="check-figure-suh-tfg-d35" id="figure-suh-tfg-d35-go-tab" /><label for="figure-suh-tfg-d35-go-tab">Go</label><div class="codeblock-item"><pre id="codeblock-2lx-xvt-zok" outputclass="language-go" data-tag="codeblock" code-type="xCode" class="pre codeblock language-go"><code>package main
+
+import (
+  "encoding/json"
+  "strings"
+  "fmt"
+  "os"
+  util  "github.com/alibabacloud-go/tea-utils/v2/service"
+  dingtalkim_1_0  "github.com/alibabacloud-go/dingtalk/im_1_0"
+  openapi  "github.com/alibabacloud-go/darabonba-openapi/v2/client"
+  "github.com/alibabacloud-go/tea/tea"
+)
+
+
+// Description:
+// 
+// 使用 Token 初始化账号Client
+// 
+// @return Client
+// 
+// @throws Exception
+func CreateClient () (_result *dingtalkim_1_0.Client, _err error) {
+  config := &amp;openapi.Config{}
+  config.Protocol = tea.String("https")
+  config.RegionId = tea.String("central")
+  _result = &amp;dingtalkim_1_0.Client{}
+  _result, _err = dingtalkim_1_0.NewClient(config)
+  return _result, _err
+}
+
+func _main (args []*string) (_err error) {
+  client, _err := CreateClient()
+  if _err != nil {
+    return _err
+  }
+
+  updateGroupHeaders := &amp;dingtalkim_1_0.UpdateGroupHeaders{}
+  updateGroupHeaders.XAcsDingtalkAccessToken = tea.String("&lt;your access token&gt;")
+  managementOptions := &amp;dingtalkim_1_0.UpdateGroupRequestManagementOptions{
+    MentionAllAuthority: tea.Int32(0),
+    ShowHistoryType: tea.Int32(0),
+    ValidationType: tea.Int32(0),
+    Searchable: tea.Int32(0),
+    ChatBannedType: tea.Int32(0),
+    ManagementType: tea.Int32(0),
+  }
+  updateGroupRequest := &amp;dingtalkim_1_0.UpdateGroupRequest{
+    Chatid: tea.String("chatxxxx"),
+    Name: tea.String("全员群。"),
+    Owner: tea.String("04201724372xxxx"),
+    OwnerType: tea.String("emp"),
+    AddUseridlist: []*string{tea.String("userid1")},
+    DelUseridlist: []*string{tea.String("userid1")},
+    AddExtidlist: []*string{tea.String("unionId")},
+    DelExtidlist: []*string{tea.String("unionId")},
+    Icon: tea.String("@mediaId"),
+    ManagementOptions: managementOptions,
+  }
+  tryErr := func()(_e error) {
+    defer func() {
+      if r := tea.Recover(recover()); r != nil {
+        _e = r
+      }
+    }()
+    _, _err = client.UpdateGroupWithOptions(updateGroupRequest, updateGroupHeaders, &amp;util.RuntimeOptions{})
+    if _err != nil {
+      return _err
+    }
+
+    return nil
+  }()
+
+  if tryErr != nil {
+    var err = &amp;tea.SDKError{}
+    if _t, ok := tryErr.(*tea.SDKError); ok {
+      err = _t
+    } else {
+      err.Message = tea.String(tryErr.Error())
+    }
+    if !tea.BoolValue(util.Empty(err.Code)) &amp;&amp; !tea.BoolValue(util.Empty(err.Message)) {
+      // err 中含有 code 和 message 属性，可帮助开发定位问题
+    }
+
+  }
+  return _err
+}
+
+
+func main() {
+  err := _main(tea.StringSlice(os.Args[1:]))
+  if err != nil {
+    panic(err)
+  }
+}</code></pre></div><input type="radio" name="check-figure-suh-tfg-d35" id="figure-suh-tfg-d35-nodejs-tab" /><label for="figure-suh-tfg-d35-nodejs-tab">Node.js</label><div class="codeblock-item"><pre id="codeblock-izd-kia-jye" outputclass="language-nodejs" data-tag="codeblock" code-type="xCode" class="pre codeblock language-nodejs"><code>'use strict';
+// This file is auto-generated, don't edit it
+const Util = require('@alicloud/tea-util');
+const dingtalkim_1_0 = require('@alicloud/dingtalk/im_1_0');
+const OpenApi = require('@alicloud/openapi-client');
+const Tea = require('@alicloud/tea-typescript');
+
+class Client {
+
+  /**
+   * 使用 Token 初始化账号Client
+   * @return Client
+   * @throws Exception
+   */
+  static createClient() {
+    let config = new OpenApi.Config({ });
+    config.protocol = 'https';
+    config.regionId = 'central';
+    return new dingtalkim_1_0.default(config);
+  }
+
+  static async main(args) {
+    let client = Client.createClient();
+    let updateGroupHeaders = new dingtalkim_1_0.UpdateGroupHeaders({ });
+    updateGroupHeaders.xAcsDingtalkAccessToken = '&lt;your access token&gt;';
+    let managementOptions = new dingtalkim_1_0.UpdateGroupRequestManagementOptions({
+      mentionAllAuthority: 0,
+      showHistoryType: 0,
+      validationType: 0,
+      searchable: 0,
+      chatBannedType: 0,
+      managementType: 0,
+    });
+    let updateGroupRequest = new dingtalkim_1_0.UpdateGroupRequest({
+      chatid: 'chatxxxx',
+      name: '全员群。',
+      owner: '04201724372xxxx',
+      ownerType: 'emp',
+      addUseridlist: [
+        'userid1'
+      ],
+      delUseridlist: [
+        'userid1'
+      ],
+      addExtidlist: [
+        'unionId'
+      ],
+      delExtidlist: [
+        'unionId'
+      ],
+      icon: '@mediaId',
+      managementOptions: managementOptions,
+    });
+    try {
+      await client.updateGroupWithOptions(updateGroupRequest, updateGroupHeaders, new Util.RuntimeOptions({ }));
+    } catch (err) {
+      if (!Util.default.empty(err.code) &amp;&amp; !Util.default.empty(err.message)) {
+        // err 中含有 code 和 message 属性，可帮助开发定位问题
+      }
+
+    }    
+  }
+
+}
+
+exports.Client = Client;
+Client.main(process.argv.slice(2));</code></pre></div><input type="radio" name="check-figure-suh-tfg-d35" id="figure-suh-tfg-d35-csharp-tab" /><label for="figure-suh-tfg-d35-csharp-tab">C#</label><div class="codeblock-item"><pre id="codeblock-gyf-k8w-awp" outputclass="language-csharp" data-tag="codeblock" code-type="xCode" class="pre codeblock language-csharp"><code>using Newtonsoft.Json;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
+
+using Tea;
+using Tea.Utils;
+
+
+namespace AlibabaCloud.SDK.Sample
+{
+    public class Sample 
+    {
+
+        /// &lt;term&gt;&lt;b&gt;Description:&lt;/b&gt;&lt;/term&gt;
+        /// &lt;description&gt;
+        /// &lt;para&gt;使用 Token 初始化账号Client&lt;/para&gt;
+        /// &lt;/description&gt;
+        /// 
+        /// &lt;returns&gt;
+        /// Client
+        /// &lt;/returns&gt;
+        /// 
+        /// &lt;term&gt;&lt;b&gt;Exception:&lt;/b&gt;&lt;/term&gt;
+        /// Exception
+        public static AlibabaCloud.SDK.Dingtalkim_1_0.Client CreateClient()
+        {
+            AlibabaCloud.OpenApiClient.Models.Config config = new AlibabaCloud.OpenApiClient.Models.Config();
+            config.Protocol = "https";
+            config.RegionId = "central";
+            return new AlibabaCloud.SDK.Dingtalkim_1_0.Client(config);
+        }
+
+        public static void Main(string[] args)
+        {
+            AlibabaCloud.SDK.Dingtalkim_1_0.Client client = CreateClient();
+            AlibabaCloud.SDK.Dingtalkim_1_0.Models.UpdateGroupHeaders updateGroupHeaders = new AlibabaCloud.SDK.Dingtalkim_1_0.Models.UpdateGroupHeaders();
+            updateGroupHeaders.XAcsDingtalkAccessToken = "&lt;your access token&gt;";
+            AlibabaCloud.SDK.Dingtalkim_1_0.Models.UpdateGroupRequest.UpdateGroupRequestManagementOptions managementOptions = new AlibabaCloud.SDK.Dingtalkim_1_0.Models.UpdateGroupRequest.UpdateGroupRequestManagementOptions
+            {
+                MentionAllAuthority = 0,
+                ShowHistoryType = 0,
+                ValidationType = 0,
+                Searchable = 0,
+                ChatBannedType = 0,
+                ManagementType = 0,
+            };
+            AlibabaCloud.SDK.Dingtalkim_1_0.Models.UpdateGroupRequest updateGroupRequest = new AlibabaCloud.SDK.Dingtalkim_1_0.Models.UpdateGroupRequest
+            {
+                Chatid = "chatxxxx",
+                Name = "全员群。",
+                Owner = "04201724372xxxx",
+                OwnerType = "emp",
+                AddUseridlist = new List&lt;string&gt;
+                {
+                    "userid1"
+                },
+                DelUseridlist = new List&lt;string&gt;
+                {
+                    "userid1"
+                },
+                AddExtidlist = new List&lt;string&gt;
+                {
+                    "unionId"
+                },
+                DelExtidlist = new List&lt;string&gt;
+                {
+                    "unionId"
+                },
+                Icon = "@mediaId",
+                ManagementOptions = managementOptions,
+            };
+            try
+            {
+                client.UpdateGroupWithOptions(updateGroupRequest, updateGroupHeaders, new AlibabaCloud.TeaUtil.Models.RuntimeOptions());
+            }
+            catch (TeaException err)
+            {
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+            catch (Exception _err)
+            {
+                TeaException err = new TeaException(new Dictionary&lt;string, object&gt;
+                {
+                    { "message", _err.Message }
+                });
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+        }
+
+
+    }
+}</code></pre></div></div></section></section><section id="section-response-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-response-1" data-tag="h2" class="h2">响应</h2><section id="section-response-parameter" class="section">
+                <h3 data-tag="h3" id="h2-ycg-dow-aun" class="h3 title">响应体</h3>
+                <table class="table">
+                    <colgroup colnum="1" colname="col1" colwidth="3*" style="width:30%"></colgroup>
+                    <colgroup colnum="2" colname="col2" colwidth="2*" style="width:20%"></colgroup>
+                    <colgroup colnum="3" colname="col3" colwidth="5*" style="width:50%"></colgroup>
+                    <thead class="thead">
+                    <tr>
+                        <th><p>名称</p></th>
+                        <th><p>类型</p></th>
+                        <th><p>描述</p></th>
+                    </tr>
+                    </thead>
+                    <tbody class="tbody">
+    <tr outputclass="row row-level-1" class="row row-level-1 row-level-1 row">
+        <td><p>success</p></td>
+        <td><p>Boolean</p></td>
+        <td><p>是否成功。</p>
+</td>
+    </tr>
+                    </tbody>
+                </table>
+            </section><section id="section-response-body-example" class="section"><h3 id="h3-response-body-example" data-tag="h3" class="h3">响应体示例</h3><pre outputclass="language-json" data-tag="codeblock" code-type="xCode" class="pre codeblock language-json"><code>HTTP/1.1 200 OK
+Content-Type:application/json
+
+{
+  "success" : true
+}</code></pre></section><section id="section-error-code-1" class="section"><h3 id="h3-error-code-1" data-tag="h3" class="h3">错误码</h3><p data-tag="p" id="p-error-code-global-guide" class="p">若调用该接口报错，可根据错误信息在<a id="a-error-code-global-guide" href="https://open.dingtalk.com/document/development/server-api-error-codes-1">全局错误码</a>文档中查找解决方案。</p><table class="table"> 
+  <colgroup colnum="1" colname="col1" colwidth="2*" style="width:20%"></colgroup> 
+  <colgroup colnum="2" colname="col2" colwidth="2.5*" style="width:25%"></colgroup> 
+  <colgroup colnum="3" colname="col3" colwidth="2.5*" style="width:25%"></colgroup> 
+  <colgroup colnum="4" colname="col4" colwidth="3*" style="width:30%"></colgroup> 
+  <thead class="thead"> 
+   <tr> 
+    <th><p>HttpCode</p></th> 
+    <th><p>错误码</p></th> 
+    <th><p>错误信息</p></th> 
+    <th><p>说明</p></th> 
+   </tr> 
+  </thead> 
+  <tbody class="tbody"> 
+   <tr> 
+    <td><p>400</p></td> 
+    <td><p>parameter.invalid</p></td> 
+    <td><p>输入参数错误</p></td> 
+    <td><p>根据接口要求，传入必要参数。</p></td> 
+   </tr> 
+   <tr> 
+    <td><p>400</p></td> 
+    <td><p>permession.checkFailed</p></td> 
+    <td><p>权限校验失败</p></td> 
+    <td><p>权限校验失败</p></td> 
+   </tr> 
+   <tr> 
+    <td><p>400</p></td> 
+    <td><p>permession.checkFailed</p></td> 
+    <td><p>群主不在应用可见性内</p></td> 
+    <td><p>群主不在应用可见性内</p></td> 
+   </tr> 
+   <tr> 
+    <td><p>500</p></td> 
+    <td><p>system.error</p></td> 
+    <td><p>请重试，若始终失败请提交工单</p></td> 
+    <td><p>请重试，若始终失败请提交工单</p></td> 
+   </tr> 
+  </tbody> 
+ </table></section></section></div>
+    </main>
+
+
+
+</body></html>

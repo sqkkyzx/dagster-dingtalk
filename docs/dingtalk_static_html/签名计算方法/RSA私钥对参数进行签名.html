@@ -1,0 +1,127 @@
+<!DOCTYPE html><html><head><meta charset="utf8" / /><meta name="" content="" / /><meta name="searchtitle" content="" / /><meta name="keywords" content="" / /><meta name="author" content="" / /><title>RSA私钥对参数进行签名</title><meta name="gmtModify" content="2026-01-22 20:27:57" / /></head><body data-tag="topic" id="topic-2040880" class="topic"><main id="d2a9a98bd1q4o" data-init-id="topic-2040880"><h1 data-tag="title" id="title-mqw-p02-lei" class="title">RSA私钥对参数进行签名</h1><p data-tag="shortdesc" id="shortdesc-f4f-h8y-5j3" class="shortdesc">本文介绍了通过RSA私钥对请求参数进行数字签名的计算方法。RSA加密算法是目前广泛使用的非对称加密算法，常用于数字签名和数据安全传输。在调用API接口时，为保障通信安全，系统间需通过签名机制实现身份认证，防止数据被篡改或抵赖。</p><div data-tag="conbody" id="conbody-50x-3ol-h2e" class="conbody"><section id="cf634d03d7vox" class="section"><h2 uuid="mkkoinyk4t39mhzk0te" id="f640b15e5esy2">使用场景</h2><p uuid="mkkoinykll366smvufl" id="11b189dec3eov">本功能适用于企业内部应用或第三方企业应用，在调用钉钉开放平台中涉及资金操作或敏感数据交互的接口时使用。典型场景包括：</p><ul id="574e8b30fdi37"><li id="f7fc27cb27qd8"><p id="fd5a5e7c40erv">红包发放（如企业红包、群红包）</p></li><li id="2f46e0b9b7mo6"><p id="4ae5c41139tmm">代扣支付</p></li><li id="fe4c1a37f6td3"><p id="12d919eb42rqj">敏感业务数据提交</p></li></ul><p uuid="mkkoinylmad5cz1nk7k" id="2097c85ac2zml"><b>安全目标</b>：</p><ul id="a00499445ffzz"><li id="c0ff762ee9k1w"><p id="693748ccb9ufc"><b>防篡改</b>：确保请求参数在传输过程中未被修改。</p></li><li id="951c9b556f4bx"><p id="0ee01235a57el"><b>防重放</b>：结合时间戳、随机数等机制可防止请求被重复使用。</p></li><li id="4670c32001mv9"><p id="5fde1d4c54ivc"><b>身份认证</b>：通过私钥签名验证调用方身份，保障通信双方可信。</p></li></ul><blockquote uuid="mkkoinymwtj8x9ypo7c" id="7d8fd92e4ctfc"><b>指引说明</b>：示例代码中的privateKeyStr和publicKeyStr由企业生成，提供公钥给钉钉侧，私钥由企业妥善保管，不可泄露。</blockquote></section><section id="section-r2u-6j4-tun" class="section"><h2 data-tag="title" id="title-kx4-p96-zws" class="title">签名计算方法</h2><ol id="ol-l8l-wtc-n55"><li id="li-hlk-yj8-w6d"><p data-tag="p" id="p-8jx-3y7-fnw" class="p">将所有非空和非NULL参数放到Map集合M中。</p></li><li id="29604a289bft9"><p id="e6bf13db69h34">将集合M内参数按照<b>参数名ASCII码从小到大排序</b>（字典序）。</p></li><li id="14dcff7c0d8jc"><p id="178ea1201ajiq">使用URL键值对的格式（即key1=value1&amp;key2=value2…）拼接成字符串plainString。</p><div type="note" id="7f91401f2b4ik" class="note note-note"><div class="note-icon-wrapper"><i class="icon-note note note"></i></div><div class="noteContentSpan"><strong>说明 </strong><p id="04d4d15476atk">如果参数的值为空或为NULL不参与签名。</p></div></div></li><li id="66a090c3f4jd8"><p data-tag="p" id="p-wom-hr6-wdm" class="p">对<code data-tag="code" uuid="mk44aciypaftu0ltju" id="68c751716aqyi" class="code">plainString</code>进行Base64编码，得到<code data-tag="code" uuid="mk44aciylahzv35dhrl" id="e08327a536lss" class="code">plainBase64String</code>。</p></li><li id="faec784194exf"><p id="85d4d56ae7hk4">使用企业私钥，通过<code data-tag="code" uuid="mk44aciy1rvy7ck0fzv" id="a09b0ed875k0a" class="code">SHA256withRSA</code>算法对<code data-tag="code" uuid="mk44aciyvygojiot9pn" id="c8a3ac6bd8uzu" class="code">plainBase64String</code>进行签名，生成字节数组 <code data-tag="code" uuid="mk44acizgw3wt3h0lfe" id="ce91ebb1a9qem" class="code">signBytes</code>。</p></li><li id="9732e8ad78eyo"><p id="b57afec9c4d12">对<code data-tag="code" uuid="mk44aciz88dohp6rya" id="831cb641bbzvm" class="code">signBytes</code>进行Base64编码，获得最终的<code data-tag="code" uuid="mk44acizd9m3msjrw96" id="6df845ba42rc6" class="code">signString</code>，该值将作为接口请求中的<code data-tag="code" uuid="mk44acizhemdz40bwtl" id="ecb8fa244dmjx" class="code">pay_sign</code>参数传入。</p></li></ol></section><section id="section-yi8-0k9-smk" class="section"><h2 data-tag="title" id="title-san-pjr-niy" class="title">签名计算代码示例（Java）</h2><pre id="codeblock-d03-d3e-t8h" data-tag="codeblock" outputclass="language-java" code-type="xCode" class="pre codeblock language-java"><code>package com.dingtalk.redenvelop.openapi;
+
+import java.nio.charset.StandardCharsets;
+import java.security.KeyFactory;
+import java.security.PrivateKey;
+import java.security.PublicKey;
+import java.security.Signature;
+import java.security.spec.PKCS8EncodedKeySpec;
+import java.security.spec.X509EncodedKeySpec;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import org.apache.commons.lang.StringUtils;
+import org.springframework.util.Base64Utils;
+import org.springframework.util.CollectionUtils;
+
+public class PaySignDemo {
+
+    public static void main(String[] args) throws Exception {
+        //私钥
+        String privateKeyStr = "MIIEvgIBADANxxxCD3ePh+0UPwzn8OGWFBO";
+        //公钥
+        String publicKeyStr = "MIIBIjANBgxxxxHBXb+CWwIDAQAB";
+
+        //参数
+        Map&lt;String, String&gt; params = Maps.newHashMap();
+        params.put("corp_biz_no", "ding380dxxxxd23343");
+        params.put("pay_method", "WITHHOLD");
+        params.put("total_amount", "100");
+        params.put("receiver_id", "ding5678");
+        params.put("sender_id", "ding1234");
+        params.put("greetings", null);
+
+        String plainStr = parsePlainStr(params);
+        System.out.println("去除空参数，排序后的字符串:" + plainStr);
+
+        String signStr = sign(privateKeyStr, plainStr);
+        System.out.println("加签后字符串:" + signStr);
+
+        boolean verify = verify(plainStr, publicKeyStr, signStr);
+        System.out.println("验签结果:" + verify);
+    }
+
+    /**
+     * 获取需要签名的明文字符串
+     *
+     * @param params 入参
+     * @return
+     */
+    public static String parsePlainStr(Map&lt;String, String&gt; params) {
+        Map&lt;String, String&gt; targetMap = Maps.newHashMap();
+        if (!CollectionUtils.isEmpty(params)) {
+            params.forEach((key, value) -&gt; {
+                if (StringUtils.isNotBlank(value)) {
+                    targetMap.put(key, value);
+                }
+            });
+        }
+        List&lt;String&gt; paramKeys = Lists.newArrayList(targetMap.keySet());
+        Collections.sort(paramKeys);
+        StringBuilder sb = new StringBuilder();
+        paramKeys.forEach(eachKey -&gt; {
+            sb.append(eachKey).append("=").append(targetMap.get(eachKey)).append("&amp;");
+        });
+        return StringUtils.substringBeforeLast(sb.toString(), "&amp;");
+    }
+
+    /**
+     * 加签
+     *
+     * @param privateKeyStr 私钥字符串
+     * @param plainStr      需要加签的字符串
+     * @return
+     * @throws Exception
+     */
+    public static String sign(String privateKeyStr, String plainStr) throws Exception {
+        // 解码私钥
+        byte[] keyBytes = Base64Utils.decodeFromString(privateKeyStr);
+        // 构造PKCS8EncodedKeySpec对象
+        PKCS8EncodedKeySpec pkcs8EncodedKeySpec = new PKCS8EncodedKeySpec(keyBytes);
+        // 指定加密算法
+        KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+        // 取私钥匙对象
+        PrivateKey privateKey = keyFactory.generatePrivate(pkcs8EncodedKeySpec);
+        // 用私钥对信息生成数字签名
+        Signature signature = Signature.getInstance("SHA256withRSA");
+        signature.initSign(privateKey);
+        // 获取待加签数据字节数组
+        byte[] plainBytes = plainStr.getBytes(StandardCharsets.UTF_8);
+        //签名获取字节数组
+        signature.update(plainBytes);
+        byte[] signBytes = signature.sign();
+        //Base64编码
+        return Base64Utils.encodeToString(signBytes);
+    }
+
+    /**
+     * 校验数字签名
+     *
+     * @param plainStr     待加签数据
+     * @param publicKeyStr 公钥
+     * @param signStr         数字签名
+     * @return
+     * @throws Exception
+     */
+    public static boolean verify(String plainStr, String publicKeyStr, String signStr) throws Exception {
+        // 解密公钥
+        byte[] keyBytes = Base64Utils.decodeFromString(publicKeyStr);
+        // 构造X509EncodedKeySpec对象
+        X509EncodedKeySpec x509EncodedKeySpec = new X509EncodedKeySpec(keyBytes);
+        // 指定加密算法
+        KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+        // 取公钥匙对象
+        PublicKey publicKey = keyFactory.generatePublic(x509EncodedKeySpec);
+        Signature signature = Signature.getInstance("SHA256withRSA");
+        signature.initVerify(publicKey);
+        // 获取待加签数据字节数组
+        byte[] plainBytes = plainStr.getBytes(StandardCharsets.UTF_8);
+        signature.update(plainBytes);
+        // 验证签名是否正常
+        return signature.verify(Base64Utils.decodeFromString(signStr));
+    }
+
+}</code></pre></section><section id="f168cf4d03r56" class="section"><h2 uuid="mk44acj0s9jhy0qlpb" id="d98069d27bh34">常见异常及处理</h2><p id="91e3c6f158qj4">以下是签名过程中可能抛出的常见异常及其原因与解决方案：</p><table id="5ec66f4fa6a1f" tablewidth="648" tablecolswidth="216 216 216" autofit="false" class="table"><colgroup colwidth="1*" style="width:33.33%"></colgroup><colgroup colwidth="1*" style="width:33.33%"></colgroup><colgroup colwidth="1*" style="width:33.33%"></colgroup><tbody class="tbody"><tr id="bf8fe366fdqai"><td id="05c09c4ae857t" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="mk44acj1qu8zdoz78hk" id="dd95f865c8hyh">异常类型</p></td><td id="31807a69e98ib" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="mk44acj1ibpqagfv7l" id="49de98b16aafd">可能成因</p></td><td id="6c9b989d480to" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="mk44acj1ehwv3wlykmg" id="988b6d2c41kc3">解决方案</p></td></tr><tr id="56e5f4e52cava"><td id="5feee1ff6djin" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="mk44acj2egq7zt4cscs" id="368307b460ftd"><code data-tag="code" uuid="mk44acj254vz5gmfloi" id="1d090d63f0yh5" class="code">InvalidKeyException</code></p></td><td id="b8ff0f9fc41oj" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="mk44acj27pv8wke5cfr" id="1ab929f9011sb">提供的私钥格式错误或不符合PKCS#8标准</p></td><td id="229d1d8274mgm" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="mk44acj3fz6dsu83cmu" id="ab8f2e3035717">确保私钥为PKCS#8格式的Base64编码字符串。</p></td></tr><tr id="92cd96f2fb7g1"><td id="13c217d6f0iwc" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="mk44acj5gp3hl892jmi" id="037d0e8383yl7"><code data-tag="code" uuid="mk44acj5whz2lt0s91" id="5e50f482basht" class="code">NoSuchAlgorithmException</code></p></td><td id="adc11cb79dnp0" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="mk44acj5wsxsicmzylg" id="e028684f59p4y">指定的加密算法（如"RSA"或"SHA256withRSA"）不可用</p></td><td id="ea302cafbddll" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="mk44acj6l5ei3sikszn" id="62be910797w86">检查JDK版本是否支持对应算法；避免手动修改算法名称大小写。</p></td></tr><tr id="2870ed278c2xg"><td id="542f6fc1aa4ky" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="mk44acj6vhsnvr9pu4" id="85554867bdojz"><code data-tag="code" uuid="mk44acj7p7b926lp0el" id="6246359163wg4" class="code">NullPointerException</code></p></td><td id="2b02c8d19ep5h" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="mk44acj71psccgm7g28" id="cfd35b5b6b1o3">输入参数（如privateKeyStr、plainStr）为null</p></td><td id="e8b821900bbgh" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="mk44acj7fpeeoouwei6" id="7796dc5e44ksg">在调用前增加判空检查逻辑。</p></td></tr><tr id="7be0d841d9811"><td id="324aec9581i2f" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="mk44acj9n5x6qmmq2y" id="daa4ba4d6cwkn"><code data-tag="code" uuid="mk44acj9gc505knre7w" id="498050fe09crq" class="code">IllegalArgumentException</code></p></td><td id="2412d7f65a0tu" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="mk44acj9okozpau052f" id="fe30f71bacttv">Base64解码失败（如包含非法字符）</p></td><td id="f8fc4ddc9c912" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="mk44acjaf0x8dmt4xqh" id="4e7dbfc5bbsee">确保私钥字符串是合法的Base64编码。</p></td></tr><tr id="2656ecf573tda"><td id="618c3c952cpun" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="mk44acjaxh8tmiyvjso" id="af7f03aeb6fp5"><code data-tag="code" uuid="mk44acjb7qvbrxh4lfe" id="7186f57a951x8" class="code">SignatureException</code></p></td><td id="6acf7dd36493m" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="mk44acjbxhmemoz1otj" id="4edec255e0dvb">签名过程出错（如update或sign阶段）</p></td><td id="ef452ee3d4z56" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="mk44acjb2clgm8sdns8" id="f6dc003d13z52">检查输入数据是否为空；确认JVM安全策略允许相应操作。</p></td></tr></tbody></table><blockquote uuid="mk44acjbahh9utw9ygt" id="fb0c9d27ae3mj"><b>建议</b>：生产环境中应对私钥读取、签名逻辑添加日志记录和异常捕获机制，便于问题排查。</blockquote></section></div></main></body></html>

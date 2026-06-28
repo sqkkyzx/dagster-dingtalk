@@ -1,0 +1,366 @@
+<!DOCTYPE html><html><head><meta charset="utf8" / /><meta name="gmtModify" content="2025-09-11 21:04:05" / /><meta name="searchtitle" content="" / /><meta name="keywords" content="" / /><meta name="author" content="" / /><title>下载审批附件</title><meta name="gmtModify" content="2026-06-03 10:12:33" / /></head><body data-tag="topic" id="doc-api-dingtalk-GrantProcessInstanceForDownloadFile" class="topic"><main id="99b66f9903ibi" data-init-id="doc-api-dingtalk_GrantProcessInstanceForDownloadFile"><h1 data-tag="title" id="h1-k2f-egs-oqn" class="title">下载审批附件</h1><p data-tag="shortdesc" id="d177148e5a3rz" class="shortdesc">调用本接口，获取审批文件下载授权，并且生成下载链接。</p><div data-tag="conbody" outputclass="icms-api-reference" class="icms-api-reference conbody"><section id="a0fcc2d046a0m" class="section"><h2 id="36808f042euqn"><b>接口调用说明</b></h2><ul id="343208e612m9a"><li id="b55eb9fd267hu"><p id="bb60168069zrk"><span style="color:rgb(24, 28, 31)">如果审批单是手动在钉钉客户端发起的，手动选择本地文件作为附件，调用本接口获取的附件下载地址的格式为#zifgs49xxxxx.file。需要与</span><a data-tag="xref" id="a63addab08xds" href="/document/development/obtains-the-details-of-a-single-approval-instance-pop#" class="xref">获取单个审批实例详情</a><span style="color:rgb(24, 28, 31)">接口结合使用，获取实例详情接口得到附件的fileName和fileType，按照本接口返回的#zifgs49xxxxx.file进行名称和后缀替换，该附件才可正常打开。</span></p></li><li id="3b3eafd9f8pqy"><p id="a64297db7ar7s"><span style="color:rgb(24, 28, 31)">附件文件大小不能为0，否则不支持获取下载链接。</span></p></li></ul></section><section id="section-request-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-request-1" data-tag="h2" class="h2">请求</h2><section id="section-request-basic-info" class="section"><h3 id="heading-request-basic-info" data-tag="h3" class="h3">基本信息</h3><table id="406817a8a28lw" tablewidth="648" tablecolswidth="216 432" autofit="false" class="table"><colgroup colwidth="0.67*" style="width:33.33%"></colgroup><colgroup colwidth="1.33*" style="width:66.67%"></colgroup><tbody class="tbody"><tr id="4eff57be85as0"><td id="ce110f8b89u47" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="a654e731d4iv6">字段</p></td><td id="85263cb88dqyo" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="7291f130efd2o">值</p></td></tr><tr id="91604c07dflfl"><td id="828fb242earme" rowspan="1" colspan="1"><p id="455b1870bc42d">HTTP URL</p></td><td id="c7056f73c8jwm" rowspan="1" colspan="1"><p id="540e929efaws3">https://api.dingtalk.com/v1.0/workflow/processInstances/spaces/files/urls/download</p></td></tr><tr id="cecb90a6b3iz7"><td id="43d715d603tzh" rowspan="1" colspan="1"><p id="fd389337939mu">HTTP Method</p></td><td id="ea97866cb60m8" rowspan="1" colspan="1"><p id="f9607f4c56sl3">POST</p></td></tr><tr id="b4c50f4268ilo"><td id="00e59023aep13" rowspan="1" colspan="1"><p id="ca12322157ics">支持的应用类型</p></td><td id="fe039cfb559ie" rowspan="1" colspan="1"><p id="ce1d5695cbb5s"><span data-tag="ph" id="ph-request-basic-app-type-apptype-0" class="ph ph-app-type" data-ph-raw-text="appType-企业内部应用">appType-企业内部应用</span>　<span data-tag="ph" id="ph-request-basic-app-type-apptype-1" class="ph ph-app-type" data-ph-raw-text="appType-第三方企业应用">appType-第三方企业应用</span></p></td></tr><tr id="e2bc67a1b94i6"><td id="839a8eb99dtkb" rowspan="1" colspan="1"><p id="3876313974ayi">权限要求</p></td><td id="09b2dc7c4c88j" rowspan="1" colspan="1"><p id="cc38c50c69mli"><span data-tag="ph" id="ph-request-basic-permission-permission-workflow-instance-write-0" class="ph-permission ph" data-ph-raw-text="permission-Workflow.Instance.Write-工作流实例写权限" data-permission-id="permission-Workflow.Instance.Write" data-permission-code="Workflow.Instance.Write" data-permission-detail-api="/document/api/permission/detail" data-permission-query-param="code">permission-Workflow.Instance.Write-工作流实例写权限</span></p></td></tr></tbody></table></section><section id="section-request-header-parameter" class="section"><h3 data-tag="h3" id="h2-56g-cbf-bmj" class="h3 title">请求头</h3><table id="d0faed739cznu" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="c5d1e3c532sz3"><td id="2d5d0f7c10v8k" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="e41185527fj4o">名称</p></td><td id="c6c14532bel0b" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="a05d25a5c0g1b">类型</p></td><td id="6ac6c43e4aj8q" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="09e5bc1636zgz">是否必填</p></td><td id="58a9d2a4b2cw4" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="78f6425942765">描述</p></td></tr><tr id="66c39f028a6ss"><td id="a41f7beebcdio" rowspan="1" colspan="1"><p id="ed36c0bcafdsl">x-acs-dingtalk-access-token</p></td><td id="1e2070603ap8m" rowspan="1" colspan="1"><p id="b2d76bedb1u6q">String</p></td><td id="46537f7363we3" rowspan="1" colspan="1"><p id="78c116636ctqr">是</p></td><td id="37e3d3c0d5te4" rowspan="1" colspan="1"><p id="6b7f3c7e1ea18">调用该接口的访问凭证，通过以下获取：</p><ul id="8fba8ccbectnj"><li id="dace943c20vbe"><p id="ca09404059yfy">企业内部应用，调用<a href="https://open.dingtalk.com/document/development/obtain-the-access-token-of-an-internal-app#" id="be79bd2d5eaen" class="xref">获取企业内部应用的accessToken</a>接口获取。</p></li><li id="4198465b2bgql"><p id="65bfc18266teh">第三方企业应用，调用<a href="https://open.dingtalk.com/document/development/obtain-the-access-token-of-the-authorized-enterprise-1#" id="a203eb3e1a5g1" class="xref">获取第三方应用授权企业的accessToken</a>接口获取。</p></li></ul></td></tr></tbody></table></section><section id="section-request-body-parameter" class="section"><h3 data-tag="h3" id="h2-5te-c06-o7u" class="h3 title">请求体</h3><table id="eee4638a47f3k" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="d835d23c1c50o"><td id="fe22d3bb20q1x" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="2d825a673c3lg">名称</p></td><td id="549fc627b5gwu" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="b1dd2f84ef2zb">类型</p></td><td id="9d01559a552jz" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="16a22ce8d6uu9">是否必填</p></td><td id="990db37f35ic9" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="eaa49475c9hog">描述</p></td></tr><tr outputclass="row row-level-1" id="ab0707386egma" class="row row-level-1"><td id="1cf8dbb97e9qe" rowspan="1" colspan="1"><p id="f73081ab83e49">processInstanceId</p></td><td id="1573b6fe19ciw" rowspan="1" colspan="1"><p id="69421e6685qxg">String</p></td><td id="38c2ad71c39vz" rowspan="1" colspan="1"><p id="b5138f3b285fb">是</p></td><td id="37635a6e02cgl" rowspan="1" colspan="1"><p id="7c450e4101023">审批实例ID。</p><ul id="752daa3f70l8n"><li id="2505bc26e2ekm"><p id="c9b19c683bu3d">调用<a href="https://open.dingtalk.com/document/development/create-an-approval-instance#" id="757ac16fba0of" class="xref">发起审批实例</a>接口获取<code data-tag="inlineCode" id="3127cfaab5nxb" class="inlineCode">InstanceId</code>参数值。</p></li><li id="2e609b1a72nsl"><p id="0addb3cf02y4r">调用<a href="https://open.dingtalk.com/document/development/obtain-an-approval-list-of-instance-ids#" id="f783b93981xbt" class="xref">获取审批实例ID列表</a>接口获取<code data-tag="inlineCode" id="e07160e528v6z" class="inlineCode">list</code>参数值。</p></li></ul></td></tr><tr outputclass="row row-level-2" id="95410d81f80f9" class="row row-level-2"><td id="d185210d29z3q" rowspan="1" colspan="1"><p id="c09df11750b6u">fileId</p></td><td id="927e07980cqqn" rowspan="1" colspan="1"><p id="d50809469052h">String</p></td><td id="4eba3795170zs" rowspan="1" colspan="1"><p id="a3584dd4b4lfw">是</p></td><td id="c4e91c62ba3e0" rowspan="1" colspan="1"><p id="5f3266ddab7f6">文件fileId，调用<a href="https://open.dingtalk.com/document/development/obtains-the-details-of-a-single-approval-instance-pop#" id="1ec5eba51cl5j" class="xref">获取单个审批实例详情</a>接口获取<code data-tag="inlineCode" id="4e19d09c5eima" class="inlineCode">fileId</code>参数值。</p><p class="note-icon-wrapper" id="9fec637bd28wc"></p><p data-tag="p" id="ed5e38c1e3ord" class="p"></p><p id="20ce8cb197o2k">文件id是审批组件中上传的fileId（如下图所示），评论中上传的附件fileId暂不支持获取下载链接。
+<img src="https://help-static-aliyun-doc.aliyuncs.com/assets/img/zh-CN/5166988061/p206204.png" alt="" class="image break" / /></p><p id="7168a0ebd63gn"></p></td></tr><tr outputclass="row row-level-3" id="2260ef778chmq" class="row row-level-3"><td id="03a7692148te3" rowspan="1" colspan="1"><p id="5c099e52deh8e">withCommentAttatchment</p></td><td id="bc4403adeccij" rowspan="1" colspan="1"><p id="8095a56fdfzfb">Boolean</p></td><td id="bfff3fe12am19" rowspan="1" colspan="1"><p id="7337183f62g89">否</p></td><td id="d07966c9bfd09" rowspan="1" colspan="1"><p id="7a41d9517e5w4">是否包含评论中的附件，默认忽略评论中附件</p></td></tr></tbody></table></section><section id="section-request-body-example" class="section"><h3 id="h3-request-body-example" data-tag="h3" class="h3">请求示例</h3><div outputclass="tabbed-codeblock" data-tag="fig" id="figure-8uf-ktu-46b" class="tabbed-codeblock-box"><div class="tab-box"></div><input type="radio" name="check-figure-8uf-ktu-46b" id="figure-8uf-ktu-46b-HTTP-tab" checked="checked" /><label for="figure-8uf-ktu-46b-HTTP-tab">HTTP</label><div class="codeblock-item"><pre id="codeblock-fsm-q0b-qze" outputclass="language-HTTP" code-type="xCode" data-tag="codeblock" class="pre codeblock language-HTTP"><code>POST /v1.0/workflow/processInstances/spaces/files/urls/download HTTP/1.1
+Host:api.dingtalk.com
+x-acs-dingtalk-access-token:6d1bxxxx
+Content-Type:application/json
+
+{
+  "processInstanceId" : "a17444d1-075b-4a4d-xxxx",
+  "fileId" : "111"
+}</code></pre></div><input type="radio" name="check-figure-8uf-ktu-46b" id="figure-8uf-ktu-46b-java-tab" /><label for="figure-8uf-ktu-46b-java-tab">Java</label><div class="codeblock-item"><pre id="codeblock-rij-s6z-gjc" outputclass="language-java" code-type="xCode" data-tag="codeblock" class="pre codeblock language-java"><code>// This file is auto-generated, don't edit it. Thanks.
+package com.aliyun.sample;
+
+import com.aliyun.tea.*;
+
+public class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Client
+     * @throws Exception
+     */
+    public static com.aliyun.dingtalkworkflow_1_0.Client createClient() throws Exception {
+        com.aliyun.teaopenapi.models.Config config = new com.aliyun.teaopenapi.models.Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        return new com.aliyun.dingtalkworkflow_1_0.Client(config);
+    }
+
+    public static void main(String[] args_) throws Exception {
+        java.util.List&lt;String&gt; args = java.util.Arrays.asList(args_);
+        com.aliyun.dingtalkworkflow_1_0.Client client = Sample.createClient();
+        com.aliyun.dingtalkworkflow_1_0.models.GrantProcessInstanceForDownloadFileHeaders grantProcessInstanceForDownloadFileHeaders = new com.aliyun.dingtalkworkflow_1_0.models.GrantProcessInstanceForDownloadFileHeaders();
+        grantProcessInstanceForDownloadFileHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        com.aliyun.dingtalkworkflow_1_0.models.GrantProcessInstanceForDownloadFileRequest grantProcessInstanceForDownloadFileRequest = new com.aliyun.dingtalkworkflow_1_0.models.GrantProcessInstanceForDownloadFileRequest()
+                .setProcessInstanceId("a17444d1-075b-4a4d-xxxx")
+                .setFileId("111");
+        try {
+            client.grantProcessInstanceForDownloadFileWithOptions(grantProcessInstanceForDownloadFileRequest, grantProcessInstanceForDownloadFileHeaders, new com.aliyun.teautil.models.RuntimeOptions());
+        } catch (TeaException err) {
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        } catch (Exception _err) {
+            TeaException err = new TeaException(_err.getMessage(), _err);
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        }        
+    }
+}</code></pre></div><input type="radio" name="check-figure-8uf-ktu-46b" id="figure-8uf-ktu-46b-python-tab" /><label for="figure-8uf-ktu-46b-python-tab">Python</label><div class="codeblock-item"><pre id="codeblock-mhg-ygy-sjj" outputclass="language-python" code-type="xCode" data-tag="codeblock" class="pre codeblock language-python"><code># -*- coding: utf-8 -*-
+# This file is auto-generated, don't edit it. Thanks.
+import sys
+
+from typing import List
+
+from alibabacloud_dingtalk.workflow_1_0.client import Client as dingtalkworkflow_1_0Client
+from alibabacloud_tea_openapi import models as open_api_models
+from alibabacloud_dingtalk.workflow_1_0 import models as dingtalkworkflow__1__0_models
+from alibabacloud_tea_util import models as util_models
+from alibabacloud_tea_util.client import Client as UtilClient
+
+
+class Sample:
+    def __init__(self):
+        pass
+
+    @staticmethod
+    def create_client() -&gt; dingtalkworkflow_1_0Client:
+        """
+        使用 Token 初始化账号Client
+        @return: Client
+        @throws Exception
+        """
+        config = open_api_models.Config()
+        config.protocol = 'https'
+        config.region_id = 'central'
+        return dingtalkworkflow_1_0Client(config)
+
+    @staticmethod
+    def main(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        grant_process_instance_for_download_file_headers = dingtalkworkflow__1__0_models.GrantProcessInstanceForDownloadFileHeaders()
+        grant_process_instance_for_download_file_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        grant_process_instance_for_download_file_request = dingtalkworkflow__1__0_models.GrantProcessInstanceForDownloadFileRequest(
+            process_instance_id='a17444d1-075b-4a4d-xxxx',
+            file_id='111'
+        )
+        try:
+            client.grant_process_instance_for_download_file_with_options(grant_process_instance_for_download_file_request, grant_process_instance_for_download_file_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+    @staticmethod
+    async def main_async(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        grant_process_instance_for_download_file_headers = dingtalkworkflow__1__0_models.GrantProcessInstanceForDownloadFileHeaders()
+        grant_process_instance_for_download_file_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        grant_process_instance_for_download_file_request = dingtalkworkflow__1__0_models.GrantProcessInstanceForDownloadFileRequest(
+            process_instance_id='a17444d1-075b-4a4d-xxxx',
+            file_id='111'
+        )
+        try:
+            await client.grant_process_instance_for_download_file_with_options_async(grant_process_instance_for_download_file_request, grant_process_instance_for_download_file_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+
+if __name__ == '__main__':
+    Sample.main(sys.argv[1:])</code></pre></div><input type="radio" name="check-figure-8uf-ktu-46b" id="figure-8uf-ktu-46b-php-tab" /><label for="figure-8uf-ktu-46b-php-tab">PHP</label><div class="codeblock-item"><pre id="codeblock-yhm-mwp-ojt" outputclass="language-php" code-type="xCode" data-tag="codeblock" class="pre codeblock language-php"><code>&lt;?php
+
+// This file is auto-generated, don't edit it. Thanks.
+namespace AlibabaCloud\SDK\Sample;
+
+use AlibabaCloud\SDK\Dingtalk\Vworkflow_1_0\Dingtalk;
+use \Exception;
+use AlibabaCloud\Tea\Exception\TeaError;
+use AlibabaCloud\Tea\Utils\Utils;
+
+use Darabonba\OpenApi\Models\Config;
+use AlibabaCloud\SDK\Dingtalk\Vworkflow_1_0\Models\GrantProcessInstanceForDownloadFileHeaders;
+use AlibabaCloud\SDK\Dingtalk\Vworkflow_1_0\Models\GrantProcessInstanceForDownloadFileRequest;
+use AlibabaCloud\Tea\Utils\Utils\RuntimeOptions;
+
+class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Dingtalk Client
+     */
+    public static function createClient(){
+        $config = new Config([]);
+        $config-&gt;protocol = "https";
+        $config-&gt;regionId = "central";
+        return new Dingtalk($config);
+    }
+
+    /**
+     * @param string[] $args
+     * @return void
+     */
+    public static function main($args){
+        $client = self::createClient();
+        $grantProcessInstanceForDownloadFileHeaders = new GrantProcessInstanceForDownloadFileHeaders([]);
+        $grantProcessInstanceForDownloadFileHeaders-&gt;xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        $grantProcessInstanceForDownloadFileRequest = new GrantProcessInstanceForDownloadFileRequest([
+            "processInstanceId" =&gt; "a17444d1-075b-4a4d-xxxx",
+            "fileId" =&gt; "111"
+        ]);
+        try {
+            $client-&gt;grantProcessInstanceForDownloadFileWithOptions($grantProcessInstanceForDownloadFileRequest, $grantProcessInstanceForDownloadFileHeaders, new RuntimeOptions([]));
+        }
+        catch (Exception $err) {
+            if (!($err instanceof TeaError)) {
+                $err = new TeaError([], $err-&gt;getMessage(), $err-&gt;getCode(), $err);
+            }
+            if (!Utils::empty_($err-&gt;code) &amp;&amp; !Utils::empty_($err-&gt;message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+        }
+    }
+}
+$path = __DIR__ . \DIRECTORY_SEPARATOR . '..' . \DIRECTORY_SEPARATOR . 'vendor' . \DIRECTORY_SEPARATOR . 'autoload.php';
+if (file_exists($path)) {
+    require_once $path;
+}
+Sample::main(array_slice($argv, 1));</code></pre></div><input type="radio" name="check-figure-8uf-ktu-46b" id="figure-8uf-ktu-46b-go-tab" /><label for="figure-8uf-ktu-46b-go-tab">Go</label><div class="codeblock-item"><pre id="codeblock-2wn-r9b-u6o" outputclass="language-go" code-type="xCode" data-tag="codeblock" class="pre codeblock language-go"><code>// This file is auto-generated, don't edit it. Thanks.
+package main
+
+import (
+  "os"
+  util  "github.com/alibabacloud-go/tea-utils/service"
+  dingtalkworkflow_1_0  "github.com/alibabacloud-go/dingtalk/workflow_1_0"
+  openapi  "github.com/alibabacloud-go/darabonba-openapi/client"
+  "github.com/alibabacloud-go/tea/tea"
+)
+
+
+/**
+ * 使用 Token 初始化账号Client
+ * @return Client
+ * @throws Exception
+ */
+func CreateClient () (_result *dingtalkworkflow_1_0.Client, _err error) {
+  config := &amp;openapi.Config{}
+  config.Protocol = tea.String("https")
+  config.RegionId = tea.String("central")
+  _result = &amp;dingtalkworkflow_1_0.Client{}
+  _result, _err = dingtalkworkflow_1_0.NewClient(config)
+  return _result, _err
+}
+
+func _main (args []*string) (_err error) {
+  client, _err := CreateClient()
+  if _err != nil {
+    return _err
+  }
+
+  grantProcessInstanceForDownloadFileHeaders := &amp;dingtalkworkflow_1_0.GrantProcessInstanceForDownloadFileHeaders{}
+  grantProcessInstanceForDownloadFileHeaders.XAcsDingtalkAccessToken = tea.String("&lt;your access token&gt;")
+  grantProcessInstanceForDownloadFileRequest := &amp;dingtalkworkflow_1_0.GrantProcessInstanceForDownloadFileRequest{
+    ProcessInstanceId: tea.String("a17444d1-075b-4a4d-xxxx"),
+    FileId: tea.String("111"),
+  }
+  tryErr := func()(_e error) {
+    defer func() {
+      if r := tea.Recover(recover()); r != nil {
+        _e = r
+      }
+    }()
+    _, _err = client.GrantProcessInstanceForDownloadFileWithOptions(grantProcessInstanceForDownloadFileRequest, grantProcessInstanceForDownloadFileHeaders, &amp;util.RuntimeOptions{})
+    if _err != nil {
+      return _err
+    }
+
+    return nil
+  }()
+
+  if tryErr != nil {
+    var err = &amp;tea.SDKError{}
+    if _t, ok := tryErr.(*tea.SDKError); ok {
+      err = _t
+    } else {
+      err.Message = tea.String(tryErr.Error())
+    }
+    if !tea.BoolValue(util.Empty(err.Code)) &amp;&amp; !tea.BoolValue(util.Empty(err.Message)) {
+      // err 中含有 code 和 message 属性，可帮助开发定位问题
+    }
+
+  }
+  return _err
+}
+
+
+func main() {
+  err := _main(tea.StringSlice(os.Args[1:]))
+  if err != nil {
+    panic(err)
+  }
+}</code></pre></div><input type="radio" name="check-figure-8uf-ktu-46b" id="figure-8uf-ktu-46b-nodejs-tab" /><label for="figure-8uf-ktu-46b-nodejs-tab">Node.js</label><div class="codeblock-item"><pre id="codeblock-l58-vv1-yha" outputclass="language-nodejs" code-type="xCode" data-tag="codeblock" class="pre codeblock language-nodejs"><code>// This file is auto-generated, don't edit it
+import Util, * as $Util from '@alicloud/tea-util';
+import dingtalkworkflow_1_0, * as $dingtalkworkflow_1_0 from '@alicloud/dingtalk/workflow_1_0';
+import OpenApi, * as $OpenApi from '@alicloud/openapi-client';
+import * as $tea from '@alicloud/tea-typescript';
+
+
+export default class Client {
+
+  /**
+   * 使用 Token 初始化账号Client
+   * @return Client
+   * @throws Exception
+   */
+  static createClient(): dingtalkworkflow_1_0 {
+    let config = new $OpenApi.Config({ });
+    config.protocol = "https";
+    config.regionId = "central";
+    return new dingtalkworkflow_1_0(config);
+  }
+
+  static async main(args: string[]): Promise&lt;void&gt; {
+    let client = Client.createClient();
+    let grantProcessInstanceForDownloadFileHeaders = new $dingtalkworkflow_1_0.GrantProcessInstanceForDownloadFileHeaders({ });
+    grantProcessInstanceForDownloadFileHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+    let grantProcessInstanceForDownloadFileRequest = new $dingtalkworkflow_1_0.GrantProcessInstanceForDownloadFileRequest({
+      processInstanceId: "a17444d1-075b-4a4d-xxxx",
+      fileId: "111",
+    });
+    try {
+      await client.grantProcessInstanceForDownloadFileWithOptions(grantProcessInstanceForDownloadFileRequest, grantProcessInstanceForDownloadFileHeaders, new $Util.RuntimeOptions({ }));
+    } catch (err) {
+      if (!Util.empty(err.code) &amp;&amp; !Util.empty(err.message)) {
+        // err 中含有 code 和 message 属性，可帮助开发定位问题
+      }
+
+    }    
+  }
+
+}
+
+Client.main(process.argv.slice(2));</code></pre></div><input type="radio" name="check-figure-8uf-ktu-46b" id="figure-8uf-ktu-46b-csharp-tab" /><label for="figure-8uf-ktu-46b-csharp-tab">C#</label><div class="codeblock-item"><pre id="codeblock-fif-bbq-8vr" outputclass="language-csharp" code-type="xCode" data-tag="codeblock" class="pre codeblock language-csharp"><code>// This file is auto-generated, don't edit it. Thanks.
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
+
+using Tea;
+using Tea.Utils;
+
+
+namespace AlibabaCloud.SDK.Sample
+{
+    public class Sample 
+    {
+
+        /**
+         * 使用 Token 初始化账号Client
+         * @return Client
+         * @throws Exception
+         */
+        public static AlibabaCloud.SDK.Dingtalkworkflow_1_0.Client CreateClient()
+        {
+            AlibabaCloud.OpenApiClient.Models.Config config = new AlibabaCloud.OpenApiClient.Models.Config();
+            config.Protocol = "https";
+            config.RegionId = "central";
+            return new AlibabaCloud.SDK.Dingtalkworkflow_1_0.Client(config);
+        }
+
+        public static void Main(string[] args)
+        {
+            AlibabaCloud.SDK.Dingtalkworkflow_1_0.Client client = CreateClient();
+            AlibabaCloud.SDK.Dingtalkworkflow_1_0.Models.GrantProcessInstanceForDownloadFileHeaders grantProcessInstanceForDownloadFileHeaders = new AlibabaCloud.SDK.Dingtalkworkflow_1_0.Models.GrantProcessInstanceForDownloadFileHeaders();
+            grantProcessInstanceForDownloadFileHeaders.XAcsDingtalkAccessToken = "&lt;your access token&gt;";
+            AlibabaCloud.SDK.Dingtalkworkflow_1_0.Models.GrantProcessInstanceForDownloadFileRequest grantProcessInstanceForDownloadFileRequest = new AlibabaCloud.SDK.Dingtalkworkflow_1_0.Models.GrantProcessInstanceForDownloadFileRequest
+            {
+                ProcessInstanceId = "a17444d1-075b-4a4d-xxxx",
+                FileId = "111",
+            };
+            try
+            {
+                client.GrantProcessInstanceForDownloadFileWithOptions(grantProcessInstanceForDownloadFileRequest, grantProcessInstanceForDownloadFileHeaders, new AlibabaCloud.TeaUtil.Models.RuntimeOptions());
+            }
+            catch (TeaException err)
+            {
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+            catch (Exception _err)
+            {
+                TeaException err = new TeaException(new Dictionary&lt;string, object&gt;
+                {
+                    { "message", _err.Message }
+                });
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+        }
+
+
+    }
+}</code></pre></div></div></section></section><section id="section-response-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-response-1" data-tag="h2" class="h2">响应</h2><section id="section-response-parameter" class="section"><h3 data-tag="h3" id="h2-kbd-9lk-cp7" class="h3 title">响应体</h3><table id="6e508849301v3" tablewidth="710" tablecolswidth="213 142 355" autofit="false" class="table"><colgroup colwidth="0.9*" style="width:30.00%"></colgroup><colgroup colwidth="0.6*" style="width:20.00%"></colgroup><colgroup colwidth="1.5*" style="width:50.00%"></colgroup><tbody class="tbody"><tr id="fc5dbe1891g1r"><td id="2a6d0490b5s38" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="19ee2929ffr4n">名称</p></td><td id="a0604d29fcq4p" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="bf112c0ccff7n">类型</p></td><td id="85ff9b7a91vun" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="ad48c0dd46mzh">描述</p></td></tr><tr outputclass="row row-level-1 has-child" id="3eb0ba1c0464v" class="row row-level-1 has-child"><td id="b44fe8f55508e" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="2fd483cdeeis5">result</p></td><td id="79a63f4ee5y7l" rowspan="1" colspan="1"><p id="e3fbe49310mj9">Object</p></td><td id="0569b71483gy4" rowspan="1" colspan="1"><p id="bedce8f9b22zl">返回结果。</p></td></tr><tr outputclass="row row-level-1-1" id="8d4f1fe4c8b76" class="row row-level-1-1"><td id="0aa9fc40a07ii" rowspan="1" colspan="1"><p id="adf504076aaap">spaceId</p></td><td id="6fa0b115d6p5n" rowspan="1" colspan="1"><p id="f2c2ab80b0153">Long</p></td><td id="66d205a981zok" rowspan="1" colspan="1"><p id="41a7443d34oyf">钉盘空间ID。</p></td></tr><tr outputclass="row row-level-1-2" id="b54f0d2c283mk" class="row row-level-1-2"><td id="b70609c235lgp" rowspan="1" colspan="1"><p id="59ddaac718elv">fileId</p></td><td id="14bf2e4ca2bkp" rowspan="1" colspan="1"><p id="29b6b211ba1p5">String</p></td><td id="fcd3f451733jd" rowspan="1" colspan="1"><p id="646a9c60acwjf">文件ID。</p></td></tr><tr outputclass="row row-level-1-3" id="be07a8b691u6s" class="row row-level-1-3"><td id="f3ab96629eey4" rowspan="1" colspan="1"><p id="b96c1c4479i9p">downloadUri</p></td><td id="05147230bfcko" rowspan="1" colspan="1"><p id="adc177fa8d577">String</p></td><td id="62918a53e332c" rowspan="1" colspan="1"><p id="c870aa7c911dx">文件下载地址。</p><p class="note-icon-wrapper" id="7de781ad3bvk2"></p><p data-tag="p" id="6449fc5194a6r" class="p"></p><p id="024632f6603rq">文件下载地址有效期15分钟。</p><p id="eb54a3fb96c6s"></p></td></tr><tr outputclass="row row-level-2" id="2045e9c3e6jhx" class="row row-level-2"><td id="38b5c192dfd7u" rowspan="1" colspan="1"><p id="fb9a8ba000h2v">success</p></td><td id="49c89680bde4t" rowspan="1" colspan="1"><p id="b71ee95e87s6d">Boolean</p></td><td id="6d79c6b2a17jl" rowspan="1" colspan="1"><p id="f937fc87e6dbq">接口调用是否成功。</p><ul id="49801fc53031j"><li id="1064c4537962t"><p id="fcc45d9196j92"><b>true</b>：成功</p></li><li id="f0a9a66c66pj6"><p id="f5d1bf41fdkfg"><b>false</b>：失败</p></li></ul></td></tr></tbody></table></section><section id="section-response-body-example" class="section"><h3 id="h3-response-body-example" data-tag="h3" class="h3">响应体示例</h3><pre id="9d75d0f7c7flg" outputclass="language-json" code-type="xCode" data-tag="codeblock" class="pre codeblock language-json"><code>HTTP/1.1 200 OK
+Content-Type:application/json
+
+{
+  "result" : {
+    "spaceId" : 3996960664,
+    "fileId" : "26748422566",
+    "downloadUri" : "http://lippi-space-zjk.oss-cn-zhangjiakou.aliyuncs.com/xxxxx"
+  },
+  "success" : true
+}</code></pre></section><section id="section-error-code-1" class="section"><h3 id="h3-error-code-1" data-tag="h3" class="h3">错误码</h3><p data-tag="p" id="p-error-code-global-guide" class="p">若调用该接口报错，可根据错误信息在<a href="https://open.dingtalk.com/document/development/server-api-error-codes-1" id="a-error-code-global-guide">全局错误码</a>文档中查找解决方案。</p><table id="b07a4a3d08ypm" tablewidth="709" tablecolswidth="142 177 177 213" autofit="false" class="table"><colgroup colwidth="0.8*" style="width:20.03%"></colgroup><colgroup colwidth="1*" style="width:24.96%"></colgroup><colgroup colwidth="1*" style="width:24.96%"></colgroup><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><tbody class="tbody"><tr id="5b2f93b23chjc"><td id="7b7208d6bcccu" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="b5d2be458f0ii">HttpCode</p></td><td id="10ff76d4020dj" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="dafee8d98cyo9">错误码</p></td><td id="ef43ad8aa94d3" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="9c66b3dabawt0">错误信息</p></td><td id="ad8080f63elth" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="f40ff8d7fazye">说明</p></td></tr><tr id="4bfde093b5265"><td id="606c184d69kz0" rowspan="1" colspan="1"><p id="94c9ca0046990">400</p></td><td id="d02b5d5b78q7z" rowspan="1" colspan="1"><p id="c9cbe5939f4cl">invalidParameter</p></td><td id="69be833adenk1" rowspan="1" colspan="1"><p id="3c17d8d5cd1r0">下载审批附件参数错误</p></td><td id="f89615fd32sg4" rowspan="1" colspan="1"><p id="37d3b78355vbf">下载审批附件参数错误</p></td></tr><tr id="07864ad114vpi"><td id="3b808264701s0" rowspan="1" colspan="1"><p id="1df2626abfax1">400</p></td><td id="c317f412772tb" rowspan="1" colspan="1"><p id="c53f1a1b9ehgu">userNotExist</p></td><td id="456cf4dd6cw8b" rowspan="1" colspan="1"><p id="9c591ae351v65">用户不存在</p></td><td id="a4f560d64bt87" rowspan="1" colspan="1"><p id="b23ce78b97wbo">用户不存在</p></td></tr><tr id="ce3df92db90gf"><td id="b713acfbf2fl3" rowspan="1" colspan="1"><p id="87bc80af9dqpb">400</p></td><td id="c4369c7b6dxig" rowspan="1" colspan="1"><p id="838a1cf58a7u9">invalidProcessInstanceId</p></td><td id="cf10ad6d947y2" rowspan="1" colspan="1"><p id="bc1137ea480hv">实例id不能为空</p></td><td id="33d5ea3fdefqp" rowspan="1" colspan="1"><p id="609887dcdfqhc">实例id不能为空</p></td></tr><tr id="97175d1fb5sax"><td id="45f076d1c84k9" rowspan="1" colspan="1"><p id="956f90e925p0i">400</p></td><td id="1957185b03nc5" rowspan="1" colspan="1"><p id="3ae21d8ecc7qu">hsfIntegrationErrorCspaceGetCustomSpace</p></td><td id="da2d25b48emn0" rowspan="1" colspan="1"><p id="1f0a0c43af711">获取钉盘space的信息失败</p></td><td id="7a408dce12pdi" rowspan="1" colspan="1"><p id="c9d6dd3b124oh">获取钉盘space的信息失败</p></td></tr><tr id="80405e4c16opa"><td id="fe14a77074pg9" rowspan="1" colspan="1"><p id="faa604119efgm">400</p></td><td id="1fb8beadfadgi" rowspan="1" colspan="1"><p id="88a867d5914u6">hsfIntegrationErrorCspaceGetSimpleMicroAppByRelatedAppId</p></td><td id="f30f5e66a7tb0" rowspan="1" colspan="1"><p id="697ecb9d440ho">根据relatedAppId查询获取微应用信息失败</p></td><td id="554540d111qnz" rowspan="1" colspan="1"><p id="5134a013daso4">根据relatedAppId查询获取微应用信息失败</p></td></tr><tr id="fdca1f9433lox"><td id="5935a745e0jco" rowspan="1" colspan="1"><p id="5b53d0167dj8e">400</p></td><td id="e255fab8036nf" rowspan="1" colspan="1"><p id="c2076a2b9fi2g">hsfIntegrationErrorCspaceDentryServiceGrant</p></td><td id="5bcb4bb25fwbf" rowspan="1" colspan="1"><p id="315d36ffc8nwx">授权访问钉盘失败</p></td><td id="6f599221f8ifi" rowspan="1" colspan="1"><p id="b2c03b5a06gze">授权访问钉盘失败</p></td></tr><tr id="1ddeddebfcrmt"><td id="1b0d7789bcz95" rowspan="1" colspan="1"><p id="75356e313cgv4">400</p></td><td id="fc47c2e31eg0k" rowspan="1" colspan="1"><p id="9a00101b24ezk">hsfIntegrationErrorCspace</p></td><td id="704299f880ajx" rowspan="1" colspan="1"><p id="418ea82471n2t">钉盘附件依赖三方错误 </p></td><td id="d2b1c05cb4yty" rowspan="1" colspan="1"><p id="971c4667baxuo">钉盘附件依赖三方错误 </p></td></tr><tr id="f78e22a738ou9"><td id="7162d83863iqf" rowspan="1" colspan="1"><p id="121a9a29df5ic">400</p></td><td id="658b54d873o2r" rowspan="1" colspan="1"><p id="3608d709edv8s">invalidFileId</p></td><td id="c076dbe736wwn" rowspan="1" colspan="1"><p id="f92b7688d53hb">审批附件fileId不能为空</p></td><td id="3b5591ba2ch7h" rowspan="1" colspan="1"><p id="603d63e64621m">审批附件fileId不能为空</p></td></tr><tr id="69afc01cb84xu"><td id="97c4f033b1uzo" rowspan="1" colspan="1"><p id="d4ca4a0b4exnc">400</p></td><td id="d06822c799r3d" rowspan="1" colspan="1"><p id="f85f9de5b4vzd">processInstNotExist</p></td><td id="924abd3b2bgrf" rowspan="1" colspan="1"><p id="5d9cae0dc7ri3">审批实例不存在</p></td><td id="9525a5dea74fb" rowspan="1" colspan="1"><p id="f84cccdff70f7">审批实例不存在</p></td></tr><tr id="823327acd54uh"><td id="6a500de99a2ya" rowspan="1" colspan="1"><p id="03fb5d8b65r6n">400</p></td><td id="41d7703a33mol" rowspan="1" colspan="1"><p id="b2941543848hb">noPermission</p></td><td id="2ae9fac2e14zq" rowspan="1" colspan="1"><p id="8f9adee9feqaz">无访问权限</p></td><td id="a4a109de29hp2" rowspan="1" colspan="1"><p id="fecc76055e1tu">无访问权限</p></td></tr><tr id="6a8383a072c2e"><td id="7e9849f6ca1fn" rowspan="1" colspan="1"><p id="be1b9d9144odv">400</p></td><td id="fa64546325jn6" rowspan="1" colspan="1"><p id="2761630248rys">processNotExist</p></td><td id="8ac84d8048ow9" rowspan="1" colspan="1"><p id="0caa6aaea170p">审批流不存在</p></td><td id="68b7f80eddc3d" rowspan="1" colspan="1"><p id="8a0707cb37s7y">审批流不存在</p></td></tr><tr id="c822d290a42x9"><td id="5e932dab659v8" rowspan="1" colspan="1"><p id="fe2dbaa6ffsic">400</p></td><td id="69b0fb308epbr" rowspan="1" colspan="1"><p id="914adfa1e72cs">processGetFailedByParameter</p></td><td id="82f1aaa25fip0" rowspan="1" colspan="1"><p id="f254d059cck15">无操作审批流的权限，请检查审批实例或者模板是否正确</p></td><td id="f49dab6a921m3" rowspan="1" colspan="1"><p id="68237e5be2qrv">无操作审批流的权限，请检查审批实例或者模板是否正确</p></td></tr><tr id="fe854fc1d75bk"><td id="b9f9ed89d34qz" rowspan="1" colspan="1"><p id="3e8752e3e5byl">400</p></td><td id="ae010324488qh" rowspan="1" colspan="1"><p id="c01af6ec6f2jn">hsfIntegrationErrorCspaceDentryServiceGenerateDownloadPresignedUrl</p></td><td id="5d8da5e12blt2" rowspan="1" colspan="1"><p id="2d1d2217a506p">产生文件下载的链接失败</p></td><td id="8b6a90d0799kl" rowspan="1" colspan="1"><p id="77dfb634bdaci">产生文件下载的链接失败</p></td></tr><tr id="d416865494zbw"><td id="9c772301e812v" rowspan="1" colspan="1"><p id="0a6185791cx3y">400</p></td><td id="c1513230ddyz6" rowspan="1" colspan="1"><p id="5be2c75829qkp">internalError</p></td><td id="9327dd0bb2jjh" rowspan="1" colspan="1"><p id="82ca8204b64z7">%s</p></td><td id="e9d5d45e68327" rowspan="1" colspan="1"><p id="0b1badb77eo7i">系统内部异常</p></td></tr><tr id="fd57e1d544ufo"><td id="d0cb54017c0h6" rowspan="1" colspan="1"><p id="20be804705jlx">500</p></td><td id="7aa6e6706c8in" rowspan="1" colspan="1"><p id="a47d86c8e6cgt">systemError</p></td><td id="b8f7057edcnxg" rowspan="1" colspan="1"><p id="18a29db458732">系统异常</p></td><td id="22588909f0nm3" rowspan="1" colspan="1"><p id="d87bffcf91534">系统异常</p></td></tr></tbody></table></section></section></div></main></body></html>

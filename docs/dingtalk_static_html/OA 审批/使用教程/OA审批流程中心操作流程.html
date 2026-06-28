@@ -1,0 +1,619 @@
+<!DOCTYPE html><html><head><meta charset="utf8" / /><meta name="searchtitle" content="" / /><meta name="keywords" content="" / /><meta name="author" content="" / /><title>OA审批流程中心操作流程</title><meta name="gmtModify" content="2025-09-10 19:31:59" / /></head><body id="concept-2259353" data-tag="concept" class="concept"><main id="main-2259353"><h1 data-tag="title" id="c7bec8d04e7rf" class="title">OA审批流程中心操作流程</h1><p id="b89ecbd050nwx" data-tag="shortdesc" class="shortdesc">本文介绍了如何调用OA审批流程中心操作流程。</p><div data-tag="conbody" class="conbody"><section id="28950f034elb0" class="section"><h2 data-tag="title" id="28950f044e93z" class="title">预期效果</h2><section id="28950f054etvl" data-tag="sectiondiv" class="section sectiondiv"><h3 data-tag="title" id="28950f064e4us" class="title">发起审批</h3><p id="7bfcc8f053fdo"><span style="color:rgb(64, 64, 64)"><b>通过流程中心方式接入的三方审批，详情页样式跟官方界面是一致的，用户可以复用官方OA审批的评论、建群讨论等官方能力，同时可以支持三方自定义某些按钮功能。比如「同意」、「拒绝」按钮可以直接跳转到三方系统中去。</b></span><img placement="break" alt="image" src="https://help-static-aliyun-doc.aliyuncs.com/assets/img/zh-CN/6193809661/p521789.png" id="e9fcfa4069pfw" width="1262" class="image break" / /></p></section><section id="28950f094ekcd" data-tag="sectiondiv" class="section sectiondiv"><h3 data-tag="title" id="28950f0a4eeac" class="title">审批实例<img placement="break" alt="image" src="https://help-static-aliyun-doc.aliyuncs.com/assets/img/zh-CN/6193809661/p521790.png" id="180d4660691qk" width="1296" class="image break" / /></h3><section id="54c07c404etzg" data-tag="sectiondiv" class="section sectiondiv"><h3 data-tag="title" id="54c07c414e6hk" class="title"><b>待处理任务</b></h3><p id="833451b153e3j"><span style="color:rgb(64, 64, 64)"><b>通过流程中心接入后，创建待处理任务后，审批单详情页中会出现同意/拒绝操作按钮，同时流程中心会把该审批任务同步生成为钉钉待办任务，这样三方就可以复用到钉钉统一待办提醒功能。</b></span></p><ul id="f82d1c42648y6"><li id="f82d1c406432c"><p id="ce2910605fjfb"><span style="color:rgb(64, 64, 64)"><b>审批单详情页：</b></span><img placement="break" alt="image" src="https://help-static-aliyun-doc.aliyuncs.com/assets/img/zh-CN/7193809661/p517423.png" id="eba0ad7064757" width="1265" class="image break" / /></p></li><li id="f9f754f064p30"><p id="d7b007605fgp0"><span style="color:rgb(64, 64, 64)"><b>钉钉待办中心：</b></span><img placement="break" alt="image" src="https://help-static-aliyun-doc.aliyuncs.com/assets/img/zh-CN/6193809661/p517424.png" id="1d763ef0646pp" width="1290" class="image break" / /></p></li></ul></section></section></section><section id="28950f0e4e6mj" class="section"><h2 data-tag="title" id="28950f0f4es2b" class="title">接入流程简介</h2><p id="28950f104etha">本文档展示了，创建一个企业内部应用，使用OA审批流程中心提供的API，实现创建/更新/删除三方审批模板、创建/更新审批实例、创建/更新/查询审批待办任务、清理OA审批数据等流程：</p><p id="08c34fd23cq6f">前提条件：完成<a data-tag="xref" id="042db65a7511k" href="/document/dingstart/create-application#" class="xref">创建应用</a>的流程。</p><p id="cc3581a50bu3k">步骤一：进入应用详情页，获取应用 Client ID 和 Client Secret。</p><p id="28950f124e8nf">步骤二：申请接口权限，申请“OA审批”相应权限。</p><p id="28950f144eaxp">步骤三：获取应用访问凭证<a data-tag="xref" id="398d191cf452w" href="/document/development/obtain-the-access-token-of-an-internal-app#" class="xref">获取企业内部应用的accessToken</a>。调用接口时，通过accessToken鉴权调用者身份。</p><p id="28950f154edln">步骤四：调用OA审批相关API：</p><ol id="28950f164e7c6"><li id="28950f174e7m6"><p id="28950f184eidw">调用新版服务端API-<a data-tag="xref" id="2ca98672021t7" href="/document/development/create-or-update-approval-templates-new#" class="xref">创建或更新审批模板</a>接口，获取模板的唯一编码<code data-tag="code" id="d823ce6c28vtq" class="code">processCode</code>。</p></li><li id="d54de0f14ezik"><p id="d54de0f04ei7o">如果没有保存<code data-tag="code" id="16e34a115dnnr" class="code">processCode</code>，可以通过调用<a data-tag="xref" id="afa53d3654lrv" href="/document/development/obtain-the-template-code#" class="xref">获取模板code</a>接口获取<code data-tag="code" id="f8ebf52dfbqdv" class="code">processCode</code>。</p></li><li id="d94e17014e8bi"><p id="d94e17004efs1">创建审批模板成功后，用户可以在钉钉OA审批管理后台，查看三方自有审批单模板、查看/搜索模板数据、导出/删除模板数据等。</p></li><li id="28950f1b4e3h5"><p id="28950f1c4e5ut">根据模板编码<code data-tag="code" id="eeea06d31a0by" class="code">processCode</code>，调用新版服务端API-<a data-tag="xref" id="c200cefd82rod" href="/document/development/create-a-ticket-approval-instance#" class="xref">创建实例</a>接口发起审批实例，获取审批实例<code data-tag="code" id="42d2e243fc47l" class="code">processInstanceId</code>。</p></li><li id="41ee4cd14e4em"><p id="41ee4cd04ew7u">创建审批实例成功后，用户也可以进入钉钉OA审批中心，查看审批四大列表（待处理、已处理、已发起、我收到的）、搜索审批实例数据、执行审批等操作。</p></li><li id="b5ad09914emn1"><p id="0309b9904exhb">根据审批实例<code data-tag="code" id="7f5c90e6c1e1r" class="code">processInstanceId</code>和待办事项列表tasks，调用<a data-tag="xref" id="f3e692af8fkxa" href="/document/development/create-pending-tasks-in-process-center#" class="xref">创建流程中心待处理任务</a>接口，可以将三方系统内的审批节点信息同步到钉钉OA审批，获取待办事项的taskId并生成对应的钉钉待办任务。</p></li><li id="275717214el5o"><p id="275717204eme4">创建待处理任务成功后，调用<a data-tag="xref" id="6dcf133fb2w2v" href="/document/development/query-oa-approval-tasks-integrated-through-process-center#" class="xref">查询通过流程中心集成的OA审批任务</a>接口，可以查询到用户运行中的审批任务。</p></li><li id="df3f1f914e6d4"><p id="e486e6404etrd">根据审批实例<code data-tag="code" id="e5c073f70bxiy" class="code">processInstanceId</code>和审批待办任务taskId，可以调用<a data-tag="xref" id="2d69affa6c4cd" href="/document/development/update-process-center-task-status#" class="xref">更新流程中心任务状态</a>接口，同步完成自有审批待办状态的更新。在或签等场景，可以调用<a data-tag="xref" id="c96a551b1fn3e" href="/document/development/cancel-multiple-oa-approval-tasks#" class="xref">批量取消流程中心待处理任务</a>接口，批量将审批实例下正在运行中的待办事项设置为CANCELED。</p></li><li id="dabb45214e5bx"><p id="d8a0f0a04el85">根据审批实例<code data-tag="code" id="ff8deb3f6f1me" class="code">processInstanceId</code>和实例状态status、实例结果result等，可以调用<a data-tag="xref" id="e99bd9c92adpu" href="/document/development/update-instance-status#" class="xref">更新实例状态</a>或 <a data-tag="xref" id="6aa4445246kqq" href="/document/development/update-the-status-of-multiple-instances-at-a-time-new#" class="xref">批量更新实例状态</a>接口，更新实例状态。</p></li><li id="28950f284encd"><p id="28950f294e6np">最后，若需要对审批模板数据进行清理，可以调用<a data-tag="xref" id="12a39dee88l01" href="/document/development/delete-a-template-new#" class="xref">删除模板</a>接口，删除为企业创建的审批模板，同时删除该模板下创建的实例和待办任务。</p></li></ol></section><section id="5d94c5e639hev" class="section"><h2 id="83c4b311e6ea2" sourceKey="2000000045449"><b>前提条件</b></h2><p id="e7709e99404zf">完成<a data-tag="xref" id="1d1dd578b56l8" href="/document/dingstart/create-application#" class="xref">创建应用</a>的流程。</p></section><section id="668f0dd90eg49" class="section"><h2 id="a2e1e76555ax6" sourceKey="2000000045463"><b>步骤一：获取应用凭证</b></h2><ol id="983289892fcxn" start="1" sourceKey="2000000045466"><li id="7188f97774ek8" sourceKey="2000000045468"><p id="c38342ef0by8p">选择目标应用，进入应用详情页，单击<b>基础信息</b> &gt; <b>凭证与基础信息</b>。</p></li><li id="c091bffae1ogq" sourceKey="2000000045473"><p id="43fa5c79a4kmw">获取应用 Client ID 和 Client Secret。</p></li></ol></section><section id="28950f3b4et0b" class="section"><h2 data-tag="title" id="28950f3c4evyu" class="title">步骤二：添加接口权限</h2><p id="45abafdf33kmp"><span style="color:rgb(23, 26, 29)">单击</span><span style="color:rgb(23, 26, 29)"><b>开发配置 </b></span><span style="color:rgb(23, 26, 29)">&gt; </span><span style="color:rgb(23, 26, 29)"><b>权限管理</b></span><span style="color:rgb(23, 26, 29)">，在权限搜索框中分别输入</span><code data-tag="code" id="94f99a3a2f725" class="code"><span style="color:rgb(51, 51, 51)">Workflow.Form.Write</span></code>、<code data-tag="code" id="03131c80b29ez" class="code"><span style="color:rgb(51, 51, 51)">Workflow.Instance.Write</span></code><span style="color:rgb(23, 26, 29)">、</span><code data-tag="code" id="660bb66c48obb" class="code"><span style="color:rgb(51, 51, 51)">Workflow.Instance.Read</span></code><span style="color:rgb(102, 102, 102)">和</span><code data-tag="code" id="4ea8a1ccddydg" class="code"><span style="color:rgba(0, 0, 0, 0.85);background-color:rgb(250, 250, 250)">qyapi_aflow</span></code><span style="color:rgba(0, 0, 0, 0.85);background-color:rgb(250, 250, 250)">，</span><span style="color:rgb(102, 102, 102)">并申请权限。</span></p></section><section id="6741a93603agx" class="section"><h2 id="c24bc98c53ar9" data-tag="title" sourcekey="2000000030145" class="title">步骤三：获取应用访问凭证accessToken</h2><div id="e7227ddf19xrj" type="notice" sourcekey="2000000030148" class="note note-notice"><div class="note-icon-wrapper"><i class="icon-note note notice"></i></div><div class="noteContentSpan"><strong>重要 </strong><p id="60641e7cb6oew">服务端API差异详情参见<a data-tag="xref" id="e2a8e3961fjcf" href="/document/development/how-to-call-apis#section-8lr-id4-rbz" class="xref">旧版服务端API、新版服务端API的区别</a>。以下接口均使用服务端API接口，SDK下载详情参见<a data-tag="xref" id="f249675b59boe" href="/document/development/download-the-server-side-sdk#" class="xref">服务端SDK下载</a>。</p></div></div><p id="31bc9ba5a4zgg">根据步骤一中的 Client ID 和 Client Secret，获取应用访问凭证<a data-tag="xref" id="75a6a1f4b9q4a" href="/document/development/obtain-the-access-token-of-an-internal-app#" class="xref">获取企业内部应用的accessToken</a>。</p><pre data-tag="codeblock" id="5cc78451bcfzo" outputclass="language-javascript" code-type="xCode" sourcekey="2000000030191" class="pre codeblock language-javascript"><code> public void getAccessToken() throws Exception {
+        Config config = new Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        com.aliyun.dingtalkoauth2_1_0.Client client = new com.aliyun.dingtalkoauth2_1_0.Client(config);
+        GetAccessTokenRequest accessTokenRequest = new GetAccessTokenRequest()
+                .setAppKey("din*********hgn")
+                .setAppSecret("9G_O************mBkhgGIO");
+        GetAccessTokenResponse accessToken = client.getAccessToken(accessTokenRequest);
+        System.out.println(JSON.toJSONString(accessToken.getBody()));
+    }</code></pre></section><section id="28950f4b4ewvv" class="section"><h2 data-tag="title" id="28950f4c4ebs4" class="title">步骤四：调用服务端OA相关API</h2><ol id="28950f4d4e6za"><li id="28950f4e4em39"><p id="28950f4f4erwk">调用新版服务端API-<a data-tag="xref" id="723f60c6bdlx2" href="/document/development/create-or-update-approval-templates-new#" class="xref">创建或更新审批模板</a>接口，获取模板的唯一编码<code data-tag="code" id="8167bdba91r94" class="code">processCode</code>。</p><div id="28950f504erdq" type="note" class="note note-note"><div class="note-icon-wrapper"><i class="icon-note note note"></i></div><div class="noteContentSpan"><strong>说明 </strong><p id="28950f514eo73">若没有保存接口返回的模板编码<code data-tag="code" id="34822f9dc84k1" class="code">processCode</code>，可以通过调用<a data-tag="xref" id="b726015475qky" href="/document/development/obtain-the-template-code#" class="xref">获取模板code</a>接口获取<code data-tag="code" id="178239527209j" class="code">processCode</code>。</p></div></div><pre outputclass="language-javascript" data-tag="codeblock" id="28950f564evnw" code-type="xCode" class="pre codeblock language-javascript"><code>  public void  saveProcess() throws Exception {
+        Config config = new Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        com.aliyun.dingtalkworkflow_1_0.Client client = new com.aliyun.dingtalkworkflow_1_0.Client(config);
+        SaveProcessHeaders saveProcessHeaders = new SaveProcessHeaders();
+        saveProcessHeaders.xAcsDingtalkAccessToken = "accessToken";
+
+        // 1. 单行输入控件
+        FormComponentProps formComponentProps1 = new FormComponentProps()
+                .setComponentId("TextField-abcd")
+                .setPlaceholder("请输入")
+                .setLabel("单行输入")
+                .setRequired(true);
+        FormComponent formComponent1 = new FormComponent()
+                .setComponentType("TextField")
+                .setProps(formComponentProps1);
+        // 2. 多行输入控件
+        FormComponentProps formComponentProps2 = new FormComponentProps()
+                .setComponentId("TextareaField-abcd")
+                .setPlaceholder("请输入")
+                .setLabel("多行输入")
+                .setRequired(true);
+        FormComponent formComponent2 = new FormComponent()
+                .setComponentType("TextareaField")
+                .setProps(formComponentProps2);
+        // 3. 数字输入控件
+        FormComponentProps formComponentProps3 = new FormComponentProps()
+                .setComponentId("NumberField-abcd")
+                .setPlaceholder("请输入")
+                .setLabel("数字输入")
+                .setUnit("元")
+                .setRequired(true);
+        FormComponent formComponent3 = new FormComponent()
+                .setComponentType("NumberField")
+                .setProps(formComponentProps3);
+        // 4. 单选控件
+        SelectOption option1 = new SelectOption();
+        option1.setKey("option1");
+        option1.setValue("选项1");
+        SelectOption option2 = new SelectOption();
+        option2.setKey("option2");
+        option2.setValue("选项2");
+        FormComponentProps formComponentProps4 = new FormComponentProps()
+                .setComponentId("DDSelectField-abcd")
+                .setPlaceholder("请选择")
+                .setLabel("单选")
+                .setBizAlias("staff_type")
+                .setOptions(java.util.Arrays.asList(option1, option2))
+                .setRequired(true);
+        FormComponent formComponent4 = new FormComponent()
+                .setComponentType("DDSelectField")
+                .setProps(formComponentProps4);
+
+        // 5. 多选控件
+        SelectOption option3 = new SelectOption();
+        option3.setKey("option1");
+        option3.setValue("选项1");
+        SelectOption option4 = new SelectOption();
+        option4.setKey("option2");
+        option4.setValue("选项2");
+        FormComponentProps formComponentProps5 = new FormComponentProps()
+                .setComponentId("DDMultiSelectField-abcd")
+                .setPlaceholder("请选择")
+                .setLabel("多选")
+                .setOptions(java.util.Arrays.asList(option3, option4))
+                .setRequired(true);
+        FormComponent formComponent5 = new FormComponent()
+                .setComponentType("DDMultiSelectField")
+                .setProps(formComponentProps5);
+
+        // 6. 日期控件
+        FormComponentProps formComponentProps6 = new FormComponentProps()
+                .setComponentId("DDDateField-abcd")
+                .setPlaceholder("请选择")
+                .setLabel("日期")
+                .setUnit("小时")
+                .setFormat("yyyy-MM-dd HH:mm")
+                .setRequired(true);
+        FormComponent formComponent6 = new FormComponent()
+                .setComponentType("DDDateField")
+                .setProps(formComponentProps6);
+
+        // 7. 时间区间控件
+        FormComponentProps formComponentProps7 = new FormComponentProps()
+                .setComponentId("DDDateRangeField-abcd")
+                .setPlaceholder("请选择")
+                .setLabel("[\"开始时间\",\"结束时间\"]")
+                .setUnit("小时")
+                .setFormat("yyyy-MM-dd HH:mm")
+                .setRequired(true);
+        FormComponent formComponent7 = new FormComponent()
+                .setComponentType("DDDateRangeField")
+                .setProps(formComponentProps7);
+
+        // 8. 文字说明控件
+        FormComponentProps formComponentProps8 = new FormComponentProps()
+                .setComponentId("TextNote-abcd")
+                .setLabel("说明")
+                .setContent("详细说明内容")
+                .setLink("https://www.dingtalk.com/")
+                .setPrint("0")
+                .setRequired(false);
+        FormComponent formComponent8 = new FormComponent()
+                .setComponentType("TextNote")
+                .setProps(formComponentProps8);
+
+        // 10. 图片控件
+        FormComponentProps formComponentProps10 = new FormComponentProps()
+                .setComponentId("DDPhotoField-abcd")
+                .setLabel("图片");
+        FormComponent formComponent10 = new FormComponent()
+                .setComponentType("DDPhotoField")
+                .setProps(formComponentProps10);
+
+        // 11. 金额控件
+        FormComponentProps formComponentProps11 = new FormComponentProps()
+                .setComponentId("MoneyField-abcd")
+                .setUpper("0")
+                .setPlaceholder("请输入金额")
+                .setLabel("奖金（元）");
+        FormComponent formComponent11 = new FormComponent()
+                .setComponentType("MoneyField")
+                .setProps(formComponentProps11);
+
+        // 13. 附件控件
+        FormComponentProps formComponentProps13 = new FormComponentProps()
+                .setComponentId("DDAttachment-abcd")
+                .setLabel("附件");
+        FormComponent formComponent13 = new FormComponent()
+                .setComponentType("DDAttachment")
+                .setProps(formComponentProps13);
+
+        // 14. 联系人控件
+        FormComponentProps formComponentProps14 = new FormComponentProps()
+                .setComponentId("InnerContactField-abcd")
+                .setLabel("联系人")
+                .setChoice("1");
+        FormComponent formComponent14 = new FormComponent()
+                .setComponentType("InnerContactField")
+                .setProps(formComponentProps14);
+
+        // 15. 部门控件
+        FormComponentProps formComponentProps15 = new FormComponentProps()
+                .setComponentId("DepartmentField-abcd")
+                .setLabel("部门")
+                .setMultiple(false);
+        FormComponent formComponent15 = new FormComponent()
+                .setComponentType("DepartmentField")
+                .setProps(formComponentProps15);
+
+        // 16. 关联审批单控件
+        AvaliableTemplate template = new AvaliableTemplate();
+        template.setName("出差申请单");
+        template.setProcessCode("出差申请单的ProcessCode");
+        FormComponentProps formComponentProps16 = new FormComponentProps()
+                .setComponentId("RelateField-abcd")
+                .setLabel("关联审批单")
+                .setAvailableTemplates(java.util.Arrays.asList(template));
+        FormComponent formComponent16 = new FormComponent()
+                .setComponentType("RelateField")
+                .setProps(formComponentProps16);
+
+        // 17. 省市区控件
+        FormComponentProps formComponentProps17 = new FormComponentProps()
+                .setComponentId("AddressField-abcd")
+                .setLabel("省市区")
+                .setPlaceholder("请选择")
+                .setAddressModel("city");
+        FormComponent formComponent17 = new FormComponent()
+                .setComponentType("AddressField")
+                .setProps(formComponentProps17);
+
+        // 18. 评分控件
+        FormComponentProps formComponentProps18 = new FormComponentProps()
+                .setComponentId("StarRatingField-abcd")
+                .setLabel("请输入")
+                .setLimit(5);
+        FormComponent formComponent18 = new FormComponent()
+                .setComponentType("StarRatingField")
+                .setProps(formComponentProps18);        
+                      
+        SaveProcessRequestProcessFeatureConfigFeatures features1 = new SaveProcessRequestProcessFeatureConfigFeatures()
+            .setName("TASK_EXECUTE")
+            .setRunType("REDIRECT")
+            .setPcUrl("https://www.dingtalk.com")
+            .setMobileUrl("https://www.dingtalk.com");
+
+      	SaveProcessRequestProcessFeatureConfig processFeatureConfig = new SaveProcessRequestProcessFeatureConfig()
+        		.setFeatures(java.util.Arrays.asList(features1));
+        
+        SaveProcessRequest saveProcessRequest = new SaveProcessRequest()
+                .setName("出差报销审批")
+                .setDescription("用于员工差旅费用报销使用")
+                .setFormComponents(java.util.Arrays.asList(
+                        formComponent1, formComponent2, formComponent3, formComponent4, formComponent5,
+                        formComponent6, formComponent7, formComponent8, formComponent10,
+                        formComponent11, formComponent13, formComponent14, formComponent15,
+                        formComponent16, formComponent17, formComponentProps18
+                ))
+                .setProcessFeatureConfig(processFeatureConfig);
+        try {
+            SaveProcessResponse saveProcessResponse = client.saveProcessWithOptions(saveProcessRequest, saveProcessHeaders, new RuntimeOptions());
+            System.out.println(JSON.toJSONString(saveProcessResponse.getBody()));
+        } catch (TeaException err) {
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+              	System.out.println(err.code);
+                System.out.println(err.message);
+            }
+
+        } catch (Exception _err) {
+            TeaException err = new TeaException(_err.getMessage(), _err);
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+              	System.out.println(err.code);
+                System.out.println(err.message);
+            }
+        } 
+    }</code></pre></li><li id="28950f574ech8"><p id="b6e947304euzg">如果没有保存<code data-tag="code" id="614ae9c992zar" class="code">processCode</code>，可以通过调用<a data-tag="xref" id="f113316cc7puq" href="/document/development/obtain-the-template-code#" class="xref">获取模板code</a>接口获取<code data-tag="code" id="58ffdd9556w03" class="code">processCode</code>。</p><pre outputclass="language-java" data-tag="codeblock" id="28950f594emh4" code-type="xCode" class="pre codeblock language-java"><code>public void getProcessCodeByName() throws Exception {
+        Config config = new Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        com.aliyun.dingtalkworkflow_1_0.Client client = new com.aliyun.dingtalkworkflow_1_0.Client(config);
+        com.aliyun.dingtalkworkflow_1_0.models.GetProcessCodeByNameHeaders getProcessCodeByNameHeaders = new com.aliyun.dingtalkworkflow_1_0.models.GetProcessCodeByNameHeaders();
+        getProcessCodeByNameHeaders.xAcsDingtalkAccessToken = "accessToken";
+        com.aliyun.dingtalkworkflow_1_0.models.GetProcessCodeByNameRequest getProcessCodeByNameRequest = new com.aliyun.dingtalkworkflow_1_0.models.GetProcessCodeByNameRequest()
+                .setName("名称");
+        try {
+            GetProcessCodeByNameResponse getProcessCodeByNameResponse = client.getProcessCodeByNameWithOptions(getProcessCodeByNameRequest, getProcessCodeByNameHeaders, new RuntimeOptions());
+            System.out.println(JSON.toJSONString(getProcessCodeByNameResponse.getBody()));
+        } catch (TeaException err) {
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+                System.out.println(err.code);
+                System.out.println(err.message);
+            }
+        } catch (Exception _err) {
+            TeaException err = new TeaException(_err.getMessage(), _err);
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+                System.out.println(err.code);
+                System.out.println(err.message);
+            }
+        }
+    }</code></pre></li><li id="28950f5b4eae5"><p id="8b1b10f04e1gm">创建审批模板成功后，用户可以在钉钉OA审批管理后台，查看自有审批单模板。</p><p id="d4a1a06064tkk"><b>钉钉客户端 &gt; 工作台 &gt; OA审批 &gt; 管理后台 </b><img id="3eb59830644nt" src="https://help-static-aliyun-doc.aliyuncs.com/assets/img/zh-CN/7193809661/p517459.gif" alt="未标题-1" placement="break" class="image break" / /></p></li><li id="28950f5f4ersm"><p id="55d8ebf04e9z8">根据模板编码<code data-tag="code" id="5fbb064b1cz9t" class="code">processCode</code>，调用新版服务端API-<a data-tag="xref" id="397a83c813t83" href="/document/development/create-a-ticket-approval-instance#" class="xref">创建实例</a>接口发起审批实例，获取审批实例<code data-tag="code" id="2a1a1edddaqnf" class="code">processInstanceId</code>。</p><pre outputclass="language-java" data-tag="codeblock" id="28950f614eij3" code-type="xCode" class="pre codeblock language-java"><code>public void saveIntegratedInstance() throws Exception {
+        Config config = new Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        com.aliyun.dingtalkworkflow_1_0.Client client = new com.aliyun.dingtalkworkflow_1_0.Client(config);
+        SaveIntegratedInstanceHeaders saveIntegratedInstanceHeaders = new SaveIntegratedInstanceHeaders();
+        saveIntegratedInstanceHeaders.xAcsDingtalkAccessToken = "accessToken";
+  
+        //1.单行输入框组件
+        SaveIntegratedInstanceRequest.SaveIntegratedInstanceRequestFormComponentValueList formComponentValues1 = new SaveIntegratedInstanceRequest.SaveIntegratedInstanceRequestFormComponentValueList()
+                .setName("客户名称")
+                .setValue("小钉");
+
+        //2.多行输入框组件
+        SaveIntegratedInstanceRequest.SaveIntegratedInstanceRequestFormComponentValueList formComponentValues2 = new SaveIntegratedInstanceRequest.SaveIntegratedInstanceRequestFormComponentValueList()
+                .setName("客户描述")
+                .setValue("潜在优质客户");
+  
+        //3.数字输入框组件
+        SaveIntegratedInstanceRequest.SaveIntegratedInstanceRequestFormComponentValueList formComponentValues3 = new SaveIntegratedInstanceRequest.SaveIntegratedInstanceRequestFormComponentValueList()
+                .setName("数量")
+                .setValue("100");
+  
+        //4.单选框组件
+        SaveIntegratedInstanceRequest.SaveIntegratedInstanceRequestFormComponentValueList formComponentValues4 = new SaveIntegratedInstanceRequest.SaveIntegratedInstanceRequestFormComponentValueList()
+                .setName("客户类型")
+                .setValue("大客户");
+  
+        //5.多选框组件
+        SaveIntegratedInstanceRequest.SaveIntegratedInstanceRequestFormComponentValueList formComponentValues5;
+        formComponentValues5 = new SaveIntegratedInstanceRequest.SaveIntegratedInstanceRequestFormComponentValueList()
+                .setName("客户标签")
+                .setValue("[\"重要\",\"一般\"]")
+                .setComponentType("DDMultiSelectField");
+
+        //6.日期组件，日期时间格式需要与创建OA审批模板中的日期控件格式一致
+        SaveIntegratedInstanceRequest.SaveIntegratedInstanceRequestFormComponentValueList formComponentValues6 = new SaveIntegratedInstanceRequest.SaveIntegratedInstanceRequestFormComponentValueList()
+                .setName("日期")
+                .setValue("2022-08-14 15:00");
+  
+        //7.日期区间组件，日期时间格式需要与创建OA审批模板中的时间区间控件格式一致
+        SaveIntegratedInstanceRequest.SaveIntegratedInstanceRequestFormComponentValueList formComponentValues7 = new SaveIntegratedInstanceRequest.SaveIntegratedInstanceRequestFormComponentValueList()
+                .setName("[\"客户达成意向开始时间\",\"客户达成意向结束时间\"]")
+                .setValue("[\"2022-08-14 15:00\",\"2022-08-15 15:00\"]");
+
+        //8.文字说明组件
+        SaveIntegratedInstanceRequest.SaveIntegratedInstanceRequestFormComponentValueList formComponentValues8 = new SaveIntegratedInstanceRequest.SaveIntegratedInstanceRequestFormComponentValueList()
+                .setName("文字说明")
+                .setValue("详细说明内容");
+    
+        //10.图片组件
+        SaveIntegratedInstanceRequest.SaveIntegratedInstanceRequestFormComponentValueList formComponentValues10 = new SaveIntegratedInstanceRequest.SaveIntegratedInstanceRequestFormComponentValueList()
+                .setName("图片")
+                .setValue("[\"http://url1\",\"http://url2\",\"http://url3\"]");
+        
+  			//11.金额组件
+        SaveIntegratedInstanceRequest.SaveIntegratedInstanceRequestFormComponentValueList formComponentValues11 = new SaveIntegratedInstanceRequest.SaveIntegratedInstanceRequestFormComponentValueList()
+                .setName("金额（元）")
+                .setValue("100");
+
+  			/*
+        		附件控件的 value 是一个 json 数组转义为字符串形式。数组中的每个 json 对象是一个附件文件，
+          	每个文件都必须包含 spaceId、fileName、fileSize、fileType 和 fileId 字段，这些字段
+          	都可以通过调用钉盘的上传附件接口获取。
+        */
+    		//13.附件组件
+        SaveIntegratedInstanceRequest.SaveIntegratedInstanceRequestFormComponentValueList formComponentValues13 = new SaveIntegratedInstanceRequest.SaveIntegratedInstanceRequestFormComponentValueList()
+                .setName("附件")
+                .setValue("[{\"spaceId\": \"163xxxx658\", \"fileName\": \"2644.JPG\", \"fileSize\": \"333\", \"fileType\": \"jpg\", \"fileId\": " +
+    "\"643xxxx140\"}]");    
+  
+  
+  			//14.联系人组件，注意联系人控件需要指定extValue值，具体格式参考下面示例，其中emplId和itemId为用户userId
+        SaveIntegratedInstanceRequest.SaveIntegratedInstanceRequestFormComponentValueList formComponentValues14 = new SaveIntegratedInstanceRequest.SaveIntegratedInstanceRequestFormComponentValueList()
+                .setName("联系人")
+                .setValue(JSON.toJSONString(Arrays.asList("联系人名称")))
+                .setExtValue("[{\"name\":\"小钉\",\"emplId\":\"userid123\",\"itemId\":\"userid123\"}]");
+
+        //15.部门组件
+        SaveIntegratedInstanceRequest.SaveIntegratedInstanceRequestFormComponentValueList formComponentValues15 = new SaveIntegratedInstanceRequest.SaveIntegratedInstanceRequestFormComponentValueList()
+                .setName("联系人部门")
+                .setValue("部门ID");
+                            
+        //16.关联审批单组件，注意关联审批单控件需要指定extValue值，具体格式参考下面示例，其中procInstId为需要关联的审批实例id
+        SaveIntegratedInstanceRequest.SaveIntegratedInstanceRequestFormComponentValueList formComponentValues16 = new SaveIntegratedInstanceRequest.SaveIntegratedInstanceRequestFormComponentValueList()
+                .setName("关联审批单")
+                .setValue(JSON.toJSONString(Arrays.asList("xxx提交的出差报销审批")))
+          			.setExtValue("{\"list\":[{\"procInstId\":\"zUUgcEmeSQG-xxx\"}]}");
+                            
+        //17.省市区组件
+        SaveIntegratedInstanceRequest.SaveIntegratedInstanceRequestFormComponentValueList formComponentValues17 = new SaveIntegratedInstanceRequest.SaveIntegratedInstanceRequestFormComponentValueList()
+                .setName("客户地址")
+                .setValue(JSON.toJSONString(Arrays.asList("北京,北京市,朝阳区,东湖街道,xxxxxxxA座")));
+                            
+        //18.评分组件
+        SaveIntegratedInstanceRequest.SaveIntegratedInstanceRequestFormComponentValueList formComponentValues18 = new SaveIntegratedInstanceRequest.SaveIntegratedInstanceRequestFormComponentValueList()
+                .setName("评分")
+                .setValue("5");
+
+  			//设置抄送人
+       SaveIntegratedInstanceRequest.SaveIntegratedInstanceRequestNotifiers notifiers0 = new SaveIntegratedInstanceRequest.SaveIntegratedInstanceRequestNotifiers()
+                .setUserid("manager001")
+                .setPosition("start");
+   		
+  		SaveIntegratedInstanceRequest saveIntegratedInstanceRequest = new SaveIntegratedInstanceRequest()
+                .setProcessCode("proc")
+                .setOriginatorUserId("manager1234")
+                .setFormComponentValueList(java.util.Arrays.asList(
+                   formComponentValues1, formComponentValues2, formComponentValues3, formComponentValues4,
+                   formComponentValues5, formComponentValues6, formComponentValues7, formComponentValues8,
+                   formComponentValues10, formComponentValues11,
+                   formComponentValues13,formComponentValues14,formComponentValues15, formComponentValues16, 
+                   formComponentValues17, formComponentValues18
+                ))
+                .setTitle("xxx的审批")
+                .setUrl("https://www.dingtalk.com/")
+                .setNotifiers(java.util.Arrays.asList(
+                    notifiers0
+                ));
+        try {
+            SaveIntegratedInstanceResponse saveIntegratedInstanceResponse = client.saveIntegratedInstanceWithOptions(saveIntegratedInstanceRequest, saveIntegratedInstanceHeaders, new RuntimeOptions());
+            System.out.println(JSON.toJSONString(saveIntegratedInstanceResponse.getBody()));
+        } catch (TeaException err) {
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+                System.out.println(err.code);
+                System.out.println(err.message);
+            }
+        } catch (Exception _err) {
+            TeaException err = new TeaException(_err.getMessage(), _err);
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+                System.out.println(err.code);
+                System.out.println(err.message);
+            }
+        }
+    }</code></pre></li><li id="aea6ebe14ee4c"><p id="b8095f604euv2">根据审批实例<code data-tag="code" id="6aea3beaf4iih" class="code">processInstanceId</code>和待办事项列表tasks，调用<a data-tag="xref" id="d6ce93753c2aq" href="/document/development/create-pending-tasks-in-process-center#" class="xref">创建流程中心待处理任务</a>接口，可以将三方系统内的审批节点信息同步到钉钉OA审批，获取待办事项的taskId并生成对应的钉钉待办任务。创建待处理任务后，审批单详情页中会出现同意/拒绝操作按钮，同时流程中心会把该审批任务同步生成为钉钉待办任务，这样三方就可以复用到钉钉统一待办提醒功能。</p></li></ol><pre outputclass="language-java" data-tag="codeblock" id="28950f684e8tl" code-type="xCode" class="pre codeblock language-java"><code>public void createIntegratedTask() throws Exception {
+        Config config = new Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        com.aliyun.dingtalkworkflow_1_0.Client client = new com.aliyun.dingtalkworkflow_1_0.Client(config);
+  			CreateIntegratedTaskHeaders createIntegratedTaskHeaders = new CreateIntegratedTaskHeaders();
+        createIntegratedTaskHeaders.xAcsDingtalkAccessToken = "accessToken";
+        CreateIntegratedTaskRequest.CreateIntegratedTaskRequestTasks tasks0 = new CreateIntegratedTaskRequest.CreateIntegratedTaskRequestTasks()
+                .setUserId("manager001")
+                .setUrl("https://www.dingtalk.com");
+        CreateIntegratedTaskRequest createIntegratedTaskRequest = new CreateIntegratedTaskRequest()
+                .setProcessInstanceId("S3j8rbiNT1CsXXXXXV3Q1Q04431661334483")
+                .setActivityId("act_xxxxx")
+                .setTasks(java.util.Arrays.asList(
+                    tasks0
+                ));
+        try {
+            CreateIntegratedTaskResponse createIntegratedTaskResponse = client.createIntegratedTaskWithOptions(createIntegratedTaskRequest, createIntegratedTaskHeaders, new RuntimeOptions());
+            System.out.println(JSON.toJSONString(createIntegratedTaskResponse.getBody()));
+        } catch (TeaException err) {
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+                System.out.println(err.code);
+                System.out.println(err.message);
+            }
+        } catch (Exception _err) {
+            TeaException err = new TeaException(_err.getMessage(), _err);
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+                System.out.println(err.code);
+                System.out.println(err.message);
+            }
+        }
+    }</code></pre><ol start="7" id="5b4602024eglq"><li id="5b4602004ekrz"><p id="5f6cef604exjv">创建待处理任务成功后，调用<a data-tag="xref" id="3a50509689m08" href="/document/development/query-oa-approval-tasks-integrated-through-process-center#" class="xref">查询通过流程中心集成的OA审批任务</a>接口，可以查询到用户运行中的审批任务。</p></li></ol><pre outputclass="language-java" data-tag="codeblock" id="55c837344ep9y" code-type="xCode" class="pre codeblock language-java"><code>public void  queryIntegratedTodoTask() throws Exception {
+        Config config = new Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        com.aliyun.dingtalkworkflow_1_0.Client client = new com.aliyun.dingtalkworkflow_1_0.Client(config);
+        QueryIntegratedTodoTaskHeaders queryIntegratedTodoTaskHeaders = new QueryIntegratedTodoTaskHeaders();
+        queryIntegratedTodoTaskHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        QueryIntegratedTodoTaskRequest queryIntegratedTodoTaskRequest = new QueryIntegratedTodoTaskRequest()
+                .setUserId("manager001")
+                .setPageSize(10)
+                .setPageNumber(1)
+                .setCreateBefore(1660036833411L);
+        try {
+            QueryIntegratedTodoTaskResponse queryIntegratedTodoTaskResponse = client.queryIntegratedTodoTaskWithOptions(queryIntegratedTodoTaskRequest, queryIntegratedTodoTaskHeaders, new RuntimeOptions());
+            System.out.println(JSON.toJSONString(queryIntegratedTodoTaskResponse.getBody()));
+        } catch (TeaException err) {
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+                System.out.println(err.code);
+                System.out.println(err.message);
+            }
+        } catch (Exception _err) {
+            TeaException err = new TeaException(_err.getMessage(), _err);
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+                System.out.println(err.code);
+                System.out.println(err.message);
+            }
+        }
+    }</code></pre><ol start="8" id="399964624fv06"><li id="399964604fr9i"><p id="2d4f55c04f2sn">根据审批实例<code data-tag="code" id="cb9e89093bt65" class="code">processInstanceId</code>和审批待办任务taskId，可以调用<a data-tag="xref" id="aa68f7234aaz9" href="/document/development/update-process-center-task-status#" class="xref">更新流程中心任务状态</a>接口，同步完成自有审批待办状态的更新。在或签等场景，可以调用<a data-tag="xref" id="210c95bc7bb23" href="/document/development/cancel-multiple-oa-approval-tasks#" class="xref">批量取消流程中心待处理任务</a>接口，批量将审批实例下正在运行中的待办事项设置为CANCELED。</p><h4 id="118e29a0641gt"><b>更新流程中心任务状态</b></h4><pre outputclass="language-java" data-tag="codeblock" id="43892f524fq6h" code-type="xCode" class="pre codeblock language-java"><code>public void  updateIntegratedTask() throws Exception {
+        Config config = new Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        com.aliyun.dingtalkworkflow_1_0.Client client = new com.aliyun.dingtalkworkflow_1_0.Client(config);
+  			UpdateIntegratedTaskHeaders updateIntegratedTaskHeaders = new UpdateIntegratedTaskHeaders();
+        updateIntegratedTaskHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        UpdateIntegratedTaskRequest.UpdateIntegratedTaskRequestTasks tasks0 = new UpdateIntegratedTaskRequest.UpdateIntegratedTaskRequestTasks()
+                .setTaskId(1234567L)
+                .setStatus("COMPLETED")
+                .setResult("AGREE");
+        UpdateIntegratedTaskRequest updateIntegratedTaskRequest = new UpdateIntegratedTaskRequest()
+                .setProcessInstanceId("S3j8rbiNT1CsXXXXXV3Q1Q04431661334483")
+                .setTasks(java.util.Arrays.asList(
+                    tasks0
+                ));
+        try {
+            UpdateIntegratedTaskResponse updateIntegratedTaskResponse = client.updateIntegratedTaskWithOptions(updateIntegratedTaskRequest, updateIntegratedTaskHeaders, new RuntimeOptions());
+            System.out.println(JSON.toJSONString(updateIntegratedTaskResponse.getBody()));
+        } catch (TeaException err) {
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+                System.out.println(err.code);
+                System.out.println(err.message);
+            }
+        } catch (Exception _err) {
+            TeaException err = new TeaException(_err.getMessage(), _err);
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+                System.out.println(err.code);
+                System.out.println(err.message);
+            }
+        }
+    }</code></pre><h4 id="364f309064208"><b>批量取消OA审批任务</b></h4><pre outputclass="language-java" data-tag="codeblock" id="481435b04frk6" code-type="xCode" class="pre codeblock language-java"><code>public void  cancelIntegratedTask() throws Exception {
+        Config config = new Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        com.aliyun.dingtalkworkflow_1_0.Client client = new com.aliyun.dingtalkworkflow_1_0.Client(config);
+  			CancelIntegratedTaskHeaders cancelIntegratedTaskHeaders = new CancelIntegratedTaskHeaders();
+        cancelIntegratedTaskHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        CancelIntegratedTaskRequest cancelIntegratedTaskRequest = new CancelIntegratedTaskRequest()
+                .setProcessInstanceId("tPr_FB_mT_xxxxxxxxx2hQ05201655306463")
+                .setActivityId("act_xxxx")
+                .setActivityIds(java.util.Arrays.asList(
+                    "act_xxxx"
+                ));
+        CancelIntegratedTaskRequest cancelIntegratedTaskRequest = new UpdateIntegratedTaskRequest()
+                .setProcessInstanceId("S3j8rbiNT1CsXXXXXV3Q1Q04431661334483")
+                .setTasks(java.util.Arrays.asList(
+                    tasks0
+                ));
+        try {
+            CancelIntegratedTaskResponse cancelIntegratedTaskResponse = client.cancelIntegratedTaskWithOptions(cancelIntegratedTaskRequest, cancelIntegratedTaskHeaders, new RuntimeOptions());
+            System.out.println(JSON.toJSONString(cancelIntegratedTaskResponse.getBody()));
+        } catch (TeaException err) {
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+                System.out.println(err.code);
+                System.out.println(err.message);
+            }
+        } catch (Exception _err) {
+            TeaException err = new TeaException(_err.getMessage(), _err);
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+                System.out.println(err.code);
+                System.out.println(err.message);
+            }
+        }
+    }</code></pre></li><li id="289536114ellv"><p id="3e109f304f00w">根据审批实例<code data-tag="code" id="8d989da7e4cdk" class="code">processInstanceId</code>和实例状态status、实例结果result等，可以调用<a data-tag="xref" id="b89e69ac77skn" href="/document/development/update-instance-status#" class="xref">更新实例状态</a>或 <a data-tag="xref" id="22665afdaea2m" href="/document/development/update-the-status-of-multiple-instances-at-a-time-new#" class="xref">批量更新实例状态</a>接口，更新实例状态。</p><pre outputclass="language-java" data-tag="codeblock" id="6f7100b24fwpw" code-type="xCode" class="pre codeblock language-java"><code>public void  updateProcessInstance() throws Exception {
+        Config config = new Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        com.aliyun.dingtalkworkflow_1_0.Client client = new com.aliyun.dingtalkworkflow_1_0.Client(config);
+  			com.aliyun.dingtalkworkflow_1_0.models.UpdateProcessInstanceHeaders updateProcessInstanceHeaders = new com.aliyun.dingtalkworkflow_1_0.models.UpdateProcessInstanceHeaders();
+        updateProcessInstanceHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        com.aliyun.dingtalkworkflow_1_0.models.UpdateProcessInstanceRequest.UpdateProcessInstanceRequestNotifiers notifiers0 = new com.aliyun.dingtalkworkflow_1_0.models.UpdateProcessInstanceRequest.UpdateProcessInstanceRequestNotifiers()
+                .setUserId("001");
+        com.aliyun.dingtalkworkflow_1_0.models.UpdateProcessInstanceRequest updateProcessInstanceRequest = new com.aliyun.dingtalkworkflow_1_0.models.UpdateProcessInstanceRequest()
+                .setProcessInstanceId("proc")
+                .setStatus("COMPLETED")
+                .setResult("agree")
+                .setNotifiers(java.util.Arrays.asList(
+                    notifiers0
+                ));
+        try {
+            UpdateProcessInstanceResponse updateProcessInstanceResponse = client.updateProcessInstanceWithOptions(updateProcessInstanceRequest, updateProcessInstanceHeaders, new com.aliyun.teautil.models.RuntimeOptions());
+            System.out.println(JSON.toJSONString(updateProcessInstanceResponse.getBody()));
+        } catch (TeaException err) {
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+                System.out.println(err.code);
+                System.out.println(err.message);
+            }
+        } catch (Exception _err) {
+            TeaException err = new TeaException(_err.getMessage(), _err);
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+                System.out.println(err.code);
+                System.out.println(err.message);
+            }
+        }
+    }</code></pre><pre outputclass="language-java" data-tag="codeblock" id="289536134eao9" code-type="xCode" class="pre codeblock language-java"><code>public void  batchUpdateProcessInstances() throws Exception {
+        Config config = new Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        com.aliyun.dingtalkworkflow_1_0.Client client = new com.aliyun.dingtalkworkflow_1_0.Client(config);
+  			com.aliyun.dingtalkworkflow_1_0.models.BatchUpdateProcessInstanceHeaders batchUpdateProcessInstanceHeaders = new com.aliyun.dingtalkworkflow_1_0.models.BatchUpdateProcessInstanceHeaders();
+        batchUpdateProcessInstanceHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        com.aliyun.dingtalkworkflow_1_0.models.BatchUpdateProcessInstanceRequest.BatchUpdateProcessInstanceRequestUpdateProcessInstanceRequestsNotifiers updateProcessInstanceRequests0Notifiers0 = new com.aliyun.dingtalkworkflow_1_0.models.BatchUpdateProcessInstanceRequest.BatchUpdateProcessInstanceRequestUpdateProcessInstanceRequestsNotifiers()
+                .setUserId("001");
+        com.aliyun.dingtalkworkflow_1_0.models.BatchUpdateProcessInstanceRequest.BatchUpdateProcessInstanceRequestUpdateProcessInstanceRequests updateProcessInstanceRequests0 = new com.aliyun.dingtalkworkflow_1_0.models.BatchUpdateProcessInstanceRequest.BatchUpdateProcessInstanceRequestUpdateProcessInstanceRequests()
+                .setProcessInstanceId("EF6YJL35")
+                .setStatus("COMPLETED")
+                .setResult("agree")
+                .setNotifiers(java.util.Arrays.asList(
+                    updateProcessInstanceRequests0Notifiers0
+                ));
+        com.aliyun.dingtalkworkflow_1_0.models.BatchUpdateProcessInstanceRequest batchUpdateProcessInstanceRequest = new com.aliyun.dingtalkworkflow_1_0.models.BatchUpdateProcessInstanceRequest()
+                .setUpdateProcessInstanceRequests(java.util.Arrays.asList(
+                    updateProcessInstanceRequests0
+                ));
+        try {
+            BatchUpdateProcessInstanceResponse batchUpdateProcessInstanceResponse = client.batchUpdateProcessInstanceWithOptions(batchUpdateProcessInstanceRequest, batchUpdateProcessInstanceHeaders, new com.aliyun.teautil.models.RuntimeOptions());
+            System.out.println(JSON.toJSONString(batchUpdateProcessInstanceResponse.getBody()));
+        } catch (TeaException err) {
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+                System.out.println(err.code);
+                System.out.println(err.message);
+            }
+        } catch (Exception _err) {
+            TeaException err = new TeaException(_err.getMessage(), _err);
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+                System.out.println(err.code);
+                System.out.println(err.message);
+            }
+        }
+    }</code></pre></li><li id="289536144exrh"><p id="4fafc5804ffr2">最后，若需要对审批模板数据进行清理，可以调用<a data-tag="xref" id="7eba687480my1" href="/document/development/delete-a-template-new#" class="xref">删除模板</a>接口，删除为企业创建的审批模板，同时删除该模板下创建的实例和待办任务。</p><pre outputclass="language-java" data-tag="codeblock" id="289536164e9sn" code-type="xCode" class="pre codeblock language-java"><code>public void  deleteProcess() throws Exception {
+        Config config = new Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        com.aliyun.dingtalkworkflow_1_0.Client client = new com.aliyun.dingtalkworkflow_1_0.Client(config);
+  			DeleteProcessHeaders deleteProcessHeaders = new DeleteProcessHeaders();
+        deleteProcessHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        DeleteProcessRequest deleteProcessRequest = new DeleteProcessRequest()
+                .setProcessCode("proc-abc")
+                .setCleanRunningTask(false);
+        try {
+            DeleteProcessResponse deleteProcessResponse = client.deleteProcessWithOptions(deleteProcessRequest, deleteProcessHeaders, new RuntimeOptions());
+            System.out.println(JSON.toJSONString(deleteProcessResponse.getBody()));
+        } catch (TeaException err) {
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+                System.out.println(err.code);
+                System.out.println(err.message);
+            }
+        } catch (Exception _err) {
+            TeaException err = new TeaException(_err.getMessage(), _err);
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+                System.out.println(err.code);
+                System.out.println(err.message);
+            }
+        }
+    }</code></pre></li></ol></section></div></main></body></html>

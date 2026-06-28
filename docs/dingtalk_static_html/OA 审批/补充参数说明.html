@@ -1,0 +1,327 @@
+<!DOCTYPE html><html><head><meta charset="utf8" / /><meta name="searchtitle" content="" / /><meta name="keywords" content="" / /><meta name="author" content="" / /><title>补充参数说明</title><meta name="gmtModify" content="2025-11-24 21:12:19" / /></head><body data-tag="topic" id="topic-3191168" class="topic"><main id="main-3191168"><h1 data-tag="title" id="7c956697b3ad4" class="title">补充参数说明</h1><p id="82f4e469e1ix5" data-tag="shortdesc" class="shortdesc"></p><div data-tag="body" class="body"><section id="900adc505f44g" class="section"><h2 data-tag="title" id="900adc515fxr6" class="title">FormComponent参数说明</h2><p id="cf7202842exhq"><b>formComponents</b>为表单组件列表，组件并非支持Props中的所有属性，每个控件支持的属性请参见下文请求示例。部分容器类控件，例如审批套件、明细控件支持子控件结构，使用children进行定义子控件类型和属性，子控件仍遵循控件属性定义。 控件模型如下：</p><div type="important" id="714b6d337651z" class="note note-important"><div class="note-icon-wrapper"><i class="icon-note note important"></i></div><div class="noteContentSpan"><strong>重要 </strong><p id="c4d262fdc3jwg">表单控件通用限制：</p><ul id="03e9afe9bbjeg"><li id="e660e6949dt2y"><p id="3d54597d70cxw">componentId：控件id，最大长度64字符。</p></li><li id="ea73303a9bxbw"><p id="2328d6bf05c9c">bizAlias：控件的业务标识，表单内唯一，与componentId二选一，最大长度64字符。</p></li><li id="4b920e2680mkp"><p id="5b7425a7d26d0">label：控件标题，最大长度20字符。</p></li><li id="54ec3efe14df2"><p id="bc22d2c7178iz">placeholder：输入提示，最大长度128字符。</p></li><li id="38d93f5ce56wj"><p id="ae1a7fc729epx">content：文字说明控件TextNote中的content内容，最大长度500字符。</p></li><li id="0e168e5289pmf"><p id="ad39f6e0fb8c6">表格明细控件总长度上限65535字符，建议明细不超过100行。</p></li></ul></div></div><section id="1768e612fdkgz" class="section"><h4 id="900adc535f6sb">控件通用属性</h4><pre outputclass="language-json" data-tag="codeblock" id="900adc545f1hn" code-type="xCode" class="pre codeblock language-json"><code>{
+  "componentId": "TextField-12345677",   // 控件id，表单内唯一，与bizAlias二选一
+  "required":true,  // 控件是否必填
+  "label": "单行文本",   // 控件标题
+  "placeholder": "请输入",    // 输入提示
+  "bizAlias": "staffId", // 控件的业务标识，表单内唯一，与componentId二选一
+  "print": "0", // 是否参与打印(0标识字段不参与打印、1标识字段可打印)，默认可打印
+  "disabled": false, // 是否可编辑
+}</code></pre></section><section id="f1ae0107929tm" class="section"><h4 id="7213524bbf24o"><span style="color:rgb(0, 0, 0)"><b>地点控件</b></span></h4><pre code-type="xCode" id="f3714392e1q4c" data-tag="codeblock" outputclass="language-json" class="pre codeblock language-json"><code>{
+   "componentType": "TimeAndLocationField",
+   "props": {
+       "label": "[\"当前时间\",\"当前地点\"]",
+       "componentId": "TimeAndLocationField_1CVHM5TIIWR9C",
+       "required": false,
+       "mask": true
+    }
+}</code></pre></section><section id="96e7ab9316vif" class="section"><h4 id="900adc555fhgm">单行输入控件</h4><pre outputclass="language-json" data-tag="codeblock" id="900adc565f89s" code-type="xCode" class="pre codeblock language-json"><code>{
+    "componentType": "TextField",
+    "props": {
+       "label": "单行输入框",  // 控件标题
+       "placeholder": "请输入", // 输入提示
+       "componentId": "TextField_17EZKEGSOCTC0", // 控件id，表单内唯一，无业务语义
+       "required": false, // 是否必填，默认非必填
+       "bizAlias": "staffId" // 控件的业务标识，表单内唯一，与componentId二选一
+    }
+}</code></pre></section><section id="94eac532b34o1" class="section"><h4 id="900adc575fvew">多行输入控件</h4><pre outputclass="language-json" data-tag="codeblock" id="900adc585fzod" code-type="xCode" class="pre codeblock language-json"><code>{
+    "componentType": "TextareaField",
+    "props": {
+       "label": "多行输入框",
+       "placeholder": "请输入多行文本内容，需要换行时请输入\r\n", // 输入提示
+       "componentId": "TextareaField_17EZKEGSOCTC0",
+       "required": false
+    }
+}
+</code></pre></section><section id="bb9450b3a26au" class="section"><h4 id="900adc595frse">数字输入控件</h4><pre outputclass="language-json" data-tag="codeblock" id="900adc5a5fjci" code-type="xCode" class="pre codeblock language-json"><code>{
+    "componentType": "NumberField",
+    "props": {
+       "label": "数字输入框",
+       "placeholder": "请输入数字",
+       "componentId": "NumberField_108PIFZM21F40",
+       "required": false,
+       "unit":"元", // 数字单位
+       "defaultValue":"10",  // 默认值
+    }
+}</code></pre></section><section id="a5f7a18bc41m8" class="section"><h4 id="900adc5b5fd2q">单选控件</h4><pre outputclass="language-json" data-tag="codeblock" id="900adc5c5fjtg" code-type="xCode" class="pre codeblock language-json"><code>{
+    "componentType": "DDSelectField",
+    "props": {
+        "options": [ // 可选选项列表
+        {
+            "value": "选项1",  // 选项显示名称
+            "key": "option_0" // 控件内唯一key，非必填，系统会默认生成
+        },
+        {
+            "value": "选项2",
+            "key": "option_1"
+        },
+        {
+            "value": "选项3",
+            "key": "option_2"
+        },
+        {
+            "key": "other", // 其他项特殊key
+           "value": "其它"
+        }
+      ],
+      "label": "单选框",
+      "placeholder": "请选择",
+      "componentId": "DDSelectField_14T8M4EKXAV40",
+      "required": false
+    }
+}</code></pre></section><section id="3dd8dad2f4pgp" class="section"><h4 id="900adc5d5fplj">多选控件</h4><pre outputclass="language-json" data-tag="codeblock" id="900adc5e5f6kw" code-type="xCode" class="pre codeblock language-json"><code>{
+    "componentType": "DDMultiSelectField",
+    "props": {
+       "options": [
+        {
+           "value": "选项1",
+           "key": "option_0"
+        },
+        {
+           "value": "选项2",
+           "key": "option_1"
+        },
+        {
+           "value": "选项3",
+           "key": "option_2"
+        },
+        {
+           "key": "other", // 其他项特殊key
+           "value": "其它"
+        }
+      ],
+      "label": "多选框",
+      "placeholder": "请选择",
+      "componentId": "DDMultiSelectField_1XJ7NG1GSD6O0",
+      "required": false
+    }
+}</code></pre></section><section id="0e21138b07sm7" class="section"><h4 id="900adc5f5f8he">日期控件</h4><pre outputclass="language-json" data-tag="codeblock" id="900adc605focq" code-type="xCode" class="pre codeblock language-json"><code> {
+    "componentType": "DDDateField",
+    "props": {
+       "unit": "小时", // 日期格式，枚举值（小时、天）
+       "format": "yyyy-MM-dd HH:mm", // 日期格式，非必填，小时对应yyyy-MM-dd HH:mm，天对应yyyy-MM-dd HH:mm
+       "bizAlias": "",
+       "label": "日期",
+       "placeholder": "请选择",
+       "componentId": "DDDateField_SQL0DF3MS9C0",
+       "required": false,
+       "defaultValue": "2021-12-21 17:46" // 默认值
+    }
+}
+</code></pre></section><section id="56a1ab3b6eevy" class="section"><h4 id="900adc615f67x">时间区间控件</h4><pre outputclass="language-json" data-tag="codeblock" id="900adc625f66f" code-type="xCode" class="pre codeblock language-json"><code>{
+    "componentType": "DDDateRangeField",
+    "props": {
+       "unit": "小时", // 日期格式，枚举值（小时、天）
+       "format": "yyyy-MM-dd HH:mm", // 日期格式，非必填，小时对应yyyy-MM-dd HH:mm，天对应yyyy-MM-dd HH:mm
+       "bizAlias": "",
+       "label": "[\"开始时间\",\"结束时间\"]",
+       "placeholder": "请选择",
+       "componentId": "DDDateRangeField_7MPG14N3OOO0",
+       "duration": true, // 是否自动计算时长
+       "required": false
+    }
+}
+</code></pre></section><section id="53fb59add6djm" class="section"><h4 id="900adc635fx49">文字说明控件</h4><pre outputclass="language-json" data-tag="codeblock" id="900adc645fniq" code-type="xCode" class="pre codeblock language-json"><code>{
+    "componentType": "TextNote",
+    "props": {
+       "link": "https://www.dingtalk.com/", // 超链接
+       "notPrint": "0",
+       "bizAlias": "",
+       "componentId": "TextNote_13RP7230RAF40",
+       "content": "说明文字"  // 说明文字
+    }
+}
+</code></pre></section><section id="0d82208f39jqt" class="section"><h4 id="900adc655fqba">图片控件</h4><pre outputclass="language-json" data-tag="codeblock" id="900adc665fa23" code-type="xCode" class="pre codeblock language-json"><code>{
+    "componentType": "DDPhotoField",
+    "props": {
+        "label": "图片",
+        "componentId": "DDPhotoField_P50A0HMHB280",
+        "required": false
+    }
+}
+</code></pre></section><section id="e0f3c8b627kmu" class="section"><h4 id="900adc675finq">金额控件</h4><pre outputclass="language-json" id="900adc685fgd1" data-tag="codeblock" code-type="xCode" class="pre codeblock language-json"><code>{
+    "componentType": "MoneyField",
+    "props": {
+        "upper": "0", // 金额需要大写(0不大写，1需要大写)，默认需要大写
+        "label": "金额（元）",
+        "placeholder": "请输入金额",
+        "componentId": "MoneyField_L1PP26ZDV400",
+        "required": false
+    }
+}</code></pre></section><section id="a75bc7e0084gw" class="section"><h4 id="887e714716t0v"><b>明细控件（表格控件）</b></h4><pre code-type="xCode" id="d5f893415785n" data-tag="codeblock" outputclass="language-json" class="pre codeblock language-json"><code>{
+    "children": [ // 明细中的子控件列表，子控件列表遵循各控件属性标准
+        {
+            "componentType": "TextField",
+            "props": {
+                "label": "单行输入框",
+                "placeholder": "请输入",
+                "componentId": "TextField_1UE1ZY1A28AO0",
+                "required": false
+            }
+        },
+        {
+            "componentType": "MoneyField",
+            "props": {
+                "payEnable": false,
+                "upper": "0",
+                "bizAlias": "",
+                "label": "金额（元）",
+                "placeholder": "请输入金额",
+                "componentId": "MoneyField_1S85G4YLMM5C0",
+                "required": false
+            }
+        },
+        {
+            "componentType": "NumberField",
+            "props": {
+                "unit": "元",
+                "payEnable": false,
+                "bizAlias": "",
+                "label": "数字输入框",
+                "placeholder": "请输入数字",
+                "componentId": "NumberField_1XP6AWG50SE80",
+                "required": false
+            }
+        }
+    ],
+    "componentType": "TableField",
+    "props": {
+        "tableViewMode": "table", // 明细填写方式，枚举值：list：列表,table：表格
+        "verticalPrint": true,  // 明细打印方式，true：纵向 false：横向
+        "statField": [  // 设置对数字、金额类控件进行总数统计
+            {
+                "upper": "",
+                "componentId": "MoneyField_1S85G4YLMM5C0",
+                "label": "金额（元）"
+            },
+            {
+                "componentId": "NumberField_1XP6AWG50SE80",
+                "label": "数字输入框"
+            }
+        ],
+        "bizAlias": "",
+        "label": "表格",
+        "componentId": "TableField_1MLEPEAQSXHC0"
+    }
+}</code></pre></section><section id="fdbe764593j25" class="section"><h4 id="900adc695fzq4">附件</h4><pre outputclass="language-json" data-tag="codeblock" id="900adc6a5fpqu" code-type="xCode" class="pre codeblock language-json"><code>{
+    "componentType": "DDAttachment",
+    "props": {
+       "label": "附件",
+       "componentId": "DDAttachment_18U4QTOWLMPS0",
+       "required": false
+    }
+}
+</code></pre></section><section id="10a510dccbpqa" class="section"><h4 id="900adc6b5f6sr">联系人控件</h4><pre outputclass="language-json" data-tag="codeblock" id="900adc6c5frb2" code-type="xCode" class="pre codeblock language-json"><code> {
+    "componentType": "InnerContactField",
+    "props": {
+      "label": "联系人",
+      "placeholder": "请选择",
+      "componentId": "InnerContactField_162USP4V1BC00",
+      "choice": "1", //枚举值：1标识支持多选，0标识单选，默认为0
+      "required": false,
+      "bizAlias": ""
+    }
+}
+</code></pre></section><section id="395ea05b86vll" class="section"><h4 id="900adc6d5fdcy">部门控件</h4><pre outputclass="language-json" data-tag="codeblock" id="900adc6e5f73r" code-type="xCode" class="pre codeblock language-json"><code>{
+    "componentType": "DepartmentField",
+    "props": {
+      "multiple": false, // 是否支持多选，true多选，false单选
+      "label": "部门",
+      "placeholder": "请选择",
+      "componentId": "DepartmentField_1GY5JSPOCY000",
+      "required": false
+    }
+}
+</code></pre></section><section id="2dda433660av9" class="section"><h4 id="900adc6f5fobs">关联审批单</h4><pre outputclass="language-json" data-tag="codeblock" id="900adc705fr08" code-type="xCode" class="pre codeblock language-json"><code>{
+    "componentType": "RelateField",
+    "props": {
+       "label": "关联审批单",
+       "placeholder": "请选择",
+       "componentId": "RelateField_5X1DL4KMKUW0",
+       "required": false,
+       "bizAlias": "",
+       "availableTemplates": [ // 可被关联的审批模板列表，为空时表示可关联所有审批模板的实例数据
+        {
+           "name": "产品演示", // 可关联的审批表单名称
+           "processCode": "PROC-1B8FC788-D2B4-4DA2-BEAE-E56F5EC17C5B" // 可关联的审批表单formCode
+        },
+        {
+           "name": "调岗套件演示",
+           "processCode": "PROC-6C383FEC-3ED6-4B90-8019-401629CB8275"
+        }
+      ]
+   }
+}</code></pre></section><section id="e9d2c5b924z59" class="section"><h4 id="900adc715flfw">省市区控件</h4><pre outputclass="language-json" data-tag="codeblock" id="900adc725fblc" code-type="xCode" class="pre codeblock language-json"><code>{
+    "componentType": "AddressField",
+    "props": {
+       "addressModel": "district", // 枚举值,city省市,district省市区,street省市区-街道
+       "bizAlias": "",
+       "label": "省市区",
+       "componentId": "AddressField_1P9H21H8R2LC0",
+       "required": false
+    }
+}
+</code></pre></section><section id="10c01a6c94d0d" class="section"><h4 id="900adc735f9s0">评分控件</h4><pre outputclass="language-json" data-tag="codeblock" id="900adc745fx5l" code-type="xCode" class="pre codeblock language-json"><code>{
+    "componentType": "StarRatingField",
+    "props": {
+       "limit": 5, // 枚举值：5分制、10分制
+       "label": "评分",
+       "placeholder": "请输入",
+       "componentId": "StarRatingField_10E5NHTA2W0G0",
+       "required": false,
+       "bizAlias": ""
+    }
+}</code></pre></section></section><section id="4cfa1f83fcjbh" class="section"><h2 id="9bcb6b14dbz03"><b>FormComponentValues 参数说明</b></h2><p id="5b7eec02f1whf">严格按照创建模板时的组件进行定义。可参考<a data-tag="xref" id="35f89e4d6f254" href="#900adc505f44g" class="xref">FormComponent参数说明</a> 为表单组件赋值：</p><section id="9ac2d652d1cis" class="section"><h3 id="9e6cbd2e04thb"><b>地点控件</b></h3><pre code-type="xCode" id="b1ac8ccf39sca" index="0" data-tag="codeblock" outputclass="language-json" class="pre codeblock language-json"><code>{
+    "name": "[\"当前时间\",\"当前地点\"]", // 控件 label 名称
+    "value": "[\"2025-05-27 14:27:20\",120.021195,30.281506,\"浙江省杭州市余杭区文一西路960-1号阿里巴巴西溪C区\",100]"
+}</code></pre></section><section id="03c55142d8176" class="section"><h3 id="202cf7343enr2"><b>单行输入控件</b></h3><pre code-type="xCode" id="cd5d1e6952tlh" index="0" data-tag="codeblock" outputclass="language-json" class="pre codeblock language-json"><code>{
+    "name": "标题（单行输入框）", // 控件 label 名称
+    "value": "测试标题（单行输入框）"
+}</code></pre></section><section id="c6500f3cd4l3x" class="section"><h3 id="5e7714b26fs8e"><b>多行输入控件</b></h3><pre code-type="xCode" id="bfa3daf97ebui" index="0" data-tag="codeblock" outputclass="language-json" class="pre codeblock language-json"><code>{
+    "name": "说明（多行输入框）", // 控件 label 名称
+    "value": "测试说明（多行输入框）"
+}</code></pre></section><section id="95895d4743q7g" class="section"><h3 id="4fb93570f52u6"><b>数字输入控件</b></h3><pre code-type="xCode" id="ed8c634d49bck" index="0" data-tag="codeblock" outputclass="language-json" class="pre codeblock language-json"><code>{
+    "name": "数字（数字输入框）",// 控件 label 名称
+    "value": "10"
+}</code></pre></section><section id="0d0f5eaea1k2b" class="section"><h3 id="1d93ecd92avyn"><b>单选控件</b></h3><pre code-type="xCode" id="0cfaa46e5cdph" index="0" data-tag="codeblock" outputclass="language-json" class="pre codeblock language-json"><code>{
+    "name": "单选",// 控件 label 名称
+    "value": "1"
+}</code></pre></section><section id="ba5d650ea1eys" class="section"><h3 id="20080e820f4it"><b>多选控件</b></h3><pre code-type="xCode" id="4e241a8f686y0" index="0" data-tag="codeblock" outputclass="language-json" class="pre codeblock language-json"><code>{
+    "name": "多选",// 控件 label 名称
+    "value": "[\"1\",\"2\"]"
+}</code></pre></section><section id="43dedda29b1eq" class="section"><h3 id="a5e9cd4992nue"><b>日期控件</b></h3><pre code-type="xCode" id="e4a7ba775da0s" index="0" data-tag="codeblock" outputclass="language-json" class="pre codeblock language-json"><code>{
+    "name": "日期", // 控件 label 名称
+    "value": "2025-05-27 10:00"
+}</code></pre></section><section id="f4d2f442abayd" class="section"><h3 id="h4-uia-ttd-h7r"><b>时间区间控件</b></h3><pre code-type="xCode" id="f9cafbe4288u4" index="0" data-tag="codeblock" outputclass="language-json" class="pre codeblock language-json"><code>{
+    "name": "[\"开始时间\",\"结束时间\"]", // 控件 label 名称
+    "value": "[\"2025-05-27\",\"2025-05-28\"]"
+}</code></pre></section><section id="b4a3a17ea4kim" class="section"><h3 id="h4-nz1-1x7-q3f"><b>电话控件</b></h3><pre code-type="xCode" id="843dc73ffe7xi" index="0" data-tag="codeblock" outputclass="language-json" class="pre codeblock language-json"><code>{
+    "name": "电话", // 控件 label 名称
+    "value": "155****3240" //严格按照你创建模板时选择的电话组件设置的 mode 类型传参。
+}</code></pre></section><section id="4863bfb79ctpo" class="section"><h3 id="8297ffe086glb"><b>图片控件</b></h3><pre code-type="xCode" id="b1250926c7edt" index="0" data-tag="codeblock" outputclass="language-json" class="pre codeblock language-json"><code>{
+    "name": "图片", // 控件 label 名称
+    "value": "[\"https://example.com/32-2-tps-1024-1024.png\",\"https://example.com/52-0-tps-717-670.jpg\"]"
+}</code></pre></section><section id="9c35603dcap7n" class="section"><h3 id="h4-odj-0u2-2kl"><b>金额控件</b></h3><pre code-type="xCode" id="7a6597bd065br" index="0" data-tag="codeblock" outputclass="language-json" class="pre codeblock language-json"><code>{
+    "name": "金额（元）", // 控件 label 名称
+    "value": "5"
+}</code></pre></section><section id="03b6821bceaam" class="section"><h3 id="96dbc05ff0q43"><b>表格（明细）控件</b></h3><div type="note" id="065d505ed01oq" class="note note-note"><div class="note-icon-wrapper"><i class="icon-note note note"></i></div><div class="noteContentSpan"><strong>说明 </strong><p id="a17630a1adzcd">value值严格按照创建模板的子组件label进行定义，可参考<a data-tag="xref" id="2593e36259nwy" href="#96dbc05ff0q43" class="xref">表格（明细）控件</a>。</p></div></div><pre code-type="xCode" id="ee3285a6e8l9h" index="0" data-tag="codeblock" outputclass="language-json" class="pre codeblock language-json"><code>{
+    "name": "表格", // 控件 label 名称
+    "value": "[[{\"name\":\"项目名称（单行输入框）\",\"value\":\"项目名称\"},{\"name\":\"项目金额（元）\",\"value\":\"100\"},{\"name\":\"项目人数（数字输入框）\",\"value\":\"10\"}]]"
+}</code></pre></section><section id="daab7376f87o8" class="section"><h3 id="a50c8ea39b0b9"><b>附件</b></h3><pre code-type="xCode" id="2f711abb30juj" index="0" data-tag="codeblock" outputclass="language-json" class="pre codeblock language-json"><code>{
+    "name": "附件", // 控件 label 名称
+    "value": "[{\"spaceId\": \"2662**5867\", \"fileName\": \"IMG_1561.JPG\", \"fileSize\": \"72891\", \"fileType\": \"jpg\", \"fileId\": \"1811****559\"}]"
+}</code></pre></section><section id="63495d7ad81z9" class="section"><h3 id="d7d00d8cbfdmg"><b>联系人</b></h3><pre code-type="xCode" id="ff03752ed9hgu" data-tag="codeblock" outputclass="language-json" class="pre codeblock language-json"><code>{
+    "name": "联系人", // 控件 label 名称
+    "value": "[\"0147282552401293909\", \"manager4974\"]" // 用户 userId 
+}</code></pre></section><section id="5b55ae623c6wl" class="section"><h3 jc="left" id="h4-3fu-vdw-6kz" data-spm-anchor-id="ding_open_doc.document.0.i28.18684a70w7VVTW" style="text-align:left"><span style="color:rgb(23, 26, 29)"><b>部门控件</b></span></h3><pre code-type="xCode" id="489cdf1a113js" index="0" data-tag="codeblock" outputclass="language-json" class="pre codeblock language-json"><code>{
+    "name": "部门", // 控件 label 名称
+    "value": "部门ID1,部门ID2"
+}</code></pre></section><section id="be144320c07u0" class="section"><h3 jc="left" id="h4-f3g-sum-f60" data-spm-anchor-id="ding_open_doc.document.0.i31.18684a70w7VVTW" style="text-align:left"><span style="color:rgb(23, 26, 29)"><b>关联审批单</b></span></h3><pre code-type="xCode" id="2733c2e003gkb" index="0" data-tag="codeblock" outputclass="language-json" class="pre codeblock language-json"><code>{
+    "name": "关联审批单", // 控件 label 名称
+    "value": "[\"RgJJ1veyQl2A****6841748395993\", \"p-OLRbmXSJeiN9*****841748395677\"]"
+}</code></pre></section><section id="1784fa7e9bneq" class="section"><h3 id="ce1e9182499rk"><b>省市区</b></h3><pre code-type="xCode" id="43735a4b10yhs" index="0" data-tag="codeblock" outputclass="language-json" class="pre codeblock language-json"><code>{
+    "name": "省市区", // 控件 label 名称
+    "value": "北京,北京市,东城区"
+}</code></pre></section><section id="26d1015e08qpc" class="section"><h3 id="3df4459943kb5"><b>评分</b></h3><pre code-type="xCode" id="38518f3d19oa6" index="0" data-tag="codeblock" outputclass="language-json" class="pre codeblock language-json"><code>{
+    "name": "评分", // 控件 label 名称
+    "value": "5"
+}</code></pre></section></section></div></main></body></html>

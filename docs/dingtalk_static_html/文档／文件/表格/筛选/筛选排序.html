@@ -1,0 +1,404 @@
+<!DOCTYPE html><html><head><meta charset="utf8" / /><meta name="gmtModify" content="2026-04-17 15:02:12" / /><meta name="searchtitle" content="" / /><meta name="keywords" content="" / /><meta name="author" content="" / /><title>筛选排序</title><meta name="gmtModify" content="2026-06-04 19:09:19" / /></head><body data-tag="topic" id="doc-api-dingtalk-SortFilter" class="topic"><main id="d33728981etpu" data-init-id="doc-api-dingtalk-SortFilter"><h1 data-tag="title" id="h1-m2p-r9k-sut" class="title">筛选排序</h1><p data-tag="shortdesc" class="shortdesc" id="4afa16c979xiz">调用本接口可对全局筛选范围内的数据按指定列进行升序或降序排序，适用于需要对筛选后的数据进行有序展示的场景，例如将销售数据按金额从高到低排列，或将任务列表按截止日期升序排序。</p><div data-tag="conbody" outputclass="icms-api-reference" class="icms-api-reference conbody"><section id="da340c0a949ke" class="section"><h2 id="20581ba425asl"><b>接口调用说明</b></h2><p id="ebdc8578d3cfu">排序操作会永久改变工作表中数据行的实际存储顺序，而非仅改变显示顺序。</p></section><section id="section-request-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-request-1" data-tag="h2" class="h2">请求</h2><section id="section-request-basic-info" class="section"><h3 id="heading-request-basic-info" data-tag="h3" class="h3">基本信息</h3><table id="13d39a1a5ebln" tablewidth="648" tablecolswidth="216 432" autofit="false" class="table"><colgroup colwidth="0.67*" style="width:33.33%"></colgroup><colgroup colwidth="1.33*" style="width:66.67%"></colgroup><tbody class="tbody"><tr id="bbac7cec25w9k"><td id="560180e626yyo" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="cfae6a2d6dr5d">字段</p></td><td id="ed0c1a590eqc4" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="5d23ec0e54ulk">值</p></td></tr><tr id="6a036d1f45nii"><td id="640cbc90e6vpp" rowspan="1" colspan="1"><p id="0efa248d56p0m">HTTP URL</p></td><td id="24fef9e02886s" rowspan="1" colspan="1"><p id="e0e974e2164kh">https://api.dingtalk.com/v1.0/doc/workbooks/{workbookId}/sheets/{sheetId}/filter/sort</p></td></tr><tr id="12f39a0f4c0ti"><td id="5c64268274pmw" rowspan="1" colspan="1"><p id="9a073034bf3xn">HTTP Method</p></td><td id="9f602252ee3dt" rowspan="1" colspan="1"><p id="7309343d122jm">POST</p></td></tr><tr id="e70a5a430bhl1"><td id="1182f01a007yx" rowspan="1" colspan="1"><p id="c5cb2e64c5hvi">支持的应用类型</p></td><td id="95103d77d9baj" rowspan="1" colspan="1"><p id="325431f605bvt"><span data-tag="ph" id="ph-request-basic-app-type-apptype-0" class="ph ph-app-type" data-ph-raw-text="appType-企业内部应用">appType-企业内部应用</span></p></td></tr><tr id="9465cba7d863i"><td id="f2c91f5b2bolf" rowspan="1" colspan="1"><p id="77ac649368q79">权限要求</p></td><td id="e715f2e1cf08x" rowspan="1" colspan="1"><p id="c07c72a1bfw4m"><span data-tag="ph" id="ph-request-basic-permission-permission-document-workbook-write-0" class="ph-permission ph" data-ph-raw-text="permission-Document.Workbook.Write-钉钉表格写权限" data-permission-id="permission-Document.Workbook.Write" data-permission-code="Document.Workbook.Write" data-permission-detail-api="/document/api/permission/detail" data-permission-query-param="code">permission-Document.Workbook.Write-钉钉表格写权限</span></p></td></tr></tbody></table></section><section id="section-request-header-parameter" class="section"><h3 data-tag="h3" id="h2-il3-srx-7oo" class="h3 title">请求头</h3><table id="eb4466ad66inh" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="6a4c8e3635uko"><td id="1baf225f9f0b1" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="a7505d28abhxx">名称</p></td><td id="3769a8efdf8lv" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="283b05e26a14i">类型</p></td><td id="3a08d19a499of" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="a0083ab736a7d">是否必填</p></td><td id="53624df7a83o5" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="35e0f2b7d7wuw">描述</p></td></tr><tr id="143bccb624bi9"><td id="ab2717de14t0i" rowspan="1" colspan="1"><p id="d5a9a9d696k4i">x-acs-dingtalk-access-token</p></td><td id="35ab26bf1cby7" rowspan="1" colspan="1"><p id="2d89c306d3430">String</p></td><td id="0ef7811ebba9c" rowspan="1" colspan="1"><p id="f4dcec3515jnr">是</p></td><td id="c2b8b93ada4wy" rowspan="1" colspan="1"><p id="83c1ac753fg9k">调用该接口的访问凭证，可调用<a data-tag="xref" id="a234b25813t31" href="/document/development/obtain-the-access-token-of-an-internal-app#" class="xref">获取企业内部应用的accessToken</a>接口获取。</p></td></tr></tbody></table></section><section id="section-request-path-parameter" class="section"><h3 data-tag="h3" id="h2-bmk-bw9-87z" class="h3 title">路径参数</h3><table id="02761fa027lmi" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="2db864337c4p2"><td id="10485791a1mpa" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="bec02006e4m3q">名称</p></td><td id="5c04094367adf" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="9d5ac840a76dj">类型</p></td><td id="a4f0476034qvk" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="9e85239b96v2l">是否必填</p></td><td id="ec5825726dmyj" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="36a5a5aef4qpp">描述</p></td></tr><tr id="42aff5f777l86"><td id="370f4913f3bqn" rowspan="1" colspan="1"><p id="211f14cb2cvp2">workbookId</p></td><td id="4b7201ef51u7k" rowspan="1" colspan="1"><p id="ff5deb50desip">String</p></td><td id="f5c78ac8bcym7" rowspan="1" colspan="1"><p id="5c611429280gz">是</p></td><td id="487fffc526len" rowspan="1" colspan="1"><p id="42bc9d1c3cnt6">表格文件&nbsp;ID ，<a href="https://open.dingtalk.com/document/orgapp/knowledge-base-overview" id="d770613c3b9z9">知识库 API</a> 返回的<code data-tag="inlineCode" id="8c7c916657tti" class="inlineCode">nodeId(dentryUuid)</code>即是表格<code data-tag="inlineCode" id="affdfc78cbjd4" class="inlineCode">workbookId</code>，可通过调用<a href="https://open.dingtalk.com/document/orgapp/get-node" id="097aaafb33np1">获取节点</a>和<a href="https://open.dingtalk.com/document/orgapp/create-team-space-document" id="23545289e9b8n">创建知识库文档</a>接口获取。</p></td></tr><tr id="6f6c21ffa74ew"><td id="7bf0232fd37nx" rowspan="1" colspan="1"><p id="4088be3388621">sheetId</p></td><td id="e3f305e0fbh74" rowspan="1" colspan="1"><p id="97fa6e6269kqy">String</p></td><td id="2c1ffd995ft7v" rowspan="1" colspan="1"><p id="b409cab00a4b2">是</p></td><td id="ee5a501f571wi" rowspan="1" colspan="1"><p id="06c9549500e26">工作表ID或名称，可调用<a href="https://open.dingtalk.com/document/orgapp/obtain-all-worksheets" id="43e24497f25dm">获取所有工作表</a>接口获取id或name参数值。</p></td></tr></tbody></table></section><section id="section-request-query-parameter" class="section"><h3 data-tag="h3" id="h2-ro9-ozv-eix" class="h3 title">查询参数</h3><table id="cc38405140d0u" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="3ee9c00697o6t"><td id="a0977fa078guo" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="5d1311b9e4skq">名称</p></td><td id="45f3bd85560sy" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="0132e82628j89">类型</p></td><td id="f6a8222682x2z" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="65d150bba0ogm">是否必填</p></td><td id="b07c806ab5mfi" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="e07d59841ff51">描述</p></td></tr><tr id="e6dae8b148uti"><td id="c1195b89b6ic3" rowspan="1" colspan="1"><p id="fff850cbb9fha">operatorId</p></td><td id="a0f578d3609xl" rowspan="1" colspan="1"><p id="5564a44071lb0">String</p></td><td id="7d1ca18a96zsl" rowspan="1" colspan="1"><p id="1f4f27a0ac2xi">是</p></td><td id="ff89c0bd1bf1d" rowspan="1" colspan="1"><p id="49b3d4ba34wgs">操作人的unionId。</p><ul id="ed5c95ccabbzi"><li id="cf15b69a57mce"><p id="3b51126e22sn6">可通过<a href="https://open.dingtalk.com/document/orgapp/obtain-the-userid-of-a-user-by-using-the-log-free" id="ca1a04fab0a3c">通过免登码获取用户信息</a>接口获取unionid参数值。</p></li><li id="73226d544ck11"><p id="c11be8447c6y1">可调用<a href="https://open.dingtalk.com/document/orgapp/query-user-details" id="f19f8bb031b1k">查询用户详情</a>接口获取unionid参数值。</p></li></ul><p class="note-icon-wrapper" id="bf630e59ees22"></p><p data-tag="p" class="p" id="8a391c4ed2d0h"></p><p id="d0b23f77b0m4k">若操作人无权限，接口会报错<code data-tag="inlineCode" id="c82b26c3d8o6h" class="inlineCode">The operator has no permission</code>。</p><p id="69d242a816lcn"></p></td></tr></tbody></table></section><section id="section-request-body-parameter" class="section"><h3 data-tag="h3" id="h2-uqe-sl1-9su" class="h3 title">请求体</h3><table id="6d6a342e82l6r" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="b71d677a7audu"><td id="c0f3b713020sl" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="9faf9d40111m7">名称</p></td><td id="7dc66c8b67y25" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="dc2d98c33bq8h">类型</p></td><td id="a379e57d5a842" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="ec0980eb15x8z">是否必填</p></td><td id="ab98a6dbb3dld" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="d840bdd1d1dkh">描述</p></td></tr><tr outputclass="row row-level-4 has-child" id="447537cb403ne" class="row row-level-4 has-child"><td id="afcd4ab4f1b67" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="9a9e041571tkj">field</p></td><td id="15bfcf1574anr" rowspan="1" colspan="1"><p id="0a518204843yb">Object</p></td><td id="7f814f29bbafm" rowspan="1" colspan="1"><p id="dbc69f866bcdk">是</p></td><td id="0f0bc74be1h76" rowspan="1" colspan="1"><p id="a9d92bbb57ruu">排序规则对象。</p></td></tr><tr outputclass="row row-level-4-1" id="d1443159d9xgn" class="row row-level-4-1"><td id="f035d4aaefamh" rowspan="1" colspan="1"><p id="55b8c0cea1tm7">column</p></td><td id="3d89f34c806bc" rowspan="1" colspan="1"><p id="ccce31cb37v1g">Long</p></td><td id="137af88f9agvn" rowspan="1" colspan="1"><p id="c42c0d7ca4l5o">是</p></td><td id="e974b9528595b" rowspan="1" colspan="1"><p id="903f8bbc6fxdi">列偏移量，相对于筛选范围首列，从 0 开始。</p></td></tr><tr outputclass="row row-level-4-2" id="afbc0b2517l4r" class="row row-level-4-2"><td id="1208167b72tus" rowspan="1" colspan="1"><p id="e870fc1d64yzy">ascending</p></td><td id="eb13e0edb6giv" rowspan="1" colspan="1"><p id="d3a60c2ffb31c">Boolean</p></td><td id="0eb6c8e8e49vf" rowspan="1" colspan="1"><p id="abd4c2da28u6p">否</p></td><td id="37db36faf3i3n" rowspan="1" colspan="1"><p id="47c95b231dina">是否升序排序。默认为 <code data-tag="inlineCode" id="3994c048c00cr" class="inlineCode">true</code>（升序）。设置为 <code data-tag="inlineCode" id="1a68322803kj9" class="inlineCode">false</code> 则降序排序。</p></td></tr></tbody></table></section><section id="section-request-body-example" class="section"><h3 id="h3-request-body-example" data-tag="h3" class="h3">请求示例</h3><div outputclass="tabbed-codeblock" data-tag="fig" id="figure-wjx-dzr-bu6" class="tabbed-codeblock-box"><div class="tab-box"></div><input type="radio" name="check-figure-wjx-dzr-bu6" id="figure-wjx-dzr-bu6-HTTP-tab" checked="checked" /><label for="figure-wjx-dzr-bu6-HTTP-tab">HTTP</label><div class="codeblock-item"><pre id="codeblock-uu9-ybm-wef" outputclass="language-HTTP" data-tag="codeblock" code-type="xCode" class="pre codeblock language-HTTP"><code>POST /v1.0/doc/workbooks/e54Lq3xxx/sheets/Sheet1/filter/sort?operatorId=ppgAxxx HTTP/1.1
+Host:api.dingtalk.com
+x-acs-dingtalk-access-token:f86e0bxxx
+Content-Type:application/json
+
+{
+  "field" : {
+    "column" : 0,
+    "ascending" : false
+  }
+}</code></pre></div><input type="radio" name="check-figure-wjx-dzr-bu6" id="figure-wjx-dzr-bu6-java-tab" /><label for="figure-wjx-dzr-bu6-java-tab">Java</label><div class="codeblock-item"><pre id="codeblock-6kf-g31-xus" outputclass="language-java" data-tag="codeblock" code-type="xCode" class="pre codeblock language-java"><code>package com.aliyun.sample;
+
+import com.aliyun.tea.*;
+
+public class Sample {
+
+    /**
+     * &lt;b&gt;description&lt;/b&gt; :
+     * &lt;p&gt;使用 Token 初始化账号Client&lt;/p&gt;
+     * @return Client
+     * 
+     * @throws Exception
+     */
+    public static com.aliyun.dingtalkdoc_1_0.Client createClient() throws Exception {
+        com.aliyun.teaopenapi.models.Config config = new com.aliyun.teaopenapi.models.Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        return new com.aliyun.dingtalkdoc_1_0.Client(config);
+    }
+
+    public static void main(String[] args_) throws Exception {
+        
+        com.aliyun.dingtalkdoc_1_0.Client client = Sample.createClient();
+        com.aliyun.dingtalkdoc_1_0.models.SortFilterHeaders sortFilterHeaders = new com.aliyun.dingtalkdoc_1_0.models.SortFilterHeaders();
+        sortFilterHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        com.aliyun.dingtalkdoc_1_0.models.SortFilterRequest.SortFilterRequestField field = new com.aliyun.dingtalkdoc_1_0.models.SortFilterRequest.SortFilterRequestField()
+                .setColumn(0L)
+                .setAscending(false);
+        com.aliyun.dingtalkdoc_1_0.models.SortFilterRequest sortFilterRequest = new com.aliyun.dingtalkdoc_1_0.models.SortFilterRequest()
+                .setOperatorId("ppgAxxx")
+                .setField(field);
+        try {
+            client.sortFilterWithOptions("e54Lq3xxx", "Sheet1", sortFilterRequest, sortFilterHeaders, new com.aliyun.teautil.models.RuntimeOptions());
+        } catch (TeaException err) {
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        } catch (Exception _err) {
+            TeaException err = new TeaException(_err.getMessage(), _err);
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        }        
+    }
+}</code></pre></div><input type="radio" name="check-figure-wjx-dzr-bu6" id="figure-wjx-dzr-bu6-python-tab" /><label for="figure-wjx-dzr-bu6-python-tab">Python</label><div class="codeblock-item"><pre id="codeblock-def-0dy-ljz" outputclass="language-python" data-tag="codeblock" code-type="xCode" class="pre codeblock language-python"><code># -*- coding: utf-8 -*-
+# This file is auto-generated, don't edit it. Thanks.
+import os
+import sys
+import json
+
+from typing import List
+
+from alibabacloud_dingtalk.doc_1_0.client import Client as dingtalkdoc_1_0Client
+from alibabacloud_tea_openapi import models as open_api_models
+from alibabacloud_dingtalk.doc_1_0 import models as dingtalkdoc__1__0_models
+from alibabacloud_tea_util import models as util_models
+from alibabacloud_tea_util.client import Client as UtilClient
+
+
+class Sample:
+    def __init__(self):
+        pass
+
+    @staticmethod
+    def create_client() -&gt; dingtalkdoc_1_0Client:
+        """
+        使用 Token 初始化账号Client
+        @return: Client
+        @throws Exception
+        """
+        config = open_api_models.Config()
+        config.protocol = 'https'
+        config.region_id = 'central'
+        return dingtalkdoc_1_0Client(config)
+
+    @staticmethod
+    def main(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        sort_filter_headers = dingtalkdoc__1__0_models.SortFilterHeaders()
+        sort_filter_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        field = dingtalkdoc__1__0_models.SortFilterRequestField(
+            column=0,
+            ascending=False
+        )
+        sort_filter_request = dingtalkdoc__1__0_models.SortFilterRequest(
+            operator_id='ppgAxxx',
+            field=field
+        )
+        try:
+            client.sort_filter_with_options('e54Lq3xxx', 'Sheet1', sort_filter_request, sort_filter_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+    @staticmethod
+    async def main_async(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        sort_filter_headers = dingtalkdoc__1__0_models.SortFilterHeaders()
+        sort_filter_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        field = dingtalkdoc__1__0_models.SortFilterRequestField(
+            column=0,
+            ascending=False
+        )
+        sort_filter_request = dingtalkdoc__1__0_models.SortFilterRequest(
+            operator_id='ppgAxxx',
+            field=field
+        )
+        try:
+            await client.sort_filter_with_options_async('e54Lq3xxx', 'Sheet1', sort_filter_request, sort_filter_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+
+if __name__ == '__main__':
+    Sample.main(sys.argv[1:])</code></pre></div><input type="radio" name="check-figure-wjx-dzr-bu6" id="figure-wjx-dzr-bu6-php-tab" /><label for="figure-wjx-dzr-bu6-php-tab">PHP</label><div class="codeblock-item"><pre id="codeblock-gf7-bta-ewg" outputclass="language-php" data-tag="codeblock" code-type="xCode" class="pre codeblock language-php"><code>&lt;?php
+
+// This file is auto-generated, don't edit it. Thanks.
+namespace AlibabaCloud\SDK\Sample;
+
+use AlibabaCloud\SDK\Dingtalk\Vdoc_1_0\Dingtalk;
+use \Exception;
+use AlibabaCloud\Tea\Exception\TeaError;
+use AlibabaCloud\Tea\Utils\Utils;
+
+use Darabonba\OpenApi\Models\Config;
+use AlibabaCloud\SDK\Dingtalk\Vdoc_1_0\Models\SortFilterHeaders;
+use AlibabaCloud\SDK\Dingtalk\Vdoc_1_0\Models\SortFilterRequest\field;
+use AlibabaCloud\SDK\Dingtalk\Vdoc_1_0\Models\SortFilterRequest;
+use AlibabaCloud\Tea\Utils\Utils\RuntimeOptions;
+
+class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Dingtalk Client
+     */
+    public static function createClient(){
+        $config = new Config([]);
+        $config-&gt;protocol = "https";
+        $config-&gt;regionId = "central";
+        return new Dingtalk($config);
+    }
+
+    /**
+     * @param string[] $args
+     * @return void
+     */
+    public static function main($args){
+        $client = self::createClient();
+        $sortFilterHeaders = new SortFilterHeaders([]);
+        $sortFilterHeaders-&gt;xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        $field = new field([
+            "column" =&gt; 0,
+            "ascending" =&gt; false
+        ]);
+        $sortFilterRequest = new SortFilterRequest([
+            "operatorId" =&gt; "ppgAxxx",
+            "field" =&gt; $field
+        ]);
+        try {
+            $client-&gt;sortFilterWithOptions("e54Lq3xxx", "Sheet1", $sortFilterRequest, $sortFilterHeaders, new RuntimeOptions([]));
+        }
+        catch (Exception $err) {
+            if (!($err instanceof TeaError)) {
+                $err = new TeaError([], $err-&gt;getMessage(), $err-&gt;getCode(), $err);
+            }
+            if (!Utils::empty_($err-&gt;code) &amp;&amp; !Utils::empty_($err-&gt;message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+        }
+    }
+}
+$path = __DIR__ . \DIRECTORY_SEPARATOR . '..' . \DIRECTORY_SEPARATOR . 'vendor' . \DIRECTORY_SEPARATOR . 'autoload.php';
+if (file_exists($path)) {
+    require_once $path;
+}
+Sample::main(array_slice($argv, 1));</code></pre></div><input type="radio" name="check-figure-wjx-dzr-bu6" id="figure-wjx-dzr-bu6-go-tab" /><label for="figure-wjx-dzr-bu6-go-tab">Go</label><div class="codeblock-item"><pre id="codeblock-iz4-uet-ozd" outputclass="language-go" data-tag="codeblock" code-type="xCode" class="pre codeblock language-go"><code>package main
+
+import (
+  "encoding/json"
+  "strings"
+  "fmt"
+  "os"
+  util  "github.com/alibabacloud-go/tea-utils/v2/service"
+  dingtalkdoc_1_0  "github.com/alibabacloud-go/dingtalk/doc_1_0"
+  openapi  "github.com/alibabacloud-go/darabonba-openapi/v2/client"
+  "github.com/alibabacloud-go/tea/tea"
+)
+
+
+// Description:
+// 
+// 使用 Token 初始化账号Client
+// 
+// @return Client
+// 
+// @throws Exception
+func CreateClient () (_result *dingtalkdoc_1_0.Client, _err error) {
+  config := &amp;openapi.Config{}
+  config.Protocol = tea.String("https")
+  config.RegionId = tea.String("central")
+  _result = &amp;dingtalkdoc_1_0.Client{}
+  _result, _err = dingtalkdoc_1_0.NewClient(config)
+  return _result, _err
+}
+
+func _main (args []*string) (_err error) {
+  client, _err := CreateClient()
+  if _err != nil {
+    return _err
+  }
+
+  sortFilterHeaders := &amp;dingtalkdoc_1_0.SortFilterHeaders{}
+  sortFilterHeaders.XAcsDingtalkAccessToken = tea.String("&lt;your access token&gt;")
+  field := &amp;dingtalkdoc_1_0.SortFilterRequestField{
+    Column: tea.Int64(0),
+    Ascending: tea.Bool(false),
+  }
+  sortFilterRequest := &amp;dingtalkdoc_1_0.SortFilterRequest{
+    OperatorId: tea.String("ppgAxxx"),
+    Field: field,
+  }
+  tryErr := func()(_e error) {
+    defer func() {
+      if r := tea.Recover(recover()); r != nil {
+        _e = r
+      }
+    }()
+    _, _err = client.SortFilterWithOptions(tea.String("e54Lq3xxx"), tea.String("Sheet1"), sortFilterRequest, sortFilterHeaders, &amp;util.RuntimeOptions{})
+    if _err != nil {
+      return _err
+    }
+
+    return nil
+  }()
+
+  if tryErr != nil {
+    var err = &amp;tea.SDKError{}
+    if _t, ok := tryErr.(*tea.SDKError); ok {
+      err = _t
+    } else {
+      err.Message = tea.String(tryErr.Error())
+    }
+    if !tea.BoolValue(util.Empty(err.Code)) &amp;&amp; !tea.BoolValue(util.Empty(err.Message)) {
+      // err 中含有 code 和 message 属性，可帮助开发定位问题
+    }
+
+  }
+  return _err
+}
+
+
+func main() {
+  err := _main(tea.StringSlice(os.Args[1:]))
+  if err != nil {
+    panic(err)
+  }
+}</code></pre></div><input type="radio" name="check-figure-wjx-dzr-bu6" id="figure-wjx-dzr-bu6-nodejs-tab" /><label for="figure-wjx-dzr-bu6-nodejs-tab">Node.js</label><div class="codeblock-item"><pre id="codeblock-pwt-v6a-1zv" outputclass="language-nodejs" data-tag="codeblock" code-type="xCode" class="pre codeblock language-nodejs"><code>'use strict';
+// This file is auto-generated, don't edit it
+const Util = require('@alicloud/tea-util');
+const dingtalkdoc_1_0 = require('@alicloud/dingtalk/doc_1_0');
+const OpenApi = require('@alicloud/openapi-client');
+const Tea = require('@alicloud/tea-typescript');
+
+class Client {
+
+  /**
+   * 使用 Token 初始化账号Client
+   * @return Client
+   * @throws Exception
+   */
+  static createClient() {
+    let config = new OpenApi.Config({ });
+    config.protocol = 'https';
+    config.regionId = 'central';
+    return new dingtalkdoc_1_0.default(config);
+  }
+
+  static async main(args) {
+    let client = Client.createClient();
+    let sortFilterHeaders = new dingtalkdoc_1_0.SortFilterHeaders({ });
+    sortFilterHeaders.xAcsDingtalkAccessToken = '&lt;your access token&gt;';
+    let field = new dingtalkdoc_1_0.SortFilterRequestField({
+      column: 0,
+      ascending: false,
+    });
+    let sortFilterRequest = new dingtalkdoc_1_0.SortFilterRequest({
+      operatorId: 'ppgAxxx',
+      field: field,
+    });
+    try {
+      await client.sortFilterWithOptions('e54Lq3xxx', 'Sheet1', sortFilterRequest, sortFilterHeaders, new Util.RuntimeOptions({ }));
+    } catch (err) {
+      if (!Util.default.empty(err.code) &amp;&amp; !Util.default.empty(err.message)) {
+        // err 中含有 code 和 message 属性，可帮助开发定位问题
+      }
+
+    }    
+  }
+
+}
+
+exports.Client = Client;
+Client.main(process.argv.slice(2));</code></pre></div><input type="radio" name="check-figure-wjx-dzr-bu6" id="figure-wjx-dzr-bu6-csharp-tab" /><label for="figure-wjx-dzr-bu6-csharp-tab">C#</label><div class="codeblock-item"><pre id="codeblock-any-d8s-hfv" outputclass="language-csharp" data-tag="codeblock" code-type="xCode" class="pre codeblock language-csharp"><code>using Newtonsoft.Json;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
+
+using Tea;
+using Tea.Utils;
+
+
+namespace AlibabaCloud.SDK.Sample
+{
+    public class Sample 
+    {
+
+        /// &lt;term&gt;&lt;b&gt;Description:&lt;/b&gt;&lt;/term&gt;
+        /// &lt;description&gt;
+        /// &lt;para&gt;使用 Token 初始化账号Client&lt;/para&gt;
+        /// &lt;/description&gt;
+        /// 
+        /// &lt;returns&gt;
+        /// Client
+        /// &lt;/returns&gt;
+        /// 
+        /// &lt;term&gt;&lt;b&gt;Exception:&lt;/b&gt;&lt;/term&gt;
+        /// Exception
+        public static AlibabaCloud.SDK.Dingtalkdoc_1_0.Client CreateClient()
+        {
+            AlibabaCloud.OpenApiClient.Models.Config config = new AlibabaCloud.OpenApiClient.Models.Config();
+            config.Protocol = "https";
+            config.RegionId = "central";
+            return new AlibabaCloud.SDK.Dingtalkdoc_1_0.Client(config);
+        }
+
+        public static void Main(string[] args)
+        {
+            AlibabaCloud.SDK.Dingtalkdoc_1_0.Client client = CreateClient();
+            AlibabaCloud.SDK.Dingtalkdoc_1_0.Models.SortFilterHeaders sortFilterHeaders = new AlibabaCloud.SDK.Dingtalkdoc_1_0.Models.SortFilterHeaders();
+            sortFilterHeaders.XAcsDingtalkAccessToken = "&lt;your access token&gt;";
+            AlibabaCloud.SDK.Dingtalkdoc_1_0.Models.SortFilterRequest.SortFilterRequestField field = new AlibabaCloud.SDK.Dingtalkdoc_1_0.Models.SortFilterRequest.SortFilterRequestField
+            {
+                Column = 0,
+                Ascending = false,
+            };
+            AlibabaCloud.SDK.Dingtalkdoc_1_0.Models.SortFilterRequest sortFilterRequest = new AlibabaCloud.SDK.Dingtalkdoc_1_0.Models.SortFilterRequest
+            {
+                OperatorId = "ppgAxxx",
+                Field = field,
+            };
+            try
+            {
+                client.SortFilterWithOptions("e54Lq3xxx", "Sheet1", sortFilterRequest, sortFilterHeaders, new AlibabaCloud.TeaUtil.Models.RuntimeOptions());
+            }
+            catch (TeaException err)
+            {
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+            catch (Exception _err)
+            {
+                TeaException err = new TeaException(new Dictionary&lt;string, object&gt;
+                {
+                    { "message", _err.Message }
+                });
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+        }
+
+
+    }
+}</code></pre></div></div></section></section><section id="section-response-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-response-1" data-tag="h2" class="h2">响应</h2><section id="section-response-parameter" class="section"><h3 data-tag="h3" id="h2-g5j-8al-rvb" class="h3 title">响应体</h3><table id="069fc7555atfp" tablewidth="710" tablecolswidth="213 142 355" autofit="false" class="table"><colgroup colwidth="0.9*" style="width:30.00%"></colgroup><colgroup colwidth="0.6*" style="width:20.00%"></colgroup><colgroup colwidth="1.5*" style="width:50.00%"></colgroup><tbody class="tbody"><tr id="e953ae574fn96"><td id="1f2108c938vnf" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="cf68688291sae">名称</p></td><td id="94a7e72e24qb1" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="7fdf3cf1cay61">类型</p></td><td id="4c9e2b916bjx7" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="2a30a7b4eakc4">描述</p></td></tr><tr outputclass="row row-level-1" id="19430874c1ltv" class="row row-level-1"><td id="9ee65e8720wb7" rowspan="1" colspan="1"><p id="a921a1c61bdj4">id</p></td><td id="c23f10af5bdcs" rowspan="1" colspan="1"><p id="ed734e9f9dtkd">String</p></td><td id="04ce6b1f50yyy" rowspan="1" colspan="1"><p id="e99ac9024bpnt">筛选的唯一标识符。</p></td></tr></tbody></table></section><section id="section-response-body-example" class="section"><h3 id="h3-response-body-example" data-tag="h3" class="h3">响应体示例</h3><pre outputclass="language-json" data-tag="codeblock" code-type="xCode" id="2deaab213fjha" class="pre codeblock language-json"><code>HTTP/1.1 200 OK
+Content-Type:application/json
+
+{
+  "id" : "filter-xxxxx"
+}</code></pre></section><section id="section-error-code-1" class="section"><h3 id="h3-error-code-1" data-tag="h3" class="h3">错误码</h3><p data-tag="p" id="p-error-code-global-guide" class="p">若调用该接口报错，可根据错误信息在<a href="https://open.dingtalk.com/document/development/server-api-error-codes-1" id="a-error-code-global-guide">全局错误码</a>文档中查找解决方案。</p><table id="d62df50a267uk" tablewidth="709" tablecolswidth="142 177 177 213" autofit="false" class="table"><colgroup colwidth="0.8*" style="width:20.03%"></colgroup><colgroup colwidth="1*" style="width:24.96%"></colgroup><colgroup colwidth="1*" style="width:24.96%"></colgroup><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><tbody class="tbody"><tr id="77650ee5besno"><td id="f4e255baa81az" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="106a364039850">HttpCode</p></td><td id="9d58250f78cnu" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="52f2f409e8c2v">错误码</p></td><td id="22d51bffdd8kz" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="b719364587cew">错误信息</p></td><td id="acb5b36ad6hmi" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="01a68aea5aajh">说明</p></td></tr><tr id="1ac885bb66qo1"><td id="9dc91aa931npt" rowspan="1" colspan="1"><p id="f3871a344c0d6">400</p></td><td id="00b46f6a78d3d" rowspan="1" colspan="1"><p id="0abf1b62c9mln">invalidRequest.inputArgs.invalid</p></td><td id="ca2d584e44q1l" rowspan="1" colspan="1"><p id="6a97b77141mw3">%s</p></td><td id="4f9434c1451fl" rowspan="1" colspan="1"><p id="57139083daff3">请求参数不合法，请查看错误信息。</p></td></tr><tr id="f0a687031e6tx"><td id="cd5c6471d9z0e" rowspan="1" colspan="1"><p id="a80bb1a893c5e">400</p></td><td id="4f9b95443eskj" rowspan="1" colspan="1"><p id="6c80cf09339j6">invalidRequest.inputArgs.workbookIdIllegal</p></td><td id="e4641cf2ae1yg" rowspan="1" colspan="1"><p id="a49a7fb91fvx7">The workbookId is illegal.</p></td><td id="18452923841ru" rowspan="1" colspan="1"><p id="e4e28fe971gsy">workbookId不合法。</p></td></tr><tr id="8b5c217b35eeh"><td id="a3d4e87a30ttw" rowspan="1" colspan="1"><p id="593dc5fa187eq">400</p></td><td id="13daedeea6lcv" rowspan="1" colspan="1"><p id="dfb964f6a0adv">invalidRequest.resource.notWorkbook</p></td><td id="52ae8603fbo3z" rowspan="1" colspan="1"><p id="d23cd5f2c25ii">%s</p></td><td id="e9272d8c32qqs" rowspan="1" colspan="1"><p id="9b857e2f639f4">不支持的文档类型，请检查workbookId。</p></td></tr><tr id="c472b9919bvsf"><td id="bf67d5fdd8mbg" rowspan="1" colspan="1"><p id="26aacdd32a2uh">400</p></td><td id="1dd248fdf83ql" rowspan="1" colspan="1"><p id="129552c649pi2">invalidRequest.document.stillInitializing</p></td><td id="46bfdbb7b4t8r" rowspan="1" colspan="1"><p id="971c5ffaf8ecs">The document is still initializing. Please try again later.</p></td><td id="2e72ddb0f6a9s" rowspan="1" colspan="1"><p id="790fc621dbp7v">文档初始化中，请稍后重试。</p></td></tr><tr id="e082f3c32dyjs"><td id="c35e62629blq4" rowspan="1" colspan="1"><p id="87abfcfec247f">403</p></td><td id="679075bafc9pq" rowspan="1" colspan="1"><p id="d77bd851b5f7m">forbidden.accessDenied</p></td><td id="278a58241f92i" rowspan="1" colspan="1"><p id="bcc49b374edt6">The operator has no permission.</p></td><td id="ac827e7e876mj" rowspan="1" colspan="1"><p id="ce4cfd18efu1z">当前用户无此操作权限。</p></td></tr><tr id="d3fbcc3f1fuon"><td id="8ee1306d4f27h" rowspan="1" colspan="1"><p id="20ff74e6edq7h">403</p></td><td id="ea69d59c57raa" rowspan="1" colspan="1"><p id="ef84e5eb5dgcg">forbidden.acrossOrg</p></td><td id="5f5997ac4ci4b" rowspan="1" colspan="1"><p id="6204621dabgjy">%s</p></td><td id="9aeafc979f0ng" rowspan="1" colspan="1"><p id="0674cdc9bb31x">请求不合法，请检查要访问的文档是否归属于accessToken指定的组织。</p></td></tr><tr id="00b644a7111j6"><td id="f61d17d44den6" rowspan="1" colspan="1"><p id="896d5fc1d1d6f">403</p></td><td id="aa9776968fd10" rowspan="1" colspan="1"><p id="1f17eab36361o">forbidden.operationIllegal</p></td><td id="a761e31119ajb" rowspan="1" colspan="1"><p id="81058cf0c05om">%s</p></td><td id="4374f413ddpp4" rowspan="1" colspan="1"><p id="0e28311096tdi">请求操作不合法，请查看错误信息。</p></td></tr><tr id="d4c61d1adfdb3"><td id="36a7dc9f32q7e" rowspan="1" colspan="1"><p id="733767bb4d1ob">403</p></td><td id="336906886aacb" rowspan="1" colspan="1"><p id="5e22c5f7128in">forbidden.document.sizeOverLimit</p></td><td id="3712bd07460s5" rowspan="1" colspan="1"><p id="f5ca969faewv4">The document size is over limit and the server is unable to complete your request. Retry is unlikely to work unless the document size is decreased.</p></td><td id="617928bb185wa" rowspan="1" colspan="1"><p id="253a412edach5">表格内容过大，请尝试缩减表格内容。</p></td></tr><tr id="05002829d3qfj"><td id="4a7c82831dadh" rowspan="1" colspan="1"><p id="852aa0a9c408r">404</p></td><td id="4a443e9fe51oi" rowspan="1" colspan="1"><p id="b61c286b94vwm">invalidRequest.resource.notFound</p></td><td id="c4430a4564mdn" rowspan="1" colspan="1"><p id="acc4d1e93cj4d">%s</p></td><td id="186310e09a5sn" rowspan="1" colspan="1"><p id="cfa3fe3ce4b65">请求失败，无法找到要访问的资源。</p></td></tr><tr id="5aa2b01667apn"><td id="6a008b9e6016a" rowspan="1" colspan="1"><p id="3c0e2ff777n73">500</p></td><td id="685c943d3028f" rowspan="1" colspan="1"><p id="524c9abfa0m6h">serviceBusy</p></td><td id="b29d8de9bfmlb" rowspan="1" colspan="1"><p id="aa3b76340ex4e">The server is busy and unable to complete your request. Please try again later.</p></td><td id="89043002351kx" rowspan="1" colspan="1"><p id="61d76f3bcbnqa">服务繁忙，请稍后重试。</p></td></tr><tr id="772bcf3c19jdf"><td id="581797cfbc6nk" rowspan="1" colspan="1"><p id="87cbdf2b7egnf">500</p></td><td id="0c61ad20fcwv0" rowspan="1" colspan="1"><p id="5b8596d83anmw">internalError</p></td><td id="8bb9d2b0a3cp9" rowspan="1" colspan="1"><p id="1a0eabd415p9j">The server encountered an internal error and was unable to complete your request. Please try again later.</p></td><td id="88d3ff4775ml6" rowspan="1" colspan="1"><p id="0e099af157zqr">服务内部错误，请稍后再试。</p></td></tr></tbody></table></section></section></div></main></body></html>

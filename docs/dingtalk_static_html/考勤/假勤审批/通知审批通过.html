@@ -1,0 +1,494 @@
+<!DOCTYPE html><html><head><meta charset="utf8" / /><meta name="gmtModify" content="2026-04-15 11:41:32" / /><meta name="searchtitle" content="" / /><meta name="keywords" content="" / /><meta name="author" content="" / /><title>通知审批通过</title><meta name="gmtModify" content="2026-06-02 09:24:51" / /></head><body data-tag="topic" id="doc-api-dingtalk-ProcessApproveFinish" class="topic"><main id="1daac0eb674mo" data-init-id="doc-api-dingtalk-ProcessApproveFinish"><h1 data-tag="title" id="h1-hm2-wfv-wvo" class="title">通知审批通过</h1><p data-tag="shortdesc" class="shortdesc" id="f01c1d6dc87dz">通过本接口，通知审批通过，支持加班、请假、外出和出差类型。</p><div data-tag="conbody" outputclass="icms-api-reference" class="icms-api-reference conbody"><section id="section-prerequisites-1" class="section icms-module" data-tag="section" data-source="latest-mounted-icms-html"><h2 id="h2-prerequisites-1" data-tag="h2" class="h2">接口调用说明</h2><p id="11bfca59fenez">例如，员工今日排班是8：00-18：00，在企业自有审批系统提交了请假，审批通过后通过本接口通知钉钉考勤，今天该员工无需打卡，不会被记为旷工，状态会显示为请假。 例如，员工小钉在11月15日未执行打卡，考勤统计中显示如下图：</p><p id="2570f215c16bb"><img id="6b1d2c01621hm" src="https://help-static-aliyun-doc.aliyuncs.com/assets/img/zh-CN/1943630871/p1075898.png" alt="image" placement="break" class="image break" / /></p><p id="2a9ff41c36wyy">调用本接口，通知审批通过，可实现修改员工小钉在11月15日的考勤为请假、出差或者加班，如下图所示：</p><p id="b341358862hl4"><img id="81f40b4494qt6" src="https://help-static-aliyun-doc.aliyuncs.com/assets/img/zh-CN/1943630871/p1075899.png" alt="image" placement="break" class="image break" / /></p></section><section id="section-request-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-request-1" data-tag="h2" class="h2">请求</h2><section id="section-request-basic-info" class="section"><h3 id="heading-request-basic-info" data-tag="h3" class="h3">基本信息</h3><table id="7f6a714b35qxg" tablewidth="648" tablecolswidth="216 432" autofit="false" class="table"><colgroup colwidth="0.67*" style="width:33.33%"></colgroup><colgroup colwidth="1.33*" style="width:66.67%"></colgroup><tbody class="tbody"><tr id="7a96d52312vmg"><td id="3cc1c6ba89tc9" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="d6a6b75566dqs">字段</p></td><td id="8849904a6d6t7" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="852c9709c7kmu">值</p></td></tr><tr id="5372cc131end0"><td id="98016610414xx" rowspan="1" colspan="1"><p id="b1fe8e29c6pqn">HTTP URL</p></td><td id="45e173a08f5a9" rowspan="1" colspan="1"><p id="bd81bc86ff2tk">https://api.dingtalk.com/v1.0/attendance/approvals/finish</p></td></tr><tr id="b362b911bdo7w"><td id="5a3a63eb1emks" rowspan="1" colspan="1"><p id="53d128c22dslk">HTTP Method</p></td><td id="b938bf3a74dnj" rowspan="1" colspan="1"><p id="acf667ffd5wn2">POST</p></td></tr><tr id="25038893e8wlm"><td id="78104e30bb7bh" rowspan="1" colspan="1"><p id="820492a42ei7t">支持的应用类型</p></td><td id="5f5797cc83qse" rowspan="1" colspan="1"><p id="68c347a4a355u"><span data-tag="ph" id="ph-request-basic-app-type-apptype-0" class="ph ph-app-type" data-ph-raw-text="appType-企业内部应用">appType-企业内部应用</span>　<span data-tag="ph" id="ph-request-basic-app-type-apptype-1" class="ph ph-app-type" data-ph-raw-text="appType-第三方企业应用">appType-第三方企业应用</span></p></td></tr><tr id="23066011938gs"><td id="ad19292fe8aor" rowspan="1" colspan="1"><p id="c6151976b43co">权限要求</p></td><td id="5090495714h9b" rowspan="1" colspan="1"><p id="dd9d5f7521ah7"><span data-tag="ph" id="ph-request-basic-permission-permission-qyapi-attendance-group-read-0" class="ph-permission ph" data-ph-raw-text="permission-qyapi_attendance_group_read-考勤组查询权限" data-permission-id="permission-qyapi_attendance_group_read" data-permission-code="qyapi_attendance_group_read" data-permission-detail-api="/document/api/permission/detail" data-permission-query-param="code">permission-qyapi_attendance_group_read-考勤组查询权限</span></p></td></tr></tbody></table></section><section id="section-request-header-parameter" class="section"><h3 data-tag="h3" id="h2-iuc-o8q-cnm" class="h3 title">请求头</h3><table id="dfeec5008aufo" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="d44c295bb5f7x"><td id="e3b279ba77szz" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="e3b92823ceuuh">名称</p></td><td id="f2db3ecbbf02x" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="ac9f39438bzg9">类型</p></td><td id="21ba5123d46f3" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="5f5dfbb8a9d5x">是否必填</p></td><td id="50f14d997d5cm" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="6f1b9ca7c4ugx">描述</p></td></tr><tr id="2eb0112885pzs"><td id="0244741927q22" rowspan="1" colspan="1"><p id="917d64b5cf4ig">x-acs-dingtalk-access-token</p></td><td id="4be56dcc21836" rowspan="1" colspan="1"><p id="0ee9d2ee0937a">String</p></td><td id="5a4779ac1dwgb" rowspan="1" colspan="1"><p id="35eed8bcd665d">是</p></td><td id="5d53de731dtvv" rowspan="1" colspan="1"><p id="f37da7bda8x5j">调用该接口的访问凭证，可通过以下方式获取：</p><ul id="884bbec4686nu"><li id="7e81b37e3bhil"><p id="2c4394267fz2z">企业内部应用可调用<a href="https://open.dingtalk.com/document/development/obtain-the-access-token-of-an-internal-app" id="29e16fb8639zu">获取企业内部应用的accessToken</a>接口获取。</p></li><li id="e7be23d3dct3a"><p id="804b50165fbqk">第三方企业应用可调用<a href="https://open.dingtalk.com/document/development/obtain-the-access-token-of-the-authorized-enterprise-1" id="318c74078ck4w">获取第三方应用授权企业的accessToken</a>接口获取。</p></li></ul></td></tr></tbody></table></section><section id="section-request-query-parameter" class="section"><h3 data-tag="h3" id="h2-hzb-yxq-bm9" class="h3 title">查询参数</h3><table id="1b605b13586gi" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="33c454cb67dg9"><td id="43bde59ee07z9" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="1e75409dd4zro">名称</p></td><td id="6e2a9d10684d9" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="5af51b069ctya">类型</p></td><td id="1abd9baa05wof" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="8c2de72646i6t">是否必填</p></td><td id="8d1b07354853a" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="42b9aa1f5bm57">描述</p></td></tr><tr id="612ea093d4t8h"><td id="d27337060csur" rowspan="1" colspan="1"><p id="bd08926a08lv5">userId</p></td><td id="9a763c3881nqs" rowspan="1" colspan="1"><p id="b6f4a0342ar1k">String</p></td><td id="38ca65cac1aau" rowspan="1" colspan="1"><p id="1180cf3ed0sor">否</p></td><td id="a504e2285dvmy" rowspan="1" colspan="1"><p id="38898d969922b">员工的userId。</p></td></tr></tbody></table></section><section id="section-request-body-parameter" class="section"><h3 data-tag="h3" id="h2-36v-cw9-f4b" class="h3 title">请求体</h3><table id="e1dd592e0f76o" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="79fb6cc7233lm"><td id="faccb08c6crin" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="2532eb97ff9ma">名称</p></td><td id="679c347eb1fs6" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="db56bca700mmx">类型</p></td><td id="b3d1bf305bt5p" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="cd9bdaa4f7fxc">是否必填</p></td><td id="370d3ecf71qkb" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="339dfb12294bq">描述</p></td></tr><tr outputclass="row row-level-2 has-child" id="b0769ef76arve" class="row row-level-2 has-child"><td id="a2d6a48bcc9m1" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="846ac7da13oem">topCalculateApproveDurationParam</p></td><td id="d7636e3b90ham" rowspan="1" colspan="1"><p id="bb749c40263jz">Object</p></td><td id="594af52c0e825" rowspan="1" colspan="1"><p id="57c64ba823los">否</p></td><td id="d78d461aca1ch" rowspan="1" colspan="1"><p id="8744f099efbnd">时长相关入参。</p></td></tr><tr outputclass="row row-level-2-1" id="ad1b4826d15ob" class="row row-level-2-1"><td id="7158fba80fbpo" rowspan="1" colspan="1"><p id="e062300138udx">bizType</p></td><td id="a2fa33af8czrf" rowspan="1" colspan="1"><p id="4e2666513fqdx">Long</p></td><td id="1ee7d6ff21g9m" rowspan="1" colspan="1"><p id="88a23a6c6bszw">否</p></td><td id="3153899ed64d5" rowspan="1" colspan="1"><p id="8dec05fbecmd9">审批单类型，可取值：</p><ul id="8952ea13705gv"><li id="943932a8b7mjy"><p id="972e7f9740ckq"><b>1</b>：加班</p></li><li id="a7166041290x2"><p id="e9d60e38669ib"><b>2</b>：出差、外出</p></li><li id="3df093b0c34m0"><p id="37e43a8c2e8ry"><b>3</b>：请假</p></li></ul></td></tr><tr outputclass="row row-level-2-2" id="d397d8c270fpj" class="row row-level-2-2"><td id="b442766747uvt" rowspan="1" colspan="1"><p id="2a8a1b10f3n6l">fromTime</p></td><td id="3096f2b5bdw1i" rowspan="1" colspan="1"><p id="c05a5d8aa9rtu">String</p></td><td id="a6aebb48b3wjr" rowspan="1" colspan="1"><p id="79126e038422w">否</p></td><td id="64a9bf3c3fj6v" rowspan="1" colspan="1"><p id="61e8295d96ac5">开始时间。开始时间不能早于当前时间前31天。
+支持以下格式：</p><ul id="6054e7acbcabz"><li id="5e19c447f9etl"><p id="af1cb0ce9are8">2019-08-15</p></li><li id="3b4144ba4b7o6"><p id="15716bde89amv">2019-08-15 AM</p></li><li id="b2a1c195bfbbk"><p id="950fd5b8fbqmu">2019-08-15 12:43</p></li></ul></td></tr><tr outputclass="row row-level-2-3" id="067ec6001a6f4" class="row row-level-2-3"><td id="067cd8947btrl" rowspan="1" colspan="1"><p id="f482a7b6fd068">toTime</p></td><td id="9960d3e96717v" rowspan="1" colspan="1"><p id="5562dff661c9r">String</p></td><td id="47ffac7dc72ch" rowspan="1" colspan="1"><p id="8443c685c0moe">否</p></td><td id="2ce2b69a1e32d" rowspan="1" colspan="1"><p id="7b1e3e2f84tii">结束时间。
+支持以下格式：</p><ul id="aaf08c159etm2"><li id="47022b719cwck"><p id="35a7f7302cbtk">2019-08-15</p></li><li id="a3a9de0214qbj"><p id="d6197d461d3ge">2019-08-15 AM</p></li><li id="8d4b4590438fd"><p id="89235b5bd1u9z">2019-08-15 12:43</p></li></ul><p class="note-icon-wrapper" id="ddbfd799f6eme"></p><p data-tag="p" class="p" id="38f20db49d8i2"></p><ul id="fecbab5093jiw"><li id="76f9b96260tju"><p id="fa4f5e752apq0">结束时间不能早于开始时间；</p></li><li id="05dec9920d03g"><p id="09b6bf4d4dp8y">时间跨度不能超过360天；</p></li><li id="a024294eb8nsp"><p id="c3aa5f00d07l7">结束时间减去开始时间的天数不能超过31天；</p></li><li id="768526bb81ndm"><p id="ebff215021hbe"><code data-tag="inlineCode" id="99b7f72e8fqcg" class="inlineCode">biz_type</code>为1时，结束时间减去开始时间的天数不能超过1天。</p></li></ul><p id="03ecc84c4cyyz"></p></td></tr><tr outputclass="row row-level-2-4" id="4a48711af30i1" class="row row-level-2-4"><td id="92e8a6c31edu7" rowspan="1" colspan="1"><p id="d2af07b9a3rzr">durationUnit</p></td><td id="f1edfed94asxj" rowspan="1" colspan="1"><p id="c762fe81a8rbq">String</p></td><td id="de50e0e9f1nio" rowspan="1" colspan="1"><p id="8e6e6c0343d7i">否</p></td><td id="801649f17bgo8" rowspan="1" colspan="1"><p id="b896668eb4c16">时长单位，支持格式如下：</p><ul id="b78606a3daptr"><li id="3b6c751643lqx"><p id="63dd2cc656rrn"><b>day</b></p></li><li id="bb42809364blz"><p id="e8170ae140qfz"><b>halfDay</b></p></li><li id="3044e6e366lyb"><p id="afaa511e22lzb"><b>hour</b>：<code data-tag="inlineCode" id="0567797b6575r" class="inlineCode">biz_type</code>为1时仅支持hour。</p></li></ul><p id="6d076948656q1">时间格式必须与时长单位对应：</p><ul id="a202bf29608s8"><li id="ed83406552dg6"><p id="80514464c178v">2019-08-15对应day</p></li><li id="95959e422emht"><p id="994e8c4dffumz">2019-08-15 AM对应halfDay</p></li><li id="869e0685571iz"><p id="1fc1f4d0b5xvw">2019-08-15 12:43对应hour</p></li></ul></td></tr><tr outputclass="row row-level-2-5" id="8bd08022c7t85" class="row row-level-2-5"><td id="74c2dc8efbrbb" rowspan="1" colspan="1"><p id="8a8262e14fale">calculateModel</p></td><td id="dec99ec495ya0" rowspan="1" colspan="1"><p id="3fd7fa9f589cd">Long</p></td><td id="02327b10d193m" rowspan="1" colspan="1"><p id="f6a80ec45d9mv">否</p></td><td id="003eb230e2ots" rowspan="1" colspan="1"><p id="09d162cb33ony">计算方法：</p><ul id="0e9849f9fe99j"><li id="6276fc63f0o44"><p id="9a5a4d255dvx8"><b>0</b>：按自然日计算</p></li><li id="e7363ac4a51cb"><p id="e7194cbeef4wd"><b>1</b>：按工作日计算</p></li></ul></td></tr><tr outputclass="row row-level-2-6" id="7578338715ft7" class="row row-level-2-6"><td id="f098a13dc2r6t" rowspan="1" colspan="1"><p id="001070951aytc">leaveCode</p></td><td id="cf6fed4e1fep6" rowspan="1" colspan="1"><p id="b0bbef3612u9s">String</p></td><td id="57d9f9b215azt" rowspan="1" colspan="1"><p id="b673f8f4bbeyx">否</p></td><td id="52f71b0cda7yu" rowspan="1" colspan="1"><p id="2b259a313f2mr">假期规则唯一标识。选填。</p><p class="note-icon-wrapper" id="ab206185b4ut9"></p><p data-tag="p" class="p" id="19ca4a853fkxy"></p><p id="189c8cf216st5">仅支持<code data-tag="inlineCode" id="9b9d2c0ab7ny6" class="inlineCode">bizType=3</code>请假时传不为空，可以支持根据假期类型设置的取整规则进行时长取整。</p><p id="bb3e2742d8sl9"></p></td></tr><tr outputclass="row row-level-3" id="2f3bf854a7pj3" class="row row-level-3"><td id="a1fe515092zrn" rowspan="1" colspan="1"><p id="10f67c50e8u3c">tagName</p></td><td id="f8145560cbgo2" rowspan="1" colspan="1"><p id="17e5d874ebap9">String</p></td><td id="f0df3f3571qcy" rowspan="1" colspan="1"><p id="a32009f3a4fby">否</p></td><td id="918aec7bf4tz2" rowspan="1" colspan="1"><p id="4daa581cc0ql5">审批单类型名称，最大长度20个字符，支持类型：请假、出差、外出、加班。</p></td></tr><tr outputclass="row row-level-4" id="f090adf601wsc" class="row row-level-4"><td id="f814bd95efh2p" rowspan="1" colspan="1"><p id="7ce5319f8csca">subType</p></td><td id="353939b947pyk" rowspan="1" colspan="1"><p id="d6b74dc9a7n4d">String</p></td><td id="58a73f5fba2qg" rowspan="1" colspan="1"><p id="624344f8dbnjq">否</p></td><td id="a2858d5a9b9iv" rowspan="1" colspan="1"><p id="9a535f1dd907g">子类型名称，最大长度64个字符。</p><p class="note-icon-wrapper" id="b290dc83f84x9"></p><p data-tag="p" class="p" id="49853c695fvt8"></p><p id="c6da4d496farx">审批单类型biz_type=3时，该参数必传。</p><p id="46f213895ab54"></p></td></tr><tr outputclass="row row-level-5" id="619223cc1crxr" class="row row-level-5"><td id="6cf99a5432tcw" rowspan="1" colspan="1"><p id="a1af145bcf0wa">approveId</p></td><td id="98815f4739vsy" rowspan="1" colspan="1"><p id="0df4a3f181wki">String</p></td><td id="5837cd7dc24un" rowspan="1" colspan="1"><p id="97fe2e6074qes">否</p></td><td id="66c990397erbu" rowspan="1" colspan="1"><p id="029b22db4e6f6">审批单ID，最大长度100个字符，自定义值。</p><p class="note-icon-wrapper" id="692f8deb99oos"></p><p data-tag="p" class="p" id="98fd36d62afam"></p><p id="cd41b6ee6aq02">第三方企业应用需要自行保存，通知审批撤销时需要使用参数。approveId不变的情况下再次调用本接口是更新操作。</p><p id="1a5130b0f8s9x"></p></td></tr><tr outputclass="row row-level-6" id="93fc545bb31tu" class="row row-level-6"><td id="c14b3bb8e4y6y" rowspan="1" colspan="1"><p id="da586f947edq0">jumpUrl</p></td><td id="55f518f98dp2h" rowspan="1" colspan="1"><p id="ed3f11ae6bz7z">String</p></td><td id="b738299a18n8x" rowspan="1" colspan="1"><p id="b348f04dc8phw">否</p></td><td id="a78be45ba3qtp" rowspan="1" colspan="1"><p id="cf12bfa0ae3f7">审批单跳转地址，最大长度200个字符。</p><p class="note-icon-wrapper" id="e17eb3ab7enpe"></p><p data-tag="p" class="p" id="33bcafac26w4k"></p><p id="f366314c0cz65">第三方企业应用在考勤统计页面点击会根据该地址进行跳转，可传对应的审批单详情地址。</p><p id="9e9748e33fztt"></p></td></tr><tr outputclass="row row-level-7" id="785694591b0cr" class="row row-level-7"><td id="c7292ea98e407" rowspan="1" colspan="1"><p id="34ee6882e3etv">overtimeDuration</p></td><td id="2eba91119exiu" rowspan="1" colspan="1"><p id="2320e708092r3">String</p></td><td id="669aded3a0pf4" rowspan="1" colspan="1"><p id="97dda9852eosq">否</p></td><td id="7bc93d032714n" rowspan="1" colspan="1"><p id="f5a720ec72nve">biz_type为1时必传，加班时长单位小时。</p></td></tr><tr outputclass="row row-level-8" id="ea51761a8bzs6" class="row row-level-8"><td id="dc56b45fc61co" rowspan="1" colspan="1"><p id="5037d91187843">overTimeToMore</p></td><td id="85ba853d02gas" rowspan="1" colspan="1"><p id="c3b840675dq09">Long</p></td><td id="459efcffcc94i" rowspan="1" colspan="1"><p id="b251163171bxq">否</p></td><td id="30d5a88d3aqpz" rowspan="1" colspan="1"><p id="e486c0f636km1">biz_type为1时必传：</p><ul id="99cf0e875axmv"><li id="879a3998e47g4"><p id="583a48bde1qbe"><b>1</b>：加班转调休</p></li><li id="be87eb8f8aud9"><p id="0a93d898efmxl"><b>2</b>：加班转工资</p></li></ul></td></tr></tbody></table></section><section id="section-request-body-example" class="section"><h3 id="h3-request-body-example" data-tag="h3" class="h3">请求示例</h3><div outputclass="tabbed-codeblock" data-tag="fig" id="figure-mtb-j7f-dzh" class="tabbed-codeblock-box"><div class="tab-box"></div><input type="radio" name="check-figure-mtb-j7f-dzh" id="figure-mtb-j7f-dzh-HTTP-tab" checked="checked" /><label for="figure-mtb-j7f-dzh-HTTP-tab">HTTP</label><div class="codeblock-item"><pre id="codeblock-jne-2gp-ie9" outputclass="language-HTTP" data-tag="codeblock" code-type="xCode" class="pre codeblock language-HTTP"><code>POST /v1.0/attendance/approvals/finish?userId=manager123 HTTP/1.1
+Host:api.dingtalk.com
+x-acs-dingtalk-access-token:234adfw423xxx
+Content-Type:application/json
+
+{
+  "topCalculateApproveDurationParam" : {
+    "bizType" : 3,
+    "fromTime" : "2019-08-15",
+    "toTime" : "2019-08-15",
+    "durationUnit" : "day",
+    "calculateModel" : 1,
+    "leaveCode" : "3afdsf-143dsadw3-ad23"
+  },
+  "tagName" : "请假",
+  "subType" : "年假",
+  "approveId" : "1234abcd",
+  "dingtalkApproveId" : "https://open.dingtalk.com/",
+  "jumpUrl" : "https://open.dingtalk.com/",
+  "overtimeDuration" : "1.07",
+  "overTimeToMore" : 1
+}</code></pre></div><input type="radio" name="check-figure-mtb-j7f-dzh" id="figure-mtb-j7f-dzh-java-tab" /><label for="figure-mtb-j7f-dzh-java-tab">Java</label><div class="codeblock-item"><pre id="codeblock-4vq-whh-4rk" outputclass="language-java" data-tag="codeblock" code-type="xCode" class="pre codeblock language-java"><code>package com.aliyun.sample;
+
+import com.aliyun.tea.*;
+
+public class Sample {
+
+    /**
+     * &lt;b&gt;description&lt;/b&gt; :
+     * &lt;p&gt;使用 Token 初始化账号Client&lt;/p&gt;
+     * @return Client
+     * 
+     * @throws Exception
+     */
+    public static com.aliyun.dingtalkattendance_1_0.Client createClient() throws Exception {
+        com.aliyun.teaopenapi.models.Config config = new com.aliyun.teaopenapi.models.Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        return new com.aliyun.dingtalkattendance_1_0.Client(config);
+    }
+
+    public static void main(String[] args_) throws Exception {
+        
+        com.aliyun.dingtalkattendance_1_0.Client client = Sample.createClient();
+        com.aliyun.dingtalkattendance_1_0.models.ProcessApproveFinishHeaders processApproveFinishHeaders = new com.aliyun.dingtalkattendance_1_0.models.ProcessApproveFinishHeaders();
+        processApproveFinishHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        com.aliyun.dingtalkattendance_1_0.models.ProcessApproveFinishRequest.ProcessApproveFinishRequestTopCalculateApproveDurationParam topCalculateApproveDurationParam = new com.aliyun.dingtalkattendance_1_0.models.ProcessApproveFinishRequest.ProcessApproveFinishRequestTopCalculateApproveDurationParam()
+                .setBizType(3L)
+                .setFromTime("2019-08-15")
+                .setToTime("2019-08-15")
+                .setDurationUnit("day")
+                .setCalculateModel(1L)
+                .setLeaveCode("3afdsf-143dsadw3-ad23");
+        com.aliyun.dingtalkattendance_1_0.models.ProcessApproveFinishRequest processApproveFinishRequest = new com.aliyun.dingtalkattendance_1_0.models.ProcessApproveFinishRequest()
+                .setUserId("manager123")
+                .setTopCalculateApproveDurationParam(topCalculateApproveDurationParam)
+                .setTagName("请假")
+                .setSubType("年假")
+                .setApproveId("1234abcd")
+                .setJumpUrl("https://open.dingtalk.com/")
+                .setOvertimeDuration("1.07")
+                .setOverTimeToMore(1L);
+        try {
+            client.processApproveFinishWithOptions(processApproveFinishRequest, processApproveFinishHeaders, new com.aliyun.teautil.models.RuntimeOptions());
+        } catch (TeaException err) {
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        } catch (Exception _err) {
+            TeaException err = new TeaException(_err.getMessage(), _err);
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        }        
+    }
+}</code></pre></div><input type="radio" name="check-figure-mtb-j7f-dzh" id="figure-mtb-j7f-dzh-python-tab" /><label for="figure-mtb-j7f-dzh-python-tab">Python</label><div class="codeblock-item"><pre id="codeblock-ndz-csc-kub" outputclass="language-python" data-tag="codeblock" code-type="xCode" class="pre codeblock language-python"><code># -*- coding: utf-8 -*-
+# This file is auto-generated, don't edit it. Thanks.
+import os
+import sys
+import json
+
+from typing import List
+
+from alibabacloud_dingtalk.attendance_1_0.client import Client as dingtalkattendance_1_0Client
+from alibabacloud_tea_openapi import models as open_api_models
+from alibabacloud_dingtalk.attendance_1_0 import models as dingtalkattendance__1__0_models
+from alibabacloud_tea_util import models as util_models
+from alibabacloud_tea_util.client import Client as UtilClient
+
+
+class Sample:
+    def __init__(self):
+        pass
+
+    @staticmethod
+    def create_client() -&gt; dingtalkattendance_1_0Client:
+        """
+        使用 Token 初始化账号Client
+        @return: Client
+        @throws Exception
+        """
+        config = open_api_models.Config()
+        config.protocol = 'https'
+        config.region_id = 'central'
+        return dingtalkattendance_1_0Client(config)
+
+    @staticmethod
+    def main(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        process_approve_finish_headers = dingtalkattendance__1__0_models.ProcessApproveFinishHeaders()
+        process_approve_finish_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        top_calculate_approve_duration_param = dingtalkattendance__1__0_models.ProcessApproveFinishRequestTopCalculateApproveDurationParam(
+            biz_type=3,
+            from_time='2019-08-15',
+            to_time='2019-08-15',
+            duration_unit='day',
+            calculate_model=1,
+            leave_code='3afdsf-143dsadw3-ad23'
+        )
+        process_approve_finish_request = dingtalkattendance__1__0_models.ProcessApproveFinishRequest(
+            user_id='manager123',
+            top_calculate_approve_duration_param=top_calculate_approve_duration_param,
+            tag_name='请假',
+            sub_type='年假',
+            approve_id='1234abcd',
+            jump_url='https://open.dingtalk.com/',
+            overtime_duration='1.07',
+            over_time_to_more=1
+        )
+        try:
+            client.process_approve_finish_with_options(process_approve_finish_request, process_approve_finish_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+    @staticmethod
+    async def main_async(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        process_approve_finish_headers = dingtalkattendance__1__0_models.ProcessApproveFinishHeaders()
+        process_approve_finish_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        top_calculate_approve_duration_param = dingtalkattendance__1__0_models.ProcessApproveFinishRequestTopCalculateApproveDurationParam(
+            biz_type=3,
+            from_time='2019-08-15',
+            to_time='2019-08-15',
+            duration_unit='day',
+            calculate_model=1,
+            leave_code='3afdsf-143dsadw3-ad23'
+        )
+        process_approve_finish_request = dingtalkattendance__1__0_models.ProcessApproveFinishRequest(
+            user_id='manager123',
+            top_calculate_approve_duration_param=top_calculate_approve_duration_param,
+            tag_name='请假',
+            sub_type='年假',
+            approve_id='1234abcd',
+            jump_url='https://open.dingtalk.com/',
+            overtime_duration='1.07',
+            over_time_to_more=1
+        )
+        try:
+            await client.process_approve_finish_with_options_async(process_approve_finish_request, process_approve_finish_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+
+if __name__ == '__main__':
+    Sample.main(sys.argv[1:])</code></pre></div><input type="radio" name="check-figure-mtb-j7f-dzh" id="figure-mtb-j7f-dzh-php-tab" /><label for="figure-mtb-j7f-dzh-php-tab">PHP</label><div class="codeblock-item"><pre id="codeblock-2zn-qu6-dtg" outputclass="language-php" data-tag="codeblock" code-type="xCode" class="pre codeblock language-php"><code>&lt;?php
+
+// This file is auto-generated, don't edit it. Thanks.
+namespace AlibabaCloud\SDK\Sample;
+
+use AlibabaCloud\SDK\Dingtalk\Vattendance_1_0\Dingtalk;
+use \Exception;
+use AlibabaCloud\Tea\Exception\TeaError;
+use AlibabaCloud\Tea\Utils\Utils;
+
+use Darabonba\OpenApi\Models\Config;
+use AlibabaCloud\SDK\Dingtalk\Vattendance_1_0\Models\ProcessApproveFinishHeaders;
+use AlibabaCloud\SDK\Dingtalk\Vattendance_1_0\Models\ProcessApproveFinishRequest\topCalculateApproveDurationParam;
+use AlibabaCloud\SDK\Dingtalk\Vattendance_1_0\Models\ProcessApproveFinishRequest;
+use AlibabaCloud\Tea\Utils\Utils\RuntimeOptions;
+
+class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Dingtalk Client
+     */
+    public static function createClient(){
+        $config = new Config([]);
+        $config-&gt;protocol = "https";
+        $config-&gt;regionId = "central";
+        return new Dingtalk($config);
+    }
+
+    /**
+     * @param string[] $args
+     * @return void
+     */
+    public static function main($args){
+        $client = self::createClient();
+        $processApproveFinishHeaders = new ProcessApproveFinishHeaders([]);
+        $processApproveFinishHeaders-&gt;xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        $topCalculateApproveDurationParam = new topCalculateApproveDurationParam([
+            "bizType" =&gt; 3,
+            "fromTime" =&gt; "2019-08-15",
+            "toTime" =&gt; "2019-08-15",
+            "durationUnit" =&gt; "day",
+            "calculateModel" =&gt; 1,
+            "leaveCode" =&gt; "3afdsf-143dsadw3-ad23"
+        ]);
+        $processApproveFinishRequest = new ProcessApproveFinishRequest([
+            "userId" =&gt; "manager123",
+            "topCalculateApproveDurationParam" =&gt; $topCalculateApproveDurationParam,
+            "tagName" =&gt; "请假",
+            "subType" =&gt; "年假",
+            "approveId" =&gt; "1234abcd",
+            "jumpUrl" =&gt; "https://open.dingtalk.com/",
+            "overtimeDuration" =&gt; "1.07",
+            "overTimeToMore" =&gt; 1
+        ]);
+        try {
+            $client-&gt;processApproveFinishWithOptions($processApproveFinishRequest, $processApproveFinishHeaders, new RuntimeOptions([]));
+        }
+        catch (Exception $err) {
+            if (!($err instanceof TeaError)) {
+                $err = new TeaError([], $err-&gt;getMessage(), $err-&gt;getCode(), $err);
+            }
+            if (!Utils::empty_($err-&gt;code) &amp;&amp; !Utils::empty_($err-&gt;message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+        }
+    }
+}
+$path = __DIR__ . \DIRECTORY_SEPARATOR . '..' . \DIRECTORY_SEPARATOR . 'vendor' . \DIRECTORY_SEPARATOR . 'autoload.php';
+if (file_exists($path)) {
+    require_once $path;
+}
+Sample::main(array_slice($argv, 1));</code></pre></div><input type="radio" name="check-figure-mtb-j7f-dzh" id="figure-mtb-j7f-dzh-go-tab" /><label for="figure-mtb-j7f-dzh-go-tab">Go</label><div class="codeblock-item"><pre id="codeblock-9tm-0yr-flw" outputclass="language-go" data-tag="codeblock" code-type="xCode" class="pre codeblock language-go"><code>package main
+
+import (
+  "encoding/json"
+  "strings"
+  "fmt"
+  "os"
+  util  "github.com/alibabacloud-go/tea-utils/v2/service"
+  dingtalkattendance_1_0  "github.com/alibabacloud-go/dingtalk/attendance_1_0"
+  openapi  "github.com/alibabacloud-go/darabonba-openapi/v2/client"
+  "github.com/alibabacloud-go/tea/tea"
+)
+
+
+// Description:
+// 
+// 使用 Token 初始化账号Client
+// 
+// @return Client
+// 
+// @throws Exception
+func CreateClient () (_result *dingtalkattendance_1_0.Client, _err error) {
+  config := &amp;openapi.Config{}
+  config.Protocol = tea.String("https")
+  config.RegionId = tea.String("central")
+  _result = &amp;dingtalkattendance_1_0.Client{}
+  _result, _err = dingtalkattendance_1_0.NewClient(config)
+  return _result, _err
+}
+
+func _main (args []*string) (_err error) {
+  client, _err := CreateClient()
+  if _err != nil {
+    return _err
+  }
+
+  processApproveFinishHeaders := &amp;dingtalkattendance_1_0.ProcessApproveFinishHeaders{}
+  processApproveFinishHeaders.XAcsDingtalkAccessToken = tea.String("&lt;your access token&gt;")
+  topCalculateApproveDurationParam := &amp;dingtalkattendance_1_0.ProcessApproveFinishRequestTopCalculateApproveDurationParam{
+    BizType: tea.Int64(3),
+    FromTime: tea.String("2019-08-15"),
+    ToTime: tea.String("2019-08-15"),
+    DurationUnit: tea.String("day"),
+    CalculateModel: tea.Int64(1),
+    LeaveCode: tea.String("3afdsf-143dsadw3-ad23"),
+  }
+  processApproveFinishRequest := &amp;dingtalkattendance_1_0.ProcessApproveFinishRequest{
+    UserId: tea.String("manager123"),
+    TopCalculateApproveDurationParam: topCalculateApproveDurationParam,
+    TagName: tea.String("请假"),
+    SubType: tea.String("年假"),
+    ApproveId: tea.String("1234abcd"),
+    JumpUrl: tea.String("https://open.dingtalk.com/"),
+    OvertimeDuration: tea.String("1.07"),
+    OverTimeToMore: tea.Int64(1),
+  }
+  tryErr := func()(_e error) {
+    defer func() {
+      if r := tea.Recover(recover()); r != nil {
+        _e = r
+      }
+    }()
+    _, _err = client.ProcessApproveFinishWithOptions(processApproveFinishRequest, processApproveFinishHeaders, &amp;util.RuntimeOptions{})
+    if _err != nil {
+      return _err
+    }
+
+    return nil
+  }()
+
+  if tryErr != nil {
+    var err = &amp;tea.SDKError{}
+    if _t, ok := tryErr.(*tea.SDKError); ok {
+      err = _t
+    } else {
+      err.Message = tea.String(tryErr.Error())
+    }
+    if !tea.BoolValue(util.Empty(err.Code)) &amp;&amp; !tea.BoolValue(util.Empty(err.Message)) {
+      // err 中含有 code 和 message 属性，可帮助开发定位问题
+    }
+
+  }
+  return _err
+}
+
+
+func main() {
+  err := _main(tea.StringSlice(os.Args[1:]))
+  if err != nil {
+    panic(err)
+  }
+}</code></pre></div><input type="radio" name="check-figure-mtb-j7f-dzh" id="figure-mtb-j7f-dzh-nodejs-tab" /><label for="figure-mtb-j7f-dzh-nodejs-tab">Node.js</label><div class="codeblock-item"><pre id="codeblock-nnp-lbs-lnh" outputclass="language-nodejs" data-tag="codeblock" code-type="xCode" class="pre codeblock language-nodejs"><code>'use strict';
+// This file is auto-generated, don't edit it
+const Util = require('@alicloud/tea-util');
+const dingtalkattendance_1_0 = require('@alicloud/dingtalk/attendance_1_0');
+const OpenApi = require('@alicloud/openapi-client');
+const Tea = require('@alicloud/tea-typescript');
+
+class Client {
+
+  /**
+   * 使用 Token 初始化账号Client
+   * @return Client
+   * @throws Exception
+   */
+  static createClient() {
+    let config = new OpenApi.Config({ });
+    config.protocol = 'https';
+    config.regionId = 'central';
+    return new dingtalkattendance_1_0.default(config);
+  }
+
+  static async main(args) {
+    let client = Client.createClient();
+    let processApproveFinishHeaders = new dingtalkattendance_1_0.ProcessApproveFinishHeaders({ });
+    processApproveFinishHeaders.xAcsDingtalkAccessToken = '&lt;your access token&gt;';
+    let topCalculateApproveDurationParam = new dingtalkattendance_1_0.ProcessApproveFinishRequestTopCalculateApproveDurationParam({
+      bizType: 3,
+      fromTime: '2019-08-15',
+      toTime: '2019-08-15',
+      durationUnit: 'day',
+      calculateModel: 1,
+      leaveCode: '3afdsf-143dsadw3-ad23',
+    });
+    let processApproveFinishRequest = new dingtalkattendance_1_0.ProcessApproveFinishRequest({
+      userId: 'manager123',
+      topCalculateApproveDurationParam: topCalculateApproveDurationParam,
+      tagName: '请假',
+      subType: '年假',
+      approveId: '1234abcd',
+      jumpUrl: 'https://open.dingtalk.com/',
+      overtimeDuration: '1.07',
+      overTimeToMore: 1,
+    });
+    try {
+      await client.processApproveFinishWithOptions(processApproveFinishRequest, processApproveFinishHeaders, new Util.RuntimeOptions({ }));
+    } catch (err) {
+      if (!Util.default.empty(err.code) &amp;&amp; !Util.default.empty(err.message)) {
+        // err 中含有 code 和 message 属性，可帮助开发定位问题
+      }
+
+    }    
+  }
+
+}
+
+exports.Client = Client;
+Client.main(process.argv.slice(2));</code></pre></div><input type="radio" name="check-figure-mtb-j7f-dzh" id="figure-mtb-j7f-dzh-csharp-tab" /><label for="figure-mtb-j7f-dzh-csharp-tab">C#</label><div class="codeblock-item"><pre id="codeblock-457-wvj-dt3" outputclass="language-csharp" data-tag="codeblock" code-type="xCode" class="pre codeblock language-csharp"><code>using Newtonsoft.Json;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
+
+using Tea;
+using Tea.Utils;
+
+
+namespace AlibabaCloud.SDK.Sample
+{
+    public class Sample 
+    {
+
+        /// &lt;term&gt;&lt;b&gt;Description:&lt;/b&gt;&lt;/term&gt;
+        /// &lt;description&gt;
+        /// &lt;para&gt;使用 Token 初始化账号Client&lt;/para&gt;
+        /// &lt;/description&gt;
+        /// 
+        /// &lt;returns&gt;
+        /// Client
+        /// &lt;/returns&gt;
+        /// 
+        /// &lt;term&gt;&lt;b&gt;Exception:&lt;/b&gt;&lt;/term&gt;
+        /// Exception
+        public static AlibabaCloud.SDK.Dingtalkattendance_1_0.Client CreateClient()
+        {
+            AlibabaCloud.OpenApiClient.Models.Config config = new AlibabaCloud.OpenApiClient.Models.Config();
+            config.Protocol = "https";
+            config.RegionId = "central";
+            return new AlibabaCloud.SDK.Dingtalkattendance_1_0.Client(config);
+        }
+
+        public static void Main(string[] args)
+        {
+            AlibabaCloud.SDK.Dingtalkattendance_1_0.Client client = CreateClient();
+            AlibabaCloud.SDK.Dingtalkattendance_1_0.Models.ProcessApproveFinishHeaders processApproveFinishHeaders = new AlibabaCloud.SDK.Dingtalkattendance_1_0.Models.ProcessApproveFinishHeaders();
+            processApproveFinishHeaders.XAcsDingtalkAccessToken = "&lt;your access token&gt;";
+            AlibabaCloud.SDK.Dingtalkattendance_1_0.Models.ProcessApproveFinishRequest.ProcessApproveFinishRequestTopCalculateApproveDurationParam topCalculateApproveDurationParam = new AlibabaCloud.SDK.Dingtalkattendance_1_0.Models.ProcessApproveFinishRequest.ProcessApproveFinishRequestTopCalculateApproveDurationParam
+            {
+                BizType = 3,
+                FromTime = "2019-08-15",
+                ToTime = "2019-08-15",
+                DurationUnit = "day",
+                CalculateModel = 1,
+                LeaveCode = "3afdsf-143dsadw3-ad23",
+            };
+            AlibabaCloud.SDK.Dingtalkattendance_1_0.Models.ProcessApproveFinishRequest processApproveFinishRequest = new AlibabaCloud.SDK.Dingtalkattendance_1_0.Models.ProcessApproveFinishRequest
+            {
+                UserId = "manager123",
+                TopCalculateApproveDurationParam = topCalculateApproveDurationParam,
+                TagName = "请假",
+                SubType = "年假",
+                ApproveId = "1234abcd",
+                JumpUrl = "https://open.dingtalk.com/",
+                OvertimeDuration = "1.07",
+                OverTimeToMore = 1,
+            };
+            try
+            {
+                client.ProcessApproveFinishWithOptions(processApproveFinishRequest, processApproveFinishHeaders, new AlibabaCloud.TeaUtil.Models.RuntimeOptions());
+            }
+            catch (TeaException err)
+            {
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+            catch (Exception _err)
+            {
+                TeaException err = new TeaException(new Dictionary&lt;string, object&gt;
+                {
+                    { "message", _err.Message }
+                });
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+        }
+
+
+    }
+}</code></pre></div></div></section></section><section id="section-response-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-response-1" data-tag="h2" class="h2">响应</h2><section id="section-response-parameter" class="section"><h3 data-tag="h3" id="h2-vuj-vlb-o6h" class="h3 title">响应体</h3><table id="d1a04605932if" tablewidth="710" tablecolswidth="213 142 355" autofit="false" class="table"><colgroup colwidth="0.9*" style="width:30.00%"></colgroup><colgroup colwidth="0.6*" style="width:20.00%"></colgroup><colgroup colwidth="1.5*" style="width:50.00%"></colgroup><tbody class="tbody"><tr id="9aabf2afb59fi"><td id="ee51c24e55xb2" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="c2ebf876c2xzz">名称</p></td><td id="991331f4837ua" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="5096540574yza">类型</p></td><td id="7df18ea77apzg" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="a43338dc410t3">描述</p></td></tr><tr outputclass="row row-level-1 has-child" id="6f67cbe735c8r" class="row row-level-1 has-child"><td id="6dab391240ojz" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="55b20c9704eh8">result</p></td><td id="f32f09170b5hd" rowspan="1" colspan="1"><p id="a0ee747529eb4">Object</p></td><td id="1b69b725051nb" rowspan="1" colspan="1"><p id="692b07c69e4n6">返回结果。</p></td></tr><tr outputclass="row row-level-1-1" id="68cd9f4563zlo" class="row row-level-1-1"><td id="2b9ddcd7d5ayw" rowspan="1" colspan="1"><p id="f88da1373e28v">duration</p></td><td id="9dd0426af1j3e" rowspan="1" colspan="1"><p id="d7da2ef3c4yv5">double</p></td><td id="c333eea79amha" rowspan="1" colspan="1"><p id="82ac7eeff2hqv">总时长，该字段的单位与本企业内对应审批单设置的单位一致。</p></td></tr><tr outputclass="row row-level-1-2 has-child" id="11e8bd8cdcoud" class="row row-level-1-2 has-child"><td id="0d8350556eaxq" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="a3fbefbaa6ld9">durationDetail</p></td><td id="7651652826n3l" rowspan="1" colspan="1"><p id="96ab9de03b3xd">Array</p></td><td id="a2aa00117010h" rowspan="1" colspan="1"><p id="fca5b54f9fawn">详细信息。</p></td></tr><tr outputclass="row row-level-1-2-1" id="151e84f8f7bd4" class="row row-level-1-2-1"><td id="a4b53090965yg" rowspan="1" colspan="1"><p id="b6f934f980m5z">date</p></td><td id="dcd143c84b4fl" rowspan="1" colspan="1"><p id="8035b50245y34">String</p></td><td id="5ab67ad6fd8qe" rowspan="1" colspan="1"><p id="5b6157b0b5wrc">审批通过日期。</p></td></tr><tr outputclass="row row-level-1-2-2" id="fd6f822ae64mk" class="row row-level-1-2-2"><td id="e3248e5311xce" rowspan="1" colspan="1"><p id="db93c4a24dwut">duration</p></td><td id="8150ecbfd378f" rowspan="1" colspan="1"><p id="375feea2cb70f">double</p></td><td id="d215fd0c20050" rowspan="1" colspan="1"><p id="20e6e36498ypf">每日时长。</p></td></tr><tr outputclass="row row-level-2" id="81d56005fdyeh" class="row row-level-2"><td id="9dd4151f092k2" rowspan="1" colspan="1"><p id="8564761170wmd">success</p></td><td id="cd11256f2byvi" rowspan="1" colspan="1"><p id="9980cf9a8bbsd">Boolean</p></td><td id="1e9306af3a427" rowspan="1" colspan="1"><p id="634ca97e0ddiq">接口调用是否成功。</p></td></tr></tbody></table></section><section id="section-response-body-example" class="section"><h3 id="h3-response-body-example" data-tag="h3" class="h3">响应体示例</h3><pre outputclass="language-json" data-tag="codeblock" code-type="xCode" id="ded279dd23frm" class="pre codeblock language-json"><code>HTTP/1.1 200 OK
+Content-Type:application/json
+
+{
+  "result" : {
+    "duration" : 2,
+    "durationDetail" : [ {
+      "date" : "2019-08-15",
+      "duration" : 1
+    } ]
+  },
+  "success" : true
+}</code></pre></section><section id="section-error-code-1" class="section"><h3 id="h3-error-code-1" data-tag="h3" class="h3">错误码</h3><p data-tag="p" id="p-error-code-global-guide" class="p">若调用该接口报错，可根据错误信息在<a href="https://open.dingtalk.com/document/development/server-api-error-codes-1" id="a-error-code-global-guide">全局错误码</a>文档中查找解决方案。</p><table id="26300b495fevv" tablewidth="709" tablecolswidth="142 177 177 213" autofit="false" class="table"><colgroup colwidth="0.8*" style="width:20.03%"></colgroup><colgroup colwidth="1*" style="width:24.96%"></colgroup><colgroup colwidth="1*" style="width:24.96%"></colgroup><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><tbody class="tbody"><tr id="4bee8cabd310b"><td id="4554a71ff8ead" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="4168836531hw4">HttpCode</p></td><td id="f3291eb9c8ay5" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="6494b4aac24h9">错误码</p></td><td id="8b61b7cac183f" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="3833519c33t51">错误信息</p></td><td id="1c483e710daa5" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="b269ca6603hgw">说明</p></td></tr><tr id="6e143c65f5cl6"><td id="e4ba937725ggk" rowspan="1" colspan="1"><p id="67955c15869xc">400</p></td><td id="6a2ed8d9f1p6z" rowspan="1" colspan="1"><p id="86df46f8detkx">illegalCalculateType</p></td><td id="26bd8a5e9a4hs" rowspan="1" colspan="1"><p id="b4456a0fc5h70">不合法的时长计算模式</p></td><td id="c1f9f6e9f6a90" rowspan="1" colspan="1"><p id="461747ee0fkdj">不合法的时长计算模式</p></td></tr><tr id="c9c3f513759te"><td id="abd75483664gt" rowspan="1" colspan="1"><p id="ab2b05c92a27d">400</p></td><td id="14a054b847jn6" rowspan="1" colspan="1"><p id="0cd9aef1b093i">illegalDurationUnit</p></td><td id="322a8861e7iq9" rowspan="1" colspan="1"><p id="c9d2a9de4cnpd">不合法的时长单位</p></td><td id="1a9a009455pds" rowspan="1" colspan="1"><p id="7aeeba5448wnk">不合法的时长单位</p></td></tr><tr id="a93771dc03a5l"><td id="fc9e8eb531e6o" rowspan="1" colspan="1"><p id="f8e347ff797t7">400</p></td><td id="2870e236c2l3f" rowspan="1" colspan="1"><p id="adfac658504wk">illegalApproveType</p></td><td id="807d511b6fa0h" rowspan="1" colspan="1"><p id="7307aa9880owa">不合法的审批类型</p></td><td id="e044084b93a84" rowspan="1" colspan="1"><p id="12dc3158b8vxf">不合法的审批类型</p></td></tr><tr id="7b360be1far1y"><td id="b88a2e78eap7e" rowspan="1" colspan="1"><p id="327c28714e438">400</p></td><td id="15df8f1d51o36" rowspan="1" colspan="1"><p id="999ab47f1culj">invalidRequestParams</p></td><td id="6a97e97956aad" rowspan="1" colspan="1"><p id="61724b3722buv">参数错误（请根据文档检查对应参数） </p></td><td id="8134eadb35i54" rowspan="1" colspan="1"><p id="29334f8d66lqy">参数错误（请根据文档检查对应参数） </p></td></tr><tr id="e8a49ac4d68fa"><td id="5a9a37f1dd77s" rowspan="1" colspan="1"><p id="b96a0154e50vw">400</p></td><td id="8452aa9e21n66" rowspan="1" colspan="1"><p id="613f1af070o44">illegalOvertimeDurationUnit</p></td><td id="158155aaadziz" rowspan="1" colspan="1"><p id="bb8642a84fzny">不合法的加班时长单位（加班仅支持按小时） </p></td><td id="4fe233f846w00" rowspan="1" colspan="1"><p id="a1c1d932cb1ws">不合法的加班时长单位（加班仅支持按小时） </p></td></tr><tr id="20b380491br79"><td id="c39bd062136fc" rowspan="1" colspan="1"><p id="0e32f45211ia6">400</p></td><td id="bbf4a5b15b8wd" rowspan="1" colspan="1"><p id="da37394481tjl">illegalDateTypeForHalfDay</p></td><td id="1defee8b81nyp" rowspan="1" colspan="1"><p id="89b5667b4emva">不合法的开始结束时间格式forDURATION_UNIT为半天</p></td><td id="9c6b0d7dbdkx4" rowspan="1" colspan="1"><p id="b5f2ad21ddb94">不合法的开始结束时间格式forDURATION_UNIT为半天</p></td></tr><tr id="4fa636ab27pxu"><td id="77c9e2258ezaa" rowspan="1" colspan="1"><p id="7ea4660244wo4">400</p></td><td id="ce4a7c47fe0gh" rowspan="1" colspan="1"><p id="9597028937ou3">beginDateCannotAfterEndDate</p></td><td id="bdcecab633y4v" rowspan="1" colspan="1"><p id="c22980315aabi">开始时间不能晚于结束时间</p></td><td id="92f7e89f66n0l" rowspan="1" colspan="1"><p id="d65203a44fr9q">开始时间不能晚于结束时间</p></td></tr><tr id="3a3bd583f1n03"><td id="e7413b5956l9n" rowspan="1" colspan="1"><p id="b99575cb67fqg">400</p></td><td id="e2d1335fd6rhi" rowspan="1" colspan="1"><p id="627af58597ice">durationTooLong</p></td><td id="e302cfb165f4w" rowspan="1" colspan="1"><p id="040b57937aekc">开始结束时间跨度过大</p></td><td id="12a6e534ac8lo" rowspan="1" colspan="1"><p id="580c4daf6ep14">开始结束时间跨度过大</p></td></tr><tr id="c4092a38d4zfx"><td id="c77d79959ai0z" rowspan="1" colspan="1"><p id="5bcdbdc31b8t8">400</p></td><td id="af39174025tqp" rowspan="1" colspan="1"><p id="bd9cdd869bklo">dateTooEarly</p></td><td id="5989ca0d8fa2i" rowspan="1" colspan="1"><p id="96c826764fxux">时间不能在指定天数之前</p></td><td id="3a209431e1oib" rowspan="1" colspan="1"><p id="08ff8029d9rbw">时间不能在指定天数之前</p></td></tr><tr id="ac2a086f11j3j"><td id="adf9ef8858ey6" rowspan="1" colspan="1"><p id="07da4c382f8gl">400</p></td><td id="3efef684372le" rowspan="1" colspan="1"><p id="7e84d63e242zw">overtimeDurationTooLong</p></td><td id="b47e46d81d22o" rowspan="1" colspan="1"><p id="8756efc74a8ny">加班时长过长</p></td><td id="2e9859abfenxd" rowspan="1" colspan="1"><p id="2e1ee2098agjf">加班时长过长</p></td></tr><tr id="9e926bf8f3wpk"><td id="38c8e915b5hl8" rowspan="1" colspan="1"><p id="7cc4e2275eprf">400</p></td><td id="e3d06229085vh" rowspan="1" colspan="1"><p id="0c93d2f59c6lp">repeatApprovesOverLimit</p></td><td id="c0a9df8849dga" rowspan="1" colspan="1"><p id="d26207eea2xjj">时间存在重复的审批单写入超过限制</p></td><td id="2f05b9c2d8mze" rowspan="1" colspan="1"><p id="f0e48cd7c4q0f">时间存在重复的审批单写入超过限制</p></td></tr><tr id="31470a267f35z"><td id="a919818827v3t" rowspan="1" colspan="1"><p id="3c7f619f62925">400</p></td><td id="ef0eb16c8bavj" rowspan="1" colspan="1"><p id="cb9da4d575pl0">systemError</p></td><td id="043e03b8ff2ix" rowspan="1" colspan="1"><p id="657576161e55z">系统错误</p></td><td id="c33c6a9116qik" rowspan="1" colspan="1"><p id="8e5d317534l4r">系统错误</p></td></tr></tbody></table></section></section></div></main></body></html>

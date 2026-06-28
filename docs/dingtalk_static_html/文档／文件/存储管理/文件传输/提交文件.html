@@ -1,0 +1,635 @@
+<!DOCTYPE html><html><head><meta charset="utf8" / /><meta name="gmtModify" content="2026-03-27 18:59:51" / /><meta name="searchtitle" content="" / /><meta name="keywords" content="" / /><meta name="author" content="" / /><title>提交文件</title><meta name="gmtModify" content="2026-06-04 19:09:37" / /></head><body data-tag="topic" id="doc-api-dingtalk-CommitFile" class="topic"><main id="038c86501bfrv"><h1 data-tag="title" id="h1-1jr-hvz-fdi" class="title">提交文件</h1><p data-tag="shortdesc" id="0397a9e71bt0j" class="shortdesc">调用本接口，提交文件。</p><div data-tag="conbody" outputclass="icms-api-reference" class="icms-api-reference conbody"><section id="80c241624ar27" class="section"><h2 id="2f181b0fcaifr"><b>接口调用说明</b></h2><p id="ee27dabc4b2vg">接口调用步骤如下：</p><p id="03a74f84a9rjw">步骤一：调用<a data-tag="xref" id="affbcec33brma" href="/document/development/obtain-file-upload-informations#" class="xref">获取文件上传信息</a>接口，获取上传文件需要的信息。</p><p id="27e5dc67324zd">步骤二：使用OSS的header加签方式上传文件，参考示例：</p><div outputclass="tabbed-codeblock" data-tag="fig" id="f5a70c703as76" class="tabbed-codeblock-box"><div class="tab-box"></div><input type="radio" name="check-f5a70c703as76" id="f5a70c703as76-java-tab" checked="checked" /><label for="f5a70c703as76-java-tab">Java</label><div class="codeblock-item"><pre outputclass="language-java" data-tag="codeblock" id="f5a733803a0ey" code-type="xCode" class="pre codeblock language-java"><code>import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
+public void test(){
+               // 从接口返回信息中拿到url
+                String resourceUrl = "第一步接口获取的resourceUrls";
+              // 从接口返回信息中拿到headers
+                Map&lt;String, String&gt; headers = 第一步接口获取的headers；
+                URL url = new URL(resourceUrl);
+                HttpURLConnection connection = (HttpURLConnection)url.openConnection();
+               if (headers != null) {
+                for (Map.Entry&lt;String, String&gt; entry : headers.entrySet()) {
+                    connection.setRequestProperty(entry.getKey(), entry.getValue());
+                }
+            }
+                connection.setDoOutput(true);
+                connection.setRequestMethod("PUT");
+                connection.setUseCaches(false);
+                connection.setReadTimeout(10000);
+                connection.setConnectTimeout(10000);
+                connection.connect();
+                OutputStream out = connection.getOutputStream();
+                InputStream is = new FileInputStream(new File("/Users/xxxxx/Desktop/测试文件.xls"));
+                byte[] b =new byte[1024];
+                int temp;
+                while ((temp=is.read(b))!=-1){
+                       out.write(b,0,temp);
+                }
+                out.flush();
+                out.close();
+                int responseCode = connection.getResponseCode();
+                connection.disconnect();
+                if (responseCode == 200) {
+                    System.out.println("上传成功");
+                 } else {
+                    System.out.println("上传失败");
+                 }
+}</code></pre></div><input type="radio" name="check-f5a70c703as76" id="f5a70c703as76-python-tab" /><label for="f5a70c703as76-python-tab">Python</label><div class="codeblock-item"><pre outputclass="language-python" data-tag="codeblock" id="00e291403arj2" code-type="xCode" class="pre codeblock language-python"><code>#!/usr/bin/env python
+
+import requests
+
+url = '&lt;第一步接口获取的resourceUrl&gt;'
+headers = &lt;第一步接口返回的headers&gt;
+result = requests.put(url, data=open('&lt;path_to_file&gt;', 'rb'), headers=headers)
+print(result)</code></pre></div><input type="radio" name="check-f5a70c703as76" id="f5a70c703as76-csharp-tab" /><label for="f5a70c703as76-csharp-tab">C#</label><div class="codeblock-item"><pre id="af1c5c00bdwbg" data-tag="codeblock" outputclass="language-csharp" code-type="xCode" class="pre codeblock language-csharp"><code>public static string HttpRequest(string url, string filePath, Dictionary&lt;string, string&gt; headers) {
+
+    FileStream fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read);
+    BinaryReader reader = new BinaryReader(fileStream);
+    reader.BaseStream.Seek(0, SeekOrigin.Begin);
+    byte[] datas = reader.ReadBytes((int)reader.BaseStream.Length);
+    HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+    request.Method = "PUT";
+    request.Timeout = 150000;
+    foreach (var header in headers) {
+        request.Headers.Add($"{header.Key}", $"{header.Value}");
+    }
+    Stream requestStream = null;
+    string responseStr = null;
+    try {
+        if (datas != null) {
+            request.ContentLength = datas.Length;
+            requestStream = request.GetRequestStream();
+            requestStream.Write(datas, 0, datas.Length);
+            requestStream.Close();
+        } else {
+            request.ContentLength = 0;
+        }
+        HttpWebResponse response = request.GetResponse() as HttpWebResponse;
+        responseStr = response.Headers.GetValues("x-oss-request-id")[0];
+    } catch (Exception ex) {
+        Console.WriteLine("error");
+    } finally {
+        request = null;
+        requestStream = null;
+    }
+    return responseStr;
+}</code></pre></div><input type="radio" name="check-f5a70c703as76" id="f5a70c703as76-php-tab" /><label for="f5a70c703as76-php-tab">PHP</label><div class="codeblock-item"><pre id="3774c820bdq8z" data-tag="codeblock" outputclass="language-php" code-type="xCode" class="pre codeblock language-php"><code>$url = $result-&gt;body-&gt;headerSignatureInfo-&gt;resourceUrls[0];
+$headersSource = $result-&gt;body-&gt;headerSignatureInfo-&gt;headers;
+foreach ($headersSource as $key =&gt; $value) {
+$headers[] = $key . ': ' . $value;
+}
+// 需要主动指定content-type为空
+$headers['Content-Type'] = '';
+
+$file = '/Users/dengxian.ldx/Desktop/test.txt';
+
+$ch = curl_init();
+curl_setopt_array($ch, array(
+CURLOPT_URL =&gt; $url,
+CURLOPT_RETURNTRANSFER =&gt; true,
+CURLOPT_HEADER =&gt; true,
+CURLOPT_TIMEOUT =&gt; 100,
+CURLOPT_CONNECTTIMEOUT =&gt; 100,
+CURLOPT_HTTP_VERSION =&gt; CURL_HTTP_VERSION_1_1,
+CURLOPT_PUT =&gt; true,
+CURLOPT_HTTPHEADER =&gt; $headers,
+CURLOPT_SSL_VERIFYPEER =&gt; false,
+CURLOPT_SSL_VERIFYHOST =&gt; false,
+));
+curl_setopt($ch, CURLOPT_INFILE, fopen($file , 'rb'));
+curl_setopt($ch, CURLOPT_INFILESIZE, filesize($file) );
+curl_setopt($ch, CURLOPT_UPLOAD, true);
+
+$response = curl_exec($ch);
+curl_close($ch);
+
+echo $response .PHP_EOL;</code></pre></div><input type="radio" name="check-f5a70c703as76" id="f5a70c703as76-nodejs-tab" /><label for="f5a70c703as76-nodejs-tab">Node.js</label><div class="codeblock-item"><pre id="003c7bc0d10se" data-tag="codeblock" outputclass="language-nodejs" code-type="xCode" class="pre codeblock language-nodejs"><code>const fs = require('fs');
+const request = require('request-promise');
+
+url = &lt;url&gt;;
+header = &lt;headers&gt;;
+
+// 注意: 需要主动指定content-type为空
+headers['content-type']='';
+
+var options = {
+  method: 'PUT',
+  url: url,
+  headers: headers
+};
+
+fs.createReadStream('/Users/dengxian.ldx/temp/test/a.txt').pipe(request(options)).then(body =&gt;{
+  console.log(body);
+}).catch(err =&gt; {
+  console.log(err);
+});</code></pre></div></div><p id="5f2bec67fd6qp">步骤三：调用本接口提交文件，完成文件上传。</p><div type="note" id="7b4bce9482l55" class="note note-note"><div class="note-icon-wrapper"><i class="icon-note note note"></i></div><div class="noteContentSpan"><strong>说明 </strong><ul id="7b4bce96829zl"><li id="487716a5341qs"><p id="7ec9c50722i40">存储空间类型为USER时，空间拥有权限的用户都有操作权限，其他员工调用<a data-tag="xref" id="b3b74fc23bd2y" href="/document/development/add-permissions-file#" class="xref">添加权限</a>接口进行授权。</p></li><li id="3a25ef2c5619a"><p id="fcdf08fafce5v">存储空间类型为APP时，任何人操作都需要调用<a data-tag="xref" id="88e3f6ac66208" href="/document/development/add-permissions-file#" class="xref">添加权限</a>接口进行授权。</p></li></ul></div></div></section><section id="section-request-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-request-1" data-tag="h2" class="h2">请求</h2><section id="section-request-basic-info" class="section"><h3 id="heading-request-basic-info" data-tag="h3" class="h3">基本信息</h3><table id="7a88cce4ccg52" tablewidth="648" tablecolswidth="216 432" autofit="false" class="table"><colgroup colwidth="0.67*" style="width:33.33%"></colgroup><colgroup colwidth="1.33*" style="width:66.67%"></colgroup><tbody class="tbody"><tr id="5b98183603eg1"><td id="20bc703f7ff64" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="b6e5c96b6brdo">字段</p></td><td id="c4ae0678fekht" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="14db3a27a5htg">值</p></td></tr><tr id="c27f7aee896jw"><td id="4548de605aebr" rowspan="1" colspan="1"><p id="14189dc4212yl">HTTP URL</p></td><td id="144f974852xa6" rowspan="1" colspan="1"><p id="089c2ac038jzn">https://api.dingtalk.com/v2.0/storage/spaces/files/{parentDentryUuid}/commit</p></td></tr><tr id="4b98749079mnz"><td id="33cc6fff98m1l" rowspan="1" colspan="1"><p id="c03c45cf5b7ga">HTTP Method</p></td><td id="588b77499akjo" rowspan="1" colspan="1"><p id="70ea1b28e96nn">POST</p></td></tr><tr id="ea2718161816t"><td id="d29d1b61cbv3x" rowspan="1" colspan="1"><p id="3408744f30unt">支持的应用类型</p></td><td id="2d88c4806ez7r" rowspan="1" colspan="1"><p id="bcb5ada97ck4q"><span data-tag="ph" id="ph-request-basic-app-type-apptype-0" class="ph ph-app-type" data-ph-raw-text="appType-企业内部应用">appType-企业内部应用</span>　<span data-tag="ph" id="ph-request-basic-app-type-apptype-1" class="ph ph-app-type" data-ph-raw-text="appType-第三方企业应用">appType-第三方企业应用</span></p></td></tr><tr id="027aecdc87rdw"><td id="7b263361dd04n" rowspan="1" colspan="1"><p id="ffeb1d2a51ng2">权限要求</p></td><td id="202e6c81c1fjp" rowspan="1" colspan="1"><p id="ca842c99aa17o"><span data-tag="ph" id="ph-request-basic-permission-permission-storage-file-write-0" class="ph-permission ph" data-ph-raw-text="permission-Storage.File.Write-企业存储文件写权限" data-permission-id="permission-Storage.File.Write" data-permission-code="Storage.File.Write" data-permission-detail-api="/document/api/permission/detail" data-permission-query-param="code">permission-Storage.File.Write-企业存储文件写权限</span></p></td></tr></tbody></table></section><section id="section-request-header-parameter" class="section"><h3 data-tag="h3" id="h2-py1-m8f-40l" class="h3 title">请求头</h3><table id="0397d1021by8d" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="0397d1031b9iz"><td id="0397d1041b370" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="0397d1051bsbb">名称</p></td><td id="0397d1061bdyq" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="0397d1071bwjj">类型</p></td><td id="0397d1081bjpd" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="0397d1091bqf8">是否必填</p></td><td id="0397d10a1b0l4" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="0397d10b1bqye">描述</p></td></tr><tr id="0397d10c1bys5"><td id="0397d10d1ba1z" rowspan="1" colspan="1"><p id="0397d10e1bfjb">x-acs-dingtalk-access-token</p></td><td id="0397d10f1bje2" rowspan="1" colspan="1"><p id="0397d1101bj2f">String</p></td><td id="0397d1111bbax" rowspan="1" colspan="1"><p id="0397d1121b56n">是</p></td><td id="0397d1131b43d" rowspan="1" colspan="1"><p id="b24523bd502iz">调用该接口的访问凭证，通过以下获取：</p><ul id="a0d4f3b0fcqrc"><li id="34af5369c5rsy"><p id="c2c1e514a1ykv">企业内部应用，调用<a href="https://open.dingtalk.com/document/development/obtain-the-access-token-of-an-internal-app#" id="ec4d0e925147i" class="xref">获取企业内部应用的accessToken</a>接口获取。</p></li><li id="a020db131bujx"><p id="73d17d89f4vs7">第三方企业应用，调用<a href="https://open.dingtalk.com/document/development/obtain-the-access-token-of-the-authorized-enterprise-1#" id="1a47f9474dp6b" class="xref">获取第三方应用授权企业的accessToken</a>接口获取。</p></li></ul></td></tr></tbody></table></section><section id="section-request-path-parameter" class="section"><h3 data-tag="h3" id="h2-fe6-2td-x9f" class="h3 title">路径参数</h3><table id="0397d11c1barm" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="0397d11d1bzs6"><td id="0397d11e1bm6h" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="0397d11f1bavk">名称</p></td><td id="0397d1201b4y6" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="0397d1211ba0g">类型</p></td><td id="0397d1221bxo4" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="0397f8001buj8">是否必填</p></td><td id="0397f8011bu8b" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="0397f8021bmeb">描述</p></td></tr><tr id="0397f8031bhsy"><td id="0397f8041bp45" rowspan="1" colspan="1"><p id="0397f8051bfem">parentDentryUuid</p></td><td id="0397f8061b9vm" rowspan="1" colspan="1"><p id="0397f8071bgvv">String</p></td><td id="0397f8081bz5l" rowspan="1" colspan="1"><p id="0397f8091bb4c">是</p></td><td id="0397f80a1b9lw" rowspan="1" colspan="1"><p id="0397f80b1bq9t">父节点dentryUuid，可调用<a href="https://open.dingtalk.com/document/development/search-for-files#" id="d6de26fdcevet" class="xref">搜索文件</a>或<a href="https://open.dingtalk.com/document/development/api-getuuidbydentryid#" id="84bed613f3bpn" class="xref">获取 dentryUuid 信息</a>接口，获取返回参数<code data-tag="code" id="4bf0a7b593y07" class="code">dentryUuid</code>字段。</p><p class="note-icon-wrapper" id="5ef66347ca08p"></p><section data-tag="p" id="0397f80d1b65g" class="p section"><p id="0397f80e1bw6x">如果是空间根目录，填空间根目录的dentryUuid。</p></section></td></tr></tbody></table></section><section id="section-request-query-parameter" class="section"><h3 data-tag="h3" id="h2-kkb-aep-hez" class="h3 title">查询参数</h3><table id="0397f80f1bwkp" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="0397f8101b5wy"><td id="0397f8111ba9d" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="0397f8121bmrj">名称</p></td><td id="0397f8131bdzv" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="0397f8141bhm7">类型</p></td><td id="0397f8151br4q" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="0397f8161bwf1">是否必填</p></td><td id="0397f8171bu0e" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="0397f8181bjj4">描述</p></td></tr><tr id="0397f8191bzvp"><td id="0397f81a1ba5w" rowspan="1" colspan="1"><p id="0397f81b1badr">unionId</p></td><td id="0397f81c1bae1" rowspan="1" colspan="1"><p id="0397f81d1bk11">String</p></td><td id="0397f81e1b3i5" rowspan="1" colspan="1"><p id="0397f81f1byvu">是</p></td><td id="0397f8201b7zn" rowspan="1" colspan="1"><p id="0397f8211b2pr">用户unionId，可调用<a href="https://open.dingtalk.com/document/development/query-user-details#" id="23dc6da0135id" class="xref">查询用户详情</a>接口获取。</p></td></tr></tbody></table></section><section id="section-request-body-parameter" class="section"><h3 data-tag="h3" id="h2-mae-e2w-xzt" class="h3 title">请求体</h3><table id="0397f8221b87c" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="0397f8231brx3"><td id="0397f8241bvv2" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="0397f8251bm25">名称</p></td><td id="0397f8261bc87" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="0397f8271ba59">类型</p></td><td id="0397f8281b782" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="0397f8291bgue">是否必填</p></td><td id="0397f82a1by8t" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="0397f82b1bj14">描述</p></td></tr><tr outputclass="row row-level-3" id="0397f82c1bhgs" class="row row-level-3"><td id="0397f82d1bhhx" rowspan="1" colspan="1"><p id="0397f82e1briq">uploadKey</p></td><td id="0397f82f1b6df" rowspan="1" colspan="1"><p id="0397f8301bweb">String</p></td><td id="0397f8311b7yh" rowspan="1" colspan="1"><p id="0397f8321bgag">是</p></td><td id="0397f8331byew" rowspan="1" colspan="1"><p id="0397f8341b8qr">添加文件唯一标识，调用<a href="https://open.dingtalk.com/document/development/obtain-file-upload-informations#" id="7fdd850674ko8" class="xref">获取文件上传信息</a>接口获取uploadKey参数值。</p></td></tr><tr outputclass="row row-level-4" id="0397f8351btrc" class="row row-level-4"><td id="03981f101b70o" rowspan="1" colspan="1"><p id="03981f111bbuw">name</p></td><td id="03981f121b2jy" rowspan="1" colspan="1"><p id="03981f131bxcc">String</p></td><td id="03981f141bg9e" rowspan="1" colspan="1"><p id="03981f151b4wz">是</p></td><td id="03981f161bnq7" rowspan="1" colspan="1"><p id="03981f171bmtm">文件的名称，带后缀。命名有以下要求：</p><ul id="7b4d553882ixz"><li id="7b4d553982ucv"><p id="9a3b5a901b70s">头尾不能包含空格，否则会自动去除</p></li><li id="7b4d553b82i3o"><p id="9a3b5a911bife">不能包含特殊字符，包括：制表符、*、"、&lt;、&gt;、|</p></li><li id="7b4d553d82mx0"><p id="9a3b81a01bbiu">不能以"."结尾</p></li></ul></td></tr><tr outputclass="row row-level-5 has-child" id="03981f181bfna" class="row row-level-5 has-child"><td id="03981f191bsh4" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="03981f1a1bc9k">option</p></td><td id="03981f1b1b6sx" rowspan="1" colspan="1"><p id="03981f1c1b6nq">Object</p></td><td id="03981f1d1btxi" rowspan="1" colspan="1"><p id="03981f1e1b4nv">否</p></td><td id="03981f1f1bfxf" rowspan="1" colspan="1"><p id="03981f201bces">可选参数。</p></td></tr><tr outputclass="row row-level-5-1" id="03981f211bqsm" class="row row-level-5-1"><td id="03981f221brte" rowspan="1" colspan="1"><p id="03981f231b8m9">size</p></td><td id="03981f241bwzd" rowspan="1" colspan="1"><p id="03981f251b72z">Long</p></td><td id="03981f261bkev" rowspan="1" colspan="1"><p id="03981f271baxh">否</p></td><td id="03981f281bs4e" rowspan="1" colspan="1"><p id="03981f291b5ht">默认文件大小, 单位:Byte。
+</p><p class="note-icon-wrapper" id="a9c6ced21b25p"></p><p id="a8b345b01b2d1">如果此字段不为空，企业存储系统会校验文件实际大小是否和此字段是否一致，不一致会报错。</p></td></tr><tr outputclass="row row-level-5-2" id="03981f2a1bf71" class="row row-level-5-2"><td id="03981f2b1buvv" rowspan="1" colspan="1"><p id="03981f2c1bnir">conflictStrategy</p></td><td id="03981f2d1b9bg" rowspan="1" colspan="1"><p id="03981f2e1by9d">String</p></td><td id="03981f2f1b906" rowspan="1" colspan="1"><p id="03981f301b47t">否</p></td><td id="03981f311bdhz" rowspan="1" colspan="1"><p id="03981f321bxzj">文件名称冲突策略。</p><ul id="7b4dca6582g64"><li id="7b4dca6682jfi"><p id="bd2a60a01bxba"><b>AUTO_RENAME</b>：自动重命名，默认值</p></li><li id="7b4df17082ndm"><p id="bd2a60a11bss9"><b>OVERWRITE</b>：覆盖</p></li><li id="7b4df17282dj5"><p id="bd2a60a21bn4m"><b>RETURN_DENTRY_IF_EXISTS</b>：返回已存在文件</p></li><li id="7b4df17482eq7"><p id="bd2a60a31bdsc"><b>RETURN_ERROR_IF_EXISTS</b>：文件已存在时报错</p></li></ul></td></tr><tr outputclass="row row-level-5-3 has-child" id="03981f331baol" class="row row-level-5-3 has-child"><td id="03981f341bnrk" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="03981f351bt12">appProperties</p></td><td id="03981f361bhki" rowspan="1" colspan="1"><p id="03981f371b0tz">Array</p></td><td id="03981f381bmss" rowspan="1" colspan="1"><p id="03981f391b6vk">否</p></td><td id="03981f3a1b4gj" rowspan="1" colspan="1"><p id="c3c55b401bsos">当前文件的应用属性列表，最大值3。</p></td></tr><tr outputclass="row row-level-5-3-1" id="03981f3c1b8sk" class="row row-level-5-3-1"><td id="03981f3d1byi9" rowspan="1" colspan="1"><p id="039846201ba9a">name</p></td><td id="039846211bzuo" rowspan="1" colspan="1"><p id="039846221bibb">String</p></td><td id="039846231bpz8" rowspan="1" colspan="1"><p id="039846241by67">是</p></td><td id="039846251bpnv" rowspan="1" colspan="1"><p id="039846261beay">属性名称。</p><p class="note-icon-wrapper" id="f983f68560lgd"></p><p id="ccf5f4e01bb87">该属性名称在当前app下需要保证唯一，不同app间同名属性互不影响。</p></td></tr><tr outputclass="row row-level-5-3-2" id="039846271buug" class="row row-level-5-3-2"><td id="039846281b5o1" rowspan="1" colspan="1"><p id="039846291b3cb">value</p></td><td id="0398462a1bbsb" rowspan="1" colspan="1"><p id="0398462b1bgr8">String</p></td><td id="0398462c1br1k" rowspan="1" colspan="1"><p id="0398462d1bq4i">是</p></td><td id="0398462e1bkoa" rowspan="1" colspan="1"><p id="0398462f1bj0m">属性值。</p></td></tr><tr outputclass="row row-level-5-3-3" id="039846301bsb5" class="row row-level-5-3-3"><td id="039846311b75m" rowspan="1" colspan="1"><p id="039846321bwin">visibility</p></td><td id="039846331bd7t" rowspan="1" colspan="1"><p id="039846341ba67">String</p></td><td id="039846351bcvp" rowspan="1" colspan="1"><p id="039846361bp4u">是</p></td><td id="039846371bozq" rowspan="1" colspan="1"><p id="039846381b1ob">属性可见性。</p><ul id="7b4e188982qpz"><li id="7b4e188a82e04"><p id="d6a498201blrf"><b>PUBLIC</b>：所有应用都可见</p></li><li id="7b4e188c82d5e"><p id="d6a498211bs0f"><b>PRIVATE</b>：仅限当前应用可见</p></li></ul></td></tr><tr outputclass="row row-level-5-4" id="039846391bbv2" class="row row-level-5-4"><td id="0398463a1b1c6" rowspan="1" colspan="1"><p id="0398463b1b8ei">convertToOnlineDoc</p></td><td id="0398463c1bqz4" rowspan="1" colspan="1"><p id="03986d301bg1c">Boolean</p></td><td id="03986d311b3pa" rowspan="1" colspan="1"><p id="03986d321bwbu">否</p></td><td id="03986d331bvu3" rowspan="1" colspan="1"><p id="03986d341bwwk">是否转换成在线文档。</p><ul id="03986d351b7w8"><li id="03986d361bnva"><p id="03986d371bfps"><b>false</b>（默认值）：否</p></li><li id="03986d381bmnv"><p id="03986d391bxwk"><b>true</b>：是</p></li></ul></td></tr></tbody></table></section><section id="section-request-body-example" class="section"><h3 id="h3-request-body-example" data-tag="h3" class="h3">请求示例</h3><div outputclass="tabbed-codeblock" data-tag="fig" id="figure-86r-mwp-wmd" class="tabbed-codeblock-box"><div class="tab-box"></div><input type="radio" name="check-figure-86r-mwp-wmd" id="figure-86r-mwp-wmd-HTTP-tab" checked="checked" /><label for="figure-86r-mwp-wmd-HTTP-tab">HTTP</label><div class="codeblock-item"><pre id="codeblock-dmx-wzk-ocv" outputclass="language-HTTP" code-type="xCode" data-tag="codeblock" class="pre codeblock language-HTTP"><code>POST /v2.0/storage/spaces/files/uuid/commit?unionId=union_id HTTP/1.1
+Host:api.dingtalk.com
+x-acs-dingtalk-access-token:xxxxx
+Content-Type:application/json
+
+{
+  "uploadKey" : "upload_key",
+  "name" : "dentry_name",
+  "option" : {
+    "size" : 512,
+    "conflictStrategy" : "AUTO_RENAME",
+    "appProperties" : [ {
+      "name" : "property_name",
+      "value" : "property_value",
+      "visibility" : "PRIVATE"
+    } ],
+    "convertToOnlineDoc" : false
+  }
+}</code></pre></div><input type="radio" name="check-figure-86r-mwp-wmd" id="figure-86r-mwp-wmd-java-tab" /><label for="figure-86r-mwp-wmd-java-tab">Java</label><div class="codeblock-item"><pre id="codeblock-ohu-t0n-qjt" outputclass="language-java" code-type="xCode" data-tag="codeblock" class="pre codeblock language-java"><code>// This file is auto-generated, don't edit it. Thanks.
+package com.aliyun.sample;
+
+import com.aliyun.tea.*;
+
+public class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Client
+     * @throws Exception
+     */
+    public static com.aliyun.dingtalkstorage_2_0.Client createClient() throws Exception {
+        com.aliyun.teaopenapi.models.Config config = new com.aliyun.teaopenapi.models.Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        return new com.aliyun.dingtalkstorage_2_0.Client(config);
+    }
+
+    public static void main(String[] args_) throws Exception {
+        java.util.List&lt;String&gt; args = java.util.Arrays.asList(args_);
+        com.aliyun.dingtalkstorage_2_0.Client client = Sample.createClient();
+        com.aliyun.dingtalkstorage_2_0.models.CommitFileHeaders commitFileHeaders = new com.aliyun.dingtalkstorage_2_0.models.CommitFileHeaders();
+        commitFileHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        com.aliyun.dingtalkstorage_2_0.models.CommitFileRequest.CommitFileRequestOptionAppProperties optionAppProperties0 = new com.aliyun.dingtalkstorage_2_0.models.CommitFileRequest.CommitFileRequestOptionAppProperties()
+                .setName("property_name")
+                .setValue("property_value")
+                .setVisibility("PRIVATE");
+        com.aliyun.dingtalkstorage_2_0.models.CommitFileRequest.CommitFileRequestOption option = new com.aliyun.dingtalkstorage_2_0.models.CommitFileRequest.CommitFileRequestOption()
+                .setSize(512L)
+                .setConflictStrategy("AUTO_RENAME")
+                .setAppProperties(java.util.Arrays.asList(
+                    optionAppProperties0
+                ))
+                .setConvertToOnlineDoc(false);
+        com.aliyun.dingtalkstorage_2_0.models.CommitFileRequest commitFileRequest = new com.aliyun.dingtalkstorage_2_0.models.CommitFileRequest()
+                .setUnionId("union_id")
+                .setUploadKey("upload_key")
+                .setName("dentry_name")
+                .setOption(option);
+        try {
+            client.commitFileWithOptions("uuid", commitFileRequest, commitFileHeaders, new com.aliyun.teautil.models.RuntimeOptions());
+        } catch (TeaException err) {
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        } catch (Exception _err) {
+            TeaException err = new TeaException(_err.getMessage(), _err);
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        }        
+    }
+}</code></pre></div><input type="radio" name="check-figure-86r-mwp-wmd" id="figure-86r-mwp-wmd-python-tab" /><label for="figure-86r-mwp-wmd-python-tab">Python</label><div class="codeblock-item"><pre id="codeblock-f7u-fdh-bgq" outputclass="language-python" code-type="xCode" data-tag="codeblock" class="pre codeblock language-python"><code># -*- coding: utf-8 -*-
+# This file is auto-generated, don't edit it. Thanks.
+import sys
+
+from typing import List
+
+from alibabacloud_dingtalk.storage_2_0.client import Client as dingtalkstorage_2_0Client
+from alibabacloud_tea_openapi import models as open_api_models
+from alibabacloud_dingtalk.storage_2_0 import models as dingtalkstorage__2__0_models
+from alibabacloud_tea_util import models as util_models
+from alibabacloud_tea_util.client import Client as UtilClient
+
+
+class Sample:
+    def __init__(self):
+        pass
+
+    @staticmethod
+    def create_client() -&gt; dingtalkstorage_2_0Client:
+        """
+        使用 Token 初始化账号Client
+        @return: Client
+        @throws Exception
+        """
+        config = open_api_models.Config()
+        config.protocol = 'https'
+        config.region_id = 'central'
+        return dingtalkstorage_2_0Client(config)
+
+    @staticmethod
+    def main(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        commit_file_headers = dingtalkstorage__2__0_models.CommitFileHeaders()
+        commit_file_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        option_app_properties_0 = dingtalkstorage__2__0_models.CommitFileRequestOptionAppProperties(
+            name='property_name',
+            value='property_value',
+            visibility='PRIVATE'
+        )
+        option = dingtalkstorage__2__0_models.CommitFileRequestOption(
+            size=512,
+            conflict_strategy='AUTO_RENAME',
+            app_properties=[
+                option_app_properties_0
+            ],
+            convert_to_online_doc=False
+        )
+        commit_file_request = dingtalkstorage__2__0_models.CommitFileRequest(
+            union_id='union_id',
+            upload_key='upload_key',
+            name='dentry_name',
+            option=option
+        )
+        try:
+            client.commit_file_with_options('uuid', commit_file_request, commit_file_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+    @staticmethod
+    async def main_async(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        commit_file_headers = dingtalkstorage__2__0_models.CommitFileHeaders()
+        commit_file_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        option_app_properties_0 = dingtalkstorage__2__0_models.CommitFileRequestOptionAppProperties(
+            name='property_name',
+            value='property_value',
+            visibility='PRIVATE'
+        )
+        option = dingtalkstorage__2__0_models.CommitFileRequestOption(
+            size=512,
+            conflict_strategy='AUTO_RENAME',
+            app_properties=[
+                option_app_properties_0
+            ],
+            convert_to_online_doc=False
+        )
+        commit_file_request = dingtalkstorage__2__0_models.CommitFileRequest(
+            union_id='union_id',
+            upload_key='upload_key',
+            name='dentry_name',
+            option=option
+        )
+        try:
+            await client.commit_file_with_options_async('uuid', commit_file_request, commit_file_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+
+if __name__ == '__main__':
+    Sample.main(sys.argv[1:])</code></pre></div><input type="radio" name="check-figure-86r-mwp-wmd" id="figure-86r-mwp-wmd-php-tab" /><label for="figure-86r-mwp-wmd-php-tab">PHP</label><div class="codeblock-item"><pre id="codeblock-epf-gyn-sic" outputclass="language-php" code-type="xCode" data-tag="codeblock" class="pre codeblock language-php"><code>&lt;?php
+
+// This file is auto-generated, don't edit it. Thanks.
+namespace AlibabaCloud\SDK\Sample;
+
+use AlibabaCloud\SDK\Dingtalk\Vstorage_2_0\Dingtalk;
+use \Exception;
+use AlibabaCloud\Tea\Exception\TeaError;
+use AlibabaCloud\Tea\Utils\Utils;
+
+use Darabonba\OpenApi\Models\Config;
+use AlibabaCloud\SDK\Dingtalk\Vstorage_2_0\Models\CommitFileHeaders;
+use AlibabaCloud\SDK\Dingtalk\Vstorage_2_0\Models\CommitFileRequest\option\appProperties;
+use AlibabaCloud\SDK\Dingtalk\Vstorage_2_0\Models\CommitFileRequest\option;
+use AlibabaCloud\SDK\Dingtalk\Vstorage_2_0\Models\CommitFileRequest;
+use AlibabaCloud\Tea\Utils\Utils\RuntimeOptions;
+
+class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Dingtalk Client
+     */
+    public static function createClient(){
+        $config = new Config([]);
+        $config-&gt;protocol = "https";
+        $config-&gt;regionId = "central";
+        return new Dingtalk($config);
+    }
+
+    /**
+     * @param string[] $args
+     * @return void
+     */
+    public static function main($args){
+        $client = self::createClient();
+        $commitFileHeaders = new CommitFileHeaders([]);
+        $commitFileHeaders-&gt;xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        $optionAppProperties0 = new appProperties([
+            "name" =&gt; "property_name",
+            "value" =&gt; "property_value",
+            "visibility" =&gt; "PRIVATE"
+        ]);
+        $option = new option([
+            "size" =&gt; 512,
+            "conflictStrategy" =&gt; "AUTO_RENAME",
+            "appProperties" =&gt; [
+                $optionAppProperties0
+            ],
+            "convertToOnlineDoc" =&gt; false
+        ]);
+        $commitFileRequest = new CommitFileRequest([
+            "unionId" =&gt; "union_id",
+            "uploadKey" =&gt; "upload_key",
+            "name" =&gt; "dentry_name",
+            "option" =&gt; $option
+        ]);
+        try {
+            $client-&gt;commitFileWithOptions("uuid", $commitFileRequest, $commitFileHeaders, new RuntimeOptions([]));
+        }
+        catch (Exception $err) {
+            if (!($err instanceof TeaError)) {
+                $err = new TeaError([], $err-&gt;getMessage(), $err-&gt;getCode(), $err);
+            }
+            if (!Utils::empty_($err-&gt;code) &amp;&amp; !Utils::empty_($err-&gt;message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+        }
+    }
+}
+$path = __DIR__ . \DIRECTORY_SEPARATOR . '..' . \DIRECTORY_SEPARATOR . 'vendor' . \DIRECTORY_SEPARATOR . 'autoload.php';
+if (file_exists($path)) {
+    require_once $path;
+}
+Sample::main(array_slice($argv, 1));</code></pre></div><input type="radio" name="check-figure-86r-mwp-wmd" id="figure-86r-mwp-wmd-go-tab" /><label for="figure-86r-mwp-wmd-go-tab">Go</label><div class="codeblock-item"><pre id="codeblock-wkf-5yl-lg0" outputclass="language-go" code-type="xCode" data-tag="codeblock" class="pre codeblock language-go"><code>// This file is auto-generated, don't edit it. Thanks.
+package main
+
+import (
+  "os"
+  util  "github.com/alibabacloud-go/tea-utils/v2/service"
+  dingtalkstorage_2_0  "github.com/alibabacloud-go/dingtalk/storage_2_0"
+  openapi  "github.com/alibabacloud-go/darabonba-openapi/v2/client"
+  "github.com/alibabacloud-go/tea/tea"
+)
+
+
+/**
+ * 使用 Token 初始化账号Client
+ * @return Client
+ * @throws Exception
+ */
+func CreateClient () (_result *dingtalkstorage_2_0.Client, _err error) {
+  config := &amp;openapi.Config{}
+  config.Protocol = tea.String("https")
+  config.RegionId = tea.String("central")
+  _result = &amp;dingtalkstorage_2_0.Client{}
+  _result, _err = dingtalkstorage_2_0.NewClient(config)
+  return _result, _err
+}
+
+func _main (args []*string) (_err error) {
+  client, _err := CreateClient()
+  if _err != nil {
+    return _err
+  }
+
+  commitFileHeaders := &amp;dingtalkstorage_2_0.CommitFileHeaders{}
+  commitFileHeaders.XAcsDingtalkAccessToken = tea.String("&lt;your access token&gt;")
+  optionAppProperties0 := &amp;dingtalkstorage_2_0.CommitFileRequestOptionAppProperties{
+    Name: tea.String("property_name"),
+    Value: tea.String("property_value"),
+    Visibility: tea.String("PRIVATE"),
+  }
+  option := &amp;dingtalkstorage_2_0.CommitFileRequestOption{
+    Size: tea.Int64(512),
+    ConflictStrategy: tea.String("AUTO_RENAME"),
+    AppProperties: []*dingtalkstorage_2_0.CommitFileRequestOptionAppProperties{optionAppProperties0},
+    ConvertToOnlineDoc: tea.Bool(false),
+  }
+  commitFileRequest := &amp;dingtalkstorage_2_0.CommitFileRequest{
+    UnionId: tea.String("union_id"),
+    UploadKey: tea.String("upload_key"),
+    Name: tea.String("dentry_name"),
+    Option: option,
+  }
+  tryErr := func()(_e error) {
+    defer func() {
+      if r := tea.Recover(recover()); r != nil {
+        _e = r
+      }
+    }()
+    _, _err = client.CommitFileWithOptions(tea.String("uuid"), commitFileRequest, commitFileHeaders, &amp;util.RuntimeOptions{})
+    if _err != nil {
+      return _err
+    }
+
+    return nil
+  }()
+
+  if tryErr != nil {
+    var err = &amp;tea.SDKError{}
+    if _t, ok := tryErr.(*tea.SDKError); ok {
+      err = _t
+    } else {
+      err.Message = tea.String(tryErr.Error())
+    }
+    if !tea.BoolValue(util.Empty(err.Code)) &amp;&amp; !tea.BoolValue(util.Empty(err.Message)) {
+      // err 中含有 code 和 message 属性，可帮助开发定位问题
+    }
+
+  }
+  return _err
+}
+
+
+func main() {
+  err := _main(tea.StringSlice(os.Args[1:]))
+  if err != nil {
+    panic(err)
+  }
+}</code></pre></div><input type="radio" name="check-figure-86r-mwp-wmd" id="figure-86r-mwp-wmd-nodejs-tab" /><label for="figure-86r-mwp-wmd-nodejs-tab">Node.js</label><div class="codeblock-item"><pre id="codeblock-uez-x7f-jjx" outputclass="language-nodejs" code-type="xCode" data-tag="codeblock" class="pre codeblock language-nodejs"><code>// This file is auto-generated, don't edit it
+import Util, * as $Util from '@alicloud/tea-util';
+import dingtalkstorage_2_0, * as $dingtalkstorage_2_0 from '@alicloud/dingtalk/storage_2_0';
+import OpenApi, * as $OpenApi from '@alicloud/openapi-client';
+import * as $tea from '@alicloud/tea-typescript';
+
+
+export default class Client {
+
+  /**
+   * 使用 Token 初始化账号Client
+   * @return Client
+   * @throws Exception
+   */
+  static createClient(): dingtalkstorage_2_0 {
+    let config = new $OpenApi.Config({ });
+    config.protocol = "https";
+    config.regionId = "central";
+    return new dingtalkstorage_2_0(config);
+  }
+
+  static async main(args: string[]): Promise&lt;void&gt; {
+    let client = Client.createClient();
+    let commitFileHeaders = new $dingtalkstorage_2_0.CommitFileHeaders({ });
+    commitFileHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+    let optionAppProperties0 = new $dingtalkstorage_2_0.CommitFileRequestOptionAppProperties({
+      name: "property_name",
+      value: "property_value",
+      visibility: "PRIVATE",
+    });
+    let option = new $dingtalkstorage_2_0.CommitFileRequestOption({
+      size: 512,
+      conflictStrategy: "AUTO_RENAME",
+      appProperties: [
+        optionAppProperties0
+      ],
+      convertToOnlineDoc: false,
+    });
+    let commitFileRequest = new $dingtalkstorage_2_0.CommitFileRequest({
+      unionId: "union_id",
+      uploadKey: "upload_key",
+      name: "dentry_name",
+      option: option,
+    });
+    try {
+      await client.commitFileWithOptions("uuid", commitFileRequest, commitFileHeaders, new $Util.RuntimeOptions({ }));
+    } catch (err) {
+      if (!Util.empty(err.code) &amp;&amp; !Util.empty(err.message)) {
+        // err 中含有 code 和 message 属性，可帮助开发定位问题
+      }
+
+    }    
+  }
+
+}
+
+Client.main(process.argv.slice(2));</code></pre></div><input type="radio" name="check-figure-86r-mwp-wmd" id="figure-86r-mwp-wmd-csharp-tab" /><label for="figure-86r-mwp-wmd-csharp-tab">C#</label><div class="codeblock-item"><pre id="codeblock-68g-zbk-rcx" outputclass="language-csharp" code-type="xCode" data-tag="codeblock" class="pre codeblock language-csharp"><code>// This file is auto-generated, don't edit it. Thanks.
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
+
+using Tea;
+using Tea.Utils;
+
+
+namespace AlibabaCloud.SDK.Sample
+{
+    public class Sample 
+    {
+
+        /**
+         * 使用 Token 初始化账号Client
+         * @return Client
+         * @throws Exception
+         */
+        public static AlibabaCloud.SDK.Dingtalkstorage_2_0.Client CreateClient()
+        {
+            AlibabaCloud.OpenApiClient.Models.Config config = new AlibabaCloud.OpenApiClient.Models.Config();
+            config.Protocol = "https";
+            config.RegionId = "central";
+            return new AlibabaCloud.SDK.Dingtalkstorage_2_0.Client(config);
+        }
+
+        public static void Main(string[] args)
+        {
+            AlibabaCloud.SDK.Dingtalkstorage_2_0.Client client = CreateClient();
+            AlibabaCloud.SDK.Dingtalkstorage_2_0.Models.CommitFileHeaders commitFileHeaders = new AlibabaCloud.SDK.Dingtalkstorage_2_0.Models.CommitFileHeaders();
+            commitFileHeaders.XAcsDingtalkAccessToken = "&lt;your access token&gt;";
+            AlibabaCloud.SDK.Dingtalkstorage_2_0.Models.CommitFileRequest.CommitFileRequestOption.CommitFileRequestOptionAppProperties optionAppProperties0 = new AlibabaCloud.SDK.Dingtalkstorage_2_0.Models.CommitFileRequest.CommitFileRequestOption.CommitFileRequestOptionAppProperties
+            {
+                Name = "property_name",
+                Value = "property_value",
+                Visibility = "PRIVATE",
+            };
+            AlibabaCloud.SDK.Dingtalkstorage_2_0.Models.CommitFileRequest.CommitFileRequestOption option = new AlibabaCloud.SDK.Dingtalkstorage_2_0.Models.CommitFileRequest.CommitFileRequestOption
+            {
+                Size = 512,
+                ConflictStrategy = "AUTO_RENAME",
+                AppProperties = new List&lt;AlibabaCloud.SDK.Dingtalkstorage_2_0.Models.CommitFileRequest.CommitFileRequestOption.CommitFileRequestOptionAppProperties&gt;
+                {
+                    optionAppProperties0
+                },
+                ConvertToOnlineDoc = false,
+            };
+            AlibabaCloud.SDK.Dingtalkstorage_2_0.Models.CommitFileRequest commitFileRequest = new AlibabaCloud.SDK.Dingtalkstorage_2_0.Models.CommitFileRequest
+            {
+                UnionId = "union_id",
+                UploadKey = "upload_key",
+                Name = "dentry_name",
+                Option = option,
+            };
+            try
+            {
+                client.CommitFileWithOptions("uuid", commitFileRequest, commitFileHeaders, new AlibabaCloud.TeaUtil.Models.RuntimeOptions());
+            }
+            catch (TeaException err)
+            {
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+            catch (Exception _err)
+            {
+                TeaException err = new TeaException(new Dictionary&lt;string, object&gt;
+                {
+                    { "message", _err.Message }
+                });
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+        }
+
+
+    }
+}</code></pre></div></div></section></section><section id="section-response-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-response-1" data-tag="h2" class="h2">响应</h2><section id="section-response-parameter" class="section"><h3 data-tag="h3" id="h2-iuo-2vc-2mz" class="h3 title">响应体</h3><table id="03986d3a1bnei" tablewidth="710" tablecolswidth="213 142 355" autofit="false" class="table"><colgroup colwidth="0.9*" style="width:30.00%"></colgroup><colgroup colwidth="0.6*" style="width:20.00%"></colgroup><colgroup colwidth="1.5*" style="width:50.00%"></colgroup><tbody class="tbody"><tr id="039894401bhah"><td id="039894411boqy" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="039894421b7t9">名称</p></td><td id="039894431bb4y" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="039894441bmuv">类型</p></td><td id="039894451bk5p" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="039894461bkap">描述</p></td></tr><tr outputclass="row row-level-1 has-child" id="039894471b4mh" class="row row-level-1 has-child"><td id="039894481b6az" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="039894491bt3b">dentry</p></td><td id="0398944a1bjfo" rowspan="1" colspan="1"><p id="0398944b1b2wy">Object</p></td><td id="0398944c1besl" rowspan="1" colspan="1"><p id="0398944d1brzb">文件信息。</p></td></tr><tr outputclass="row row-level-1-1" id="0398944e1b9jg" class="row row-level-1-1"><td id="0398944f1bvqe" rowspan="1" colspan="1"><p id="039894501b8ni">id</p></td><td id="039894511b5nr" rowspan="1" colspan="1"><p id="039894521buoy">String</p></td><td id="039894531bbsk" rowspan="1" colspan="1"><p id="039894541b5a4">文件id。</p></td></tr><tr outputclass="row row-level-1-2" id="039894551btkf" class="row row-level-1-2"><td id="039894561bwe6" rowspan="1" colspan="1"><p id="039894571bctg">spaceId</p></td><td id="039894581b2iu" rowspan="1" colspan="1"><p id="039894591b2b2">String</p></td><td id="0398945a1bbzx" rowspan="1" colspan="1"><p id="0398945b1bwyw">所在空间id。</p></td></tr><tr outputclass="row row-level-1-3" id="0398945c1bj9l" class="row row-level-1-3"><td id="0398945d1bw33" rowspan="1" colspan="1"><p id="0398945e1bydw">parentId</p></td><td id="0398945f1b3ym" rowspan="1" colspan="1"><p id="039894601b5ji">String</p></td><td id="039894611bbrq" rowspan="1" colspan="1"><p id="039894621bcua">父目录Id。根目录时，该参数是0。
+</p><p class="note-icon-wrapper" id="e21237559ecx8"></p><p id="ecba20d01bp7d">空值代表根目录的parentId不存在。</p></td></tr><tr outputclass="row row-level-1-4" id="039894631bwoy" class="row row-level-1-4"><td id="039894641bqb0" rowspan="1" colspan="1"><p id="039894651btay">type</p></td><td id="039894661bt7m" rowspan="1" colspan="1"><p id="039894671bxhh">String</p></td><td id="039894681b9pz" rowspan="1" colspan="1"><p id="039894691b3fb">类型，目录或文件，枚举值:</p><ul id="fcb74c621bfr2"><li id="fcb74c601bju1"><p id="fa54a4401bvdp"><b>FILE</b>：文件</p></li><li id="fe0306401bs1o"><p id="fe02df301bj35"><b>FOLDER</b>：文件夹</p></li></ul></td></tr><tr outputclass="row row-level-1-5" id="0398946a1b4ge" class="row row-level-1-5"><td id="0398946b1b8pv" rowspan="1" colspan="1"><p id="0398946c1bgwp">name</p></td><td id="0398946d1b3mo" rowspan="1" colspan="1"><p id="0398946e1b9e6">String</p></td><td id="0398946f1b0mn" rowspan="1" colspan="1"><p id="05d34c901bmmj">文件名称。</p></td></tr><tr outputclass="row row-level-1-6" id="039894711bkqh" class="row row-level-1-6"><td id="039894721b9hb" rowspan="1" colspan="1"><p id="039894731b8u9">size</p></td><td id="039894741bejw" rowspan="1" colspan="1"><p id="039894751bxst">Long</p></td><td id="039894761b9db" rowspan="1" colspan="1"><p id="039894771b28s">文件大小, 单位:Byte。</p></td></tr><tr outputclass="row row-level-1-7" id="039894781bqrr" class="row row-level-1-7"><td id="039894791bxid" rowspan="1" colspan="1"><p id="0398947a1b40w">path</p></td><td id="0398947b1beqe" rowspan="1" colspan="1"><p id="0398947c1bccy">String</p></td><td id="0398bb501bh7g" rowspan="1" colspan="1"><p id="0cfca4801b8km">文件在空间内的路径。</p></td></tr><tr outputclass="row row-level-1-8" id="0398bb521bqkp" class="row row-level-1-8"><td id="0398bb531b0dr" rowspan="1" colspan="1"><p id="0398bb541bxpz">version</p></td><td id="0398bb551bapg" rowspan="1" colspan="1"><p id="0398bb561bfz1">Long</p></td><td id="0398bb571bpw1" rowspan="1" colspan="1"><p id="0398bb581bdfv">版本。</p></td></tr><tr outputclass="row row-level-1-9" id="0398bb591b5s1" class="row row-level-1-9"><td id="0398bb5a1by2c" rowspan="1" colspan="1"><p id="0398bb5b1bfxx">status</p></td><td id="0398bb5c1bidq" rowspan="1" colspan="1"><p id="0398bb5d1bke9">String</p></td><td id="0398bb5e1b1lg" rowspan="1" colspan="1"><p id="0398bb5f1bj7i">状态：</p><ul id="7b4eb4e382aqz"><li id="7b4eb4e4825d8"><p id="12afb0201bdqe"><b>NORMAL</b>：正常</p></li><li id="7b4edbd1828f6"><p id="12afb0211b12q"><b>DELETED</b>：已删除</p></li><li id="7b4edbd382is0"><p id="12afb0221bjbt"><b>EXPIRED</b>：已过期</p></li></ul></td></tr><tr outputclass="row row-level-1-10" id="0398bb601biqu" class="row row-level-1-10"><td id="0398bb611bccv" rowspan="1" colspan="1"><p id="0398bb621bknt">extension</p></td><td id="0398bb631b1g1" rowspan="1" colspan="1"><p id="0398bb641b7ya">String</p></td><td id="0398bb651bowp" rowspan="1" colspan="1"><p id="17a649901b6kl">文件后缀。</p></td></tr><tr outputclass="row row-level-1-11" id="0398bb671bpj3" class="row row-level-1-11"><td id="0398bb681bm05" rowspan="1" colspan="1"><p id="0398bb691bfcg">creatorId</p></td><td id="0398bb6a1bzvr" rowspan="1" colspan="1"><p id="0398bb6b1bbig">String</p></td><td id="0398bb6c1blbb" rowspan="1" colspan="1"><p id="1a372da01bddb">创建者unionId。</p></td></tr><tr outputclass="row row-level-1-12" id="0398bb6e1b08w" class="row row-level-1-12"><td id="0398bb6f1bp1z" rowspan="1" colspan="1"><p id="0398bb701bsop">modifierId</p></td><td id="0398bb711bekz" rowspan="1" colspan="1"><p id="0398bb721bx8l">String</p></td><td id="0398bb731brfo" rowspan="1" colspan="1"><p id="1c1870c01b7fw">修改者unionId。</p></td></tr><tr outputclass="row row-level-1-13" id="0398bb751bza4" class="row row-level-1-13"><td id="0398bb761biuj" rowspan="1" colspan="1"><p id="0398bb771bbuf">createTime</p></td><td id="0398bb781bc48" rowspan="1" colspan="1"><p id="0398bb791bp98">String</p></td><td id="0398bb7a1bb2m" rowspan="1" colspan="1"><p id="1ed14f301bc7n">创建时间，iso8601格式，例如：2022-07-29T14:55Z。</p></td></tr><tr outputclass="row row-level-1-14" id="0398bb7c1bngw" class="row row-level-1-14"><td id="0398bb7d1b9z2" rowspan="1" colspan="1"><p id="0398bb7e1berh">modifiedTime</p></td><td id="0398bb7f1b2d0" rowspan="1" colspan="1"><p id="0398bb801bhx9">String</p></td><td id="0398bb811b884" rowspan="1" colspan="1"><p id="212cf2701bcwq">修改时间，iso8601格式，例如：2022-07-29T14:55Z。</p></td></tr><tr outputclass="row row-level-1-15 has-child" id="0398bb831bq5i" class="row row-level-1-15 has-child"><td id="0398bb841b8z6" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="0398bb851bu7w">properties</p></td><td id="0398bb861btqa" rowspan="1" colspan="1"><p id="0398bb871bzzb">Object</p></td><td id="0398bb881bsiq" rowspan="1" colspan="1"><p id="248126801b6ry">文件属性。</p></td></tr><tr outputclass="row row-level-1-15-1" id="0398e2611bsml" class="row row-level-1-15-1"><td id="0398e2621bmet" rowspan="1" colspan="1"><p id="0398e2631bg9d">readOnly</p></td><td id="0398e2641bn38" rowspan="1" colspan="1"><p id="0398e2651b866">Boolean</p></td><td id="0398e2661b9wa" rowspan="1" colspan="1"><p id="0398e2671bbt8">文件是否只读。</p><ul id="7b4f02f682e8h"><li id="7b4f02f782c1v"><p id="27d9ee701bkz2"><b>true</b>：是</p></li><li id="7b4f02f982ee9"><p id="27d9ee711bj3c"><b>false</b>：否</p></li></ul></td></tr><tr outputclass="row row-level-1-16 has-child" id="0398e2681bva8" class="row row-level-1-16 has-child"><td id="0398e2691b4zg" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="0398e26a1bf6t">appProperties</p></td><td id="0398e26b1bw6p" rowspan="1" colspan="1"><p id="0398e26c1bu3p">Map&lt;String, Array&gt;</p></td><td id="0398e26d1bhs6" rowspan="1" colspan="1"><p id="36566d701bghg">在特定应用上的属性。key是所属空间的ownerId，value是属性列表。</p></td></tr><tr outputclass="row row-level-1-16-1 has-child" id="0398e26f1bda2" class="row row-level-1-16-1 has-child"><td id="0398e2701bcw5" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="0398e2711bzsl"></p></td><td id="0398e2721b3bg" rowspan="1" colspan="1"><p id="0398e2731btkq">Array</p></td><td id="0398e2741bm4k" rowspan="1" colspan="1"><p id="0398e2751bt34">属性列表。</p></td></tr><tr outputclass="row row-level-1-16-1-1" id="0398e2761b658" class="row row-level-1-16-1-1"><td id="0398e2771bp0x" rowspan="1" colspan="1"><p id="0398e2781bjry">name</p></td><td id="0398e2791buzy" rowspan="1" colspan="1"><p id="0398e27a1b6bp">String</p></td><td id="0398e27b1bbv9" rowspan="1" colspan="1"><p id="0398e27c1b61e">属性名称。</p></td></tr><tr outputclass="row row-level-1-16-1-2" id="0398e27d1bnvp" class="row row-level-1-16-1-2"><td id="0398e27e1bi06" rowspan="1" colspan="1"><p id="0398e27f1bdfx">value</p></td><td id="0398e2801by38" rowspan="1" colspan="1"><p id="0398e2811bpxe">String</p></td><td id="0398e2821b6dw" rowspan="1" colspan="1"><p id="0398e2831bit2">属性值。</p></td></tr><tr outputclass="row row-level-1-16-1-3" id="0398e2841b8fx" class="row row-level-1-16-1-3"><td id="0398e2851b89e" rowspan="1" colspan="1"><p id="0398e2861blj1">visibility</p></td><td id="0398e2871bop1" rowspan="1" colspan="1"><p id="0398e2881bt5t">String</p></td><td id="0398e2891bqgu" rowspan="1" colspan="1"><p id="0398e28a1btbv">属性可见性。</p><ul id="7b4f2a0d821l6"><li id="7b4f2a0e82dwc"><p id="420993401bmza"><b>PUBLIC</b>：所有应用都可见</p></li><li id="7b4f2a1082vov"><p id="420993411b63b"><b>PRIVATE</b>：仅限当前应用可见</p></li></ul></td></tr><tr outputclass="row row-level-1-17" id="0398e28b1b3fn" class="row row-level-1-17"><td id="0398e28c1b3eq" rowspan="1" colspan="1"><p id="0398e28d1bnbk">uuid</p></td><td id="0398e28e1b5st" rowspan="1" colspan="1"><p id="0398e28f1b2i4">String</p></td><td id="0398e2901blqc" rowspan="1" colspan="1"><p id="0398e2911buv4">唯一标识uuid，如移动文件，此字段不变。</p></td></tr><tr outputclass="row row-level-1-18" id="0398e2921bvxi" class="row row-level-1-18"><td id="0398e2931bwb9" rowspan="1" colspan="1"><p id="0398e2941bfio">partitionType</p></td><td id="0398e2951bcz1" rowspan="1" colspan="1"><p id="0398e2961bri3">String</p></td><td id="0398e2971bs8n" rowspan="1" colspan="1"><p id="0398e2981b81e">存储分区：</p><ul id="7b4f510a82dp2"><li id="7b4f510b82a2v"><p id="55875a101b0jr"><b>PUBLIC_OSS_PARTITION</b>：公有云OSS存储分区</p></li><li id="7b4f510d82ci9"><p id="55875a111br52"><b>MINI_OSS_PARTITION</b>：专属MiniOSS存储分区</p></li></ul></td></tr><tr outputclass="row row-level-1-19" id="0398e2991bjhu" class="row row-level-1-19"><td id="0398e29a1bruz" rowspan="1" colspan="1"><p id="0398e29b1b74x">storageDriver</p></td><td id="039909701bxte" rowspan="1" colspan="1"><p id="039909711bqlp">String</p></td><td id="039909721bd1h" rowspan="1" colspan="1"><p id="039909731br3u">驱动类型，枚举值:</p><ul id="6df5edf21bdq5"><li id="6df5edf01b1u2"><p id="6c513ea01bc6t"><b>DINGTALK</b>：钉钉统一存储驱动</p></li><li id="6efa3e901bhlw"><p id="6ef9f0701br9c"><b>ALIDOC</b>：钉钉文档存储驱动</p></li><li id="6fd9a2101bgou"><p id="6fd97b001b7rt"><b>SHANJI</b>：闪记存储驱动</p></li><li id="70b1d9a01b0x3"><p id="70b18b801bowa"><b>UNKNOWN</b>：未知驱动</p></li></ul></td></tr><tr outputclass="row row-level-1-20 has-child" id="039909741bkbb" class="row row-level-1-20 has-child"><td id="039909751bcd9" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="039909761b9na">thumbnail</p></td><td id="039909771boyt" rowspan="1" colspan="1"><p id="039909781bo6s">Object</p></td><td id="039909791bu9c" rowspan="1" colspan="1"><p id="0399097a1bxh4">缩略图信息。</p></td></tr><tr outputclass="row row-level-1-20-1" id="0399097b1b4hi" class="row row-level-1-20-1"><td id="0399097c1byp8" rowspan="1" colspan="1"><p id="0399097d1bnl8">width</p></td><td id="0399097e1bp4c" rowspan="1" colspan="1"><p id="0399097f1bvqd">Integer</p></td><td id="039909801bc9e" rowspan="1" colspan="1"><p id="039909811bmf3">缩略图宽度。</p></td></tr><tr outputclass="row row-level-1-20-2" id="039909821bk31" class="row row-level-1-20-2"><td id="039909831bnh9" rowspan="1" colspan="1"><p id="039909841bx3z">height</p></td><td id="039909851b7e7" rowspan="1" colspan="1"><p id="039909861bjmc">Integer</p></td><td id="039909871b3ie" rowspan="1" colspan="1"><p id="039909881bgf9">缩略图高度。</p></td></tr><tr outputclass="row row-level-1-20-3" id="039909891bcck" class="row row-level-1-20-3"><td id="0399098a1bpkv" rowspan="1" colspan="1"><p id="0399098b1bzxa">url</p></td><td id="0399098c1b1s6" rowspan="1" colspan="1"><p id="0399098d1baza">String</p></td><td id="0399098e1b98l" rowspan="1" colspan="1"><p id="0399098f1bqip">缩略图url。</p></td></tr><tr outputclass="row row-level-1-21" id="039909901b96u" class="row row-level-1-21"><td id="039909911b78b" rowspan="1" colspan="1"><p id="039909921bwy9">category</p></td><td id="039909931bp9f" rowspan="1" colspan="1"><p id="039909941bdor">String</p></td><td id="039909951b0r8" rowspan="1" colspan="1"><p id="039909961bcjy">类别，枚举值:</p><ul id="872476721bmjr"><li id="872476701bza2"><p id="86584cd01b2bm"><b>IMAGE</b>：图片</p></li><li id="887dc4e01b19c"><p id="887d9dd01b7om"><b>VIDEO</b>：视频</p></li><li id="89b310901bc8m"><p id="89b2e9801bcaj"><b>AUDIO</b>：音频</p></li><li id="8a5607501blh1"><p id="8a55e0401b92v"><b>ARCHIVE</b>：压缩包</p></li><li id="8adc00301b8te"><p id="8adbd9201b9lf"><b>SHORTCUT</b>：快捷方式</p></li><li id="8b6e2e101bpd7"><p id="8b6e07001b5wt"><b>DOCUMENT</b>：文档</p></li><li id="8bf4c3301b4vz"><p id="8bf49c201bt4d"><b>ALI_DOC</b>：钉钉文档</p></li><li id="8c75da101bcxg"><p id="8c75b3001bqwm"><b>OTHER</b>：其它</p></li></ul></td></tr></tbody></table></section><section id="section-response-body-example" class="section"><h3 id="h3-response-body-example" data-tag="h3" class="h3">响应体示例</h3><pre id="038cad601bjei" outputclass="language-json" code-type="xCode" data-tag="codeblock" class="pre codeblock language-json"><code>HTTP/1.1 200 OK
+Content-Type:application/json
+
+{
+  "dentry" : {
+    "id" : "dentry_id",
+    "spaceId" : "space_id",
+    "parentId" : "parent_id",
+    "type" : "FILE",
+    "name" : "dentry_name",
+    "size" : 512,
+    "path" : "dentry_path",
+    "version" : 1,
+    "status" : "NORMAL",
+    "extension" : "txt",
+    "creatorId" : "creator_id",
+    "modifierId" : "modifier_id",
+    "createTime" : "2022-01-01T10:00:00Z",
+    "modifiedTime" : "2022-01-01T10:00:00Z",
+    "properties" : {
+      "readOnly" : true
+    },
+    "appProperties" : [ {
+      "name" : "property_name",
+      "value" : "property_value",
+      "visibility" : "PRIVATE"
+    } ],
+    "uuid" : "uuid",
+    "partitionType" : "PUBLIC_OSS_PARTITION",
+    "storageDriver" : "DINGTALK",
+    "thumbnail" : {
+      "width" : 64,
+      "height" : 64,
+      "url" : "url"
+    },
+    "category" : "DOCUMENT"
+  }
+}</code></pre></section><section id="section-error-code-1" class="section"><h3 id="h3-error-code-1" data-tag="h3" class="h3">错误码</h3><p data-tag="p" id="p-error-code-global-guide" class="p">若调用该接口报错，可根据错误信息在<a href="https://open.dingtalk.com/document/development/server-api-error-codes-1" id="a-error-code-global-guide">全局错误码</a>文档中查找解决方案。</p><table id="039909991bx9u" tablewidth="709" tablecolswidth="142 177 177 213" autofit="false" class="table"><colgroup colwidth="0.8*" style="width:20.03%"></colgroup><colgroup colwidth="1*" style="width:24.96%"></colgroup><colgroup colwidth="1*" style="width:24.96%"></colgroup><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><tbody class="tbody"><tr id="0399099a1bigq"><td id="0399099b1bfdd" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="0399099c1bj0x">HttpCode</p></td><td id="0399099d1bnrk" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="0399099e1bd85">错误码</p></td><td id="0399099f1bzkr" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="039909a01b0zh">错误信息</p></td><td id="039909a11bihe" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="039909a21b805">说明</p></td></tr><tr id="039909a31bi5c"><td id="039909a41bded" rowspan="1" colspan="1"><p id="039909a51baes">400</p></td><td id="039909a61biqo" rowspan="1" colspan="1"><p id="039909a71br56">operationConcurrentControl</p></td><td id="039909a81bobw" rowspan="1" colspan="1"><p id="039909a91btr6">%s</p></td><td id="039909aa1bshm" rowspan="1" colspan="1"><p id="039909ab1bevv">并发控制</p></td></tr><tr id="039909ac1bo5a"><td id="039909ad1bpoo" rowspan="1" colspan="1"><p id="039930801bwgq">400</p></td><td id="039930811bjcp" rowspan="1" colspan="1"><p id="039930821bjsy">paramError</p></td><td id="039930831bbmg" rowspan="1" colspan="1"><p id="039930841btui">%s</p></td><td id="039930851bo7d" rowspan="1" colspan="1"><p id="039930861bpy0">参数错误</p></td></tr><tr id="039930871bz72"><td id="039930881bcag" rowspan="1" colspan="1"><p id="039930891b6qe">400</p></td><td id="0399308a1b0x1" rowspan="1" colspan="1"><p id="0399308b1bkcz">paramError.parentDentryUuid</p></td><td id="0399308c1b7f7" rowspan="1" colspan="1"><p id="0399308d1bi5h">%s</p></td><td id="0399308e1b2px" rowspan="1" colspan="1"><p id="0399308f1b5og">参数错误-parentDentryUuid</p></td></tr><tr id="039930901b4pk"><td id="039930911b4nd" rowspan="1" colspan="1"><p id="039930921bjrj">400</p></td><td id="039930931bu9n" rowspan="1" colspan="1"><p id="039930941bdkn">paramError.uploadKey</p></td><td id="039930951bmfe" rowspan="1" colspan="1"><p id="039930961bw7o">%s</p></td><td id="039930971b11x" rowspan="1" colspan="1"><p id="039930981bo26">参数错误-uploadKey</p></td></tr><tr id="039930991bzo3"><td id="0399309a1bvjk" rowspan="1" colspan="1"><p id="0399309b1bef9">400</p></td><td id="0399309c1bzcc" rowspan="1" colspan="1"><p id="0399309d1ba9k">paramError.name</p></td><td id="0399309e1brw2" rowspan="1" colspan="1"><p id="0399309f1b7qd">%s</p></td><td id="039930a01bhda" rowspan="1" colspan="1"><p id="039930a11b27z">参数错误-name</p></td></tr><tr id="039930a21bvyu"><td id="039930a31btrv" rowspan="1" colspan="1"><p id="039930a41bd6x">400</p></td><td id="039930a51bs4w" rowspan="1" colspan="1"><p id="039930a61b0p8">paramError.conflictStrategy</p></td><td id="039930a71blrv" rowspan="1" colspan="1"><p id="039930a81blkl">%s</p></td><td id="039930a91bj02" rowspan="1" colspan="1"><p id="039930aa1bq9q">参数错误-conflictStrategy</p></td></tr><tr id="039930ab1boq5"><td id="039930ac1bk1k" rowspan="1" colspan="1"><p id="039930ad1bwl9">400</p></td><td id="039930ae1b2rk" rowspan="1" colspan="1"><p id="039930af1bqzb">spaceQuotaInsufficient</p></td><td id="039930b01b35a" rowspan="1" colspan="1"><p id="039930b11bp63">%s</p></td><td id="039930b21by07" rowspan="1" colspan="1"><p id="039930b31bhj3">空间容量不足</p></td></tr><tr id="039930b41bqfk"><td id="039930b51bmck" rowspan="1" colspan="1"><p id="039930b61bwie">400</p></td><td id="039930b71bbdz" rowspan="1" colspan="1"><p id="039930b81btyg">sceneQuotaInsufficient</p></td><td id="039930b91bmbq" rowspan="1" colspan="1"><p id="039930ba1bxut">%s</p></td><td id="039930bb1bhro" rowspan="1" colspan="1"><p id="039930bc1b828">场景容量不足</p></td></tr><tr id="039930bd1bf0p"><td id="039930be1b7lv" rowspan="1" colspan="1"><p id="039930bf1bziy">400</p></td><td id="039930c01b081" rowspan="1" colspan="1"><p id="039930c11br70">appQuotaInsufficient</p></td><td id="039930c21byxp" rowspan="1" colspan="1"><p id="039930c31b89y">%s</p></td><td id="039957901bv1n" rowspan="1" colspan="1"><p id="039957911b4d8">应用容量不足</p></td></tr><tr id="039957921b2uk"><td id="039957931b1oo" rowspan="1" colspan="1"><p id="039957941bqc9">400</p></td><td id="039957951bv37" rowspan="1" colspan="1"><p id="039957961bdg8">orgQuotaInsufficient</p></td><td id="039957971bie7" rowspan="1" colspan="1"><p id="039957981b69z">%s</p></td><td id="039957991b1a0" rowspan="1" colspan="1"><p id="0399579a1b4vj">企业容量不足</p></td></tr><tr id="0399579b1bfeb"><td id="0399579c1bstd" rowspan="1" colspan="1"><p id="0399579d1bh7o">400</p></td><td id="0399579e1brtm" rowspan="1" colspan="1"><p id="0399579f1behb">dentryNameIllegal</p></td><td id="039957a01bhvo" rowspan="1" colspan="1"><p id="039957a11b8de">%s</p></td><td id="039957a21bcxu" rowspan="1" colspan="1"><p id="039957a31buow">文件名非法</p></td></tr><tr id="039957a41b1by"><td id="039957a51b7j1" rowspan="1" colspan="1"><p id="039957a61b3pd">400</p></td><td id="039957a71b73t" rowspan="1" colspan="1"><p id="039957a81bq4q">dentryStoreError</p></td><td id="039957a91bs53" rowspan="1" colspan="1"><p id="039957aa1bxzt">%s</p></td><td id="039957ab1ba2q" rowspan="1" colspan="1"><p id="039957ac1bnlg">文件存储异常</p></td></tr><tr id="039957ad1b5gv"><td id="039957ae1b264" rowspan="1" colspan="1"><p id="039957af1bohb">400</p></td><td id="039957b01b20v" rowspan="1" colspan="1"><p id="039957b11b4nn">dentryNameConflict</p></td><td id="039957b21bpma" rowspan="1" colspan="1"><p id="039957b31bb6f">%s</p></td><td id="039957b41b4wq" rowspan="1" colspan="1"><p id="039957b51bxpo">文件名冲突</p></td></tr><tr id="039957b61bf8q"><td id="039957b71bye7" rowspan="1" colspan="1"><p id="039957b81bvyj">400</p></td><td id="039957b91blxc" rowspan="1" colspan="1"><p id="039957ba1bwu6">dentryFormatNotSupport</p></td><td id="039957bb1by6a" rowspan="1" colspan="1"><p id="039957bc1blme">%s</p></td><td id="039957bd1bps8" rowspan="1" colspan="1"><p id="039957be1b85y">不支持的文件格式</p></td></tr><tr id="039957bf1bibt"><td id="039957c01bzwl" rowspan="1" colspan="1"><p id="039957c11bg24">403</p></td><td id="039957c21bkr8" rowspan="1" colspan="1"><p id="039957c31bpp7">permissionDenied</p></td><td id="039957c41bs5s" rowspan="1" colspan="1"><p id="039957c51b60t">%s</p></td><td id="039957c61bae7" rowspan="1" colspan="1"><p id="039957c71b3hn">用户缺少上传文件的权限</p></td></tr><tr id="039957c81bzfy"><td id="039957c91btd4" rowspan="1" colspan="1"><p id="039957ca1biid">404</p></td><td id="039957cb1b7p1" rowspan="1" colspan="1"><p id="039957cc1bizx">spaceNotExist</p></td><td id="039957cd1buyy" rowspan="1" colspan="1"><p id="039957ce1bfj0">%s</p></td><td id="039957cf1bcfk" rowspan="1" colspan="1"><p id="039957d01bh3y">空间不存在</p></td></tr><tr id="03997ea01bbdr"><td id="03997ea11bdls" rowspan="1" colspan="1"><p id="03997ea21b8z0">500</p></td><td id="03997ea31bmxp" rowspan="1" colspan="1"><p id="03997ea41bfwe">systemError</p></td><td id="03997ea51bm1s" rowspan="1" colspan="1"><p id="03997ea61bvbr">%s</p></td><td id="03997ea71blfq" rowspan="1" colspan="1"><p id="03997ea81b12m">系统错误</p></td></tr><tr id="03997ea91bebi"><td id="03997eaa1bmf6" rowspan="1" colspan="1"><p id="03997eab1bd9p">500</p></td><td id="03997eac1byrr" rowspan="1" colspan="1"><p id="03997ead1bltp">unknownError</p></td><td id="03997eae1buam" rowspan="1" colspan="1"><p id="03997eaf1bqvp">Unknown Error</p></td><td id="03997eb01b2xb" rowspan="1" colspan="1"><p id="03997eb11bt6v">未知错误</p></td></tr><tr id="03997eb21bgdz"><td id="03997eb31blhu" rowspan="1" colspan="1"><p id="03997eb41bd69">503</p></td><td id="03997eb51bs8x" rowspan="1" colspan="1"><p id="03997eb61by4i">operationTimeout</p></td><td id="03997eb71b1m4" rowspan="1" colspan="1"><p id="03997eb81bgwl">%s</p></td><td id="03997eb91b4qn" rowspan="1" colspan="1"><p id="03997eba1bczw">请求超时</p></td></tr></tbody></table></section></section></div></main></body></html>

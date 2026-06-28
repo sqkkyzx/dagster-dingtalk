@@ -1,0 +1,787 @@
+<!DOCTYPE html><html><head><meta charset="utf8" / /><meta name="searchtitle" content="" / /><meta name="keywords" content="" / /><meta name="author" content="" / /><title>API 调用示例</title><meta name="gmtModify" content="2025-09-23 19:18:11" / /></head><body data-tag="topic" id="topic-2854576" class="topic"><main id="main-2854576"><h1 data-tag="title" id="de76db644c9bd" class="title">API 调用示例</h1><p id="ce3b603807cg3" data-tag="shortdesc" class="shortdesc">由于创建卡片、投放卡片接口参数比较复杂，本文档提供常见的参数组合和各语言调用示例以作参考。</p><div data-tag="body" class="body"><section id="d0fa43b03f21u" class="section"><h2 id="f12d05603fg8q"><span style="color:rgb(51, 51, 51)"><b>创建并投放卡片（发送卡片）接口调用示例</b></span> </h2><p id="4eeaa0731dqyl">下面是三个常用场域的创建并投放卡片（发送卡片）接口调用传参示例，示例中花括号的内容需要替换成真实的数据，比如 access_token、卡片模板 id、用户 userId、群聊 openConversationId 等。<a data-tag="xref" id="7df468afddrj4" href="/document/development/interface-for-creating-a-card-instance#" class="xref">创建卡片</a>和<a data-tag="xref" id="46315eba9797c" href="/document/development/delivery-card-interface#" class="xref">投放卡片</a>接口的传参也可参考该示例。</p><p id="22070bc9f5lnw"></p><section id="fa8d88844broj" class="section"><h3 id="55d2cb6221cva"><span style="color:rgb(51, 51, 51)"><b>场域类型：</b></span><span style="color:rgb(23, 26, 29)"><b>IM机器人单聊</b></span></h3><div outputclass="tabbed-codeblock" data-tag="fig" id="4fd0b3d0c5kza" class="tabbed-codeblock-box"><div class="tab-box"></div><input type="radio" name="check-4fd0b3d0c5kza" id="4fd0b3d0c5kza-http-tab" checked="checked" /><label for="4fd0b3d0c5kza-http-tab">HTTP</label><div class="codeblock-item"><pre code-type="xCode" id="102472ed75yqs" data-tag="codeblock" outputclass="language-http" class="pre codeblock language-http"><code>POST /v1.0/card/instances/createAndDeliver HTTP/1.1
+Host:api.dingtalk.com
+x-acs-dingtalk-access-token:String
+Content-Type:application/json
+
+{
+  "cardTemplateId": "{卡片模板 id}",
+  "outTrackId": "{唯一卡片实例 id}",
+  "cardData": {
+    "cardParamMap": {
+      "string": "字符串",
+      "boolean": "true",
+      "number": "1",
+      "markdown": "# markdown",
+      "obj": "{\"key\": \"value\"}",
+      "arr": "[{\"key\": \"value\"}]"
+    }
+  },
+  "openSpaceId": "dtv1.card//IM_ROBOT.{用户 userId}",
+  "imRobotOpenSpaceModel": { "supportForward": true },
+  "imRobotOpenDeliverModel": { "spaceType": "IM_ROBOT" }
+}
+</code></pre></div><input type="radio" name="check-4fd0b3d0c5kza" id="4fd0b3d0c5kza-java-tab" /><label for="4fd0b3d0c5kza-java-tab">Java</label><div class="codeblock-item"><pre code-type="xCode" id="0b1fab1e9fdqe" data-tag="codeblock" outputclass="language-java" class="pre codeblock language-java"><code>import com.alibaba.fastjson.JSON;
+import com.squareup.okhttp.*;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
+public class Main {
+    
+    public static Map&lt;String, String&gt; convertJsonValuesToString(Map&lt;String, Object&gt; obj) {
+        Map&lt;String, String&gt; result = new HashMap&lt;&gt;();
+        for (Map.Entry&lt;String, Object&gt; entry : obj.entrySet()) {
+            String key = entry.getKey();
+            Object value = entry.getValue();
+            if (value instanceof String) {
+                result.put(key, (String) value);
+            } else {
+                result.put(key, JSON.toJSONString(value));
+            }
+        }
+        return result;
+    }
+
+    public static void main(String[] args) {
+        String accessToken = "{access_token}";
+        String url = "https://api.dingtalk.com/v1.0/card/instances/createAndDeliver";
+
+        Map&lt;String, Object&gt; cardData = new HashMap&lt;&gt;();
+        cardData.put("string", "字符串");
+        cardData.put("boolean", true);
+        cardData.put("number", 1);
+        cardData.put("markdown", "# markdown");
+        Map&lt;String, String&gt; obj = new HashMap&lt;&gt;();
+        obj.put("key", "value");
+        cardData.put("obj", obj);
+        cardData.put("arr", new Object[]{obj});
+
+        Map&lt;String, Object&gt; body = new HashMap&lt;&gt;();
+        body.put("cardTemplateId", "{卡片模板 id}");
+        body.put("outTrackId", UUID.randomUUID().toString());
+        body.put("cardData", new HashMap&lt;String, Object&gt;() {{
+            put("cardParamMap", convertJsonValuesToString(cardData));
+        }});
+        body.put("openSpaceId", "dtv1.card//IM_ROBOT.{用户 userId}");
+        body.put("imRobotOpenSpaceModel", new HashMap&lt;String, Object&gt;() {{
+            put("supportForward", true);
+            put("lastMessageI18n", new HashMap&lt;String, String&gt;() {{
+                put("ZH_CN", "您收到一条卡片消息");
+            }});
+        }});
+        body.put("imRobotOpenDeliverModel", new HashMap&lt;String, Object&gt;() {{
+            put("spaceType", "IM_ROBOT");
+        }});
+
+        OkHttpClient client = new OkHttpClient();
+        MediaType JSON_MEDIA_TYPE = MediaType.parse("application/json; charset=utf-8");
+        RequestBody requestBody = RequestBody.create(JSON_MEDIA_TYPE, JSON.toJSONString(body));
+        Request request = new Request.Builder()
+                .url(url)
+                .post(requestBody)
+                .addHeader("Content-Type", "application/json")
+                .addHeader("Accept", "*/*")
+                .addHeader("x-acs-dingtalk-access-token", accessToken)
+                .build();
+
+        try (Response response = client.newCall(request).execute()) {
+            if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
+            System.out.println(response.body().string());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}</code></pre></div><input type="radio" name="check-4fd0b3d0c5kza" id="4fd0b3d0c5kza-python-tab" /><label for="4fd0b3d0c5kza-python-tab">Python</label><div class="codeblock-item"><pre code-type="xCode" id="012b9165cf848" data-tag="codeblock" outputclass="language-python" class="pre codeblock language-python"><code>import uuid
+import json
+import requests
+
+def convert_json_values_to_string(obj: dict) -&gt; str:
+    """
+    Dump the attributes of a dictionary to a string.
+    """
+    result = {}
+    for key, value in obj.items():
+        if isinstance(value, str):
+            result[key] = value
+        else:
+            result[key] = json.dumps(value)
+    return result
+
+access_token = "{access_token}"
+headers = {
+    "Content-Type": "application/json",
+    "Accept": "*/*",
+    "x-acs-dingtalk-access-token": access_token,
+}
+card_data = {
+  "string": "字符串",
+  "boolean": True,
+  "number": 1,
+  "markdown": "# markdown",
+  "obj": {"key": "value"},
+  "arr": [{"key": "value"}],
+}
+body = {
+    "cardTemplateId": "{卡片模板 id}",
+    "outTrackId": str(uuid.uuid1()),
+    "cardData": {"cardParamMap": convert_json_values_to_string(card_data)},
+    "openSpaceId": "dtv1.card//IM_ROBOT.{用户 userId}",
+    "imRobotOpenSpaceModel": {
+        "supportForward": True,
+        "lastMessageI18n": {"ZH_CN": "您收到一条卡片消息"},
+    },
+    "imRobotOpenDeliverModel": {"spaceType": "IM_ROBOT"},
+}
+
+url = "https://api.dingtalk.com/v1.0/card/instances/createAndDeliver"
+
+response = requests.post(url, headers=headers, json=body)
+print(response.text)</code></pre></div><input type="radio" name="check-4fd0b3d0c5kza" id="4fd0b3d0c5kza-nodejs-tab" /><label for="4fd0b3d0c5kza-nodejs-tab">Node.js</label><div class="codeblock-item"><pre code-type="xCode" id="575a982130ocd" data-tag="codeblock" outputclass="language-nodejs" class="pre codeblock language-nodejs"><code>const axios = require('axios');
+const uuid = require('uuid');
+
+function convertJsonValuesToString(obj) {
+    const result = {};
+    for (const key in obj) {
+        const value = obj[key];
+        result[key] = (typeof value === 'string') ? value : JSON.stringify(value);
+    }
+    return result;
+}
+
+const accessToken = "{access_token}";
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "*/*",
+    "x-acs-dingtalk-access-token": accessToken,
+};
+
+const cardData = {
+    "string": "字符串",
+    "boolean": true,
+    "number": 1,
+    "markdown": "# markdown",
+    "obj": {"key": "value"},
+    "arr": [{"key": "value"}],
+};
+
+const body = {
+    "cardTemplateId": "{卡片模板 id}",
+    "outTrackId": uuid.v1(),
+    "cardData": { "cardParamMap": convertJsonValuesToString(cardData) },
+    "openSpaceId": "dtv1.card//IM_ROBOT.{用户 userId}",
+    "imRobotOpenSpaceModel": {
+        "supportForward": true,
+        "lastMessageI18n": { "ZH_CN": "您收到一条卡片消息" },
+    },
+    "imRobotOpenDeliverModel": { "spaceType": "IM_ROBOT" },
+};
+
+const url = "https://api.dingtalk.com/v1.0/card/instances/createAndDeliver";
+
+axios.post(url, body, { headers })
+    .then(response =&gt; {
+        console.log(response.data);
+    })
+    .catch(error =&gt; {
+        console.error(error);
+    });
+</code></pre></div><input type="radio" name="check-4fd0b3d0c5kza" id="4fd0b3d0c5kza-go-tab" /><label for="4fd0b3d0c5kza-go-tab">Go</label><div class="codeblock-item"><pre code-type="xCode" id="e95a16b86amyp" data-tag="codeblock" outputclass="language-go" class="pre codeblock language-go"><code>package main
+
+import (
+	"bytes"
+	"encoding/json"
+	"fmt"
+	"net/http"
+
+	"github.com/google/uuid"
+)
+
+func convertJsonValuesToString(obj map[string]interface{}) map[string]string {
+	result := make(map[string]string)
+	for key, value := range obj {
+		if str, ok := value.(string); ok {
+			result[key] = str
+		} else {
+			jsonValue, _ := json.Marshal(value)
+			result[key] = string(jsonValue)
+		}
+	}
+	return result
+}
+
+func main() {
+	accessToken := "{access_token}"
+
+	cardData := map[string]interface{}{
+		"string":   "字符串",
+		"boolean":  true,
+		"number":   1,
+		"markdown": "# markdown",
+		"obj":      map[string]string{"key": "value"},
+		"arr":      []map[string]string{{"key": "value"}},
+	}
+
+	body := map[string]interface{}{
+		"cardTemplateId": "{卡片模板 id}",
+		"outTrackId":     uuid.New().String(),
+		"cardData": map[string]interface{}{
+			"cardParamMap": convertJsonValuesToString(cardData),
+		},
+		"openSpaceId": "dtv1.card//IM_ROBOT.{用户 userId}",
+		"imRobotOpenSpaceModel": map[string]interface{}{
+			"supportForward":  true,
+			"lastMessageI18n": map[string]string{"ZH_CN": "您收到一条卡片消息"},
+		},
+		"imRobotOpenDeliverModel": map[string]interface{}{
+			"spaceType": "IM_ROBOT",
+		},
+	}
+
+	jsonBody, _ := json.Marshal(body)
+
+	req, err := http.NewRequest("POST", "https://api.dingtalk.com/v1.0/card/instances/createAndDeliver", bytes.NewBuffer(jsonBody))
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	req.Header.Set("Content-Type", "application/json")
+	req.Header.Set("Accept", "*/*")
+	req.Header.Set("x-acs-dingtalk-access-token", accessToken)
+
+	client := &amp;http.Client{}
+	resp, err := client.Do(req)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	defer resp.Body.Close()
+
+	var resBody map[string]interface{}
+	json.NewDecoder(resp.Body).Decode(&amp;resBody)
+	fmt.Println(resBody)
+}</code></pre></div></div></section><section id="3c087ed1d8zev" class="section"><h3 id="fbacc777cfsqw"><b>场域类型：IM机器人群聊</b></h3><div outputclass="tabbed-codeblock" data-tag="fig" id="76e5cbc0078ot" class="tabbed-codeblock-box"><div class="tab-box"></div><input type="radio" name="check-76e5cbc0078ot" id="76e5cbc0078ot-http-tab" checked="checked" /><label for="76e5cbc0078ot-http-tab">HTTP</label><div class="codeblock-item"><pre code-type="xCode" id="d80d53e7ff1j1" data-tag="codeblock" outputclass="language-http" class="pre codeblock language-http"><code>POST /v1.0/card/instances/createAndDeliver HTTP/1.1
+Host:api.dingtalk.com
+x-acs-dingtalk-access-token:String
+Content-Type:application/json
+
+{
+  "cardTemplateId": "{卡片模板 id}",
+  "outTrackId": "{唯一卡片实例 id}",
+  "cardData": {
+    "cardParamMap": {
+      "string": "字符串",
+      "boolean": "true",
+      "number": "1",
+      "markdown": "# markdown",
+      "obj": "{\"key\": \"value\"}",
+      "arr": "[{\"key\": \"value\"}]"
+    }
+  },
+  "imGroupOpenSpaceModel": { "supportForward": true },
+  "openSpaceId": "dtv1.card//IM_GROUP.{群聊 openConversationId}",
+  "imGroupOpenDeliverModel": { "robotCode": "{应用 client-id}" }
+}
+</code></pre></div><input type="radio" name="check-76e5cbc0078ot" id="76e5cbc0078ot-java-tab" /><label for="76e5cbc0078ot-java-tab">Java</label><div class="codeblock-item"><pre code-type="xCode" id="c997678dedb1x" data-tag="codeblock" outputclass="language-java" class="pre codeblock language-java"><code>import com.alibaba.fastjson.JSON;
+import com.squareup.okhttp.*;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
+public class Main {
+    
+    public static Map&lt;String, String&gt; convertJsonValuesToString(Map&lt;String, Object&gt; obj) {
+        Map&lt;String, String&gt; result = new HashMap&lt;&gt;();
+        for (Map.Entry&lt;String, Object&gt; entry : obj.entrySet()) {
+            String key = entry.getKey();
+            Object value = entry.getValue();
+            if (value instanceof String) {
+                result.put(key, (String) value);
+            } else {
+                result.put(key, JSON.toJSONString(value));
+            }
+        }
+        return result;
+    }
+
+    public static void main(String[] args) {
+        String accessToken = "{access_token}";
+        String url = "https://api.dingtalk.com/v1.0/card/instances/createAndDeliver";
+
+        Map&lt;String, Object&gt; cardData = new HashMap&lt;&gt;();
+        cardData.put("string", "字符串");
+        cardData.put("boolean", true);
+        cardData.put("number", 1);
+        cardData.put("markdown", "# markdown");
+        Map&lt;String, String&gt; obj = new HashMap&lt;&gt;();
+        obj.put("key", "value");
+        cardData.put("obj", obj);
+        cardData.put("arr", new Object[]{obj});
+
+        Map&lt;String, Object&gt; body = new HashMap&lt;&gt;();
+        body.put("cardTemplateId", "{卡片模板 id}");
+        body.put("outTrackId", UUID.randomUUID().toString());
+        body.put("cardData", new HashMap&lt;String, Object&gt;() {{
+            put("cardParamMap", convertJsonValuesToString(cardData));
+        }});
+        body.put("openSpaceId", "dtv1.card//IM_GROUP.{群聊 openConversationId}");
+        body.put("imGroupOpenSpaceModel", new HashMap&lt;String, Object&gt;() {{
+            put("supportForward", true);
+            put("lastMessageI18n", new HashMap&lt;String, String&gt;() {{
+                put("ZH_CN", "您收到一条卡片消息");
+            }});
+        }});
+        body.put("imGroupOpenDeliverModel", new HashMap&lt;String, Object&gt;() {{
+            put("robotCode", "{应用 client-id}");
+        }});
+
+        OkHttpClient client = new OkHttpClient();
+        MediaType JSON_MEDIA_TYPE = MediaType.parse("application/json; charset=utf-8");
+        RequestBody requestBody = RequestBody.create(JSON_MEDIA_TYPE, JSON.toJSONString(body));
+        Request request = new Request.Builder()
+                .url(url)
+                .post(requestBody)
+                .addHeader("Content-Type", "application/json")
+                .addHeader("Accept", "*/*")
+                .addHeader("x-acs-dingtalk-access-token", accessToken)
+                .build();
+
+        try (Response response = client.newCall(request).execute()) {
+            if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
+            System.out.println(response.body().string());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}</code></pre></div><input type="radio" name="check-76e5cbc0078ot" id="76e5cbc0078ot-python-tab" /><label for="76e5cbc0078ot-python-tab">Python</label><div class="codeblock-item"><pre code-type="xCode" id="cdb8ca825fqff" data-tag="codeblock" outputclass="language-python" class="pre codeblock language-python"><code>import uuid
+import json
+import requests
+
+
+def convert_json_values_to_string(obj: dict) -&gt; str:
+    """
+    Dump the attributes of a dictionary to a string.
+    """
+    result = {}
+    for key, value in obj.items():
+        if isinstance(value, str):
+            result[key] = value
+        else:
+            result[key] = json.dumps(value)
+    return result
+
+
+access_token = "{access_token}"
+headers = {
+    "Content-Type": "application/json",
+    "Accept": "*/*",
+    "x-acs-dingtalk-access-token": access_token,
+}
+card_data = {
+    "string": "字符串",
+    "boolean": True,
+    "number": 1,
+    "markdown": "# markdown",
+    "obj": {"key": "value"},
+    "arr": [{"key": "value"}],
+}
+
+body = {
+    "cardTemplateId": "{卡片模板 id}",
+    "outTrackId": str(uuid.uuid1()),
+    "cardData": {"cardParamMap": convert_json_values_to_string(card_data)},
+    "openSpaceId": "dtv1.card//IM_GROUP.{群聊 openConversationId}",
+    "imGroupOpenSpaceModel": {
+        "supportForward": True,
+        "lastMessageI18n": {"ZH_CN": "您收到一条卡片消息"},
+    },
+    "imGroupOpenDeliverModel": {"robotCode": "{应用 client-id}"},
+}
+
+url = "https://api.dingtalk.com/v1.0/card/instances/createAndDeliver"
+
+response = requests.post(url, headers=headers, json=body)
+print(response.text)
+</code></pre></div><input type="radio" name="check-76e5cbc0078ot" id="76e5cbc0078ot-nodejs-tab" /><label for="76e5cbc0078ot-nodejs-tab">Node.js</label><div class="codeblock-item"><pre code-type="xCode" id="cf601a888e6oy" data-tag="codeblock" outputclass="language-nodejs" class="pre codeblock language-nodejs"><code>const axios = require('axios');
+const uuid = require('uuid');
+
+function convertJsonValuesToString(obj) {
+    const result = {};
+    for (const key in obj) {
+        const value = obj[key];
+        result[key] = (typeof value === 'string') ? value : JSON.stringify(value);
+    }
+    return result;
+}
+
+const accessToken = "{access_token}";
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "*/*",
+    "x-acs-dingtalk-access-token": accessToken,
+};
+
+const cardData = {
+    "string": "字符串",
+    "boolean": true,
+    "number": 1,
+    "markdown": "# markdown",
+    "obj": {"key": "value"},
+    "arr": [{"key": "value"}],
+};
+
+const body = {
+    "cardTemplateId": "{卡片模板 id}",
+    "outTrackId": uuid.v1(),
+    "cardData": { "cardParamMap": convertJsonValuesToString(cardData) },
+    "openSpaceId": "dtv1.card//IM_GROUP.{群聊 openConversationId}",
+    "imGroupOpenSpaceModel": {
+        "supportForward": true,
+        "lastMessageI18n": { "ZH_CN": "您收到一条卡片消息" },
+    },
+    "imGroupOpenDeliverModel": {"robotCode": "{应用 client-id}"},
+};
+
+const url = "https://api.dingtalk.com/v1.0/card/instances/createAndDeliver";
+
+axios.post(url, body, { headers })
+    .then(response =&gt; {
+        console.log(response.data);
+    })
+    .catch(error =&gt; {
+        console.error(error);
+    });
+</code></pre></div><input type="radio" name="check-76e5cbc0078ot" id="76e5cbc0078ot-go-tab" /><label for="76e5cbc0078ot-go-tab">Go</label><div class="codeblock-item"><pre code-type="xCode" id="e6e73d5e35yxk" data-tag="codeblock" outputclass="language-go" class="pre codeblock language-go"><code>package main
+
+import (
+	"bytes"
+	"encoding/json"
+	"fmt"
+	"net/http"
+
+	"github.com/google/uuid"
+)
+
+func convertJsonValuesToString(obj map[string]interface{}) map[string]string {
+	result := make(map[string]string)
+	for key, value := range obj {
+		if str, ok := value.(string); ok {
+			result[key] = str
+		} else {
+			jsonValue, _ := json.Marshal(value)
+			result[key] = string(jsonValue)
+		}
+	}
+	return result
+}
+
+func main() {
+	accessToken := "{access_token}"
+
+	cardData := map[string]interface{}{
+		"string":   "字符串",
+		"boolean":  true,
+		"number":   1,
+		"markdown": "# markdown",
+		"obj":      map[string]string{"key": "value"},
+		"arr":      []interface{}{map[string]string{"key": "value"}},
+	}
+
+	body := map[string]interface{}{
+		"cardTemplateId": "{卡片模板 id}",
+		"outTrackId":     uuid.New().String(),
+		"cardData": map[string]interface{}{
+			"cardParamMap": convertJsonValuesToString(cardData),
+		},
+		"openSpaceId": "dtv1.card//IM_GROUP.{群聊 openConversationId}",
+		"imGroupOpenSpaceModel": map[string]interface{}{
+			"supportForward": true,
+			"lastMessageI18n": map[string]string{
+				"ZH_CN": "您收到一条卡片消息",
+			},
+		},
+		"imGroupOpenDeliverModel": map[string]interface{}{
+			"robotCode": "{应用 client-id}",
+		},
+	}
+
+	jsonBody, _ := json.Marshal(body)
+
+	req, err := http.NewRequest("POST", "https://api.dingtalk.com/v1.0/card/instances/createAndDeliver", bytes.NewBuffer(jsonBody))
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	req.Header.Set("Content-Type", "application/json")
+	req.Header.Set("Accept", "*/*")
+	req.Header.Set("x-acs-dingtalk-access-token", accessToken)
+
+	client := &amp;http.Client{}
+	resp, err := client.Do(req)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	defer resp.Body.Close()
+
+	var resBody map[string]interface{}
+	json.NewDecoder(resp.Body).Decode(&amp;resBody)
+	fmt.Println(resBody)
+}
+</code></pre></div></div></section><section id="4a0aaab9f22em" class="section"><h3 id="66017fde36lt4"><b>场域类型：吊顶</b></h3><div outputclass="tabbed-codeblock" data-tag="fig" id="114eca4242fki" class="tabbed-codeblock-box"><div class="tab-box"></div><input type="radio" name="check-114eca4242fki" id="114eca4242fki-http-tab" checked="checked" /><label for="114eca4242fki-http-tab">HTTP</label><div class="codeblock-item"><pre code-type="xCode" id="b476d959a6ujr" data-tag="codeblock" outputclass="language-http" class="pre codeblock language-http"><code>POST /v1.0/card/instances/createAndDeliver HTTP/1.1
+Host:api.dingtalk.com
+x-acs-dingtalk-access-token:String
+Content-Type:application/json
+
+{
+  "cardTemplateId": "{卡片模板 id}",
+  "outTrackId": "{唯一卡片实例 id}",
+  "cardData": {
+    "cardParamMap": {
+      "string": "字符串",
+      "boolean": "true",
+      "number": "1",
+      "markdown": "# markdown",
+      "obj": "{\"key\": \"value\"}",
+      "arr": "[{\"key\": \"value\"}]"
+    }
+  },
+  "openSpaceId": "dtv1.card//ONE_BOX.{群聊 openConversationId}",
+  "topOpenSpaceModel": { "spaceType": "ONE_BOX" },
+  "topOpenDeliverModel": { "expiredTimeMillis": 1739795765042 }
+}</code></pre></div><input type="radio" name="check-114eca4242fki" id="114eca4242fki-java-tab" /><label for="114eca4242fki-java-tab">Java</label><div class="codeblock-item"><pre code-type="xCode" id="13d3c1f481svi" data-tag="codeblock" outputclass="language-java" class="pre codeblock language-java"><code>import com.alibaba.fastjson.JSON;
+import com.squareup.okhttp.*;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
+public class Main {
+    
+    public static Map&lt;String, String&gt; convertJsonValuesToString(Map&lt;String, Object&gt; obj) {
+        Map&lt;String, String&gt; result = new HashMap&lt;&gt;();
+        for (Map.Entry&lt;String, Object&gt; entry : obj.entrySet()) {
+            String key = entry.getKey();
+            Object value = entry.getValue();
+            if (value instanceof String) {
+                result.put(key, (String) value);
+            } else {
+                result.put(key, JSON.toJSONString(value));
+            }
+        }
+        return result;
+    }
+
+    public static void main(String[] args) {
+        String accessToken = "{access_token}";
+        String url = "https://api.dingtalk.com/v1.0/card/instances/createAndDeliver";
+
+        Map&lt;String, Object&gt; cardData = new HashMap&lt;&gt;();
+        cardData.put("string", "字符串");
+        cardData.put("boolean", true);
+        cardData.put("number", 1);
+        cardData.put("markdown", "# markdown");
+        Map&lt;String, String&gt; obj = new HashMap&lt;&gt;();
+        obj.put("key", "value");
+        cardData.put("obj", obj);
+        cardData.put("arr", new Object[]{obj}); // Note: JSON array
+
+        Map&lt;String, Object&gt; body = new HashMap&lt;&gt;();
+        body.put("cardTemplateId", "{卡片模板 id}");
+        body.put("outTrackId", UUID.randomUUID().toString());
+        body.put("cardData", new HashMap&lt;String, Object&gt;() {{
+            put("cardParamMap", convertJsonValuesToString(cardData));
+        }});
+        body.put("openSpaceId", "dtv1.card//ONE_BOX.{群聊 openConversationId}");
+        body.put("topOpenSpaceModel", new HashMap&lt;String, Object&gt;() {{
+            put("spaceType", "ONE_BOX");
+        }});
+        body.put("topOpenDeliverModel", new HashMap&lt;String, Object&gt;() {{
+            put("expiredTimeMillis", 1739795765042);
+        }});
+
+        OkHttpClient client = new OkHttpClient();
+        MediaType JSON_MEDIA_TYPE = MediaType.parse("application/json; charset=utf-8");
+        RequestBody requestBody = RequestBody.create(JSON_MEDIA_TYPE, JSON.toJSONString(body));
+        Request request = new Request.Builder()
+                .url(url)
+                .post(requestBody)
+                .addHeader("Content-Type", "application/json")
+                .addHeader("Accept", "*/*")
+                .addHeader("x-acs-dingtalk-access-token", accessToken)
+                .build();
+
+        try (Response response = client.newCall(request).execute()) {
+            if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
+            System.out.println(response.body().string());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+</code></pre></div><input type="radio" name="check-114eca4242fki" id="114eca4242fki-python-tab" /><label for="114eca4242fki-python-tab">Python</label><div class="codeblock-item"><pre code-type="xCode" id="121a9442c0j93" data-tag="codeblock" outputclass="language-python" class="pre codeblock language-python"><code>import uuid
+import json
+import requests
+
+
+def convert_json_values_to_string(obj: dict) -&gt; str:
+    """
+    Dump the attributes of a dictionary to a string.
+    """
+    result = {}
+    for key, value in obj.items():
+        if isinstance(value, str):
+            result[key] = value
+        else:
+            result[key] = json.dumps(value)
+    return result
+
+
+access_token = "{access_token}"
+headers = {
+    "Content-Type": "application/json",
+    "Accept": "*/*",
+    "x-acs-dingtalk-access-token": access_token,
+}
+card_data = {
+    "string": "字符串",
+    "boolean": True,
+    "number": 1,
+    "markdown": "# markdown",
+    "obj": {"key": "value"},
+    "arr": [{"key": "value"}],
+}
+
+body = {
+    "cardTemplateId": "{卡片模板 id}",
+    "outTrackId": str(uuid.uuid1()),
+    "cardData": {"cardParamMap": convert_json_values_to_string(card_data)},
+    "openSpaceId": "dtv1.card//ONE_BOX.{群聊 openConversationId}",
+    "topOpenSpaceModel": { "spaceType": "ONE_BOX" },
+    "topOpenDeliverModel": { "expiredTimeMillis": 1739795765042 }
+}
+
+url = "https://api.dingtalk.com/v1.0/card/instances/createAndDeliver"
+
+response = requests.post(url, headers=headers, json=body)
+print(response.text)</code></pre></div><input type="radio" name="check-114eca4242fki" id="114eca4242fki-nodejs-tab" /><label for="114eca4242fki-nodejs-tab">Node.js</label><div class="codeblock-item"><pre code-type="xCode" id="ebf51e2573p0i" data-tag="codeblock" outputclass="language-nodejs" class="pre codeblock language-nodejs"><code>const axios = require('axios');
+const uuid = require('uuid');
+
+function convertJsonValuesToString(obj) {
+    const result = {};
+    for (const key in obj) {
+        const value = obj[key];
+        result[key] = (typeof value === 'string') ? value : JSON.stringify(value);
+    }
+    return result;
+}
+
+const accessToken = "{access_token}";
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "*/*",
+    "x-acs-dingtalk-access-token": accessToken,
+};
+
+const cardData = {
+    "string": "字符串",
+    "boolean": true,
+    "number": 1,
+    "markdown": "# markdown",
+    "obj": {"key": "value"},
+    "arr": [{"key": "value"}],
+};
+
+const body = {
+    "cardTemplateId": "{卡片模板 id}",
+    "outTrackId": uuid.v1(),
+    "cardData": { "cardParamMap": convertJsonValuesToString(cardData) },
+    "openSpaceId": "dtv1.card//ONE_BOX.{群聊 openConversationId}",
+    "topOpenSpaceModel": { "spaceType": "ONE_BOX" },
+    "topOpenDeliverModel": { "expiredTimeMillis": 1739795765042 }
+};
+
+const url = "https://api.dingtalk.com/v1.0/card/instances/createAndDeliver";
+
+axios.post(url, body, { headers })
+    .then(response =&gt; {
+        console.log(response.data);
+    })
+    .catch(error =&gt; {
+        console.error(error);
+    });
+</code></pre></div><input type="radio" name="check-114eca4242fki" id="114eca4242fki-go-tab" /><label for="114eca4242fki-go-tab">Go</label><div class="codeblock-item"><pre code-type="xCode" id="96ef92645bbua" data-tag="codeblock" outputclass="language-go" class="pre codeblock language-go"><code>package main
+
+import (
+	"bytes"
+	"encoding/json"
+	"fmt"
+	"net/http"
+
+	"github.com/google/uuid"
+)
+
+func convertJsonValuesToString(obj map[string]interface{}) map[string]string {
+	result := make(map[string]string)
+	for key, value := range obj {
+		if str, ok := value.(string); ok {
+			result[key] = str
+		} else {
+			jsonValue, _ := json.Marshal(value)
+			result[key] = string(jsonValue)
+		}
+	}
+	return result
+}
+
+func main() {
+	accessToken := "{access_token}"
+
+	cardData := map[string]interface{}{
+		"string":   "字符串",
+		"boolean":  true,
+		"number":   1,
+		"markdown": "# markdown",
+		"obj":      map[string]string{"key": "value"},
+		"arr":      []interface{}{map[string]string{"key": "value"}},
+	}
+
+	body := map[string]interface{}{
+		"cardTemplateId": "{卡片模板 id}",
+		"outTrackId":     uuid.New().String(),
+		"cardData": map[string]interface{}{
+			"cardParamMap": convertJsonValuesToString(cardData),
+		},
+		"openSpaceId": "dtv1.card//ONE_BOX.{群聊 openConversationId}",
+		"topOpenSpaceModel": map[string]interface{}{
+			"spaceType": "ONE_BOX",
+		},
+		"topOpenDeliverModel": map[string]interface{}{
+			"expiredTimeMillis": 1739795765042,
+		},
+	}
+
+	jsonBody, _ := json.Marshal(body)
+
+	req, err := http.NewRequest("POST", "https://api.dingtalk.com/v1.0/card/instances/createAndDeliver", bytes.NewBuffer(jsonBody))
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	req.Header.Set("Content-Type", "application/json")
+	req.Header.Set("Accept", "*/*")
+	req.Header.Set("x-acs-dingtalk-access-token", accessToken)
+
+	client := &amp;http.Client{}
+	resp, err := client.Do(req)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	defer resp.Body.Close()
+
+	var resBody map[string]interface{}
+	json.NewDecoder(resp.Body).Decode(&amp;resBody)
+	fmt.Println(resBody)
+}</code></pre></div></div></section></section><section id="a2efeb003fx6x" class="section"><h2 id="9d358c603f51o"><b>相关文档</b></h2><ul id="7190a8ee4eqxt"><li id="42090fe8cbajd"><p id="a8c4af703f9gr"><a data-tag="xref" id="35dac91292wq0" href="/document/development/create-and-deliver-cards#" class="xref">创建并投放卡片</a></p></li></ul></section></div></main></body></html>

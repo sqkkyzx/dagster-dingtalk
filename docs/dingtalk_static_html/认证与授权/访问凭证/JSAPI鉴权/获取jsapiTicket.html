@@ -1,0 +1,325 @@
+<!DOCTYPE html><html><head><meta charset="utf8" / /><meta name="searchtitle" content="" / /><meta name="keywords" content="" / /><meta name="author" content="" / /><title>获取jsapiTicket</title><meta name="gmtModify" content="2026-04-29 22:27:42" / /></head><body data-tag="topic" id="doc-api-dingtalk-CreateJsapiTicket" class="topic"><main id="04175ef13d4gt" data-init-id="doc-api-dingtalk_CreateJsapiTicket"><h1 data-tag="title" id="h1-7jj-gre-rje" class="title">获取jsapiTicket</h1><p data-tag="shortdesc" id="8d4e7a134d8mh" class="shortdesc">当开发H5微应用时，需要先通过本接口获取jsapi_ticket，然后再生成鉴权签名，最后调用dd.config完成鉴权。</p><div data-tag="conbody" outputclass="icms-api-reference" class="icms-api-reference conbody"><section id="80c8be3a17nru" class="section"><h2 id="16b9bc08cc1hw"><b>接口调用说明</b></h2><p id="4ae7ae0d87u7w">企业内部应用是以应用维度获取jsapi_ticket的，所以在使用的时候需要将jsapi_ticket以appKey为维度进行缓存下来（设置缓存过期时间2小时），并不需要每次都通过接口拉取。</p></section><section id="90872be72dche" class="section"><h2 id="0f1b29cd22yk2"><b>请求</b></h2><table id="0b4130b6d8vvx" tablewidth="100" tablecolswidth="19.13 80.87" autofit="true" class="table"><colgroup colwidth="0.38*" style="width:19.13%"></colgroup><colgroup colwidth="1.62*" style="width:80.87%"></colgroup><tbody class="tbody"><tr id="9d257bc02cy63" style="height:42px"><td id="2e54db7925mek" rowspan="1" style="vertical-align:middle" colspan="2"><p id="8ad4354e77tma"><b>基本信息</b></p></td></tr><tr id="1eb0c777233i0"><td id="c94c33a75adh9" rowspan="1" style="vertical-align:middle" colspan="1"><p id="99f2983ffbh1b">HTTP URL</p></td><td id="4ca98c556eenf" rowspan="1" style="vertical-align:middle" colspan="1"><p id="18712e1130f8g">https://api.dingtalk.com/v1.0/oauth2/jsapiTickets</p></td></tr><tr id="583e275232f5a" style="height:41px"><td id="c499777faajh3" rowspan="1" style="vertical-align:middle" colspan="1"><p id="ca86dc8073zlp">HTTP Method</p></td><td id="d04c0627fcykp" rowspan="1" style="vertical-align:middle" colspan="1"><p id="311f3ef0b5bnl">POST</p></td></tr><tr id="ac7cde70cfqei"><td id="1f514e377fl5m" rowspan="1" style="vertical-align:middle" colspan="1"><p id="6036c57cf7s4f">支持的应用类型</p></td><td id="09872ea0db9d1" rowspan="1" style="vertical-align:middle" colspan="1"><p id="9b6f6ac0e1pw6"><span data-tag="ph" id="16e8b55e11x36" class="ph">appType-企业内部应用</span><span data-tag="ph" id="8dcb014d8bgs3" class="ph">appType-第三方企业应用</span></p></td></tr><tr id="e3d1b91ff9r7v"><td id="eed3c78f30hjj" rowspan="1" style="vertical-align:middle" colspan="1"><p id="f188ec7dcdf58">权限要求</p></td><td id="93223588072wx" rowspan="1" style="vertical-align:middle" colspan="1"><p id="f1897e0dd8sex"><span data-tag="ph" id="607ee47d782a4" class="ph"><span style="color:rgb(42, 47, 69)">permission-</span><span style="color:rgb(23, 26, 29)">qyapi_base-</span><span style="color:rgba(0, 0, 0, 0.88)">调用企业API时需要具备的基本权限</span></span></p></td></tr></tbody></table><section id="section-request-query-parameter" class="section"><h3 data-tag="title" id="h2-fsv-edz-yi4" class="title"><b>请求头</b></h3><table id="348bad5cc4sex" tablewidth="815" tablecolswidth="213 106 106 106 284" autofit="false" class="table"><colgroup colwidth="1.31*" style="width:26.13%"></colgroup><colgroup colwidth="0.65*" style="width:13.01%"></colgroup><colgroup colwidth="0.65*" style="width:13.01%"></colgroup><colgroup colwidth="0.65*" style="width:13.01%"></colgroup><colgroup colwidth="1.74*" style="width:34.85%"></colgroup><tbody class="tbody"><tr id="798af1ef75h6x"><td id="d1a29c9eccrgi" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="3643be441dkpy">名称</p></td><td id="048aacb544mie" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="0ffb27821cuwn">类型</p></td><td id="ac1dd9dc71lht" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="287e5354d3l0a">是否必填</p></td><td id="88a6e90371r5t" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="49b10c27f6e0n">示例值</p></td><td id="9e0e5aba9c90w" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="81834e910d2cv">描述</p></td></tr><tr id="c94f8cf28cqfv"><td id="59168aa16ey73" rowspan="1" colspan="1"><p id="24741fae5d5wg">x-acs-dingtalk-access-token</p></td><td id="044b5df16a62b" rowspan="1" colspan="1"><p id="5928e446bajz6">String</p></td><td id="853f6fd9caxnl" rowspan="1" colspan="1"><p id="5f4f6a94b67d1">是</p></td><td id="cbfb522c119sd" rowspan="1" colspan="1"><p id="1cb7171998kmw">BExxx</p></td><td id="5eee61bb2a33e" rowspan="1" colspan="1"><p id="6b7f3c7e1ea18">调用该接口的访问凭证，通过以下获取：</p><ul id="8fba8ccbectnj"><li id="ad45f88d22c3s"><p id="7e5f5dac5597a">企业内部应用，调用<a data-tag="xref" id="a7df992e33yod" href="/document/development/obtain-the-access-token-of-an-internal-app#" class="xref">获取企业内部应用的accessToken</a>接口获取。</p></li><li id="4e95eaf7b26xw"><p id="149cb23258rjt">第三方企业应用，调用<a data-tag="xref" id="64be9ccf87t1v" href="/document/development/obtain-the-access-token-of-the-authorized-enterprise-1#" class="xref">获取第三方应用授权企业的accessToken</a>接口获取。</p></li></ul></td></tr></tbody></table></section><section id="49e8276c985bq" class="section"><h3 id="2ce47e72e6ynz"><b>请求示例</b></h3><div outputclass="tabbed-codeblock" data-tag="fig" id="figure-piq-m0k-ioz" class="tabbed-codeblock-box"><div class="tab-box"></div><input type="radio" name="check-figure-piq-m0k-ioz" id="figure-piq-m0k-ioz-HTTP-tab" checked="checked" /><label for="figure-piq-m0k-ioz-HTTP-tab">HTTP</label><div class="codeblock-item"><pre data-tag="codeblock" id="codeblock-uk4-f1t-qs4" outputclass="language-HTTP" code-type="xCode" class="pre codeblock language-HTTP"><code>curl -X POST 'https://api.dingtalk.com/v1.0/oauth2/jsapiTickets' \
+  -H 'x-acs-dingtalk-access-token: BExxx'</code></pre></div><input type="radio" name="check-figure-piq-m0k-ioz" id="figure-piq-m0k-ioz-java-tab" /><label for="figure-piq-m0k-ioz-java-tab">Java</label><div class="codeblock-item"><pre data-tag="codeblock" id="codeblock-wvj-cz6-zzj" outputclass="language-java" code-type="xCode" class="pre codeblock language-java"><code>// This file is auto-generated, don't edit it. Thanks.
+package com.aliyun.sample;
+
+import com.aliyun.tea.*;
+
+public class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Client
+     * @throws Exception
+     */
+    public static com.aliyun.dingtalkoauth2_1_0.Client createClient() throws Exception {
+        com.aliyun.teaopenapi.models.Config config = new com.aliyun.teaopenapi.models.Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        return new com.aliyun.dingtalkoauth2_1_0.Client(config);
+    }
+
+    public static void main(String[] args_) throws Exception {
+        java.util.List&lt;String&gt; args = java.util.Arrays.asList(args_);
+        com.aliyun.dingtalkoauth2_1_0.Client client = Sample.createClient();
+        com.aliyun.dingtalkoauth2_1_0.models.CreateJsapiTicketHeaders createJsapiTicketHeaders = new com.aliyun.dingtalkoauth2_1_0.models.CreateJsapiTicketHeaders();
+        createJsapiTicketHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        try {
+            client.createJsapiTicketWithOptions(createJsapiTicketHeaders, new com.aliyun.teautil.models.RuntimeOptions());
+        } catch (TeaException err) {
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        } catch (Exception _err) {
+            TeaException err = new TeaException(_err.getMessage(), _err);
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        }        
+    }
+}</code></pre></div><input type="radio" name="check-figure-piq-m0k-ioz" id="figure-piq-m0k-ioz-python-tab" /><label for="figure-piq-m0k-ioz-python-tab">Python</label><div class="codeblock-item"><pre data-tag="codeblock" id="codeblock-ix7-cix-ubk" outputclass="language-python" code-type="xCode" class="pre codeblock language-python"><code># -*- coding: utf-8 -*-
+# This file is auto-generated, don't edit it. Thanks.
+import sys
+
+from typing import List
+
+from alibabacloud_dingtalk.oauth2_1_0.client import Client as dingtalkoauth2_1_0Client
+from alibabacloud_tea_openapi import models as open_api_models
+from alibabacloud_dingtalk.oauth2_1_0 import models as dingtalkoauth_2__1__0_models
+from alibabacloud_tea_util import models as util_models
+from alibabacloud_tea_util.client import Client as UtilClient
+
+
+class Sample:
+    def __init__(self):
+        pass
+
+    @staticmethod
+    def create_client() -&gt; dingtalkoauth2_1_0Client:
+        """
+        使用 Token 初始化账号Client
+        @return: Client
+        @throws Exception
+        """
+        config = open_api_models.Config()
+        config.protocol = 'https'
+        config.region_id = 'central'
+        return dingtalkoauth2_1_0Client(config)
+
+    @staticmethod
+    def main(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        create_jsapi_ticket_headers = dingtalkoauth_2__1__0_models.CreateJsapiTicketHeaders()
+        create_jsapi_ticket_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        try:
+            client.create_jsapi_ticket_with_options(create_jsapi_ticket_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+    @staticmethod
+    async def main_async(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        create_jsapi_ticket_headers = dingtalkoauth_2__1__0_models.CreateJsapiTicketHeaders()
+        create_jsapi_ticket_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        try:
+            await client.create_jsapi_ticket_with_options_async(create_jsapi_ticket_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+
+if __name__ == '__main__':
+    Sample.main(sys.argv[1:])</code></pre></div><input type="radio" name="check-figure-piq-m0k-ioz" id="figure-piq-m0k-ioz-php-tab" /><label for="figure-piq-m0k-ioz-php-tab">PHP</label><div class="codeblock-item"><pre data-tag="codeblock" id="codeblock-hch-q47-jvx" outputclass="language-php" code-type="xCode" class="pre codeblock language-php"><code>&lt;?php
+
+// This file is auto-generated, don't edit it. Thanks.
+namespace AlibabaCloud\SDK\Sample;
+
+use AlibabaCloud\SDK\Dingtalk\Voauth2_1_0\Dingtalk;
+use \Exception;
+use AlibabaCloud\Tea\Exception\TeaError;
+use AlibabaCloud\Tea\Utils\Utils;
+
+use Darabonba\OpenApi\Models\Config;
+use AlibabaCloud\SDK\Dingtalk\Voauth2_1_0\Models\CreateJsapiTicketHeaders;
+use AlibabaCloud\Tea\Utils\Utils\RuntimeOptions;
+
+class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Dingtalk Client
+     */
+    public static function createClient(){
+        $config = new Config([]);
+        $config-&gt;protocol = "https";
+        $config-&gt;regionId = "central";
+        return new Dingtalk($config);
+    }
+
+    /**
+     * @param string[] $args
+     * @return void
+     */
+    public static function main($args){
+        $client = self::createClient();
+        $createJsapiTicketHeaders = new CreateJsapiTicketHeaders([]);
+        $createJsapiTicketHeaders-&gt;xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        try {
+            $client-&gt;createJsapiTicketWithOptions($createJsapiTicketHeaders, new RuntimeOptions([]));
+        }
+        catch (Exception $err) {
+            if (!($err instanceof TeaError)) {
+                $err = new TeaError([], $err-&gt;getMessage(), $err-&gt;getCode(), $err);
+            }
+            if (!Utils::empty_($err-&gt;code) &amp;&amp; !Utils::empty_($err-&gt;message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+        }
+    }
+}
+$path = __DIR__ . \DIRECTORY_SEPARATOR . '..' . \DIRECTORY_SEPARATOR . 'vendor' . \DIRECTORY_SEPARATOR . 'autoload.php';
+if (file_exists($path)) {
+    require_once $path;
+}
+Sample::main(array_slice($argv, 1));</code></pre></div><input type="radio" name="check-figure-piq-m0k-ioz" id="figure-piq-m0k-ioz-go-tab" /><label for="figure-piq-m0k-ioz-go-tab">Go</label><div class="codeblock-item"><pre data-tag="codeblock" id="codeblock-hkh-pex-8fx" outputclass="language-go" code-type="xCode" class="pre codeblock language-go"><code>// This file is auto-generated, don't edit it. Thanks.
+package main
+
+import (
+  "os"
+  util  "github.com/alibabacloud-go/tea-utils/v2/service"
+  dingtalkoauth2_1_0  "github.com/alibabacloud-go/dingtalk/oauth2_1_0"
+  openapi  "github.com/alibabacloud-go/darabonba-openapi/v2/client"
+  "github.com/alibabacloud-go/tea/tea"
+)
+
+
+/**
+ * 使用 Token 初始化账号Client
+ * @return Client
+ * @throws Exception
+ */
+func CreateClient () (_result *dingtalkoauth2_1_0.Client, _err error) {
+  config := &amp;openapi.Config{}
+  config.Protocol = tea.String("https")
+  config.RegionId = tea.String("central")
+  _result = &amp;dingtalkoauth2_1_0.Client{}
+  _result, _err = dingtalkoauth2_1_0.NewClient(config)
+  return _result, _err
+}
+
+func _main (args []*string) (_err error) {
+  client, _err := CreateClient()
+  if _err != nil {
+    return _err
+  }
+
+  createJsapiTicketHeaders := &amp;dingtalkoauth2_1_0.CreateJsapiTicketHeaders{}
+  createJsapiTicketHeaders.XAcsDingtalkAccessToken = tea.String("&lt;your access token&gt;")
+  tryErr := func()(_e error) {
+    defer func() {
+      if r := tea.Recover(recover()); r != nil {
+        _e = r
+      }
+    }()
+    _, _err = client.CreateJsapiTicketWithOptions(createJsapiTicketHeaders, &amp;util.RuntimeOptions{})
+    if _err != nil {
+      return _err
+    }
+
+    return nil
+  }()
+
+  if tryErr != nil {
+    var err = &amp;tea.SDKError{}
+    if _t, ok := tryErr.(*tea.SDKError); ok {
+      err = _t
+    } else {
+      err.Message = tea.String(tryErr.Error())
+    }
+    if !tea.BoolValue(util.Empty(err.Code)) &amp;&amp; !tea.BoolValue(util.Empty(err.Message)) {
+      // err 中含有 code 和 message 属性，可帮助开发定位问题
+    }
+
+  }
+  return _err
+}
+
+
+func main() {
+  err := _main(tea.StringSlice(os.Args[1:]))
+  if err != nil {
+    panic(err)
+  }
+}</code></pre></div><input type="radio" name="check-figure-piq-m0k-ioz" id="figure-piq-m0k-ioz-nodejs-tab" /><label for="figure-piq-m0k-ioz-nodejs-tab">Node.js</label><div class="codeblock-item"><pre data-tag="codeblock" id="codeblock-e6h-ecf-2y3" outputclass="language-nodejs" code-type="xCode" class="pre codeblock language-nodejs"><code>// This file is auto-generated, don't edit it
+import Util, * as $Util from '@alicloud/tea-util';
+import dingtalkoauth2_1_0, * as $dingtalkoauth2_1_0 from '@alicloud/dingtalk/oauth2_1_0';
+import OpenApi, * as $OpenApi from '@alicloud/openapi-client';
+import * as $tea from '@alicloud/tea-typescript';
+
+
+export default class Client {
+
+  /**
+   * 使用 Token 初始化账号Client
+   * @return Client
+   * @throws Exception
+   */
+  static createClient(): dingtalkoauth2_1_0 {
+    let config = new $OpenApi.Config({ });
+    config.protocol = "https";
+    config.regionId = "central";
+    return new dingtalkoauth2_1_0(config);
+  }
+
+  static async main(args: string[]): Promise&lt;void&gt; {
+    let client = Client.createClient();
+    let createJsapiTicketHeaders = new $dingtalkoauth2_1_0.CreateJsapiTicketHeaders({ });
+    createJsapiTicketHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+    try {
+      await client.createJsapiTicketWithOptions(createJsapiTicketHeaders, new $Util.RuntimeOptions({ }));
+    } catch (err) {
+      if (!Util.empty(err.code) &amp;&amp; !Util.empty(err.message)) {
+        // err 中含有 code 和 message 属性，可帮助开发定位问题
+      }
+
+    }    
+  }
+
+}
+
+Client.main(process.argv.slice(2));</code></pre></div><input type="radio" name="check-figure-piq-m0k-ioz" id="figure-piq-m0k-ioz-csharp-tab" /><label for="figure-piq-m0k-ioz-csharp-tab">C#</label><div class="codeblock-item"><pre data-tag="codeblock" id="codeblock-6fo-dfv-7la" outputclass="language-csharp" code-type="xCode" class="pre codeblock language-csharp"><code>// This file is auto-generated, don't edit it. Thanks.
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
+
+using Tea;
+using Tea.Utils;
+
+
+namespace AlibabaCloud.SDK.Sample
+{
+    public class Sample 
+    {
+
+        /**
+         * 使用 Token 初始化账号Client
+         * @return Client
+         * @throws Exception
+         */
+        public static AlibabaCloud.SDK.Dingtalkoauth2_1_0.Client CreateClient()
+        {
+            AlibabaCloud.OpenApiClient.Models.Config config = new AlibabaCloud.OpenApiClient.Models.Config();
+            config.Protocol = "https";
+            config.RegionId = "central";
+            return new AlibabaCloud.SDK.Dingtalkoauth2_1_0.Client(config);
+        }
+
+        public static void Main(string[] args)
+        {
+            AlibabaCloud.SDK.Dingtalkoauth2_1_0.Client client = CreateClient();
+            AlibabaCloud.SDK.Dingtalkoauth2_1_0.Models.CreateJsapiTicketHeaders createJsapiTicketHeaders = new AlibabaCloud.SDK.Dingtalkoauth2_1_0.Models.CreateJsapiTicketHeaders();
+            createJsapiTicketHeaders.XAcsDingtalkAccessToken = "&lt;your access token&gt;";
+            try
+            {
+                client.CreateJsapiTicketWithOptions(createJsapiTicketHeaders, new AlibabaCloud.TeaUtil.Models.RuntimeOptions());
+            }
+            catch (TeaException err)
+            {
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+            catch (Exception _err)
+            {
+                TeaException err = new TeaException(new Dictionary&lt;string, object&gt;
+                {
+                    { "message", _err.Message }
+                });
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+        }
+
+
+    }
+}</code></pre></div></div></section></section><section id="5a596eda75f0e" class="section"><h2 id="514a5e1e480we"><b>响应</b></h2><section id="1ea0078117u9c" class="section"><h3 data-tag="title" id="h2-zsn-g7q-aya" class="title"><b>响应体</b></h3><table id="a637b84c60k0j" tablewidth="852" tablecolswidth="213 142 142 355" autofit="false" class="table"><colgroup colwidth="1*" style="width:25.00%"></colgroup><colgroup colwidth="0.67*" style="width:16.67%"></colgroup><colgroup colwidth="0.67*" style="width:16.67%"></colgroup><colgroup colwidth="1.67*" style="width:41.67%"></colgroup><tbody class="tbody"><tr id="a0244015288t9"><td id="454ab364be100" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="31a9166787b7a">名称</p></td><td id="1a9adc3682to8" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="584e2b756b4fu">类型</p></td><td id="47e7e6c2d5z44" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="5b060c8dad1ku">示例值</p></td><td id="333728d261akr" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="836a274a6716y">描述</p></td></tr><tr outputclass="row row-level-1" id="93f269c67cum9" class="row row-level-1"><td id="9be43fa9a1gcx" rowspan="1" colspan="1"><p id="faf3902d44al5">jsapiTicket</p></td><td id="8f8ca2d541v53" rowspan="1" colspan="1"><p id="6b0251a647dvw">String</p></td><td id="572590342a4dg" rowspan="1" colspan="1"><p id="0ed20ac5e52xc">asjdgxxx</p></td><td id="57a0c10f1feg9" rowspan="1" colspan="1"><p id="7da9cd611etli">返回的jsapi_ticket。</p></td></tr><tr outputclass="row row-level-2" id="54e5935d3akp9" class="row row-level-2"><td id="65f3b080ddkk4" rowspan="1" colspan="1"><p id="0aa06b613bi90">expireIn</p></td><td id="89a1d590a23cc" rowspan="1" colspan="1"><p id="02e603dc1dn6u">Long</p></td><td id="e2b59fee47tur" rowspan="1" colspan="1"><p id="636410aa13hto">7200</p></td><td id="67625e9ad4ehn" rowspan="1" colspan="1"><p id="a7cb5da00176t">jsapiTicket过期时间，单位秒。</p></td></tr></tbody></table></section><section id="0e6e17de2dmnn" class="section"><h3 id="10d7dc0465bgt"><b>响应体示例</b></h3><pre code-type="xCode" id="ce9d11f3e9win" index="0" data-tag="codeblock" outputclass="language-json" class="pre codeblock language-json"><code>HTTP/1.1 200 OK
+Content-Type:application/json
+
+{
+  "jsapiTicket" : "asjdgxxx",
+  "expireIn" : 7200
+}</code></pre></section><section id="d736c9fb7ei93" class="section"><h3 id="7894500ce8la8"><b>错误码</b></h3><p id="b9cdee0183p11">若调用该接口报错，可根据错误信息在<a data-tag="xref" id="21977cf555npt" href="/document/development/server-api-error-codes-1#" class="xref">全局错误码</a>文档中查找解决方案。</p><table id="85778443d78ng" tablewidth="709" tablecolswidth="142 177 177 213" autofit="false" class="table"><colgroup colwidth="0.8*" style="width:20.03%"></colgroup><colgroup colwidth="1*" style="width:24.96%"></colgroup><colgroup colwidth="1*" style="width:24.96%"></colgroup><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><tbody class="tbody"><tr id="7b5376378fqie"><td id="b2c26ca0ce3tr" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="183d94f6b8adh">HttpCode</p></td><td id="b955aa0883oa2" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="eb494b6e13s5g">错误码</p></td><td id="15d866a52e6g8" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="026b22e2da1wy">错误信息</p></td><td id="c19297d265rak" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="fa3cd4e6d7kd8">说明</p></td></tr><tr id="b4e6d5d007b0f"><td id="723f84e8f2zh4" rowspan="1" colspan="1"><p id="7dff345895t6x">400</p></td><td id="2244a0cd49yif" rowspan="1" colspan="1"><p id="eec78f03eaewc">invalidClientIdOrSecret</p></td><td id="f2b189ec65c4j" rowspan="1" colspan="1"><p id="7007d8b99ddnk">无效的clientId或者clientSecret</p></td><td id="1cfb6e0afc0bn" rowspan="1" colspan="1"><p id="c012236678llt">无效的clientId或者clientSecret</p></td></tr><tr id="6ec1b8e173wis"><td id="4e57e97b69tla" rowspan="1" colspan="1"><p id="03e89911ebwo7">500</p></td><td id="5487e6da85ksb" rowspan="1" colspan="1"><p id="96c06cdb2fhhh">systemBusy</p></td><td id="8ff2b2db8apdm" rowspan="1" colspan="1"><p id="b8a22699earuy">系统繁忙</p></td><td id="b3bb3c8738iop" rowspan="1" colspan="1"><p id="e7a9ac9987u64">系统繁忙</p></td></tr></tbody></table></section></section></div></main></body></html>

@@ -1,0 +1,205 @@
+<!DOCTYPE html><html><head><meta charset="utf8" / /><meta name="searchtitle" content="" / /><meta name="keywords" content="" / /><meta name="author" content="" / /><title>创建、修改、查询及删除日程</title><meta name="gmtModify" content="2026-05-15 09:04:46" / /></head><body data-tag="topic" id="topic-2179239" class="topic"><main id="7a85b2c07cuxh"><h1 data-tag="title" id="title-753-7lg-4t3" class="title">创建、修改、查询及删除日程</h1><p data-tag="shortdesc" id="shortdesc-5bu-phv-rns" class="shortdesc">本文档介绍了如何调用日程接口创建日程等流程。首先创建一个企业内部应用，再使用日程提供的API，实现创建日程、修改日程、查询单个日程详情、删除日程流程。</p><div data-tag="conbody" id="conbody-li2-e11-j3z" class="conbody"><section id="e06c1c502aiye" class="section"><h2 id="d0766ad12aw96"><b>预期效果</b></h2><p id="86ceab4943zj6">创建日程后，效果如下图所示：</p><p id="7d15c0dec611e"><img placement="break" alt="image" src="https://help-static-aliyun-doc.aliyuncs.com/assets/img/zh-CN/3572012661/p485300.png" id="img-fx3-4ib-vb7" class="image break" / /></p></section><section id="section-k5f-2hv-85c" class="section"><h2 data-tag="title" id="title-lzu-jx0-pdp" class="title">接入流程简介</h2><p id="1b29a5b12adxf">本文档展示了创建一个企业内部应用，再使用日程提供的API，实现创建日程、修改日程、查询单个日程详情、删除日程流程。</p><p id="e366b49c4921d">前提条件：完成<a data-tag="xref" id="fa4fa70a76vv0" href="/document/dingstart/create-application#" class="xref">应用创建与配置</a>的流程。</p><p id="p-go9-lnn-zix">步骤一：<span style="color:rgb(51, 51, 51)">获取应用凭证信息，获取应用 Client ID 和 Client Secret。</span></p><p id="p-17c-87g-sbc">步骤二：申请接口权限，申请日程相关接口的权限。</p><p id="p-p9b-ink-fgd">步骤三：获取应用访问凭证<a data-tag="xref" id="5e0ba8641ay2j" href="/document/development/obtain-the-access-token-of-an-internal-app#" class="xref">获取企业内部应用的accessToken</a>，调用接口时，通过accessToken鉴权调用者身份。</p><p id="p-r4b-7zi-ycs">步骤四：调用服务端日程相关API：</p><section id="div-guv-5s0-vxg" class="section"><ol id="ol-wkr-wbp-czu"><li id="li-u5u-t7l-eco"><p id="p-qpc-ev8-wa1">调用服务端API-<a data-tag="xref" id="622d9f71f8620" href="/document/development/create-schedule#" class="xref">创建日程</a>接口，进行创建日程。获取日程<code data-tag="code" id="47ec8c5393ire" class="code">id</code>。</p></li><li id="li-wvs-tvz-2ql"><p id="p-agw-cn0-j6c">根据日程<code data-tag="code" id="c3d94f1d1afwm" class="code">id</code>，调用服务端API-<a data-tag="xref" id="bb4853ff72wbl" href="/document/development/modify-event#" class="xref">修改日程</a>接口，进行日程信息修改。</p></li><li id="li-iqb-4a3-qy9"><p id="p-jy5-xdh-gso">根据日程<code data-tag="code" id="5b6995961co1l" class="code">id</code>，调用服务端API-<a data-tag="xref" id="23802efefaz3l" href="/document/development/query-details-about-an-event#" class="xref">查询单个日程详情</a>接口，获取日程详情信息。</p></li><li id="li-qx3-kfn-byn"><p id="p-uhl-21t-ydu">根据日程<code data-tag="code" id="fa999d16eeflt" class="code">id</code>，调用服务端API-<a data-tag="xref" id="b3fd6b96c17fp" href="/document/development/delete-event#" class="xref">删除日程</a>接口，删除创建的日程。</p></li></ol></section></section><section id="ab26007c40id8" class="section"><h2 id="1d7afac580wje" sourcekey="2000000003826"><b>前提条件</b></h2><p id="9eb70963a38qk">完成<a data-tag="xref" id="362d552c1e059" href="/document/dingstart/create-application#" class="xref">应用创建与配置</a>的流程。</p></section><section id="79ae6e466848q" class="section"><h2 id="84bc3e991agfb" sourcekey="2000000003840"><b>步骤一：获取应用凭证</b></h2><ol id="6963bc2e83se5" start="1" sourcekey="2000000003843"><li id="e12d2028942ro" sourcekey="2000000003845"><p id="29c4243ddf0r1">选择目标应用，进入应用详情页，单击<b>基础信息</b> &gt; <b>凭证与基础信息</b>。</p></li><li id="0e1bfbbe88k5x" sourcekey="2000000003850"><p id="93a5b28f13uo1">获取应用 Client ID 和 Client Secret。</p></li></ol></section><section id="773d927a990qb" class="section"><h2 id="473ce9a4d95ua"><b>步骤二：添加接口权限</b></h2><p id="833294e33dtgg"><span style="color:rgb(23, 26, 29)">单击</span><span style="color:rgb(23, 26, 29)"><b>开发配置 </b></span><span style="color:rgb(23, 26, 29)">&gt; </span><span style="color:rgb(23, 26, 29)"><b>权限管理</b></span><span style="color:rgb(23, 26, 29)">，在权限搜索框中分别输入</span><code data-tag="code" id="6430acc47c6ax" class="code">Calendar.Event.Write</code><span style="color:rgba(0, 0, 0, 0.85);background-color:rgba(250, 250, 250, 0)">和</span><code data-tag="code" id="67656629d7ylg" class="code">Calendar.Event.Read</code><span style="color:rgb(23, 26, 29)">，并申请权限。</span></p></section><section id="section-13r-5it-euq" class="section"><h2 data-tag="title" id="title-avq-ymn-u4o" class="title">步骤三：获取应用访问凭证accessToken</h2><div type="notice" id="bf5019d02ama3" class="note note-notice"><div class="note-icon-wrapper"><i class="icon-note note notice"></i></div><div class="noteContentSpan"><strong>重要 </strong><p id="bf5019d12aww8">服务端API差异详情参见<a data-tag="xref" id="c21c2dab253zh" href="/document/development/how-to-call-apis#section-8lr-id4-rbz" class="xref">旧版API VS 新版API</a>。以下接口均使用服务端API接口，SDK下载详情参见<a data-tag="xref" id="5f02b7dc6b6x2" href="/document/development/download-the-server-side-sdk#" class="xref">服务端SDK下载</a>。</p></div></div><p id="p-za5-zvy-h9x">根据步骤一中 的 Client ID 和 Client Secret，获取应用访问凭证<a data-tag="xref" id="4bfadf07abbnz" href="/document/development/obtain-orgapp-token#" class="xref">获取企业内部应用的access_token</a>。</p><pre id="codeblock-jlq-8lc-zax" data-tag="codeblock" outputclass="language-java" code-type="xCode" class="pre codeblock language-java"><code> public void getAccessToken() throws Exception {
+        Config config = new Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        com.aliyun.dingtalkoauth2_1_0.Client client = new com.aliyun.dingtalkoauth2_1_0.Client(config);
+        GetAccessTokenRequest accessTokenRequest = new GetAccessTokenRequest()
+                .setAppKey("ding*********hgn")
+                .setAppSecret("9G_O**********xamBkhgGIO");
+        GetAccessTokenResponse accessToken = client.getAccessToken(accessTokenRequest);
+        System.out.println(JSON.toJSONString(accessToken.getBody()));
+    }
+</code></pre></section><section id="section-un5-lgy-v1g" class="section"><h2 data-tag="title" id="title-x6q-iy2-ls0" class="title">步骤四：调用服务端日程相关API</h2><section id="41b43a502aa5h" class="section"><ol id="41b43a512akmq"><li id="41b43a522a4sa"><p id="41b43a532a0m4">调用服务端API-<a data-tag="xref" id="931bc15797pdx" href="/document/development/create-schedule#" class="xref">创建日程</a>接口，进行创建日程。获取日程<code data-tag="code" id="e2ad1351f7vfd" class="code">id</code>。</p><pre outputclass="language-java" data-tag="codeblock" id="5poavb" code-type="xCode" class="pre codeblock language-java"><code> public void createCalendar() throws Exception {
+        Config config = new Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        com.aliyun.dingtalkcalendar_1_0.Client client = new com.aliyun.dingtalkcalendar_1_0.Client(config);
+        CreateEventHeaders createEventHeaders = new CreateEventHeaders();
+        createEventHeaders.xAcsDingtalkAccessToken = "accessToken";
+        java.util.Map&lt;String, String&gt; extra = TeaConverter.buildMap(
+                new TeaPair("noChatNotification", "false"),
+                new TeaPair("noPushNotification","false")
+        );
+        CreateEventRequest.CreateEventRequestOnlineMeetingInfo onlineMeetingInfo = new CreateEventRequest.CreateEventRequestOnlineMeetingInfo()
+                .setType("dingtalk");
+        CreateEventRequest.CreateEventRequestReminders reminders0 = new CreateEventRequest.CreateEventRequestReminders()
+                .setMethod("dingtalk")
+                .setMinutes(15);
+        CreateEventRequest.CreateEventRequestLocation location = new CreateEventRequest.CreateEventRequestLocation()
+                .setDisplayName("********A座9F");
+        CreateEventRequest.CreateEventRequestAttendees attendees0 = new CreateEventRequest.CreateEventRequestAttendees()
+                .setId("日程参与人unionId")
+                .setIsOptional(false);
+        CreateEventRequest.CreateEventRequestAttendees attendees1 = new CreateEventRequest.CreateEventRequestAttendees()
+                .setId("日程参与人unionId")
+                .setIsOptional(false);
+        CreateEventRequest.CreateEventRequestAttendees attendees2 = new CreateEventRequest.CreateEventRequestAttendees()
+                .setId("日程参与人unionId")
+                .setIsOptional(false);
+        CreateEventRequest.CreateEventRequestRecurrenceRange recurrenceRange = new CreateEventRequest.CreateEventRequestRecurrenceRange()
+                .setType("numbered")
+                .setNumberOfOccurrences(2);
+        CreateEventRequest.CreateEventRequestRecurrencePattern recurrencePattern = new CreateEventRequest.CreateEventRequestRecurrencePattern()
+                .setType("daily")
+                .setInterval(1);
+        CreateEventRequest.CreateEventRequestRecurrence recurrence = new CreateEventRequest.CreateEventRequestRecurrence()
+                .setPattern(recurrencePattern)
+                .setRange(recurrenceRange);
+        CreateEventRequest.CreateEventRequestEnd end = new CreateEventRequest.CreateEventRequestEnd()
+                .setDate("2022-09-03");
+//                .setDateTime("2021-09-20T10:15:30+08:00")
+//                .setTimeZone("Asia/Shanghai");
+        CreateEventRequest.CreateEventRequestStart start = new CreateEventRequest.CreateEventRequestStart()
+                .setDate("2022-09-02");
+//                .setDateTime("2021-09-20T10:15:30+08:00")
+//                .setTimeZone("Asia/Shanghai");
+        CreateEventRequest createEventRequest = new CreateEventRequest()
+                .setSummary("0902创建日程")
+                .setDescription("这是0902创建的一个日程")
+                .setStart(start)
+                .setEnd(end)
+                .setIsAllDay(true)
+                .setRecurrence(recurrence)
+                .setAttendees(java.util.Arrays.asList(
+                        attendees0,
+                        attendees1,
+                        attendees2
+                ))
+                .setLocation(location)
+                .setReminders(java.util.Arrays.asList(
+                        reminders0
+                ))
+                .setOnlineMeetingInfo(onlineMeetingInfo)
+                .setExtra(extra);
+        try {
+            CreateEventResponse eventWithOptions = client.createEventWithOptions("日程组织人unionId", "primary", createEventRequest, createEventHeaders, new RuntimeOptions());
+            System.out.println(JSON.toJSONString(eventWithOptions.getBody()));
+        } catch (TeaException err) {
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+                System.out.println(err.code);
+                System.out.println(err.message);
+            }
+        } catch (Exception _err) {
+            TeaException err = new TeaException(_err.getMessage(), _err);
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+                System.out.println(err.code);
+                System.out.println(err.message);
+            }
+        }
+    }</code></pre><p id="869d38102aw1k"></p></li><li id="41b43a542ab9z"><p id="41b43a552ahba">根据日程<code data-tag="code" id="2e7e7bd096mmh" class="code">id</code>，调用服务端API-<a data-tag="xref" id="8d5f33408bvg4" href="/document/development/modify-event#" class="xref">修改日程</a>接口，进行日程信息修改。</p><pre outputclass="language-java" data-tag="codeblock" id="vzkgia" code-type="xCode" class="pre codeblock language-java"><code>public void  updateCalendar() throws Exception {
+        Config config = new Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        com.aliyun.dingtalkcalendar_1_0.Client client = new com.aliyun.dingtalkcalendar_1_0.Client(config);
+        PatchEventHeaders patchEventHeaders = new PatchEventHeaders();
+        patchEventHeaders.xAcsDingtalkAccessToken = "accessToken";
+        PatchEventRequest.PatchEventRequestReminders reminders0 = new PatchEventRequest.PatchEventRequestReminders()
+                .setMethod("dingtalk")
+                .setMinutes(15);
+        java.util.Map&lt;String, String&gt; extra = TeaConverter.buildMap(
+                new TeaPair("noChatNotification", "false"),
+                new TeaPair("noPushNotification","false")
+        );
+        PatchEventRequest.PatchEventRequestLocation location = new PatchEventRequest.PatchEventRequestLocation()
+                .setDisplayName("room 1-2-3");
+        PatchEventRequest.PatchEventRequestAttendees attendees0 = new PatchEventRequest.PatchEventRequestAttendees()
+                .setId("日程参与人unionId")
+                .setIsOptional(false);
+        PatchEventRequest.PatchEventRequestRecurrenceRange recurrenceRange = new PatchEventRequest.PatchEventRequestRecurrenceRange()
+                .setType("numbered")
+                .setNumberOfOccurrences(1);
+        PatchEventRequest.PatchEventRequestRecurrencePattern recurrencePattern = new PatchEventRequest.PatchEventRequestRecurrencePattern()
+                .setType("daily")
+                .setInterval(1);
+        PatchEventRequest.PatchEventRequestRecurrence recurrence = new PatchEventRequest.PatchEventRequestRecurrence()
+                .setPattern(recurrencePattern)
+                .setRange(recurrenceRange);
+        PatchEventRequest.PatchEventRequestEnd end = new PatchEventRequest.PatchEventRequestEnd()
+                .setDate("2022-09-02");
+        PatchEventRequest.PatchEventRequestStart start = new PatchEventRequest.PatchEventRequestStart()
+                .setDate("2022-09-02");
+        PatchEventRequest patchEventRequest = new PatchEventRequest()
+                .setSummary("0902修改日程内容")
+                .setId("日程id")
+                .setDescription("这是一个0902修改的日程")
+                .setStart(start)
+                .setEnd(end)
+                .setIsAllDay(true)
+                .setRecurrence(recurrence)
+                .setAttendees(java.util.Arrays.asList(
+                        attendees0
+                ))
+                .setLocation(location)
+                .setExtra(extra)
+                .setReminders(java.util.Arrays.asList(
+                        reminders0
+                ));
+        try {
+            PatchEventResponse patchEventResponse = client.patchEventWithOptions("日程组织者unionId", "primary", "日程id", patchEventRequest, patchEventHeaders, new RuntimeOptions());
+            System.out.println(JSON.toJSONString(patchEventResponse.getBody()));
+        } catch (TeaException err) {
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+                System.out.println(err.code);
+                System.out.println(err.message);
+            }
+        } catch (Exception _err) {
+            TeaException err = new TeaException(_err.getMessage(), _err);
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+                System.out.println(err.code);
+                System.out.println(err.message);
+            }
+        }
+    }</code></pre><p id="5bbe31e02aw57"></p></li><li id="41b43a562ab5b"><p id="41b43a572a3rv">根据日程<code data-tag="code" id="81123fa020916" class="code">id</code>，调用服务端API-<a data-tag="xref" id="59cde82670zcn" href="/document/development/query-details-about-an-event#" class="xref">查询单个日程详情</a>接口，获取日程详情信息。</p><pre outputclass="language-java" data-tag="codeblock" id="i0n9gv" code-type="xCode" class="pre codeblock language-java"><code> public void calendarInfo() throws Exception {
+        Config config = new Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        com.aliyun.dingtalkcalendar_1_0.Client client = new com.aliyun.dingtalkcalendar_1_0.Client(config);
+        GetEventHeaders getEventHeaders = new GetEventHeaders();
+        getEventHeaders.xAcsDingtalkAccessToken = "accessToken";
+        GetEventRequest getEventRequest = new GetEventRequest()
+                .setMaxAttendees(100L);
+        try {
+            GetEventResponse eventWithOptions = client.getEventWithOptions("日程组织者unionId", "primary", "日程id", getEventRequest, getEventHeaders, new RuntimeOptions());
+            System.out.println(JSON.toJSONString(eventWithOptions.getBody()));
+        } catch (TeaException err) {
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+                System.out.println(err.code);
+                System.out.println(err.message);
+            }
+        } catch (Exception _err) {
+            TeaException err = new TeaException(_err.getMessage(), _err);
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+                System.out.println(err.code);
+                System.out.println(err.message);
+            }
+        }
+    }</code></pre><p id="914189202a1w3"></p></li><li id="41b43a582ac8h"><p id="41b43a592amkv">根据日程<code data-tag="code" id="b365c2148enj4" class="code">id</code>，调用服务端API-<a data-tag="xref" id="f21fa205f0hp5" href="/document/development/delete-event#" class="xref">删除日程</a>接口，删除创建的日程。</p><pre outputclass="language-java" data-tag="codeblock" id="5db0gf" code-type="xCode" class="pre codeblock language-java"><code>public void  deleteCalendar() throws Exception {
+        Config config = new Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        com.aliyun.dingtalkcalendar_1_0.Client client = new com.aliyun.dingtalkcalendar_1_0.Client(config);
+        DeleteEventHeaders deleteEventHeaders = new DeleteEventHeaders();
+        deleteEventHeaders.xAcsDingtalkAccessToken = "accessToken";
+        try {
+            client.deleteEventWithOptions("日程组织者unionId", "primary", "日程id", deleteEventHeaders, new RuntimeOptions());
+        } catch (TeaException err) {
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+                System.out.println(err.code);
+                System.out.println(err.message);
+            }
+        } catch (Exception _err) {
+            TeaException err = new TeaException(_err.getMessage(), _err);
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+                System.out.println(err.code);
+                System.out.println(err.message);
+            }
+        }
+    }</code></pre></li></ol></section><div type="note" id="note-eyx-0qj-pei" class="note note-note"><div class="note-icon-wrapper"><i class="icon-note note note"></i></div><div class="noteContentSpan"><strong>说明 </strong><p id="p-j26-jh5-dq6">支持以下2种删除场景：</p><ul id="ul-n9h-lsn-zis"><li id="li-kl2-9u6-iim"><p id="p-tib-tog-i8o">当组织者删除日程时（Path参数中的userId参数使用组织者uninoId），所有参与者会收到日程取消通知，同时日程将从所有参与者的日历中删除。</p></li><li id="li-ctt-qk0-6wb"><p id="p-vxh-zf4-uvg">当参与者删除日程时（Path参数中的userId参数使用参与者uninoId），仅将日程从自己的日历中删除，其他日程参与者不受影响。</p></li></ul></div></div></section></div></main></body></html>

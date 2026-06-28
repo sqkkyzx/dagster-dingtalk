@@ -1,0 +1,415 @@
+<!DOCTYPE html><html><head><meta charset="utf8" / /><meta name="searchtitle" content="" / /><meta name="keywords" content="" / /><meta name="author" content="" / /><title>查询用户考勤节假日信息</title><meta name="gmtModify" content="2025-09-11 21:02:22" / /><meta name="gmtModify" content="2026-06-01 16:58:45" / /></head><body data-tag="topic" id="doc-api-dingtalk-GetUserHolidays" class="topic"><main id="20e3c63a7ezgj" data-init-id="doc-api-dingtalk_GetUserHolidays"><h1 data-tag="title" id="h1-wy4-wqg-ss8" class="title">查询用户考勤节假日信息</h1><p data-tag="shortdesc" id="6d87a4fae2t14" class="shortdesc">调用本接口查询员工一段时间内的节假日信息。</p><div data-tag="conbody" outputclass="icms-api-reference" class="icms-api-reference conbody"><section id="section-request-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-request-1" data-tag="h2" class="h2">请求</h2><section id="section-request-basic-info" class="section"><h3 id="heading-request-basic-info" data-tag="h3" class="h3">基本信息</h3><table tablewidth="648" tablecolswidth="216 432" autofit="false" class="table"><colgroup colwidth="1*" style="width:33.33%"></colgroup><colgroup colwidth="2*" style="width:66.67%"></colgroup><tbody class="tbody"><tr><td rowspan="1" style="background-color:#e5e5e5" colspan="1"><p>字段</p></td><td rowspan="1" style="background-color:#e5e5e5" colspan="1"><p>值</p></td></tr><tr><td rowspan="1" colspan="1"><p>HTTP URL</p></td><td rowspan="1" colspan="1"><p>https://api.dingtalk.com/v1.0/attendance/holidays</p></td></tr><tr><td rowspan="1" colspan="1"><p>HTTP Method</p></td><td rowspan="1" colspan="1"><p>POST</p></td></tr><tr><td rowspan="1" colspan="1"><p>支持的应用类型</p></td><td rowspan="1" colspan="1"><p><span data-tag="ph" id="ph-request-basic-app-type-apptype-0" class="ph ph-app-type" data-ph-raw-text="appType-企业内部应用">appType-企业内部应用</span>　<span data-tag="ph" id="ph-request-basic-app-type-apptype-1" class="ph ph-app-type" data-ph-raw-text="appType-第三方企业应用">appType-第三方企业应用</span></p></td></tr><tr><td rowspan="1" colspan="1"><p>权限要求</p></td><td rowspan="1" colspan="1"><p><span data-tag="ph" id="ph-request-basic-permission-permission-qyapi-attendance-group-read-0" class="ph-permission ph" data-ph-raw-text="permission-qyapi_attendance_group_read-考勤组查询权限" data-permission-id="permission-qyapi_attendance_group_read" data-permission-code="qyapi_attendance_group_read" data-permission-detail-api="/document/api/permission/detail" data-permission-query-param="code">permission-qyapi_attendance_group_read-考勤组查询权限</span></p></td></tr></tbody></table></section><section id="section-request-header-parameter" class="section"><h3 data-tag="h3" id="h2-b8x-eav-ki4" class="h3 title">请求头</h3><table id="a5064b84f7qv1" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="88f7d4a9407hs"><td id="c140c2ea7241q" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="176816372a4p3">名称</p></td><td id="3b5e2f11241h7" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="ddaa1d16493u2">类型</p></td><td id="2f412b0a5dwvb" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="45e9fb103d9tn">是否必填</p></td><td id="4d05f90e78a7m" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="0241770893200">描述</p></td></tr><tr id="1d8174f871sdv"><td id="6ae2d9f736rin" rowspan="1" colspan="1"><p id="4e82fc30966c4">x-acs-dingtalk-access-token</p></td><td id="5bcf889775fdc" rowspan="1" colspan="1"><p id="6198149d9cske">String</p></td><td id="e65f6380a5dlf" rowspan="1" colspan="1"><p id="399e928f0d29q">是</p></td><td id="407438271dm70" rowspan="1" colspan="1"><p id="6b7f3c7e1ea18">调用该接口的访问凭证，通过以下获取：</p><ul id="8fba8ccbectnj"><li id="dace943c20vbe"><p id="ca09404059yfy">企业内部应用，调用<a id="bad3ee7ef9msn" href="https://open.dingtalk.com/document/development/obtain-the-access-token-of-an-internal-app#" class="xref">获取企业内部应用的accessToken</a>接口获取。</p></li><li id="4198465b2bgql"><p id="65bfc18266teh">第三方企业应用，调用<a id="51c3300a2adtf" href="https://open.dingtalk.com/document/development/obtain-the-access-token-of-the-authorized-enterprise-1#" class="xref">获取第三方应用授权企业的accessToken</a>接口获取。</p></li></ul></td></tr></tbody></table></section><section id="section-request-body-parameter" class="section"><h3 data-tag="h3" id="h2-xvt-h7d-k6g" class="h3 title">请求体</h3><table id="2718942c77qr8" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="e27b8315efuj6"><td id="67cd44d37fbzr" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="bd20f0299fyuo">名称</p></td><td id="8d17414daa77v" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="27f293e938fqg">类型</p></td><td id="fc1e5ed2a50iq" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="5a017bd9fev03">是否必填</p></td><td id="455b2cbe3a9lf" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="990065e2c04zz">描述</p></td></tr><tr outputclass="row row-level-1" id="d2f0ee15e1x48" class="row row-level-1 row-level-1 row"><td id="502b69aa51j7a" rowspan="1" colspan="1"><p id="4216efdac54ib">userIds</p></td><td id="4dd9dc09459bj" rowspan="1" colspan="1"><p id="d06f1e4126hco">Array of String</p></td><td id="616882b13dx5h" rowspan="1" colspan="1"><p id="648c3ff03e68h">是</p></td><td id="aac5b569f6nfa" rowspan="1" colspan="1"><p id="192c10559bt9v">员工列表。</p></td></tr><tr outputclass="row row-level-2" id="6f41490414b6w" class="row row-level-2 row-level-2 row"><td id="e813925e0b7rv" rowspan="1" colspan="1"><p id="2b969fa8f1jtb">workDateFrom</p></td><td id="e5494f6f9f6en" rowspan="1" colspan="1"><p id="035510fdc5f6z">Long</p></td><td id="34a5839cacf29" rowspan="1" colspan="1"><p id="66146d2ca3dgl">是</p></td><td id="b583a05523ash" rowspan="1" colspan="1"><p id="2500150ecafdn">开始日期。</p></td></tr><tr outputclass="row row-level-3" id="b2838fb331tsr" class="row row-level-3 row row-level-3"><td id="c2eb69f65fc58" rowspan="1" colspan="1"><p id="8ca00b9358bop">workDateTo</p></td><td id="098508c7532e0" rowspan="1" colspan="1"><p id="1bd4c3878dt66">Long</p></td><td id="19d57bdacdgz5" rowspan="1" colspan="1"><p id="14991cb7222bk">是</p></td><td id="f639ccd717jw9" rowspan="1" colspan="1"><p id="7eaf32d86f3sb">结束日期。</p></td></tr></tbody></table></section><section id="section-request-body-example" class="section"><h3 id="h3-request-body-example" data-tag="h3" class="h3">请求示例</h3><div id="figure-7dg-mdg-3ys" outputclass="tabbed-codeblock" data-tag="fig" class="tabbed-codeblock-box"><div class="tab-box"></div><input type="radio" name="check-figure-7dg-mdg-3ys" id="figure-7dg-mdg-3ys-HTTP-tab" checked="checked" /><label for="figure-7dg-mdg-3ys-HTTP-tab">HTTP</label><div class="codeblock-item"><pre id="codeblock-zxl-hvo-xnj" outputclass="language-HTTP" code-type="xCode" data-tag="codeblock" class="pre codeblock language-HTTP"><code>POST /v1.0/attendance/holidays HTTP/1.1
+Host:api.dingtalk.com
+x-acs-dingtalk-access-token:BE3XX
+Content-Type:application/json
+
+{
+  "userIds" : [ "fdfi3435" ],
+  "workDateFrom" : 1609430400000,
+  "workDateTo" : 1614528000000
+}</code></pre></div><input type="radio" name="check-figure-7dg-mdg-3ys" id="figure-7dg-mdg-3ys-java-tab" /><label for="figure-7dg-mdg-3ys-java-tab">Java</label><div class="codeblock-item"><pre id="codeblock-zqn-ctb-o9e" outputclass="language-java" code-type="xCode" data-tag="codeblock" class="pre codeblock language-java"><code>// This file is auto-generated, don't edit it. Thanks.
+package com.aliyun.sample;
+
+import com.aliyun.tea.*;
+
+public class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Client
+     * @throws Exception
+     */
+    public static com.aliyun.dingtalkattendance_1_0.Client createClient() throws Exception {
+        com.aliyun.teaopenapi.models.Config config = new com.aliyun.teaopenapi.models.Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        return new com.aliyun.dingtalkattendance_1_0.Client(config);
+    }
+
+    public static void main(String[] args_) throws Exception {
+        java.util.List&lt;String&gt; args = java.util.Arrays.asList(args_);
+        com.aliyun.dingtalkattendance_1_0.Client client = Sample.createClient();
+        com.aliyun.dingtalkattendance_1_0.models.GetUserHolidaysHeaders getUserHolidaysHeaders = new com.aliyun.dingtalkattendance_1_0.models.GetUserHolidaysHeaders();
+        getUserHolidaysHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        com.aliyun.dingtalkattendance_1_0.models.GetUserHolidaysRequest getUserHolidaysRequest = new com.aliyun.dingtalkattendance_1_0.models.GetUserHolidaysRequest()
+                .setUserIds(java.util.Arrays.asList(
+                    "fdfi3435"
+                ))
+                .setWorkDateFrom(1609430400000L)
+                .setWorkDateTo(1614528000000L);
+        try {
+            client.getUserHolidaysWithOptions(getUserHolidaysRequest, getUserHolidaysHeaders, new com.aliyun.teautil.models.RuntimeOptions());
+        } catch (TeaException err) {
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        } catch (Exception _err) {
+            TeaException err = new TeaException(_err.getMessage(), _err);
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        }        
+    }
+}</code></pre></div><input type="radio" name="check-figure-7dg-mdg-3ys" id="figure-7dg-mdg-3ys-python-tab" /><label for="figure-7dg-mdg-3ys-python-tab">Python</label><div class="codeblock-item"><pre id="codeblock-vng-xqk-zqn" outputclass="language-python" code-type="xCode" data-tag="codeblock" class="pre codeblock language-python"><code># -*- coding: utf-8 -*-
+# This file is auto-generated, don't edit it. Thanks.
+import sys
+
+from typing import List
+
+from alibabacloud_dingtalk.attendance_1_0.client import Client as dingtalkattendance_1_0Client
+from alibabacloud_tea_openapi import models as open_api_models
+from alibabacloud_dingtalk.attendance_1_0 import models as dingtalkattendance__1__0_models
+from alibabacloud_tea_util import models as util_models
+from alibabacloud_tea_util.client import Client as UtilClient
+
+
+class Sample:
+    def __init__(self):
+        pass
+
+    @staticmethod
+    def create_client() -&gt; dingtalkattendance_1_0Client:
+        """
+        使用 Token 初始化账号Client
+        @return: Client
+        @throws Exception
+        """
+        config = open_api_models.Config()
+        config.protocol = 'https'
+        config.region_id = 'central'
+        return dingtalkattendance_1_0Client(config)
+
+    @staticmethod
+    def main(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        get_user_holidays_headers = dingtalkattendance__1__0_models.GetUserHolidaysHeaders()
+        get_user_holidays_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        get_user_holidays_request = dingtalkattendance__1__0_models.GetUserHolidaysRequest(
+            user_ids=[
+                'fdfi3435'
+            ],
+            work_date_from=1609430400000,
+            work_date_to=1614528000000
+        )
+        try:
+            client.get_user_holidays_with_options(get_user_holidays_request, get_user_holidays_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+    @staticmethod
+    async def main_async(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        get_user_holidays_headers = dingtalkattendance__1__0_models.GetUserHolidaysHeaders()
+        get_user_holidays_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        get_user_holidays_request = dingtalkattendance__1__0_models.GetUserHolidaysRequest(
+            user_ids=[
+                'fdfi3435'
+            ],
+            work_date_from=1609430400000,
+            work_date_to=1614528000000
+        )
+        try:
+            await client.get_user_holidays_with_options_async(get_user_holidays_request, get_user_holidays_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+
+if __name__ == '__main__':
+    Sample.main(sys.argv[1:])</code></pre></div><input type="radio" name="check-figure-7dg-mdg-3ys" id="figure-7dg-mdg-3ys-php-tab" /><label for="figure-7dg-mdg-3ys-php-tab">PHP</label><div class="codeblock-item"><pre id="codeblock-lnj-gsz-spl" outputclass="language-php" code-type="xCode" data-tag="codeblock" class="pre codeblock language-php"><code>&lt;?php
+
+// This file is auto-generated, don't edit it. Thanks.
+namespace AlibabaCloud\SDK\Sample;
+
+use AlibabaCloud\SDK\Dingtalk\Vattendance_1_0\Dingtalk;
+use \Exception;
+use AlibabaCloud\Tea\Exception\TeaError;
+use AlibabaCloud\Tea\Utils\Utils;
+
+use Darabonba\OpenApi\Models\Config;
+use AlibabaCloud\SDK\Dingtalk\Vattendance_1_0\Models\GetUserHolidaysHeaders;
+use AlibabaCloud\SDK\Dingtalk\Vattendance_1_0\Models\GetUserHolidaysRequest;
+use AlibabaCloud\Tea\Utils\Utils\RuntimeOptions;
+
+class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Dingtalk Client
+     */
+    public static function createClient(){
+        $config = new Config([]);
+        $config-&gt;protocol = "https";
+        $config-&gt;regionId = "central";
+        return new Dingtalk($config);
+    }
+
+    /**
+     * @param string[] $args
+     * @return void
+     */
+    public static function main($args){
+        $client = self::createClient();
+        $getUserHolidaysHeaders = new GetUserHolidaysHeaders([]);
+        $getUserHolidaysHeaders-&gt;xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        $getUserHolidaysRequest = new GetUserHolidaysRequest([
+            "userIds" =&gt; [
+                "fdfi3435"
+            ],
+            "workDateFrom" =&gt; 1609430400000,
+            "workDateTo" =&gt; 1614528000000
+        ]);
+        try {
+            $client-&gt;getUserHolidaysWithOptions($getUserHolidaysRequest, $getUserHolidaysHeaders, new RuntimeOptions([]));
+        }
+        catch (Exception $err) {
+            if (!($err instanceof TeaError)) {
+                $err = new TeaError([], $err-&gt;getMessage(), $err-&gt;getCode(), $err);
+            }
+            if (!Utils::empty_($err-&gt;code) &amp;&amp; !Utils::empty_($err-&gt;message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+        }
+    }
+}
+$path = __DIR__ . \DIRECTORY_SEPARATOR . '..' . \DIRECTORY_SEPARATOR . 'vendor' . \DIRECTORY_SEPARATOR . 'autoload.php';
+if (file_exists($path)) {
+    require_once $path;
+}
+Sample::main(array_slice($argv, 1));</code></pre></div><input type="radio" name="check-figure-7dg-mdg-3ys" id="figure-7dg-mdg-3ys-go-tab" /><label for="figure-7dg-mdg-3ys-go-tab">Go</label><div class="codeblock-item"><pre id="codeblock-nhb-w6z-ci1" outputclass="language-go" code-type="xCode" data-tag="codeblock" class="pre codeblock language-go"><code>// This file is auto-generated, don't edit it. Thanks.
+package main
+
+import (
+  "os"
+  util  "github.com/alibabacloud-go/tea-utils/service"
+  dingtalkattendance_1_0  "github.com/alibabacloud-go/dingtalk/attendance_1_0"
+  openapi  "github.com/alibabacloud-go/darabonba-openapi/client"
+  "github.com/alibabacloud-go/tea/tea"
+)
+
+
+/**
+ * 使用 Token 初始化账号Client
+ * @return Client
+ * @throws Exception
+ */
+func CreateClient () (_result *dingtalkattendance_1_0.Client, _err error) {
+  config := &amp;openapi.Config{}
+  config.Protocol = tea.String("https")
+  config.RegionId = tea.String("central")
+  _result = &amp;dingtalkattendance_1_0.Client{}
+  _result, _err = dingtalkattendance_1_0.NewClient(config)
+  return _result, _err
+}
+
+func _main (args []*string) (_err error) {
+  client, _err := CreateClient()
+  if _err != nil {
+    return _err
+  }
+
+  getUserHolidaysHeaders := &amp;dingtalkattendance_1_0.GetUserHolidaysHeaders{}
+  getUserHolidaysHeaders.XAcsDingtalkAccessToken = tea.String("&lt;your access token&gt;")
+  getUserHolidaysRequest := &amp;dingtalkattendance_1_0.GetUserHolidaysRequest{
+    UserIds: []*string{tea.String("fdfi3435")},
+    WorkDateFrom: tea.Int64(1609430400000),
+    WorkDateTo: tea.Int64(1614528000000),
+  }
+  tryErr := func()(_e error) {
+    defer func() {
+      if r := tea.Recover(recover()); r != nil {
+        _e = r
+      }
+    }()
+    _, _err = client.GetUserHolidaysWithOptions(getUserHolidaysRequest, getUserHolidaysHeaders, &amp;util.RuntimeOptions{})
+    if _err != nil {
+      return _err
+    }
+
+    return nil
+  }()
+
+  if tryErr != nil {
+    var err = &amp;tea.SDKError{}
+    if _t, ok := tryErr.(*tea.SDKError); ok {
+      err = _t
+    } else {
+      err.Message = tea.String(tryErr.Error())
+    }
+    if !tea.BoolValue(util.Empty(err.Code)) &amp;&amp; !tea.BoolValue(util.Empty(err.Message)) {
+      // err 中含有 code 和 message 属性，可帮助开发定位问题
+    }
+
+  }
+  return _err
+}
+
+
+func main() {
+  err := _main(tea.StringSlice(os.Args[1:]))
+  if err != nil {
+    panic(err)
+  }
+}</code></pre></div><input type="radio" name="check-figure-7dg-mdg-3ys" id="figure-7dg-mdg-3ys-nodejs-tab" /><label for="figure-7dg-mdg-3ys-nodejs-tab">Node.js</label><div class="codeblock-item"><pre id="codeblock-yyc-je2-1to" outputclass="language-nodejs" code-type="xCode" data-tag="codeblock" class="pre codeblock language-nodejs"><code>// This file is auto-generated, don't edit it
+import Util, * as $Util from '@alicloud/tea-util';
+import dingtalkattendance_1_0, * as $dingtalkattendance_1_0 from '@alicloud/dingtalk/attendance_1_0';
+import OpenApi, * as $OpenApi from '@alicloud/openapi-client';
+import * as $tea from '@alicloud/tea-typescript';
+
+
+export default class Client {
+
+  /**
+   * 使用 Token 初始化账号Client
+   * @return Client
+   * @throws Exception
+   */
+  static createClient(): dingtalkattendance_1_0 {
+    let config = new $OpenApi.Config({ });
+    config.protocol = "https";
+    config.regionId = "central";
+    return new dingtalkattendance_1_0(config);
+  }
+
+  static async main(args: string[]): Promise&lt;void&gt; {
+    let client = Client.createClient();
+    let getUserHolidaysHeaders = new $dingtalkattendance_1_0.GetUserHolidaysHeaders({ });
+    getUserHolidaysHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+    let getUserHolidaysRequest = new $dingtalkattendance_1_0.GetUserHolidaysRequest({
+      userIds: [
+        "fdfi3435"
+      ],
+      workDateFrom: 1609430400000,
+      workDateTo: 1614528000000,
+    });
+    try {
+      await client.getUserHolidaysWithOptions(getUserHolidaysRequest, getUserHolidaysHeaders, new $Util.RuntimeOptions({ }));
+    } catch (err) {
+      if (!Util.empty(err.code) &amp;&amp; !Util.empty(err.message)) {
+        // err 中含有 code 和 message 属性，可帮助开发定位问题
+      }
+
+    }    
+  }
+
+}
+
+Client.main(process.argv.slice(2));</code></pre></div><input type="radio" name="check-figure-7dg-mdg-3ys" id="figure-7dg-mdg-3ys-csharp-tab" /><label for="figure-7dg-mdg-3ys-csharp-tab">C#</label><div class="codeblock-item"><pre id="codeblock-lvz-lpc-aro" outputclass="language-csharp" code-type="xCode" data-tag="codeblock" class="pre codeblock language-csharp"><code>// This file is auto-generated, don't edit it. Thanks.
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
+
+using Tea;
+using Tea.Utils;
+
+
+namespace AlibabaCloud.SDK.Sample
+{
+    public class Sample 
+    {
+
+        /**
+         * 使用 Token 初始化账号Client
+         * @return Client
+         * @throws Exception
+         */
+        public static AlibabaCloud.SDK.Dingtalkattendance_1_0.Client CreateClient()
+        {
+            AlibabaCloud.OpenApiClient.Models.Config config = new AlibabaCloud.OpenApiClient.Models.Config();
+            config.Protocol = "https";
+            config.RegionId = "central";
+            return new AlibabaCloud.SDK.Dingtalkattendance_1_0.Client(config);
+        }
+
+        public static void Main(string[] args)
+        {
+            AlibabaCloud.SDK.Dingtalkattendance_1_0.Client client = CreateClient();
+            AlibabaCloud.SDK.Dingtalkattendance_1_0.Models.GetUserHolidaysHeaders getUserHolidaysHeaders = new AlibabaCloud.SDK.Dingtalkattendance_1_0.Models.GetUserHolidaysHeaders();
+            getUserHolidaysHeaders.XAcsDingtalkAccessToken = "&lt;your access token&gt;";
+            AlibabaCloud.SDK.Dingtalkattendance_1_0.Models.GetUserHolidaysRequest getUserHolidaysRequest = new AlibabaCloud.SDK.Dingtalkattendance_1_0.Models.GetUserHolidaysRequest
+            {
+                UserIds = new List&lt;string&gt;
+                {
+                    "fdfi3435"
+                },
+                WorkDateFrom = 1609430400000,
+                WorkDateTo = 1614528000000,
+            };
+            try
+            {
+                client.GetUserHolidaysWithOptions(getUserHolidaysRequest, getUserHolidaysHeaders, new AlibabaCloud.TeaUtil.Models.RuntimeOptions());
+            }
+            catch (TeaException err)
+            {
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+            catch (Exception _err)
+            {
+                TeaException err = new TeaException(new Dictionary&lt;string, object&gt;
+                {
+                    { "message", _err.Message }
+                });
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+        }
+
+
+    }
+}</code></pre></div></div></section></section><section id="section-response-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-response-1" data-tag="h2" class="h2">响应</h2><section id="section-response-parameter" class="section"><h3 data-tag="h3" id="h2-qth-mi7-f6w" class="h3 title">响应体</h3><table id="2b3dd99a7dptc" tablewidth="710" tablecolswidth="213 142 355" autofit="false" class="table"><colgroup colwidth="0.9*" style="width:30.00%"></colgroup><colgroup colwidth="0.6*" style="width:20.00%"></colgroup><colgroup colwidth="1.5*" style="width:50.00%"></colgroup><tbody class="tbody"><tr id="ef5837139czi6"><td id="7d894b10d84v1" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="d90c24f0c16ly">名称</p></td><td id="6de0a74dc2ise" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="4fc43a7fb1pog">类型</p></td><td id="0085cc2debdoh" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="6e9fc1523dcqh">描述</p></td></tr><tr outputclass="row row-level-1 has-child" id="361b9f3cc3dhx" class="has-child row row-level-1 has-child row-level-1 row"><td id="6f7668f5d7kj8" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><span class="icms-tree-table-trigger" type="checkbox"></span><p id="442b7b8620olo">result</p></td><td id="774761e7dcxg2" rowspan="1" colspan="1"><p id="faa3173bfb5hm">Array</p></td><td id="9a9b875367vsf" rowspan="1" colspan="1"><p id="d3525e7decpg8">员工假期列表。</p></td></tr><tr outputclass="row row-level-1-1" id="c0b276f0edwov" class="row-level-1-1 row row row-level-1-1"><td id="ba86f015c9p7o" rowspan="1" colspan="1"><p id="35e4b04c12oyy">userId</p></td><td id="ddc310c908kze" rowspan="1" colspan="1"><p id="2bf52574dcrmz">String</p></td><td id="6352b03df0sxs" rowspan="1" colspan="1"><p id="971277d26ddhu">员工的userid。</p></td></tr><tr outputclass="row row-level-1-2 has-child" id="42d89f046awno" class="has-child row row-level-1-2 has-child row-level-1-2 row"><td id="d41a23aed342j" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><span class="icms-tree-table-trigger" type="checkbox"></span><p id="dd01743fcdcwx">holidays</p></td><td id="9c3fa47ea173c" rowspan="1" colspan="1"><p id="1da89a75c5kua">Array</p></td><td id="f85f6472d61xu" rowspan="1" colspan="1"><p id="55c241b222idj">假期列表。</p></td></tr><tr outputclass="row row-level-1-2-1" id="643f0a30d92et" class="row-level-1-2-1 row row-level-1-2-1 row"><td id="405301c3c8gkl" rowspan="1" colspan="1"><p id="1d479ffd2bnjn">workDate</p></td><td id="8405c5ed523dh" rowspan="1" colspan="1"><p id="196332d748jwm">Long</p></td><td id="a34c9fca0ai13" rowspan="1" colspan="1"><p id="30334dd2f92pf">日期。</p></td></tr><tr outputclass="row row-level-1-2-2" id="a3d94824a0npm" class="row-level-1-2-2 row row-level-1-2-2 row"><td id="1fd3555159plh" rowspan="1" colspan="1"><p id="fc8bdeff0bof7">holidayName</p></td><td id="c0d58579bekxa" rowspan="1" colspan="1"><p id="883a014b61pyd">String</p></td><td id="3dfdc0d534zta" rowspan="1" colspan="1"><p id="bc76e41495vih">假期名称。</p></td></tr><tr outputclass="row row-level-1-2-3" id="f94adb882eyjt" class="row row-level-1-2-3 row row-level-1-2-3"><td id="758b99f5d6cg1" rowspan="1" colspan="1"><p id="535ff612ebkv7">holidayType</p></td><td id="734a17f6f09qa" rowspan="1" colspan="1"><p id="abb2b79e4a860">String</p></td><td id="2cc3e18a81jxs" rowspan="1" colspan="1"><p id="c312c5cc90wbl">假期类型：</p><ul id="775af841c7pwq"><li id="2b2a847e80wl9"><p id="fea9502b6713z">festival：法定节假日</p></li><li id="fe51385d94yrh"><p id="b9c8bf39cck6h">rest：调休日</p></li><li id="06efa8aa69h8r"><p id="ee33307c9d2ov">overtime：加班日</p></li></ul></td></tr><tr outputclass="row row-level-1-2-4" id="553007f216seu" class="row row-level-1-2-4 row-level-1-2-4 row"><td id="94b3392dd9rjb" rowspan="1" colspan="1"><p id="aedc9ad6861v6">realWorkDate</p></td><td id="14cc699780fb3" rowspan="1" colspan="1"><p id="88cc57cd59jtn">Long</p></td><td id="e5328951dbi2z" rowspan="1" colspan="1"><p id="ebf70b6906k00">补休日，只有假期类型为加班日时才有值。</p></td></tr></tbody></table></section><section id="section-response-body-example" class="section"><h3 id="h3-response-body-example" data-tag="h3" class="h3">响应体示例</h3><pre id="29338df2a5pcd" outputclass="language-json" code-type="xCode" data-tag="codeblock" class="pre codeblock language-json"><code>HTTP/1.1 200 OK
+Content-Type:application/json
+
+{
+  "result" : [ {
+    "userId" : "fdfi3435",
+    "holidays" : [ {
+      "workDate" : 1613059200000,
+      "holidayName" : "春节",
+      "holidayType" : "festival",
+      "realWorkDate" : 1612627200000
+    } ]
+  } ]
+}</code></pre></section><section id="section-error-code-1" class="section"><h3 id="h3-error-code-1" data-tag="h3" class="h3">错误码</h3><p data-tag="p" id="p-error-code-global-guide" class="p">若调用该接口报错，可根据错误信息在<a id="a-error-code-global-guide" href="https://open.dingtalk.com/document/development/server-api-error-codes-1">全局错误码</a>文档中查找解决方案。</p><table id="9ca59710e0iwu" tablewidth="709" tablecolswidth="142 177 177 213" autofit="false" class="table">
+  <colgroup colwidth="0.8*" style="width:20.03%"></colgroup>
+  <colgroup colwidth="1*" style="width:24.96%"></colgroup>
+  <colgroup colwidth="1*" style="width:24.96%"></colgroup>
+  <colgroup colwidth="1.2*" style="width:30.04%"></colgroup>
+  <tbody class="tbody">
+   <tr id="793035a969zs5">
+    <td id="2195e09fd0adu" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="b017d3180eb42">HttpCode</p></td>
+    <td id="c153cdafb6xho" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="920a4035e48w1">错误码</p></td>
+    <td id="d16a9b3793pgy" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="3667017feeq8y">错误信息</p></td>
+    <td id="02fc0a78b5epc" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="509dbc4d22usj">说明</p></td>
+   </tr>
+   <tr id="85f392e3d4xqz">
+    <td id="4011cbbfa93u9" rowspan="1" colspan="1"><p id="8b28aa59desit">400</p></td>
+    <td id="56cdc03128muv" rowspan="1" colspan="1"><p id="aa980f03d1xd0">invalidParameter</p></td>
+    <td id="9aafb9840agjz" rowspan="1" colspan="1"><p id="b627397df6sx8">参数错误 </p></td>
+    <td id="232ce41eddip0" rowspan="1" colspan="1"><p id="ee8ea96d8b6or">参数异常</p></td>
+   </tr>
+   <tr id="1395b4696en55">
+    <td id="6647351cbco6j" rowspan="1" colspan="1"><p id="55b3f146042cb">500</p></td>
+    <td id="f1a2f09b43xtc" rowspan="1" colspan="1"><p id="8f2a6d2dd5quy">systemError</p></td>
+    <td id="68a9368d920tm" rowspan="1" colspan="1"><p id="77a54d3a29c47">系统异常 </p></td>
+    <td id="4cad69a312f49" rowspan="1" colspan="1"><p id="0534cde7afqyj">系统异常 </p></td>
+   </tr>
+  </tbody>
+ </table></section></section></div></main>
+</body></html>

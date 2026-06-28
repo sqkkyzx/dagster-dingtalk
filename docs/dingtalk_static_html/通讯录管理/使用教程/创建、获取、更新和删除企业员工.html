@@ -1,0 +1,88 @@
+<!DOCTYPE html><html><head><meta charset="utf8" / /><meta name="searchtitle" content="" / /><meta name="keywords" content="" / /><meta name="author" content="" / /><title>创建、获取、更新和删除企业员工</title><meta name="gmtModify" content="2026-05-15 09:04:32" / /></head><body data-tag="topic" id="topic-2144336" class="topic"><main id="1383c9f04fryw"><h1 data-tag="title" id="title-jin-zoa-rz9" class="title">创建、获取、更新和删除企业员工</h1><p data-tag="shortdesc" id="shortdesc-0ui-xpi-q0p" class="shortdesc">本文介绍了创建一个企业内部应用，使用通讯录管理提供的用户管理相关API，实现创建、获取、更新和删除企业员工等。</p><div data-tag="conbody" id="conbody-qrn-699-r30" class="conbody"><section id="1f1844304fqry" class="section"><h2 id="17913be04f9hq"><b>预期效果</b></h2><p id="6813b519efsmb">用户信息界面如下图所示：</p><p id="fadf03ad50t3q"><img id="img-55n-ue6-cn4" src="https://help-static-aliyun-doc.aliyuncs.com/assets/img/zh-CN/1378516661/p505603.png" alt="image" placement="break" class="image break" / /></p></section><section id="348139304f9ri" class="section"><h2 id="29551db04fijl"><b>接入流程简介</b></h2><p id="3693c5804fcl3">本文介绍了创建一个企业内部应用，使用<b>通讯录管理</b>提供的<b>用户管理</b>相关API，实现创建、获取、更新和删除企业员工等。</p><p id="5dc927d04fo0h"><span style="color:rgb(51, 51, 51)">步骤一：获取应用凭证信息，获取应用 Client ID 和 Client Secret。</span></p><p id="5dc8d9b14frz4"><span style="color:rgb(51, 51, 51)">步骤二：申请接口权限，申请通讯录管理相关接口权限。</span></p><p id="5dc8d9b34fnnm"><span style="color:rgb(51, 51, 51)">步骤三：获取应用访问凭证</span><a data-tag="xref" id="a8bba87b2cn72" href="/document/development/obtain-orgapp-token#" class="xref">获取企业内部应用的access_token</a><span style="color:rgb(51, 51, 51)">。调用接口时，通过accessToken鉴权调用者身份。</span></p><p id="5dc900c04fr6c"><span style="color:rgb(51, 51, 51)">步骤四：调用通讯录相关API：</span></p><ol id="61bafb704fr1k"><li id="61bafb714fi1w"><p id="61bafb724fq7a">调用服务端API-<a data-tag="xref" id="fc757fc7f2mqp" href="/document/development/user-information-creation#" class="xref">创建用户</a>接口，实现用户创建。获取用户<code data-tag="code" id="4fee59be98psp" class="code">userid</code>。</p><ul id="f23349f04fnjz"><li id="f23349f14ffsj"><p id="f23349f24f446">如果员工添加到根部门，接口参数传1即可。本示例采用添加员工至根部门。</p></li><li id="f23349f34f4fw"><p id="f23349f44f9nv">如果员工添加到某个部门下，先调用<a data-tag="xref" id="fcc68b48a0dvt" href="/document/development/obtain-the-list-of-sub-department-ids#" class="xref">获取子部门ID列表</a>接口获取部门ID，作为创建用户接口的部门参数。</p></li></ul></li><li id="61bafb734fpjf"><p id="475201b04fuzn">根据用户<code data-tag="code" id="68baf7c6980ey" class="code">userid</code>信息，调用服务端API-<a data-tag="xref" id="139cffa9484g0" href="/document/development/query-user-details#" class="xref">查询用户详情</a>接口，获取用户详细信息。</p></li><li id="497be6904fgkv"><p id="48e28cc04f6tm">根据用户<code data-tag="code" id="d2c40fe817xpe" class="code">userid</code>信息，调用服务端API-<a data-tag="xref" id="1385f75c4fsp0" href="/document/development/user-information-update#" class="xref">更新用户信息</a>接口，实现更新用户信息。</p></li><li id="466446504f2t0"><p id="46641f404fa3l">根据用户<code data-tag="code" id="fed4a34959ybx" class="code">userid</code>信息，调用服务端API-<a data-tag="xref" id="2b9f328faeo1w" href="/document/development/delete-a-user#" class="xref">删除用户</a>接口，实现删除用户信息。</p></li></ol></section><section id="2230385573i3s" class="section"><section id="47d04663517wd" tagname="section" data-init-id="809b085417j37" sourcekey="2000000000854" class="section"><h2 id="33a894f677s0b" sourcekey="2000000000856"><b>前提条件</b></h2><p id="b7e26127e2v9m">完成<a data-tag="xref" id="1d3d28a3cf4bx" href="/document/dingstart/create-application#" class="xref">应用创建与配置</a>的流程。</p></section></section><section id="e3bbad87e6649" class="section"><h2 id="7c76ea6958emw" sourcekey="2000000000870"><b>步骤一：获取应用凭证</b></h2><ol id="12981faec6bcq" start="1" sourcekey="2000000000873"><li id="9bad7be9c4km7" sourcekey="2000000000875"><p id="f96916412awxi">选择目标应用，进入应用详情页，单击<b>基础信息</b> &gt; <b>凭证与基础信息</b>。</p></li><li id="663a9349abagd" sourcekey="2000000000880"><p id="83564639e2mli">获取应用 Client ID 和 Client Secret。</p></li></ol></section><section id="388584f14bf97" class="section"><h2 data-tag="title" id="388584f24b6qa" class="title">步骤二：添加接口权限</h2><p id="6e0e4ff246mhj">单击<b>开发配置</b> &gt; <b>权限管理</b>，在权限搜索框中输入<code data-tag="code" id="e2406cb8d073m" class="code">qyapi_manage_addresslist</code><span style="color:rgba(0, 0, 0, 0.85)">和</span><code data-tag="code" id="917b5445af3dc" class="code">qyapi_get_department_list</code><span style="color:rgb(102, 102, 102)">，并申请权限。</span></p></section><section id="388584f64bjtl" class="section"><h2 data-tag="title" id="388584f74bz05" class="title">步骤三：获取应用访问凭证accessToken</h2><div type="notice" id="388584f84bpnh" class="note note-notice"><div class="note-icon-wrapper"><i class="icon-note note notice"></i></div><div class="noteContentSpan"><strong>重要 </strong><ul id="cb8abb38129up"><li id="310a9bd884lwt"><p id="7378f9e04bbum">服务端API差异详情参见<a data-tag="xref" id="17839a3cb27o5" href="/document/development/how-to-call-apis#section-8lr-id4-rbz" class="xref">旧版API VS 新版API</a>。</p></li><li id="li-oh9-2jb-kea"><p id="7378f9e14bp6v">服务端API接口SDK下载，详情参见<a data-tag="xref" id="4920a9799c1ew" href="/document/development/download-the-server-side-sdk#" class="xref">服务端SDK下载</a>。</p></li></ul></div></div><p id="d4efd2444fvts">根据步骤一中的 Client ID 和 Client Secret，获取应用访问凭证<a data-tag="xref" id="ef6d69d357x0l" href="/document/development/obtain-orgapp-token#" class="xref">获取企业内部应用的access_token</a>。</p><pre outputclass="language-javascript" id="388585014b3zh" data-tag="codeblock" code-type="xCode" class="pre codeblock language-javascript"><code>public void getAccessToken() throws ApiException {
+        DingTalkClient client = new DefaultDingTalkClient("https://oapi.dingtalk.com/gettoken");
+        OapiGettokenRequest req = new OapiGettokenRequest();
+        req.setAppkey("dingxxxxxxxxxhgn");
+        req.setAppsecret("9G_xxxxxxxxxxxxxxx1JDf0Qq3nexxxxxxxxGIO");
+        req.setHttpMethod("GET");
+        OapiGettokenResponse rsp = client.execute(req);
+        System.out.println(rsp.getBody());
+    }</code></pre></section><section id="e935fe304b4mo" class="section"><h2 id="p-ymq-h6q-77k"><b>步骤四：调用通讯录相关API</b></h2><ol id="db6cbd904fk9b"><li id="db6cbd914f8g2"><p id="db6cbd924fljf">调用服务端API-<a data-tag="xref" id="342cfa0fd3kji" href="/document/development/user-information-creation#" class="xref">创建用户</a>接口，实现用户创建。获取用户<code data-tag="code" id="af44fd4d29hmu" class="code">userid</code>。</p><pre id="0lahxx" data-tag="codeblock" outputclass="language-java" code-type="xCode" class="pre codeblock language-java"><code>public void createUser() throws ApiException {
+        DingTalkClient client = new DefaultDingTalkClient("https://oapi.dingtalk.com/topapi/v2/user/create");
+        OapiV2UserCreateRequest req = new OapiV2UserCreateRequest();
+        req.setUserid("manger7676");
+        req.setName("1009测试用户");
+        req.setSeniorMode(false);
+        req.setMobile("152****3025");
+        req.setTitle("技术总监");
+        req.setEmail("test*****@xx.com");
+        req.setOrgEmail("test***@xxx.com");
+        req.setOrgEmailType("profession");
+        ArrayList&lt;OapiV2UserCreateRequest.DeptTitle&gt; deptTitles = new ArrayList&lt;&gt;();
+        OapiV2UserCreateRequest.DeptTitle deptTitle = new OapiV2UserCreateRequest.DeptTitle();
+        deptTitle.setDeptId(724960197L);
+        deptTitle.setTitle("资深技术总监");
+        deptTitles.add(deptTitle);
+        req.setDeptTitleList(deptTitles);
+        req.setHideMobile(false);
+        req.setTelephone("010-8xxxxx6-2345");
+        req.setJobNumber("202210190001");
+        req.setHiredDate(1666143772000L);
+        req.setWorkPlace("阿里中心******");
+        req.setRemark("备注信息");
+        req.setDeptIdList("724960197");
+        List&lt;OapiV2UserCreateRequest.DeptOrder&gt; deptOrderList = new ArrayList&lt;OapiV2UserCreateRequest.DeptOrder&gt;();
+        OapiV2UserCreateRequest.DeptOrder deptOrder = new OapiV2UserCreateRequest.DeptOrder();
+        deptOrder.setDeptId(724960197L);
+        deptOrder.setOrder(1L);
+        deptOrderList.add(deptOrder);
+        req.setDeptOrderList(deptOrderList);
+        req.setExtension("{\"爱好\":\"[爱好](http://test.com?userid=#userid#&amp;corpid=#corpid#)\"}");
+        req.setManagerUserid("manager7676");
+        req.setLoginEmail("test****@xxx.com");
+        OapiV2UserCreateResponse rsp = client.execute(req, "access_token");
+        System.out.println(rsp.getBody());
+    }</code></pre><ul id="eb4765a04f5p4"><li id="eb4765a14ff0w"><p id="eb4765a24fgfr">如果员工添加到根部门，接口参数传1即可。本示例采用添加员工至根部门。</p></li><li id="eb4765a34fjty"><p id="eb4765a44ft9n">如果员工添加到某个部门下，先调用<a data-tag="xref" id="7016415ad0c7i" href="/document/development/obtain-the-list-of-sub-department-ids#" class="xref">获取子部门ID列表</a>接口获取部门ID，作为创建用户接口的部门参数。</p></li></ul><pre id="3873761271tlv" data-tag="codeblock" outputclass="language-java" code-type="xCode" class="pre codeblock language-java"><code>public void departmentListSubId() throws ApiException {
+        DingTalkClient client = new DefaultDingTalkClient("https://oapi.dingtalk.com/topapi/v2/department/listsubid");
+        OapiV2DepartmentListsubidRequest req = new OapiV2DepartmentListsubidRequest();
+        req.setDeptId(1L);
+        OapiV2DepartmentListsubidResponse rsp = client.execute(req, "access_token");
+        System.out.println(rsp.getBody());
+    }</code></pre></li><li id="db6cbd934fexb"><p id="db6cbd944fhb2">根据用户<code data-tag="code" id="1fd4d5db03dfd" class="code">userid</code>信息，调用服务端API-<a data-tag="xref" id="1f021236482ls" href="/document/development/query-user-details#" class="xref">查询用户详情</a>接口，获取用户详细信息。</p><div id="57ac6ba04f1j7" type="note" class="note note-note"><div class="note-icon-wrapper"><i class="icon-note note note"></i></div><div class="noteContentSpan"><strong>说明 </strong><p id="4bafb9b04fvoc">获取用户详情返回的部分字段有一定要求，请参考<a data-tag="xref" id="c748ad4ac532v" href="/document/development/query-user-details#" class="xref">查询用户详情</a>接口文档返回字段的描述。</p></div></div><pre id="4oxpxa" data-tag="codeblock" outputclass="language-java" code-type="xCode" class="pre codeblock language-java"><code> public void userInfo() throws ApiException {
+        DingTalkClient client = new DefaultDingTalkClient("https://oapi.dingtalk.com/topapi/v2/user/get");
+        OapiV2UserGetRequest req = new OapiV2UserGetRequest();
+        req.setUserid("manger7676");
+        req.setLanguage("zh_CN");
+        OapiV2UserGetResponse rsp = client.execute(req, "access_token");
+        System.out.println(rsp.getBody());
+    }</code></pre></li><li id="db6cbd954f2oh"><p id="db6cbd964foy0">根据用户<code data-tag="code" id="8cc4218199ou5" class="code">userid</code>信息，调用服务端API-<a data-tag="xref" id="473cfc8db9ath" href="/document/development/user-information-update#" class="xref">更新用户信息</a>接口，实现更新用户信息。</p><div id="82ed6b204f2s1" type="note" class="note note-note"><div class="note-icon-wrapper"><i class="icon-note note note"></i></div><div class="noteContentSpan"><strong>说明 </strong><p id="7c8df2e04ftfh">更新用户信息接口，暂时不支持更新手机号。</p></div></div><pre id="dyinat" data-tag="codeblock" outputclass="language-java" code-type="xCode" class="pre codeblock language-java"><code>public void userModify() throws ApiException {
+        DingTalkClient client = new DefaultDingTalkClient("https://oapi.dingtalk.com/topapi/v2/user/update");
+        OapiV2UserUpdateRequest req = new OapiV2UserUpdateRequest();
+        req.setUserid("manger7676");
+        req.setName("小钉");
+        req.setHideMobile(false);
+        req.setTelephone("010-86*****6-2345");
+        req.setJobNumber("202210190002");
+        req.setTitle("技术总监");
+        req.setEmail("test*****@xxx.com");
+        req.setWorkPlace("未来park");
+        req.setRemark("备注备注");
+        req.setDeptIdList("1");
+        List&lt;OapiV2UserUpdateRequest.DeptOrder&gt; list2 = new ArrayList&lt;OapiV2UserUpdateRequest.DeptOrder&gt;();
+        OapiV2UserUpdateRequest.DeptOrder obj3 = new OapiV2UserUpdateRequest.DeptOrder();
+        list2.add(obj3);
+        obj3.setDeptId(1L);
+        obj3.setOrder(1L);
+        req.setDeptOrderList(list2);
+        req.setExtension("{\"爱好\":\"旅游\",\"年龄\":\"24\"}");
+        req.setSeniorMode(false);
+        req.setHiredDate(1633017600000L);
+        req.setLanguage("zh_CN");
+        OapiV2UserUpdateResponse rsp = client.execute(req, "access_token");
+        System.out.println(rsp.getBody());
+    }</code></pre></li><li id="db6cbd974ft1f"><p id="db6cbd984f3s6">根据用户<code data-tag="code" id="8ff32496faguu" class="code">userid</code>信息，调用服务端API-<a data-tag="xref" id="d9c4d8409balu" href="/document/development/delete-a-user#" class="xref">删除用户</a>接口，实现删除用户信息。</p><pre id="kuwizu" data-tag="codeblock" outputclass="language-java" code-type="xCode" class="pre codeblock language-java"><code>public void userDelete() throws ApiException {
+        DingTalkClient client = new DefaultDingTalkClient("https://oapi.dingtalk.com/topapi/v2/user/delete");
+        OapiV2UserDeleteRequest req = new OapiV2UserDeleteRequest();
+        req.setUserid("manager7676");
+        OapiV2UserDeleteResponse rsp = client.execute(req, "access_token");
+        System.out.println(rsp.getBody());
+    }</code></pre></li></ol></section></div></main></body></html>

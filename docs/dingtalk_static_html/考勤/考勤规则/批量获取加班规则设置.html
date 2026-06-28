@@ -1,0 +1,481 @@
+<!DOCTYPE html><html><head><meta charset="utf8" / /><meta name="searchtitle" content="" / /><meta name="keywords" content="" / /><meta name="author" content="" / /><title>批量获取加班规则设置</title><meta name="gmtModify" content="2025-09-11 21:02:14" / /><meta name="gmtModify" content="2026-06-01 16:47:21" / /></head><body data-tag="topic" id="doc-api-dingtalk-GetOvertimeSetting" class="topic"><main id="3cc8a3b910a9n" data-init-id="doc-api-dingtalk_GetOvertimeSetting"><h1 data-tag="title" id="h1-4cs-ibe-zu1" class="title">批量获取加班规则设置</h1><p data-tag="shortdesc" id="12fce852b3t9b" class="shortdesc">调用本接口，根据多个加班规则ID，批量获取加班规则设置详情。</p><div data-tag="conbody" outputclass="icms-api-reference" class="icms-api-reference conbody"><section id="section-prerequisites-1" class="section icms-module" data-tag="section" data-source="latest-mounted-icms-html"><h2 id="h2-prerequisites-1" data-tag="h2" class="h2">接口调用说明</h2><p>例如，企业考勤组内设置的加班规则是<b>以审批时间计算加班</b>，如下图所示。</p><p><img src="https://help-static-aliyun-doc.aliyuncs.com/assets/img/zh-CN/3885238471/p961095.png" alt="image" placement="break" class="image break" / />调用本接口，获取<b>以审批时间计算加班</b>加班规则的设置详情信息，包括规则名称、加班计算方式等。 <img src="https://help-static-aliyun-doc.aliyuncs.com/assets/img/zh-CN/3885238471/p961092.png" alt="image" placement="break" class="image break" / /></p></section><section id="section-request-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-request-1" data-tag="h2" class="h2">请求</h2><section id="section-request-basic-info" class="section"><h3 id="heading-request-basic-info" data-tag="h3" class="h3">基本信息</h3><table tablewidth="648" tablecolswidth="216 432" autofit="false" class="table"><colgroup colwidth="1*" style="width:33.33%"></colgroup><colgroup colwidth="2*" style="width:66.67%"></colgroup><tbody class="tbody"><tr><td rowspan="1" style="background-color:#e5e5e5" colspan="1"><p>字段</p></td><td rowspan="1" style="background-color:#e5e5e5" colspan="1"><p>值</p></td></tr><tr><td rowspan="1" colspan="1"><p>HTTP URL</p></td><td rowspan="1" colspan="1"><p>https://api.dingtalk.com/v1.0/attendance/overtimeSettings/query</p></td></tr><tr><td rowspan="1" colspan="1"><p>HTTP Method</p></td><td rowspan="1" colspan="1"><p>POST</p></td></tr><tr><td rowspan="1" colspan="1"><p>支持的应用类型</p></td><td rowspan="1" colspan="1"><p><span data-tag="ph" id="ph-request-basic-app-type-apptype-0" class="ph ph-app-type" data-ph-raw-text="appType-企业内部应用">appType-企业内部应用</span>　<span data-tag="ph" id="ph-request-basic-app-type-apptype-1" class="ph ph-app-type" data-ph-raw-text="appType-第三方企业应用">appType-第三方企业应用</span></p></td></tr><tr><td rowspan="1" colspan="1"><p>权限要求</p></td><td rowspan="1" colspan="1"><p><span data-tag="ph" id="ph-request-basic-permission-permission-qyapi-attendance-group-read-0" class="ph-permission ph" data-ph-raw-text="permission-qyapi_attendance_group_read-考勤组查询权限" data-permission-id="permission-qyapi_attendance_group_read" data-permission-code="qyapi_attendance_group_read" data-permission-detail-api="/document/api/permission/detail" data-permission-query-param="code">permission-qyapi_attendance_group_read-考勤组查询权限</span></p></td></tr></tbody></table></section><section id="section-request-header-parameter" class="section"><h3 data-tag="h3" id="h2-stw-le0-yk5" class="h3 title">请求头</h3><table id="3905b5e9c7e1n" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="19af8441ceza7"><td id="2176fac85693l" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="6e65e72009xde">名称</p></td><td id="fd27a70520x5k" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="562cd3b49file">类型</p></td><td id="d7892ac9eaxj5" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="89620e3f80r21">是否必填</p></td><td id="7659149cab3c9" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="4e7a1455dau30">描述</p></td></tr><tr id="cd762aaecftv7"><td id="85eddbc6c01nl" rowspan="1" colspan="1"><p id="f1803fb90axbk">x-acs-dingtalk-access-token</p></td><td id="b84e6f85041c0" rowspan="1" colspan="1"><p id="1c4fd1431512e">String</p></td><td id="6062dcfc04vmn" rowspan="1" colspan="1"><p id="5038e22af7hz4">是</p></td><td id="099031d269y5y" rowspan="1" colspan="1"><p id="6b7f3c7e1ea18">调用该接口的访问凭证，通过以下获取：</p><ul id="8fba8ccbectnj"><li id="dace943c20vbe"><p id="ca09404059yfy">企业内部应用，调用<a id="c330c1f2e16dx" href="https://open.dingtalk.com/document/development/obtain-the-access-token-of-an-internal-app#" class="xref">获取企业内部应用的accessToken</a>接口获取。</p></li><li id="4198465b2bgql"><p id="65bfc18266teh">第三方企业应用，调用<a id="0831dd376euoy" href="https://open.dingtalk.com/document/development/obtain-the-access-token-of-the-authorized-enterprise-1#" class="xref">获取第三方应用授权企业的accessToken</a>接口获取。</p></li></ul></td></tr></tbody></table></section><section id="section-request-body-parameter" class="section"><h3 data-tag="h3" id="h2-tqp-ytv-xiy" class="h3 title">请求体</h3><table id="dcf5b4f9calkv" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="a9a4536bad4o1"><td id="ce42ac37c1g1g" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="f5a0bf500c37u">名称</p></td><td id="8c7752c682omk" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="8d4bfae1abq7l">类型</p></td><td id="0b5c5079314hl" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="2066bea2726ch">是否必填</p></td><td id="56e9739c582s6" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="49bb4ec3d1f48">描述</p></td></tr><tr outputclass="row row-level-1" id="7cc19d689avq0" class="row row-level-1 row-level-1 row"><td id="6e2c7102d7m16" rowspan="1" colspan="1"><p id="54b5361d342ox">overtimeSettingIds</p></td><td id="6dd0a24323coa" rowspan="1" colspan="1"><p id="524e687027zul">Array of Long</p></td><td id="bcfc0bcad2pii" rowspan="1" colspan="1"><p id="d75b56897d31d">否</p></td><td id="29450495bdkwr" rowspan="1" colspan="1"><p id="a578edd38326r">加班规则设置id，可调用<a id="f8dcb4b58ez40" href="https://open.dingtalk.com/document/development/query-scheduling-for-a-day#" class="xref">查询成员排班信息</a>接口获取，对应features内的overtimeSettingId字段。</p></td></tr></tbody></table></section><section id="section-request-body-example" class="section"><h3 id="h3-request-body-example" data-tag="h3" class="h3">请求示例</h3><div id="figure-ep2-ujo-ufg" outputclass="tabbed-codeblock" data-tag="fig" class="tabbed-codeblock-box"><div class="tab-box"></div><input type="radio" name="check-figure-ep2-ujo-ufg" id="figure-ep2-ujo-ufg-HTTP-tab" checked="checked" /><label for="figure-ep2-ujo-ufg-HTTP-tab">HTTP</label><div class="codeblock-item"><pre id="codeblock-trw-gnm-j34" outputclass="language-HTTP" code-type="xCode" data-tag="codeblock" class="pre codeblock language-HTTP"><code>POST /v1.0/attendance/overtimeSettings/query HTTP/1.1
+Host:api.dingtalk.com
+x-acs-dingtalk-access-token:1d96xxxx
+Content-Type:application/json
+
+{
+  "overtimeSettingIds" : [ 12345678 ]
+}</code></pre></div><input type="radio" name="check-figure-ep2-ujo-ufg" id="figure-ep2-ujo-ufg-java-tab" /><label for="figure-ep2-ujo-ufg-java-tab">Java</label><div class="codeblock-item"><pre id="codeblock-hlo-8nt-stl" outputclass="language-java" code-type="xCode" data-tag="codeblock" class="pre codeblock language-java"><code>// This file is auto-generated, don't edit it. Thanks.
+package com.aliyun.sample;
+
+import com.aliyun.tea.*;
+import com.aliyun.teautil.*;
+import com.aliyun.teautil.models.*;
+import com.aliyun.dingtalkattendance_1_0.*;
+import com.aliyun.dingtalkattendance_1_0.models.*;
+import com.aliyun.teaopenapi.*;
+import com.aliyun.teaopenapi.models.*;
+
+public class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Client
+     * @throws Exception
+     */
+    public static com.aliyun.dingtalkattendance_1_0.Client createClient() throws Exception {
+        Config config = new Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        return new com.aliyun.dingtalkattendance_1_0.Client(config);
+    }
+
+    public static void main(String[] args_) throws Exception {
+        java.util.List&lt;String&gt; args = java.util.Arrays.asList(args_);
+        com.aliyun.dingtalkattendance_1_0.Client client = Sample.createClient();
+        GetOvertimeSettingHeaders getOvertimeSettingHeaders = new GetOvertimeSettingHeaders();
+        getOvertimeSettingHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        GetOvertimeSettingRequest getOvertimeSettingRequest = new GetOvertimeSettingRequest()
+                .setOvertimeSettingIds(java.util.Arrays.asList(
+                    12345678L
+                ));
+        try {
+            client.getOvertimeSettingWithOptions(getOvertimeSettingRequest, getOvertimeSettingHeaders, new RuntimeOptions());
+        } catch (TeaException err) {
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        } catch (Exception _err) {
+            TeaException err = new TeaException(_err.getMessage(), _err);
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        }        
+    }
+}</code></pre></div><input type="radio" name="check-figure-ep2-ujo-ufg" id="figure-ep2-ujo-ufg-python-tab" /><label for="figure-ep2-ujo-ufg-python-tab">Python</label><div class="codeblock-item"><pre id="codeblock-bcm-o84-mey" outputclass="language-python" code-type="xCode" data-tag="codeblock" class="pre codeblock language-python"><code># -*- coding: utf-8 -*-
+# This file is auto-generated, don't edit it. Thanks.
+import sys
+
+from typing import List
+
+from alibabacloud_dingtalk.attendance_1_0.client import Client as dingtalkattendance_1_0Client
+from alibabacloud_tea_openapi import models as open_api_models
+from alibabacloud_dingtalk.attendance_1_0 import models as dingtalkattendance__1__0_models
+from alibabacloud_tea_util import models as util_models
+from alibabacloud_tea_util.client import Client as UtilClient
+
+
+class Sample:
+    def __init__(self):
+        pass
+
+    @staticmethod
+    def create_client() -&gt; dingtalkattendance_1_0Client:
+        """
+        使用 Token 初始化账号Client
+        @return: Client
+        @throws Exception
+        """
+        config = open_api_models.Config()
+        config.protocol = 'https'
+        config.region_id = 'central'
+        return dingtalkattendance_1_0Client(config)
+
+    @staticmethod
+    def main(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        get_overtime_setting_headers = dingtalkattendance__1__0_models.GetOvertimeSettingHeaders()
+        get_overtime_setting_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        get_overtime_setting_request = dingtalkattendance__1__0_models.GetOvertimeSettingRequest(
+            overtime_setting_ids=[
+                12345678
+            ]
+        )
+        try:
+            client.get_overtime_setting_with_options(get_overtime_setting_request, get_overtime_setting_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+    @staticmethod
+    async def main_async(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        get_overtime_setting_headers = dingtalkattendance__1__0_models.GetOvertimeSettingHeaders()
+        get_overtime_setting_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        get_overtime_setting_request = dingtalkattendance__1__0_models.GetOvertimeSettingRequest(
+            overtime_setting_ids=[
+                12345678
+            ]
+        )
+        try:
+            await client.get_overtime_setting_with_options_async(get_overtime_setting_request, get_overtime_setting_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+
+if __name__ == '__main__':
+    Sample.main(sys.argv[1:])</code></pre></div><input type="radio" name="check-figure-ep2-ujo-ufg" id="figure-ep2-ujo-ufg-php-tab" /><label for="figure-ep2-ujo-ufg-php-tab">PHP</label><div class="codeblock-item"><pre id="codeblock-wpr-cjd-pua" outputclass="language-php" code-type="xCode" data-tag="codeblock" class="pre codeblock language-php"><code>&lt;?php
+
+// This file is auto-generated, don't edit it. Thanks.
+namespace AlibabaCloud\SDK\Sample;
+
+use AlibabaCloud\SDK\Dingtalk\Vattendance_1_0\Dingtalk;
+use \Exception;
+use AlibabaCloud\Tea\Exception\TeaError;
+use AlibabaCloud\Tea\Utils\Utils;
+
+use Darabonba\OpenApi\Models\Config;
+use AlibabaCloud\SDK\Dingtalk\Vattendance_1_0\Models\GetOvertimeSettingHeaders;
+use AlibabaCloud\SDK\Dingtalk\Vattendance_1_0\Models\GetOvertimeSettingRequest;
+use AlibabaCloud\Tea\Utils\Utils\RuntimeOptions;
+
+class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Dingtalk Client
+     */
+    public static function createClient(){
+        $config = new Config([]);
+        $config-&gt;protocol = "https";
+        $config-&gt;regionId = "central";
+        return new Dingtalk($config);
+    }
+
+    /**
+     * @param string[] $args
+     * @return void
+     */
+    public static function main($args){
+        $client = self::createClient();
+        $getOvertimeSettingHeaders = new GetOvertimeSettingHeaders([]);
+        $getOvertimeSettingHeaders-&gt;xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        $getOvertimeSettingRequest = new GetOvertimeSettingRequest([
+            "overtimeSettingIds" =&gt; [
+                12345678
+            ]
+        ]);
+        try {
+            $client-&gt;getOvertimeSettingWithOptions($getOvertimeSettingRequest, $getOvertimeSettingHeaders, new RuntimeOptions([]));
+        }
+        catch (Exception $err) {
+            if (!($err instanceof TeaError)) {
+                $err = new TeaError([], $err-&gt;getMessage(), $err-&gt;getCode(), $err);
+            }
+            if (!Utils::empty_($err-&gt;code) &amp;&amp; !Utils::empty_($err-&gt;message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+        }
+    }
+}
+$path = __DIR__ . \DIRECTORY_SEPARATOR . '..' . \DIRECTORY_SEPARATOR . 'vendor' . \DIRECTORY_SEPARATOR . 'autoload.php';
+if (file_exists($path)) {
+    require_once $path;
+}
+Sample::main(array_slice($argv, 1));</code></pre></div><input type="radio" name="check-figure-ep2-ujo-ufg" id="figure-ep2-ujo-ufg-go-tab" /><label for="figure-ep2-ujo-ufg-go-tab">Go</label><div class="codeblock-item"><pre id="codeblock-9lo-1tg-qlo" outputclass="language-go" code-type="xCode" data-tag="codeblock" class="pre codeblock language-go"><code>// This file is auto-generated, don't edit it. Thanks.
+package main
+
+import (
+  "os"
+  util  "github.com/alibabacloud-go/tea-utils/service"
+  dingtalkattendance_1_0  "github.com/alibabacloud-go/dingtalk/attendance_1_0"
+  openapi  "github.com/alibabacloud-go/darabonba-openapi/client"
+  "github.com/alibabacloud-go/tea/tea"
+)
+
+
+/**
+ * 使用 Token 初始化账号Client
+ * @return Client
+ * @throws Exception
+ */
+func CreateClient () (_result *dingtalkattendance_1_0.Client, _err error) {
+  config := &amp;openapi.Config{}
+  config.Protocol = tea.String("https")
+  config.RegionId = tea.String("central")
+  _result = &amp;dingtalkattendance_1_0.Client{}
+  _result, _err = dingtalkattendance_1_0.NewClient(config)
+  return _result, _err
+}
+
+func _main (args []*string) (_err error) {
+  client, _err := CreateClient()
+  if _err != nil {
+    return _err
+  }
+
+  getOvertimeSettingHeaders := &amp;dingtalkattendance_1_0.GetOvertimeSettingHeaders{}
+  getOvertimeSettingHeaders.XAcsDingtalkAccessToken = tea.String("&lt;your access token&gt;")
+  getOvertimeSettingRequest := &amp;dingtalkattendance_1_0.GetOvertimeSettingRequest{
+    OvertimeSettingIds: []*int64{tea.Int(12345678)},
+  }
+  tryErr := func()(_e error) {
+    defer func() {
+      if r := tea.Recover(recover()); r != nil {
+        _e = r
+      }
+    }()
+    _, _err = client.GetOvertimeSettingWithOptions(getOvertimeSettingRequest, getOvertimeSettingHeaders, &amp;util.RuntimeOptions{})
+    if _err != nil {
+      return _err
+    }
+
+    return nil
+  }()
+
+  if tryErr != nil {
+    var err = &amp;tea.SDKError{}
+    if _t, ok := tryErr.(*tea.SDKError); ok {
+      err = _t
+    } else {
+      err.Message = tea.String(tryErr.Error())
+    }
+    if !tea.BoolValue(util.Empty(err.Code)) &amp;&amp; !tea.BoolValue(util.Empty(err.Message)) {
+      // err 中含有 code 和 message 属性，可帮助开发定位问题
+    }
+
+  }
+  return _err
+}
+
+
+func main() {
+  err := _main(tea.StringSlice(os.Args[1:]))
+  if err != nil {
+    panic(err)
+  }
+}</code></pre></div><input type="radio" name="check-figure-ep2-ujo-ufg" id="figure-ep2-ujo-ufg-nodejs-tab" /><label for="figure-ep2-ujo-ufg-nodejs-tab">Node.js</label><div class="codeblock-item"><pre id="codeblock-ks6-hdl-hoi" outputclass="language-nodejs" code-type="xCode" data-tag="codeblock" class="pre codeblock language-nodejs"><code>// This file is auto-generated, don't edit it
+import Util, * as $Util from '@alicloud/tea-util';
+import dingtalkattendance_1_0, * as $dingtalkattendance_1_0 from '@alicloud/dingtalk/attendance_1_0';
+import OpenApi, * as $OpenApi from '@alicloud/openapi-client';
+import * as $tea from '@alicloud/tea-typescript';
+
+
+export default class Client {
+
+  /**
+   * 使用 Token 初始化账号Client
+   * @return Client
+   * @throws Exception
+   */
+  static createClient(): dingtalkattendance_1_0 {
+    let config = new $OpenApi.Config({ });
+    config.protocol = "https";
+    config.regionId = "central";
+    return new dingtalkattendance_1_0(config);
+  }
+
+  static async main(args: string[]): Promise&lt;void&gt; {
+    let client = Client.createClient();
+    let getOvertimeSettingHeaders = new $dingtalkattendance_1_0.GetOvertimeSettingHeaders({ });
+    getOvertimeSettingHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+    let getOvertimeSettingRequest = new $dingtalkattendance_1_0.GetOvertimeSettingRequest({
+      overtimeSettingIds: [
+        12345678
+      ],
+    });
+    try {
+      await client.getOvertimeSettingWithOptions(getOvertimeSettingRequest, getOvertimeSettingHeaders, new $Util.RuntimeOptions({ }));
+    } catch (err) {
+      if (!Util.empty(err.code) &amp;&amp; !Util.empty(err.message)) {
+        // err 中含有 code 和 message 属性，可帮助开发定位问题
+      }
+
+    }    
+  }
+
+}
+
+Client.main(process.argv.slice(2));</code></pre></div><input type="radio" name="check-figure-ep2-ujo-ufg" id="figure-ep2-ujo-ufg-csharp-tab" /><label for="figure-ep2-ujo-ufg-csharp-tab">C#</label><div class="codeblock-item"><pre id="codeblock-h6b-g3b-jfd" outputclass="language-csharp" code-type="xCode" data-tag="codeblock" class="pre codeblock language-csharp"><code>// This file is auto-generated, don't edit it. Thanks.
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
+
+using Tea;
+using Tea.Utils;
+
+
+namespace AlibabaCloud.SDK.Sample
+{
+    public class Sample 
+    {
+
+        /**
+         * 使用 Token 初始化账号Client
+         * @return Client
+         * @throws Exception
+         */
+        public static AlibabaCloud.SDK.Dingtalkattendance_1_0.Client CreateClient()
+        {
+            AlibabaCloud.OpenApiClient.Models.Config config = new AlibabaCloud.OpenApiClient.Models.Config();
+            config.Protocol = "https";
+            config.RegionId = "central";
+            return new AlibabaCloud.SDK.Dingtalkattendance_1_0.Client(config);
+        }
+
+        public static void Main(string[] args)
+        {
+            AlibabaCloud.SDK.Dingtalkattendance_1_0.Client client = CreateClient();
+            AlibabaCloud.SDK.Dingtalkattendance_1_0.Models.GetOvertimeSettingHeaders getOvertimeSettingHeaders = new AlibabaCloud.SDK.Dingtalkattendance_1_0.Models.GetOvertimeSettingHeaders();
+            getOvertimeSettingHeaders.XAcsDingtalkAccessToken = "&lt;your access token&gt;";
+            AlibabaCloud.SDK.Dingtalkattendance_1_0.Models.GetOvertimeSettingRequest getOvertimeSettingRequest = new AlibabaCloud.SDK.Dingtalkattendance_1_0.Models.GetOvertimeSettingRequest
+            {
+                OvertimeSettingIds = new List&lt;long?&gt;
+                {
+                    12345678
+                },
+            };
+            try
+            {
+                client.GetOvertimeSettingWithOptions(getOvertimeSettingRequest, getOvertimeSettingHeaders, new AlibabaCloud.TeaUtil.Models.RuntimeOptions());
+            }
+            catch (TeaException err)
+            {
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+            catch (Exception _err)
+            {
+                TeaException err = new TeaException(new Dictionary&lt;string, object&gt;
+                {
+                    { "message", _err.Message }
+                });
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+        }
+
+
+    }
+}</code></pre></div><input type="radio" name="check-figure-ep2-ujo-ufg" id="figure-ep2-ujo-ufg-cpp-tab" /><label for="figure-ep2-ujo-ufg-cpp-tab">C++</label><div class="codeblock-item"><pre id="codeblock-iux-upg-xup" outputclass="language-cpp" code-type="xCode" data-tag="codeblock" class="pre codeblock language-cpp"><code>// This file is auto-generated, don't edit it. Thanks.
+
+#include &lt;alibabacloud/dingtalkattendance__1__0.hpp&gt;
+#include &lt;alibabacloud/open_api.hpp&gt;
+#include &lt;boost/any.hpp&gt;
+#include &lt;darabonba/core.hpp&gt;
+#include &lt;darabonba/util.hpp&gt;
+#include &lt;iostream&gt;
+#include &lt;map&gt;
+#include &lt;vector&gt;
+
+using namespace std;
+
+Alibabacloud_Dingtalkattendance_1_0::Client createClient() {
+  shared_ptr&lt;Alibabacloud_OpenApi::Config&gt; config = make_shared&lt;Alibabacloud_OpenApi::Config&gt;();
+  config-&gt;protocol = make_shared&lt;string&gt;("https");
+  config-&gt;regionId = make_shared&lt;string&gt;("central");
+  return Alibabacloud_Dingtalkattendance_1_0::Client(config);
+}
+
+int main(int argc, char *args[]) {
+  args++;
+  shared_ptr&lt;Alibabacloud_Dingtalkattendance_1_0::Client&gt; client = make_shared&lt;Alibabacloud_Dingtalkattendance_1_0::Client&gt;(createClient());
+  shared_ptr&lt;Alibabacloud_Dingtalkattendance_1_0::GetOvertimeSettingHeaders&gt; getOvertimeSettingHeaders = make_shared&lt;Alibabacloud_Dingtalkattendance_1_0::GetOvertimeSettingHeaders&gt;();
+  getOvertimeSettingHeaders-&gt;xAcsDingtalkAccessToken = make_shared&lt;string&gt;("&lt;your access token&gt;");
+  shared_ptr&lt;Alibabacloud_Dingtalkattendance_1_0::GetOvertimeSettingRequest&gt; getOvertimeSettingRequest = make_shared&lt;Alibabacloud_Dingtalkattendance_1_0::GetOvertimeSettingRequest&gt;(map&lt;string, boost::any&gt;({
+    {"overtimeSettingIds", boost::any(vector&lt;long&gt;({
+      12345678
+    }))}
+  }));
+  try {
+    client-&gt;getOvertimeSettingWithOptions(getOvertimeSettingRequest, getOvertimeSettingHeaders, make_shared&lt;Darabonba_Util::RuntimeOptions&gt;(Darabonba_Util::RuntimeOptions()));
+  }
+  catch (std::exception &amp;err) {
+    if (!Darabonba_Util::Client::empty(err.code) &amp;&amp; !Darabonba_Util::Client::empty(err.message)) {
+      // err 中含有 code 和 message 属性，可帮助开发定位问题
+    }
+  }
+}</code></pre></div></div></section></section><section id="section-response-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-response-1" data-tag="h2" class="h2">响应</h2><section id="section-response-parameter" class="section"><h3 data-tag="h3" id="h2-kzg-uck-oil" class="h3 title">响应体</h3><table id="84402530510cj" tablewidth="710" tablecolswidth="213 142 355" autofit="false" class="table"><colgroup colwidth="0.9*" style="width:30.00%"></colgroup><colgroup colwidth="0.6*" style="width:20.00%"></colgroup><colgroup colwidth="1.5*" style="width:50.00%"></colgroup><tbody class="tbody"><tr id="2fc16cf105tzm"><td id="1cafe4e90090c" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="9ffd39b618e02">名称</p></td><td id="bae060e11f3yc" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="9b6a89da08xiu">类型</p></td><td id="5eeb08fae0wtr" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="03cad3b619r7t">描述</p></td></tr><tr outputclass="row row-level-1 has-child" id="f51af4d09d6sf" class="has-child row row-level-1 has-child row-level-1 row"><td id="5b576e413fn15" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><span class="icms-tree-table-trigger" type="checkbox"></span><p id="230fe1911do6i">result</p></td><td id="1a10f3cab9fbx" rowspan="1" colspan="1"><p id="4223b4e54b56i">Array</p></td><td id="01c90acab3t1h" rowspan="1" colspan="1"><p id="ae4c1ea36d7b0">加班设置详情列表。</p></td></tr><tr outputclass="row row-level-1-1" id="f488882ae8k6y" class="row-level-1-1 row row row-level-1-1"><td id="094c960341kuy" rowspan="1" colspan="1"><p id="c650137cd7gb5">settingId</p></td><td id="fe6bcb5ceevfu" rowspan="1" colspan="1"><p id="b78e88353fa1x">Long</p></td><td id="c5600263bbhim" rowspan="1" colspan="1"><p id="4e951f9cd8x71">设置ID。</p></td></tr><tr outputclass="row row-level-1-2" id="bdda1d643c6yo" class="row-level-1-2 row row row-level-1-2"><td id="61d14d6fb3hzg" rowspan="1" colspan="1"><p id="f6f89e7e58m4v">name</p></td><td id="e7a75022e87o3" rowspan="1" colspan="1"><p id="7f3ec53a842n0">String</p></td><td id="dcd45c2c16acf" rowspan="1" colspan="1"><p id="f0afd4f238lse">规则名称。</p></td></tr><tr outputclass="row row-level-1-3" id="2457cbccecqwq" class="row-level-1-3 row row row-level-1-3"><td id="46523f34dezhw" rowspan="1" colspan="1"><p id="2322b8064fbt5">default</p></td><td id="cccf04c9d3gi0" rowspan="1" colspan="1"><p id="64d87d8871f0e">Boolean</p></td><td id="d19077ab6eqzc" rowspan="1" colspan="1"><p id="4175e8e09fuyh">是否默认。</p><ul id="49ee94fac4ybv"><li id="5fd7a9be48384"><p id="2ed53febb2uxq"><b>true</b>：是</p></li><li id="41b647ed5927v"><p id="8f6f08a65d4hy"><b>false</b>：不是</p></li></ul></td></tr><tr outputclass="row row-level-1-4 has-child" id="47ad546fb1z4l" class="row-level-1-4 has-child row row-level-1-4 has-child row"><td id="6f497a2449u8a" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><span class="icms-tree-table-trigger" type="checkbox"></span><p id="ad84e21528lld">durationSettings</p></td><td id="75d2fc2ea8cqe" rowspan="1" colspan="1"><p id="5a171a71671wf">Map&lt;String, Object&gt;</p></td><td id="5d2fe03208765" rowspan="1" colspan="1"><p id="3cd89dfc061gc">加班规则日期类型列表。</p></td></tr><tr outputclass="row row-level-1-4-1 has-child" id="4862a8fff1mhs" class="has-child row row-level-1-4-1 has-child row row-level-1-4-1"><td id="a1b9ef80e64sx" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><span class="icms-tree-table-trigger" type="checkbox"></span><p id="485900fc7aaot"></p></td><td id="f75d30a5e52cj" rowspan="1" colspan="1"><p id="a3906e62ae11e">Object</p></td><td id="b9e9d78ee2ykb" rowspan="1" colspan="1"><p id="b6433627d5kpa">加班规则类型详情。</p></td></tr><tr outputclass="row row-level-1-4-1-1" id="0f815b90e9sj9" class="row-level-1-4-1-1 row row-level-1-4-1-1 row"><td id="cf520a0af8sv2" rowspan="1" colspan="1"><p id="3527b7cac2zz0">calcType</p></td><td id="255b663a9eqht" rowspan="1" colspan="1"><p id="5417728d2cssi">Integer</p></td><td id="1b7f1e1e420w9" rowspan="1" colspan="1"><p id="0ccba11890t8j">加班是否需要填写审批单，取值：</p><ul id="65ff665072usl"><li id="b5837485bc040"><p id="5f564fe424dl5"><b>1</b>： 需要提交审批单</p></li><li id="713e83f92a5s0"><p id="e1ff7d0b27c4h"><b>2</b>：无需提交审批单</p></li><li id="f81aa84aeb5m4"><p id="183baf1b52qxt"><b>3</b>： 不允许加班</p></li></ul></td></tr><tr outputclass="row row-level-1-4-1-2" id="08e5d1348dm92" class="row-level-1-4-1-2 row row-level-1-4-1-2 row"><td id="469a6daa71kwd" rowspan="1" colspan="1"><p id="a7054554c9gpm">durationType</p></td><td id="7c5d2803f7055" rowspan="1" colspan="1"><p id="f29cec8cb7197">Integer</p></td><td id="a732249b4fmzz" rowspan="1" colspan="1"><p id="647e7aac8ekww">计算方式，取值：</p><ul id="7442e643f4g2a"><li id="75db8e85de1wb"><p id="5d7d9dd1040tz"><b>1</b>：按审批单时长计算</p></li><li id="6de244fca72m1"><p id="a6de961d23ujc"><b>2</b>：按打卡时长计算。</p></li></ul></td></tr><tr outputclass="row row-level-1-4-1-3" id="fe1cc261d9hn9" class="row-level-1-4-1-3 row row-level-1-4-1-3 row"><td id="b57b0f8daf2xw" rowspan="1" colspan="1"><p id="6ff2aede8b2wo">overtimeRedress</p></td><td id="563f0390645ob" rowspan="1" colspan="1"><p id="15d3a38ab0u6i">Boolean</p></td><td id="5482ff3dac515" rowspan="1" colspan="1"><p id="436929096351d">加班时长计为调休或加班费开关。</p></td></tr><tr outputclass="row row-level-1-4-1-4" id="f12342793a6y9" class="row-level-1-4-1-4 row row-level-1-4-1-4 row"><td id="8c83e79f94chi" rowspan="1" colspan="1"><p id="20dce12a3bov3">settings</p></td><td id="1b4420bc4cxob" rowspan="1" colspan="1"><p id="ea6d1613afel1">Map</p></td><td id="47b43ea05cckg" rowspan="1" colspan="1"><p id="6d7944dd58ydt">取值为<b>加班开始时间</b>和<b>最小加班时间</b>。</p></td></tr><tr outputclass="row row-level-1-4-1-5" id="4fb8bb82abyr6" class="row-level-1-4-1-5 row row row-level-1-4-1-5"><td id="41599c5fd0xid" rowspan="1" colspan="1"><p id="87acfe91e490u">overtimeRedressBy</p></td><td id="a871a58557cyf" rowspan="1" colspan="1"><p id="40a2483f912db">String</p></td><td id="e16fc970a1110" rowspan="1" colspan="1"><p id="58fc407f10tpb">加班时长计为方式，取值：</p><ul id="7d6f862000ero"><li id="66808e660b6hi"><p id="83448be00ck7k"><b>vacation</b>：计为调休</p></li><li id="629b0d2bea4kz"><p id="3bab975617i0u"><b>charge</b>：计为加班费</p></li><li id="a1c06cb0a7l78"><p id="2e379f3866qu2"><b>manual</b>：员工自主选择</p></li></ul></td></tr><tr outputclass="row row-level-1-4-1-6" id="002c3b4a0dxun" class="row-level-1-4-1-6 row row-level-1-4-1-6 row"><td id="78b68d3f91rmu" rowspan="1" colspan="1"><p id="f61bb5b006n7v">vacationRate</p></td><td id="12b2674626fs7" rowspan="1" colspan="1"><p id="8d5ce7f3adqf7">Float</p></td><td id="6c9bd4166ajnh" rowspan="1" colspan="1"><p id="2ed5c86ef6u1r">调休时长计算比例。</p></td></tr><tr outputclass="row row-level-1-4-1-7" id="5eab23380ai1y" class="row row-level-1-4-1-7 row row-level-1-4-1-7"><td id="371a3ea336r6v" rowspan="1" colspan="1"><p id="6c3a22ef3dnip">skipTime</p></td><td id="0931830098v3a" rowspan="1" colspan="1"><p id="73d88f98e8lki">String</p></td><td id="5bb50dca6dveb" rowspan="1" colspan="1"><p id="c95ef184ecd3h">扣除休息时间，取值：</p><ul id="926c6b405d8ua"><li id="b0fefdb6c9fx9"><p id="ef640b9e59qxu"><b>frame</b>： 按休息时段扣除</p></li><li id="9fd1bdd1d80ae"><p id="b3335b12e4kkh"><b>duration</b>：按加班时长扣除</p></li></ul></td></tr><tr outputclass="row row-level-1-4-1-8 has-child" id="7beff7b7c81gt" class="has-child row row-level-1-4-1-8 has-child row-level-1-4-1-8 row"><td id="a17d11c38bm7n" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><span class="icms-tree-table-trigger" type="checkbox"></span><p id="dc4298db9cgii">skipTimeByFrames</p></td><td id="9da0bf7447929" rowspan="1" colspan="1"><p id="5b7d9879a85js">Array</p></td><td id="7aa8db9108c0f" rowspan="1" colspan="1"><p id="bfbaffa6abslw">按休息时段扣除。</p><div type="note" id="9c516bbc1bygl" class="note note-note"><div class="note-icon-wrapper"><i class="icon-note note note"></i></div><div class="noteContentSpan"><p data-tag="p" id="b2e061df78pvc" class="p"></p><p id="d25766ec03qdz">只有<b>skipTime</b>等于<b>frame</b>时，才有值。</p><p id="d8f60e650014z"></p></div></div></td></tr><tr outputclass="row row-level-1-4-1-8-1" id="48b1cbafbcrp5" class="row-level-1-4-1-8-1 row row row-level-1-4-1-8-1"><td id="bd7a9cde00ewn" rowspan="1" colspan="1"><p id="502ea7a40ddqr">startTime</p></td><td id="0426bee8804pu" rowspan="1" colspan="1"><p id="8c55305c9dpjb">String</p></td><td id="8c5ba347e852a" rowspan="1" colspan="1"><p id="d73e7eaaa4wqh">开始时间，格式为<code data-tag="code" id="6f608d9f4difz" class="code">HH:mm</code>。</p></td></tr><tr outputclass="row row-level-1-4-1-8-2" id="e4edf68849p12" class="row row row-level-1-4-1-8-2 row-level-1-4-1-8-2"><td id="ea245b73cedrd" rowspan="1" colspan="1"><p id="290723a3femv0">endTime</p></td><td id="c8ca75a731imm" rowspan="1" colspan="1"><p id="8afd6bf9626e7">String</p></td><td id="af39570440zdm" rowspan="1" colspan="1"><p id="4d985e981epy2">结束时间，格式为<code data-tag="code" id="f5100b8f26jpw" class="code">HH:mm</code>。</p></td></tr><tr outputclass="row row-level-1-4-1-8-3" id="1d3616af25wki" class="row row row-level-1-4-1-8-3 row-level-1-4-1-8-3"><td id="8059ba5d55ko0" rowspan="1" colspan="1"><p id="d800679599zo9">valid</p></td><td id="794d538eb7iy8" rowspan="1" colspan="1"><p id="d3cde2d44exq0">Boolean</p></td><td id="5678c9b34bap5" rowspan="1" colspan="1"><p id="df2581fad39dy">是否生效。</p><ul id="8465765a64pzy"><li id="d350a9b9f0n0q"><p id="c8a761baa7c03"><b>true</b>：生效</p></li><li id="95f35b5e90phd"><p id="6e05cd023bv6b"><b>false</b>：不生效</p></li></ul></td></tr><tr outputclass="row row-level-1-4-1-9 has-child" id="361a8545fd45n" class="has-child row row-level-1-4-1-9 row row-level-1-4-1-9 has-child"><td id="69fda52b8bh2i" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><span class="icms-tree-table-trigger" type="checkbox"></span><p id="86b93c15ea76o">skipTimeByDurations</p></td><td id="d7109f384eeev" rowspan="1" colspan="1"><p id="eeebe3ffe14ki">Array</p></td><td id="e2673cda685oy" rowspan="1" colspan="1"><p id="eef2dc7da062j">按加班时长扣除。</p><div type="note" id="f441b9712dlh3" class="note note-note"><div class="note-icon-wrapper"><i class="icon-note note note"></i></div><div class="noteContentSpan"><p data-tag="p" id="2f5adf39a040v" class="p"></p><p id="8b536d55cc5xm">只有<b>skipTime</b>等于<b>duration</b>才有值。</p><p id="7cad0a312ec6v"></p></div></div></td></tr><tr outputclass="row row-level-1-4-1-9-1" id="a7db31ee2dvo6" class="row row row-level-1-4-1-9-1 row-level-1-4-1-9-1"><td id="746ab3121b4ei" rowspan="1" colspan="1"><p id="6469b874e5a4m">duration</p></td><td id="30cb1d456cwof" rowspan="1" colspan="1"><p id="91051e1fc95dl">Long</p></td><td id="d3b6ecd8e6nt1" rowspan="1" colspan="1"><p id="5e140b3ccbcqe">每天加班满时长，单位：秒。</p></td></tr><tr outputclass="row row-level-1-4-1-9-2" id="88227c07e6kth" class="row row row-level-1-4-1-9-2 row-level-1-4-1-9-2"><td id="a1df7bd97bwrg" rowspan="1" colspan="1"><p id="cac66d81e4ige">minus</p></td><td id="a061eb8fbb5nl" rowspan="1" colspan="1"><p id="0d4871038f0r1">Long</p></td><td id="09342be1b13la" rowspan="1" colspan="1"><p id="7cc968f9f1jf7">扣除时长，单位：秒。</p></td></tr><tr outputclass="row row-level-1-4-1-10" id="4595286ae2czs" class="row-level-1-4-1-10 row row-level-1-4-1-10 row"><td id="562e01c80cowz" rowspan="1" colspan="1"><p id="0bd36a56dc4fu">holidayPlanOvertimeRedress</p></td><td id="ab79bd2a0cpqb" rowspan="1" colspan="1"><p id="29cceb634amdx">Boolean</p></td><td id="2f7830dcf9vx9" rowspan="1" colspan="1"><p id="5f263ae17abzn">休息日或节假日排班加班时长计为调休或加班费开关。</p></td></tr><tr outputclass="row row-level-1-4-1-11" id="88845be6b19x2" class="row-level-1-4-1-11 row row-level-1-4-1-11 row"><td id="def4e1d9e5shp" rowspan="1" colspan="1"><p id="9605f599bcq8u">holidayPlanOvertimeRedressBy</p></td><td id="c45298616cjo0" rowspan="1" colspan="1"><p id="3d3812cf0380r">String</p></td><td id="69bf57c53dn5d" rowspan="1" colspan="1"><p id="5748020dc7or7">休息日或节假日排班加班时长计为方式，取值：</p><ul id="86aa7852bbuow"><li id="6c7cbfed07h4w"><p id="53a383ce2ea2g"><b>vacation</b>：计为调休</p></li><li id="b1a132955d999"><p id="813c442c52qfo"><b>charge</b>：计为加班费</p></li><li id="7c45132d34wew"><p id="4db090bb69dfb"><b>manual</b>：员工自主选择</p></li></ul></td></tr><tr outputclass="row row-level-1-4-1-12" id="5f2ad611514w6" class="row-level-1-4-1-12 row row-level-1-4-1-12 row"><td id="e94a9950e8zag" rowspan="1" colspan="1"><p id="cb86012cf955u">holidayPlanVacationRate</p></td><td id="3268e96e8b7kh" rowspan="1" colspan="1"><p id="6f4131281acuu">Float</p></td><td id="3c2f0383daj0s" rowspan="1" colspan="1"><p id="db79fd5be0vsa">休息日或节假日排班调休时长计算比例。</p></td></tr><tr outputclass="row row-level-1-5 has-child" id="0689265c419tz" class="has-child row-level-1-5 row row row-level-1-5 has-child"><td id="e5f182f6besp8" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><span class="icms-tree-table-trigger" type="checkbox"></span><p id="cdc984f881u9v">warningSettings</p></td><td id="ab196bd6e8abq" rowspan="1" colspan="1"><p id="5671fef0e1e9d">Array</p></td><td id="ba079681542gy" rowspan="1" colspan="1"><p id="ea5a8847ea2x8">预警设置部分。</p></td></tr><tr outputclass="row row-level-1-5-1" id="b00ee0718f9w4" class="row row-level-1-5-1 row-level-1-5-1 row"><td id="1fe15f044afnv" rowspan="1" colspan="1"><p id="4726b25959mfw">time</p></td><td id="55ddcbd7ebnbm" rowspan="1" colspan="1"><p id="feefc87205qsv">String</p></td><td id="70024e286f1kk" rowspan="1" colspan="1"><p id="cc1712a2fag6z">预警类型，取值：</p><ul id="9ca6a95afam9j"><li id="7b8ff9c278xp5"><p id="73cbf2e12c5jc"><b>everyday</b>： 每日</p></li><li id="467088875e4oi"><p id="9fb97cda41ed9"><b>everyweek</b>：每周</p></li><li id="5a00c2a2b3mt0"><p id="7f635228cbxii"><b>everymonth</b>：每月</p></li></ul></td></tr><tr outputclass="row row-level-1-5-2" id="e944a17e32xl5" class="row row-level-1-5-2 row-level-1-5-2 row"><td id="e127daca4c6px" rowspan="1" colspan="1"><p id="33582fbf1bi6r">threshold</p></td><td id="e2b6dff6c73dn" rowspan="1" colspan="1"><p id="eff9f723d9se0">Long</p></td><td id="e6013c5500ihn" rowspan="1" colspan="1"><p id="83a453ea63i8l">提醒阈值。</p></td></tr><tr outputclass="row row-level-1-5-3" id="4ebd0fcaf64y6" class="row row-level-1-5-3 row-level-1-5-3 row"><td id="5b68b926fehxz" rowspan="1" colspan="1"><p id="c6deeded863v2">action</p></td><td id="2e3aef0dd9vw1" rowspan="1" colspan="1"><p id="a759d15d04beu">String</p></td><td id="0f26d9ac2dia3" rowspan="1" colspan="1"><p id="5c084942175d9">取值为<b>风险预警</b>或<b>最大加班时间</b>。</p></td></tr><tr outputclass="row row-level-1-6" id="409c463a364p9" class="row row-level-1-6 row-level-1-6 row"><td id="afaaee2827ud3" rowspan="1" colspan="1"><p id="a25b9ddf8765q">stepType</p></td><td id="2ef101da654dk" rowspan="1" colspan="1"><p id="986affe61f59e">Integer</p></td><td id="8205abd74c7o4" rowspan="1" colspan="1"><p id="08dc0dfb9efua">加班时长单位。</p></td></tr><tr outputclass="row row-level-1-7" id="d82a268075p0m" class="row row-level-1-7 row-level-1-7 row"><td id="19f6560407nx6" rowspan="1" colspan="1"><p id="d7f918278am6m">stepValue</p></td><td id="a11e9c3ff7y5b" rowspan="1" colspan="1"><p id="8dc5e20080bj4">Float</p></td><td id="b22da9ccddwr1" rowspan="1" colspan="1"><p id="18897dd72bscr">加班时长是否取整，单位：小时 ，取值：</p><ul id="75cd78417fne2"><li id="55a502ce86se4"><p id="b7b02134b6sa8"><b>1</b>：不取整</p></li><li id="c939a85c998zw"><p id="9f7f2861a5t7u"><b>其他值</b>：按步长值向下取整及步长值</p></li></ul></td></tr><tr outputclass="row row-level-1-8" id="0576a760f1qd9" class="row row-level-1-8 row row-level-1-8"><td id="629e215f02jls" rowspan="1" colspan="1"><p id="4f0efd4704s8w">workMinutesPerDay</p></td><td id="ee9d0ead1bogj" rowspan="1" colspan="1"><p id="298f2ecbe7evf">Integer</p></td><td id="da92caee4ezl4" rowspan="1" colspan="1"><p id="81e4415dc192b">日折算时长 单位：分钟。</p></td></tr><tr outputclass="row row-level-1-9 has-child" id="b5b7bb9622jll" class="has-child row row-level-1-9 has-child row row-level-1-9"><td id="960d2ff93coo7" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><span class="icms-tree-table-trigger" type="checkbox"></span><p id="2353ab9ebdwt8">overtimeDivisions</p></td><td id="67f6b565ef9j8" rowspan="1" colspan="1"><p id="41e147d8f3kot">Array</p></td><td id="62dd1f922312a" rowspan="1" colspan="1"><p id="87f70d5cf5z8h">时间分割规则。</p></td></tr><tr outputclass="row row-level-1-9-1" id="9bd93fa0b1y0b" class="row row-level-1-9-1 row row-level-1-9-1"><td id="72f20a046chml" rowspan="1" colspan="1"><p id="4bdd0bb6233t8">previousDayType</p></td><td id="04bb290302ric" rowspan="1" colspan="1"><p id="fc3f043479h4f">String</p></td><td id="d159a08bafue1" rowspan="1" colspan="1"><p id="ef4f412c197mk">前一日类型。</p></td></tr><tr outputclass="row row-level-1-9-2" id="0450f45fc051t" class="row row-level-1-9-2 row row-level-1-9-2"><td id="22d92dd50cc9z" rowspan="1" colspan="1"><p id="d08565861cfob">nextDayType</p></td><td id="dfa8a8afc1dpb" rowspan="1" colspan="1"><p id="dd8b51af70b14">String</p></td><td id="68b6eb923ezl3" rowspan="1" colspan="1"><p id="30baee6f519lc">后一日类型。</p></td></tr><tr outputclass="row row-level-1-9-3" id="106800cf8cm0s" class="row row-level-1-9-3 row row-level-1-9-3"><td id="2858274f61nu7" rowspan="1" colspan="1"><p id="212b6fc109hbp">timeSplitPoint</p></td><td id="83689315a2ecl" rowspan="1" colspan="1"><p id="e78f66e67bzhs">String</p></td><td id="96307db13dlio" rowspan="1" colspan="1"><p id="3d29a25c4d3q0">分割时间点。</p></td></tr><tr outputclass="row row-level-1-10" id="9f5141c1eceqm" class="row row-level-1-10 row-level-1-10 row"><td id="1ca962cde965k" rowspan="1" colspan="1"><p id="bacea16880doa">id</p></td><td id="2538efe8b25tw" rowspan="1" colspan="1"><p id="a3d3db99029rn">Long</p></td><td id="dfae724480kq1" rowspan="1" colspan="1"><p id="d262385c3eshl">历史加班规则设置ID。</p></td></tr></tbody></table></section><section id="section-response-body-example" class="section"><h3 id="h3-response-body-example" data-tag="h3" class="h3">响应体示例</h3><pre id="490eaa4f1el05" outputclass="language-json" code-type="xCode" data-tag="codeblock" class="pre codeblock language-json"><code>HTTP/1.1 200 OK
+Content-Type:application/json
+
+{
+  "result" : [ {
+    "settingId" : 841251521,
+    "name" : "加班规则名称测试",
+    "default" : false,
+    "durationSettings" : {
+      "key" : {
+        "calcType" : 1,
+        "durationType" : 2,
+        "overtimeRedress" : true,
+        "overtimeRedressBy" : "charge",
+        "vacationRate" : 1,
+        "skipTime" : "frame",
+        "skipTimeByFrames" : [ {
+          "startTime" : "12:00",
+          "endTime" : "13:00",
+          "valid" : true
+        } ],
+        "skipTimeByDurations" : [ {
+          "duration" : 18000,
+          "minus" : 3600
+        } ],
+        "holidayPlanOvertimeRedress" : true,
+        "holidayPlanOvertimeRedressBy" : "vacation",
+        "holidayPlanVacationRate" : 1
+      }
+    },
+    "warningSettings" : [ {
+      "time" : "everymonth",
+      "threshold" : 129600,
+      "action" : "alert"
+    } ],
+    "stepType" : 0,
+    "stepValue" : 1,
+    "workMinutesPerDay" : 480,
+    "overtimeDivisions" : [ {
+      "previousDayType" : "workDay",
+      "nextDayType" : "restDay",
+      "timeSplitPoint" : "00:00"
+    } ],
+    "id" : 12345678
+  } ]
+}</code></pre></section><section id="section-error-code-1" class="section"><h3 id="h3-error-code-1" data-tag="h3" class="h3">错误码</h3><p data-tag="p" id="p-error-code-global-guide" class="p">若调用该接口报错，可根据错误信息在<a id="a-error-code-global-guide" href="https://open.dingtalk.com/document/development/server-api-error-codes-1">全局错误码</a>文档中查找解决方案。</p><table id="7d044ad733ua7" tablewidth="709" tablecolswidth="142 177 177 213" autofit="false" class="table">
+  <colgroup colwidth="0.8*" style="width:20.03%"></colgroup>
+  <colgroup colwidth="1*" style="width:24.96%"></colgroup>
+  <colgroup colwidth="1*" style="width:24.96%"></colgroup>
+  <colgroup colwidth="1.2*" style="width:30.04%"></colgroup>
+  <tbody class="tbody">
+   <tr id="17fb034fb8d44">
+    <td id="b3551dfcb7z47" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="e34fa253594eg">HttpCode</p></td>
+    <td id="1daec325206on" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="3bd4761c2fod8">错误码</p></td>
+    <td id="26186bf3ebw0l" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="c428e5df59emk">错误信息</p></td>
+    <td id="4bb49683b4ubs" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="06c07b38c4its">说明</p></td>
+   </tr>
+   <tr id="9f5b8b995dohp">
+    <td id="892d576fdc5qk" rowspan="1" colspan="1"><p id="0ff333348fec1">400</p></td>
+    <td id="6ea80ee6ff2t5" rowspan="1" colspan="1"><p id="92fbe8d888bym">invalidSize</p></td>
+    <td id="f016fec739302" rowspan="1" colspan="1"><p id="7b1dbe091eooj">不合法的大小</p></td>
+    <td id="711af1780foue" rowspan="1" colspan="1"><p id="17a6be6cb23yp">overtimeSettingIds不合法的大小</p></td>
+   </tr>
+   <tr id="18e355febagg5">
+    <td id="bdcfccb1acy0q" rowspan="1" colspan="1"><p id="747167f74djh8">400</p></td>
+    <td id="8dc6471792qjc" rowspan="1" colspan="1"><p id="1e1eee9c72jpf">invalidParameter</p></td>
+    <td id="a2b4b7597d9jr" rowspan="1" colspan="1"><p id="be4c362e801nc">参数错误</p></td>
+    <td id="6dd33eaaa0s81" rowspan="1" colspan="1"><p id="46ee9a7ce8ucf">overtimeSettingIds参数异常</p></td>
+   </tr>
+   <tr id="05809538636z9">
+    <td id="4a37612ee6lm3" rowspan="1" colspan="1"><p id="4e85bedb67vwl">500</p></td>
+    <td id="f5e9597541klu" rowspan="1" colspan="1"><p id="49d4f33bb7py2">systemError</p></td>
+    <td id="322bbeba2a62q" rowspan="1" colspan="1"><p id="51d201fb93sit">系统异常</p></td>
+    <td id="11073e192fn8g" rowspan="1" colspan="1"><p id="55543a84a4sjn">系统异常</p></td>
+   </tr>
+  </tbody>
+ </table></section></section></div></main>
+</body></html>

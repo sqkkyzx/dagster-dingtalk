@@ -1,0 +1,802 @@
+<!DOCTYPE html><html><head><meta charset="utf8" / /><meta name="gmtModify" content="2026-04-24 14:10:41" / /><meta name="searchtitle" content="" / /><meta name="keywords" content="" / /><meta name="author" content="" / /><title>获取审批单流程中的节点信息</title><meta name="gmtModify" content="2026-06-03 10:12:22" / /></head><body data-tag="topic" id="doc-api-dingtalk-ProcessForecast" class="topic"><main id="261a962bfaomu" data-init-id="doc-api-dingtalk_ProcessForecast"><h1 data-tag="title" id="h1-xvu-1gm-nyv" class="title">获取审批单流程中的节点信息</h1><p data-tag="shortdesc" id="7ce5d6e0410kk" class="shortdesc">调用本接口，获取审批单流程中的节点信息。</p><div data-tag="conbody" outputclass="icms-api-reference" class="icms-api-reference conbody"><section id="f161f65ea7ahc" class="section"><h2 id="00f3d89811lta"><b>接口调用说明</b></h2><section id="ed0580cb11zaz" class="section"><h3 id="ce65fe47c1i0p">调用说明</h3><p id="d4424f309bdwq">调用本接口，可获取到节点的以下信息：</p><ul id="f4c11adf01jvf"><li id="b1f23751bagpn"><p id="74b7f25da008w">自选节点，可以获取节点名称、审批类型、设置审批人信息、选择范围、多人审批时采用的审批方式、节点激活类型等。</p></li><li id="a20539beddrtc"><p id="b59d2e51190zr">非自选节点，可以获取节点名称、审批类型、设置审批人信息、多人审批时采用的审批方式、节点激活类型等。</p><p id="73abee902fdkc" data-init-id="b59d2e51190zr"><img src="https://img.alicdn.com/imgextra/i1/O1CN01LpxV4b1f6M20NzZNY_!!6000000003957-2-tps-1916-950.png" alt="" uuid="mpw7ykz3bjdqnsjj4l4" class="image break" / /></p></li></ul></section><section id="a542b0c1b8ozd" class="section"><h3 id="6a298c3a50q7s">使用场景</h3><ol id="2a7cc7a0753cf"><li id="ffd58a6ce1y3x"><p id="5c245a9d8deaq">用于判断是否有自选节点，和<a data-tag="xref" id="9a0ed3d21crov" href="/document/development/create-an-approval-instance#" class="xref">发起审批实例</a>接口配合使用。</p><div type="note" id="14bfaa6c4783r" class="note note-note"><div class="note-icon-wrapper"><i class="icon-note note note"></i></div><div class="noteContentSpan"><strong>说明 </strong><p id="ee5928297amq5">仅适用于调用<b>发起审批实例</b>接口时，不指定审批流程，复用审批后台设置的审批流程情况。</p></div></div><p id="e86ab76a058h8"><img src="https://img.alicdn.com/imgextra/i1/O1CN01JClTWm1lU4EXAZn3f_!!6000000004821-2-tps-1906-920.png" alt="" uuid="mpw7vynhf1ynz6mhzci" class="image break" / /></p></li><li id="0f0e0a6cb2sue"><p id="4723fc7daccp4">企业希望获取某审批模板设置的节点信息，如获取节点类型、节点名称等。</p></li></ol></section><section id="a49a28ad01xko" class="section"><h3 id="e5b7d3e9f218y">是否有自选节点</h3><section id="a426541961whc" class="section"><h4 id="2ff0795be8anh">有自选节点</h4><p id="67cb4f6dfdz3h">调用本文接口，返回信息中存在<code data-tag="code" id="3a2c02bb1ffvc" class="code">activityType</code>字段值为<code data-tag="code" id="31bd3835baz7i" class="code">target_select</code>的节点。</p><p id="0f236050526dh">在和<b>发起审批实例</b>接口配合使用时，需注意以下：</p><ul id="9ca3e8b8d1v1f"><li id="b606b058ecmwg"><p id="5003b9b248eaw">将当前节点内的<code data-tag="code" id="74350753d4589" class="code">actorKey</code>字段值作为发起审批接口的actionerKey参数。</p></li><li id="e067f0725az3v"><p id="c4e4bba94d05y"><code data-tag="code" id="df81b3c000i4x" class="code">actorSelectionRange</code>内的<code data-tag="code" id="9b3d771f3723l" class="code">workNo</code>字段值做为发起审批实例接口的<code data-tag="code" id="4f5a0f43bf99f" class="code">actionerUserIds</code>参数。</p><p id="06def7f381wy8" data-init-id="c4e4bba94d05y"><img src="https://img.alicdn.com/imgextra/i2/O1CN010b2wGy1QuzaU1MHJb_!!6000000002037-2-tps-1904-916.png" alt="" uuid="mpw7wmz7uc2xqlgvba9" class="image break" / /></p></li></ul></section><section id="a56dccdca5v52" class="section"><h4 id="532e9549de756">无自选节点</h4><p id="a3ee7a2a0d0xo">调用本文接口，返回信息中不存在<code data-tag="code" id="67ea0c7d7455d" class="code">activityType</code>字段值为<code data-tag="code" id="71910e348elrt" class="code">target_approval</code>的节点。</p><p id="aa47dc4a22mg8"><img src="https://img.alicdn.com/imgextra/i4/O1CN01t0X30U28ZJwNFoWOa_!!6000000007946-2-tps-1896-918.png" alt="" uuid="mpw7ws0g6ebdkmuzwc5" class="image break" / /></p></section></section></section><section id="section-request-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-request-1" data-tag="h2" class="h2">请求</h2><section id="section-request-basic-info" class="section"><h3 id="heading-request-basic-info" data-tag="h3" class="h3">基本信息</h3><table id="9ae5b72aa1zbt" tablewidth="648" tablecolswidth="216 432" autofit="false" class="table"><colgroup colwidth="0.67*" style="width:33.33%"></colgroup><colgroup colwidth="1.33*" style="width:66.67%"></colgroup><tbody class="tbody"><tr id="f97e26f51cxiv"><td id="ff222a85dejyn" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="d368f5d4b2hgm">字段</p></td><td id="ba8138bf97ndn" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="aaf0fc12ddhdn">值</p></td></tr><tr id="a5064180f236y"><td id="535b06368fcvi" rowspan="1" colspan="1"><p id="acde61f659ygp">HTTP URL</p></td><td id="591f23cf3du91" rowspan="1" colspan="1"><p id="4af02aad9f6j6">https://api.dingtalk.com/v1.0/workflow/processes/forecast</p></td></tr><tr id="ed842abaa9wta"><td id="a4c43336a47n7" rowspan="1" colspan="1"><p id="985066bf7a6x1">HTTP Method</p></td><td id="7fb19e54e28iz" rowspan="1" colspan="1"><p id="366d5238c7uyf">POST</p></td></tr><tr id="4110b1143b2hs"><td id="7ca78dd8a0po2" rowspan="1" colspan="1"><p id="e4ecd104f5iai">支持的应用类型</p></td><td id="8baf2ac57fje3" rowspan="1" colspan="1"><p id="59bfa94d135pc"><span data-tag="ph" id="ph-request-basic-app-type-apptype-0" class="ph ph-app-type" data-ph-raw-text="appType-企业内部应用">appType-企业内部应用</span>　<span data-tag="ph" id="ph-request-basic-app-type-apptype-1" class="ph ph-app-type" data-ph-raw-text="appType-第三方企业应用">appType-第三方企业应用</span></p></td></tr><tr id="4f27d42a94bxc"><td id="edbef4b62b7oh" rowspan="1" colspan="1"><p id="aa12a321de5sg">权限要求</p></td><td id="70bc3145d6y5q" rowspan="1" colspan="1"><p id="b821267bd5k7u"><span data-tag="ph" id="ph-request-basic-permission-permission-workflow-instance-write-0" class="ph-permission ph" data-ph-raw-text="permission-Workflow.Instance.Write-工作流实例写权限" data-permission-id="permission-Workflow.Instance.Write" data-permission-code="Workflow.Instance.Write" data-permission-detail-api="/document/api/permission/detail" data-permission-query-param="code">permission-Workflow.Instance.Write-工作流实例写权限</span></p></td></tr></tbody></table></section><section id="section-request-header-parameter" class="section"><h3 data-tag="h3" id="h2-nx6-skd-hq8" class="h3 title">请求头</h3><table id="64214eb806oe8" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="9517b035c3ojs"><td id="d33e02c2c6h9x" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="eb57153f74zsc">名称</p></td><td id="677c20f918yh0" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="431d3f57188ra">类型</p></td><td id="17774ae776sfo" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="ce679d3a8eh16">是否必填</p></td><td id="880ad87e70a4u" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="d3b3517ec4fh8">描述</p></td></tr><tr id="463916d6f2qu0"><td id="3be833a130xp5" rowspan="1" colspan="1"><p id="fc6fa802858x0">x-acs-dingtalk-access-token</p></td><td id="a001a32072934" rowspan="1" colspan="1"><p id="7df363fca3lwf">String</p></td><td id="5cd7ac21dbtp9" rowspan="1" colspan="1"><p id="b089509fa41l8">是</p></td><td id="0cf0dcdb9a221" rowspan="1" colspan="1"><p id="6b7f3c7e1ea18">调用该接口的访问凭证，通过以下获取：</p><ul id="8fba8ccbectnj"><li id="dace943c20vbe"><p id="ca09404059yfy">企业内部应用，调用<a href="https://open.dingtalk.com/document/development/obtain-the-access-token-of-an-internal-app#" id="7ea7464b9atq7" class="xref">获取企业内部应用的accessToken</a>接口获取。</p></li><li id="4198465b2bgql"><p id="65bfc18266teh">第三方企业应用，调用<a href="https://open.dingtalk.com/document/development/obtain-the-access-token-of-the-authorized-enterprise-1#" id="8889cafb9d8wg" class="xref">获取第三方应用授权企业的accessToken</a>接口获取。</p></li></ul></td></tr></tbody></table></section><section id="section-request-body-parameter" class="section"><h3 data-tag="h3" id="h2-p5w-yfs-vwa" class="h3 title">请求体</h3><table id="fa08b9c501kxg" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="73974464f4khc"><td id="6870baf474ggo" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="a484897ca083s">名称</p></td><td id="f006204f78of6" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="1130bd77f0v6h">类型</p></td><td id="8ecf9b9ad5sgn" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="5f84bf36e8m2e">是否必填</p></td><td id="7d6db917f1ip0" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="4717b25808lhb">描述</p></td></tr><tr outputclass="row row-level-1" id="151819d853w6c" class="row row-level-1"><td id="243a8ca96fbv9" rowspan="1" colspan="1"><p id="f99e54859elri">processCode</p></td><td id="1abb8a8124yxn" rowspan="1" colspan="1"><p id="1df379cbf4dqc">String</p></td><td id="ce4d61a14dqb2" rowspan="1" colspan="1"><p id="8d06496d6d6u4">是</p></td><td id="8c720780ecnul" rowspan="1" colspan="1"><p id="0cc16a56e9oe5">审批流的唯一码，<span style="color:rgb(23, 26, 29)">调用</span><a href="https://open.dingtalk.com/document/development/create-an-approval-form-template#" id="4226629905qol" class="xref doc-preview-card-popover" target="_blank">创建或更新审批表单模板</a><span style="color:rgb(23, 26, 29)">接口或</span><a href="https://open.dingtalk.com/document/development/workflow-overview#" id="5bb8807aearqt" class="xref doc-preview-card-popover" target="_blank">OA审批概述-名词解释</a><span style="color:rgb(23, 26, 29)">获取。</span></p></td></tr><tr outputclass="row row-level-2" id="a6e5530d38vxe" class="row row-level-2"><td id="ea78feb75bn31" rowspan="1" colspan="1"><p id="67017e0686cvn">deptId</p></td><td id="dbd3b06fe1ldl" rowspan="1" colspan="1"><p id="de42762570yh8">Integer</p></td><td id="16937396e0u4h" rowspan="1" colspan="1"><p id="a6c3297681za3">是</p></td><td id="eafd02318271p" rowspan="1" colspan="1"><p id="86a388622cdt9">即将发起审批单的员工所在部门ID，可通过<a href="https://open.dingtalk.com/document/development/user-management-acquires-the-list-departments#" id="b0c5b85b36mzq" class="xref">获取部门列表</a>接口获取。</p></td></tr><tr outputclass="row row-level-3" id="de2779c39cuyt" class="row row-level-3"><td id="4e4bd4e8bdh7o" rowspan="1" colspan="1"><p id="942d0c69b05ny">userId</p></td><td id="572cbc078ewhu" rowspan="1" colspan="1"><p id="c10468c3e3mbu">String</p></td><td id="e0fdca90398vz" rowspan="1" colspan="1"><p id="37365f131cu77">是</p></td><td id="e09c3770ddz9u" rowspan="1" colspan="1"><p id="aa09c168f4vlr">即将发起审批单的员工userId，可通过<a href="https://open.dingtalk.com/document/development/query-the-list-of-department-userids#" id="99ee2ee8c6snx" class="xref">获取部门用户userid列表</a>接口获取。</p></td></tr><tr outputclass="row row-level-4 has-child" id="d675dee5efr1h" class="row row-level-4 has-child"><td id="b011fde84fxfd" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="8298da664cm2a">formComponentValues</p></td><td id="dae5cc02fbzlt" rowspan="1" colspan="1"><p id="20f703a04fjmi">Array</p></td><td id="6f3849f0578jh" rowspan="1" colspan="1"><p id="3a39122ed47rn">是</p></td><td id="62b9bc54b5a27" rowspan="1" colspan="1"><p id="12b55751382yf">表单控件数据列表，最多长度150。</p></td></tr><tr outputclass="row row-level-4-1" id="bf4b399470nzi" class="row row-level-4-1"><td id="f35caa8af8mi4" rowspan="1" colspan="1"><p id="27ca5a0d64qp0">id</p></td><td id="5f48ae6c30cxg" rowspan="1" colspan="1"><p id="308bfc87565mv">String</p></td><td id="976885917fsdz" rowspan="1" colspan="1"><p id="ea72525bb992s">否</p></td><td id="02e73ab8ac9n6" rowspan="1" colspan="1"><p id="acef55126esn7">控件id。</p></td></tr><tr outputclass="row row-level-4-2" id="765e46160ed8m" class="row row-level-4-2"><td id="7ad7f87ae0w04" rowspan="1" colspan="1"><p id="05f6476068tzo">bizAlias</p></td><td id="8e53b57c1407r" rowspan="1" colspan="1"><p id="a7004ca44eibu">String</p></td><td id="73d2b79494r81" rowspan="1" colspan="1"><p id="ee11eade6br26">否</p></td><td id="17e756b0eaa4a" rowspan="1" colspan="1"><p id="4e84fe43b0pqi">控件别名。</p></td></tr><tr outputclass="row row-level-4-3" id="62f97f90fflzi" class="row row-level-4-3"><td id="388313caa4m24" rowspan="1" colspan="1"><p id="35e4f2de13qyh">name</p></td><td id="7ff283cbbfgfr" rowspan="1" colspan="1"><p id="303fbf3c4agzk">String</p></td><td id="73e10f3bad5i1" rowspan="1" colspan="1"><p id="7eccb72570gqy">是</p></td><td id="da7ef0063co5q" rowspan="1" colspan="1"><p id="fac1c5a5c5ada">控件名称。</p></td></tr><tr outputclass="row row-level-4-4" id="5483a68dc5d9n" class="row row-level-4-4"><td id="d3c382c9c4rxp" rowspan="1" colspan="1"><p id="c299e98d81mog">value</p></td><td id="4fa6ed73d30xd" rowspan="1" colspan="1"><p id="1ff5750cdatot">String</p></td><td id="b5d50a20ba800" rowspan="1" colspan="1"><p id="e04d6f3441xo5">是</p></td><td id="d3643a33fakj0" rowspan="1" colspan="1"><p id="24b67e32bf0el">控件值。</p></td></tr><tr outputclass="row row-level-4-5" id="7b7a97252c69l" class="row row-level-4-5"><td id="ac8b158088do9" rowspan="1" colspan="1"><p id="064564c9513pz">extValue</p></td><td id="c5aeedc721ubt" rowspan="1" colspan="1"><p id="4893fa18e8xv7">String</p></td><td id="7288716066w0q" rowspan="1" colspan="1"><p id="9e3b5a094b4xj">否</p></td><td id="9a62902e1a811" rowspan="1" colspan="1"><p id="606990f343m5g">控件扩展值。</p></td></tr><tr outputclass="row row-level-4-6" id="28c582a182f7u" class="row row-level-4-6"><td id="865af8c35fkkg" rowspan="1" colspan="1"><p id="a9f9c922edv7z">componentType</p></td><td id="f849bb875ah8m" rowspan="1" colspan="1"><p id="19ee17fc8ccv1">String</p></td><td id="290437c00f2g6" rowspan="1" colspan="1"><p id="37aa1c622bmqu">否</p></td><td id="80960826b8yxk" rowspan="1" colspan="1"><p id="b0c0842c91h2t">控件类型，取值：</p><ul id="478b7c66076uq"><li id="aa4a2c3c3c1ez"><p id="f55946daa3xjd"><b>TextField</b>：单行输入框</p></li><li id="2c5bb57e15vpp"><p id="fd4a9c470cldx"><b>TextareaField</b>：多行输入框</p></li><li id="ffda346f0av1b"><p id="064321cdffi5c"><b>NumberField</b>：数字输入框</p></li><li id="8c24ca2c7b2e9"><p id="678fc8de3b42g"><b>DDSelectField</b>：单选框</p></li><li id="86953dcd9f44p"><p id="3ffd0ed4efz85"><b>DDMultiSelectField</b>：多选框</p></li><li id="1ae7e6eb528ls"><p id="9e312601b2hef"><b>DDDateField</b>：日期控件</p></li><li id="068922532eewo"><p id="fd8c8de85enc0"><b>DDDateRangeField</b>：时间区间控件</p></li><li id="b6cbffdb74m09"><p id="d2291cac279ax"><b>TextNote</b>：文字说明控件</p></li><li id="3468eb1fff5ui"><p id="fff6da5ec0qro"><b>PhoneField</b>：电话控件</p></li><li id="9f356605de4wx"><p id="188eb0cc42et6"><b>DDPhotoField</b>：图片控件</p></li><li id="d27d36c8dc0nd"><p id="b2b2a1545e4m1"><b>MoneyField</b>：金额控件</p></li><li id="31385373bci7h"><p id="c00eaec267gwt"><b>TableField</b>：明细控件</p></li><li id="7abbcee9095fy"><p id="34b73261815iu"><b>DDAttachment</b>：附件</p></li><li id="23fe2ff1049qw"><p id="e64664421ackk"><b>InnerContactField</b>：联系人控件</p></li><li id="dc9d2a2ba8k7a"><p id="3e5ba71524zj7"><b>RelateField</b>：关联审批单</p></li><li id="d0501a1a35dt4"><p id="5d2e835ac6u3x"><b>FormRelateField</b>：关联控件</p></li></ul></td></tr><tr outputclass="row row-level-4-7 has-child" id="7fa63f32ee8dh" class="row row-level-4-7 has-child"><td id="41c1b52587kgx" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="e6aaa6914a2kh">details</p></td><td id="131e40968dv9t" rowspan="1" colspan="1"><p id="5e5023984cnzz">Array</p></td><td id="61362d719bmn7" rowspan="1" colspan="1"><p id="9cc1b2f27bwsk">否</p></td><td id="432c8d0f813ye" rowspan="1" colspan="1"><p id="fd66354b9ekxe">子控件列表，最大列表长度150。</p></td></tr><tr outputclass="row row-level-4-7-1" id="8fb9f3e287dap" class="row row-level-4-7-1"><td id="616187ca9116w" rowspan="1" colspan="1"><p id="82fbc542f3rr3">id</p></td><td id="00b9738ef1mtg" rowspan="1" colspan="1"><p id="5cf74fe06fdza">String</p></td><td id="6830c23deb1im" rowspan="1" colspan="1"><p id="69b653e2804uf">否</p></td><td id="7a3fe3df047iy" rowspan="1" colspan="1"><p id="405c13e5fchk0">控件id。</p></td></tr><tr outputclass="row row-level-4-7-2" id="948e09f45evjf" class="row row-level-4-7-2"><td id="210755dbc8ped" rowspan="1" colspan="1"><p id="45b0f47d387jb">bizAlias</p></td><td id="cd146fb44bu63" rowspan="1" colspan="1"><p id="72e7b1a531n5d">String</p></td><td id="04ddc2ce179g8" rowspan="1" colspan="1"><p id="ef9d2d2ce80aw">否</p></td><td id="8d06c39671ayg" rowspan="1" colspan="1"><p id="749e1025f85ky">控件别名。</p></td></tr><tr outputclass="row row-level-4-7-3" id="b0c44536e809x" class="row row-level-4-7-3"><td id="892e547adcfrx" rowspan="1" colspan="1"><p id="9d8cfbb4bd1rv">name</p></td><td id="ab0034d5abn4k" rowspan="1" colspan="1"><p id="8b09a68e68ovi">String</p></td><td id="74a8fefc69p5v" rowspan="1" colspan="1"><p id="89ffdef189re3">否</p></td><td id="fec0c894dbs95" rowspan="1" colspan="1"><p id="ee09e590f6hri">控件名称。</p></td></tr><tr outputclass="row row-level-4-7-4" id="8c6b02d6c0wo9" class="row row-level-4-7-4"><td id="f7437fae53sg5" rowspan="1" colspan="1"><p id="1c9803e289pqn">value</p></td><td id="39ec5ab95byyx" rowspan="1" colspan="1"><p id="6ab1801cd2as1">String</p></td><td id="c6c4b9bd04x9z" rowspan="1" colspan="1"><p id="139b4bd0b8jby">否</p></td><td id="66a5d2f6de5fh" rowspan="1" colspan="1"><p id="043e5e63c17l4">控件值。</p></td></tr><tr outputclass="row row-level-4-7-5" id="608f0f2b9byz7" class="row row-level-4-7-5"><td id="d155b61cde5y5" rowspan="1" colspan="1"><p id="c150aae6f26o3">extValue</p></td><td id="272333f9f8cbt" rowspan="1" colspan="1"><p id="bab24ac407vr5">String</p></td><td id="7de35fa843i51" rowspan="1" colspan="1"><p id="17700e6e68zwk">否</p></td><td id="7419a63bbaj1h" rowspan="1" colspan="1"><p id="765cd2d6d3t5x">控件扩展值。</p></td></tr><tr outputclass="row row-level-4-7-6 has-child" id="a281e44edefvi" class="row row-level-4-7-6 has-child"><td id="b5ec38b9168ht" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="1a8b99d578ytq">details</p></td><td id="6d2786c871fvg" rowspan="1" colspan="1"><p id="3185974072bne">Array</p></td><td id="1014ac3560zk6" rowspan="1" colspan="1"><p id="1b42a2d9d4abm">否</p></td><td id="1ab7f52fceeyp" rowspan="1" colspan="1"><p id="947a1ac86fapt">子控件列表，最大列表长度150。</p></td></tr><tr outputclass="row row-level-4-7-6-1" id="ea730b85caqm7" class="row row-level-4-7-6-1"><td id="a7a1f40ea56um" rowspan="1" colspan="1"><p id="6a98146e910nh">id</p></td><td id="2584791e77evk" rowspan="1" colspan="1"><p id="a507e41953xx2">String</p></td><td id="b9ed9aaf2am4w" rowspan="1" colspan="1"><p id="c254831e5bp67">否</p></td><td id="5c7fc6fda15i9" rowspan="1" colspan="1"><p id="2a53989013bp2">控件id。</p></td></tr><tr outputclass="row row-level-4-7-6-2" id="5daccdc7288k5" class="row row-level-4-7-6-2"><td id="b38d2b472bgdy" rowspan="1" colspan="1"><p id="c8516b4b46a8t">bizAlias</p></td><td id="a9d972ec816ij" rowspan="1" colspan="1"><p id="878947c7f00vn">String</p></td><td id="2ff6fcde3dqel" rowspan="1" colspan="1"><p id="869ecf21ackhe">否</p></td><td id="7ff858b338jua" rowspan="1" colspan="1"><p id="2b7299c50837t">控件别名。</p></td></tr><tr outputclass="row row-level-4-7-6-3" id="7e3824d26fd11" class="row row-level-4-7-6-3"><td id="f0dde71db5a65" rowspan="1" colspan="1"><p id="087e69c201dw2">name</p></td><td id="481e7ed21b359" rowspan="1" colspan="1"><p id="96e38f48cco9t">String</p></td><td id="676de277824jm" rowspan="1" colspan="1"><p id="391e713a5bm20">否</p></td><td id="f5acbe30cbzns" rowspan="1" colspan="1"><p id="f3f8b702890xj">控件名称。</p></td></tr><tr outputclass="row row-level-4-7-6-4" id="d2360e77b2sz8" class="row row-level-4-7-6-4"><td id="493db85e9a608" rowspan="1" colspan="1"><p id="b996fe80caenz">value</p></td><td id="87183df07fwt6" rowspan="1" colspan="1"><p id="d229ea793aheu">String</p></td><td id="d000633f6ep74" rowspan="1" colspan="1"><p id="e5dc464998miv">否</p></td><td id="20731b35358ub" rowspan="1" colspan="1"><p id="9e24343c075hs">控件值。</p></td></tr><tr outputclass="row row-level-4-7-6-5" id="3663730796sqf" class="row row-level-4-7-6-5"><td id="1fa073cebfru5" rowspan="1" colspan="1"><p id="1792960fed2rg">extValue</p></td><td id="d3b5df09a8qnh" rowspan="1" colspan="1"><p id="9eede86405d3b">String</p></td><td id="e1bcf1ac16iq1" rowspan="1" colspan="1"><p id="c7b6c92fb219m">否</p></td><td id="d5911077b3kn1" rowspan="1" colspan="1"><p id="a2dd590054x6b">控件扩展值。</p></td></tr><tr outputclass="row row-level-4-7-6-6" id="815b15cfdfrst" class="row row-level-4-7-6-6"><td id="12e90624c0m5o" rowspan="1" colspan="1"><p id="f3bc246356r1n">componentType</p></td><td id="bb9b7633f9uon" rowspan="1" colspan="1"><p id="3d10f08f53wqf">String</p></td><td id="336de4a9d18f1" rowspan="1" colspan="1"><p id="a6ba9ef11csmr">否</p></td><td id="1703a0b0bbmvb" rowspan="1" colspan="1"><p id="83d397ebf9h2p">控件类型，取值：</p><ul id="59d4c2921dhxo"><li id="0f2b0e8e54ild"><p id="87a4ec9d85u50"><b>TextField</b>：单行输入框</p></li><li id="095d3006494tg"><p id="fcb716cabf82c"><b>TextareaField</b>：多行输入框</p></li><li id="eb85babd98fjf"><p id="d325274a04m5f"><b>NumberField</b>：数字输入框</p></li><li id="74a6e3f96d0jt"><p id="7e91566aa3tv4"><b>DDSelectField</b>：单选框</p></li><li id="5af970c32ezae"><p id="5b0e55b283jar"><b>DDMultiSelectField</b>：多选框</p></li><li id="b6ccb543a6g58"><p id="24f81ffd3egmm"><b>DDDateField</b>：日期控件</p></li><li id="b379d65d98ct3"><p id="b91e2d394fgye"><b>DDDateRangeField</b>：时间区间控件</p></li><li id="7730e6c011p93"><p id="ca39d3fef6z6d"><b>TextNote</b>：文字说明控件</p></li><li id="a5ccfa8222er4"><p id="33066ca3e3mdo"><b>PhoneField</b>：电话控件</p></li><li id="b5fd4e2ce2nt5"><p id="74f5e37133mul"><b>DDPhotoField</b>：图片控件</p></li><li id="8253f9a7d3cn6"><p id="4a5df26c0cgpi"><b>MoneyField</b>：金额控件</p></li><li id="1e4ebf6bb66ts"><p id="9e1bc103f4uny"><b>TableField</b>：明细控件</p></li><li id="3176c0fc99m09"><p id="fb403d47b51t7"><b>DDAttachment</b>：附件</p></li><li id="b7214799c2b27"><p id="018fca9a09rc8"><b>InnerContactField</b>：联系人控件</p></li><li id="833b1a63739lv"><p id="5e6b2cb3ddtrm"><b>RelateField</b>：关联审批单</p></li><li id="f3ea95e67dali"><p id="31fd139b00aod"><b>FormRelateField</b>：关联控件</p></li></ul></td></tr></tbody></table></section><section id="section-request-body-example" class="section"><h3 id="h3-request-body-example" data-tag="h3" class="h3">请求示例</h3><div outputclass="tabbed-codeblock" data-tag="fig" id="figure-teh-sk1-z4z" class="tabbed-codeblock-box"><div class="tab-box"></div><input type="radio" name="check-figure-teh-sk1-z4z" id="figure-teh-sk1-z4z-HTTP-tab" checked="checked" /><label for="figure-teh-sk1-z4z-HTTP-tab">HTTP</label><div class="codeblock-item"><pre id="codeblock-yzw-xwz-odj" outputclass="language-HTTP" code-type="xCode" data-tag="codeblock" class="pre codeblock language-HTTP"><code>POST /v1.0/workflow/processes/forecast HTTP/1.1
+Host:api.dingtalk.com
+x-acs-dingtalk-access-token:ea96fed0eda0325e8b30f182805f5f4e
+Content-Type:application/json
+
+{ 
+    /*
+      该接口当前尚未支持审批应用中的所有控件，以以下列出示例的控件为准。
+      基本的控件数据在传递时只需要填写 name 和 value 属性即可，两者都是字符串格式。
+      如果数据是 json 格式，也需要先转义为字符串格式。
+    */ 
+    "userId": "26652461xxxx5992",
+    "deptId": 1,
+    "processCode": "PROC-17428B8C-6C60-xxxx-924C-64F1037AE067",
+    "formComponentValues": [
+        {
+          "name": "单行输入框",
+          "value": "单行输入框示例"
+        },
+        {
+          "name": "多行输入框",
+          "value": "多行输入框示例"
+        },
+        {
+          "name": "数字输入框",
+          "value": "100"
+        },
+        {
+          /*
+            value 可以直接填写实际的选项值
+          */
+          "name": "单选框",
+          "value": "选项1"
+        },
+        {
+          /*
+            value 需要将实际的选项值组成的数组转义为字符串，即使只有一个
+            选项也需要是数组形式
+          */
+          "name": "多选框",
+          "value": "[\"选项1\",\"选项2\"]"
+        }, 
+        {
+          /*
+            value 仅支持 yyyy-MM-dd 一种格式
+          */
+          "name": "日期",
+          "value": "2021-08-17"
+        },
+        {
+          /*
+            value 是时间数组的字符串形式，同样仅支持 yyyy-MM-dd 一种格式
+          */
+          "name": "[\"开始时间\",\"结束时间\"]",
+          "value": "[\"2019-02-19\",\"2019-02-25\"]"
+        },
+        {
+          "name": "身份证",
+          "value": "xxxx"
+        },
+        {
+          /*
+            value 需要将实际的 url 组成的数组转义为字符串，即使只有一个
+            选项也需要是数组形式
+          */
+          "name": "图片",
+          "value": "[\"http://url1\",\"http://url2\",\"http://url3\"]"
+        },
+        {
+          /*
+            表格控件的 value 是一个 json 对象的二维数组。数组中的每一行表示了表格中的一行数据，
+            一行中的每个 json 对象表示表格中的一个控件。
+          */
+          "name": "表格",
+          "value": "[[{\"id\":\"TextField_CM2IN2SOB600\", \"value\":\"hello\"}, {\"id\":\"TextField_QQOAK1OA2G00\", \"value\":\"world\"}]]"
+        },
+        {
+          "name": "金额（元）",
+          "value": "100"
+        },
+        {
+          /*
+            附件控件的 value 是一个 json 数组转义为字符串形式。数组中的每个 json 对象是一个附件文件，
+            每个文件都必须包含 spaceId、fileName、fileSize、fileType 和 fileId 字段，这些字段
+            都可以通过调用钉盘的上传附件接口获取。
+          */
+          "name": "附件",
+          "value": "[{\"spaceId\": \"163xxxx658\", \"fileName\": \"2644.JPG\", \"fileSize\": \"333\", \"fileType\": \"jpg\", \"fileId\": " +
+          "\"643xxxx140\"}]"
+        },
+        {
+          "name": "联系人",
+          "value": "[\"4525xxxxxxxx77041\"]"
+        },
+        {
+          /*
+            value 需要将实际的审批单组成的数组转义为字符串，即使只有一个
+            选项也需要是数组形式
+          */
+          "name": "关联审批单",
+          "value": "[\"fa2aa864-xxxx-xxxx-xxxx-75572c0e2cdf\", \"7125778e-xxxx-xxxx-xxxx-faa987478a9b\"]"
+        }
+    ]
+}</code></pre></div><input type="radio" name="check-figure-teh-sk1-z4z" id="figure-teh-sk1-z4z-java-tab" /><label for="figure-teh-sk1-z4z-java-tab">Java</label><div class="codeblock-item"><pre id="codeblock-rmp-2dl-gjq" outputclass="language-java" code-type="xCode" data-tag="codeblock" class="pre codeblock language-java"><code>// This file is auto-generated, don't edit it. Thanks.
+package com.aliyun.sample;
+
+import com.aliyun.tea.*;
+import com.aliyun.teautil.*;
+import com.aliyun.teautil.models.*;
+import com.aliyun.dingtalkworkflow_1_0.*;
+import com.aliyun.dingtalkworkflow_1_0.models.*;
+import com.aliyun.teaopenapi.*;
+import com.aliyun.teaopenapi.models.*;
+
+public class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Client
+     * @throws Exception
+     */
+    public static com.aliyun.dingtalkworkflow_1_0.Client createClient() throws Exception {
+        Config config = new Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        return new com.aliyun.dingtalkworkflow_1_0.Client(config);
+    }
+
+    public static void main(String[] args_) throws Exception {
+        java.util.List&lt;String&gt; args = java.util.Arrays.asList(args_);
+        com.aliyun.dingtalkworkflow_1_0.Client client = Sample.createClient();
+        ProcessForecastHeaders processForecastHeaders = new ProcessForecastHeaders();
+        processForecastHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        ProcessForecastRequest.ProcessForecastRequestFormComponentValuesDetailsDetails formComponentValues0Details0Details0 = new ProcessForecastRequest.ProcessForecastRequestFormComponentValuesDetailsDetails()
+                .setId("PhoneField_IZI2LP8QF6O0")
+                .setBizAlias("Phone")
+                .setName("PhoneField")
+                .setValue("123xxxxxxxx")
+                .setExtValue("总个数:1")
+                .setComponentType("TextField");
+        ProcessForecastRequest.ProcessForecastRequestFormComponentValuesDetails formComponentValues0Details0 = new ProcessForecastRequest.ProcessForecastRequestFormComponentValuesDetails()
+                .setId("PhoneField_IZI2LP8QF6O0")
+                .setBizAlias("Phone")
+                .setName("PhoneField")
+                .setValue("123xxxxxxxx")
+                .setExtValue("总个数:1")
+                .setDetails(java.util.Arrays.asList(
+                    formComponentValues0Details0Details0
+                ));
+        ProcessForecastRequest.ProcessForecastRequestFormComponentValues formComponentValues0 = new ProcessForecastRequest.ProcessForecastRequestFormComponentValues()
+                .setId("PhoneField_IZI2LP8QF6O0")
+                .setBizAlias("Phone")
+                .setName("PhoneField")
+                .setValue("123xxxxxxxx")
+                .setExtValue("总个数:1")
+                .setComponentType("TextField")
+                .setDetails(java.util.Arrays.asList(
+                    formComponentValues0Details0
+                ));
+        ProcessForecastRequest processForecastRequest = new ProcessForecastRequest()
+                .setProcessCode("PROC-EF6YJL35P2-SCKICSB7P750S0YISYKV3-xxxx-1")
+                .setDeptId(1)
+                .setUserId("manager432")
+                .setFormComponentValues(java.util.Arrays.asList(
+                    formComponentValues0
+                ));
+        try {
+            client.processForecastWithOptions(processForecastRequest, processForecastHeaders, new RuntimeOptions());
+        } catch (TeaException err) {
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        } catch (Exception _err) {
+            TeaException err = new TeaException(_err.getMessage(), _err);
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        }        
+    }
+}</code></pre></div><input type="radio" name="check-figure-teh-sk1-z4z" id="figure-teh-sk1-z4z-python-tab" /><label for="figure-teh-sk1-z4z-python-tab">Python</label><div class="codeblock-item"><pre id="codeblock-of3-ugn-avy" outputclass="language-python" code-type="xCode" data-tag="codeblock" class="pre codeblock language-python"><code># -*- coding: utf-8 -*-
+# This file is auto-generated, don't edit it. Thanks.
+import sys
+
+from typing import List
+
+from alibabacloud_dingtalk.workflow_1_0.client import Client as dingtalkworkflow_1_0Client
+from alibabacloud_tea_openapi import models as open_api_models
+from alibabacloud_dingtalk.workflow_1_0 import models as dingtalkworkflow__1__0_models
+from alibabacloud_tea_util import models as util_models
+from alibabacloud_tea_util.client import Client as UtilClient
+
+
+class Sample:
+    def __init__(self):
+        pass
+
+    @staticmethod
+    def create_client() -&gt; dingtalkworkflow_1_0Client:
+        """
+        使用 Token 初始化账号Client
+        @return: Client
+        @throws Exception
+        """
+        config = open_api_models.Config()
+        config.protocol = 'https'
+        config.region_id = 'central'
+        return dingtalkworkflow_1_0Client(config)
+
+    @staticmethod
+    def main(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        process_forecast_headers = dingtalkworkflow__1__0_models.ProcessForecastHeaders()
+        process_forecast_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        form_component_values_0details_0details_0 = dingtalkworkflow__1__0_models.ProcessForecastRequestFormComponentValuesDetailsDetails(
+            id='PhoneField_IZI2LP8QF6O0',
+            biz_alias='Phone',
+            name='PhoneField',
+            value='123xxxxxxxx',
+            ext_value='总个数:1',
+            component_type='TextField'
+        )
+        form_component_values_0details_0 = dingtalkworkflow__1__0_models.ProcessForecastRequestFormComponentValuesDetails(
+            id='PhoneField_IZI2LP8QF6O0',
+            biz_alias='Phone',
+            name='PhoneField',
+            value='123xxxxxxxx',
+            ext_value='总个数:1',
+            details=[
+                form_component_values_0details_0details_0
+            ]
+        )
+        form_component_values_0 = dingtalkworkflow__1__0_models.ProcessForecastRequestFormComponentValues(
+            id='PhoneField_IZI2LP8QF6O0',
+            biz_alias='Phone',
+            name='PhoneField',
+            value='123xxxxxxxx',
+            ext_value='总个数:1',
+            component_type='TextField',
+            details=[
+                form_component_values_0details_0
+            ]
+        )
+        process_forecast_request = dingtalkworkflow__1__0_models.ProcessForecastRequest(
+            process_code='PROC-EF6YJL35P2-SCKICSB7P750S0YISYKV3-xxxx-1',
+            dept_id=1,
+            user_id='manager432',
+            form_component_values=[
+                form_component_values_0
+            ]
+        )
+        try:
+            client.process_forecast_with_options(process_forecast_request, process_forecast_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+    @staticmethod
+    async def main_async(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        process_forecast_headers = dingtalkworkflow__1__0_models.ProcessForecastHeaders()
+        process_forecast_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        form_component_values_0details_0details_0 = dingtalkworkflow__1__0_models.ProcessForecastRequestFormComponentValuesDetailsDetails(
+            id='PhoneField_IZI2LP8QF6O0',
+            biz_alias='Phone',
+            name='PhoneField',
+            value='123xxxxxxxx',
+            ext_value='总个数:1',
+            component_type='TextField'
+        )
+        form_component_values_0details_0 = dingtalkworkflow__1__0_models.ProcessForecastRequestFormComponentValuesDetails(
+            id='PhoneField_IZI2LP8QF6O0',
+            biz_alias='Phone',
+            name='PhoneField',
+            value='123xxxxxxxx',
+            ext_value='总个数:1',
+            details=[
+                form_component_values_0details_0details_0
+            ]
+        )
+        form_component_values_0 = dingtalkworkflow__1__0_models.ProcessForecastRequestFormComponentValues(
+            id='PhoneField_IZI2LP8QF6O0',
+            biz_alias='Phone',
+            name='PhoneField',
+            value='123xxxxxxxx',
+            ext_value='总个数:1',
+            component_type='TextField',
+            details=[
+                form_component_values_0details_0
+            ]
+        )
+        process_forecast_request = dingtalkworkflow__1__0_models.ProcessForecastRequest(
+            process_code='PROC-EF6YJL35P2-SCKICSB7P750S0YISYKV3-xxxx-1',
+            dept_id=1,
+            user_id='manager432',
+            form_component_values=[
+                form_component_values_0
+            ]
+        )
+        try:
+            await client.process_forecast_with_options_async(process_forecast_request, process_forecast_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+
+if __name__ == '__main__':
+    Sample.main(sys.argv[1:])</code></pre></div><input type="radio" name="check-figure-teh-sk1-z4z" id="figure-teh-sk1-z4z-php-tab" /><label for="figure-teh-sk1-z4z-php-tab">PHP</label><div class="codeblock-item"><pre id="codeblock-q4p-n6j-fnf" outputclass="language-php" code-type="xCode" data-tag="codeblock" class="pre codeblock language-php"><code>&lt;?php
+
+// This file is auto-generated, don't edit it. Thanks.
+namespace AlibabaCloud\SDK\Sample;
+
+use AlibabaCloud\SDK\Dingtalk\Vworkflow_1_0\Dingtalk;
+use \Exception;
+use AlibabaCloud\Tea\Exception\TeaError;
+use AlibabaCloud\Tea\Utils\Utils;
+
+use Darabonba\OpenApi\Models\Config;
+use AlibabaCloud\SDK\Dingtalk\Vworkflow_1_0\Models\ProcessForecastHeaders;
+use AlibabaCloud\SDK\Dingtalk\Vworkflow_1_0\Models\ProcessForecastRequest\formComponentValues\details\details;
+use AlibabaCloud\SDK\Dingtalk\Vworkflow_1_0\Models\ProcessForecastRequest\formComponentValues;
+use AlibabaCloud\SDK\Dingtalk\Vworkflow_1_0\Models\ProcessForecastRequest;
+use AlibabaCloud\Tea\Utils\Utils\RuntimeOptions;
+
+class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Dingtalk Client
+     */
+    public static function createClient(){
+        $config = new Config([]);
+        $config-&gt;protocol = "https";
+        $config-&gt;regionId = "central";
+        return new Dingtalk($config);
+    }
+
+    /**
+     * @param string[] $args
+     * @return void
+     */
+    public static function main($args){
+        $client = self::createClient();
+        $processForecastHeaders = new ProcessForecastHeaders([]);
+        $processForecastHeaders-&gt;xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        $formComponentValues0Details0Details0 = new details([
+            "id" =&gt; "PhoneField_IZI2LP8QF6O0",
+            "bizAlias" =&gt; "Phone",
+            "name" =&gt; "PhoneField",
+            "value" =&gt; "123xxxxxxxx",
+            "extValue" =&gt; "总个数:1",
+            "componentType" =&gt; "TextField"
+        ]);
+        $formComponentValues0Details0 = new \AlibabaCloud\SDK\Dingtalk\Vworkflow_1_0\Models\ProcessForecastRequest\formComponentValues\details([
+            "id" =&gt; "PhoneField_IZI2LP8QF6O0",
+            "bizAlias" =&gt; "Phone",
+            "name" =&gt; "PhoneField",
+            "value" =&gt; "123xxxxxxxx",
+            "extValue" =&gt; "总个数:1",
+            "details" =&gt; [
+                $formComponentValues0Details0Details0
+            ]
+        ]);
+        $formComponentValues0 = new formComponentValues([
+            "id" =&gt; "PhoneField_IZI2LP8QF6O0",
+            "bizAlias" =&gt; "Phone",
+            "name" =&gt; "PhoneField",
+            "value" =&gt; "123xxxxxxxx",
+            "extValue" =&gt; "总个数:1",
+            "componentType" =&gt; "TextField",
+            "details" =&gt; [
+                $formComponentValues0Details0
+            ]
+        ]);
+        $processForecastRequest = new ProcessForecastRequest([
+            "processCode" =&gt; "PROC-EF6YJL35P2-SCKICSB7P750S0YISYKV3-xxxx-1",
+            "deptId" =&gt; 1,
+            "userId" =&gt; "manager432",
+            "formComponentValues" =&gt; [
+                $formComponentValues0
+            ]
+        ]);
+        try {
+            $client-&gt;processForecastWithOptions($processForecastRequest, $processForecastHeaders, new RuntimeOptions([]));
+        }
+        catch (Exception $err) {
+            if (!($err instanceof TeaError)) {
+                $err = new TeaError([], $err-&gt;getMessage(), $err-&gt;getCode(), $err);
+            }
+            if (!Utils::empty_($err-&gt;code) &amp;&amp; !Utils::empty_($err-&gt;message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+        }
+    }
+}
+$path = __DIR__ . \DIRECTORY_SEPARATOR . '..' . \DIRECTORY_SEPARATOR . 'vendor' . \DIRECTORY_SEPARATOR . 'autoload.php';
+if (file_exists($path)) {
+    require_once $path;
+}
+Sample::main(array_slice($argv, 1));</code></pre></div><input type="radio" name="check-figure-teh-sk1-z4z" id="figure-teh-sk1-z4z-go-tab" /><label for="figure-teh-sk1-z4z-go-tab">Go</label><div class="codeblock-item"><pre id="codeblock-pg1-jmk-efc" outputclass="language-go" code-type="xCode" data-tag="codeblock" class="pre codeblock language-go"><code>// This file is auto-generated, don't edit it. Thanks.
+package main
+
+import (
+  "os"
+  util  "github.com/alibabacloud-go/tea-utils/service"
+  dingtalkworkflow_1_0  "github.com/alibabacloud-go/dingtalk/workflow_1_0"
+  openapi  "github.com/alibabacloud-go/darabonba-openapi/client"
+  "github.com/alibabacloud-go/tea/tea"
+)
+
+
+/**
+ * 使用 Token 初始化账号Client
+ * @return Client
+ * @throws Exception
+ */
+func CreateClient () (_result *dingtalkworkflow_1_0.Client, _err error) {
+  config := &amp;openapi.Config{}
+  config.Protocol = tea.String("https")
+  config.RegionId = tea.String("central")
+  _result = &amp;dingtalkworkflow_1_0.Client{}
+  _result, _err = dingtalkworkflow_1_0.NewClient(config)
+  return _result, _err
+}
+
+func _main (args []*string) (_err error) {
+  client, _err := CreateClient()
+  if _err != nil {
+    return _err
+  }
+
+  processForecastHeaders := &amp;dingtalkworkflow_1_0.ProcessForecastHeaders{}
+  processForecastHeaders.XAcsDingtalkAccessToken = tea.String("&lt;your access token&gt;")
+  formComponentValues0Details0Details0 := &amp;dingtalkworkflow_1_0.ProcessForecastRequestFormComponentValuesDetailsDetails{
+    Id: tea.String("PhoneField_IZI2LP8QF6O0"),
+    BizAlias: tea.String("Phone"),
+    Name: tea.String("PhoneField"),
+    Value: tea.String("123xxxxxxxx"),
+    ExtValue: tea.String("总个数:1"),
+    ComponentType: tea.String("TextField"),
+  }
+  formComponentValues0Details0 := &amp;dingtalkworkflow_1_0.ProcessForecastRequestFormComponentValuesDetails{
+    Id: tea.String("PhoneField_IZI2LP8QF6O0"),
+    BizAlias: tea.String("Phone"),
+    Name: tea.String("PhoneField"),
+    Value: tea.String("123xxxxxxxx"),
+    ExtValue: tea.String("总个数:1"),
+    Details: []*dingtalkworkflow_1_0.ProcessForecastRequestFormComponentValuesDetailsDetails{formComponentValues0Details0Details0},
+  }
+  formComponentValues0 := &amp;dingtalkworkflow_1_0.ProcessForecastRequestFormComponentValues{
+    Id: tea.String("PhoneField_IZI2LP8QF6O0"),
+    BizAlias: tea.String("Phone"),
+    Name: tea.String("PhoneField"),
+    Value: tea.String("123xxxxxxxx"),
+    ExtValue: tea.String("总个数:1"),
+    ComponentType: tea.String("TextField"),
+    Details: []*dingtalkworkflow_1_0.ProcessForecastRequestFormComponentValuesDetails{formComponentValues0Details0},
+  }
+  processForecastRequest := &amp;dingtalkworkflow_1_0.ProcessForecastRequest{
+    ProcessCode: tea.String("PROC-EF6YJL35P2-SCKICSB7P750S0YISYKV3-xxxx-1"),
+    DeptId: tea.Int32(1),
+    UserId: tea.String("manager432"),
+    FormComponentValues: []*dingtalkworkflow_1_0.ProcessForecastRequestFormComponentValues{formComponentValues0},
+  }
+  tryErr := func()(_e error) {
+    defer func() {
+      if r := tea.Recover(recover()); r != nil {
+        _e = r
+      }
+    }()
+    _, _err = client.ProcessForecastWithOptions(processForecastRequest, processForecastHeaders, &amp;util.RuntimeOptions{})
+    if _err != nil {
+      return _err
+    }
+
+    return nil
+  }()
+
+  if tryErr != nil {
+    var err = &amp;tea.SDKError{}
+    if _t, ok := tryErr.(*tea.SDKError); ok {
+      err = _t
+    } else {
+      err.Message = tea.String(tryErr.Error())
+    }
+    if !tea.BoolValue(util.Empty(err.Code)) &amp;&amp; !tea.BoolValue(util.Empty(err.Message)) {
+      // err 中含有 code 和 message 属性，可帮助开发定位问题
+    }
+
+  }
+  return _err
+}
+
+
+func main() {
+  err := _main(tea.StringSlice(os.Args[1:]))
+  if err != nil {
+    panic(err)
+  }
+}</code></pre></div><input type="radio" name="check-figure-teh-sk1-z4z" id="figure-teh-sk1-z4z-nodejs-tab" /><label for="figure-teh-sk1-z4z-nodejs-tab">Node.js</label><div class="codeblock-item"><pre id="codeblock-j3j-xah-dzo" outputclass="language-nodejs" code-type="xCode" data-tag="codeblock" class="pre codeblock language-nodejs"><code>// This file is auto-generated, don't edit it
+import Util, * as $Util from '@alicloud/tea-util';
+import dingtalkworkflow_1_0, * as $dingtalkworkflow_1_0 from '@alicloud/dingtalk/workflow_1_0';
+import OpenApi, * as $OpenApi from '@alicloud/openapi-client';
+import * as $tea from '@alicloud/tea-typescript';
+
+
+export default class Client {
+
+  /**
+   * 使用 Token 初始化账号Client
+   * @return Client
+   * @throws Exception
+   */
+  static createClient(): dingtalkworkflow_1_0 {
+    let config = new $OpenApi.Config({ });
+    config.protocol = "https";
+    config.regionId = "central";
+    return new dingtalkworkflow_1_0(config);
+  }
+
+  static async main(args: string[]): Promise&lt;void&gt; {
+    let client = Client.createClient();
+    let processForecastHeaders = new $dingtalkworkflow_1_0.ProcessForecastHeaders({ });
+    processForecastHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+    let formComponentValues0Details0Details0 = new $dingtalkworkflow_1_0.ProcessForecastRequestFormComponentValuesDetailsDetails({
+      id: "PhoneField_IZI2LP8QF6O0",
+      bizAlias: "Phone",
+      name: "PhoneField",
+      value: "123xxxxxxxx",
+      extValue: "总个数:1",
+      componentType: "TextField",
+    });
+    let formComponentValues0Details0 = new $dingtalkworkflow_1_0.ProcessForecastRequestFormComponentValuesDetails({
+      id: "PhoneField_IZI2LP8QF6O0",
+      bizAlias: "Phone",
+      name: "PhoneField",
+      value: "123xxxxxxxx",
+      extValue: "总个数:1",
+      details: [
+        formComponentValues0Details0Details0
+      ],
+    });
+    let formComponentValues0 = new $dingtalkworkflow_1_0.ProcessForecastRequestFormComponentValues({
+      id: "PhoneField_IZI2LP8QF6O0",
+      bizAlias: "Phone",
+      name: "PhoneField",
+      value: "123xxxxxxxx",
+      extValue: "总个数:1",
+      componentType: "TextField",
+      details: [
+        formComponentValues0Details0
+      ],
+    });
+    let processForecastRequest = new $dingtalkworkflow_1_0.ProcessForecastRequest({
+      processCode: "PROC-EF6YJL35P2-SCKICSB7P750S0YISYKV3-xxxx-1",
+      deptId: 1,
+      userId: "manager432",
+      formComponentValues: [
+        formComponentValues0
+      ],
+    });
+    try {
+      await client.processForecastWithOptions(processForecastRequest, processForecastHeaders, new $Util.RuntimeOptions({ }));
+    } catch (err) {
+      if (!Util.empty(err.code) &amp;&amp; !Util.empty(err.message)) {
+        // err 中含有 code 和 message 属性，可帮助开发定位问题
+      }
+
+    }    
+  }
+
+}
+
+Client.main(process.argv.slice(2));</code></pre></div><input type="radio" name="check-figure-teh-sk1-z4z" id="figure-teh-sk1-z4z-csharp-tab" /><label for="figure-teh-sk1-z4z-csharp-tab">C#</label><div class="codeblock-item"><pre id="codeblock-cvt-mu4-ykx" outputclass="language-csharp" code-type="xCode" data-tag="codeblock" class="pre codeblock language-csharp"><code>// This file is auto-generated, don't edit it. Thanks.
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
+
+using Tea;
+using Tea.Utils;
+
+
+namespace AlibabaCloud.SDK.Sample
+{
+    public class Sample 
+    {
+
+        /**
+         * 使用 Token 初始化账号Client
+         * @return Client
+         * @throws Exception
+         */
+        public static AlibabaCloud.SDK.Dingtalkworkflow_1_0.Client CreateClient()
+        {
+            AlibabaCloud.OpenApiClient.Models.Config config = new AlibabaCloud.OpenApiClient.Models.Config();
+            config.Protocol = "https";
+            config.RegionId = "central";
+            return new AlibabaCloud.SDK.Dingtalkworkflow_1_0.Client(config);
+        }
+
+        public static void Main(string[] args)
+        {
+            AlibabaCloud.SDK.Dingtalkworkflow_1_0.Client client = CreateClient();
+            AlibabaCloud.SDK.Dingtalkworkflow_1_0.Models.ProcessForecastHeaders processForecastHeaders = new AlibabaCloud.SDK.Dingtalkworkflow_1_0.Models.ProcessForecastHeaders();
+            processForecastHeaders.XAcsDingtalkAccessToken = "&lt;your access token&gt;";
+            AlibabaCloud.SDK.Dingtalkworkflow_1_0.Models.ProcessForecastRequest.ProcessForecastRequestFormComponentValues.ProcessForecastRequestFormComponentValuesDetails.ProcessForecastRequestFormComponentValuesDetailsDetails formComponentValues0Details0Details0 = new AlibabaCloud.SDK.Dingtalkworkflow_1_0.Models.ProcessForecastRequest.ProcessForecastRequestFormComponentValues.ProcessForecastRequestFormComponentValuesDetails.ProcessForecastRequestFormComponentValuesDetailsDetails
+            {
+                Id = "PhoneField_IZI2LP8QF6O0",
+                BizAlias = "Phone",
+                Name = "PhoneField",
+                Value = "123xxxxxxxx",
+                ExtValue = "总个数:1",
+                ComponentType = "TextField",
+            };
+            AlibabaCloud.SDK.Dingtalkworkflow_1_0.Models.ProcessForecastRequest.ProcessForecastRequestFormComponentValues.ProcessForecastRequestFormComponentValuesDetails formComponentValues0Details0 = new AlibabaCloud.SDK.Dingtalkworkflow_1_0.Models.ProcessForecastRequest.ProcessForecastRequestFormComponentValues.ProcessForecastRequestFormComponentValuesDetails
+            {
+                Id = "PhoneField_IZI2LP8QF6O0",
+                BizAlias = "Phone",
+                Name = "PhoneField",
+                Value = "123xxxxxxxx",
+                ExtValue = "总个数:1",
+                Details = new List&lt;AlibabaCloud.SDK.Dingtalkworkflow_1_0.Models.ProcessForecastRequest.ProcessForecastRequestFormComponentValues.ProcessForecastRequestFormComponentValuesDetails.ProcessForecastRequestFormComponentValuesDetailsDetails&gt;
+                {
+                    formComponentValues0Details0Details0
+                },
+            };
+            AlibabaCloud.SDK.Dingtalkworkflow_1_0.Models.ProcessForecastRequest.ProcessForecastRequestFormComponentValues formComponentValues0 = new AlibabaCloud.SDK.Dingtalkworkflow_1_0.Models.ProcessForecastRequest.ProcessForecastRequestFormComponentValues
+            {
+                Id = "PhoneField_IZI2LP8QF6O0",
+                BizAlias = "Phone",
+                Name = "PhoneField",
+                Value = "123xxxxxxxx",
+                ExtValue = "总个数:1",
+                ComponentType = "TextField",
+                Details = new List&lt;AlibabaCloud.SDK.Dingtalkworkflow_1_0.Models.ProcessForecastRequest.ProcessForecastRequestFormComponentValues.ProcessForecastRequestFormComponentValuesDetails&gt;
+                {
+                    formComponentValues0Details0
+                },
+            };
+            AlibabaCloud.SDK.Dingtalkworkflow_1_0.Models.ProcessForecastRequest processForecastRequest = new AlibabaCloud.SDK.Dingtalkworkflow_1_0.Models.ProcessForecastRequest
+            {
+                ProcessCode = "PROC-EF6YJL35P2-SCKICSB7P750S0YISYKV3-xxxx-1",
+                DeptId = 1,
+                UserId = "manager432",
+                FormComponentValues = new List&lt;AlibabaCloud.SDK.Dingtalkworkflow_1_0.Models.ProcessForecastRequest.ProcessForecastRequestFormComponentValues&gt;
+                {
+                    formComponentValues0
+                },
+            };
+            try
+            {
+                client.ProcessForecastWithOptions(processForecastRequest, processForecastHeaders, new AlibabaCloud.TeaUtil.Models.RuntimeOptions());
+            }
+            catch (TeaException err)
+            {
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+            catch (Exception _err)
+            {
+                TeaException err = new TeaException(new Dictionary&lt;string, object&gt;
+                {
+                    { "message", _err.Message }
+                });
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+        }
+
+
+    }
+}</code></pre></div><input type="radio" name="check-figure-teh-sk1-z4z" id="figure-teh-sk1-z4z-cpp-tab" /><label for="figure-teh-sk1-z4z-cpp-tab">C++</label><div class="codeblock-item"><pre id="codeblock-teh-aqi-ukp" outputclass="language-cpp" code-type="xCode" data-tag="codeblock" class="pre codeblock language-cpp"><code>// This file is auto-generated, don't edit it. Thanks.
+
+#include &lt;alibabacloud/dingtalkworkflow__1__0.hpp&gt;
+#include &lt;alibabacloud/open_api.hpp&gt;
+#include &lt;boost/any.hpp&gt;
+#include &lt;darabonba/core.hpp&gt;
+#include &lt;darabonba/util.hpp&gt;
+#include &lt;iostream&gt;
+#include &lt;map&gt;
+
+using namespace std;
+
+Alibabacloud_Dingtalkworkflow_1_0::Client createClient() {
+  shared_ptr&lt;Alibabacloud_OpenApi::Config&gt; config = make_shared&lt;Alibabacloud_OpenApi::Config&gt;();
+  config-&gt;protocol = make_shared&lt;string&gt;("https");
+  config-&gt;regionId = make_shared&lt;string&gt;("central");
+  return Alibabacloud_Dingtalkworkflow_1_0::Client(config);
+}
+
+int main(int argc, char *args[]) {
+  args++;
+  shared_ptr&lt;Alibabacloud_Dingtalkworkflow_1_0::Client&gt; client = make_shared&lt;Alibabacloud_Dingtalkworkflow_1_0::Client&gt;(createClient());
+  shared_ptr&lt;Alibabacloud_Dingtalkworkflow_1_0::ProcessForecastHeaders&gt; processForecastHeaders = make_shared&lt;Alibabacloud_Dingtalkworkflow_1_0::ProcessForecastHeaders&gt;();
+  processForecastHeaders-&gt;xAcsDingtalkAccessToken = make_shared&lt;string&gt;("&lt;your access token&gt;");
+  shared_ptr&lt;Alibabacloud_Dingtalkworkflow_1_0::ProcessForecastRequestFormComponentValuesDetailsDetails&gt; formComponentValues0Details0Details0 = make_shared&lt;Alibabacloud_Dingtalkworkflow_1_0::ProcessForecastRequestFormComponentValuesDetailsDetails&gt;(map&lt;string, boost::any&gt;({
+    {"id", boost::any(string("PhoneField_IZI2LP8QF6O0"))},
+    {"bizAlias", boost::any(string("Phone"))},
+    {"name", boost::any(string("PhoneField"))},
+    {"value", boost::any(string("123xxxxxxxx"))},
+    {"extValue", boost::any(string("总个数:1"))},
+    {"componentType", boost::any(string("TextField"))}
+  }));
+  shared_ptr&lt;Alibabacloud_Dingtalkworkflow_1_0::ProcessForecastRequestFormComponentValuesDetails&gt; formComponentValues0Details0 = make_shared&lt;Alibabacloud_Dingtalkworkflow_1_0::ProcessForecastRequestFormComponentValuesDetails&gt;(map&lt;string, boost::any&gt;({
+    {"id", boost::any(string("PhoneField_IZI2LP8QF6O0"))},
+    {"bizAlias", boost::any(string("Phone"))},
+    {"name", boost::any(string("PhoneField"))},
+    {"value", boost::any(string("123xxxxxxxx"))},
+    {"extValue", boost::any(string("总个数:1"))},
+    {"details", boost::any(vector&lt;Alibabacloud_Dingtalkworkflow_1_0::ProcessForecastRequestFormComponentValuesDetailsDetails&gt;({
+      formComponentValues0Details0Details0
+    }))}
+  }));
+  shared_ptr&lt;Alibabacloud_Dingtalkworkflow_1_0::ProcessForecastRequestFormComponentValues&gt; formComponentValues0 = make_shared&lt;Alibabacloud_Dingtalkworkflow_1_0::ProcessForecastRequestFormComponentValues&gt;(map&lt;string, boost::any&gt;({
+    {"id", boost::any(string("PhoneField_IZI2LP8QF6O0"))},
+    {"bizAlias", boost::any(string("Phone"))},
+    {"name", boost::any(string("PhoneField"))},
+    {"value", boost::any(string("123xxxxxxxx"))},
+    {"extValue", boost::any(string("总个数:1"))},
+    {"componentType", boost::any(string("TextField"))},
+    {"details", boost::any(vector&lt;Alibabacloud_Dingtalkworkflow_1_0::ProcessForecastRequestFormComponentValuesDetails&gt;({
+      formComponentValues0Details0
+    }))}
+  }));
+  shared_ptr&lt;Alibabacloud_Dingtalkworkflow_1_0::ProcessForecastRequest&gt; processForecastRequest = make_shared&lt;Alibabacloud_Dingtalkworkflow_1_0::ProcessForecastRequest&gt;(map&lt;string, boost::any&gt;({
+    {"processCode", boost::any(string("PROC-EF6YJL35P2-SCKICSB7P750S0YISYKV3-xxxx-1"))},
+    {"deptId", boost::any(1)},
+    {"userId", boost::any(string("manager432"))},
+    {"formComponentValues", boost::any(vector&lt;Alibabacloud_Dingtalkworkflow_1_0::ProcessForecastRequestFormComponentValues&gt;({
+      formComponentValues0
+    }))}
+  }));
+  try {
+    client-&gt;processForecastWithOptions(processForecastRequest, processForecastHeaders, make_shared&lt;Darabonba_Util::RuntimeOptions&gt;(Darabonba_Util::RuntimeOptions()));
+  }
+  catch (std::exception &amp;err) {
+    if (!Darabonba_Util::Client::empty(err.code) &amp;&amp; !Darabonba_Util::Client::empty(err.message)) {
+      // err 中含有 code 和 message 属性，可帮助开发定位问题
+    }
+  }
+}</code></pre></div></div></section></section><section id="section-response-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-response-1" data-tag="h2" class="h2">响应</h2><section id="section-response-parameter" class="section"><h3 data-tag="h3" id="h2-4l6-awg-n3f" class="h3 title">响应体</h3><table id="3d6e8490090dt" tablewidth="710" tablecolswidth="213 142 355" autofit="false" class="table"><colgroup colwidth="0.9*" style="width:30.00%"></colgroup><colgroup colwidth="0.6*" style="width:20.00%"></colgroup><colgroup colwidth="1.5*" style="width:50.00%"></colgroup><tbody class="tbody"><tr id="c5b38b74f2itu"><td id="226474077cokg" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="eb81a97b5694d">名称</p></td><td id="5d29f76ad3pwi" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="92d06f63bcbj6">类型</p></td><td id="2e36a92a742cq" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="d73708faaefww">描述</p></td></tr><tr outputclass="row row-level-1 has-child" id="b14d0381fdzc7" class="row row-level-1 has-child"><td id="6f79ab8c00om8" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="712404705924v">result</p></td><td id="08dd260978use" rowspan="1" colspan="1"><p id="58059f4017iom">Object</p></td><td id="a6d74b0dfdisg" rowspan="1" colspan="1"><p id="4f44534aacbig">返回结果详情。</p></td></tr><tr outputclass="row row-level-1-1" id="0bc0c4d377t1k" class="row row-level-1-1"><td id="8c1099a487ofu" rowspan="1" colspan="1"><p id="e1b2acdd82e6q">isForecastSuccess</p></td><td id="1cfbb6024317h" rowspan="1" colspan="1"><p id="77daeb514eqci">Boolean</p></td><td id="f56a257bafmtl" rowspan="1" colspan="1"><p id="5df2e68235ogb">是否预测成功，成功返回true。</p></td></tr><tr outputclass="row row-level-1-2" id="f173777695z5o" class="row row-level-1-2"><td id="e6a676b95aemb" rowspan="1" colspan="1"><p id="ca483bd7744wd">processCode</p></td><td id="43b89e428drrh" rowspan="1" colspan="1"><p id="4d2053ae9amot">String</p></td><td id="6a9787a8d4ez0" rowspan="1" colspan="1"><p id="7102ce7223fq3">表单的唯一码。</p></td></tr><tr outputclass="row row-level-1-3" id="e757e39606eij" class="row row-level-1-3"><td id="105f23794axpd" rowspan="1" colspan="1"><p id="485a8578eb4io">userId</p></td><td id="eb5e19dbddf99" rowspan="1" colspan="1"><p id="2bbddfe734kio">String</p></td><td id="d7d3d15628ug9" rowspan="1" colspan="1"><p id="62f38b4511cs9">用户id。</p></td></tr><tr outputclass="row row-level-1-4" id="ae5a7e6fc4rl1" class="row row-level-1-4"><td id="ed71f998da2k2" rowspan="1" colspan="1"><p id="180e271bc0yhu">processId</p></td><td id="701a14d4cdmnm" rowspan="1" colspan="1"><p id="0f1c663d1ca7t">Long</p></td><td id="053fa15bf17rl" rowspan="1" colspan="1"><p id="3babb27a92823">流程ID，暂无使用场景。</p></td></tr><tr outputclass="row row-level-1-5" id="9b7a63ec27yuj" class="row row-level-1-5"><td id="33ef1937251oe" rowspan="1" colspan="1"><p id="c7b15ba86cmxw">isStaticWorkflow</p></td><td id="4f69e1ffebug5" rowspan="1" colspan="1"><p id="bb6deef2870p9">Boolean</p></td><td id="7564694dbcaic" rowspan="1" colspan="1"><p id="c610981f15tck">是否静态流程。</p><ul id="fc495b7ca79ri"><li id="cf2959b671p1h"><p id="46b5f594866zr"><b>true</b>：</p></li><li id="33b03d3361tbn"><p id="41ad62808f4xy"><b>false</b>：</p></li></ul></td></tr><tr outputclass="row row-level-1-6 has-child" id="0ec0175c85ld2" class="row row-level-1-6 has-child"><td id="b84f362f2f8o9" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="0fa4cb202bs73">workflowActivityRules</p></td><td id="ce679423a6v4i" rowspan="1" colspan="1"><p id="f41e06d099ixe">Array</p></td><td id="3dd0d18ba2a0p" rowspan="1" colspan="1"><p id="d1af610ce4ygj">工作流节点规则。</p></td></tr><tr outputclass="row row-level-1-6-1" id="fe1f0767bco8c" class="row row-level-1-6-1"><td id="a36c30408b0zq" rowspan="1" colspan="1"><p id="f1c701b209ipv">activityId</p></td><td id="c9d8c336e3wbw" rowspan="1" colspan="1"><p id="670e51c5abrut">String</p></td><td id="7fb8192401v3c" rowspan="1" colspan="1"><p id="726ffaa11cait">节点ID，暂无使用场景。</p></td></tr><tr outputclass="row row-level-1-6-2" id="b5f6abe15ek9u" class="row row-level-1-6-2"><td id="27bd8c959fny5" rowspan="1" colspan="1"><p id="c8bb48cb3cs9t">prevActivityId</p></td><td id="e33410d5fey2b" rowspan="1" colspan="1"><p id="fdebf0f6b9wpo">String</p></td><td id="262905293733g" rowspan="1" colspan="1"><p id="66e91885823wj">流程中前一个节点的 id。</p></td></tr><tr outputclass="row row-level-1-6-3" id="e85dadbdb8kyh" class="row row-level-1-6-3"><td id="e4d45b09279gn" rowspan="1" colspan="1"><p id="ac1feaf555dyv">activityName</p></td><td id="5ed39abc60bsr" rowspan="1" colspan="1"><p id="d5b8341dea11u">String</p></td><td id="064c5fcc70vte" rowspan="1" colspan="1"><p id="b0f8a4b038a6x">节点名称。</p></td></tr><tr outputclass="row row-level-1-6-4" id="7cd765311bzk2" class="row row-level-1-6-4"><td id="480935780eqnz" rowspan="1" colspan="1"><p id="246d3f0aa5226">activityType</p></td><td id="1391c50eaf51l" rowspan="1" colspan="1"><p id="e1d3520392600">String</p></td><td id="385167a7d5mbz" rowspan="1" colspan="1"><p id="0794464cc1110">规则类型，取值：</p><ul id="fc48082436s6x"><li id="db54a11c7b3ou"><p id="2ea1ac6e7cnio"><b>target_select</b>：自选审批人节点</p></li><li id="1d5522d80a7ct"><p id="765280143eilf"><b>target_approval</b>：指定审批人节点</p></li></ul></td></tr><tr outputclass="row row-level-1-6-5" id="e604f5062dvnv" class="row row-level-1-6-5"><td id="d580146b9ewvv" rowspan="1" colspan="1"><p id="de222d7620bl6">isTargetSelect</p></td><td id="08a182e556f4h" rowspan="1" colspan="1"><p id="6f84425d99klz">Boolean</p></td><td id="888466d52891b" rowspan="1" colspan="1"><p id="9345b6bd47rt4">是否为自选审批节点。</p><p id="7fab49f823k81">activityType 值为target_select时，该字段值为true。</p></td></tr><tr outputclass="row row-level-1-6-6 has-child" id="54b9ff27077w5" class="row row-level-1-6-6 has-child"><td id="e25bee1763lhq" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="3c82ea7cd4s8e">workflowActor</p></td><td id="7c2ea541d41sq" rowspan="1" colspan="1"><p id="9a2a5d8db5jqg">Object</p></td><td id="4c87f772ecpii" rowspan="1" colspan="1"><p id="e7878748db4if">节点操作人信息。</p></td></tr><tr outputclass="row row-level-1-6-6-1" id="6f30e612939oo" class="row row-level-1-6-6-1"><td id="7ad47ab3c13mv" rowspan="1" colspan="1"><p id="f35e84d03f3c5">actorKey</p></td><td id="76436748a7pji" rowspan="1" colspan="1"><p id="e682abb660f7j">String</p></td><td id="5c28d84dd898u" rowspan="1" colspan="1"><p id="ca21a36402jmf">节点操作人 key。</p></td></tr><tr outputclass="row row-level-1-6-6-2" id="1d7526e8b44j6" class="row row-level-1-6-6-2"><td id="8e91bf5fdeooz" rowspan="1" colspan="1"><p id="4f205653eajeh">actorType</p></td><td id="d5f39f3b56x28" rowspan="1" colspan="1"><p id="c82a7f5368xjw">String</p></td><td id="b44d9f3b85e8u" rowspan="1" colspan="1"><p id="4252dfd03aaur">节点操作人类型，取值：</p><ul id="3c70a22ebd2iu"><li id="998d4134feliw"><p id="1cd2b06c8a77x"><b>approver</b>：审批人</p></li><li id="a3c1dd30abwkn"><p id="be7390c152xeo"><b>notifier</b>：抄送人</p></li><li id="a5f92eb30eche"><p id="c189856483gcr"><b>audit</b>：办理人</p></li></ul></td></tr><tr outputclass="row row-level-1-6-6-3" id="7a85431820itg" class="row row-level-1-6-6-3"><td id="c5b8a7e9a743n" rowspan="1" colspan="1"><p id="85f5ff44b4ken">actorSelectionType</p></td><td id="5488f37854ogg" rowspan="1" colspan="1"><p id="15841e48e7044">String</p></td><td id="2171ecbb53abb" rowspan="1" colspan="1"><p id="0df284b3f6udm">节点操作人选择范围类型，取值：</p><ul id="51b0447f74fuc"><li id="3f19c6b326v0x"><p id="6db5ea9578lvk"><b>allStaff</b>：全公司</p></li><li id="eb05974672vfp"><p id="e66bd2461f0u0"><b>approvals</b>：指定成员</p></li><li id="67c3980950dmn"><p id="8b808a33d79tz"><b>labels</b>：角色</p></li></ul></td></tr><tr outputclass="row row-level-1-6-6-4 has-child" id="2477dc0020k49" class="row row-level-1-6-6-4 has-child"><td id="5bd67486336pi" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="03795a5eb99sk">actorSelectionRange</p></td><td id="f6011676e4h2l" rowspan="1" colspan="1"><p id="d8888b5e25qta">Object</p></td><td id="a89d460feb19s" rowspan="1" colspan="1"><p id="3e7d610f6333t">节点操作人选择范围。</p></td></tr><tr outputclass="row row-level-1-6-6-4-1 has-child" id="b54da6aaeci1p" class="row row-level-1-6-6-4-1 has-child"><td id="03fc99ca10bni" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="38f908aac2j5c">approvals</p></td><td id="bf4c671648eth" rowspan="1" colspan="1"><p id="9063e20bf2utm">Array</p></td><td id="b6f914cac1juh" rowspan="1" colspan="1"><p id="c7be81f06b9mt">审批指定成员，节点设置方式如下图，会返回该字段。</p><p id="5397204121pz5"><img src="https://img.alicdn.com/imgextra/i3/O1CN01m0GFNk1CVtCB44NL0_!!6000000000087-2-tps-1252-1312.png" alt="" class="image break" / /></p></td></tr><tr outputclass="row row-level-1-6-6-4-1-1" id="a6490efe368v7" class="row row-level-1-6-6-4-1-1"><td id="5875fb1155po4" rowspan="1" colspan="1"><p id="37bf8510a62xu">workNo</p></td><td id="1fd8d6d2a4o3m" rowspan="1" colspan="1"><p id="bf781da51fu2t">String</p></td><td id="e75274e7d8t1n" rowspan="1" colspan="1"><p id="ee325becc8si9">员工 userId。</p></td></tr><tr outputclass="row row-level-1-6-6-4-1-2" id="b4929ecaaavr8" class="row row-level-1-6-6-4-1-2"><td id="4b506edd41m43" rowspan="1" colspan="1"><p id="395d5add39dwn">userName</p></td><td id="c4147ef582kvz" rowspan="1" colspan="1"><p id="3f87ee9669y0w">String</p></td><td id="87f26a1709na6" rowspan="1" colspan="1"><p id="ce7f56025chss">员工姓名。</p></td></tr><tr outputclass="row row-level-1-6-6-4-2 has-child" id="687d4c514flj1" class="row row-level-1-6-6-4-2 has-child"><td id="29b85dd892t6f" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="84bb14b02cwcl">labels</p></td><td id="82a133b42ck1x" rowspan="1" colspan="1"><p id="0af0216189yvn">Array</p></td><td id="e173ad6ac96z4" rowspan="1" colspan="1"><p id="743c0231148ai">审批指定角色，节点设置如下图，会返回该字段。</p><p id="e0806caf11the"><img src="https://img.alicdn.com/imgextra/i2/O1CN01JxeYMX1GDLclxvoTX_!!6000000000588-2-tps-1264-1264.png" alt="" class="image break" / /></p></td></tr><tr outputclass="row row-level-1-6-6-4-2-1" id="8bcb0b60d9tze" class="row row-level-1-6-6-4-2-1"><td id="d7e50d24b6fp8" rowspan="1" colspan="1"><p id="8d97feef63wip">labels</p></td><td id="2b3ec089b6unf" rowspan="1" colspan="1"><p id="20b027d0ffwns">String</p></td><td id="66cef74a192s0" rowspan="1" colspan="1"><p id="acf748c7724as">角色 id。</p></td></tr><tr outputclass="row row-level-1-6-6-4-2-2" id="55528c1d14k7z" class="row row-level-1-6-6-4-2-2"><td id="bc9d0a5713p3o" rowspan="1" colspan="1"><p id="fbcdc28947ldv">labelNames</p></td><td id="78dcc49fe85xa" rowspan="1" colspan="1"><p id="8fa6be87b2iiu">String</p></td><td id="360494ba60gfx" rowspan="1" colspan="1"><p id="fb014cd186w0c">角色名字。</p></td></tr><tr outputclass="row row-level-1-6-6-5" id="e746e2ac65sk7" class="row row-level-1-6-6-5"><td id="3c09f6654f4ky" rowspan="1" colspan="1"><p id="42a41e6e91sfp">allowedMulti</p></td><td id="18b5a71de9s33" rowspan="1" colspan="1"><p id="07a72a5d1efeg">Boolean</p></td><td id="2c1769364fdsn" rowspan="1" colspan="1"><p id="5bfbe8f927udd">是否允许多选，还是仅允许选一人。</p></td></tr><tr outputclass="row row-level-1-6-6-6" id="e48c8b375banu" class="row row-level-1-6-6-6"><td id="e7018cc52dys3" rowspan="1" colspan="1"><p id="905a30cd1e0fq">approvalType</p></td><td id="1e1df1e2fduij" rowspan="1" colspan="1"><p id="4963c9f5c3j8o">String</p></td><td id="a0c15c269da1p" rowspan="1" colspan="1"><p id="55a71f5973274">节点审批类型，取值：</p><ul id="e8619dfebf4fe"><li id="a9073ae2121l2"><p id="a10cb4c75dqp7">MANUAL：人工审批</p></li><li id="e4c587b319n77"><p id="cd28b1e85cn0p">AUTO_AGREE：自动通过</p></li><li id="0ce0ef74ddtzu"><p id="b65577d172c7r">AUTO_REFUSE：自动拒绝</p></li></ul></td></tr><tr outputclass="row row-level-1-6-6-7" id="88470c8fd4zpb" class="row row-level-1-6-6-7"><td id="c9284d3ff8uq1" rowspan="1" colspan="1"><p id="a191d7137f2n1">approvalMethod</p></td><td id="bcc8f9d915urg" rowspan="1" colspan="1"><p id="36d1891db8lnk">String</p></td><td id="de4ba2437dzt9" rowspan="1" colspan="1"><p id="6866ccadeby1e">节点审批方式，取值：</p><ul id="f7af3b40e9dah"><li id="d0534cbc293wq"><p id="a10ecbf86228t">ONE_BY_ONE：依次审批</p></li><li id="11a39073bfos1"><p id="9acb5be16bwcc">AND：会签审批</p></li><li id="d3036db47e93q"><p id="2765c32dab912">OR：或签审批</p></li></ul></td></tr><tr outputclass="row row-level-1-6-6-8" id="eb26f833d3hkh" class="row row-level-1-6-6-8"><td id="0b8a5a92c38dp" rowspan="1" colspan="1"><p id="9d6e03fe894ye">actorActivateType</p></td><td id="159fd067825ov" rowspan="1" colspan="1"><p id="a2fec4e06789w">String</p></td><td id="2779b160e8dy7" rowspan="1" colspan="1"><p id="7f945fb763dgb">节点激活类型，取值：</p><ul id="430234a4072mw"><li id="7ff826d876vme"><p id="2c7d5c9a528uc">ALL：并行</p></li><li id="f8e9e8da3fimu"><p id="28f3b4dd6appy">ONE_BY_ONE：串行</p></li></ul></td></tr><tr outputclass="row row-level-1-6-6-9" id="f3179ad80f8rj" class="row row-level-1-6-6-9"><td id="f386014c28xdp" rowspan="1" colspan="1"><p id="110158a6af7uq">required</p></td><td id="2e8103ac787my" rowspan="1" colspan="1"><p id="e969085cb1uli">Boolean</p></td><td id="334e9b69df9a9" rowspan="1" colspan="1"><p id="909a1909f1u0p">该审批人节点在发起审批时是否必填。</p></td></tr><tr outputclass="row row-level-1-6-7 has-child" id="8a95d9b7e4jvy" class="row row-level-1-6-7 has-child"><td id="58c9ab43b6xh9" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="ad5949e3da2fi">activityActioners</p></td><td id="bc077564c2cxc" rowspan="1" colspan="1"><p id="3141879059f43">Array</p></td><td id="749a851b5ehbv" rowspan="1" colspan="1"><p id="6df7ce11c0kak">节点审批人列表。</p></td></tr><tr outputclass="row row-level-1-6-7-1" id="b14bf118dfs67" class="row row-level-1-6-7-1"><td id="e9c4da038fps0" rowspan="1" colspan="1"><p id="3fb52a6b4ddhq">userId</p></td><td id="4fc24e792fdii" rowspan="1" colspan="1"><p id="d27f36bf7es97">String</p></td><td id="b7c629f4baxac" rowspan="1" colspan="1"><p id="24aea9b881qv8">审批人userId。</p></td></tr><tr outputclass="row row-level-1-6-7-2" id="df6b869e371d5" class="row row-level-1-6-7-2"><td id="76e1a52eaaby1" rowspan="1" colspan="1"><p id="df52931975wjy">name</p></td><td id="47919b5001di3" rowspan="1" colspan="1"><p id="f6d31c72256wp">String</p></td><td id="b2ce68f130wte" rowspan="1" colspan="1"><p id="ac069863bao5v">审批人名称。</p></td></tr><tr outputclass="row row-level-1-6-7-3" id="694f169876h23" class="row row-level-1-6-7-3"><td id="9747c724773j1" rowspan="1" colspan="1"><p id="99e6cd791am23">avatar</p></td><td id="7a99b00e0f6io" rowspan="1" colspan="1"><p id="6716905fd10g5">String</p></td><td id="1b18b4d8617x4" rowspan="1" colspan="1"><p id="db59a38468kl4">审批人头像。</p></td></tr><tr outputclass="row row-level-1-7 has-child" id="095799a7efzga" class="row row-level-1-7 has-child"><td id="073bd9366f5yg" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="4ee8136086wfn">workflowForecastNodes</p></td><td id="ed1f2cf65f6l5" rowspan="1" colspan="1"><p id="1ef2e12699i2y">Array</p></td><td id="147feb9aaaqjl" rowspan="1" colspan="1"><p id="fc7cb2caeb67y">工作流节点流。</p></td></tr><tr outputclass="row row-level-1-7-1" id="7ce5e7ce816rk" class="row row-level-1-7-1"><td id="848d0c04a82op" rowspan="1" colspan="1"><p id="97ea103581gmu">activityId</p></td><td id="666442b8c0ddy" rowspan="1" colspan="1"><p id="24d08467a006a">String</p></td><td id="832416f3e8wiw" rowspan="1" colspan="1"><p id="ff073e4c624fl">节点 id。</p></td></tr><tr outputclass="row row-level-1-7-2" id="7d54f22dcay3z" class="row row-level-1-7-2"><td id="b2ffc930a37lm" rowspan="1" colspan="1"><p id="6d9a3bd956ykp">outId</p></td><td id="870903bc48vxr" rowspan="1" colspan="1"><p id="4d09cec53ewgw">String</p></td><td id="eb74bad98djqa" rowspan="1" colspan="1"><p id="13db80d876xb7">节点出线 id。</p></td></tr></tbody></table></section><section id="section-response-body-example" class="section"><h3 id="h3-response-body-example" data-tag="h3" class="h3">响应体示例</h3><pre id="372d011660v2u" outputclass="language-json" code-type="xCode" data-tag="codeblock" class="pre codeblock language-json"><code>HTTP/1.1 200 OK
+Content-Type:application/json
+
+{
+  "result" : {
+    "isForecastSuccess" : true,
+    "processCode" : "PROC-2B60E506-D6CB-43F3-B661-359B27F90947",
+    "userId" : "2665246100805992",
+    "processId" : 63657309999,
+    "isStaticWorkflow" : true,
+    "workflowActivityRules" : [ {
+      "activityId" : "1918_5cd3",
+      "prevActivityId" : "1918_5cd3",
+      "activityName" : "审批人",
+      "activityType" : "target_select",
+      "isTargetSelect" : true,
+      "workflowActor" : {
+        "actorKey" : "manual_e203_14a3_895a_45ad",
+        "actorType" : "approver:审批人，notifier:抄送人，audit：办理人",
+        "actorSelectionType" : "allStaff",
+        "actorSelectionRange" : {
+          "approvals" : [ {
+            "workNo" : "26652461xxxx5992",
+            "userName" : "张三"
+          } ],
+          "labels" : [ {
+            "labels" : "200649095",
+            "labelNames" : "财务"
+          } ]
+        },
+        "allowedMulti" : true,
+        "approvalType" : "MANUAL",
+        "approvalMethod" : "ONE_BY_ONE",
+        "actorActivateType" : "ALL",
+        "required" : true
+      },
+      "activityActioners" : [ {
+        "userId" : "2665246100805992",
+        "name" : "钉三多",
+        "avatar" : "https://url1"
+      } ]
+    } ],
+    "workflowForecastNodes" : [ {
+      "activityId" : "1cc3_959a",
+      "outId" : "line-random-1cc3_959a-831a_607b"
+    } ]
+  }
+}</code></pre></section><section id="section-error-code-1" class="section"><h3 id="h3-error-code-1" data-tag="h3" class="h3">错误码</h3><p data-tag="p" id="p-error-code-global-guide" class="p">若调用该接口报错，可根据错误信息在<a href="https://open.dingtalk.com/document/development/server-api-error-codes-1" id="a-error-code-global-guide">全局错误码</a>文档中查找解决方案。</p><table id="160ae2f9cekv1" tablewidth="709" tablecolswidth="142 177 177 213" autofit="false" class="table"><colgroup colwidth="0.8*" style="width:20.03%"></colgroup><colgroup colwidth="1*" style="width:24.96%"></colgroup><colgroup colwidth="1*" style="width:24.96%"></colgroup><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><tbody class="tbody"><tr id="5b4d470d78zt6"><td id="9273c65e76wcv" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="3f69e17060xnt">HttpCode</p></td><td id="c754bec1846y1" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="7e7a9b085cwgl">错误码</p></td><td id="94c328d460ndr" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="c30d1e02b82s9">错误信息</p></td><td id="fc321c9ef6xqm" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="876ad3b5f71z5">说明</p></td></tr><tr id="12ba4bdcf5hh1"><td id="a375aa090cc5c" rowspan="1" colspan="1"><p id="72b321ca4d8uy">400</p></td><td id="9c085509adoww" rowspan="1" colspan="1"><p id="ad78b5f84bvl5">forecastError</p></td><td id="404dde1288gjy" rowspan="1" colspan="1"><p id="a5f17a2393chh">流程预测失败</p></td><td id="0fcecfd5berg3" rowspan="1" colspan="1"><p id="9035ae0bc9uth">流程预测失败</p></td></tr><tr id="b7d304171fyqb"><td id="df0692c8bcgcm" rowspan="1" colspan="1"><p id="7faf58d2eby8s">400</p></td><td id="c49c5955eazym" rowspan="1" colspan="1"><p id="ce1476e6a71gi">invalidParameter</p></td><td id="3434cd97baqmf" rowspan="1" colspan="1"><p id="af60919ab81da">参数错误</p></td><td id="76fef3bd43glv" rowspan="1" colspan="1"><p id="a0e3e84e53atk">参数错误</p></td></tr><tr id="6d754a3a0eiaa"><td id="eda8d2e5ebp30" rowspan="1" colspan="1"><p id="928cedb4093g4">400</p></td><td id="06f03bfe25iup" rowspan="1" colspan="1"><p id="e7ae6ebceffaw">componentIsNull</p></td><td id="d1b9fbf9553cv" rowspan="1" colspan="1"><p id="7872aed287sxu">表单数据为空</p></td><td id="2bdd85cbb176x" rowspan="1" colspan="1"><p id="c16f4ad9507xm">表单数据为空</p></td></tr><tr id="25e71c61c6ttx"><td id="8f6200f6631dn" rowspan="1" colspan="1"><p id="b96033640b0d2">400</p></td><td id="fc1c9b1c019jl" rowspan="1" colspan="1"><p id="29d3a7eed2q2r">processCodeError</p></td><td id="5f1bf9601a1zu" rowspan="1" colspan="1"><p id="f4b99ef2bb9ll">获取审批模板失败或模板已删除</p></td><td id="0cf9e0b4dfc3t" rowspan="1" colspan="1"><p id="89c9fdecc4kvq">获取审批模板失败或模板已删除</p></td></tr><tr id="b6c465e5293ya"><td id="33562872a5bqd" rowspan="1" colspan="1"><p id="5690524254r20">400</p></td><td id="371f1322ddjbs" rowspan="1" colspan="1"><p id="d8551e4d006io">formNotExist</p></td><td id="e7457e089dftr" rowspan="1" colspan="1"><p id="425e59f0cbc3l">表单不存在</p></td><td id="a363b0d344vq8" rowspan="1" colspan="1"><p id="ca05ee7a1fyoi">表单不存在</p></td></tr><tr id="6e9ad5d50ezix"><td id="d93345cec9v3a" rowspan="1" colspan="1"><p id="e3c64774deidx">400</p></td><td id="3f524debbdhac" rowspan="1" colspan="1"><p id="36fb38bb26su8">internalError</p></td><td id="eedc16a086xkg" rowspan="1" colspan="1"><p id="6905bf5a6droi">%s</p></td><td id="6084c8b2d7g4u" rowspan="1" colspan="1"><p id="012442f2e8n0u">系统内部异常</p></td></tr><tr id="8f368fee079zf"><td id="8323faa90aih3" rowspan="1" colspan="1"><p id="3db1bfeb81fd9">400</p></td><td id="e7ab95f141v8h" rowspan="1" colspan="1"><p id="bfda9d3c01bd0">invalidUserId</p></td><td id="d9486079dcc2y" rowspan="1" colspan="1"><p id="4551170bafg4q">用户userId为空</p></td><td id="975805485a34d" rowspan="1" colspan="1"><p id="b177077968xxq">用户userId为空</p></td></tr><tr id="73c9ee6664b1s"><td id="fac86e9a4029d" rowspan="1" colspan="1"><p id="9480c0a04fr0l">400</p></td><td id="1bbf1d4d1d52y" rowspan="1" colspan="1"><p id="f82cbd009bc33">userNotExist</p></td><td id="f9fee0189agwl" rowspan="1" colspan="1"><p id="bdd6079fc4f0l">用户不存在</p></td><td id="c090cf2649z11" rowspan="1" colspan="1"><p id="c31d91ddc7p6z">用户不存在</p></td></tr><tr id="07897b47dazs6"><td id="d5f2d99a379m0" rowspan="1" colspan="1"><p id="a15f504709xn0">500</p></td><td id="a588338812dbd" rowspan="1" colspan="1"><p id="28b57e7685ke3">systemError</p></td><td id="f69ede353d25a" rowspan="1" colspan="1"><p id="fdd4be5039hlq">系统异常</p></td><td id="03ca63aafdp8r" rowspan="1" colspan="1"><p id="9d1c8d7a8ba87">系统异常</p></td></tr></tbody></table></section></section></div></main></body></html>

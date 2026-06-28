@@ -1,0 +1,354 @@
+<!DOCTYPE html><html><head><meta charset="utf8" / /><meta name="searchtitle" content="" / /><meta name="keywords" content="" / /><meta name="author" content="" / /><title>自有OA审批集成模式：使用三方流程和页面对接</title><meta name="gmtModify" content="2025-09-10 19:31:45" / /></head><body data-tag="topic" id="topic-2763773" class="topic"><main id="main-2763773"><h1 data-tag="title" id="b46e9cedc2876" class="title">自有OA审批集成模式：使用三方流程和页面对接</h1><p id="32ed28c5d2fzk" data-tag="shortdesc" class="shortdesc"></p><div data-tag="body" class="body"><section id="section-1fx-nuz-9ww" class="section"><h2 data-tag="title" id="title-xjn-eug-ci9" class="title">场景介绍</h2><h3 data-tag="title" id="525f9307356al" class="title"><b>方案说明</b></h3><p uuid="m0nadqa5vofjc0fnhed" id="eb6528f12b3fg"><b>自有OA审批集成模式：使用三方流程和页面对接。</b>可在业务系统发起流程，调用钉钉<b>自有OA审批相关接口</b>创建钉钉OA审批流程，在钉钉端打开业务系统审批详情页处理流程。</p><h3 uuid="m0naec8el36nc6v9i6" id="1673dbd4c9aum"><b>方案特点&amp;价值</b></h3><p uuid="m0naffckn7n4seff6z8" id="d554334e530fj"><b>更轻量</b></p><p uuid="lzuxzwsl8k2k2bf741c" id="f1323466e7zn1">1、接入简单，直接在钉钉端内打开业务系统页面审批。</p><p uuid="lzuy04n4bpog11wpuve" id="2bf17458ec8cb">2、只有同意拒绝等基础操作，无和钉钉连接操作，如拉群。</p><p uuid="lzuxsu0yb59ct1scqmc" id="b0681339c23x0">3、延续用户原来使用的流程和页面习惯，低成本快速使用。</p></section><section id="305c1f6416f4g" class="section"><h2 data-tag="title" id="4489e9811473a" class="title">业务流程</h2><p uuid="lzjkzq8j0zqmm3u45nq" id="b486c37ef483f"><img id="457c3348633iw" src="https://help-static-aliyun-doc.aliyuncs.com/assets/img/zh-CN/8516224271/p835389.png" alt="image" placement="break" class="image break" / /></p></section><section id="f032f2d7e5jtq" class="section"><h2 jc="left" uuid="lwrubgzvszrzkkzlnqh" id="5f8640af89vtj" style="text-align:left"><b>实现效果</b></h2><h3 uuid="lxlgq05peztv1vqudxw" left="0" id="e71a92efa7sfa"><b>支持从钉钉OA审批列表打开业务系统审批详情页审批</b></h3><p uuid="lzjlyi5lgd8f9w5f1ls" id="2e9c828128vax"><img id="e6a908babdr6d" src="https://help-static-aliyun-doc.aliyuncs.com/assets/img/zh-CN/8516224271/p835391.png" alt="image" placement="break" class="image break" / /></p><h3 uuid="lxlgrc1ma2ktpgco9po" left="0" id="75a36de4482f9"><b>支持从钉钉待办打开业务系统审批详情页审批</b></h3><p id="b0f037ca24mtl"><img id="2efbabe34cjzo" src="https://help-static-aliyun-doc.aliyuncs.com/assets/img/zh-CN/8516224271/p835392.png" alt="image" placement="break" class="image break" / /></p></section><section id="e68df96ab8frc" class="section"><h2 data-tag="title" id="675e2d16475t4" class="title">开发流程</h2><p uuid="lzjkzq8j0zqmm3u45nq" id="36cfd349a44d4">以企业开发一个内部应用实现能力集成举例，实现业务系统发起，钉钉端内打开业务系统详情页进行审批。具体实现流程如下图所示：<span style="color:rgb(0, 0, 0)"><b>（注意此场景下，审批任务的同步流程是按步骤5执行的）</b></span></p><p jc="center" uuid="lwru5jgsm8zi7yg8vp" id="b5e812d940e63" style="text-align:center"><img id="d4567a78ded0w" src="https://help-static-aliyun-doc.aliyuncs.com/assets/img/zh-CN/8516224271/p835394.png" alt="image" placement="break" class="image break" / /></p><h3 uuid="lxc0mleibo7hxpymmnl" id="8951cb3d9aftt"><b>接入流程简介</b></h3><p uuid="lxc0mxy56dlkc7v9hd" id="639dcd98c03ks">本文档展示了，创建一个企业内部应用，使用OA审批流程中心提供的API，通过创建/更新/删除三方审批模板、创建/更新审批实例、创建/更新/查询审批待办任务、清理OA审批数据等API，实现业务系统发起，钉钉端内打开业务系统详情页进行集成的场景案例。</p><p uuid="lxcjlp5h5jg2xjbjg55" id="e7650d8a31emc"></p><p uuid="lxc0n9wu4hduixhzw23" id="9a4dd2c0cdl7c">前提条件：完成<a data-tag="xref" id="34a95f9390iy6" href="/document/dingstart/create-application#" class="xref">创建应用</a>的流程。</p><p uuid="lxcjl6oxdbyb6go0b2" id="7ec5e5e87fx00">步骤一：进入应用详情页，获取应用 Client ID 和 Client Secret。</p><p uuid="lxc0n9wuwbxvw7p9fff" id="afd296d6c6spi">步骤二：申请接口权限，申请“OA审批”相应权限。</p><p uuid="lxc0n9wvwsihtgm9lqc" id="6c49133dcad61">步骤三：获取应用访问凭证<a data-tag="xref" id="9ce75ed22fo9t" href="/document/development/obtain-the-access-token-of-an-internal-app#" class="xref">获取企业内部应用的accessToken</a>。调用接口时，通过accessToken鉴权调用者身份。</p><p uuid="lxc0n9wv0wklr57amwrm" id="4386ea262c6ko">步骤四：调用OA审批相关API：</p><ol id="5e55cdc2f9k7j"><li id="e60fddf9003wq"><p id="45d5f6f419pif"><b>同步审批模板数据到钉钉：</b>调用新版服务端API-<a data-tag="xref" id="aa642b959917y" href="/document/development/create-or-update-approval-templates-new#" class="xref">创建或更新审批模板</a>接口，获取模板的唯一编码<code data-tag="code" uuid="lxc0n9wvf3kzdq4lpn" code-type="xCode" id="49ae39e03fplu" class="code">processCode</code>。<span style="color:rgb(64, 64, 64)"><b>注意：该场景下无需设置processFeatureConfig流程中心集成相关配置，默认会以打开业务系统详情页方式进行审批。</b></span></p></li></ol><pre id="b54f5c1db94zf" title="" font="{&quot;fontFamily&quot;:&quot;defaultFont&quot;,&quot;ligatures&quot;:false}" uuid="m026s6og1y2w2zlm77d" data-tag="codeblock" outputclass="language-json" code-type="xCode" class="pre codeblock language-json"><code>{
+
+    "name": "使用三方流程和页面对接钉钉OA",
+    "description": "钉钉OA审批支持将外部系统（企业自研或采购的第三方系统）的审批任务推送到钉钉审批应用，用户在钉钉审批中即可统一查看和处理所有审批、享受一站式的审批体验。",
+    "formComponents": [
+        {
+            "componentType": "TextField",
+            "props": {
+                "componentId": "TextField-1",
+                "label": "单行输入框",
+                "required": true,
+                "bizAlias": "TextField-bizAlias",
+                "disabled": false
+            }
+        },
+        {
+            "componentType": "TextareaField",
+            "props": {
+                "placeholder": "请输入",
+                "label": "多行输入框"
+            }
+        },
+        {
+            "componentType": "NumberField",
+            "props": {
+                "placeholder": "请输入数字",
+                "label": "数字输入框",
+                "id": "NumberField-1"
+            }
+        },
+        {
+            "componentType": "DDSelectField",
+            "props": {
+                "options": [ // 可选选项列表
+                    {
+                        "value": "选项1", // 选项显示名称
+                        "key": "option_0" // 控件内唯一key，非必填，系统会默认生成
+                    },
+                    {
+                        "value": "选项2",
+                        "key": "option_1"
+                    },
+                    {
+                        "value": "选项3",
+                        "key": "option_2"
+                    },
+                    {
+                        "key": "other", // 其他项特殊key
+                        "value": "其它"
+                    }
+                ],
+                "label": "单选框",
+                "placeholder": "请选择",
+                "componentId": "DDSelectField_1",
+                "required": false
+            }
+        },
+        {
+            "componentType": "DDMultiSelectField",
+            "props": {
+                "options": [
+                    {
+                        "value": "选项1",
+                        "key": "option_0"
+                    },
+                    {
+                        "value": "选项2",
+                        "key": "option_1"
+                    },
+                    {
+                        "value": "选项3",
+                        "key": "option_2"
+                    },
+                    {
+                        "key": "other", // 其他项特殊key
+                        "value": "其它"
+                    }
+                ],
+                "label": "多选框",
+                "placeholder": "请选择",
+                "componentId": "DDMultiSelectField_1",
+                "required": false
+            }
+        },
+        {
+            "componentType": "DDDateField",
+            "props": {
+                "unit": "小时", // 日期格式，枚举值（小时、天）
+                "format": "yyyy-MM-dd HH:mm", // 日期格式，非必填，小时对应yyyy-MM-dd HH:mm，天对应yyyy-MM-dd
+                "bizAlias": "",
+                "label": "日期",
+                "placeholder": "请选择",
+                "componentId": "DDDateField_1",
+                "required": false,
+                "defaultValue": "2021-12-21 17:46" // 默认值
+            }
+        },
+        {
+            "componentType": "DDDateRangeField",
+            "props": {
+                "unit": "天",
+                "format": "yyyy-MM-dd",
+                "bizAlias": "",
+                "label": "[\"开始时间\",\"结束时间\"]",
+                "placeholder": "请选择",
+                "componentId": "DDDateRangeField_1",
+                "duration": true, // 是否自动计算时长
+                "durationLabel": "时长", // 时长计算显示文本
+                "required": false
+            }
+        },
+        {
+            "componentType": "TextNote",
+            "props": {
+                "link": "https://www.dingtalk.com/", // 超链接
+                "notPrint": "0",
+                "bizAlias": "",
+                "componentId": "TextNote_1",
+                "content": "这是一个说明文字" // 说明文字
+            }
+        },
+        {
+            "componentType": "DDPhotoField",
+            "props": {
+                "label": "图片",
+                "componentId": "DDPhotoField_1",
+                "required": false
+            }
+        },
+        {
+            "componentType": "MoneyField",
+            "props": {
+                "upper": "0", // 金额需要大写(0不大写，1需要大写)，默认需要大写
+                "label": "金额（元）",
+                "placeholder": "请输入金额",
+                "componentId": "MoneyField_1",
+                "required": false
+            }
+        },
+        {
+            "children": [
+                {
+                    "componentType": "TextField",
+                    "props": {
+                        "label": "单行输入框",
+                        "placeholder": "请输入",
+                        "componentId": "TextField_1UE1ZY1A28AO0",
+                        "required": false
+                    }
+                },
+                {
+                    "componentType": "MoneyField",
+                    "props": {
+                        "upper": "0",
+                        "bizAlias": "",
+                        "label": "金额（元）",
+                        "placeholder": "请输入金额",
+                        "componentId": "MoneyField_1S85G0",
+                        "required": false
+                    }
+                },
+                {
+                    "componentType": "NumberField",
+                    "props": {
+                        "unit": "元",
+                        "bizAlias": "",
+                        "label": "数字输入框",
+                        "placeholder": "请输入数字",
+                        "componentId": "NumberField_1XP6A",
+                        "required": false
+                    }
+                }
+            ],
+            "componentType": "TableField",
+            "props": {
+                "tableViewMode": "table",
+                "verticalPrint": true,
+                "statField": [
+                    {
+                        "componentId": "MoneyField_1S85G0",
+                        "label": "金额（元）"
+                    },
+                    {
+                        "componentId": "NumberField_1XP6A",
+                        "label": "数字输入框"
+                    }
+                ],
+                "bizAlias": "table",
+                "label": "表格",
+                "componentId": "TableField_1MLEPEA"
+            }
+        },
+        {
+            "componentType": "DDAttachment",
+            "props": {
+                "label": "附件",
+                "componentId": "DDAttachment_1",
+                "required": false
+            }
+        },
+        {
+            "componentType": "InnerContactField",
+            "props": {
+                "label": "联系人",
+                "placeholder": "请选择",
+                "componentId": "InnerContactField_1",
+                "choice": "1", //枚举值：1标识支持多选，0标识单选，默认为0
+                "required": false,
+                "bizAlias": ""
+            }
+        },
+        {
+            "componentType": "DepartmentField",
+            "props": {
+                "multiple": false, // 是否支持多选，true多选，false单选
+                "label": "部门",
+                "placeholder": "请选择",
+                "componentId": "DepartmentField_1",
+                "required": false
+            }
+        },
+        {
+            "componentType": "RelateField",
+            "props": {
+                "label": "关联审批单",
+                "placeholder": "请选择",
+                "componentId": "RelateField_1",
+                "required": false,
+                "bizAlias": "",
+                "availableTemplates": [ // 可被关联的审批模板列表，为空时表示可关联所有审批模板的实例数据
+                ]
+            }
+        },
+        {
+            "componentType": "AddressField",
+            "props": {
+                "addressModel": "district", // 枚举值,city省市,district省市区,street省市区-街道
+                "bizAlias": "",
+                "label": "省市区",
+                "componentId": "AddressField_1",
+                "required": false
+            }
+        },
+        {
+            "componentType": "StarRatingField",
+            "props": {
+                "limit": 5, // 枚举值：5分制、10分制
+                "label": "评分",
+                "placeholder": "请输入",
+                "componentId": "StarRatingField_1",
+                "required": false,
+                "bizAlias": ""
+            }
+        }
+    ],
+    "templateConfig": {
+        "hiddenProcess": true,
+        "createInstanceMobileUrl": "https://www.dingtalk.com",
+        "createInstancePcUrl": "https://www.dingtalk.com",
+        "templateEditUrl": "https://www.dingtalk.com",
+        "disableSendCard": false
+    }
+}</code></pre><p uuid="m026s3zbs76so8mpwsg" id="20d0ff7df5031" left="0"></p><ol start="2" id="1c57efa336i6x"><li id="c45f38d4fchw8"><p id="86e41f09e6hlh">如果没有保存<code data-tag="code" uuid="lxc0n9wvrg0w64lprm" code-type="xCode" id="09555530205vz" class="code">processCode</code>，可以通过调用<a data-tag="xref" id="095bce78e2zjd" href="/document/development/obtain-the-template-code#" class="xref">获取模板code</a>接口获取<code data-tag="code" uuid="lxc0n9wvt6s8xxz45lq" code-type="xCode" id="23030f88dcot5" class="code">processCode</code>。</p></li><li id="ec4276e87f86p"><p id="8f9601eb28vyi">创建审批模板成功后，用户可以在钉钉OA审批管理后台，查看三方自有审批单模板、查看/搜索模板数据、导出/删除模板数据等。</p></li><li id="cab3517db1xq1"><p id="0fd6579e26srn"><b>同步审批实例数据到钉钉：</b>根据模板编码<code data-tag="code" uuid="lxc0n9wwe3mkhdfea0w" code-type="xCode" id="037687785dg7s" class="code">processCode</code>，调用新版服务端API-<a data-tag="xref" id="d85dc15feakrp" href="/document/development/create-a-ticket-approval-instance#" class="xref">创建实例</a>接口发起审批实例，获取审批实例<code data-tag="code" uuid="lxc0n9wwth0zo4x5y5b" code-type="xCode" id="94cb4d744er6m" class="code">processInstanceId</code>。</p></li></ol><pre id="dutegh" title="" font="{&quot;fontFamily&quot;:&quot;defaultFont&quot;,&quot;ligatures&quot;:false}" uuid="m0271m9yfu3gj3qhrpf" data-tag="codeblock" outputclass="language-json" code-type="xCode" class="pre codeblock language-json"><code>{
+    "formComponentValueList": [
+        {
+            "name": "单行输入框",
+            "value": "[钉钉](https://www.dingtalk.com/)"
+        },
+        {
+            "name": "多行输入框",
+            "value": "请输入多行文本内容，需要换行时请输入\r\n请输入多行文本内容，需要换行时请输入\r\n"
+        },
+        {
+            "name": "数字输入框",
+            "value": "100"
+        },
+        {
+            "name": "单选框",
+            "value": "选项1"
+        },
+        {
+            "name": "多选框",
+            "value": "[\"选项1\",\"选项2\"]"
+        },
+        {
+            "name": "日期",
+            "value": "2021-08-17 11:11"
+        },
+        {
+            "name": "[\"开始时间\",\"结束时间\"]",
+            "value": "[\"2019-02-19 11:11\",\"2019-02-25 11:11\"]"
+        },
+        {
+            "name": "图片",
+            "value": "[\"https://img.alicdn.com/imgextra/i3/O1CN01TDKbCW28HuskT5vnR_!!6000000007908-2-tps-2724-650.png\",\"https://img.alicdn.com/imgextra/i3/O1CN01TDKbCW28HuskT5vnR_!!6000000007908-2-tps-2724-650.png\",\"http://url3\"]"
+        },
+        {
+            "name": "表格",
+            "value": "[[{\"name\":\"单行输入框\",\"value\":\"[钉钉](https://www.dingtalk.com/)\"},{\"name\":\"数字输入框\",\"value\":\"100\"}]]"
+        },
+        {
+            "name": "金额（元）",
+            "value": "100"
+        },
+        {
+            "name": "附件",
+            "value": "[{\"spaceId\": \"163xxxx658\", \"fileName\": \"2644.JPG\", \"fileSize\": \"333\", \"fileType\": \"jpg\", \"fileId\": \"643xxxx140\"}]"
+        },
+        {
+            "name": "联系人",
+            "value": "[\"0135185610551036178639\"]"
+        },
+        {
+            "name": "关联审批单",
+            "value": "[\"9XCLWKxNTom6W_u88iKbug09641720074458\", \"9XCLWKxNTom6W_u88iKbug09641720074458\"]"
+        },
+        {
+            "name": "电话",
+            "value": "18015586666"
+        },
+        {
+            "name": "省市区",
+            "value": "北京,北京市,河东区"
+        },
+        {
+            "name": "评分",
+            "value": "5"
+        },
+        {
+            "name": "部门",
+            "value": "714738614"
+        }
+    ],
+    "title": "使用三方流程和页面对接钉钉OA",
+    "processCode": "PROC-39B555F8-FFC6-4CCC-AC5F-xxx",
+    "originatorUserId": "manager9814",
+    "url": "http://www.dingtalk.com",
+    "notifiers": [
+        {
+            "userid": "manager9814",
+            "position": "start"
+        }
+    ],
+    "bizData": "{\"apiKey\":\"apiKey\",\"appUuid\":\"appUuid\",\"version\":\"1\"}"
+}</code></pre><p uuid="m0271jrtxfw3n3555s" id="1e39c541a11pv" left="0"></p><ol start="5" id="534cac1c92fwp"><li id="41ac4d7cb3wea"><p id="363a8fc4a20qa">创建审批实例成功后，用户也可以进入钉钉OA审批中心，查看审批四大列表（待处理、已处理、已发起、我收到的）、搜索审批实例数据、执行审批等操作。</p></li><li id="374203c8000zm"><p id="f63ca58a4b3hm"><b>同步审批任务数据到钉钉：</b>根据审批实例<code data-tag="code" uuid="lxc0n9ww4ytgly32t8s" code-type="xCode" id="1c0d7bee06wj1" class="code">processInstanceId</code>和待办事项列表tasks，调用<a data-tag="xref" id="a077532613xvz" href="/document/development/create-pending-tasks-in-process-center#" class="xref">创建流程中心待处理任务</a>接口，可以将三方系统内的审批节点信息同步到钉钉OA审批，获取待办事项的taskId并生成对应的钉钉待办任务。<span style="color:rgb(64, 64, 64)"><b>注意：该场景下同步的审批任务将会以打开业务系统详情页方式进行审批。</b></span></p></li></ol><pre id="qqi4cs" title="" font="{&quot;fontFamily&quot;:&quot;defaultFont&quot;,&quot;ligatures&quot;:false}" uuid="m027hvrc36wwzayfem6" data-tag="codeblock" outputclass="language-json" code-type="xCode" class="pre codeblock language-json"><code>{
+    "processInstanceId": "zG1X1zwFTEiwzI0JB5w38A0964172381_xxxx",
+    "activityId": "activityId_xxx",
+    "tasks": [
+        {
+            "userId": "manager9814",
+            "url": "https://www.dingtalk.com"
+        }
+    ]
+}</code></pre><p uuid="m027hszvq4017cg3kpf" id="90c3b8c7112t7" left="0"></p><ol start="7" id="d8c3f1fe07pf9"><li id="a765875cedi1n"><p id="26fb5a5feaxtp">创建待处理任务成功后，调用<a data-tag="xref" id="c78a1f2c772dw" href="/document/development/query-oa-approval-tasks-integrated-through-process-center#" class="xref">查询通过流程中心集成的OA审批任务</a>接口，可以查询到用户运行中的审批任务。</p></li><li id="9b6466bde1moh"><p id="b81bcd871ftnp"><b>同步审批任务状态到钉钉：</b>根据审批实例<code data-tag="code" uuid="lxc0n9wxa1ql5dsmtk" code-type="xCode" id="6b4f28f718xa5" class="code">processInstanceId</code>和审批待办任务taskId，可以调用<a data-tag="xref" id="96a637c7abtb5" href="/document/development/update-process-center-task-status#" class="xref">更新流程中心任务状态</a>接口，同步完成自有审批待办状态的更新。在或签等场景，可以调用<a data-tag="xref" id="0cb99fee7evqe" href="/document/development/cancel-multiple-oa-approval-tasks#" class="xref">批量取消流程中心待处理任务</a>接口，批量将审批实例下正在运行中的待办事项设置为CANCELED。</p></li><li id="2b92417e375ku"><p id="4a8aa0f273asg"><b>同步审批实例状态到钉钉：</b>根据审批实例<code data-tag="code" uuid="lxc0n9wx8dgflh3akr" code-type="xCode" id="5700368476hzo" class="code">processInstanceId</code>和实例状态status、实例结果result等，可以调用<a data-tag="xref" id="f61eea40dfzzs" href="/document/development/update-instance-status#" class="xref">更新实例状态</a>或&nbsp;<a data-tag="xref" id="193856444198u" href="/document/development/update-the-status-of-multiple-instances-at-a-time-new#" class="xref">批量更新实例状态</a>接口，更新实例状态。</p></li><li id="0a4ff2f65dzam"><p id="0cd47b1c7bzut">最后，若需要对审批模板数据进行清理，可以调用<a data-tag="xref" id="9e92461a14nzz" href="/document/development/delete-a-template-new#" class="xref">删除模板</a>接口，删除为企业创建的审批模板，同时删除该模板下创建的实例和待办任务。</p></li></ol></section><section id="a012ce4a39gb1" class="section"><h2 data-tag="title" id="a9eac4ac6dito" class="title">客户案例</h2><p uuid="lzjkzq8j0zqmm3u45nq" id="c0cdda43f1k2u"> <a href="https://page.dingtalk.com/wow/tianyuan/act/toufang?wh_showError=true&amp;caseId=NTMzNg==" uuid="lzkx5nz4tm5jh8mfj2f" id="78c0704bdd2xd">https://page.dingtalk.com/wow/tianyuan/act/toufang?wh_showError=true&amp;caseId=NTMzNg==</a></p><p uuid="lzkx5asaug0m54qdf2l" id="c3342bd227t18"><img id="25b97257b1jor" src="https://help-static-aliyun-doc.aliyuncs.com/assets/img/zh-CN/8516224271/p835396.png" alt="image" placement="break" class="image break" / /></p></section><p id="61db46db7b07c"></p></div></main></body></html>

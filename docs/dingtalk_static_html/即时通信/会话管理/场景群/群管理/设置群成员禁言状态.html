@@ -1,0 +1,390 @@
+<!DOCTYPE html><html><head><meta charset="utf8" / /><meta name="gmtModify" content="2025-09-12 17:18:30" / /><meta name="searchtitle" content="" / /><meta name="keywords" content="" / /><meta name="author" content="" / /><title>设置群成员禁言状态</title><meta name="gmtModify" content="2026-06-05 13:56:06" / /></head><body data-tag="topic" id="doc-api-dingtalk-UpdateMemberBanWords" class="topic"><main id="b8e466b36c9jv" data-init-id="doc-api-dingtalk_UpdateMemberBanWords"><h1 data-tag="title" id="h1-pkp-mea-rzm" class="title">设置群成员禁言状态</h1><p data-tag="shortdesc" id="c1fa21d7bdfp8" class="shortdesc">调用本接口设置场景群内的群成员禁言状态，可设置指定群成员禁言或解除禁言，适用于企业群管理员对群内成员进行管理，需要对违规成员进行禁言或解除禁言的场景。</p><div data-tag="conbody" outputclass="icms-api-reference" class="icms-api-reference conbody"><section id="section-prerequisites-1" class="section icms-module" data-tag="section" data-source="latest-mounted-icms-html"><h2 id="h2-prerequisites-1" data-tag="h2" class="h2">接口调用说明</h2><p id="13fa1f77ed611">支持以下场景使用：</p><ul id="28515af824ojr"><li id="958f27902ewu2"><p id="18026dbee6t00">基于群模板创建的群，详情参见<a href="https://open.dingtalk.com/document/development/create-a-scene-group-v2#" class="xref" id="920ab06b61bak">创建群</a>。</p></li></ul></section><section id="section-request-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-request-1" data-tag="h2" class="h2">请求</h2><section id="section-request-basic-info" class="section"><h3 id="heading-request-basic-info" data-tag="h3" class="h3">基本信息</h3><table id="83226b3570ykw" tablewidth="648" tablecolswidth="216 432" autofit="false" class="table"><colgroup colwidth="0.67*" style="width:33.33%"></colgroup><colgroup colwidth="1.33*" style="width:66.67%"></colgroup><tbody class="tbody"><tr id="2b197466488sv"><td id="90628001adqrk" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="f65009bf771tg">字段</p></td><td id="2a075297c95e1" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="e0d26ec3f1boe">值</p></td></tr><tr id="54f47a8c9cyqm"><td id="c667507505b4n" rowspan="1" colspan="1"><p id="1ce6a560cdupl">HTTP URL</p></td><td id="a332a1b0693rk" rowspan="1" colspan="1"><p id="13a625f80dxvy">https://api.dingtalk.com/v1.0/im/sceneGroups/muteMembers/set</p></td></tr><tr id="ef29570961wp4"><td id="62610163903u5" rowspan="1" colspan="1"><p id="14417ec2f42yg">HTTP Method</p></td><td id="c030bf02c53bn" rowspan="1" colspan="1"><p id="cb13df290d7fi">POST</p></td></tr><tr id="af01187354pil"><td id="ca0c443cc2bxx" rowspan="1" colspan="1"><p id="5c1484ea56qvx">支持的应用类型</p></td><td id="158b4c073eqqt" rowspan="1" colspan="1"><p id="f2eff3ba94hsl"><span data-tag="ph" id="ph-request-basic-app-type-apptype-0" class="ph ph-app-type" data-ph-raw-text="appType-企业内部应用">appType-企业内部应用</span></p></td></tr><tr id="6a6bfe608dhjp"><td id="6e16e6517496l" rowspan="1" colspan="1"><p id="b31a5eb112iun">权限要求</p></td><td id="1a3effc6a96v9" rowspan="1" colspan="1"><p id="980682daeamro"><span data-tag="ph" id="ph-request-basic-permission-permission-qyapi-chat-manage-0" class="ph-permission ph" data-ph-raw-text="permission-qyapi_chat_manage-钉钉群基础信息管理权限" data-permission-id="permission-qyapi_chat_manage" data-permission-code="qyapi_chat_manage" data-permission-detail-api="/document/api/permission/detail" data-permission-query-param="code">permission-qyapi_chat_manage-钉钉群基础信息管理权限</span></p></td></tr></tbody></table></section><section id="section-request-header-parameter" class="section"><h3 data-tag="h3" id="h2-slc-axc-eik" class="h3 title">请求头</h3><table id="2acfa72691zbf" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="c6d9eb9e195mw"><td id="f55740b30f2p7" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="67ba151b44852">名称</p></td><td id="3637ab43aedl8" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="c8c60fff87x93">类型</p></td><td id="e6d626b292ows" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="5e3ac599531o6">是否必填</p></td><td id="72bd83137b8i4" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="6ba6907c490ec">描述</p></td></tr><tr id="7651d0e79cdil"><td id="ec44412a6cs9j" rowspan="1" colspan="1"><p id="297e4b3067mb9">x-acs-dingtalk-access-token</p></td><td id="d90eef348etcx" rowspan="1" colspan="1"><p id="ddbf459b61q81">String</p></td><td id="4f9b5525fc259" rowspan="1" colspan="1"><p id="d2a33189672ns">是</p></td><td id="68bbfc391fkea" rowspan="1" colspan="1"><p id="9c220f62c2fu3">调用该接口的访问凭证，通过调用<a href="https://open.dingtalk.com/document/development/obtain-the-access-token-of-an-internal-app#" id="b7309859125o1" class="xref">获取企业内部应用的accessToken</a>接口获取。</p></td></tr></tbody></table></section><section id="section-request-body-parameter" class="section"><h3 data-tag="h3" id="h2-nhr-oum-i8z" class="h3 title">请求体</h3><table id="528dc9f50b0yd" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="12a37a99d1mld"><td id="31192ca2580xg" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="1911ab6bba2yo">名称</p></td><td id="b0709632a40e2" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="68efde472blw6">类型</p></td><td id="581984df20xx7" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="f47926e7d2k7w">是否必填</p></td><td id="d268d34c75lah" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="2be367c46fowv">描述</p></td></tr><tr outputclass="row row-level-1" id="4fe1f340abto7" class="row row-level-1"><td id="7d34e2958etic" rowspan="1" colspan="1"><p id="338aedaafcn4d">userIdList</p></td><td id="819e835449jvz" rowspan="1" colspan="1"><p id="d3fb645711p9e">Array of String</p></td><td id="ea2221971385y" rowspan="1" colspan="1"><p id="eecc79af0a0wj">是</p></td><td id="6c17afcf0ek37" rowspan="1" colspan="1"><p id="705351c521c8r">需要禁言或取消禁言的群成员userId列表。</p><p class="note-icon-wrapper" id="94dd439b19iat"></p><ul id="33e048bf28flz"><li id="dab8a6d83duey"><p id="618eda0d78q0p">群主和群管理员无法被设置禁言。</p></li><li id="057707894d1en"><p id="4f94c14943jv0">最多传999个。</p></li></ul></td></tr><tr outputclass="row row-level-2" id="25bcbb1be2p08" class="row row-level-2"><td id="25b2034989mb4" rowspan="1" colspan="1"><p id="0fd9c7cf0a18q">openConversationId</p></td><td id="8b67c40b36bmg" rowspan="1" colspan="1"><p id="1b0870fbddvy6">String</p></td><td id="4439492122d38" rowspan="1" colspan="1"><p id="fee2dc0aeeyl2">是</p></td><td id="297cb185e7hd0" rowspan="1" colspan="1"><p id="ceb199012cu1r">群ID，通过<a href="https://open.dingtalk.com/document/development/create-a-scene-group-v2#" id="07b095b16ahr6" class="xref">创建群</a>接口获取<code data-tag="inlineCode" id="a6de54ef89cia" class="inlineCode">open_conversation_id</code>参数值。</p></td></tr><tr outputclass="row row-level-3" id="753f42c52fwnb" class="row row-level-3"><td id="cc53b2afa6oh0" rowspan="1" colspan="1"><p id="5a11a124a9n4w">muteStatus</p></td><td id="103d5d6c60adi" rowspan="1" colspan="1"><p id="8e7b12b32el5h">Integer</p></td><td id="877058479d442" rowspan="1" colspan="1"><p id="c9fba8429awe2">是</p></td><td id="10cf5d151b8bu" rowspan="1" colspan="1"><p id="e15b6523b8jk9">禁言状态：</p><ul id="e964645684vt4"><li id="bcbfb6edfehpg"><p id="66a044dd76oae"><b>0</b>：取消禁言</p></li><li id="a9f8f93d4f5tz"><p id="192dc7c947su3"><b>1</b>：禁言</p></li></ul></td></tr><tr outputclass="row row-level-4" id="c85479daccbf3" class="row row-level-4"><td id="b6163e2137xq3" rowspan="1" colspan="1"><p id="db68d5b5d8fke">muteDuration</p></td><td id="307480d5602oy" rowspan="1" colspan="1"><p id="e9b7ab21c5ey8">Long</p></td><td id="e5d920c7ady2n" rowspan="1" colspan="1"><p id="23c857dcbahg9">是</p></td><td id="1d79c23e1c78j" rowspan="1" colspan="1"><p id="12d06ee7bd1ia">禁言持续时长，单位：毫秒。</p></td></tr></tbody></table></section><section id="section-request-body-example" class="section"><h3 id="h3-request-body-example" data-tag="h3" class="h3">请求示例</h3><div outputclass="tabbed-codeblock" data-tag="fig" id="figure-o5b-yig-ay7" class="tabbed-codeblock-box"><div class="tab-box"></div><input type="radio" name="check-figure-o5b-yig-ay7" id="figure-o5b-yig-ay7-HTTP-tab" checked="checked" /><label for="figure-o5b-yig-ay7-HTTP-tab">HTTP</label><div class="codeblock-item"><pre id="codeblock-y2a-du1-rom" outputclass="language-HTTP" code-type="xCode" data-tag="codeblock" class="pre codeblock language-HTTP"><code>POST /v1.0/im/sceneGroups/muteMembers/set HTTP/1.1
+Host:api.dingtalk.com
+x-acs-dingtalk-access-token:2107d7ae16466433794062053d0587
+Content-Type:application/json
+
+{
+  "userIdList" : [ "0104440938191508" ],
+  "openConversationId" : "cid5d5uM3XEw3gxbNc/n7EQ4g==",
+  "muteStatus" : 1,
+  "muteDuration" : 300000
+}</code></pre></div><input type="radio" name="check-figure-o5b-yig-ay7" id="figure-o5b-yig-ay7-java-tab" /><label for="figure-o5b-yig-ay7-java-tab">Java</label><div class="codeblock-item"><pre id="codeblock-pi6-izv-xig" outputclass="language-java" code-type="xCode" data-tag="codeblock" class="pre codeblock language-java"><code>// This file is auto-generated, don't edit it. Thanks.
+package com.aliyun.sample;
+
+import com.aliyun.tea.*;
+import com.aliyun.teautil.*;
+import com.aliyun.teautil.models.*;
+import com.aliyun.dingtalkim_1_0.*;
+import com.aliyun.dingtalkim_1_0.models.*;
+import com.aliyun.teaopenapi.*;
+import com.aliyun.teaopenapi.models.*;
+
+public class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Client
+     * @throws Exception
+     */
+    public static com.aliyun.dingtalkim_1_0.Client createClient() throws Exception {
+        Config config = new Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        return new com.aliyun.dingtalkim_1_0.Client(config);
+    }
+
+    public static void main(String[] args_) throws Exception {
+        java.util.List&lt;String&gt; args = java.util.Arrays.asList(args_);
+        com.aliyun.dingtalkim_1_0.Client client = Sample.createClient();
+        UpdateMemberBanWordsHeaders updateMemberBanWordsHeaders = new UpdateMemberBanWordsHeaders();
+        updateMemberBanWordsHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        UpdateMemberBanWordsRequest updateMemberBanWordsRequest = new UpdateMemberBanWordsRequest()
+                .setUserIdList(java.util.Arrays.asList(
+                    "0104440938191508"
+                ))
+                .setOpenConversationId("cid5d5uM3XEw3gxbNc/n7EQ4g==")
+                .setMuteStatus(1)
+                .setMuteDuration(300000L);
+        try {
+            client.updateMemberBanWordsWithOptions(updateMemberBanWordsRequest, updateMemberBanWordsHeaders, new RuntimeOptions());
+        } catch (TeaException err) {
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        } catch (Exception _err) {
+            TeaException err = new TeaException(_err.getMessage(), _err);
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        }        
+    }
+}</code></pre></div><input type="radio" name="check-figure-o5b-yig-ay7" id="figure-o5b-yig-ay7-python-tab" /><label for="figure-o5b-yig-ay7-python-tab">Python</label><div class="codeblock-item"><pre id="codeblock-mxe-eva-eru" outputclass="language-python" code-type="xCode" data-tag="codeblock" class="pre codeblock language-python"><code># -*- coding: utf-8 -*-
+# This file is auto-generated, don't edit it. Thanks.
+import sys
+
+from typing import List
+
+from alibabacloud_dingtalk.im_1_0.client import Client as dingtalkim_1_0Client
+from alibabacloud_tea_openapi import models as open_api_models
+from alibabacloud_dingtalk.im_1_0 import models as dingtalkim__1__0_models
+from alibabacloud_tea_util import models as util_models
+from alibabacloud_tea_util.client import Client as UtilClient
+
+
+class Sample:
+    def __init__(self):
+        pass
+
+    @staticmethod
+    def create_client() -&gt; dingtalkim_1_0Client:
+        """
+        使用 Token 初始化账号Client
+        @return: Client
+        @throws Exception
+        """
+        config = open_api_models.Config()
+        config.protocol = 'https'
+        config.region_id = 'central'
+        return dingtalkim_1_0Client(config)
+
+    @staticmethod
+    def main(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        update_member_ban_words_headers = dingtalkim__1__0_models.UpdateMemberBanWordsHeaders()
+        update_member_ban_words_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        update_member_ban_words_request = dingtalkim__1__0_models.UpdateMemberBanWordsRequest(
+            user_id_list=[
+                '0104440938191508'
+            ],
+            open_conversation_id='cid5d5uM3XEw3gxbNc/n7EQ4g==',
+            mute_status=1,
+            mute_duration=300000
+        )
+        try:
+            client.update_member_ban_words_with_options(update_member_ban_words_request, update_member_ban_words_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+    @staticmethod
+    async def main_async(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        update_member_ban_words_headers = dingtalkim__1__0_models.UpdateMemberBanWordsHeaders()
+        update_member_ban_words_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        update_member_ban_words_request = dingtalkim__1__0_models.UpdateMemberBanWordsRequest(
+            user_id_list=[
+                '0104440938191508'
+            ],
+            open_conversation_id='cid5d5uM3XEw3gxbNc/n7EQ4g==',
+            mute_status=1,
+            mute_duration=300000
+        )
+        try:
+            await client.update_member_ban_words_with_options_async(update_member_ban_words_request, update_member_ban_words_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+
+if __name__ == '__main__':
+    Sample.main(sys.argv[1:])</code></pre></div><input type="radio" name="check-figure-o5b-yig-ay7" id="figure-o5b-yig-ay7-php-tab" /><label for="figure-o5b-yig-ay7-php-tab">PHP</label><div class="codeblock-item"><pre id="codeblock-zeg-9lv-rba" outputclass="language-php" code-type="xCode" data-tag="codeblock" class="pre codeblock language-php"><code>&lt;?php
+
+// This file is auto-generated, don't edit it. Thanks.
+namespace AlibabaCloud\SDK\Sample;
+
+use AlibabaCloud\SDK\Dingtalk\Vim_1_0\Dingtalk;
+use \Exception;
+use AlibabaCloud\Tea\Exception\TeaError;
+use AlibabaCloud\Tea\Utils\Utils;
+
+use Darabonba\OpenApi\Models\Config;
+use AlibabaCloud\SDK\Dingtalk\Vim_1_0\Models\UpdateMemberBanWordsHeaders;
+use AlibabaCloud\SDK\Dingtalk\Vim_1_0\Models\UpdateMemberBanWordsRequest;
+use AlibabaCloud\Tea\Utils\Utils\RuntimeOptions;
+
+class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Dingtalk Client
+     */
+    public static function createClient(){
+        $config = new Config([]);
+        $config-&gt;protocol = "https";
+        $config-&gt;regionId = "central";
+        return new Dingtalk($config);
+    }
+
+    /**
+     * @param string[] $args
+     * @return void
+     */
+    public static function main($args){
+        $client = self::createClient();
+        $updateMemberBanWordsHeaders = new UpdateMemberBanWordsHeaders([]);
+        $updateMemberBanWordsHeaders-&gt;xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        $updateMemberBanWordsRequest = new UpdateMemberBanWordsRequest([
+            "userIdList" =&gt; [
+                "0104440938191508"
+            ],
+            "openConversationId" =&gt; "cid5d5uM3XEw3gxbNc/n7EQ4g==",
+            "muteStatus" =&gt; 1,
+            "muteDuration" =&gt; 300000
+        ]);
+        try {
+            $client-&gt;updateMemberBanWordsWithOptions($updateMemberBanWordsRequest, $updateMemberBanWordsHeaders, new RuntimeOptions([]));
+        }
+        catch (Exception $err) {
+            if (!($err instanceof TeaError)) {
+                $err = new TeaError([], $err-&gt;getMessage(), $err-&gt;getCode(), $err);
+            }
+            if (!Utils::empty_($err-&gt;code) &amp;&amp; !Utils::empty_($err-&gt;message)) {
+                // err 中含��� code 和 message 属性，可帮助开发定位问题
+            }
+        }
+    }
+}
+$path = __DIR__ . \DIRECTORY_SEPARATOR . '..' . \DIRECTORY_SEPARATOR . 'vendor' . \DIRECTORY_SEPARATOR . 'autoload.php';
+if (file_exists($path)) {
+    require_once $path;
+}
+Sample::main(array_slice($argv, 1));</code></pre></div><input type="radio" name="check-figure-o5b-yig-ay7" id="figure-o5b-yig-ay7-go-tab" /><label for="figure-o5b-yig-ay7-go-tab">Go</label><div class="codeblock-item"><pre id="codeblock-mwb-qqp-b6o" outputclass="language-go" code-type="xCode" data-tag="codeblock" class="pre codeblock language-go"><code>// This file is auto-generated, don't edit it. Thanks.
+package main
+
+import (
+  "os"
+  util  "github.com/alibabacloud-go/tea-utils/service"
+  dingtalkim_1_0  "github.com/alibabacloud-go/dingtalk/im_1_0"
+  openapi  "github.com/alibabacloud-go/darabonba-openapi/client"
+  "github.com/alibabacloud-go/tea/tea"
+)
+
+
+/**
+ * 使用 Token 初始化账号Client
+ * @return Client
+ * @throws Exception
+ */
+func CreateClient () (_result *dingtalkim_1_0.Client, _err error) {
+  config := &amp;openapi.Config{}
+  config.Protocol = tea.String("https")
+  config.RegionId = tea.String("central")
+  _result = &amp;dingtalkim_1_0.Client{}
+  _result, _err = dingtalkim_1_0.NewClient(config)
+  return _result, _err
+}
+
+func _main (args []*string) (_err error) {
+  client, _err := CreateClient()
+  if _err != nil {
+    return _err
+  }
+
+  updateMemberBanWordsHeaders := &amp;dingtalkim_1_0.UpdateMemberBanWordsHeaders{}
+  updateMemberBanWordsHeaders.XAcsDingtalkAccessToken = tea.String("&lt;your access token&gt;")
+  updateMemberBanWordsRequest := &amp;dingtalkim_1_0.UpdateMemberBanWordsRequest{
+    UserIdList: []*string{tea.String("0104440938191508")},
+    OpenConversationId: tea.String("cid5d5uM3XEw3gxbNc/n7EQ4g=="),
+    MuteStatus: tea.Int32(1),
+    MuteDuration: tea.Int64(300000),
+  }
+  tryErr := func()(_e error) {
+    defer func() {
+      if r := tea.Recover(recover()); r != nil {
+        _e = r
+      }
+    }()
+    _, _err = client.UpdateMemberBanWordsWithOptions(updateMemberBanWordsRequest, updateMemberBanWordsHeaders, &amp;util.RuntimeOptions{})
+    if _err != nil {
+      return _err
+    }
+
+    return nil
+  }()
+
+  if tryErr != nil {
+    var err = &amp;tea.SDKError{}
+    if _t, ok := tryErr.(*tea.SDKError); ok {
+      err = _t
+    } else {
+      err.Message = tea.String(tryErr.Error())
+    }
+    if !tea.BoolValue(util.Empty(err.Code)) &amp;&amp; !tea.BoolValue(util.Empty(err.Message)) {
+      // err 中含有 code 和 message 属性，可帮助开发定位问题
+    }
+
+  }
+  return _err
+}
+
+
+func main() {
+  err := _main(tea.StringSlice(os.Args[1:]))
+  if err != nil {
+    panic(err)
+  }
+}</code></pre></div><input type="radio" name="check-figure-o5b-yig-ay7" id="figure-o5b-yig-ay7-nodejs-tab" /><label for="figure-o5b-yig-ay7-nodejs-tab">Node.js</label><div class="codeblock-item"><pre id="codeblock-g1v-rbe-gwo" outputclass="language-nodejs" code-type="xCode" data-tag="codeblock" class="pre codeblock language-nodejs"><code>// This file is auto-generated, don't edit it
+import Util, * as $Util from '@alicloud/tea-util';
+import dingtalkim_1_0, * as $dingtalkim_1_0 from '@alicloud/dingtalk/im_1_0';
+import OpenApi, * as $OpenApi from '@alicloud/openapi-client';
+import * as $tea from '@alicloud/tea-typescript';
+
+
+export default class Client {
+
+  /**
+   * 使用 Token 初始化账号Client
+   * @return Client
+   * @throws Exception
+   */
+  static createClient(): dingtalkim_1_0 {
+    let config = new $OpenApi.Config({ });
+    config.protocol = "https";
+    config.regionId = "central";
+    return new dingtalkim_1_0(config);
+  }
+
+  static async main(args: string[]): Promise&lt;void&gt; {
+    let client = Client.createClient();
+    let updateMemberBanWordsHeaders = new $dingtalkim_1_0.UpdateMemberBanWordsHeaders({ });
+    updateMemberBanWordsHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+    let updateMemberBanWordsRequest = new $dingtalkim_1_0.UpdateMemberBanWordsRequest({
+      userIdList: [
+        "0104440938191508"
+      ],
+      openConversationId: "cid5d5uM3XEw3gxbNc/n7EQ4g==",
+      muteStatus: 1,
+      muteDuration: 300000,
+    });
+    try {
+      await client.updateMemberBanWordsWithOptions(updateMemberBanWordsRequest, updateMemberBanWordsHeaders, new $Util.RuntimeOptions({ }));
+    } catch (err) {
+      if (!Util.empty(err.code) &amp;&amp; !Util.empty(err.message)) {
+        // err 中含有 code 和 message 属性，可帮助开发定位问题
+      }
+
+    }    
+  }
+
+}
+
+Client.main(process.argv.slice(2));</code></pre></div><input type="radio" name="check-figure-o5b-yig-ay7" id="figure-o5b-yig-ay7-csharp-tab" /><label for="figure-o5b-yig-ay7-csharp-tab">C#</label><div class="codeblock-item"><pre id="codeblock-vks-3of-7w5" outputclass="language-csharp" code-type="xCode" data-tag="codeblock" class="pre codeblock language-csharp"><code>// This file is auto-generated, don't edit it. Thanks.
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
+
+using Tea;
+using Tea.Utils;
+
+
+namespace AlibabaCloud.SDK.Sample
+{
+    public class Sample 
+    {
+
+        /**
+         * 使用 Token 初始化账号Client
+         * @return Client
+         * @throws Exception
+         */
+        public static AlibabaCloud.SDK.Dingtalkim_1_0.Client CreateClient()
+        {
+            AlibabaCloud.OpenApiClient.Models.Config config = new AlibabaCloud.OpenApiClient.Models.Config();
+            config.Protocol = "https";
+            config.RegionId = "central";
+            return new AlibabaCloud.SDK.Dingtalkim_1_0.Client(config);
+        }
+
+        public static void Main(string[] args)
+        {
+            AlibabaCloud.SDK.Dingtalkim_1_0.Client client = CreateClient();
+            AlibabaCloud.SDK.Dingtalkim_1_0.Models.UpdateMemberBanWordsHeaders updateMemberBanWordsHeaders = new AlibabaCloud.SDK.Dingtalkim_1_0.Models.UpdateMemberBanWordsHeaders();
+            updateMemberBanWordsHeaders.XAcsDingtalkAccessToken = "&lt;your access token&gt;";
+            AlibabaCloud.SDK.Dingtalkim_1_0.Models.UpdateMemberBanWordsRequest updateMemberBanWordsRequest = new AlibabaCloud.SDK.Dingtalkim_1_0.Models.UpdateMemberBanWordsRequest
+            {
+                UserIdList = new List&lt;string&gt;
+                {
+                    "0104440938191508"
+                },
+                OpenConversationId = "cid5d5uM3XEw3gxbNc/n7EQ4g==",
+                MuteStatus = 1,
+                MuteDuration = 300000,
+            };
+            try
+            {
+                client.UpdateMemberBanWordsWithOptions(updateMemberBanWordsRequest, updateMemberBanWordsHeaders, new AlibabaCloud.TeaUtil.Models.RuntimeOptions());
+            }
+            catch (TeaException err)
+            {
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+            catch (Exception _err)
+            {
+                TeaException err = new TeaException(new Dictionary&lt;string, object&gt;
+                {
+                    { "message", _err.Message }
+                });
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+        }
+
+
+    }
+}</code></pre></div></div></section></section><section id="section-response-1" class="section icms-module" data-tag="section" data-source="apiMeta"><h2 id="h2-response-1" data-tag="h2" class="h2">响应</h2><section id="section-response-body-example" class="section"><h3 id="h3-response-body-example" data-tag="h3" class="h3">响应体示例</h3><pre id="a4580aa8d6b5r" outputclass="language-json" code-type="xCode" data-tag="codeblock" class="pre codeblock language-json"><code>HTTP/1.1 200 OK</code></pre></section><section id="section-error-code-1" class="section"><h3 id="h3-error-code-1" data-tag="h3" class="h3">错误码</h3><p data-tag="p" id="p-error-code-global-guide" class="p">若调用该接口报错，可根据错误信息在<a href="https://open.dingtalk.com/document/development/server-api-error-codes-1" id="a-error-code-global-guide">全局错误码</a>文档中查找解决方案。</p><table id="8a0351f279oag" tablewidth="709" tablecolswidth="142 177 177 213" autofit="false" class="table"><colgroup colwidth="0.8*" style="width:20.03%"></colgroup><colgroup colwidth="1*" style="width:24.96%"></colgroup><colgroup colwidth="1*" style="width:24.96%"></colgroup><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><tbody class="tbody"><tr id="18a4f0e0a27a2"><td id="42de5f5032mpm" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="56708f979fq62">HttpCode</p></td><td id="42e28c92cck4k" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="8b73a87f62ahj">错误码</p></td><td id="9c6e6127e8ydp" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="6f02fb9b41iil">错误信息</p></td><td id="c5df46987d5s7" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="e0b1047662dsd">说明</p></td></tr><tr id="cb68baa186okz"><td id="c13d7f9869fys" rowspan="1" colspan="1"><p id="a30155af8bxct">400</p></td><td id="1784205856zpa" rowspan="1" colspan="1"><p id="dd1fbdbe41bbu">invalidParameter.openConversationIdDecError</p></td><td id="9fcda798f31lp" rowspan="1" colspan="1"><p id="e451af41e01q9">会话ID解密失败</p></td><td id="63c1b8a9ec44b" rowspan="1" colspan="1"><p id="8cfb837680dg2">会话ID解密失败</p></td></tr><tr id="9cd3ad571723b"><td id="85a692bb35e8a" rowspan="1" colspan="1"><p id="bb3d367296g8n">400</p></td><td id="f5da08ddee3zb" rowspan="1" colspan="1"><p id="f9be868c7cqx4">invalidParameter.userIdList</p></td><td id="2520bde7e8rw0" rowspan="1" colspan="1"><p id="2afc75fe9emhi">不合法的群成员列表</p></td><td id="b5dff5fdcdqg1" rowspan="1" colspan="1"><p id="b5047719b48f9">不合法的群成员列表</p></td></tr><tr id="f87db444a8gax"><td id="ffcc07b62ex2u" rowspan="1" colspan="1"><p id="e750a24a27s29">400</p></td><td id="5172f2d58depp" rowspan="1" colspan="1"><p id="1bdb031f6bngu">invalidParameter.muteStatusError</p></td><td id="c529412c31d50" rowspan="1" colspan="1"><p id="ba7b682a88cih">不合法的的禁言状态</p></td><td id="a58b885a021gr" rowspan="1" colspan="1"><p id="0f109e96c6y8g">不合法的的禁言状态</p></td></tr><tr id="495445b718lqi"><td id="59cd19225e3g8" rowspan="1" colspan="1"><p id="a3a46d8f278xv">400</p></td><td id="1aac1325482an" rowspan="1" colspan="1"><p id="458a910cf9zk0">invalidParameter.openConversationIdError</p></td><td id="c55d2aa329mak" rowspan="1" colspan="1"><p id="bccc6c179c4ry">不合法的会话ID</p></td><td id="ae3c26ccc8dd2" rowspan="1" colspan="1"><p id="9792a2a8a78ok">不合法的会话ID</p></td></tr><tr id="af68a0dfc0usg"><td id="7271a69184n51" rowspan="1" colspan="1"><p id="71b32b11f30f3">400</p></td><td id="39cecc00f5a7n" rowspan="1" colspan="1"><p id="00b4380bd5rk9">cannot.ban.owner</p></td><td id="646e8372b8dmm" rowspan="1" colspan="1"><p id="cd7ae4e9d2yee">不允许禁言群主</p></td><td id="53d6f97251fng" rowspan="1" colspan="1"><p id="056a381ceeyk9">不允许禁言群主</p></td></tr><tr id="7ab4227f7515i"><td id="3b3f877c7fupz" rowspan="1" colspan="1"><p id="19225e12b747q">400</p></td><td id="b08e80149fdtr" rowspan="1" colspan="1"><p id="176888ef9fn3a">cannot.find.user</p></td><td id="5ea25162310hi" rowspan="1" colspan="1"><p id="a0e39c8feen9i">找不到该用户</p></td><td id="5d552930ed9td" rowspan="1" colspan="1"><p id="773acc01e42w8">找不到该用户</p></td></tr><tr id="4bc962ff20gny"><td id="6efb50a7048dv" rowspan="1" colspan="1"><p id="4596461461w0l">400</p></td><td id="b874a3a9f20io" rowspan="1" colspan="1"><p id="8431c6bfa1zzw">invalidGroupParams</p></td><td id="0556ffdf30ozd" rowspan="1" colspan="1"><p id="19823820c5in3">群不存在或者群成员为空</p></td><td id="dd833ab09320z" rowspan="1" colspan="1"><p id="26297fa369uss">群不存在或者群成员为空</p></td></tr><tr id="7205fe4e8dx2i"><td id="d9c2d3db528jz" rowspan="1" colspan="1"><p id="1eef687b16wvl">400</p></td><td id="220ec49434l8x" rowspan="1" colspan="1"><p id="e012650b55fi8">group.org.checkFailed</p></td><td id="5279a15992j4l" rowspan="1" colspan="1"><p id="aec243a588ni1">无权限，群不属于当前企业</p></td><td id="0f33cc20a92op" rowspan="1" colspan="1"><p id="2b59a1dfabegy">无权限，群不属于当前企业</p></td></tr><tr id="501ad02ddfaas"><td id="281c3a0000720" rowspan="1" colspan="1"><p id="de4827ce3actm">500</p></td><td id="cc5b480712844" rowspan="1" colspan="1"><p id="6f7796edc8jpt">system.error</p></td><td id="797c138d75wvk" rowspan="1" colspan="1"><p id="13627fa95282e">系统繁忙，请稍后再试</p></td><td id="dc81e7dfd6bkt" rowspan="1" colspan="1"><p id="9448ebff88htq">系统繁忙，请稍后再试</p></td></tr></tbody></table></section></section></div></main></body></html>

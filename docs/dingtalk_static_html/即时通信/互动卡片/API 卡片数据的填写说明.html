@@ -1,0 +1,88 @@
+<!DOCTYPE html><html><head><meta charset="utf8" / /><meta name="searchtitle" content="" / /><meta name="keywords" content="" / /><meta name="author" content="" / /><title>API 卡片数据的填写说明</title><meta name="gmtModify" content="2026-06-15 16:46:46" / /></head><body data-tag="topic" id="topic-2296990" class="topic"><main id="main-2296990"><h1 data-tag="title" id="c3fa7870a8awr" class="title">API 卡片数据的填写说明</h1><p id="7c1a9f2743s5r" data-tag="shortdesc" class="shortdesc">本文介绍了创建卡片、创建并投放卡片、更新卡片 三个接口中卡片数据（包括公共数据和私有数据）的填写说明。</p><div data-tag="body" class="body"><section id="a66c23a3f1w3c" class="section"><h2 id="f155e816d24fo"><b>前言</b></h2><p id="4dfa4540a8aal"><a data-tag="xref" id="347205ee80zd0" href="/document/development/interface-for-creating-a-card-instance#" class="xref">创建卡片</a>、<a data-tag="xref" id="2f296389cd192" href="/document/development/create-and-deliver-cards#" class="xref">创建并投放卡片</a>、<a data-tag="xref" id="596bc19b5c6fg" href="/document/development/interactive-card-update-interface#" class="xref">更新卡片</a>三个接口<span style="color:rgb(23, 26, 29)">都是使用 </span><code data-tag="code" id="65155d953b1sh" class="code"><span style="color:rgb(23, 26, 29)">Map&lt;String, String&gt;</span></code> 来传递<span style="color:rgb(23, 26, 29)">卡片数据的，其中 Key 为参数名、Value 为参数值。本文介绍了当参数值的类型为 String 和非 String 时填写说明。</span></p></section><section id="67e54d459b2il" class="section"><h2 id="ab90aa10a8ety"><b>卡片 String 类型参数的填写说明</b></h2><p id="49896450a889v">对于 String 类型的参数，可以直接将参数名和参数值填写到卡片数据中即可，如：</p><pre id="xmqbdh" data-tag="codeblock" outputclass="language-json" code-type="xCode" class="pre codeblock language-json"><code>{
+  "outTrackId": "testId"
+  "cardData": {
+    "cardParamMap" {
+    "strParam1": "str1",					  // 公共 String 类型属性
+    "strParam2": "str2"             // 公共 String 类型属性
+  }
+},
+"privateData": {
+  "myUserId": {
+    "cardParamMap" {
+      "privateStrParam3": "str3",   // 私有 String 类型属性
+      "privateStrParam4": "str4"    // 私有 String 类型属性
+    }
+  }
+},
+  
+...
+}</code></pre></section><section id="2418215a45k1s" class="section"><h2 id="445386b2a8qss"><b>卡片非 String 类型参数的填写说明</b></h2><p id="49898b60a8qwc">对于非 String 类型，需要做一些特殊处理。</p><ul id="445386b3a8006"><li id="445386b4a8kxu"><p id="445386b5a88fe">基本类型，如 Number、Boolean，填写范例如下：</p><pre outputclass="language-json" data-tag="codeblock" id="445386b6a8z91" code-type="xCode" class="pre codeblock language-json"><code>{
+  "outTrackId": "testId"
+  "cardData": {
+    "cardParamMap" {
+    "intParam": "1",						// 公共整数类型属性
+    "trueParam": "true",			  // 公共布尔类型属性，对应 TRUE
+  }
+  },
+  "privateData": {
+    "myUserId": {
+      "cardParamMap" {
+        "floatParam": "1.23",    // 私有浮点类型属性
+        "falseparam": "false"    // 私有布尔类型属性，对应 FALSE
+      }
+    }
+  },
+  
+  ...
+}
+</code></pre></li><li id="445386b7a8t98"><p id="445386b8a82xu">对象类型，需要将对象转成 JSONString，填写范例如下：</p><pre outputclass="language-json" data-tag="codeblock" id="445386b9a84l1" code-type="xCode" class="pre codeblock language-json"><code>{
+  "outTrackId": "testId"
+  "cardData": {
+    "cardParamMap" {
+    "objParam": "{\"str\":\"stringValue\",\"innerObj\":{\"innerStr\":\"stringValue\",\"innerInt\":123,\"innerBool\":true},\"bool\":true,\"float\":1.23,\"int\":123}"
+  }
+},
+...
+}</code></pre><p id="42726990c3kc1">objParam 对应的值解析成 JSON 对象后如下：</p><pre code-type="xCode" id="8fa3c80f5euen" index="0" data-tag="codeblock" outputclass="language-json" class="pre codeblock language-json"><code>{
+  "strParam": "stringValue",         // 对象的字符串类型属性
+  "boolParam": true,			           // 对象的布尔类型属性
+  "floatParam": 1.2,                 // 对象的浮点类型属性
+  "intParam": 123,          		     // 对象的整数类型属性
+  "innerObjParam": {                 // 对象的对象类型属性
+    "innerStrParam": "stringValue",  // 内部对象的字符串类型属性
+    "innerIntParam": 123,            // 内部对象的整数类型属性
+    "innerBoolParam": true           // 内部对象的布尔类型属性
+  },
+}</code></pre></li><li id="445386bca8xms"><p id="445386bda8ypv">数组类型，需要将数组转成 JSONString，填写范例如下：</p><pre outputclass="language-json" data-tag="codeblock" id="445386bea8xt5" code-type="xCode" class="pre codeblock language-json"><code>{
+  "outTrackId": "testId"
+  "cardData": {
+    "cardParamMap" {
+    "intArrParam": "[1,2,3]",               
+    "boolArrParam": "[true,false]",
+    "objArrParam": "[{\"param1\":\"val1\"},{\"param2\":\"val2\"}]"
+  }
+},
+"privateData": {
+  "myUserId": {
+    "cardParamMap" {
+      "floatArrParam": "[1.1,2.2,3.3]", 
+      "stringArrParam": "[\"str1\",\"str2\"]"
+    }
+  }
+},
+  
+...
+}</code></pre><p id="e75de50133uyx"><code data-tag="code" id="aa977c7f95akl" class="code">intArrParam</code>、<code data-tag="code" id="5daf883d95zyv" class="code">boolArrParam</code>、<code data-tag="code" id="0462accdd1zfx" class="code">objArrParam</code>、<code data-tag="code" id="4c49162f35662" class="code">floatArrParam</code> 和 <code data-tag="code" id="4ac33b9282fkz" class="code">stringArrParam</code> 参数对应的值解析成 JSON 对象后为：</p><pre id="pcqvoe" data-tag="codeblock" outputclass="language-json" code-type="xCode" class="pre codeblock language-json"><code>{
+  "intArrParam": [1, 2, 3],
+  "boolArrParam": [true, false],
+  "objArrParam": [
+    {
+      "param1": "val1"
+    },
+    {
+      "param2": "val2"
+    }
+  ],
+  "floatArrParam": [1.1, 2.2, 3.3],
+  "stringArrParam": ["str1", "str2"]
+}</code></pre></li></ul></section></div></main></body></html>

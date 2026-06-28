@@ -1,0 +1,808 @@
+<!DOCTYPE html><html><head><meta charset="utf8" / /><meta name="gmtModify" content="2025-09-12 17:19:45" / /><meta name="searchtitle" content="" / /><meta name="keywords" content="" / /><meta name="author" content="" / /><title>创建钉钉待办任务</title><meta name="gmtModify" content="2026-06-04 19:09:50" / /></head><body data-tag="topic" id="doc-api-dingtalk-CreateTodoTask" class="topic"><main id="a1cb0101eciud" data-init-id="doc-api-dingtalk_CreateTodoTask"><h1 data-tag="title" id="h1-tjx-e8w-y6e" class="title">创建钉钉待办任务</h1><p data-tag="shortdesc" id="9bae3a0d5btfm" class="shortdesc">调用本接口，发起一个钉钉待办任务。</p><div data-tag="conbody" outputclass="icms-api-reference" class="icms-api-reference conbody"><section id="section-prerequisites-1" class="section icms-module" data-tag="section" data-source="latest-mounted-icms-html"><h2 id="h2-prerequisites-1" data-tag="h2" class="h2">接口调用说明</h2><ul id="e971c0747b009"><li id="6375bb2f07s04"><p id="91d82b5852zj8">第三方企业应用上架后，需要新增当前待办接口前，需要<span style="color:rgb(23, 26, 29)">接入</span><a href="https://open.dingtalk.com/document/development/function-description#" class="xref" id="a5073ad6cak3n">统一授权套件</a><span style="color:rgb(23, 26, 29)">授权类型必须为</span><span style="color:rgb(23, 26, 29)"><b>申请个人授权</b></span><span style="color:rgb(23, 26, 29)">，即</span><span style="color:rgb(23, 26, 29)"><b>type=0</b></span></p></li><li id="ca64850d670rr"><p id="99ee58e928myh">创建待办接口，目前已支持创建个人待办和第三方待办：</p><ul id="b9c772cee21d4"><li id="9b65882b22an4"><p id="1ab726041dbft">个人待办：个人待办场景（与用户在钉钉客户端创建的待办完全一致）</p></li><li id="afcc6078dfvbw"><p id="4ec4902a34hta">第三方待办：第三方业务自闭环场景（调用本接口时需传入自身应用详情页链接）</p></li></ul></li></ul><div type="note" id="ea179057197ow" class="note note-note"><div class="note-icon-wrapper"><i class="icon-note note note"></i></div><div class="noteContentSpan"><strong>说明 </strong><p id="3d41ac39e82vj">为了提升接口质量与用户体验，针对待办任务的相关接口规范进行升级，因此我们将对本接口作出以下调整：</p><ul id="664cc7c1c5qvf"><li id="b0798aa00aoue"><p id="ff0c7c6583oq9">从 2024 年 2 月 1 日起，本接口升级为仅支持创建工作待办（原第三方待办），即接口文档中的 detailUrl 字段将成为必填项。届时，本接口将无法创建个人待办（原钉钉官方待办），即接口文档中的 detailUrl 字段入参为空。</p></li><li id="148128644bqer"><p id="fb4855dd4dum8">如果尚未使用本接口创建个人待办（原钉钉官方待办），请通过<a href="https://open.dingtalk.com/document/development/api-createpersonaltodotask#" class="xref" id="e53632bf64kjx">创建钉钉个人待办任务</a>接口进行创建。</p></li><li id="84a7ff5a61fiy"><p id="c8ca9af193h2b">如果已使用本接口创建个人待办（原钉钉官方待办），你需要于 2024 年 1 月 31 日之前尽快将创建个人待办任务从本接口迁移到<a href="https://open.dingtalk.com/document/development/api-createpersonaltodotask#" class="xref" id="49678b254dm96">创建钉钉个人待办任务</a>接口，若未完成迁移，后续调用本接口且未填写 detailUrl 字段的入参，则会出现拦截报错提示。</p></li></ul></div></div></section><section id="section-request-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-request-1" data-tag="h2" class="h2">请求</h2><section id="section-request-basic-info" class="section"><h3 id="heading-request-basic-info" data-tag="h3" class="h3">基本信息</h3><table id="19ff140ad97ck" tablewidth="648" tablecolswidth="216 432" autofit="false" class="table"><colgroup colwidth="0.67*" style="width:33.33%"></colgroup><colgroup colwidth="1.33*" style="width:66.67%"></colgroup><tbody class="tbody"><tr id="769a7ce55bdt3"><td id="b624ed6b90zwa" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="e1a82ee9a8lm5">字段</p></td><td id="da1118a1b03fp" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="e70dc7303dzpk">值</p></td></tr><tr id="e2e997732exbu"><td id="bf2865f9cf635" rowspan="1" colspan="1"><p id="45a59d1892t1z">HTTP URL</p></td><td id="875b285dc0349" rowspan="1" colspan="1"><p id="757fbcdc43i42">https://api.dingtalk.com/v1.0/todo/users/{unionId}/tasks</p></td></tr><tr id="d1a42654426bw"><td id="4fab7c1710nhb" rowspan="1" colspan="1"><p id="e6a1bbe990ovy">HTTP Method</p></td><td id="0d02d625d86c4" rowspan="1" colspan="1"><p id="b358c42299f4o">POST</p></td></tr><tr id="6660805769rfj"><td id="a9527690180vs" rowspan="1" colspan="1"><p id="2d48a545df0gl">支持的应用类型</p></td><td id="a7a93180c1h97" rowspan="1" colspan="1"><p id="cc38a3b91eboa"><span data-tag="ph" id="ph-request-basic-app-type-apptype-0" class="ph ph-app-type" data-ph-raw-text="appType-企业内部应用">appType-企业内部应用</span>　<span data-tag="ph" id="ph-request-basic-app-type-apptype-1" class="ph ph-app-type" data-ph-raw-text="appType-第三方企业应用">appType-第三方企业应用</span></p></td></tr><tr id="216e567a8ckq5"><td id="21a080c6d4mji" rowspan="1" colspan="1"><p id="f8c2d0c35b0f7">权限要求</p></td><td id="2a7f108cde17o" rowspan="1" colspan="1"><p id="597e6bb2829id"><span data-tag="ph" id="ph-request-basic-permission-permission-todo-todo-write-0" class="ph-permission ph" data-ph-raw-text="permission-Todo.Todo.Write-待办应用中待办写权限" data-permission-id="permission-Todo.Todo.Write" data-permission-code="Todo.Todo.Write" data-permission-detail-api="/document/api/permission/detail" data-permission-query-param="code">permission-Todo.Todo.Write-待办应用中待办写权限</span></p></td></tr></tbody></table></section><section id="section-request-header-parameter" class="section"><h3 data-tag="h3" id="h2-9wq-oaa-blu" class="h3 title">请求头</h3><table id="68bac9dcf5n3j" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="cd35a7b2531hc"><td id="0ebd73817f01l" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="131461e4727ga">名称</p></td><td id="59bea903d2gtl" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="5f844849bad51">类型</p></td><td id="cf0fd7787b1df" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="f0f3bdd378978">是否必填</p></td><td id="e4c5b4cb8d0x6" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="0e3f8a7df6tdw">描述</p></td></tr><tr id="a5e44b5d4235h"><td id="671560b1a8105" rowspan="1" colspan="1"><p id="efe5da284blbd">x-acs-dingtalk-access-token</p></td><td id="03b96384b9fca" rowspan="1" colspan="1"><p id="c3f83b09d4e4h">String</p></td><td id="4af88a2b6ceyo" rowspan="1" colspan="1"><p id="7d1f68c396vqv">是</p></td><td id="0fafda5849h9b" rowspan="1" colspan="1"><p id="f4de7d3d2amyc">调用该接口的访问凭证。</p><ul id="97e1d6751ai4f"><li id="738fa69eeeijf"><p id="d2c382215bzai">企业内部应用，调用<a href="https://open.dingtalk.com/document/development/obtain-the-access-token-of-an-internal-app#" id="4afb15acdfpj6" class="xref">获取企业内部应用的accessToken</a>接口获取。</p></li><li id="0d4f57ab2dddv"><p id="57e04ac992ps7">第三方企业应用，<span style="color:rgb(23, 26, 29)">授权后使用返回的</span><span style="color:rgb(23, 26, 29)"><b>authCode </b></span><span style="color:rgb(23, 26, 29)">，</span>通过调用<a href="https://open.dingtalk.com/document/development/obtain-user-token#" id="79c200be934fq" class="xref">获取用户token</a>接口获取。</p></li></ul></td></tr></tbody></table></section><section id="section-request-path-parameter" class="section"><h3 data-tag="h3" id="h2-l3n-gui-vd5" class="h3 title">路径参数</h3><table id="261e2d87e8nf1" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="7643a3a577qeq"><td id="68f2221bb0dw0" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="16af67ccb4gt2">名称</p></td><td id="46ec6f0525apg" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="c9d1680986vw3">类型</p></td><td id="b65388c84er4o" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="b60ce46230t30">是否必填</p></td><td id="25e09e1939bmk" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="9fd603615aa2g">描述</p></td></tr><tr id="7bad9f8a0ac0w"><td id="84565ae5ddlnd" rowspan="1" colspan="1"><p id="84d14ef9878ny">unionId</p></td><td id="ed61dd9f103n4" rowspan="1" colspan="1"><p id="4b685330edcrr">String</p></td><td id="4b3409caea5aw" rowspan="1" colspan="1"><p id="60e1c2b34bp4x">是</p></td><td id="e8e9bf0759xdp" rowspan="1" colspan="1"><p id="6ff50e5f74e0v">当前访问资源所归属用户的unionId，和创建者的unionId保持一致，通过调用<a href="https://open.dingtalk.com/document/development/query-user-details#" id="c5e05c37db8s0" class="xref">查询用户详情</a>接口获取unionid参数值。</p></td></tr></tbody></table></section><section id="section-request-query-parameter" class="section"><h3 data-tag="h3" id="h2-ndz-8a3-tyq" class="h3 title">查询参数</h3><table id="9f64af062bwtt" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="c28f6b31abk8m"><td id="4e11c27d9co8u" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="d6450a42787d4">名称</p></td><td id="e8d8130c81sos" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="27606a03425wo">类型</p></td><td id="f74acddfb6zzm" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="d3e6b2cb243t8">是否必填</p></td><td id="ca025ee13b987" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="73c01850dd5wf">描述</p></td></tr><tr id="49b6eea33db6a"><td id="9b88366f3fh0y" rowspan="1" colspan="1"><p id="9b650b90b80dc">operatorId</p></td><td id="014e3d35cdvs3" rowspan="1" colspan="1"><p id="cb0de9c2b20v6">String</p></td><td id="f2bc5f79b8nft" rowspan="1" colspan="1"><p id="4c3be9cea95uc">否</p></td><td id="7054162638a5h" rowspan="1" colspan="1"><p id="5d2d8e4890f11">当前操作者用户的unionId，可调用<a href="https://open.dingtalk.com/document/development/query-user-details#" id="c6899e275b8cm" class="xref">查询用户详情</a>接口获取unionid参数值。</p></td></tr></tbody></table></section><section id="section-request-body-parameter" class="section"><h3 data-tag="h3" id="h2-j97-jcd-k1j" class="h3 title">请求体</h3><table id="f1b0361a97liu" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="d01c5d73811wf"><td id="6642ab583byyx" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="2593680fc0lhl">名称</p></td><td id="bc8f77a3e7uq7" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="21b85feaf5hg4">类型</p></td><td id="df40f5add8uxl" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="fff8654a8bp94">是否必填</p></td><td id="5c61990e2dwvy" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="9a10924915779">描述</p></td></tr><tr outputclass="row row-level-3" id="07f2192ba9goz" class="row row-level-3"><td id="63dbe4da0afek" rowspan="1" colspan="1"><p id="53eadda9881xc">sourceId</p></td><td id="3ba84c27998vy" rowspan="1" colspan="1"><p id="006edcc65c170">String</p></td><td id="54395261dafcy" rowspan="1" colspan="1"><p id="14342b21a7req">否</p></td><td id="8b498e8e5az68" rowspan="1" colspan="1"><p id="5447965161w1x">业务系统侧的唯一标识ID，即业务ID。</p><p class="note-icon-wrapper" id="3c18411ac9owv"></p><ul id="5aaad3b1b7o4n"><li id="3d7d90997515g"><p id="aab4df08e1eom">创建个人待办时，该字段无需传入。</p></li><li id="70c1cef0b93hh"><p id="39b531deb8mct">创建第三方待办时，业务系统侧的唯一标识任务ID作为sourceId，保证<b>一个待办任务对应一个sourceId</b>。</p></li></ul></td></tr><tr outputclass="row row-level-4" id="c494b117fb0q9" class="row row-level-4"><td id="23c8d6eb1ct25" rowspan="1" colspan="1"><p id="1d8c3b6186y65">subject</p></td><td id="574eed7b34rjb" rowspan="1" colspan="1"><p id="3f440a36f0ln2">String</p></td><td id="04af471beddkv" rowspan="1" colspan="1"><p id="62400b7adclh9">是</p></td><td id="ef2ae623adohj" rowspan="1" colspan="1"><p id="5c90513f8e7qv">待办标题，最大长度1024。</p></td></tr><tr outputclass="row row-level-5" id="950cc713494bp" class="row row-level-5"><td id="b20eb61e10gd1" rowspan="1" colspan="1"><p id="90805e9800ji9">creatorId</p></td><td id="68a51ede07gzm" rowspan="1" colspan="1"><p id="f2d66958756se">String</p></td><td id="de3f17fb93p0d" rowspan="1" colspan="1"><p id="90286f749a53v">否</p></td><td id="25dd5ee2c99rn" rowspan="1" colspan="1"><p id="ceb90b2a35pql">创建者的unionId，可调用<a href="https://open.dingtalk.com/document/development/query-user-details#" id="d830914001ttc" class="xref">查询用户详情</a>接口获取unionid参数值。</p></td></tr><tr outputclass="row row-level-6" id="d9fd26ffc76u9" class="row row-level-6"><td id="410076073522t" rowspan="1" colspan="1"><p id="adc9456bcfen1">description</p></td><td id="abdb07c8aab7l" rowspan="1" colspan="1"><p id="d07ff31e3em1a">String</p></td><td id="7f5b0ff4cd1z3" rowspan="1" colspan="1"><p id="a9697f166f1zp">否</p></td><td id="610bc55650j5t" rowspan="1" colspan="1"><p id="2c0f6388b0y5v">待办备注描述，最大长度4096。</p><p class="note-icon-wrapper" id="908a1fd99fwrx"></p><p data-tag="p" id="8dc4c2cddeh42" class="p"></p><ul id="6a49e69198s4t"><li id="909a38d74ee1u"><p id="72830286f7nyo">创建第三方待办时，该字段无需传入，不会正常展示。</p></li></ul><p id="8c68215a0diks"></p></td></tr><tr outputclass="row row-level-7" id="d5da88824a2ye" class="row row-level-7"><td id="20b6a477dbl8i" rowspan="1" colspan="1"><p id="d516a8b19d7fd">dueTime</p></td><td id="f72465f4cdxv6" rowspan="1" colspan="1"><p id="5ad2ff00ed9qf">Long</p></td><td id="eeffbb14bfivf" rowspan="1" colspan="1"><p id="87b0223513gbt">否</p></td><td id="82b2ebcd8daif" rowspan="1" colspan="1"><p id="001a43d746ze6">截止时间，Unix时间戳，单位毫秒。</p></td></tr><tr outputclass="row row-level-8" id="fbbe89f5932um" class="row row-level-8"><td id="2403c0f213hme" rowspan="1" colspan="1"><p id="316efa932ecfh">executorIds</p></td><td id="4bebe48a9c0nw" rowspan="1" colspan="1"><p id="864134b47b1b0">Array of String</p></td><td id="d61c6dc4e0fot" rowspan="1" colspan="1"><p id="607a446405l88">否</p></td><td id="815ca1ac78vwg" rowspan="1" colspan="1"><p id="8595aed918ae5">执行者的unionId，可调用<a href="https://open.dingtalk.com/document/development/query-user-details#" id="7d609cf85cd7x" class="xref">查询用户详情</a>接口获取unionid参数值，建议不超过100人。</p></td></tr><tr outputclass="row row-level-9" id="418d374eee6fv" class="row row-level-9"><td id="1afb536d481ub" rowspan="1" colspan="1"><p id="9ac6b55996c0c">participantIds</p></td><td id="80f1d68c33g9a" rowspan="1" colspan="1"><p id="532a9b61abiit">Array of String</p></td><td id="457c2452fegcq" rowspan="1" colspan="1"><p id="0f137f8b5bdbm">否</p></td><td id="51bd098829uim" rowspan="1" colspan="1"><p id="5dbfc5da7f91v">参与者的unionId，可调用<a href="https://open.dingtalk.com/document/development/query-user-details#" id="ace4f9b543r56" class="xref">查询用户详情</a>接口获取unionid参数值，建议不超过100人。</p></td></tr><tr outputclass="row row-level-10 has-child" id="3a6d6212de4kh" class="row row-level-10 has-child"><td id="32dd78a404050" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="510fb21fa6k9n">detailUrl</p></td><td id="29e4f60538ugp" rowspan="1" colspan="1"><p id="c4d35bd7eenh7">Object</p></td><td id="0081c13773irc" rowspan="1" colspan="1"><p id="af2b9ffe5eehe">否</p></td><td id="e810db459ei3f" rowspan="1" colspan="1"><p id="d823330c35dxl">详情页url跳转地址。</p><p class="note-icon-wrapper" id="1373652fd1bgr"></p><ul id="2111bf4e01xir"><li id="bcfab17b24b7c"><p id="a58b5e6ec5gr1">创建个人待办时，该字段无需传入。</p></li><li id="50ebc17bd9x1u"><p id="7641110837ddw">创建第三方待办时，需传入自身应用详情页链接。</p></li></ul></td></tr><tr outputclass="row row-level-10-1" id="f5c3cf12a93ex" class="row row-level-10-1"><td id="17a5052fd5zcx" rowspan="1" colspan="1"><p id="37c1f7248123q">appUrl</p></td><td id="9e9775dc84xbu" rowspan="1" colspan="1"><p id="883803f26bzf0">String</p></td><td id="92614d4c775bg" rowspan="1" colspan="1"><p id="56bbccd7aeegw">否</p></td><td id="dc29d99ae5977" rowspan="1" colspan="1"><p id="50adfc582e4pa">APP端详情页url跳转地址，该字段长度限制为1024个字节。</p><ul id="3b84ea5839prx"><li id="9873e8e515dz2"><p id="691cbf7ffc3ea">创建个人待办时，该字段无需传入。</p></li><li id="83a84c3e90x9q"><p id="6d0dbb9f47xxc">创建第三方待办时，需传入自身应用详情页链接。</p></li></ul><p class="note-icon-wrapper" id="75c4e01ca7dfe"></p><p id="5c85ed4250whs">如果创建第三方待办时配置了DING通知能力，appUrl需要支持以dingtalk协议打开。</p></td></tr><tr outputclass="row row-level-10-2" id="05d1ba8755vbu" class="row row-level-10-2"><td id="3028dcb983aq2" rowspan="1" colspan="1"><p id="bb4173d0d7tc3">pcUrl</p></td><td id="e60dbf82c6n8h" rowspan="1" colspan="1"><p id="f4549c2980utj">String</p></td><td id="d5b80bece3wxs" rowspan="1" colspan="1"><p id="61ef583a881yj">否</p></td><td id="1f032fdfcf2pt" rowspan="1" colspan="1"><p id="7d49960c5a4qv">PC端详情页url跳转地址，该字段长度限制为1024个字节。</p><p class="note-icon-wrapper" id="a7b845ca6dbu1"></p><ul id="30a12b4730s35"><li id="e703a65907c5i"><p id="9ad3cee5e3vfc">创建个人待办时，该字段无需传入。</p></li><li id="8069fe790f71r"><p id="e0e7c3fbddvy7">创建第三方待办时，需传入自身应用详情页链接。</p></li></ul></td></tr><tr outputclass="row row-level-11 has-child" id="3bc114217ffav" class="row row-level-11 has-child"><td id="088c1994aa3v5" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="0d20f15b3ahj2">contentFieldList</p></td><td id="d3c5fcbe4cnem" rowspan="1" colspan="1"><p id="6137b71271yfz">Array</p></td><td id="f3d1598ec3w6g" rowspan="1" colspan="1"><p id="cf657f9025lve">否</p></td><td id="66cb87b21809x" rowspan="1" colspan="1"><p id="87e258a77fird">待办卡片内容区表单自定义字段列表。</p></td></tr><tr outputclass="row row-level-11-1" id="7f0be78222h96" class="row row-level-11-1"><td id="84f79b0586qkx" rowspan="1" colspan="1"><p id="89a4bf9fa5ron">fieldKey</p></td><td id="f964673126j1x" rowspan="1" colspan="1"><p id="afbc8f3834svr">String</p></td><td id="c1101f1cdbw4m" rowspan="1" colspan="1"><p id="f70490fd3dycq">否</p></td><td id="61590ff4deeqv" rowspan="1" colspan="1"><p id="5b1e766befqop">字段唯一标识，最大长度1024字节</p></td></tr><tr outputclass="row row-level-11-2" id="d2c6d1c2736gu" class="row row-level-11-2"><td id="bd1f529511dfx" rowspan="1" colspan="1"><p id="4b05cea40brx7">fieldValue</p></td><td id="2468fbeea0luu" rowspan="1" colspan="1"><p id="00c825adddhzr">String</p></td><td id="dc595b487c017" rowspan="1" colspan="1"><p id="171c7b388bdmw">否</p></td><td id="2306ad12bc3kr" rowspan="1" colspan="1"><p id="9cfbf725feki6">字段值，最大长度1024字节</p></td></tr><tr outputclass="row row-level-12" id="dfdba1e347u6i" class="row row-level-12"><td id="52b9e55d65n2q" rowspan="1" colspan="1"><p id="2cb6470863euk">isOnlyShowExecutor</p></td><td id="db298299bdea9" rowspan="1" colspan="1"><p id="60862f02b3n03">Boolean</p></td><td id="b5874db458mio" rowspan="1" colspan="1"><p id="1004b6fd16g10">否</p></td><td id="3fdbc3925b944" rowspan="1" colspan="1"><p id="20462a2bc5itj">生成的待办是否仅展示在执行者的待办列表中。</p></td></tr><tr outputclass="row row-level-13" id="de0b00e70baej" class="row row-level-13"><td id="5e82922e3cj04" rowspan="1" colspan="1"><p id="17a31b27c4lek">priority</p></td><td id="9585c5c093oau" rowspan="1" colspan="1"><p id="b964694f79pok">Integer</p></td><td id="bd0c66a3cff4j" rowspan="1" colspan="1"><p id="8060bcf8395y5">否</p></td><td id="3f573adadetqu" rowspan="1" colspan="1"><p id="3c04ad5e837jx">优先级，取值：</p><ul id="de95e64f74omf"><li id="f8708d8efeepb"><p id="c275434438mr9"><b>10</b>：较低</p></li><li id="0050bddda1f8m"><p id="71626a0b7c0up"><b>20</b>：普通</p></li><li id="a9787befecty9"><p id="4aa217ac18chv"><b>30</b>：较高</p></li><li id="a55bcd45af68e"><p id="ddb53942dfv0b"><b>40</b>：紧急</p></li></ul></td></tr><tr outputclass="row row-level-14 has-child" id="2b4941c153vp7" class="row row-level-14 has-child"><td id="7326210791ych" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="8ed13fc4c6v4b">notifyConfigs</p></td><td id="8176981e6e3g4" rowspan="1" colspan="1"><p id="511c3c1076i04">Object</p></td><td id="8c1d9e7b4acc3" rowspan="1" colspan="1"><p id="fa2b4424e6plp">否</p></td><td id="10e7207c383wc" rowspan="1" colspan="1"><p id="138e15b36fg22">待办通知配置。</p></td></tr><tr outputclass="row row-level-14-1" id="8b8d783b15c43" class="row row-level-14-1"><td id="032c98a534agc" rowspan="1" colspan="1"><p id="ebe826d7b67cw">dingNotify</p></td><td id="bf1c4e207f1oi" rowspan="1" colspan="1"><p id="85f9ebbd4fbvo">String</p></td><td id="28187e8445m8c" rowspan="1" colspan="1"><p id="52b64d68cf9rv">否</p></td><td id="d33902c986oc2" rowspan="1" colspan="1"><p id="7874870df0v67">是否发送钉钉弹框通知：</p><ul id="997a048b39m6p"><li id="280108f8b0ih8"><p id="21141ab0ferk5"><b>1</b>：发送</p></li><li id="5246911e43f5w"><p id="943fa67bf5jiv"><b>0</b>：不发送</p></li></ul></td></tr><tr outputclass="row row-level-14-2" id="5ed0bb2ea1wgb" class="row row-level-14-2"><td id="30c8bac225o0d" rowspan="1" colspan="1"><p id="4a93378f2c4na">sendTodoApn</p></td><td id="a6adaa4f375no" rowspan="1" colspan="1"><p id="1043ac89d4cpr">String</p></td><td id="67f8ea74f933s" rowspan="1" colspan="1"><p id="db04575b3d2ys">否</p></td><td id="0c5a06c5781yf" rowspan="1" colspan="1"><p id="5e07be3d4fqwb">是否发送系统APN通知：</p><ul id="f32643d16eef7"><li id="f4c4237e64a49"><p id="37283493a1ebk">true：发送</p></li><li id="8ab05b564b7em"><p id="8148db09e8loe">false：不发送</p></li></ul><p class="note-icon-wrapper" id="146f93080ce8i"></p><p id="020337f61duub">当未设置时取dingNotify的设置值。</p></td></tr><tr outputclass="row row-level-14-3" id="205360ce9b0r6" class="row row-level-14-3"><td id="0425f81911nh0" rowspan="1" colspan="1"><p id="f7ba94771ehb4">sendAssistantChat</p></td><td id="202b2d11f6h0p" rowspan="1" colspan="1"><p id="f971e3edefc5h">String</p></td><td id="f56a4dc1a0th0" rowspan="1" colspan="1"><p id="f13c8b4a80bdt">否</p></td><td id="36274138efjix" rowspan="1" colspan="1"><p id="42a5fb8e13l9b">是否发送待办助手通知：</p><ul id="e8e138f8ff12x"><li id="308d99a8f4gs9"><p id="cbbeb61a56ef2">true：发送，默认值</p></li><li id="36922594a7pnm"><p id="f6e366d30bqec">false：不发送</p></li></ul></td></tr><tr outputclass="row row-level-15" id="cfdf3608307do" class="row row-level-15"><td id="db581caff37rn" rowspan="1" colspan="1"><p id="53f09fd779oaq">bizCategoryId</p></td><td id="272a508ddb1sp" rowspan="1" colspan="1"><p id="68f5e0a0a3h66">String</p></td><td id="c932e6bfbcc29" rowspan="1" colspan="1"><p id="9b7742f849luy">否</p></td><td id="8438959fd0luq" rowspan="1" colspan="1"><p id="cc008e33b08z3">二级分类。</p></td></tr><tr outputclass="row row-level-16 has-child" id="57662dca66j7u" class="row row-level-16 has-child"><td id="60c2d7cf1bena" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="a48f9067d0yz5">actionList</p></td><td id="84493d2b1abuh" rowspan="1" colspan="1"><p id="8f53faa6e4hh5">Array</p></td><td id="6524fa95298wx" rowspan="1" colspan="1"><p id="b05c129214w2u">否</p></td><td id="9306316e52tot" rowspan="1" colspan="1"><p id="8fc36e6cb0nsa">自定义按钮配置。</p></td></tr><tr outputclass="row row-level-16-1" id="4beff6cf166mu" class="row row-level-16-1"><td id="e769049b5bfll" rowspan="1" colspan="1"><p id="3851c19f0fp5e">title</p></td><td id="c965031d8ejqg" rowspan="1" colspan="1"><p id="c6c586ab3cwxi">String</p></td><td id="cfe0ad9116oog" rowspan="1" colspan="1"><p id="3163b17e26ww9">否</p></td><td id="09b00bee02084" rowspan="1" colspan="1"><p id="44ae100d37yxs">按钮的名称。</p></td></tr><tr outputclass="row row-level-16-2" id="abf9283903rbr" class="row row-level-16-2"><td id="9d90d9650368l" rowspan="1" colspan="1"><p id="027c12a41fohj">actionType</p></td><td id="901d786922s3i" rowspan="1" colspan="1"><p id="4d4e40e7a2sai">Integer</p></td><td id="4006495103zye" rowspan="1" colspan="1"><p id="0a741ef7acasg">否</p></td><td id="2508befa4bkyy" rowspan="1" colspan="1"><p id="d958a832a6iuc">按钮类型：</p><ul id="917180d701vrp"><li id="1b05cf15fdpaq"><p id="82a605817ep6p"><b>1</b>：直接调用业务服务</p></li><li id="73138ad31bg8a"><p id="38f5d62878zqa"><b>2</b>：直接跳转</p></li></ul></td></tr><tr outputclass="row row-level-16-3 has-child" id="b14293655134v" class="row row-level-16-3 has-child"><td id="390ddcbdf0yot" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="50997f5e3b7pw">param</p></td><td id="272a96b1e392v" rowspan="1" colspan="1"><p id="e89890f2dbodw">Object</p></td><td id="53ab91400am9u" rowspan="1" colspan="1"><p id="d8fd6c3eccswo">否</p></td><td id="5930bb8924kkl" rowspan="1" colspan="1"><p id="5b1fef00a6kkq">按钮的回调参数。</p></td></tr><tr outputclass="row row-level-16-3-1" id="3f0ae884fcr7q" class="row row-level-16-3-1"><td id="646ad2e711nsy" rowspan="1" colspan="1"><p id="a80493b5f4kx8">body</p></td><td id="37453380b1mgk" rowspan="1" colspan="1"><p id="0de7ac25cd2w7">String</p></td><td id="481cbd0d2c9xr" rowspan="1" colspan="1"><p id="157013b0c4kk3">否</p></td><td id="2dabd2f39chrm" rowspan="1" colspan="1"><p id="6493fffbe892y">回调三方服务时请求的body。</p></td></tr><tr outputclass="row row-level-16-3-2" id="dcea5573f2sof" class="row row-level-16-3-2"><td id="12f4aa4a65rqu" rowspan="1" colspan="1"><p id="071dbe76d0a12">header</p></td><td id="9d71e42bcchba" rowspan="1" colspan="1"><p id="529c2405fd4uq">Map</p></td><td id="0797795847gmq" rowspan="1" colspan="1"><p id="a74fd23d2714g">否</p></td><td id="f66b387616ayw" rowspan="1" colspan="1"><p id="b26fcd0465jh2">回调三方服务时请求的header。</p></td></tr><tr outputclass="row row-level-16-4" id="170fb787beub2" class="row row-level-16-4"><td id="ec83de58efjbk" rowspan="1" colspan="1"><p id="d069d10d7a6sz">url</p></td><td id="028286133ft09" rowspan="1" colspan="1"><p id="f4836d84dcu0x">String</p></td><td id="1acfe4002551s" rowspan="1" colspan="1"><p id="7ca061926azzk">否</p></td><td id="a714c410e5kpl" rowspan="1" colspan="1"><p id="2298fdbb19o0y">跳转链接或者回调请求的地址。</p></td></tr><tr outputclass="row row-level-16-5" id="ce694f38625x0" class="row row-level-16-5"><td id="c3170140bbmk7" rowspan="1" colspan="1"><p id="1d36603c63h6d">actionKey</p></td><td id="e7e1904078xx4" rowspan="1" colspan="1"><p id="3b1cc0afa7ujq">String</p></td><td id="a286afdb1buwx" rowspan="1" colspan="1"><p id="73981271f93f0">否</p></td><td id="0831fb7dc3r1t" rowspan="1" colspan="1"><p id="2dca9e22d78rs">按钮唯一标识，当有两个按钮时可以通过这个字段来区分。</p></td></tr><tr outputclass="row row-level-16-6" id="8ad4efe5385fq" class="row row-level-16-6"><td id="5575996788rmm" rowspan="1" colspan="1"><p id="73ca8d6f6aipe">pcUrl</p></td><td id="432cbd25156b3" rowspan="1" colspan="1"><p id="0bb0d8cda4tna">String</p></td><td id="e2a149c98f0yi" rowspan="1" colspan="1"><p id="b51ccf8e052yl">否</p></td><td id="7874d2452fgmm" rowspan="1" colspan="1"><p id="c6bb8595d8osn">pc端的跳转链接，可以不填，为空时会拿url参数里面的值。</p></td></tr><tr outputclass="row row-level-17" id="e4cc55ca43yk9" class="row row-level-17"><td id="b50d08c375fqh" rowspan="1" colspan="1"><p id="3e2285002co4u">todoType</p></td><td id="7a183a0647aj4" rowspan="1" colspan="1"><p id="bffd5e62d8tbj">String</p></td><td id="5dae00e386mcz" rowspan="1" colspan="1"><p id="750a3e9e60jju">否</p></td><td id="779c65fa81ue2" rowspan="1" colspan="1"><p id="93c72c6ca417j">待办的业务类型，目前支持两种：</p><ul id="7e669287796ny"><li id="3fb4cea6bfrge"><p id="b31188379ac78"><b>TODO</b>：待办业务类型</p></li><li id="0838821cfar85"><p id="b578f04240ntt"><b>READ</b>：待阅业务类型。</p></li></ul><p class="note-icon-wrapper" id="864b773901yyl"></p><p id="4c510c4d68uas">不传该入参时，默认创建的是待办业务类型。</p></td></tr><tr outputclass="row row-level-18" id="f4687374e8zj2" class="row row-level-18"><td id="1a8a23aa56fa4" rowspan="1" colspan="1"><p id="8e6e0e6717ojj">reminderTimeStamp</p></td><td id="9f267e9480pyf" rowspan="1" colspan="1"><p id="cfe6fe2dd38pn">Long</p></td><td id="7b34640d92tte" rowspan="1" colspan="1"><p id="429377a0ccews">否</p></td><td id="f087e96c77yi1" rowspan="1" colspan="1"><p id="f8727e7e902uq">待办任务的提醒时间，Unix时间戳，单位毫秒。</p></td></tr><tr outputclass="row row-level-19 has-child" id="a94a8b59b5kby" class="row row-level-19 has-child"><td id="ecd6e2abd2qib" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="9e80ecb629d9q">remindNotifyConfigs</p></td><td id="fd2ebe888182i" rowspan="1" colspan="1"><p id="13059ae77bv4r">Object</p></td><td id="f1909d9c879nc" rowspan="1" colspan="1"><p id="6109428d63yvo">否</p></td><td id="fa43490194jgy" rowspan="1" colspan="1"><p id="d24f215107s4r">待办截止前的通知提醒设置。</p></td></tr><tr outputclass="row row-level-19-1" id="7f344df711omm" class="row row-level-19-1"><td id="7e405909ed2e4" rowspan="1" colspan="1"><p id="7bdb08b9d71b9">dingNotify</p></td><td id="a55f5f38fakma" rowspan="1" colspan="1"><p id="cc38b039cbbya">String</p></td><td id="a1a44add762cz" rowspan="1" colspan="1"><p id="af31ec958235b">否</p></td><td id="592b76e09alwv" rowspan="1" colspan="1"><p id="f1276b78c0oxn">是否发送钉钉弹框通知：</p><ul id="93a74deee90bv"><li id="53cce4d799itp"><p id="b7433fc3d4ygs"><b>1</b>：发送</p></li><li id="c97da2f7abl1e"><p id="a30338ac16dzu"><b>0</b>：不发送</p></li></ul></td></tr><tr outputclass="row row-level-19-2" id="66e0df10bb9ho" class="row row-level-19-2"><td id="0e825410a0819" rowspan="1" colspan="1"><p id="0edde4a31aolu">sendTodoApn</p></td><td id="6babd8ce70lfr" rowspan="1" colspan="1"><p id="925805eab8ch1">String</p></td><td id="7f8086072dohl" rowspan="1" colspan="1"><p id="e53daf9ffap4c">否</p></td><td id="a5c9aed9950fw" rowspan="1" colspan="1"><p id="209823db033ac">是否发送系统APN通知：</p><ul id="1542efb89bytt"><li id="94e5d7fcf6mbc"><p id="ce74e92e341e6"><b>true</b>：发送</p></li><li id="1f7a48caeagca"><p id="36cbbeda929d1"><b>false</b>：不发送。</p></li></ul><p class="note-icon-wrapper" id="e0c69d621447z"></p><p id="47e520944cs14">当未设置时取dingNotify的设置值。</p></td></tr><tr outputclass="row row-level-20" id="5b9cf1edd0pcr" class="row row-level-20"><td id="ada16ec201x40" rowspan="1" colspan="1"><p id="ef9215cd697ns">thirdExtension</p></td><td id="ac7b191b5163h" rowspan="1" colspan="1"><p id="23eeec01a12rd">Map</p></td><td id="b645842a31lcq" rowspan="1" colspan="1"><p id="727f578f9b1n3">否</p></td><td id="a17e50166adys" rowspan="1" colspan="1"><p id="62a65218ecdx5">三方待办的业务拓展数据</p></td></tr></tbody></table></section><section id="section-request-body-example" class="section"><h3 id="h3-request-body-example" data-tag="h3" class="h3">请求示例</h3><div outputclass="tabbed-codeblock" data-tag="fig" id="figure-ldf-rpx-efb" class="tabbed-codeblock-box"><div class="tab-box"></div><input type="radio" name="check-figure-ldf-rpx-efb" id="figure-ldf-rpx-efb-HTTP-tab" checked="checked" /><label for="figure-ldf-rpx-efb-HTTP-tab">HTTP</label><div class="codeblock-item"><pre id="codeblock-5sa-8df-icj" outputclass="language-HTTP" code-type="xCode" data-tag="codeblock" class="pre codeblock language-HTTP"><code>POST /v1.0/todo/users/PUoixxxxGiP6g/tasks?operatorId=PUoiinWIpxxx HTTP/1.1
+Host:api.dingtalk.com
+x-acs-dingtalk-access-token:xxxxx
+Content-Type:application/json
+
+{
+  "sourceId" : "isv_dingtalkTodo1",
+  "subject" : "接入钉钉待办",
+  "creatorId" : "PUoiiP6g",
+  "description" : "应用可以调用该接口发起一个钉钉待办任务，该待办事项会出现在钉钉客户端“待办”页面，需要注意的是，通过开放接口发起的待办，目前仅支持直接跳转ISV应用详情页（ISV在调该接口时需传入自身应用详情页链接）。",
+  "dueTime" : 1617675000000,
+  "executorIds" : [ "PUoiixxxxhiiGiP6g" ],
+  "participantIds" : [ "PUoxxxxiGiP6g" ],
+  "detailUrl" : {
+    "appUrl" : "https://www.dingtalk.com",
+    "pcUrl" : "https://www.dingtalk.com"
+  },
+  "contentFieldList" : [ {
+    "fieldKey" : "xxx",
+    "fieldValue" : "xxx"
+  } ],
+  "isOnlyShowExecutor" : true,
+  "priority" : 20,
+  "notifyConfigs" : {
+    "dingNotify" : "1",
+    "sendTodoApn" : "true",
+    "sendAssistantChat" : "true"
+  },
+  "bizCategoryId" : "123",
+  "actionList" : [ {
+    "title" : "去查看",
+    "buttonStyleType" : 101,
+    "actionType" : 2,
+    "param" : {
+      "body" : "xxx"
+    },
+    "url" : "https://www.dingtalk.com/",
+    "actionKey" : "ak-1-1",
+    "pcUrl" : "xxx"
+  } ],
+  "todoType" : "TODO",
+  "reminderTimeStamp" : 1748226368571,
+  "remindNotifyConfigs" : {
+    "dingNotify" : "1",
+    "sendTodoApn" : "true"
+  }
+}</code></pre></div><input type="radio" name="check-figure-ldf-rpx-efb" id="figure-ldf-rpx-efb-java-tab" /><label for="figure-ldf-rpx-efb-java-tab">Java</label><div class="codeblock-item"><pre id="codeblock-dfm-08c-w3h" outputclass="language-java" code-type="xCode" data-tag="codeblock" class="pre codeblock language-java"><code>// This file is auto-generated, don't edit it. Thanks.
+package com.aliyun.sample;
+
+import com.aliyun.tea.*;
+
+public class Sample {
+
+    /**
+     * &lt;b&gt;description&lt;/b&gt; :
+     * &lt;p&gt;使用 Token 初始化账号Client&lt;/p&gt;
+     * @return Client
+     * 
+     * @throws Exception
+     */
+    public static com.aliyun.dingtalktodo_1_0.Client createClient() throws Exception {
+        com.aliyun.teaopenapi.models.Config config = new com.aliyun.teaopenapi.models.Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        return new com.aliyun.dingtalktodo_1_0.Client(config);
+    }
+
+    public static void main(String[] args_) throws Exception {
+        
+        com.aliyun.dingtalktodo_1_0.Client client = Sample.createClient();
+        com.aliyun.dingtalktodo_1_0.models.CreateTodoTaskHeaders createTodoTaskHeaders = new com.aliyun.dingtalktodo_1_0.models.CreateTodoTaskHeaders();
+        createTodoTaskHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        com.aliyun.dingtalktodo_1_0.models.CreateTodoTaskRequest.CreateTodoTaskRequestRemindNotifyConfigs remindNotifyConfigs = new com.aliyun.dingtalktodo_1_0.models.CreateTodoTaskRequest.CreateTodoTaskRequestRemindNotifyConfigs()
+                .setDingNotify("1")
+                .setSendTodoApn("true");
+        com.aliyun.dingtalktodo_1_0.models.CreateTodoTaskRequest.CreateTodoTaskRequestActionListParam actionList0Param = new com.aliyun.dingtalktodo_1_0.models.CreateTodoTaskRequest.CreateTodoTaskRequestActionListParam()
+                .setBody("xxx");
+        com.aliyun.dingtalktodo_1_0.models.CreateTodoTaskRequest.CreateTodoTaskRequestActionList actionList0 = new com.aliyun.dingtalktodo_1_0.models.CreateTodoTaskRequest.CreateTodoTaskRequestActionList()
+                .setTitle("去查看")
+                .setActionType(2)
+                .setParam(actionList0Param)
+                .setUrl("https://www.dingtalk.com/")
+                .setActionKey("ak-1-1")
+                .setPcUrl("xxx");
+        com.aliyun.dingtalktodo_1_0.models.CreateTodoTaskRequest.CreateTodoTaskRequestNotifyConfigs notifyConfigs = new com.aliyun.dingtalktodo_1_0.models.CreateTodoTaskRequest.CreateTodoTaskRequestNotifyConfigs()
+                .setDingNotify("1")
+                .setSendTodoApn("true")
+                .setSendAssistantChat("true");
+        com.aliyun.dingtalktodo_1_0.models.CreateTodoTaskRequest.CreateTodoTaskRequestContentFieldList contentFieldList0 = new com.aliyun.dingtalktodo_1_0.models.CreateTodoTaskRequest.CreateTodoTaskRequestContentFieldList()
+                .setFieldKey("xxx")
+                .setFieldValue("xxx");
+        com.aliyun.dingtalktodo_1_0.models.CreateTodoTaskRequest.CreateTodoTaskRequestDetailUrl detailUrl = new com.aliyun.dingtalktodo_1_0.models.CreateTodoTaskRequest.CreateTodoTaskRequestDetailUrl()
+                .setAppUrl("https://www.dingtalk.com")
+                .setPcUrl("https://www.dingtalk.com");
+        com.aliyun.dingtalktodo_1_0.models.CreateTodoTaskRequest createTodoTaskRequest = new com.aliyun.dingtalktodo_1_0.models.CreateTodoTaskRequest()
+                .setOperatorId("PUoiinWIpxxx")
+                .setSourceId("isv_dingtalkTodo1")
+                .setSubject("接入钉钉待办")
+                .setCreatorId("PUoiiP6g")
+                .setDescription("应用可以调用该接口发起一个钉钉待办任务，该待办事项会出现在钉钉客户端“待办”页面，需要注意的是，通过开放接口发起的待办，目前仅支持直接跳转ISV应用详情页（ISV在调该接口时需传入自身应用详情页链接）。")
+                .setDueTime(1617675000000L)
+                .setExecutorIds(java.util.Arrays.asList(
+                    "PUoiixxxxhiiGiP6g"
+                ))
+                .setParticipantIds(java.util.Arrays.asList(
+                    "PUoxxxxiGiP6g"
+                ))
+                .setDetailUrl(detailUrl)
+                .setContentFieldList(java.util.Arrays.asList(
+                    contentFieldList0
+                ))
+                .setIsOnlyShowExecutor(true)
+                .setPriority(20)
+                .setNotifyConfigs(notifyConfigs)
+                .setBizCategoryId("123")
+                .setActionList(java.util.Arrays.asList(
+                    actionList0
+                ))
+                .setTodoType("TODO")
+                .setReminderTimeStamp(1748226368571L)
+                .setRemindNotifyConfigs(remindNotifyConfigs);
+        try {
+            client.createTodoTaskWithOptions("PUoixxxxGiP6g", createTodoTaskRequest, createTodoTaskHeaders, new com.aliyun.teautil.models.RuntimeOptions());
+        } catch (TeaException err) {
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        } catch (Exception _err) {
+            TeaException err = new TeaException(_err.getMessage(), _err);
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        }        
+    }
+}</code></pre></div><input type="radio" name="check-figure-ldf-rpx-efb" id="figure-ldf-rpx-efb-python-tab" /><label for="figure-ldf-rpx-efb-python-tab">Python</label><div class="codeblock-item"><pre id="codeblock-ra9-imf-gz0" outputclass="language-python" code-type="xCode" data-tag="codeblock" class="pre codeblock language-python"><code># -*- coding: utf-8 -*-
+# This file is auto-generated, don't edit it. Thanks.
+import os
+import sys
+
+from typing import List
+
+from alibabacloud_dingtalk.todo_1_0.client import Client as dingtalktodo_1_0Client
+from alibabacloud_tea_openapi import models as open_api_models
+from alibabacloud_dingtalk.todo_1_0 import models as dingtalktodo__1__0_models
+from alibabacloud_tea_util import models as util_models
+from alibabacloud_tea_util.client import Client as UtilClient
+
+
+class Sample:
+    def __init__(self):
+        pass
+
+    @staticmethod
+    def create_client() -&gt; dingtalktodo_1_0Client:
+        """
+        使用 Token 初始化账号Client
+        @return: Client
+        @throws Exception
+        """
+        config = open_api_models.Config()
+        config.protocol = 'https'
+        config.region_id = 'central'
+        return dingtalktodo_1_0Client(config)
+
+    @staticmethod
+    def main(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        create_todo_task_headers = dingtalktodo__1__0_models.CreateTodoTaskHeaders()
+        create_todo_task_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        remind_notify_configs = dingtalktodo__1__0_models.CreateTodoTaskRequestRemindNotifyConfigs(
+            ding_notify='1',
+            send_todo_apn='true'
+        )
+        action_list_0param = dingtalktodo__1__0_models.CreateTodoTaskRequestActionListParam(
+            body='xxx'
+        )
+        action_list_0 = dingtalktodo__1__0_models.CreateTodoTaskRequestActionList(
+            title='去查看',
+            action_type=2,
+            param=action_list_0param,
+            url='https://www.dingtalk.com/',
+            action_key='ak-1-1',
+            pc_url='xxx'
+        )
+        notify_configs = dingtalktodo__1__0_models.CreateTodoTaskRequestNotifyConfigs(
+            ding_notify='1',
+            send_todo_apn='true',
+            send_assistant_chat='true'
+        )
+        content_field_list_0 = dingtalktodo__1__0_models.CreateTodoTaskRequestContentFieldList(
+            field_key='xxx',
+            field_value='xxx'
+        )
+        detail_url = dingtalktodo__1__0_models.CreateTodoTaskRequestDetailUrl(
+            app_url='https://www.dingtalk.com',
+            pc_url='https://www.dingtalk.com'
+        )
+        create_todo_task_request = dingtalktodo__1__0_models.CreateTodoTaskRequest(
+            operator_id='PUoiinWIpxxx',
+            source_id='isv_dingtalkTodo1',
+            subject='接入钉钉待办',
+            creator_id='PUoiiP6g',
+            description='应用可以调用该接口发起一个钉钉待办任务，该待办事项会出现在钉钉客户端“待办”页面，需要注意的是，通过开放接口发起的待办，目前仅支持直接跳转ISV应用详情页（ISV在调该接口时需传入自身应用详情页链接）。',
+            due_time=1617675000000,
+            executor_ids=[
+                'PUoiixxxxhiiGiP6g'
+            ],
+            participant_ids=[
+                'PUoxxxxiGiP6g'
+            ],
+            detail_url=detail_url,
+            content_field_list=[
+                content_field_list_0
+            ],
+            is_only_show_executor=True,
+            priority=20,
+            notify_configs=notify_configs,
+            biz_category_id='123',
+            action_list=[
+                action_list_0
+            ],
+            todo_type='TODO',
+            reminder_time_stamp=1748226368571,
+            remind_notify_configs=remind_notify_configs
+        )
+        try:
+            client.create_todo_task_with_options('PUoixxxxGiP6g', create_todo_task_request, create_todo_task_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+    @staticmethod
+    async def main_async(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        create_todo_task_headers = dingtalktodo__1__0_models.CreateTodoTaskHeaders()
+        create_todo_task_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        remind_notify_configs = dingtalktodo__1__0_models.CreateTodoTaskRequestRemindNotifyConfigs(
+            ding_notify='1',
+            send_todo_apn='true'
+        )
+        action_list_0param = dingtalktodo__1__0_models.CreateTodoTaskRequestActionListParam(
+            body='xxx'
+        )
+        action_list_0 = dingtalktodo__1__0_models.CreateTodoTaskRequestActionList(
+            title='去查看',
+            action_type=2,
+            param=action_list_0param,
+            url='https://www.dingtalk.com/',
+            action_key='ak-1-1',
+            pc_url='xxx'
+        )
+        notify_configs = dingtalktodo__1__0_models.CreateTodoTaskRequestNotifyConfigs(
+            ding_notify='1',
+            send_todo_apn='true',
+            send_assistant_chat='true'
+        )
+        content_field_list_0 = dingtalktodo__1__0_models.CreateTodoTaskRequestContentFieldList(
+            field_key='xxx',
+            field_value='xxx'
+        )
+        detail_url = dingtalktodo__1__0_models.CreateTodoTaskRequestDetailUrl(
+            app_url='https://www.dingtalk.com',
+            pc_url='https://www.dingtalk.com'
+        )
+        create_todo_task_request = dingtalktodo__1__0_models.CreateTodoTaskRequest(
+            operator_id='PUoiinWIpxxx',
+            source_id='isv_dingtalkTodo1',
+            subject='接入钉钉待办',
+            creator_id='PUoiiP6g',
+            description='应用可以调用该接口发起一个钉钉待办任务，该待办事项会出现在钉钉客户端“待办”页面，需要注意的是，通过开放接口发起的待办，目前仅支持直接跳转ISV应用详情页（ISV在调该接口时需传入自身应用详情页链接）。',
+            due_time=1617675000000,
+            executor_ids=[
+                'PUoiixxxxhiiGiP6g'
+            ],
+            participant_ids=[
+                'PUoxxxxiGiP6g'
+            ],
+            detail_url=detail_url,
+            content_field_list=[
+                content_field_list_0
+            ],
+            is_only_show_executor=True,
+            priority=20,
+            notify_configs=notify_configs,
+            biz_category_id='123',
+            action_list=[
+                action_list_0
+            ],
+            todo_type='TODO',
+            reminder_time_stamp=1748226368571,
+            remind_notify_configs=remind_notify_configs
+        )
+        try:
+            await client.create_todo_task_with_options_async('PUoixxxxGiP6g', create_todo_task_request, create_todo_task_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+
+if __name__ == '__main__':
+    Sample.main(sys.argv[1:])</code></pre></div><input type="radio" name="check-figure-ldf-rpx-efb" id="figure-ldf-rpx-efb-php-tab" /><label for="figure-ldf-rpx-efb-php-tab">PHP</label><div class="codeblock-item"><pre id="codeblock-1pi-ici-5se" outputclass="language-php" code-type="xCode" data-tag="codeblock" class="pre codeblock language-php"><code>&lt;?php
+
+// This file is auto-generated, don't edit it. Thanks.
+namespace AlibabaCloud\SDK\Sample;
+
+use AlibabaCloud\SDK\Dingtalk\Vtodo_1_0\Dingtalk;
+use \Exception;
+use AlibabaCloud\Tea\Exception\TeaError;
+use AlibabaCloud\Tea\Utils\Utils;
+
+use Darabonba\OpenApi\Models\Config;
+use AlibabaCloud\SDK\Dingtalk\Vtodo_1_0\Models\CreateTodoTaskHeaders;
+use AlibabaCloud\SDK\Dingtalk\Vtodo_1_0\Models\CreateTodoTaskRequest\remindNotifyConfigs;
+use AlibabaCloud\SDK\Dingtalk\Vtodo_1_0\Models\CreateTodoTaskRequest\actionList\param;
+use AlibabaCloud\SDK\Dingtalk\Vtodo_1_0\Models\CreateTodoTaskRequest\actionList;
+use AlibabaCloud\SDK\Dingtalk\Vtodo_1_0\Models\CreateTodoTaskRequest\notifyConfigs;
+use AlibabaCloud\SDK\Dingtalk\Vtodo_1_0\Models\CreateTodoTaskRequest\contentFieldList;
+use AlibabaCloud\SDK\Dingtalk\Vtodo_1_0\Models\CreateTodoTaskRequest\detailUrl;
+use AlibabaCloud\SDK\Dingtalk\Vtodo_1_0\Models\CreateTodoTaskRequest;
+use AlibabaCloud\Tea\Utils\Utils\RuntimeOptions;
+
+class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Dingtalk Client
+     */
+    public static function createClient(){
+        $config = new Config([]);
+        $config-&gt;protocol = "https";
+        $config-&gt;regionId = "central";
+        return new Dingtalk($config);
+    }
+
+    /**
+     * @param string[] $args
+     * @return void
+     */
+    public static function main($args){
+        $client = self::createClient();
+        $createTodoTaskHeaders = new CreateTodoTaskHeaders([]);
+        $createTodoTaskHeaders-&gt;xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        $remindNotifyConfigs = new remindNotifyConfigs([
+            "dingNotify" =&gt; "1",
+            "sendTodoApn" =&gt; "true"
+        ]);
+        $actionList0Param = new param([
+            "body" =&gt; "xxx"
+        ]);
+        $actionList0 = new actionList([
+            "title" =&gt; "去查看",
+            "actionType" =&gt; 2,
+            "param" =&gt; $actionList0Param,
+            "url" =&gt; "https://www.dingtalk.com/",
+            "actionKey" =&gt; "ak-1-1",
+            "pcUrl" =&gt; "xxx"
+        ]);
+        $notifyConfigs = new notifyConfigs([
+            "dingNotify" =&gt; "1",
+            "sendTodoApn" =&gt; "true",
+            "sendAssistantChat" =&gt; "true"
+        ]);
+        $contentFieldList0 = new contentFieldList([
+            "fieldKey" =&gt; "xxx",
+            "fieldValue" =&gt; "xxx"
+        ]);
+        $detailUrl = new detailUrl([
+            "appUrl" =&gt; "https://www.dingtalk.com",
+            "pcUrl" =&gt; "https://www.dingtalk.com"
+        ]);
+        $createTodoTaskRequest = new CreateTodoTaskRequest([
+            "operatorId" =&gt; "PUoiinWIpxxx",
+            "sourceId" =&gt; "isv_dingtalkTodo1",
+            "subject" =&gt; "接入钉钉待办",
+            "creatorId" =&gt; "PUoiiP6g",
+            "description" =&gt; "应用可以调用该接口发起一个钉钉待办任务，该待办事项会出现在钉钉客户端“待办”页面，需要注意的是，通过开放接口发起的待办，目前仅支持直接跳转ISV应用详情页（ISV在调该接口时需传入自身应用详情页链接）。",
+            "dueTime" =&gt; 1617675000000,
+            "executorIds" =&gt; [
+                "PUoiixxxxhiiGiP6g"
+            ],
+            "participantIds" =&gt; [
+                "PUoxxxxiGiP6g"
+            ],
+            "detailUrl" =&gt; $detailUrl,
+            "contentFieldList" =&gt; [
+                $contentFieldList0
+            ],
+            "isOnlyShowExecutor" =&gt; true,
+            "priority" =&gt; 20,
+            "notifyConfigs" =&gt; $notifyConfigs,
+            "bizCategoryId" =&gt; "123",
+            "actionList" =&gt; [
+                $actionList0
+            ],
+            "todoType" =&gt; "TODO",
+            "reminderTimeStamp" =&gt; 1748226368571,
+            "remindNotifyConfigs" =&gt; $remindNotifyConfigs
+        ]);
+        try {
+            $client-&gt;createTodoTaskWithOptions("PUoixxxxGiP6g", $createTodoTaskRequest, $createTodoTaskHeaders, new RuntimeOptions([]));
+        }
+        catch (Exception $err) {
+            if (!($err instanceof TeaError)) {
+                $err = new TeaError([], $err-&gt;getMessage(), $err-&gt;getCode(), $err);
+            }
+            if (!Utils::empty_($err-&gt;code) &amp;&amp; !Utils::empty_($err-&gt;message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+        }
+    }
+}
+$path = __DIR__ . \DIRECTORY_SEPARATOR . '..' . \DIRECTORY_SEPARATOR . 'vendor' . \DIRECTORY_SEPARATOR . 'autoload.php';
+if (file_exists($path)) {
+    require_once $path;
+}
+Sample::main(array_slice($argv, 1));</code></pre></div><input type="radio" name="check-figure-ldf-rpx-efb" id="figure-ldf-rpx-efb-go-tab" /><label for="figure-ldf-rpx-efb-go-tab">Go</label><div class="codeblock-item"><pre id="codeblock-c7i-soz-ldc" outputclass="language-go" code-type="xCode" data-tag="codeblock" class="pre codeblock language-go"><code>// This file is auto-generated, don't edit it. Thanks.
+package main
+
+import (
+  "encoding/json"
+  "strings"
+  "fmt"
+  "os"
+  util  "github.com/alibabacloud-go/tea-utils/v2/service"
+  dingtalktodo_1_0  "github.com/alibabacloud-go/dingtalk/todo_1_0"
+  openapi  "github.com/alibabacloud-go/darabonba-openapi/v2/client"
+  "github.com/alibabacloud-go/tea/tea"
+)
+
+
+// Description:
+// 
+// 使用 Token 初始化账号Client
+// 
+// @return Client
+// 
+// @throws Exception
+func CreateClient () (_result *dingtalktodo_1_0.Client, _err error) {
+  config := &amp;openapi.Config{}
+  config.Protocol = tea.String("https")
+  config.RegionId = tea.String("central")
+  _result = &amp;dingtalktodo_1_0.Client{}
+  _result, _err = dingtalktodo_1_0.NewClient(config)
+  return _result, _err
+}
+
+func _main (args []*string) (_err error) {
+  client, _err := CreateClient()
+  if _err != nil {
+    return _err
+  }
+
+  createTodoTaskHeaders := &amp;dingtalktodo_1_0.CreateTodoTaskHeaders{}
+  createTodoTaskHeaders.XAcsDingtalkAccessToken = tea.String("&lt;your access token&gt;")
+  remindNotifyConfigs := &amp;dingtalktodo_1_0.CreateTodoTaskRequestRemindNotifyConfigs{
+    DingNotify: tea.String("1"),
+    SendTodoApn: tea.String("true"),
+  }
+  actionList0Param := &amp;dingtalktodo_1_0.CreateTodoTaskRequestActionListParam{
+    Body: tea.String("xxx"),
+  }
+  actionList0 := &amp;dingtalktodo_1_0.CreateTodoTaskRequestActionList{
+    Title: tea.String("去查看"),
+    ActionType: tea.Int32(2),
+    Param: actionList0Param,
+    Url: tea.String("https://www.dingtalk.com/"),
+    ActionKey: tea.String("ak-1-1"),
+    PcUrl: tea.String("xxx"),
+  }
+  notifyConfigs := &amp;dingtalktodo_1_0.CreateTodoTaskRequestNotifyConfigs{
+    DingNotify: tea.String("1"),
+    SendTodoApn: tea.String("true"),
+    SendAssistantChat: tea.String("true"),
+  }
+  contentFieldList0 := &amp;dingtalktodo_1_0.CreateTodoTaskRequestContentFieldList{
+    FieldKey: tea.String("xxx"),
+    FieldValue: tea.String("xxx"),
+  }
+  detailUrl := &amp;dingtalktodo_1_0.CreateTodoTaskRequestDetailUrl{
+    AppUrl: tea.String("https://www.dingtalk.com"),
+    PcUrl: tea.String("https://www.dingtalk.com"),
+  }
+  createTodoTaskRequest := &amp;dingtalktodo_1_0.CreateTodoTaskRequest{
+    OperatorId: tea.String("PUoiinWIpxxx"),
+    SourceId: tea.String("isv_dingtalkTodo1"),
+    Subject: tea.String("接入钉钉待办"),
+    CreatorId: tea.String("PUoiiP6g"),
+    Description: tea.String("应用可以调用该接口发起一个钉钉待办任务，该待办事项会出现在钉钉客户端“待办”页面，需要注意的是，通过开放接口发起的待办，目前仅支持直接跳转ISV应用详情页（ISV在调该接口时需传入自身应用详情页链接）。"),
+    DueTime: tea.Int64(1617675000000),
+    ExecutorIds: []*string{tea.String("PUoiixxxxhiiGiP6g")},
+    ParticipantIds: []*string{tea.String("PUoxxxxiGiP6g")},
+    DetailUrl: detailUrl,
+    ContentFieldList: []*dingtalktodo_1_0.CreateTodoTaskRequestContentFieldList{contentFieldList0},
+    IsOnlyShowExecutor: tea.Bool(true),
+    Priority: tea.Int32(20),
+    NotifyConfigs: notifyConfigs,
+    BizCategoryId: tea.String("123"),
+    ActionList: []*dingtalktodo_1_0.CreateTodoTaskRequestActionList{actionList0},
+    TodoType: tea.String("TODO"),
+    ReminderTimeStamp: tea.Int64(1748226368571),
+    RemindNotifyConfigs: remindNotifyConfigs,
+  }
+  tryErr := func()(_e error) {
+    defer func() {
+      if r := tea.Recover(recover()); r != nil {
+        _e = r
+      }
+    }()
+    _, _err = client.CreateTodoTaskWithOptions(tea.String("PUoixxxxGiP6g"), createTodoTaskRequest, createTodoTaskHeaders, &amp;util.RuntimeOptions{})
+    if _err != nil {
+      return _err
+    }
+
+    return nil
+  }()
+
+  if tryErr != nil {
+    var err = &amp;tea.SDKError{}
+    if _t, ok := tryErr.(*tea.SDKError); ok {
+      err = _t
+    } else {
+      err.Message = tea.String(tryErr.Error())
+    }
+    if !tea.BoolValue(util.Empty(err.Code)) &amp;&amp; !tea.BoolValue(util.Empty(err.Message)) {
+      // err 中含有 code 和 message 属性，可帮助开发定位问题
+    }
+
+  }
+  return _err
+}
+
+
+func main() {
+  err := _main(tea.StringSlice(os.Args[1:]))
+  if err != nil {
+    panic(err)
+  }
+}</code></pre></div><input type="radio" name="check-figure-ldf-rpx-efb" id="figure-ldf-rpx-efb-nodejs-tab" /><label for="figure-ldf-rpx-efb-nodejs-tab">Node.js</label><div class="codeblock-item"><pre id="codeblock-4it-ul1-cqk" outputclass="language-nodejs" code-type="xCode" data-tag="codeblock" class="pre codeblock language-nodejs"><code>'use strict';
+// This file is auto-generated, don't edit it
+const Util = require('@alicloud/tea-util');
+const dingtalktodo_1_0 = require('@alicloud/dingtalk/todo_1_0');
+const OpenApi = require('@alicloud/openapi-client');
+const Tea = require('@alicloud/tea-typescript');
+
+class Client {
+
+  /**
+   * 使用 Token 初始化账号Client
+   * @return Client
+   * @throws Exception
+   */
+  static createClient() {
+    let config = new OpenApi.Config({ });
+    config.protocol = 'https';
+    config.regionId = 'central';
+    return new dingtalktodo_1_0.default(config);
+  }
+
+  static async main(args) {
+    let client = Client.createClient();
+    let createTodoTaskHeaders = new dingtalktodo_1_0.CreateTodoTaskHeaders({ });
+    createTodoTaskHeaders.xAcsDingtalkAccessToken = '&lt;your access token&gt;';
+    let remindNotifyConfigs = new dingtalktodo_1_0.CreateTodoTaskRequestRemindNotifyConfigs({
+      dingNotify: '1',
+      sendTodoApn: 'true',
+    });
+    let actionList0Param = new dingtalktodo_1_0.CreateTodoTaskRequestActionListParam({
+      body: 'xxx',
+    });
+    let actionList0 = new dingtalktodo_1_0.CreateTodoTaskRequestActionList({
+      title: '去查看',
+      actionType: 2,
+      param: actionList0Param,
+      url: 'https://www.dingtalk.com/',
+      actionKey: 'ak-1-1',
+      pcUrl: 'xxx',
+    });
+    let notifyConfigs = new dingtalktodo_1_0.CreateTodoTaskRequestNotifyConfigs({
+      dingNotify: '1',
+      sendTodoApn: 'true',
+      sendAssistantChat: 'true',
+    });
+    let contentFieldList0 = new dingtalktodo_1_0.CreateTodoTaskRequestContentFieldList({
+      fieldKey: 'xxx',
+      fieldValue: 'xxx',
+    });
+    let detailUrl = new dingtalktodo_1_0.CreateTodoTaskRequestDetailUrl({
+      appUrl: 'https://www.dingtalk.com',
+      pcUrl: 'https://www.dingtalk.com',
+    });
+    let createTodoTaskRequest = new dingtalktodo_1_0.CreateTodoTaskRequest({
+      operatorId: 'PUoiinWIpxxx',
+      sourceId: 'isv_dingtalkTodo1',
+      subject: '接入钉钉待办',
+      creatorId: 'PUoiiP6g',
+      description: '应用可以调用该接口发起一个钉钉待办任务，该待办事项会出现在钉钉客户端“待办”页面，需要注意的是，通过开放接口发起的待办，目前仅支持直接跳转ISV应用详情页（ISV在调该接口时需传入自身应用详情页链接）。',
+      dueTime: 1617675000000,
+      executorIds: [
+        'PUoiixxxxhiiGiP6g'
+      ],
+      participantIds: [
+        'PUoxxxxiGiP6g'
+      ],
+      detailUrl: detailUrl,
+      contentFieldList: [
+        contentFieldList0
+      ],
+      isOnlyShowExecutor: true,
+      priority: 20,
+      notifyConfigs: notifyConfigs,
+      bizCategoryId: '123',
+      actionList: [
+        actionList0
+      ],
+      todoType: 'TODO',
+      reminderTimeStamp: 1748226368571,
+      remindNotifyConfigs: remindNotifyConfigs,
+    });
+    try {
+      await client.createTodoTaskWithOptions('PUoixxxxGiP6g', createTodoTaskRequest, createTodoTaskHeaders, new Util.RuntimeOptions({ }));
+    } catch (err) {
+      if (!Util.default.empty(err.code) &amp;&amp; !Util.default.empty(err.message)) {
+        // err 中含有 code 和 message 属性，可帮助开发定位问题
+      }
+
+    }    
+  }
+
+}
+
+exports.Client = Client;
+Client.main(process.argv.slice(2));</code></pre></div><input type="radio" name="check-figure-ldf-rpx-efb" id="figure-ldf-rpx-efb-csharp-tab" /><label for="figure-ldf-rpx-efb-csharp-tab">C#</label><div class="codeblock-item"><pre id="codeblock-w6v-vfq-1ry" outputclass="language-csharp" code-type="xCode" data-tag="codeblock" class="pre codeblock language-csharp"><code>// This file is auto-generated, don't edit it. Thanks.
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
+
+using Tea;
+using Tea.Utils;
+
+
+namespace AlibabaCloud.SDK.Sample
+{
+    public class Sample 
+    {
+
+        /// &lt;term&gt;&lt;b&gt;Description:&lt;/b&gt;&lt;/term&gt;
+        /// &lt;description&gt;
+        /// &lt;para&gt;使用 Token 初始化账号Client&lt;/para&gt;
+        /// &lt;/description&gt;
+        /// 
+        /// &lt;returns&gt;
+        /// Client
+        /// &lt;/returns&gt;
+        /// 
+        /// &lt;term&gt;&lt;b&gt;Exception:&lt;/b&gt;&lt;/term&gt;
+        /// Exception
+        public static AlibabaCloud.SDK.Dingtalktodo_1_0.Client CreateClient()
+        {
+            AlibabaCloud.OpenApiClient.Models.Config config = new AlibabaCloud.OpenApiClient.Models.Config();
+            config.Protocol = "https";
+            config.RegionId = "central";
+            return new AlibabaCloud.SDK.Dingtalktodo_1_0.Client(config);
+        }
+
+        public static void Main(string[] args)
+        {
+            AlibabaCloud.SDK.Dingtalktodo_1_0.Client client = CreateClient();
+            AlibabaCloud.SDK.Dingtalktodo_1_0.Models.CreateTodoTaskHeaders createTodoTaskHeaders = new AlibabaCloud.SDK.Dingtalktodo_1_0.Models.CreateTodoTaskHeaders();
+            createTodoTaskHeaders.XAcsDingtalkAccessToken = "&lt;your access token&gt;";
+            AlibabaCloud.SDK.Dingtalktodo_1_0.Models.CreateTodoTaskRequest.CreateTodoTaskRequestRemindNotifyConfigs remindNotifyConfigs = new AlibabaCloud.SDK.Dingtalktodo_1_0.Models.CreateTodoTaskRequest.CreateTodoTaskRequestRemindNotifyConfigs
+            {
+                DingNotify = "1",
+                SendTodoApn = "true",
+            };
+            AlibabaCloud.SDK.Dingtalktodo_1_0.Models.CreateTodoTaskRequest.CreateTodoTaskRequestActionList.CreateTodoTaskRequestActionListParam actionList0Param = new AlibabaCloud.SDK.Dingtalktodo_1_0.Models.CreateTodoTaskRequest.CreateTodoTaskRequestActionList.CreateTodoTaskRequestActionListParam
+            {
+                Body = "xxx",
+            };
+            AlibabaCloud.SDK.Dingtalktodo_1_0.Models.CreateTodoTaskRequest.CreateTodoTaskRequestActionList actionList0 = new AlibabaCloud.SDK.Dingtalktodo_1_0.Models.CreateTodoTaskRequest.CreateTodoTaskRequestActionList
+            {
+                Title = "去查看",
+                ActionType = 2,
+                Param = actionList0Param,
+                Url = "https://www.dingtalk.com/",
+                ActionKey = "ak-1-1",
+                PcUrl = "xxx",
+            };
+            AlibabaCloud.SDK.Dingtalktodo_1_0.Models.CreateTodoTaskRequest.CreateTodoTaskRequestNotifyConfigs notifyConfigs = new AlibabaCloud.SDK.Dingtalktodo_1_0.Models.CreateTodoTaskRequest.CreateTodoTaskRequestNotifyConfigs
+            {
+                DingNotify = "1",
+                SendTodoApn = "true",
+                SendAssistantChat = "true",
+            };
+            AlibabaCloud.SDK.Dingtalktodo_1_0.Models.CreateTodoTaskRequest.CreateTodoTaskRequestContentFieldList contentFieldList0 = new AlibabaCloud.SDK.Dingtalktodo_1_0.Models.CreateTodoTaskRequest.CreateTodoTaskRequestContentFieldList
+            {
+                FieldKey = "xxx",
+                FieldValue = "xxx",
+            };
+            AlibabaCloud.SDK.Dingtalktodo_1_0.Models.CreateTodoTaskRequest.CreateTodoTaskRequestDetailUrl detailUrl = new AlibabaCloud.SDK.Dingtalktodo_1_0.Models.CreateTodoTaskRequest.CreateTodoTaskRequestDetailUrl
+            {
+                AppUrl = "https://www.dingtalk.com",
+                PcUrl = "https://www.dingtalk.com",
+            };
+            AlibabaCloud.SDK.Dingtalktodo_1_0.Models.CreateTodoTaskRequest createTodoTaskRequest = new AlibabaCloud.SDK.Dingtalktodo_1_0.Models.CreateTodoTaskRequest
+            {
+                OperatorId = "PUoiinWIpxxx",
+                SourceId = "isv_dingtalkTodo1",
+                Subject = "接入钉钉待办",
+                CreatorId = "PUoiiP6g",
+                Description = "应用可以调用该接口发起一个钉钉待办任务，该待办事项会出现在钉钉客户端“待办”页面，需要注意的是，通过开放接口发起的待办，目前仅支持直接跳转ISV应用详情页（ISV在调该接口时需传入自身应用详情页链接）。",
+                DueTime = 1617675000000,
+                ExecutorIds = new List&lt;string&gt;
+                {
+                    "PUoiixxxxhiiGiP6g"
+                },
+                ParticipantIds = new List&lt;string&gt;
+                {
+                    "PUoxxxxiGiP6g"
+                },
+                DetailUrl = detailUrl,
+                ContentFieldList = new List&lt;AlibabaCloud.SDK.Dingtalktodo_1_0.Models.CreateTodoTaskRequest.CreateTodoTaskRequestContentFieldList&gt;
+                {
+                    contentFieldList0
+                },
+                IsOnlyShowExecutor = true,
+                Priority = 20,
+                NotifyConfigs = notifyConfigs,
+                BizCategoryId = "123",
+                ActionList = new List&lt;AlibabaCloud.SDK.Dingtalktodo_1_0.Models.CreateTodoTaskRequest.CreateTodoTaskRequestActionList&gt;
+                {
+                    actionList0
+                },
+                TodoType = "TODO",
+                ReminderTimeStamp = 1748226368571,
+                RemindNotifyConfigs = remindNotifyConfigs,
+            };
+            try
+            {
+                client.CreateTodoTaskWithOptions("PUoixxxxGiP6g", createTodoTaskRequest, createTodoTaskHeaders, new AlibabaCloud.TeaUtil.Models.RuntimeOptions());
+            }
+            catch (TeaException err)
+            {
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+            catch (Exception _err)
+            {
+                TeaException err = new TeaException(new Dictionary&lt;string, object&gt;
+                {
+                    { "message", _err.Message }
+                });
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+        }
+
+
+    }
+}</code></pre></div></div></section></section><section id="section-response-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-response-1" data-tag="h2" class="h2">响应</h2><section id="section-response-parameter" class="section"><h3 data-tag="h3" id="h2-zcp-tsi-gax" class="h3 title">响应体</h3><table id="bceed23579ryv" tablewidth="710" tablecolswidth="213 142 355" autofit="false" class="table"><colgroup colwidth="0.9*" style="width:30.00%"></colgroup><colgroup colwidth="0.6*" style="width:20.00%"></colgroup><colgroup colwidth="1.5*" style="width:50.00%"></colgroup><tbody class="tbody"><tr id="c4f41bf18d3l6"><td id="154f44641frz9" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="295eea5b11p1a">名称</p></td><td id="755f403cc23ms" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="7d9a584a86xow">类型</p></td><td id="b0dd13eff4us1" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="9b635dc33c550">描述</p></td></tr><tr outputclass="row row-level-1" id="6ba1bbc46b28y" class="row row-level-1"><td id="48f23b1c9dz6x" rowspan="1" colspan="1"><p id="14dcce6afc118">id</p></td><td id="542bc8376akwq" rowspan="1" colspan="1"><p id="b789643a5cyhv">String</p></td><td id="54e30bec39jud" rowspan="1" colspan="1"><p id="f62b4b40b683x">待办ID。</p></td></tr><tr outputclass="row row-level-2" id="db3a77e546iy7" class="row row-level-2"><td id="7020edbb4drzz" rowspan="1" colspan="1"><p id="9644e876b5qzu">subject</p></td><td id="349c24b0b1x0x" rowspan="1" colspan="1"><p id="f179bba5de8m8">String</p></td><td id="d6dd6103c6mnq" rowspan="1" colspan="1"><p id="e0373a6a97m12">待办的标题。</p></td></tr><tr outputclass="row row-level-3" id="7ed1fd363c98k" class="row row-level-3"><td id="76a9c95b65ov7" rowspan="1" colspan="1"><p id="e9727d0afbevy">description</p></td><td id="e77bfe1785puv" rowspan="1" colspan="1"><p id="f2a411145b3m9">String</p></td><td id="6d3a44758cx3r" rowspan="1" colspan="1"><p id="c40409ee0fhif">待办描述。</p></td></tr><tr outputclass="row row-level-4" id="1a511be03c3nm" class="row row-level-4"><td id="bf8e89aafd181" rowspan="1" colspan="1"><p id="b51baa63e6r9x">startTime</p></td><td id="d13242beffhm4" rowspan="1" colspan="1"><p id="090e1f6b4bngs">Long</p></td><td id="badff35c6b9eh" rowspan="1" colspan="1"><p id="a4ab9383ddq9x">开始时间，Unix时间戳，单位毫秒。</p></td></tr><tr outputclass="row row-level-5" id="5ec9495c39qxg" class="row row-level-5"><td id="29bbf6427dz0l" rowspan="1" colspan="1"><p id="fe18aca578vnn">dueTime</p></td><td id="96fbb41e5cjn4" rowspan="1" colspan="1"><p id="57fd1801ab76z">Long</p></td><td id="fa36805fc7qfu" rowspan="1" colspan="1"><p id="7763593410tag">截止时间，Unix时间戳，单位毫秒。</p></td></tr><tr outputclass="row row-level-6" id="c4471f8788t8y" class="row row-level-6"><td id="e868ae4eabxt6" rowspan="1" colspan="1"><p id="27cd6c20f9s2r">finishTime</p></td><td id="d0dc9320dcfkg" rowspan="1" colspan="1"><p id="f6c430a3fcyo8">Long</p></td><td id="688629bc8alnu" rowspan="1" colspan="1"><p id="5a11008b472sy">完成时间，Unix时间戳，单位毫秒。</p></td></tr><tr outputclass="row row-level-7" id="fe8db97451vq1" class="row row-level-7"><td id="124d39c3dde89" rowspan="1" colspan="1"><p id="ef138783ef83q">done</p></td><td id="0de49caf3avo1" rowspan="1" colspan="1"><p id="a1b053e874bwo">Boolean</p></td><td id="b1b1e37268n9i" rowspan="1" colspan="1"><p id="e8a7aecc01okg">完成状态。</p></td></tr><tr outputclass="row row-level-8" id="0296d541c76h7" class="row row-level-8"><td id="180d75d1717r1" rowspan="1" colspan="1"><p id="670ee0fc57g01">executorIds</p></td><td id="5c10ac18a7n5t" rowspan="1" colspan="1"><p id="fdf4c1f65bu65">Array of String</p></td><td id="86d5bce670zyk" rowspan="1" colspan="1"><p id="0a0ee75d8a7hv">执行者的unionId。</p></td></tr><tr outputclass="row row-level-9" id="76ec56758ak5l" class="row row-level-9"><td id="d3e63c0ae6p7z" rowspan="1" colspan="1"><p id="81a8543063bn1">participantIds</p></td><td id="e9c23b882dq3j" rowspan="1" colspan="1"><p id="57c1e6943dl9q">Array of String</p></td><td id="e2ab9704f7ua7" rowspan="1" colspan="1"><p id="da406cbb97q8n">参与者的unionId。</p></td></tr><tr outputclass="row row-level-10 has-child" id="45aebebde2d9n" class="row row-level-10 has-child"><td id="cfe97e819dewj" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="33786d4496o1f">detailUrl</p></td><td id="66c71cd04fdni" rowspan="1" colspan="1"><p id="e9b8e93a5cc0o">Object</p></td><td id="f3a47888bbg34" rowspan="1" colspan="1"><p id="7f03a9322aitu">详情页url跳转地址。</p></td></tr><tr outputclass="row row-level-10-1" id="123c8d35e4ltr" class="row row-level-10-1"><td id="41dedb7bba4qv" rowspan="1" colspan="1"><p id="fb7359da3epds">pcUrl</p></td><td id="49dc44aa3fq8z" rowspan="1" colspan="1"><p id="b08685bd51e7o">String</p></td><td id="18b768be39uhi" rowspan="1" colspan="1"><p id="bb794fcdbcewr">PC端详情页url跳转地址。</p></td></tr><tr outputclass="row row-level-10-2" id="01e49886cbqyx" class="row row-level-10-2"><td id="b014ed0db2622" rowspan="1" colspan="1"><p id="01ff16f583grq">appUrl</p></td><td id="e49e1c427amgb" rowspan="1" colspan="1"><p id="f63516a75brv4">String</p></td><td id="6776472d02xpk" rowspan="1" colspan="1"><p id="2f4b831800uy3">APP端详情页url跳转地址。</p></td></tr><tr outputclass="row row-level-11" id="9fc46a73c3o3u" class="row row-level-11"><td id="8fbaf896d1lnq" rowspan="1" colspan="1"><p id="878fa1cdd1exd">source</p></td><td id="5a14dce4b4x9l" rowspan="1" colspan="1"><p id="7232f78a77tg9">String</p></td><td id="2e262f2160brs" rowspan="1" colspan="1"><p id="d749f995bb6sy">业务来源。</p></td></tr><tr outputclass="row row-level-12" id="7793c537eevne" class="row row-level-12"><td id="0bd4eac9c2ns5" rowspan="1" colspan="1"><p id="b6d26075c7yu0">sourceId</p></td><td id="f6fa5beb87j5m" rowspan="1" colspan="1"><p id="c1dfc71263epj">String</p></td><td id="ac19acef9en55" rowspan="1" colspan="1"><p id="d388b432d7r85">业务系统侧的唯一标识ID，即业务ID。</p></td></tr><tr outputclass="row row-level-13" id="f056a99d38smg" class="row row-level-13"><td id="8863016140f4n" rowspan="1" colspan="1"><p id="d3cbb0594dqji">createdTime</p></td><td id="eb1fb413181im" rowspan="1" colspan="1"><p id="256d08d9bbfc3">Long</p></td><td id="4310bc093bplt" rowspan="1" colspan="1"><p id="de6240440dpca">创建时间，Unix时间戳，单位毫秒。</p></td></tr><tr outputclass="row row-level-14" id="23fe05ae4dlrj" class="row row-level-14"><td id="902b8d3555mfp" rowspan="1" colspan="1"><p id="fc27b13182ss0">modifiedTime</p></td><td id="9b59134a10w9e" rowspan="1" colspan="1"><p id="20fe265804xae">Long</p></td><td id="d9158c75578ie" rowspan="1" colspan="1"><p id="5ca127af30k4f">更新时间，Unix时间戳，单位毫秒。</p></td></tr><tr outputclass="row row-level-15" id="76353fa477cry" class="row row-level-15"><td id="77ec5019ccmt3" rowspan="1" colspan="1"><p id="d8a838eb3dfye">creatorId</p></td><td id="bf0bac0003hm5" rowspan="1" colspan="1"><p id="7794e9acc5xra">String</p></td><td id="7ce78dea2d5ln" rowspan="1" colspan="1"><p id="cb51970120q5q">创建者的unionId。</p></td></tr><tr outputclass="row row-level-16" id="f3294a22cd6w8" class="row row-level-16"><td id="32ccdb88b0wp2" rowspan="1" colspan="1"><p id="29ca4cc77cral">modifierId</p></td><td id="186882ba7c0dy" rowspan="1" colspan="1"><p id="70da31aee70qs">String</p></td><td id="ed47295b2dkat" rowspan="1" colspan="1"><p id="65abc83c44hp0">更新者的unionId。</p></td></tr><tr outputclass="row row-level-17" id="1a648a5b98ikn" class="row row-level-17"><td id="f0779c470cp2u" rowspan="1" colspan="1"><p id="78a9cdd5f4zsb">bizTag</p></td><td id="f7dc5e6a44dgw" rowspan="1" colspan="1"><p id="1670bdbceezm8">String</p></td><td id="2a2a194cbbmjv" rowspan="1" colspan="1"><p id="111670d218g02">接入应用标识。</p></td></tr><tr outputclass="row row-level-18" id="76498380548zo" class="row row-level-18"><td id="5a78ca4aa3iw6" rowspan="1" colspan="1"><p id="a8754176035fi">requestId</p></td><td id="f65446aa9betx" rowspan="1" colspan="1"><p id="163f6d9df14wk">String</p></td><td id="6dd24f405ck4d" rowspan="1" colspan="1"><p id="b1a7915139wr0">请求ID。</p></td></tr><tr outputclass="row row-level-19 has-child" id="0dab14cc14jxi" class="row row-level-19 has-child"><td id="74aed89364qck" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="f899c51fd9noi">contentFieldList</p></td><td id="4143b17c5dgyk" rowspan="1" colspan="1"><p id="c4d6626585z83">Array</p></td><td id="0c677412991y4" rowspan="1" colspan="1"><p id="5fdf6e970937g">内容区表单字段配置</p></td></tr><tr outputclass="row row-level-19-1" id="23f3bc19e9awb" class="row row-level-19-1"><td id="0b10c5b711cs1" rowspan="1" colspan="1"><p id="05dfb873e8y26">fieldKey</p></td><td id="d9e4064b55mya" rowspan="1" colspan="1"><p id="aa27856318uzu">String</p></td><td id="2a7f4e11d0c0q" rowspan="1" colspan="1"><p id="538f629fd3xvc">字段唯一标识。</p></td></tr><tr outputclass="row row-level-19-2" id="e55f052f00k46" class="row row-level-19-2"><td id="3b17fcb4f31jz" rowspan="1" colspan="1"><p id="3d74cfafc8igl">fieldValue</p></td><td id="608e1fb0a3lvw" rowspan="1" colspan="1"><p id="f37404261b8fl">String</p></td><td id="ffced56e31l68" rowspan="1" colspan="1"><p id="8683768b83gsc">字段值。</p></td></tr><tr outputclass="row row-level-20" id="573281f03650x" class="row row-level-20"><td id="3460997c44qmn" rowspan="1" colspan="1"><p id="f3ee07ab87way">isOnlyShowExecutor</p></td><td id="de252ba548a2x" rowspan="1" colspan="1"><p id="fcc862c2903im">Boolean</p></td><td id="d94992d76ctrr" rowspan="1" colspan="1"><p id="0ceb45ac8deu2">生成的待办是否仅展示在执行者的待办列表中。</p></td></tr><tr outputclass="row row-level-21" id="34243bb8c50nu" class="row row-level-21"><td id="2477a2840121t" rowspan="1" colspan="1"><p id="2fa32bc4eezcb">priority</p></td><td id="784910e1b0ii0" rowspan="1" colspan="1"><p id="c029b9fe84sm6">Integer</p></td><td id="7e5dca9269sq2" rowspan="1" colspan="1"><p id="29b798369bvbe">优先级，取值：</p><ul id="f645009bab0h3"><li id="7a3011da58soi"><p id="8483ba02ab0qk"><b>10</b>：较低</p></li><li id="97d92256e9stb"><p id="31034c71feiyv"><b>20</b>：普通</p></li><li id="605d200515hcg"><p id="bd9505c1643p2"><b>30</b>：较高</p></li><li id="fd2379cbb1ttr"><p id="a1120d0e86em4"><b>40</b>：紧急</p></li></ul></td></tr><tr outputclass="row row-level-22 has-child" id="4bdc84f8b5job" class="row row-level-22 has-child"><td id="85cefb7d39dua" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="94b00a578a1f2">notifyConfigs</p></td><td id="3031330440y0r" rowspan="1" colspan="1"><p id="26df8da5b1zrn">Object</p></td><td id="8041f2af10ubc" rowspan="1" colspan="1"><p id="5bbf5bc11a7b1">待办通知配置。</p></td></tr><tr outputclass="row row-level-22-1" id="3f5f3714433xt" class="row row-level-22-1"><td id="cf68550f82ufc" rowspan="1" colspan="1"><p id="8d185fca69ulh">dingNotify</p></td><td id="b7518ab7e8uj1" rowspan="1" colspan="1"><p id="34a4621fc4ay9">String</p></td><td id="1b0db91c885tx" rowspan="1" colspan="1"><p id="a7ebd7560b60q">DING通知配置，目前仅支持取值为<b>1</b>，表示应用内DING。</p></td></tr></tbody></table></section><section id="section-response-body-example" class="section"><h3 id="h3-response-body-example" data-tag="h3" class="h3">响应体示例</h3><pre id="b31948e844obi" outputclass="language-json" code-type="xCode" data-tag="codeblock" class="pre codeblock language-json"><code>HTTP/1.1 200 OK
+Content-Type:application/json
+
+{
+  "id" : "OPJxxxxxURjrzd",
+  "subject" : "接入钉钉待办",
+  "description" : "应用可以调用该接口发起一个钉钉待办任务，该待办事项会出现在钉钉客户端“待办”页面，需要注意的是，通过开放接口发起的待办，目前仅支持直接跳转ISV应用详情页（ISV在调该接口时需传入自身应用详情页链接）。",
+  "startTime" : 1617675000000,
+  "dueTime" : 1617675100000,
+  "finishTime" : 1617675200000,
+  "done" : false,
+  "executorIds" : [ "PUoiinxxxxGiP6g" ],
+  "participantIds" : [ "PUoiinxxxxiiGiP6g" ],
+  "detailUrl" : {
+    "pcUrl" : "https://www.dingtalk.com",
+    "appUrl" : "https://www.dingtalk.com"
+  },
+  "source" : "isv_dingtalkTodo",
+  "sourceId" : "isv_dingtalkTodo1",
+  "createdTime" : 1617675200000,
+  "modifiedTime" : 1617675200000,
+  "creatorId" : "PUoiixxxxx",
+  "modifierId" : "PUoiinxxxxx",
+  "bizTag" : "isv_dingtalkTodo",
+  "requestId" : "12345",
+  "contentFieldList" : [ {
+    "fieldKey" : "xxx",
+    "fieldValue" : "xxx"
+  } ],
+  "isOnlyShowExecutor" : true,
+  "priority" : 20,
+  "notifyConfigs" : {
+    "dingNotify" : "1"
+  }
+}</code></pre></section><section id="section-error-code-1" class="section"><h3 id="h3-error-code-1" data-tag="h3" class="h3">错误码</h3><p data-tag="p" id="p-error-code-global-guide" class="p">若调用该接口报错，可根据错误信息在<a href="https://open.dingtalk.com/document/development/server-api-error-codes-1" id="a-error-code-global-guide">全局错误码</a>文档中查找解决方案。</p><table id="c6fb527c53zt0" tablewidth="709" tablecolswidth="142 177 177 213" autofit="false" class="table"><colgroup colwidth="0.8*" style="width:20.03%"></colgroup><colgroup colwidth="1*" style="width:24.96%"></colgroup><colgroup colwidth="1*" style="width:24.96%"></colgroup><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><tbody class="tbody"><tr id="dc7ad435d8ue3"><td id="d683c3d6ddbhh" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="48843bd8d1o58">HttpCode</p></td><td id="93fc9984e67js" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="961efc99c7l22">错误码</p></td><td id="eec84322836s9" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="8df0bdd69fwg5">错误信息</p></td><td id="35450ff101lbi" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="db24e469d59jp">说明</p></td></tr><tr id="bb390f1a7ecls"><td id="32bc779843uym" rowspan="1" colspan="1"><p id="756128eac0qd6">400</p></td><td id="80e9af4d9f218" rowspan="1" colspan="1"><p id="f4a07f00bf2rl">todo.taskCreate.lockError</p></td><td id="ddf495d9575ld" rowspan="1" colspan="1"><p id="88c03c0413lz1">todo.taskCreate.lockError</p></td><td id="e96b9c50513nm" rowspan="1" colspan="1"><p id="74d3ebf4e836e">创建待办根据sourceId加锁失败</p></td></tr><tr id="4720479e65cgy"><td id="fc18eb11907c0" rowspan="1" colspan="1"><p id="a3a3cec5d6mvh">400</p></td><td id="2cdb4ab6b8oxy" rowspan="1" colspan="1"><p id="b249d791c5hcx">todo.taskCreate.paramError</p></td><td id="420c824cb33v4" rowspan="1" colspan="1"><p id="19d7c4e7bdhae">task exist</p></td><td id="7860e0c3efkbo" rowspan="1" colspan="1"><p id="6d08165cc4y0i">待办任务已存在</p></td></tr><tr id="1805652744l8w"><td id="ebd3f2bb85bl6" rowspan="1" colspan="1"><p id="97471289192fb">400</p></td><td id="db7705626esqt" rowspan="1" colspan="1"><p id="1b8cbc236e6di">todo.taskCreate.paramError</p></td><td id="f175e03bc7noo" rowspan="1" colspan="1"><p id="71c4f64e69wea">subject is oversize</p></td><td id="be9c06685bac1" rowspan="1" colspan="1"><p id="89845deb7an5o">待办标题长度超出限制</p></td></tr><tr id="d1e0e33edee7v"><td id="3f6a8e0536i6c" rowspan="1" colspan="1"><p id="f9b0e6cf3ezet">400</p></td><td id="c6468cb5f1gls" rowspan="1" colspan="1"><p id="c949962992sig">todo.taskCreate.paramError</p></td><td id="59bb175c04fuu" rowspan="1" colspan="1"><p id="8ac9aeb592oqa">description is oversize</p></td><td id="66228cdab5ifh" rowspan="1" colspan="1"><p id="8b1a00119bn7n">待办描述长度超出限制</p></td></tr><tr id="fa6b93c4d2jf1"><td id="22619686b56j2" rowspan="1" colspan="1"><p id="a7db40a77algf">400</p></td><td id="8553ca24fdc2f" rowspan="1" colspan="1"><p id="7eeef0d69blpv">todo.taskCreate.paramError</p></td><td id="36fda6acb96wn" rowspan="1" colspan="1"><p id="40cfe6c2620bn">executors is oversize</p></td><td id="33bf7744ee0bp" rowspan="1" colspan="1"><p id="aca9910bec466">待办执行人超出限制</p></td></tr><tr id="c40c59ac43mhk"><td id="f0a59f0466xqx" rowspan="1" colspan="1"><p id="2d1da1cbafzt0">400</p></td><td id="8f457376fbnwc" rowspan="1" colspan="1"><p id="4f83eaa80crm7">todo.taskCreate.paramError</p></td><td id="ecabfcdd25x79" rowspan="1" colspan="1"><p id="832d039d4bpcb">participants is oversize</p></td><td id="bcad7666bf2aq" rowspan="1" colspan="1"><p id="5830b605391ov">待办参与人超出限制</p></td></tr><tr id="35c0016e5ayhd"><td id="559961c10c7sj" rowspan="1" colspan="1"><p id="8fa21b27610dq">400</p></td><td id="750862ae21q0i" rowspan="1" colspan="1"><p id="4149ceb5b0hk5">todo.taskCreate.paramError</p></td><td id="d00e8cbacdyhu" rowspan="1" colspan="1"><p id="4d0543844cptv">dueTime is invalid</p></td><td id="b348a2507dhr2" rowspan="1" colspan="1"><p id="cd8480199b9at">待办截止时间非法</p></td></tr><tr id="46c1661ec5u9q"><td id="dfb7932f11pyh" rowspan="1" colspan="1"><p id="4e13de297aeff">400</p></td><td id="d8c8e2b5c0wlg" rowspan="1" colspan="1"><p id="f51992d7d867b">todo.taskCreate.paramError</p></td><td id="544f2cbf1fd2g" rowspan="1" colspan="1"><p id="af1010c52cydh">todo.taskCreate.paramError</p></td><td id="cb787d623ci64" rowspan="1" colspan="1"><p id="95429ada22d5k">创建待办参数异常</p></td></tr><tr id="16e9ca155fjek"><td id="0dc6d05a191nf" rowspan="1" colspan="1"><p id="e924ff9c85u2y">400</p></td><td id="f31b1d01d9mc4" rowspan="1" colspan="1"><p id="61064a19a09me">todo.taskCreate.flowControlError</p></td><td id="3b2d078e65eks" rowspan="1" colspan="1"><p id="1fedcbfee7exa">flowControl because of executorId or orgId</p></td><td id="6e373fbf7by0g" rowspan="1" colspan="1"><p id="5db744d203htt">创建待办针对执行者或者企业进行了限流处理</p></td></tr><tr id="d9b457cf44t9u"><td id="e41392467bqx1" rowspan="1" colspan="1"><p id="8475d5f1814se">500</p></td><td id="3f8a39fe24lli" rowspan="1" colspan="1"><p id="8144f8feaefoc">todo.taskCreate.systemError</p></td><td id="48dac23cb78je" rowspan="1" colspan="1"><p id="e42d8b0c4e4pr">todo.taskCreate.systemError</p></td><td id="0a345c8e5cgz8" rowspan="1" colspan="1"><p id="63355aeb4fp6l">创建待办系统内部异常</p></td></tr></tbody></table></section></section></div></main></body></html>

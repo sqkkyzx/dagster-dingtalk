@@ -1,0 +1,409 @@
+<!DOCTYPE html><html><head><meta charset="utf8" / /><meta name="searchtitle" content="" / /><meta name="keywords" content="" / /><meta name="author" content="" / /><title>获取用户token</title><meta name="gmtModify" content="2026-04-29 22:27:37" / /></head><body id="doc-api-dingtalk-GetUserToken" data-tag="topic" class="topic"><main id="a43cd31041gwp"><h1 id="h1-c6x-rys-sk8" data-tag="title" class="title">获取用户token</h1><p data-tag="shortdesc" id="800231d02dlkv" class="shortdesc">通过此接口获取用户级别的访问令牌（access token），支持 OAuth 2.0 授权码模式和刷新令牌模式，适用于需要以用户身份调用钉钉开放平台 API 的第三方个人应用。</p><div outputclass="icms-api-reference" data-tag="conbody" class="icms-api-reference conbody"><section id="1260524f2cc5t" class="section"><h2 uuid="mkko4y6i5nf9l6ltadm" id="d5e83c6554ae7">使用场景</h2><p uuid="mkko4y6ix3sh4o0y88" id="137a45645d9tl">该接口用于获取用户的<code data-tag="code" uuid="mkko4y6j4u48hl8j9e8" id="494a822e48ca7" class="code">accessToken</code>，是实现用户身份认证的关键步骤。常见使用场景包括：</p><ul id="09759881888gi"><li id="b13939e00darw"><p id="12fbc18ed8hpi">用户登录后，通过授权码（<code data-tag="code" uuid="mkko4y6ja6wd303kwt5" id="307bb6a273smn" class="code">code</code>）换取有效的访问凭证。</p></li><li id="d2b7568384a44"><p id="3da8f649a9mb4">在<code data-tag="code" uuid="mkko4y6jaj2ihfozh3p" id="3fbf7a37a04xg" class="code">accessToken</code>过期前，使用<code data-tag="code" uuid="mkko4y6j05qjilrohkdm" id="377ae2eda8efa" class="code">refreshToken</code>自动续期，避免频繁重新授权。</p></li><li id="930175ef11t3j"><p id="37fe2db70cvwg">第三方企业应用集成钉钉统一登录体系，实现单点登录（SSO）。</p></li><li id="a9ccda5907s3b"><p id="47aa1c6349xu0">企业应用在后台服务中代表用户调用受保护的 API 接口。</p></li></ul><p uuid="mkko4y6kb0nfbwkny1" id="b6cce70c992pd">开发者应妥善管理<code data-tag="code" uuid="mkko4y6ktefaizfhiee" id="b4a5eadd922t3" class="code">accessToken</code>的生命周期，建议在本地缓存并设置自动刷新机制，确保调用稳定性。</p><div type="note" id="800231d22dhku" class="note note-note"><div class="note-icon-wrapper"><i class="icon-note note note"></i></div><div class="noteContentSpan"><strong>说明 </strong><p id="800258e02dbvp">在使用accessToken时，请注意：</p><ul id="800258e12d5z5"><li id="800258e22dzv8"><p id="800258e32dzxo"><code data-tag="code" id="448ed11edde2x" class="code">accessToken</code>的有效期为7200秒（2小时），有效期内重复获取将返回相同结果并自动续期；过期后获取会返回新的<code data-tag="code" id="8381133586gjf" class="code">accessToken</code>。</p></li><li id="800258e42dsei"><p id="800258e52d94t">每个应用的<code data-tag="code" uuid="mkko4y6miz94azj1wm" id="ac2eb9395f9wq" class="code">accessToken</code>相互独立，缓存时需按应用维度进行存储，防止混淆。</p></li></ul></div></div></section><section id="0b7e1b5dc768v" class="section"><h2 id="97140a9a3ffrs"><b>请求</b></h2><table id="0b4130b6d8vvx" tablewidth="100" tablecolswidth="19.13 80.87" autofit="true" class="table"><colgroup colwidth="0.38*" style="width:19.13%"></colgroup><colgroup colwidth="1.62*" style="width:80.87%"></colgroup><tbody class="tbody"><tr id="9d257bc02cy63" style="height:42px"><td id="2e54db7925mek" rowspan="1" colspan="2"><p id="ca25b2bbb6wb5"><b>基本信息</b></p></td></tr><tr id="1eb0c777233i0"><td id="c94c33a75adh9" rowspan="1" colspan="1"><p id="5154b46615sfq">HTTP URL</p></td><td id="4ca98c556eenf" rowspan="1" colspan="1"><p id="b4236a78f6eor"> https://api.dingtalk.com/v1.0/oauth2/userAccessToken</p></td></tr><tr id="583e275232f5a"><td id="c499777faajh3" rowspan="1" colspan="1"><p id="e6527b7a07e34">HTTP Method</p></td><td id="d04c0627fcykp" rowspan="1" colspan="1"><p id="5128a819b0c2x">POST</p></td></tr><tr id="ac7cde70cfqei"><td id="1f514e377fl5m" rowspan="1" colspan="1"><p id="00928d1357eur">支持的应用类型</p></td><td id="09872ea0db9d1" rowspan="1" colspan="1"><p id="78c84e98d5zv5"><span data-tag="ph" id="16e8b55e11x36" class="ph">appType-企业内部应用</span><span data-tag="ph" id="8dcb014d8bgs3" class="ph">appType-第三方企业应用</span><span data-tag="ph" id="11b1d30202zvb" class="ph">appType-第三方个人应用</span></p></td></tr><tr id="e3d1b91ff9r7v"><td id="eed3c78f30hjj" rowspan="1" colspan="1"><p id="7ca8b9ed27agh">权限要求</p></td><td id="93223588072wx" rowspan="1" colspan="1"><p id="51314949cfi7z"><span data-tag="ph" id="607ee47d782a4" class="ph"><span style="color:rgb(42, 47, 69)">permission-</span><span style="color:rgb(23, 26, 29)">open_app_api_base-</span><span style="color:rgba(0, 0, 0, 0.88)">获取钉钉开放接口用户访问凭证的基础权限</span></span></p></td></tr></tbody></table><section id="6d62eb8063slc" class="section"><h3 id="96d4fc7c9bpvw"><b>请求体</b></h3><table id="80031c302dau8" tablewidth="748" tablecolswidth="146 106 106 106 284" autofit="false" class="table"><colgroup colwidth="0.98*" style="width:19.52%"></colgroup><colgroup colwidth="0.71*" style="width:14.17%"></colgroup><colgroup colwidth="0.71*" style="width:14.17%"></colgroup><colgroup colwidth="0.71*" style="width:14.17%"></colgroup><colgroup colwidth="1.91*" style="width:37.97%"></colgroup><tbody class="tbody"><tr id="80031c312d4ku"><td id="80031c322dvw8" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="80031c332d4ck">名称</p></td><td id="80031c342djor" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="80031c352ddmg">类型</p></td><td id="80031c362ddmu" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="80031c372dthv">是否必填</p></td><td id="de775583d4qxw" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="b38044a97bbiq">示例值</p></td><td id="80031c382dd28" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="80031c392da70">描述</p></td></tr><tr outputclass="row row-level-1" id="80031c3a2dpsg" class="row row-level-1"><td id="80031c3b2dvnw" rowspan="1" colspan="1"><p id="80031c3c2dxez">clientId</p></td><td id="80031c3d2dj5g" rowspan="1" colspan="1"><p id="80031c3e2d2rc">String</p></td><td id="80031c3f2dqeo" rowspan="1" colspan="1"><p id="80031c402d94k">是</p></td><td id="66d72a3803d97" rowspan="1" colspan="1"><p id="84e98166c16ej">dingxxx</p></td><td id="80031c412dwwq" rowspan="1" colspan="1"><p id="80031c422d2p4">应用id。可使用扫码登录应用或者第三方个人小程序的appId。</p><ul id="80031c432dz3q"><li id="800343402da10"><p id="800343412dbow">企业内部应用传应用的<b>AppKey</b></p></li><li id="800343422dygi"><p id="800343432dtne">第三方企业应用传应用的<b>SuiteKey</b></p></li><li id="800343442do7y"><p id="800343452dij4">第三方个人应用传应用的<b>AppId</b></p></li></ul></td></tr><tr outputclass="row row-level-2" id="800343462d5pq" class="row row-level-2"><td id="800343472df95" rowspan="1" colspan="1"><p id="800343482d3xc">clientSecret</p></td><td id="800343492d93l" rowspan="1" colspan="1"><p id="8003434a2d16j">String</p></td><td id="8003434b2d4bh" rowspan="1" colspan="1"><p id="8003434c2dtkc">是</p></td><td id="0cebda8e66bui" rowspan="1" colspan="1"><p id="14c4eea95635q">1234</p></td><td id="8003434d2ds0a" rowspan="1" colspan="1"><p id="8003434e2djab">应用密钥。</p><ul id="8003434f2dzyk"><li id="800343502drq7"><p id="800343512doey">企业内部应用传应用的<b>AppSecret</b></p></li><li id="80036a502db63"><p id="80036a512dlq3">第三方企业应用传应用的<b>SuiteSecret</b></p></li><li id="80036a522d7o0"><p id="80036a532defb">第三方个人应用传应用的<b>AppSecret</b></p></li></ul></td></tr><tr outputclass="row row-level-3" id="80036a542d0ea" class="row row-level-3"><td id="80036a552dhho" rowspan="1" colspan="1"><p id="80036a562dwdj">code</p></td><td id="80036a572db17" rowspan="1" colspan="1"><p id="80036a582d7v4">String</p></td><td id="80036a592djmq" rowspan="1" colspan="1"><p id="80036a5a2dm8q">否</p></td><td id="ffbd7ca28a0az" rowspan="1" colspan="1"><p id="4667c213860wn">abcd</p></td><td id="80036a5b2degg" rowspan="1" colspan="1"><p id="33066c0484a1x">OAuth&nbsp;2.0&nbsp;临时授权码，第三方企业应用需要<a data-tag="xref" id="681005c73dj64" href="/document/development/unified-licensing-suite-sdk#" class="xref">接入统一授权套件</a>/<a data-tag="xref" id="52b48907934nn" href="/document/development/obtain-identity-credentials#" class="xref">获取登录用户的访问凭证</a>，获取临时授权码authCode。</p></td></tr><tr outputclass="row row-level-4" id="80036a5d2dcon" class="row row-level-4"><td id="80036a5e2d40g" rowspan="1" colspan="1"><p id="80036a5f2d8lr">refreshToken</p></td><td id="80036a602dniq" rowspan="1" colspan="1"><p id="80036a612dn0w">String</p></td><td id="800391602do13" rowspan="1" colspan="1"><p id="800391612drn9">否</p></td><td id="a3d97263f4vj6" rowspan="1" colspan="1"><p id="6e9c5676c8e3s">abcd</p></td><td id="800391622dmgm" rowspan="1" colspan="1"><p id="800391632d9lp">OAuth 2.0 刷新令牌，从上一次接口返回结果中获取。有效期为 30 天。</p></td></tr><tr outputclass="row row-level-5" id="800391642dch4" class="row row-level-5"><td id="800391652dvrh" rowspan="1" colspan="1"><p id="800391662dvp8">grantType</p></td><td id="800391672dbbz" rowspan="1" colspan="1"><p id="800391682dy4w">String</p></td><td id="800391692dbyp" rowspan="1" colspan="1"><p id="8003916a2dcb5">是</p></td><td id="4d2fd3d3c5xu6" rowspan="1" colspan="1"><p id="b4a7eab20dg7j">authorization_code</p></td><td id="8003b8702dl0t" rowspan="1" colspan="1"><ul id="8003b8712dkb7"><li id="8003b8722d5th"><p id="8003b8732di7o">如果使用授权码换token：传<code data-tag="code" uuid="mkko4y7d3krfl0gxhs" id="93dd8b9df1i8s" class="code">authorization_code</code>，此时必须填写<code data-tag="code" uuid="mkko4y7djukk8egga3" id="18bc8954b884c" class="code">code</code>参数。</p></li><li id="8003b8742d5iw"><p id="8003b8752damr">使用刷新 token 换新 token：传<code data-tag="code" uuid="mkko4y7er9n3slqez9" id="a463a93bddbaa" class="code">refresh_token</code>，此时必须填写<code data-tag="code" uuid="mkko4y7ex5ibrmgsfos" id="8dda7d7ed5vkq" class="code">refreshToken</code>参数。</p></li></ul></td></tr></tbody></table></section><section id="16dff00a2blk5" class="section"><h3 id="80042da22dbn5"><b>请求示例</b></h3><div outputclass="tabbed-codeblock" data-tag="fig" id="figure-eko-qsb-4cp" class="tabbed-codeblock-box"><div class="tab-box"></div><input type="radio" name="check-figure-eko-qsb-4cp" id="figure-eko-qsb-4cp-curl-tab" checked="checked" /><label for="figure-eko-qsb-4cp-curl-tab">curl</label><div class="codeblock-item"><pre outputclass="language-curl" id="codeblock-4rl-k6x-edm" data-tag="codeblock" code-type="xCode" index="0" class="pre codeblock language-curl"><code>curl -X POST 'https://api.dingtalk.com/v1.0/oauth2/userAccessToken' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "clientId": "dingxxx",
+    "clientSecret": "1234",
+    "code": "abcd",
+    "refreshToken": "abcd",
+    "grantType": "authorization_code"
+  }'</code></pre></div><input type="radio" name="check-figure-eko-qsb-4cp" id="figure-eko-qsb-4cp-java-tab" /><label for="figure-eko-qsb-4cp-java-tab">Java</label><div class="codeblock-item"><pre outputclass="language-java" id="codeblock-jbk-z0e-jvi" data-tag="codeblock" code-type="xCode" class="pre codeblock language-java"><code>// This file is auto-generated, don't edit it. Thanks.
+package com.aliyun.sample;
+
+import com.aliyun.tea.*;
+import com.aliyun.teautil.*;
+import com.aliyun.dingtalkoauth2_1_0.*;
+import com.aliyun.dingtalkoauth2_1_0.models.*;
+import com.aliyun.teaopenapi.*;
+import com.aliyun.teaopenapi.models.*;
+
+public class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Client
+     * @throws Exception
+     */
+    public static com.aliyun.dingtalkoauth2_1_0.Client createClient() throws Exception {
+        Config config = new Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        return new com.aliyun.dingtalkoauth2_1_0.Client(config);
+    }
+
+    public static void main(String[] args_) throws Exception {
+        java.util.List&lt;String&gt; args = java.util.Arrays.asList(args_);
+        com.aliyun.dingtalkoauth2_1_0.Client client = Sample.createClient();
+        GetUserTokenRequest getUserTokenRequest = new GetUserTokenRequest()
+                .setClientId("dingxxx")
+                .setClientSecret("1234")
+                .setCode("abcd")
+                .setRefreshToken("abcd")
+                .setGrantType("authorization_code");
+        try {
+            client.getUserToken(getUserTokenRequest);
+        } catch (TeaException err) {
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        } catch (Exception _err) {
+            TeaException err = new TeaException(_err.getMessage(), _err);
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        }        
+    }
+}</code></pre></div><input type="radio" name="check-figure-eko-qsb-4cp" id="figure-eko-qsb-4cp-python-tab" /><label for="figure-eko-qsb-4cp-python-tab">Python</label><div class="codeblock-item"><pre outputclass="language-python" id="codeblock-ehn-7zh-j18" data-tag="codeblock" code-type="xCode" class="pre codeblock language-python"><code># -*- coding: utf-8 -*-
+# This file is auto-generated, don't edit it. Thanks.
+import sys
+
+from typing import List
+
+from alibabacloud_dingtalk.oauth2_1_0.client import Client as dingtalkoauth2_1_0Client
+from alibabacloud_tea_openapi import models as open_api_models
+from alibabacloud_dingtalk.oauth2_1_0 import models as dingtalkoauth_2__1__0_models
+from alibabacloud_tea_util.client import Client as UtilClient
+
+
+class Sample:
+    def __init__(self):
+        pass
+
+    @staticmethod
+    def create_client() -&gt; dingtalkoauth2_1_0Client:
+        """
+        使用 Token 初始化账号Client
+        @return: Client
+        @throws Exception
+        """
+        config = open_api_models.Config()
+        config.protocol = 'https'
+        config.region_id = 'central'
+        return dingtalkoauth2_1_0Client(config)
+
+    @staticmethod
+    def main(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        get_user_token_request = dingtalkoauth_2__1__0_models.GetUserTokenRequest(
+            client_id='dingxxx',
+            client_secret='1234',
+            code='abcd',
+            refresh_token='abcd',
+            grant_type='authorization_code'
+        )
+        try:
+            client.get_user_token(get_user_token_request)
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+    @staticmethod
+    async def main_async(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        get_user_token_request = dingtalkoauth_2__1__0_models.GetUserTokenRequest(
+            client_id='dingxxx',
+            client_secret='1234',
+            code='abcd',
+            refresh_token='abcd',
+            grant_type='authorization_code'
+        )
+        try:
+            await client.get_user_token_async(get_user_token_request)
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+
+if __name__ == '__main__':
+    Sample.main(sys.argv[1:])</code></pre></div><input type="radio" name="check-figure-eko-qsb-4cp" id="figure-eko-qsb-4cp-php-tab" /><label for="figure-eko-qsb-4cp-php-tab">PHP</label><div class="codeblock-item"><pre outputclass="language-php" id="codeblock-cyv-tjw-lar" data-tag="codeblock" code-type="xCode" class="pre codeblock language-php"><code>&lt;?php
+
+// This file is auto-generated, don't edit it. Thanks.
+namespace AlibabaCloud\SDK\Sample;
+
+use AlibabaCloud\SDK\Dingtalk\Voauth2_1_0\Dingtalk;
+use \Exception;
+use AlibabaCloud\Tea\Exception\TeaError;
+use AlibabaCloud\Tea\Utils\Utils;
+
+use Darabonba\OpenApi\Models\Config;
+use AlibabaCloud\SDK\Dingtalk\Voauth2_1_0\Models\GetUserTokenRequest;
+
+class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Dingtalk Client
+     */
+    public static function createClient(){
+        $config = new Config([]);
+        $config-&gt;protocol = "https";
+        $config-&gt;regionId = "central";
+        return new Dingtalk($config);
+    }
+
+    /**
+     * @param string[] $args
+     * @return void
+     */
+    public static function main($args){
+        $client = self::createClient();
+        $getUserTokenRequest = new GetUserTokenRequest([
+            "clientId" =&gt; "dingxxx",
+            "clientSecret" =&gt; "1234",
+            "code" =&gt; "abcd",
+            "refreshToken" =&gt; "abcd",
+            "grantType" =&gt; "authorization_code"
+        ]);
+        try {
+            $client-&gt;getUserToken($getUserTokenRequest);
+        }
+        catch (Exception $err) {
+            if (!($err instanceof TeaError)) {
+                $err = new TeaError([], $err-&gt;getMessage(), $err-&gt;getCode(), $err);
+            }
+            if (!Utils::empty_($err-&gt;code) &amp;&amp; !Utils::empty_($err-&gt;message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+        }
+    }
+}
+$path = __DIR__ . \DIRECTORY_SEPARATOR . '..' . \DIRECTORY_SEPARATOR . 'vendor' . \DIRECTORY_SEPARATOR . 'autoload.php';
+if (file_exists($path)) {
+    require_once $path;
+}
+Sample::main(array_slice($argv, 1));</code></pre></div><input type="radio" name="check-figure-eko-qsb-4cp" id="figure-eko-qsb-4cp-go-tab" /><label for="figure-eko-qsb-4cp-go-tab">Go</label><div class="codeblock-item"><pre outputclass="language-go" id="codeblock-sji-6q9-www" data-tag="codeblock" code-type="xCode" class="pre codeblock language-go"><code>// This file is auto-generated, don't edit it. Thanks.
+package main
+
+import (
+  "os"
+  util  "github.com/alibabacloud-go/tea-utils/service"
+  dingtalkoauth2_1_0  "github.com/alibabacloud-go/dingtalk/oauth2_1_0"
+  openapi  "github.com/alibabacloud-go/darabonba-openapi/client"
+  "github.com/alibabacloud-go/tea/tea"
+)
+
+
+/**
+ * 使用 Token 初始化账号Client
+ * @return Client
+ * @throws Exception
+ */
+func CreateClient () (_result *dingtalkoauth2_1_0.Client, _err error) {
+  config := &amp;openapi.Config{}
+  config.Protocol = tea.String("https")
+  config.RegionId = tea.String("central")
+  _result = &amp;dingtalkoauth2_1_0.Client{}
+  _result, _err = dingtalkoauth2_1_0.NewClient(config)
+  return _result, _err
+}
+
+func _main (args []*string) (_err error) {
+  client, _err := CreateClient()
+  if _err != nil {
+    return _err
+  }
+
+  getUserTokenRequest := &amp;dingtalkoauth2_1_0.GetUserTokenRequest{
+    ClientId: tea.String("dingxxx"),
+    ClientSecret: tea.String("1234"),
+    Code: tea.String("abcd"),
+    RefreshToken: tea.String("abcd"),
+    GrantType: tea.String("authorization_code"),
+  }
+  tryErr := func()(_e error) {
+    defer func() {
+      if r := tea.Recover(recover()); r != nil {
+        _e = r
+      }
+    }()
+    _, _err = client.GetUserToken(getUserTokenRequest)
+    if _err != nil {
+      return _err
+    }
+
+    return nil
+  }()
+
+  if tryErr != nil {
+    var err = &amp;tea.SDKError{}
+    if _t, ok := tryErr.(*tea.SDKError); ok {
+      err = _t
+    } else {
+      err.Message = tea.String(tryErr.Error())
+    }
+    if !tea.BoolValue(util.Empty(err.Code)) &amp;&amp; !tea.BoolValue(util.Empty(err.Message)) {
+      // err 中含有 code 和 message 属性，可帮助开发定位问题
+    }
+
+  }
+  return _err
+}
+
+
+func main() {
+  err := _main(tea.StringSlice(os.Args[1:]))
+  if err != nil {
+    panic(err)
+  }
+}</code></pre></div><input type="radio" name="check-figure-eko-qsb-4cp" id="figure-eko-qsb-4cp-nodejs-tab" /><label for="figure-eko-qsb-4cp-nodejs-tab">Node.js</label><div class="codeblock-item"><pre outputclass="language-nodejs" id="codeblock-gaw-f1x-drs" data-tag="codeblock" code-type="xCode" class="pre codeblock language-nodejs"><code>// This file is auto-generated, don't edit it
+import Util from '@alicloud/tea-util';
+import dingtalkoauth2_1_0, * as $dingtalkoauth2_1_0 from '@alicloud/dingtalk/oauth2_1_0';
+import OpenApi, * as $OpenApi from '@alicloud/openapi-client';
+import * as $tea from '@alicloud/tea-typescript';
+
+
+export default class Client {
+
+  /**
+   * 使用 Token 初始化账号Client
+   * @return Client
+   * @throws Exception
+   */
+  static createClient(): dingtalkoauth2_1_0 {
+    let config = new $OpenApi.Config({ });
+    config.protocol = "https";
+    config.regionId = "central";
+    return new dingtalkoauth2_1_0(config);
+  }
+
+  static async main(args: string[]): Promise&lt;void&gt; {
+    let client = Client.createClient();
+    let getUserTokenRequest = new $dingtalkoauth2_1_0.GetUserTokenRequest({
+      clientId: "dingxxx",
+      clientSecret: "1234",
+      code: "abcd",
+      refreshToken: "abcd",
+      grantType: "authorization_code",
+    });
+    try {
+      await client.getUserToken(getUserTokenRequest);
+    } catch (err) {
+      if (!Util.empty(err.code) &amp;&amp; !Util.empty(err.message)) {
+        // err 中含有 code 和 message 属性，可帮助开发定位问题
+      }
+
+    }    
+  }
+
+}
+
+Client.main(process.argv.slice(2));</code></pre></div><input type="radio" name="check-figure-eko-qsb-4cp" id="figure-eko-qsb-4cp-csharp-tab" /><label for="figure-eko-qsb-4cp-csharp-tab">C#</label><div class="codeblock-item"><pre outputclass="language-csharp" id="codeblock-ejp-mjg-dkj" data-tag="codeblock" code-type="xCode" class="pre codeblock language-csharp"><code>// This file is auto-generated, don't edit it. Thanks.
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
+
+using Tea;
+using Tea.Utils;
+
+
+namespace AlibabaCloud.SDK.Sample
+{
+    public class Sample 
+    {
+
+        /**
+         * 使用 Token 初始化账号Client
+         * @return Client
+         * @throws Exception
+         */
+        public static AlibabaCloud.SDK.Dingtalkoauth2_1_0.Client CreateClient()
+        {
+            AlibabaCloud.OpenApiClient.Models.Config config = new AlibabaCloud.OpenApiClient.Models.Config();
+            config.Protocol = "https";
+            config.RegionId = "central";
+            return new AlibabaCloud.SDK.Dingtalkoauth2_1_0.Client(config);
+        }
+
+        public static void Main(string[] args)
+        {
+            AlibabaCloud.SDK.Dingtalkoauth2_1_0.Client client = CreateClient();
+            AlibabaCloud.SDK.Dingtalkoauth2_1_0.Models.GetUserTokenRequest getUserTokenRequest = new AlibabaCloud.SDK.Dingtalkoauth2_1_0.Models.GetUserTokenRequest
+            {
+                ClientId = "dingxxx",
+                ClientSecret = "1234",
+                Code = "abcd",
+                RefreshToken = "abcd",
+                GrantType = "authorization_code",
+            };
+            try
+            {
+                client.GetUserToken(getUserTokenRequest);
+            }
+            catch (TeaException err)
+            {
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+            catch (Exception _err)
+            {
+                TeaException err = new TeaException(new Dictionary&lt;string, object&gt;
+                {
+                    { "message", _err.Message }
+                });
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+        }
+
+
+    }
+}</code></pre></div><input type="radio" name="check-figure-eko-qsb-4cp" id="figure-eko-qsb-4cp-cpp-tab" /><label for="figure-eko-qsb-4cp-cpp-tab">C++</label><div class="codeblock-item"><pre outputclass="language-cpp" id="codeblock-eix-fsv-ivg" data-tag="codeblock" code-type="xCode" class="pre codeblock language-cpp"><code>// This file is auto-generated, don't edit it. Thanks.
+
+#include &lt;alibabacloud/dingtalkoauth_2__1__0.hpp&gt;
+#include &lt;alibabacloud/open_api.hpp&gt;
+#include &lt;boost/any.hpp&gt;
+#include &lt;darabonba/core.hpp&gt;
+#include &lt;darabonba/util.hpp&gt;
+#include &lt;iostream&gt;
+#include &lt;map&gt;
+
+using namespace std;
+
+Alibabacloud_Dingtalkoauth2_1_0::Client createClient() {
+  shared_ptr&lt;Alibabacloud_OpenApi::Config&gt; config = make_shared&lt;Alibabacloud_OpenApi::Config&gt;();
+  config-&gt;protocol = make_shared&lt;string&gt;("https");
+  config-&gt;regionId = make_shared&lt;string&gt;("central");
+  return Alibabacloud_Dingtalkoauth2_1_0::Client(config);
+}
+
+int main(int argc, char *args[]) {
+  args++;
+  shared_ptr&lt;Alibabacloud_Dingtalkoauth2_1_0::Client&gt; client = make_shared&lt;Alibabacloud_Dingtalkoauth2_1_0::Client&gt;(createClient());
+  shared_ptr&lt;Alibabacloud_Dingtalkoauth2_1_0::GetUserTokenRequest&gt; getUserTokenRequest = make_shared&lt;Alibabacloud_Dingtalkoauth2_1_0::GetUserTokenRequest&gt;(map&lt;string, boost::any&gt;({
+    {"clientId", boost::any(string("dingxxx"))},
+    {"clientSecret", boost::any(string("1234"))},
+    {"code", boost::any(string("abcd"))},
+    {"refreshToken", boost::any(string("abcd"))},
+    {"grantType", boost::any(string("authorization_code"))}
+  }));
+  try {
+    client-&gt;getUserToken(getUserTokenRequest);
+  }
+  catch (std::exception &amp;err) {
+    if (!Darabonba_Util::Client::empty(err.code) &amp;&amp; !Darabonba_Util::Client::empty(err.message)) {
+      // err 中含有 code 和 message 属性，可帮助开发定位问题
+    }
+  }
+}</code></pre></div></div></section></section><section id="fd26626e0dg4t" class="section"><h2 id="9851ed28c9ag6"><b>响应</b></h2><section id="e1f856a67b3cj" class="section"><h3 id="cff4dc2f7fj9n"><b>响应体</b></h3><table id="8003b8762dz4n" tablewidth="766" tablecolswidth="127 142 142 355" autofit="false" class="table"><colgroup colwidth="0.66*" style="width:16.58%"></colgroup><colgroup colwidth="0.74*" style="width:18.54%"></colgroup><colgroup colwidth="0.74*" style="width:18.54%"></colgroup><colgroup colwidth="1.86*" style="width:46.34%"></colgroup><tbody class="tbody"><tr id="8003b8772d84u"><td id="8003b8782dswb" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="8003b8792d0kj">名称</p></td><td id="8003b87a2dgu0" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="8003b87b2dxia">类型</p></td><td id="3ec995ec0017p" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="bf08bf85a5h8a">示例值</p></td><td id="8003b87c2dxg3" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="8003b87d2dli4">描述</p></td></tr><tr outputclass="row row-level-1" id="8003b87e2d6c2" class="row row-level-1"><td id="8003b87f2d8m6" rowspan="1" colspan="1"><p id="8003df802dtd1">accessToken</p></td><td id="8003df812dx5m" rowspan="1" colspan="1"><p id="8003df822doza">String</p></td><td id="e1f4f8fc6fqqy" rowspan="1" colspan="1"><p id="f6742efff7c4x">abcd</p></td><td id="8003df832d1si" rowspan="1" colspan="1"><p id="8003df842dwp4">生成的accessToken，用于后续 API 调用的身份验证。</p></td></tr><tr outputclass="row row-level-2" id="8003df852d59p" class="row row-level-2"><td id="8003df862d8om" rowspan="1" colspan="1"><p id="8003df872d4gv">refreshToken</p></td><td id="8003df882dqk4" rowspan="1" colspan="1"><p id="8003df892dn26">String</p></td><td id="389995f24fxa3" rowspan="1" colspan="1"><p id="447853c9189cz">abcd</p></td><td id="8003df8a2d5wt" rowspan="1" colspan="1"><p id="8003df8b2d5ag">生成的refresh_token。可以使用此刷新token，定期的获取用户的accessToken</p></td></tr><tr outputclass="row row-level-3" id="800406902d0y0" class="row row-level-3"><td id="800406912d41x" rowspan="1" colspan="1"><p id="800406922dkog">expireIn</p></td><td id="800406932dou1" rowspan="1" colspan="1"><p id="800406942d3q7">Long</p></td><td id="6993b53810ks9" rowspan="1" colspan="1"><p id="785c0976a6pu9">7200</p></td><td id="800406952dlcm" rowspan="1" colspan="1"><p id="800406962d213">超时时间，单位秒。</p></td></tr><tr outputclass="row row-level-4" id="800406972djmy" class="row row-level-4"><td id="800406982dkl3" rowspan="1" colspan="1"><p id="800406992deqs">corpId</p></td><td id="8004069a2dn0h" rowspan="1" colspan="1"><p id="8004069b2d6ih">String</p></td><td id="2996d61b81t2q" rowspan="1" colspan="1"><p id="45f057cec5pkk">corpxxxx</p></td><td id="80042da02dabg" rowspan="1" colspan="1"><p id="80042da12dlh2">所选企业corpId。</p></td></tr></tbody></table></section><section id="6e59c1173c4vi" class="section"><h3 id="0481fa98dcbp8"><b>响应示例</b></h3><pre id="7ffa90b02d26a" outputclass="language-json" data-tag="codeblock" code-type="xCode" class="pre codeblock language-json"><code>HTTP/1.1 200 OK
+Content-Type:application/json
+
+{
+  "accessToken" : "abcd",
+  "refreshToken" : "abcd",
+  "expireIn" : 7200,
+  "corpId" : "corpxxxx"
+}</code></pre></section><section id="73584a275dm7g" class="section"><h3 id="383e17304esos"><b>错误码</b></h3><p id="50c9a89865kf7">若调用该接口报错，可根据错误信息在<a data-tag="xref" id="fdd3ae393bxsu" href="/document/development/server-api-error-codes-1#" class="xref">错误码（旧版服务端）</a>文档中查找解决方案。</p></section></section></div></main></body></html>

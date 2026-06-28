@@ -1,0 +1,506 @@
+<!DOCTYPE html><html><head><meta charset="utf8" / /><meta name="gmtModify" content="2025-09-12 17:20:31" / /><meta name="searchtitle" content="" / /><meta name="keywords" content="" / /><meta name="author" content="" / /><title>搜索文件</title><meta name="gmtModify" content="2026-06-04 19:09:27" / /></head><body data-tag="topic" id="doc-api-dingtalk-SearchDentries" class="topic"><main id="e20fda311fmbx" data-init-id="doc-api-dingtalk_SearchDentries"><h1 data-tag="title" id="h1-kyr-mqk-vdy" class="title">搜索文件</h1><p data-tag="shortdesc" id="051e10f26434f" class="shortdesc"><span style="color:rgb(23, 26, 29)">调用本接口，根据操作者unionId和关键词信息，获取文件信息。</span></p><div data-tag="conbody" outputclass="icms-api-reference" class="icms-api-reference conbody"><section id="section-request-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-request-1" data-tag="h2" class="h2">请求</h2><section id="section-request-basic-info" class="section"><h3 id="heading-request-basic-info" data-tag="h3" class="h3">基本信息</h3><table id="c0427c0b8eqb0" tablewidth="648" tablecolswidth="216 432" autofit="false" class="table"><colgroup colwidth="0.67*" style="width:33.33%"></colgroup><colgroup colwidth="1.33*" style="width:66.67%"></colgroup><tbody class="tbody"><tr id="1f8637e8c7glv"><td id="6bc2c9843fb1v" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="acbdec2d2ceig">字段</p></td><td id="a4bddf8e22ifq" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="341b53c64cqqt">值</p></td></tr><tr id="bae6f6c0f4580"><td id="3b606a205d7vs" rowspan="1" colspan="1"><p id="3b629739651xf">HTTP URL</p></td><td id="133b39d87bkp4" rowspan="1" colspan="1"><p id="a74b7deb4epcc">https://api.dingtalk.com/v2.0/storage/dentries/search</p></td></tr><tr id="68f6cd77c654k"><td id="2f0c34c14fp6y" rowspan="1" colspan="1"><p id="7730ce1892kxu">HTTP Method</p></td><td id="7512058913jch" rowspan="1" colspan="1"><p id="44dca26d6c47b">POST</p></td></tr><tr id="9407ee5ac2xgf"><td id="808af7c4a3kxa" rowspan="1" colspan="1"><p id="88dbd1c79f3yv">支持的应用类型</p></td><td id="e9c164f176w1x" rowspan="1" colspan="1"><p id="b18b97cb76e8x"><span data-tag="ph" id="ph-request-basic-app-type-apptype-0" class="ph ph-app-type" data-ph-raw-text="appType-企业内部应用">appType-企业内部应用</span>　<span data-tag="ph" id="ph-request-basic-app-type-apptype-1" class="ph ph-app-type" data-ph-raw-text="appType-第三方企业应用">appType-第三方企业应用</span></p></td></tr><tr id="fbb266ca395ps"><td id="5448b55e51qbl" rowspan="1" colspan="1"><p id="9e5be121f0mej">权限要求</p></td><td id="e51d60c811s0g" rowspan="1" colspan="1"><p id="d8c7990cfbg7q"><span data-tag="ph" id="ph-request-basic-permission-permission-storage-dentry-search-0" class="ph-permission ph" data-ph-raw-text="permission-Storage.Dentry.Search-文件搜索权限" data-permission-id="permission-Storage.Dentry.Search" data-permission-code="Storage.Dentry.Search" data-permission-detail-api="/document/api/permission/detail" data-permission-query-param="code">permission-Storage.Dentry.Search-文件搜索权限</span></p></td></tr></tbody></table></section><section id="section-request-header-parameter" class="section"><h3 data-tag="h3" id="h2-8j0-8jx-ri1" class="h3 title">请求头</h3><table id="e9eba9bf4650r" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="ed2e73c05fe4a"><td id="0cabea6777mxh" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="ca6f0cbd36g2i">名称</p></td><td id="8f336b2c92kkw" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="1cb4af85e6yub">类型</p></td><td id="4b016ca1942mj" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="8329487bb69w7">是否必填</p></td><td id="9578b3c82c61o" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="e76ee29261oq4">描述</p></td></tr><tr id="65b713af9akx1"><td id="0d5a01617f2mg" rowspan="1" colspan="1"><p id="e81b13e23ci3d">x-acs-dingtalk-access-token</p></td><td id="af2865bc7clq6" rowspan="1" colspan="1"><p id="54561bc391nbx">String</p></td><td id="53d308ecbbiwx" rowspan="1" colspan="1"><p id="635c604c6eyjm">是</p></td><td id="d0d1c527bd66x" rowspan="1" colspan="1"><p id="b24523bd502iz">调用该接口的访问凭证，通过以下获取：</p><ul id="a0d4f3b0fcqrc"><li id="34af5369c5rsy"><p id="c2c1e514a1ykv">企业内部应用，调用<a href="https://open.dingtalk.com/document/development/obtain-the-access-token-of-an-internal-app#" id="c17db943008lt" class="xref">获取企业内部应用的accessToken</a>接口获取。</p></li><li id="a020db131bujx"><p id="73d17d89f4vs7">第三方企业应用，调用<a href="https://open.dingtalk.com/document/development/obtain-the-access-token-of-the-authorized-enterprise-1#" id="439945045bzuz" class="xref">获取第三方应用授权企业的accessToken</a>接口获取。</p></li></ul></td></tr></tbody></table></section><section id="section-request-query-parameter" class="section"><h3 data-tag="h3" id="h2-9st-nch-jpb" class="h3 title">查询参数</h3><table id="ab3dc829fchxm" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="6f43a98e18wmy"><td id="0ac957a03258o" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="c2d3d7241d6pf">名称</p></td><td id="de83358ac2lpw" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="9fa38682cdrw8">类型</p></td><td id="fe5bae9b4d7y8" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="da46505d213n9">是否必填</p></td><td id="32c44ad983ne9" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="d5888a4736s1p">描述</p></td></tr><tr id="6876909c43p72"><td id="558c30ef81zgp" rowspan="1" colspan="1"><p id="81b217298ack1">operatorId</p></td><td id="8efc9b2ca6u5o" rowspan="1" colspan="1"><p id="2858bf29b0m9n">String</p></td><td id="d8a3441cc3o0q" rowspan="1" colspan="1"><p id="5f8193f62e7d9">是</p></td><td id="c01d8213d5tx8" rowspan="1" colspan="1"><p id="f4c14725d4h67">操作人unionId。</p></td></tr></tbody></table></section><section id="section-request-body-parameter" class="section"><h3 data-tag="h3" id="h2-kns-ric-nnv" class="h3 title">请求体</h3><table id="ce45bc7038pnm" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="01d45493b6w7x"><td id="0def8c0223t6f" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="60c58c8893j07">名称</p></td><td id="69d617c0a7pex" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="ea52726606xct">类型</p></td><td id="371ef77c63tru" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="ae2bf5f848u2j">是否必填</p></td><td id="0fc4df65bftem" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="2e5a89d929ssp">描述</p></td></tr><tr outputclass="row row-level-2" id="a66e770ca7dcn" class="row row-level-2"><td id="825aeb1fd01dd" rowspan="1" colspan="1"><p id="17e22c113alb2">keyword</p></td><td id="fc509493ebo9n" rowspan="1" colspan="1"><p id="e56104c131tw8">String</p></td><td id="93d8318ca0a2z" rowspan="1" colspan="1"><p id="807e57af8f5sf">是</p></td><td id="6ef9e4b919m0d" rowspan="1" colspan="1"><p id="88677f718cvht">搜索关键词。</p></td></tr><tr outputclass="row row-level-3 has-child" id="04ce3e10206hf" class="row row-level-3 has-child"><td id="6e66bd65b7xoo" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="06487e4928p0c">option</p></td><td id="464ebd3ebcepm" rowspan="1" colspan="1"><p id="b2c4f5133718m">Object</p></td><td id="c365e7a885xjq" rowspan="1" colspan="1"><p id="44bdcd3aa4d6x">否</p></td><td id="0425ef2307hkv" rowspan="1" colspan="1"><p id="4131b73edali7">可选参数。</p></td></tr><tr outputclass="row row-level-3-1" id="d9c0873497389" class="row row-level-3-1"><td id="89fbc62b34qiz" rowspan="1" colspan="1"><p id="aa19b99cb5fyz">nextToken</p></td><td id="9047814abcn6c" rowspan="1" colspan="1"><p id="e943d50a0bh98">String</p></td><td id="07220ca280a3b" rowspan="1" colspan="1"><p id="04bd6a8c1br4i">否</p></td><td id="178ad4431dkjs" rowspan="1" colspan="1"><p id="4a6df56203jhr">分页游标。</p><p class="note-icon-wrapper" id="da804077b42hn"></p><p data-tag="p" id="a9427f50b79mc" class="p"></p><p id="9d0d7608b20f8">首次拉取不用传。</p><p id="fa6a7f62d5w8a"></p></td></tr><tr outputclass="row row-level-3-2" id="9688fcd115krs" class="row row-level-3-2"><td id="fe4e288015y9s" rowspan="1" colspan="1"><p id="eda05f9973j17">maxResults</p></td><td id="d53b976e79hty" rowspan="1" colspan="1"><p id="a66bdbc2dfvyr">Integer</p></td><td id="4ad7d90e67zuo" rowspan="1" colspan="1"><p id="2b0c6238b1v0k">否</p></td><td id="6211873c3012x" rowspan="1" colspan="1"><p id="c630c4291blmb">分页大小，默认值50。</p><p class="note-icon-wrapper" id="f64797b5f390b"></p><p data-tag="p" id="8796a0ffc3g2a" class="p"></p><p id="100c191518bs3">最大值50。</p><p id="91d894b57fpcd"></p></td></tr><tr outputclass="row row-level-3-3" id="163513dda24bv" class="row row-level-3-3"><td id="ff22cfdf901cq" rowspan="1" colspan="1"><p id="2056530b4eswu">dentryCategories</p></td><td id="10841c29e958w" rowspan="1" colspan="1"><p id="bd13bec3c7kvj">Array of String</p></td><td id="60fffd1eb2kbg" rowspan="1" colspan="1"><p id="dec984954dvl9">否</p></td><td id="de48b9dd42ke2" rowspan="1" colspan="1"><p id="832f2a593doky">限定文件类别。</p></td></tr><tr outputclass="row row-level-3-4" id="7505c1d7e22be" class="row row-level-3-4"><td id="54d01dfe44cv4" rowspan="1" colspan="1"><p id="654b9120b551w">creatorIds</p></td><td id="e255409123j2m" rowspan="1" colspan="1"><p id="fd5dd51de0hu8">Array of String</p></td><td id="5391668d07bgc" rowspan="1" colspan="1"><p id="277e25ba0546v">否</p></td><td id="ea5abc3a16ika" rowspan="1" colspan="1"><p id="d3ba25f2cc4b2">限定创建者。</p></td></tr><tr outputclass="row row-level-3-5" id="0551bfbb4d8v3" class="row row-level-3-5"><td id="fc1ede721adk1" rowspan="1" colspan="1"><p id="48316e4b8b108">modifierIds</p></td><td id="60ba3d15e7bl6" rowspan="1" colspan="1"><p id="677a62f350j0c">Array of String</p></td><td id="c900aa7b66p5s" rowspan="1" colspan="1"><p id="230a324404bq6">否</p></td><td id="6d8dcec2a2g6q" rowspan="1" colspan="1"><p id="c806ac101bu3k">限定修改者。</p></td></tr><tr outputclass="row row-level-3-6 has-child" id="5226e441c0zk1" class="row row-level-3-6 has-child"><td id="94392c1899qg9" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="9eb4099326sng">createTimeRange</p></td><td id="09a4ffddd1yu5" rowspan="1" colspan="1"><p id="15d71928e0x33">Object</p></td><td id="6ab637b56ay2s" rowspan="1" colspan="1"><p id="d24730abb220v">否</p></td><td id="973edb3399s5h" rowspan="1" colspan="1"><p id="9a63f1f11f72f">限定创建时间范围。</p><p class="note-icon-wrapper" id="e9c4c9f580cqg"></p><p data-tag="p" id="72094270247w0" class="p"></p><p id="5e827da108lfw">不指定时, 默认所有创建时间。</p><p id="11d0c4c3b17rk"></p></td></tr><tr outputclass="row row-level-3-6-1" id="6abd00e275mva" class="row row-level-3-6-1"><td id="368330a2542aa" rowspan="1" colspan="1"><p id="3433ec4c2cd0i">startTime</p></td><td id="fd41e706719xt" rowspan="1" colspan="1"><p id="49919dcd46h6s">Long</p></td><td id="eb8beb2793szd" rowspan="1" colspan="1"><p id="c01b4a7ee317k">否</p></td><td id="41760b810d32p" rowspan="1" colspan="1"><p id="207259edbejlo">开始时间戳。</p></td></tr><tr outputclass="row row-level-3-6-2" id="2621e9d6ebixc" class="row row-level-3-6-2"><td id="dba2ed1326511" rowspan="1" colspan="1"><p id="3d6a2ed55e6p0">endTime</p></td><td id="e04e120e9bkkc" rowspan="1" colspan="1"><p id="649acbc33epq7">Long</p></td><td id="b72027794chfd" rowspan="1" colspan="1"><p id="dbafc4dc182tm">否</p></td><td id="8efd1c39f9edm" rowspan="1" colspan="1"><p id="8a21ed5b88aag">结束时间戳。</p></td></tr><tr outputclass="row row-level-3-7 has-child" id="dd1e1209b8b4m" class="row row-level-3-7 has-child"><td id="cf376592702jq" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="abc6f46043ivi">visitTimeRange</p></td><td id="176875e311j1t" rowspan="1" colspan="1"><p id="d2a805f249z60">Object</p></td><td id="5bf1d21f31aow" rowspan="1" colspan="1"><p id="a188ea04b4dh1">否</p></td><td id="94529fcfc1c7a" rowspan="1" colspan="1"><p id="d7df5604969e0">限定访问时间范围。</p><p class="note-icon-wrapper" id="2a765fefdcj1j"></p><p id="87a658d7b9zc7">不指定时, 默认所有访问时间。</p></td></tr><tr outputclass="row row-level-3-7-1" id="ee8f399a060l9" class="row row-level-3-7-1"><td id="bf6e503694mwg" rowspan="1" colspan="1"><p id="16fbd40842stm">startTime</p></td><td id="53dd1259590v8" rowspan="1" colspan="1"><p id="ba1781420d8jv">Long</p></td><td id="ac2d9a202892n" rowspan="1" colspan="1"><p id="d8a7cfcad63ec">否</p></td><td id="3b332ee511etw" rowspan="1" colspan="1"><p id="ad2106ff11z5u">开始时间戳。</p></td></tr><tr outputclass="row row-level-3-7-2" id="12679c5cfeq03" class="row row-level-3-7-2"><td id="efdbdf0d1c0te" rowspan="1" colspan="1"><p id="bb81e3ad8dc9e">endTime</p></td><td id="493dd56245a39" rowspan="1" colspan="1"><p id="59302fee02qlc">Long</p></td><td id="166a3cc152psv" rowspan="1" colspan="1"><p id="3f9ddbfeb3x00">否</p></td><td id="fe4baf4388uwx" rowspan="1" colspan="1"><p id="f18d44dcdfjjj">结束时间戳。</p></td></tr></tbody></table></section><section id="section-request-body-example" class="section"><h3 id="h3-request-body-example" data-tag="h3" class="h3">请求示例</h3><div outputclass="tabbed-codeblock" data-tag="fig" id="figure-apu-yno-urj" class="tabbed-codeblock-box"><div class="tab-box"></div><input type="radio" name="check-figure-apu-yno-urj" id="figure-apu-yno-urj-HTTP-tab" checked="checked" /><label for="figure-apu-yno-urj-HTTP-tab">HTTP</label><div class="codeblock-item"><pre id="codeblock-671-g0x-ljz" outputclass="language-HTTP" code-type="xCode" data-tag="codeblock" class="pre codeblock language-HTTP"><code>POST /v2.0/storage/dentries/search?operatorId=tXguN309iPhE4roSKPlLURAiEiE HTTP/1.1
+Host:api.dingtalk.com
+x-acs-dingtalk-access-token:access_token
+Content-Type:application/json
+
+{
+  "keyword" : "keyword",
+  "option" : {
+    "nextToken" : "next_token",
+    "maxResults" : 20,
+    "dentryCategories" : [ "category" ],
+    "creatorIds" : [ "creator_id" ],
+    "modifierIds" : [ "modifier_id" ],
+    "createTimeRange" : { },
+    "visitTimeRange" : { }
+  }
+}</code></pre></div><input type="radio" name="check-figure-apu-yno-urj" id="figure-apu-yno-urj-java-tab" /><label for="figure-apu-yno-urj-java-tab">Java</label><div class="codeblock-item"><pre id="codeblock-gvu-fal-lwq" outputclass="language-java" code-type="xCode" data-tag="codeblock" class="pre codeblock language-java"><code>// This file is auto-generated, don't edit it. Thanks.
+package com.aliyun.sample;
+
+import com.aliyun.tea.*;
+
+public class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Client
+     * @throws Exception
+     */
+    public static com.aliyun.dingtalkstorage_2_0.Client createClient() throws Exception {
+        com.aliyun.teaopenapi.models.Config config = new com.aliyun.teaopenapi.models.Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        return new com.aliyun.dingtalkstorage_2_0.Client(config);
+    }
+
+    public static void main(String[] args_) throws Exception {
+        java.util.List&lt;String&gt; args = java.util.Arrays.asList(args_);
+        com.aliyun.dingtalkstorage_2_0.Client client = Sample.createClient();
+        com.aliyun.dingtalkstorage_2_0.models.SearchDentriesHeaders searchDentriesHeaders = new com.aliyun.dingtalkstorage_2_0.models.SearchDentriesHeaders();
+        searchDentriesHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        com.aliyun.dingtalkstorage_2_0.models.SearchDentriesRequest.SearchDentriesRequestOptionVisitTimeRange optionVisitTimeRange = new com.aliyun.dingtalkstorage_2_0.models.SearchDentriesRequest.SearchDentriesRequestOptionVisitTimeRange();
+        com.aliyun.dingtalkstorage_2_0.models.SearchDentriesRequest.SearchDentriesRequestOptionCreateTimeRange optionCreateTimeRange = new com.aliyun.dingtalkstorage_2_0.models.SearchDentriesRequest.SearchDentriesRequestOptionCreateTimeRange();
+        com.aliyun.dingtalkstorage_2_0.models.SearchDentriesRequest.SearchDentriesRequestOption option = new com.aliyun.dingtalkstorage_2_0.models.SearchDentriesRequest.SearchDentriesRequestOption()
+                .setNextToken("next_token")
+                .setMaxResults(20)
+                .setDentryCategories(java.util.Arrays.asList(
+                    "category"
+                ))
+                .setCreatorIds(java.util.Arrays.asList(
+                    "creator_id"
+                ))
+                .setModifierIds(java.util.Arrays.asList(
+                    "modifier_id"
+                ))
+                .setCreateTimeRange(optionCreateTimeRange)
+                .setVisitTimeRange(optionVisitTimeRange);
+        com.aliyun.dingtalkstorage_2_0.models.SearchDentriesRequest searchDentriesRequest = new com.aliyun.dingtalkstorage_2_0.models.SearchDentriesRequest()
+                .setOperatorId("tXguN309iPhE4roSKPlLURAiEiE")
+                .setKeyword("keyword")
+                .setOption(option);
+        try {
+            client.searchDentriesWithOptions(searchDentriesRequest, searchDentriesHeaders, new com.aliyun.teautil.models.RuntimeOptions());
+        } catch (TeaException err) {
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        } catch (Exception _err) {
+            TeaException err = new TeaException(_err.getMessage(), _err);
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        }        
+    }
+}</code></pre></div><input type="radio" name="check-figure-apu-yno-urj" id="figure-apu-yno-urj-python-tab" /><label for="figure-apu-yno-urj-python-tab">Python</label><div class="codeblock-item"><pre id="codeblock-suq-orc-jtn" outputclass="language-python" code-type="xCode" data-tag="codeblock" class="pre codeblock language-python"><code># -*- coding: utf-8 -*-
+# This file is auto-generated, don't edit it. Thanks.
+import sys
+
+from typing import List
+
+from alibabacloud_dingtalk.storage_2_0.client import Client as dingtalkstorage_2_0Client
+from alibabacloud_tea_openapi import models as open_api_models
+from alibabacloud_dingtalk.storage_2_0 import models as dingtalkstorage__2__0_models
+from alibabacloud_tea_util import models as util_models
+from alibabacloud_tea_util.client import Client as UtilClient
+
+
+class Sample:
+    def __init__(self):
+        pass
+
+    @staticmethod
+    def create_client() -&gt; dingtalkstorage_2_0Client:
+        """
+        使用 Token 初始化账号Client
+        @return: Client
+        @throws Exception
+        """
+        config = open_api_models.Config()
+        config.protocol = 'https'
+        config.region_id = 'central'
+        return dingtalkstorage_2_0Client(config)
+
+    @staticmethod
+    def main(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        search_dentries_headers = dingtalkstorage__2__0_models.SearchDentriesHeaders()
+        search_dentries_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        option_visit_time_range = dingtalkstorage__2__0_models.SearchDentriesRequestOptionVisitTimeRange()
+        option_create_time_range = dingtalkstorage__2__0_models.SearchDentriesRequestOptionCreateTimeRange()
+        option = dingtalkstorage__2__0_models.SearchDentriesRequestOption(
+            next_token='next_token',
+            max_results=20,
+            dentry_categories=[
+                'category'
+            ],
+            creator_ids=[
+                'creator_id'
+            ],
+            modifier_ids=[
+                'modifier_id'
+            ],
+            create_time_range=option_create_time_range,
+            visit_time_range=option_visit_time_range
+        )
+        search_dentries_request = dingtalkstorage__2__0_models.SearchDentriesRequest(
+            operator_id='tXguN309iPhE4roSKPlLURAiEiE',
+            keyword='keyword',
+            option=option
+        )
+        try:
+            client.search_dentries_with_options(search_dentries_request, search_dentries_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+    @staticmethod
+    async def main_async(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        search_dentries_headers = dingtalkstorage__2__0_models.SearchDentriesHeaders()
+        search_dentries_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        option_visit_time_range = dingtalkstorage__2__0_models.SearchDentriesRequestOptionVisitTimeRange()
+        option_create_time_range = dingtalkstorage__2__0_models.SearchDentriesRequestOptionCreateTimeRange()
+        option = dingtalkstorage__2__0_models.SearchDentriesRequestOption(
+            next_token='next_token',
+            max_results=20,
+            dentry_categories=[
+                'category'
+            ],
+            creator_ids=[
+                'creator_id'
+            ],
+            modifier_ids=[
+                'modifier_id'
+            ],
+            create_time_range=option_create_time_range,
+            visit_time_range=option_visit_time_range
+        )
+        search_dentries_request = dingtalkstorage__2__0_models.SearchDentriesRequest(
+            operator_id='tXguN309iPhE4roSKPlLURAiEiE',
+            keyword='keyword',
+            option=option
+        )
+        try:
+            await client.search_dentries_with_options_async(search_dentries_request, search_dentries_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+
+if __name__ == '__main__':
+    Sample.main(sys.argv[1:])</code></pre></div><input type="radio" name="check-figure-apu-yno-urj" id="figure-apu-yno-urj-php-tab" /><label for="figure-apu-yno-urj-php-tab">PHP</label><div class="codeblock-item"><pre id="codeblock-qa8-xm1-y5r" outputclass="language-php" code-type="xCode" data-tag="codeblock" class="pre codeblock language-php"><code>&lt;?php
+
+// This file is auto-generated, don't edit it. Thanks.
+namespace AlibabaCloud\SDK\Sample;
+
+use AlibabaCloud\SDK\Dingtalk\Vstorage_2_0\Dingtalk;
+use \Exception;
+use AlibabaCloud\Tea\Exception\TeaError;
+use AlibabaCloud\Tea\Utils\Utils;
+
+use Darabonba\OpenApi\Models\Config;
+use AlibabaCloud\SDK\Dingtalk\Vstorage_2_0\Models\SearchDentriesHeaders;
+use AlibabaCloud\SDK\Dingtalk\Vstorage_2_0\Models\SearchDentriesRequest\option\visitTimeRange;
+use AlibabaCloud\SDK\Dingtalk\Vstorage_2_0\Models\SearchDentriesRequest\option\createTimeRange;
+use AlibabaCloud\SDK\Dingtalk\Vstorage_2_0\Models\SearchDentriesRequest\option;
+use AlibabaCloud\SDK\Dingtalk\Vstorage_2_0\Models\SearchDentriesRequest;
+use AlibabaCloud\Tea\Utils\Utils\RuntimeOptions;
+
+class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Dingtalk Client
+     */
+    public static function createClient(){
+        $config = new Config([]);
+        $config-&gt;protocol = "https";
+        $config-&gt;regionId = "central";
+        return new Dingtalk($config);
+    }
+
+    /**
+     * @param string[] $args
+     * @return void
+     */
+    public static function main($args){
+        $client = self::createClient();
+        $searchDentriesHeaders = new SearchDentriesHeaders([]);
+        $searchDentriesHeaders-&gt;xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        $optionVisitTimeRange = new visitTimeRange([]);
+        $optionCreateTimeRange = new createTimeRange([]);
+        $option = new option([
+            "nextToken" =&gt; "next_token",
+            "maxResults" =&gt; 20,
+            "dentryCategories" =&gt; [
+                "category"
+            ],
+            "creatorIds" =&gt; [
+                "creator_id"
+            ],
+            "modifierIds" =&gt; [
+                "modifier_id"
+            ],
+            "createTimeRange" =&gt; $optionCreateTimeRange,
+            "visitTimeRange" =&gt; $optionVisitTimeRange
+        ]);
+        $searchDentriesRequest = new SearchDentriesRequest([
+            "operatorId" =&gt; "tXguN309iPhE4roSKPlLURAiEiE",
+            "keyword" =&gt; "keyword",
+            "option" =&gt; $option
+        ]);
+        try {
+            $client-&gt;searchDentriesWithOptions($searchDentriesRequest, $searchDentriesHeaders, new RuntimeOptions([]));
+        }
+        catch (Exception $err) {
+            if (!($err instanceof TeaError)) {
+                $err = new TeaError([], $err-&gt;getMessage(), $err-&gt;getCode(), $err);
+            }
+            if (!Utils::empty_($err-&gt;code) &amp;&amp; !Utils::empty_($err-&gt;message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+        }
+    }
+}
+$path = __DIR__ . \DIRECTORY_SEPARATOR . '..' . \DIRECTORY_SEPARATOR . 'vendor' . \DIRECTORY_SEPARATOR . 'autoload.php';
+if (file_exists($path)) {
+    require_once $path;
+}
+Sample::main(array_slice($argv, 1));</code></pre></div><input type="radio" name="check-figure-apu-yno-urj" id="figure-apu-yno-urj-go-tab" /><label for="figure-apu-yno-urj-go-tab">Go</label><div class="codeblock-item"><pre id="codeblock-xab-6ag-i2j" outputclass="language-go" code-type="xCode" data-tag="codeblock" class="pre codeblock language-go"><code>// This file is auto-generated, don't edit it. Thanks.
+package main
+
+import (
+  "os"
+  util  "github.com/alibabacloud-go/tea-utils/v2/service"
+  dingtalkstorage_2_0  "github.com/alibabacloud-go/dingtalk/storage_2_0"
+  openapi  "github.com/alibabacloud-go/darabonba-openapi/v2/client"
+  "github.com/alibabacloud-go/tea/tea"
+)
+
+
+/**
+ * 使用 Token 初始化账号Client
+ * @return Client
+ * @throws Exception
+ */
+func CreateClient () (_result *dingtalkstorage_2_0.Client, _err error) {
+  config := &amp;openapi.Config{}
+  config.Protocol = tea.String("https")
+  config.RegionId = tea.String("central")
+  _result = &amp;dingtalkstorage_2_0.Client{}
+  _result, _err = dingtalkstorage_2_0.NewClient(config)
+  return _result, _err
+}
+
+func _main (args []*string) (_err error) {
+  client, _err := CreateClient()
+  if _err != nil {
+    return _err
+  }
+
+  searchDentriesHeaders := &amp;dingtalkstorage_2_0.SearchDentriesHeaders{}
+  searchDentriesHeaders.XAcsDingtalkAccessToken = tea.String("&lt;your access token&gt;")
+  optionVisitTimeRange := &amp;dingtalkstorage_2_0.SearchDentriesRequestOptionVisitTimeRange{}
+  optionCreateTimeRange := &amp;dingtalkstorage_2_0.SearchDentriesRequestOptionCreateTimeRange{}
+  option := &amp;dingtalkstorage_2_0.SearchDentriesRequestOption{
+    NextToken: tea.String("next_token"),
+    MaxResults: tea.Int32(20),
+    DentryCategories: []*string{tea.String("category")},
+    CreatorIds: []*string{tea.String("creator_id")},
+    ModifierIds: []*string{tea.String("modifier_id")},
+    CreateTimeRange: optionCreateTimeRange,
+    VisitTimeRange: optionVisitTimeRange,
+  }
+  searchDentriesRequest := &amp;dingtalkstorage_2_0.SearchDentriesRequest{
+    OperatorId: tea.String("tXguN309iPhE4roSKPlLURAiEiE"),
+    Keyword: tea.String("keyword"),
+    Option: option,
+  }
+  tryErr := func()(_e error) {
+    defer func() {
+      if r := tea.Recover(recover()); r != nil {
+        _e = r
+      }
+    }()
+    _, _err = client.SearchDentriesWithOptions(searchDentriesRequest, searchDentriesHeaders, &amp;util.RuntimeOptions{})
+    if _err != nil {
+      return _err
+    }
+
+    return nil
+  }()
+
+  if tryErr != nil {
+    var err = &amp;tea.SDKError{}
+    if _t, ok := tryErr.(*tea.SDKError); ok {
+      err = _t
+    } else {
+      err.Message = tea.String(tryErr.Error())
+    }
+    if !tea.BoolValue(util.Empty(err.Code)) &amp;&amp; !tea.BoolValue(util.Empty(err.Message)) {
+      // err 中含有 code 和 message 属性，可帮助开发定位问题
+    }
+
+  }
+  return _err
+}
+
+
+func main() {
+  err := _main(tea.StringSlice(os.Args[1:]))
+  if err != nil {
+    panic(err)
+  }
+}</code></pre></div><input type="radio" name="check-figure-apu-yno-urj" id="figure-apu-yno-urj-nodejs-tab" /><label for="figure-apu-yno-urj-nodejs-tab">Node.js</label><div class="codeblock-item"><pre id="codeblock-4sw-p0i-6yq" outputclass="language-nodejs" code-type="xCode" data-tag="codeblock" class="pre codeblock language-nodejs"><code>// This file is auto-generated, don't edit it
+import Util, * as $Util from '@alicloud/tea-util';
+import dingtalkstorage_2_0, * as $dingtalkstorage_2_0 from '@alicloud/dingtalk/storage_2_0';
+import OpenApi, * as $OpenApi from '@alicloud/openapi-client';
+import * as $tea from '@alicloud/tea-typescript';
+
+
+export default class Client {
+
+  /**
+   * 使用 Token 初始化账号Client
+   * @return Client
+   * @throws Exception
+   */
+  static createClient(): dingtalkstorage_2_0 {
+    let config = new $OpenApi.Config({ });
+    config.protocol = "https";
+    config.regionId = "central";
+    return new dingtalkstorage_2_0(config);
+  }
+
+  static async main(args: string[]): Promise&lt;void&gt; {
+    let client = Client.createClient();
+    let searchDentriesHeaders = new $dingtalkstorage_2_0.SearchDentriesHeaders({ });
+    searchDentriesHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+    let optionVisitTimeRange = new $dingtalkstorage_2_0.SearchDentriesRequestOptionVisitTimeRange({ });
+    let optionCreateTimeRange = new $dingtalkstorage_2_0.SearchDentriesRequestOptionCreateTimeRange({ });
+    let option = new $dingtalkstorage_2_0.SearchDentriesRequestOption({
+      nextToken: "next_token",
+      maxResults: 20,
+      dentryCategories: [
+        "category"
+      ],
+      creatorIds: [
+        "creator_id"
+      ],
+      modifierIds: [
+        "modifier_id"
+      ],
+      createTimeRange: optionCreateTimeRange,
+      visitTimeRange: optionVisitTimeRange,
+    });
+    let searchDentriesRequest = new $dingtalkstorage_2_0.SearchDentriesRequest({
+      operatorId: "tXguN309iPhE4roSKPlLURAiEiE",
+      keyword: "keyword",
+      option: option,
+    });
+    try {
+      await client.searchDentriesWithOptions(searchDentriesRequest, searchDentriesHeaders, new $Util.RuntimeOptions({ }));
+    } catch (err) {
+      if (!Util.empty(err.code) &amp;&amp; !Util.empty(err.message)) {
+        // err 中含有 code 和 message 属性，可帮助开发定位问题
+      }
+
+    }    
+  }
+
+}
+
+Client.main(process.argv.slice(2));</code></pre></div><input type="radio" name="check-figure-apu-yno-urj" id="figure-apu-yno-urj-csharp-tab" /><label for="figure-apu-yno-urj-csharp-tab">C#</label><div class="codeblock-item"><pre id="codeblock-cys-du7-wfr" outputclass="language-csharp" code-type="xCode" data-tag="codeblock" class="pre codeblock language-csharp"><code>// This file is auto-generated, don't edit it. Thanks.
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
+
+using Tea;
+using Tea.Utils;
+
+
+namespace AlibabaCloud.SDK.Sample
+{
+    public class Sample 
+    {
+
+        /**
+         * 使用 Token 初始化账号Client
+         * @return Client
+         * @throws Exception
+         */
+        public static AlibabaCloud.SDK.Dingtalkstorage_2_0.Client CreateClient()
+        {
+            AlibabaCloud.OpenApiClient.Models.Config config = new AlibabaCloud.OpenApiClient.Models.Config();
+            config.Protocol = "https";
+            config.RegionId = "central";
+            return new AlibabaCloud.SDK.Dingtalkstorage_2_0.Client(config);
+        }
+
+        public static void Main(string[] args)
+        {
+            AlibabaCloud.SDK.Dingtalkstorage_2_0.Client client = CreateClient();
+            AlibabaCloud.SDK.Dingtalkstorage_2_0.Models.SearchDentriesHeaders searchDentriesHeaders = new AlibabaCloud.SDK.Dingtalkstorage_2_0.Models.SearchDentriesHeaders();
+            searchDentriesHeaders.XAcsDingtalkAccessToken = "&lt;your access token&gt;";
+            AlibabaCloud.SDK.Dingtalkstorage_2_0.Models.SearchDentriesRequest.SearchDentriesRequestOption.SearchDentriesRequestOptionVisitTimeRange optionVisitTimeRange = new AlibabaCloud.SDK.Dingtalkstorage_2_0.Models.SearchDentriesRequest.SearchDentriesRequestOption.SearchDentriesRequestOptionVisitTimeRange();
+            AlibabaCloud.SDK.Dingtalkstorage_2_0.Models.SearchDentriesRequest.SearchDentriesRequestOption.SearchDentriesRequestOptionCreateTimeRange optionCreateTimeRange = new AlibabaCloud.SDK.Dingtalkstorage_2_0.Models.SearchDentriesRequest.SearchDentriesRequestOption.SearchDentriesRequestOptionCreateTimeRange();
+            AlibabaCloud.SDK.Dingtalkstorage_2_0.Models.SearchDentriesRequest.SearchDentriesRequestOption option = new AlibabaCloud.SDK.Dingtalkstorage_2_0.Models.SearchDentriesRequest.SearchDentriesRequestOption
+            {
+                NextToken = "next_token",
+                MaxResults = 20,
+                DentryCategories = new List&lt;string&gt;
+                {
+                    "category"
+                },
+                CreatorIds = new List&lt;string&gt;
+                {
+                    "creator_id"
+                },
+                ModifierIds = new List&lt;string&gt;
+                {
+                    "modifier_id"
+                },
+                CreateTimeRange = optionCreateTimeRange,
+                VisitTimeRange = optionVisitTimeRange,
+            };
+            AlibabaCloud.SDK.Dingtalkstorage_2_0.Models.SearchDentriesRequest searchDentriesRequest = new AlibabaCloud.SDK.Dingtalkstorage_2_0.Models.SearchDentriesRequest
+            {
+                OperatorId = "tXguN309iPhE4roSKPlLURAiEiE",
+                Keyword = "keyword",
+                Option = option,
+            };
+            try
+            {
+                client.SearchDentriesWithOptions(searchDentriesRequest, searchDentriesHeaders, new AlibabaCloud.TeaUtil.Models.RuntimeOptions());
+            }
+            catch (TeaException err)
+            {
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+            catch (Exception _err)
+            {
+                TeaException err = new TeaException(new Dictionary&lt;string, object&gt;
+                {
+                    { "message", _err.Message }
+                });
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+        }
+
+
+    }
+}</code></pre></div></div></section></section><section id="section-response-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-response-1" data-tag="h2" class="h2">响应</h2><section id="section-response-parameter" class="section"><h3 data-tag="h3" id="h2-any-vv5-42f" class="h3 title">响应体</h3><table id="e13a611b56rfp" tablewidth="710" tablecolswidth="213 142 355" autofit="false" class="table"><colgroup colwidth="0.9*" style="width:30.00%"></colgroup><colgroup colwidth="0.6*" style="width:20.00%"></colgroup><colgroup colwidth="1.5*" style="width:50.00%"></colgroup><tbody class="tbody"><tr id="781499c3ccey7"><td id="f6d55597d98d6" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="1e89a04ad4hs3">名称</p></td><td id="93c0ebd577mu0" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="3747df6bec7j5">类型</p></td><td id="567a46fccbca0" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="402bfa97518th">描述</p></td></tr><tr outputclass="row row-level-1 has-child" id="b9c8f7d8a9zwi" class="row row-level-1 has-child"><td id="5eaaeeeec328l" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="95fa4a964cvu8">items</p></td><td id="0ebf688596xjq" rowspan="1" colspan="1"><p id="8efe3a941dd2e">Array</p></td><td id="e5b4be0944ojy" rowspan="1" colspan="1"><p id="342b8e6fc0eou">搜索结果列表，最大size50。</p></td></tr><tr outputclass="row row-level-1-1" id="2f0814af1dois" class="row row-level-1-1"><td id="a6373c92f4us7" rowspan="1" colspan="1"><p id="e1e571ae61s90">dentryUuid</p></td><td id="27c5c037cberg" rowspan="1" colspan="1"><p id="358dac88dboqb">String</p></td><td id="333f709382qqm" rowspan="1" colspan="1"><p id="d5e7c1559fcpp">文件uuid。</p></td></tr><tr outputclass="row row-level-1-2" id="e5cf6bd510djw" class="row row-level-1-2"><td id="ad941ed243xnm" rowspan="1" colspan="1"><p id="cdff970cach53">name</p></td><td id="a145e0b18dgrz" rowspan="1" colspan="1"><p id="081115da07kki">String</p></td><td id="95c2ef8e3cvoi" rowspan="1" colspan="1"><p id="3013821664oe7">文件名称。</p></td></tr><tr outputclass="row row-level-1-3 has-child" id="3297fefb36p3u" class="row row-level-1-3 has-child"><td id="159775c3b90qi" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="ddd6bb26922j2">creator</p></td><td id="de1d6d52766sk" rowspan="1" colspan="1"><p id="37a4b7dcc84im">Object</p></td><td id="249c7c9975v93" rowspan="1" colspan="1"><p id="1828902065wnq">创建者。</p></td></tr><tr outputclass="row row-level-1-3-1" id="5ba7a89500co0" class="row row-level-1-3-1"><td id="e67804ef18pv4" rowspan="1" colspan="1"><p id="2d4dddd040bnv">userId</p></td><td id="f3689f67b5mwn" rowspan="1" colspan="1"><p id="9afe4e7e489b4">String</p></td><td id="342feb7b7erun" rowspan="1" colspan="1"><p id="e0df5cb23ap3v">用户id。</p></td></tr><tr outputclass="row row-level-1-3-2" id="cc853a35165b0" class="row row-level-1-3-2"><td id="c958e4523eyj4" rowspan="1" colspan="1"><p id="4e345931e2tka">name</p></td><td id="1eb44bf2b2l68" rowspan="1" colspan="1"><p id="7333741c98h4g">String</p></td><td id="2a7b57219al0c" rowspan="1" colspan="1"><p id="f8b878efad4n2">名称。</p></td></tr><tr outputclass="row row-level-1-4 has-child" id="a6772f3504awt" style="height:42px" class="row row-level-1-4 has-child"><td id="26d54e3e9anth" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="c17c0579065a4">modifier</p></td><td id="b1177f74aer2n" rowspan="1" colspan="1"><p id="316ea17182mjz">Object</p></td><td id="35c9aae10d12q" rowspan="1" colspan="1"><p id="d35eb339bbaia">修改者。</p></td></tr><tr outputclass="row row-level-1-4-1" id="beff540f6cjm9" class="row row-level-1-4-1"><td id="03cd8db1721wl" rowspan="1" colspan="1"><p id="5c54c096c8och">userId</p></td><td id="2f0aa61a9b90p" rowspan="1" colspan="1"><p id="efdb25cae4geq">String</p></td><td id="baa4aeafc6qtk" rowspan="1" colspan="1"><p id="ffcbcf24fc5ob">用户id。</p></td></tr><tr outputclass="row row-level-1-4-2" id="ef9accc81dg9g" class="row row-level-1-4-2"><td id="8f9aabe2a8dvq" rowspan="1" colspan="1"><p id="31a0a9346cmf5">name</p></td><td id="b028fcbc0dg0f" rowspan="1" colspan="1"><p id="c09abf589860f">String</p></td><td id="6ef660149fozm" rowspan="1" colspan="1"><p id="e8dd073f2bnru">名称。</p></td></tr><tr outputclass="row row-level-2" id="3e41ee9c0fq5m" class="row row-level-2"><td id="b8bb71ee0dct0" rowspan="1" colspan="1"><p id="a5d2a4c402573">nextToken</p></td><td id="562d5889f23o3" rowspan="1" colspan="1"><p id="a8da5956f2olo">String</p></td><td id="e9888b83cdp7w" rowspan="1" colspan="1"><p id="bfe4f90865t5i">分页游标，不为空表示有更多数据。</p></td></tr></tbody></table></section><section id="section-response-body-example" class="section"><h3 id="h3-response-body-example" data-tag="h3" class="h3">响应体示例</h3><pre id="555b0b5746js8" outputclass="language-json" code-type="xCode" data-tag="codeblock" class="pre codeblock language-json"><code>HTTP/1.1 200 OK
+Content-Type:application/json
+
+{
+  "items" : [ {
+    "dentryUuid" : "EpGBa2Lm8aRmzkkNhplMx1prWgN7R35y",
+    "name" : "name",
+    "creator" : {
+      "userId" : "01472825524039877041",
+      "name" : "user_name"
+    },
+    "modifier" : {
+      "userId" : "01472825524039877041",
+      "name" : "user_name"
+    }
+  } ],
+  "nextToken" : "next_token"
+}</code></pre></section><section id="section-error-code-1" class="section"><h3 id="h3-error-code-1" data-tag="h3" class="h3">错误码</h3><p data-tag="p" id="p-error-code-global-guide" class="p">若调用该接口报错，可根据错误信息在<a href="https://open.dingtalk.com/document/development/server-api-error-codes-1" id="a-error-code-global-guide">全局错误码</a>文档中查找解决方案。</p><table id="75989b3ad8h6k" tablewidth="709" tablecolswidth="142 177 177 213" autofit="false" class="table"><colgroup colwidth="0.8*" style="width:20.03%"></colgroup><colgroup colwidth="1*" style="width:24.96%"></colgroup><colgroup colwidth="1*" style="width:24.96%"></colgroup><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><tbody class="tbody"><tr id="4db51c6836xod"><td id="2387553233380" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="091b8465120ky">HttpCode</p></td><td id="ae77934527442" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="f23b7a4d72q5z">错误码</p></td><td id="262a01b2d18ww" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="e6f2f8b850dhl">错误信息</p></td><td id="453afb232227h" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="0b0fa02fc9mos">说明</p></td></tr><tr id="d8b0be22ac6mb"><td id="3d70ae4cfddks" rowspan="1" colspan="1"><p id="85a5ce60c4kru">400</p></td><td id="b85e4390b47xm" rowspan="1" colspan="1"><p id="81039bdb032u2">paramError</p></td><td id="f89d7d6eebqhk" rowspan="1" colspan="1"><p id="a3cfd9c432ww7">%s</p></td><td id="22c431e02ayod" rowspan="1" colspan="1"><p id="dd04df00079nh">参数错误</p></td></tr><tr id="884fd5ff21m0w"><td id="13d8ba50110ht" rowspan="1" colspan="1"><p id="8b077f5b0b98e">400</p></td><td id="6f0b3c6d587f0" rowspan="1" colspan="1"><p id="9906b595109b2">paramError-keyword</p></td><td id="2793b44cb3ac8" rowspan="1" colspan="1"><p id="ec9074579ez7p">%s</p></td><td id="605964ff93swf" rowspan="1" colspan="1"><p id="748a7d621b7pk">参数错误-keyword</p></td></tr><tr id="9820d79d0138x"><td id="0ab6103583z4b" rowspan="1" colspan="1"><p id="23be1b2502cx3">400</p></td><td id="9a2b36d00bmp5" rowspan="1" colspan="1"><p id="e9300e43d7mbd">paramError.maxResults</p></td><td id="5c9cb3f5dbukg" rowspan="1" colspan="1"><p id="8f5b60d726gdb">%s</p></td><td id="b7d1b327b9dv8" rowspan="1" colspan="1"><p id="b6bce3ed996qm">参数错误-maxResults</p></td></tr><tr id="5813da8b86673"><td id="a0fe6ae86f3tu" rowspan="1" colspan="1"><p id="f307bc82d1cjj">400</p></td><td id="13aa3f95caxxz" rowspan="1" colspan="1"><p id="d775e083d4g4m">paramError.searchScopes</p></td><td id="ad474f7f89kq4" rowspan="1" colspan="1"><p id="0bf061a697dpg">%s</p></td><td id="a52e22f36554w" rowspan="1" colspan="1"><p id="ed5226d1d3024">参数错误-searchScopes</p></td></tr><tr id="8041b932e4slv"><td id="399e4fb9d4kpl" rowspan="1" colspan="1"><p id="eb63038abasb1">400</p></td><td id="61f209bbb7kfs" rowspan="1" colspan="1"><p id="0655b36041dn9">paramError.searchTargets</p></td><td id="d4c15eb0827dc" rowspan="1" colspan="1"><p id="f2a1fb2453tw4">%s</p></td><td id="37e7c347davdg" rowspan="1" colspan="1"><p id="21fc64a7f9w83">参数错误-searchTargets</p></td></tr><tr id="8f7170a448zqs"><td id="add234b60cppj" rowspan="1" colspan="1"><p id="20688421fefhg">400</p></td><td id="f6f049a909xul" rowspan="1" colspan="1"><p id="3a357746eaj8h">paramError.dentryTypes</p></td><td id="20e18de98c6uz" rowspan="1" colspan="1"><p id="ccbb5a41cccew">%s</p></td><td id="fb180451f776y" rowspan="1" colspan="1"><p id="fc3170eb1bonn">参数错误-dentryTypes</p></td></tr><tr id="442855403f1te"><td id="c9c54e2d71yqy" rowspan="1" colspan="1"><p id="90ab24b14culw">400</p></td><td id="3c9bbcfc96dfh" rowspan="1" colspan="1"><p id="2b1c5f67f5gel">paramError.dentryCategories</p></td><td id="7930d32d03rmc" rowspan="1" colspan="1"><p id="8bf64550e3dtk">%s</p></td><td id="91e9f1da286lo" rowspan="1" colspan="1"><p id="7f78c9878bkce">参数错误-dentryCategories</p></td></tr><tr id="bceab4972ehho"><td id="00e4cb4fedbcm" rowspan="1" colspan="1"><p id="257b97c2902uc">400</p></td><td id="a8e59b982b1b6" rowspan="1" colspan="1"><p id="4b0c5b2c60cg9">paramError.createTimeRange</p></td><td id="c8953aff571ls" rowspan="1" colspan="1"><p id="cb991d6e21w5i">%s</p></td><td id="263b3465a3buj" rowspan="1" colspan="1"><p id="db9255c6fdck7">参数错误-createTimeRange</p></td></tr><tr id="1479e9f2858yc"><td id="2345595cadlng" rowspan="1" colspan="1"><p id="66ba1bc8bet44">400</p></td><td id="94f4d4adf6x0d" rowspan="1" colspan="1"><p id="63edf0a82bzvw">paramError.modifiedTimeRange</p></td><td id="7b2fdd8c5cdb0" rowspan="1" colspan="1"><p id="7b2657c8e7xhm">%s</p></td><td id="440233976fcd7" rowspan="1" colspan="1"><p id="3e97642ef81zq">参数错误-modifiedTimeRange</p></td></tr><tr id="7846c0d53aqoq"><td id="c54a0cdf52hbh" rowspan="1" colspan="1"><p id="cfc3a72f1b7w0">400</p></td><td id="539548b763857" rowspan="1" colspan="1"><p id="fceb92dbf9v06">paramError.visitTimeRange</p></td><td id="fb37bd8cecnci" rowspan="1" colspan="1"><p id="f3294160af1to">%s</p></td><td id="33b96d825fb9e" rowspan="1" colspan="1"><p id="71b084ea58a9h">参数错误-visitTimeRange</p></td></tr><tr id="dc7c336a38f3m"><td id="6be51313a2soc" rowspan="1" colspan="1"><p id="c48b0ecfd0w7u">403</p></td><td id="bafd40de2b9df" rowspan="1" colspan="1"><p id="b7a7dc0d33tzm">spaceNotAccessible</p></td><td id="84341fc86btxe" rowspan="1" colspan="1"><p id="701ae25e91gba">%s</p></td><td id="23a69debc80tb" rowspan="1" colspan="1"><p id="984cb1d56fp7b">空间不可访问</p></td></tr><tr id="45ef22700dx41"><td id="bfacf08dc06vp" rowspan="1" colspan="1"><p id="e3523111332ku">403</p></td><td id="20ab199da89ki" rowspan="1" colspan="1"><p id="e6e0cfe3851yf">workspaceNotAccessible</p></td><td id="a09e9defc527r" rowspan="1" colspan="1"><p id="21c8bef5fdwiq">%s</p></td><td id="02c16d1dd1c4p" rowspan="1" colspan="1"><p id="e402abfe49fqi">知识库不可访问</p></td></tr><tr id="edb22bedfb2ml"><td id="b86bde5fe2jih" rowspan="1" colspan="1"><p id="3aa308aa26n94">403</p></td><td id="18f8347043580" rowspan="1" colspan="1"><p id="e8a7c6280f4tb">workspaceTeamNotAccessible</p></td><td id="339dec24287be" rowspan="1" colspan="1"><p id="d4a7832f5bt0d">%s</p></td><td id="1b9a965361aro" rowspan="1" colspan="1"><p id="fb3c1ed9f6zqt">知识小组不可访问</p></td></tr><tr id="94719ccdddycm"><td id="e7aff176ccw0j" rowspan="1" colspan="1"><p id="039715658azqu">500</p></td><td id="78dfa40e2c7jl" rowspan="1" colspan="1"><p id="6912c3ce9f8pr">systemError</p></td><td id="8e980ae1eey9r" rowspan="1" colspan="1"><p id="de736a3dfd9b1">%s</p></td><td id="05695733cad3v" rowspan="1" colspan="1"><p id="cfddc4bfd7ehh">服务繁忙，请稍后重试</p></td></tr><tr id="d5ac7facfasgu"><td id="f7905ae621cat" rowspan="1" colspan="1"><p id="d35a7d2f88x6y">500</p></td><td id="6a810842a0bgn" rowspan="1" colspan="1"><p id="d0a5ff6034wjf">unknownError</p></td><td id="6a83898149f4o" rowspan="1" colspan="1"><p id="e58c4859f82n0">Unknown Error</p></td><td id="b3926a705afaf" rowspan="1" colspan="1"><p id="56bd96c43eewj">未知错误</p></td></tr><tr id="862090d6184mz"><td id="b90ecf61710en" rowspan="1" colspan="1"><p id="af51ac9eb8fl1">503</p></td><td id="5c6505399dyjw" rowspan="1" colspan="1"><p id="b77af7fd78c65">operationTimeout</p></td><td id="39870f4d0ajmm" rowspan="1" colspan="1"><p id="0095287719azs">%s</p></td><td id="78989cba1be5l" rowspan="1" colspan="1"><p id="dee4ae713eolv">请求超时</p></td></tr></tbody></table></section></section></div></main></body></html>

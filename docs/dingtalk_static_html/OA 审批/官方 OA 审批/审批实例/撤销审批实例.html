@@ -1,0 +1,392 @@
+<!DOCTYPE html><html><head><meta charset="utf8" / /><meta name="gmtModify" content="2025-11-24 16:28:34" / /><meta name="searchtitle" content="" / /><meta name="keywords" content="" / /><meta name="author" content="" / /><title>撤销审批实例</title><meta name="gmtModify" content="2026-06-03 10:12:27" / /></head><body data-tag="topic" id="doc-api-dingtalk-TerminateProcessInstance" class="topic"><main id="ac4b194061bkq" data-init-id="doc-api-dingtalk-TerminateProcessInstance"><h1 data-tag="title" id="h1-2sm-tu6-isb" class="title">撤销审批实例</h1><p data-tag="shortdesc" class="shortdesc" id="398f08a6b641h">调用本接口，撤销发起的处于流程中的审批实例。</p><div data-tag="conbody" outputclass="icms-api-reference" class="icms-api-reference conbody"><section id="f16ff45952jck" class="section"><h2 id="4851a05e02pn6"><b>接口调用说明</b></h2><ul id="eb8b5327a839n"><li id="ef7e7d1236lak"><p id="fa93f81eda6r5">审批发起15秒内不能撤销审批流程。</p></li><li id="5c15a132a1pdx"><p id="56349b9de362i">当入参isSystem选择为false时（由指定的操作者终止），需要传发起人才能撤销。</p></li><li id="aeb3127b32027"><p id="91e88c3e24zg6">本接口只能撤销流程中的审批实例，不能撤销已审批完成的审批实例。</p></li><li id="214f23edd4o5e"><p id="2000000005019">调用本接口前，需要在<a href="https://oa.dingtalk.com/" id="bebf86d0abmhg">钉钉管理后台</a>&gt; <b>工作台 &gt; 应用管理 &gt; OA审批应用</b>，进入<b>OA审批管理后台</b>，找到<b>模板 &gt; 高级设置 &gt; 撤销/修改审批单</b> &gt;勾选<b>允许提交人撤销审批中的审批单</b>，才能撤销审批实例，否则会报错<code data-tag="code" id="0409cad057myo" class="code">errcode:820008, success:false, errmsg:审批系统错误</code>，原因为【您没有任务处理的权限】。</p><p id="b3d4aa396do9u"><img id="15c2bba010unx" src="https://help-static-aliyun-doc.aliyuncs.com/assets/img/zh-CN/7472540871/p1076089.png" alt="image" placement="break" class="image break" / /></p></li></ul></section><section id="section-request-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-request-1" data-tag="h2" class="h2">请求</h2><section id="section-request-basic-info" class="section"><h3 id="heading-request-basic-info" data-tag="h3" class="h3">基本信息</h3><table id="2bec254c7f21x" tablewidth="648" tablecolswidth="216 432" autofit="false" class="table"><colgroup colwidth="0.67*" style="width:33.33%"></colgroup><colgroup colwidth="1.33*" style="width:66.67%"></colgroup><tbody class="tbody"><tr id="2800584288bbr"><td id="9300eff9b5496" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="852859826a9u7">字段</p></td><td id="4c4b1fec2dg5e" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="ea59b1b3b4iab">值</p></td></tr><tr id="8f6db58cb6ihr"><td id="6d28b2839di10" rowspan="1" colspan="1"><p id="a254a91c3bhzt">HTTP URL</p></td><td id="d2b80fc0b2q3x" rowspan="1" colspan="1"><p id="e82541e428e6f">https://api.dingtalk.com/v1.0/workflow/processInstances/terminate</p></td></tr><tr id="3f77d7ed1bd7h"><td id="c4465d68e75ul" rowspan="1" colspan="1"><p id="a7203206998qy">HTTP Method</p></td><td id="62aec55fb2ra2" rowspan="1" colspan="1"><p id="d7eb1ec967e2p">POST</p></td></tr><tr id="e4cce30173vh2"><td id="5203f9eac81ai" rowspan="1" colspan="1"><p id="df74b78e69xrx">支持的应用类型</p></td><td id="436a7a0c0aama" rowspan="1" colspan="1"><p id="865ce14b59lvs"><span data-tag="ph" id="ph-request-basic-app-type-apptype-0" class="ph ph-app-type" data-ph-raw-text="appType-企业内部应用">appType-企业内部应用</span></p></td></tr><tr id="ae1b0a419ds43"><td id="02d1e8f51c6y9" rowspan="1" colspan="1"><p id="76815ccba91ss">权限要求</p></td><td id="29220632c3qri" rowspan="1" colspan="1"><p id="80ca72f67bdqi"><span data-tag="ph" id="ph-request-basic-permission-permission-workflow-instance-write-0" class="ph-permission ph" data-ph-raw-text="permission-Workflow.Instance.Write-工作流实例写权限" data-permission-id="permission-Workflow.Instance.Write" data-permission-code="Workflow.Instance.Write" data-permission-detail-api="/document/api/permission/detail" data-permission-query-param="code">permission-Workflow.Instance.Write-工作流实例写权限</span></p></td></tr></tbody></table></section><section id="section-request-header-parameter" class="section"><h3 data-tag="h3" id="h2-jja-dmw-ch0" class="h3 title">请求头</h3><table id="edd7176d78o3o" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="b8222a87716lv"><td id="80a3a3ed8ac22" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="64c5c0576c1or">名称</p></td><td id="f309b1f923qwl" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="f170cd16c4pnn">类型</p></td><td id="76d2b72d95xsi" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="69c06d5152xo8">是否必填</p></td><td id="68ed57abb8ls1" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="778d86f851cgd">描述</p></td></tr><tr id="1440ae7b5c7u2"><td id="68129a0fde105" rowspan="1" colspan="1"><p id="f9038bd793h5o">x-acs-dingtalk-access-token</p></td><td id="cf3596a781qsz" rowspan="1" colspan="1"><p id="9106cd9fd120x">String</p></td><td id="5d638acc4exw9" rowspan="1" colspan="1"><p id="74649b4d4fieb">是</p></td><td id="5dc8c32b2f99k" rowspan="1" colspan="1"><p id="6262a21a37imj">调用该接口的访问凭证，调用<a href="https://open.dingtalk.com/document/development/obtain-the-access-token-of-an-internal-app" id="5eb5e4a3aabnr">获取企业内部应用的accessToken</a>接口获取。</p></td></tr></tbody></table></section><section id="section-request-body-parameter" class="section"><h3 data-tag="h3" id="h2-9lr-dca-eey" class="h3 title">请求体</h3><table id="0c25295d97zna" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="490097290c6mh"><td id="66dd2af45733p" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="55fbe6bafb5hk">名称</p></td><td id="4884132227t0s" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="aeb7981f92ffb">类型</p></td><td id="11e2a17909dwo" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="6ea857fda093o">是否必填</p></td><td id="d3b57ffffc8v3" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="0a6033810appr">描述</p></td></tr><tr outputclass="row row-level-1" id="7d334ee38971j" class="row row-level-1"><td id="f5cddc9717lwd" rowspan="1" colspan="1"><p id="1aca5487c28re">processInstanceId</p></td><td id="7d6e5bc276q67" rowspan="1" colspan="1"><p id="756e1d3fd1rho">String</p></td><td id="989ad0840dbr1" rowspan="1" colspan="1"><p id="72c12b2afdiah">是</p></td><td id="addc794be0b23" rowspan="1" colspan="1"><p id="2d56d3386czjk">审批实例ID。</p><ul id="5dc107b364uzq"><li id="3bc5860faamsh"><p id="ff0b84d8214s1">调用<a href="https://open.dingtalk.com/document/development/create-an-approval-instance" id="b37fe188e6r5g">发起审批实例</a>接口获取<code data-tag="inlineCode" id="bf43145631q19" class="inlineCode">InstanceId</code>参数值。</p></li><li id="dc5b7badc3vis"><p id="c972107d7cstx">调用<a href="https://open.dingtalk.com/document/development/obtain-an-approval-list-of-instance-ids" id="434b64b7cf4y2">获取审批实例ID列表</a>接口获取<code data-tag="inlineCode" id="9c049552f56ax" class="inlineCode">list</code>参数值。</p></li></ul></td></tr><tr outputclass="row row-level-2" id="b459e94002h1z" class="row row-level-2"><td id="f2436542f9fga" rowspan="1" colspan="1"><p id="ee6b676c70d23">isSystem</p></td><td id="681044d844w4s" rowspan="1" colspan="1"><p id="1af2570d4acvt">Boolean</p></td><td id="f35f8f79cdvju" rowspan="1" colspan="1"><p id="847c67aa5cch6">否</p></td><td id="1fd57914b68ev" rowspan="1" colspan="1"><p id="5faf7db4f2vl0">是否通过系统操作。</p><ul id="8f02c5280ebek"><li id="efb4393275lgs"><p id="66fd1ddf0eb6e"><b>true</b>：由系统直接终止</p></li><li id="b15f2ac431914"><p id="6ae331a95dpjb"><b>false</b>：由指定的操作者终止（需要传发起人才能撤销）</p></li></ul></td></tr><tr outputclass="row row-level-3" id="d844901954ya9" class="row row-level-3"><td id="9f017200b0lpr" rowspan="1" colspan="1"><p id="b60fad77bbxv1">remark</p></td><td id="179acae6dfsg4" rowspan="1" colspan="1"><p id="fef2b9c61fp2u">String</p></td><td id="d7d5b023adpqc" rowspan="1" colspan="1"><p id="d8b636ebc83uu">否</p></td><td id="8d8c058dbf9i2" rowspan="1" colspan="1"><p id="d15cf147c0j8j">终止说明，最大长度1024字符。</p></td></tr><tr outputclass="row row-level-4" id="274d0250746qk" class="row row-level-4"><td id="4ce54884fb6d6" rowspan="1" colspan="1"><p id="4e42d92c8c0bm">operatingUserId</p></td><td id="67c39eb191c37" rowspan="1" colspan="1"><p id="86b4328f58o08">String</p></td><td id="a21839a8b7e6i" rowspan="1" colspan="1"><p id="473e81a95aqng">否</p></td><td id="1a0e40637c2si" rowspan="1" colspan="1"><p id="9fcaed86750o9">操作人的userId。</p><p class="note-icon-wrapper" id="d14ca5da4bjbs"></p><p data-tag="p" class="p" id="3e0d486c8c6yh"></p><p id="21d4e0eadd0f8">当isSystem为false时，该参数必传（需要传发起人才能撤销）。</p><p id="8a61784abdjrt"></p></td></tr></tbody></table></section><section id="section-request-body-example" class="section"><h3 id="h3-request-body-example" data-tag="h3" class="h3">请求示例</h3><div outputclass="tabbed-codeblock" data-tag="fig" id="figure-df5-bcy-pts" class="tabbed-codeblock-box"><div class="tab-box"></div><input type="radio" name="check-figure-df5-bcy-pts" id="figure-df5-bcy-pts-HTTP-tab" checked="checked" /><label for="figure-df5-bcy-pts-HTTP-tab">HTTP</label><div class="codeblock-item"><pre id="codeblock-svi-yww-rjl" outputclass="language-HTTP" data-tag="codeblock" code-type="xCode" class="pre codeblock language-HTTP"><code>POST /v1.0/workflow/processInstances/terminate HTTP/1.1
+Host:api.dingtalk.com
+x-acs-dingtalk-access-token:be311xxxx
+Content-Type:application/json
+
+{
+  "processInstanceId" : "a171de6c-8bxxxx",
+  "isSystem" : true,
+  "remark" : "终止说明。",
+  "operatingUserId" : "133743186427339452"
+}</code></pre></div><input type="radio" name="check-figure-df5-bcy-pts" id="figure-df5-bcy-pts-java-tab" /><label for="figure-df5-bcy-pts-java-tab">Java</label><div class="codeblock-item"><pre id="codeblock-5xy-5wj-4u3" outputclass="language-java" data-tag="codeblock" code-type="xCode" class="pre codeblock language-java"><code>// This file is auto-generated, don't edit it. Thanks.
+package com.aliyun.sample;
+
+import com.aliyun.tea.*;
+
+public class Sample {
+
+    /**
+     * &lt;b&gt;description&lt;/b&gt; :
+     * &lt;p&gt;使用 Token 初始化账号Client&lt;/p&gt;
+     * @return Client
+     * 
+     * @throws Exception
+     */
+    public static com.aliyun.dingtalkworkflow_1_0.Client createClient() throws Exception {
+        com.aliyun.teaopenapi.models.Config config = new com.aliyun.teaopenapi.models.Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        return new com.aliyun.dingtalkworkflow_1_0.Client(config);
+    }
+
+    public static void main(String[] args_) throws Exception {
+        
+        com.aliyun.dingtalkworkflow_1_0.Client client = Sample.createClient();
+        com.aliyun.dingtalkworkflow_1_0.models.TerminateProcessInstanceHeaders terminateProcessInstanceHeaders = new com.aliyun.dingtalkworkflow_1_0.models.TerminateProcessInstanceHeaders();
+        terminateProcessInstanceHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        com.aliyun.dingtalkworkflow_1_0.models.TerminateProcessInstanceRequest terminateProcessInstanceRequest = new com.aliyun.dingtalkworkflow_1_0.models.TerminateProcessInstanceRequest()
+                .setProcessInstanceId("a171de6c-8bxxxx")
+                .setIsSystem(true)
+                .setRemark("终止说明。")
+                .setOperatingUserId("133743186427339452");
+        try {
+            client.terminateProcessInstanceWithOptions(terminateProcessInstanceRequest, terminateProcessInstanceHeaders, new com.aliyun.teautil.models.RuntimeOptions());
+        } catch (TeaException err) {
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        } catch (Exception _err) {
+            TeaException err = new TeaException(_err.getMessage(), _err);
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        }        
+    }
+}</code></pre></div><input type="radio" name="check-figure-df5-bcy-pts" id="figure-df5-bcy-pts-python-tab" /><label for="figure-df5-bcy-pts-python-tab">Python</label><div class="codeblock-item"><pre id="codeblock-e93-lce-4zd" outputclass="language-python" data-tag="codeblock" code-type="xCode" class="pre codeblock language-python"><code># -*- coding: utf-8 -*-
+# This file is auto-generated, don't edit it. Thanks.
+import os
+import sys
+
+from typing import List
+
+from alibabacloud_dingtalk.workflow_1_0.client import Client as dingtalkworkflow_1_0Client
+from alibabacloud_tea_openapi import models as open_api_models
+from alibabacloud_dingtalk.workflow_1_0 import models as dingtalkworkflow__1__0_models
+from alibabacloud_tea_util import models as util_models
+from alibabacloud_tea_util.client import Client as UtilClient
+
+
+class Sample:
+    def __init__(self):
+        pass
+
+    @staticmethod
+    def create_client() -&gt; dingtalkworkflow_1_0Client:
+        """
+        使用 Token 初始化账号Client
+        @return: Client
+        @throws Exception
+        """
+        config = open_api_models.Config()
+        config.protocol = 'https'
+        config.region_id = 'central'
+        return dingtalkworkflow_1_0Client(config)
+
+    @staticmethod
+    def main(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        terminate_process_instance_headers = dingtalkworkflow__1__0_models.TerminateProcessInstanceHeaders()
+        terminate_process_instance_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        terminate_process_instance_request = dingtalkworkflow__1__0_models.TerminateProcessInstanceRequest(
+            process_instance_id='a171de6c-8bxxxx',
+            is_system=True,
+            remark='终止说明。',
+            operating_user_id='133743186427339452'
+        )
+        try:
+            client.terminate_process_instance_with_options(terminate_process_instance_request, terminate_process_instance_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+    @staticmethod
+    async def main_async(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        terminate_process_instance_headers = dingtalkworkflow__1__0_models.TerminateProcessInstanceHeaders()
+        terminate_process_instance_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        terminate_process_instance_request = dingtalkworkflow__1__0_models.TerminateProcessInstanceRequest(
+            process_instance_id='a171de6c-8bxxxx',
+            is_system=True,
+            remark='终止说明。',
+            operating_user_id='133743186427339452'
+        )
+        try:
+            await client.terminate_process_instance_with_options_async(terminate_process_instance_request, terminate_process_instance_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+
+if __name__ == '__main__':
+    Sample.main(sys.argv[1:])</code></pre></div><input type="radio" name="check-figure-df5-bcy-pts" id="figure-df5-bcy-pts-php-tab" /><label for="figure-df5-bcy-pts-php-tab">PHP</label><div class="codeblock-item"><pre id="codeblock-hde-sgz-njf" outputclass="language-php" data-tag="codeblock" code-type="xCode" class="pre codeblock language-php"><code>&lt;?php
+
+// This file is auto-generated, don't edit it. Thanks.
+namespace AlibabaCloud\SDK\Sample;
+
+use AlibabaCloud\SDK\Dingtalk\Vworkflow_1_0\Dingtalk;
+use \Exception;
+use AlibabaCloud\Tea\Exception\TeaError;
+use AlibabaCloud\Tea\Utils\Utils;
+
+use Darabonba\OpenApi\Models\Config;
+use AlibabaCloud\SDK\Dingtalk\Vworkflow_1_0\Models\TerminateProcessInstanceHeaders;
+use AlibabaCloud\SDK\Dingtalk\Vworkflow_1_0\Models\TerminateProcessInstanceRequest;
+use AlibabaCloud\Tea\Utils\Utils\RuntimeOptions;
+
+class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Dingtalk Client
+     */
+    public static function createClient(){
+        $config = new Config([]);
+        $config-&gt;protocol = "https";
+        $config-&gt;regionId = "central";
+        return new Dingtalk($config);
+    }
+
+    /**
+     * @param string[] $args
+     * @return void
+     */
+    public static function main($args){
+        $client = self::createClient();
+        $terminateProcessInstanceHeaders = new TerminateProcessInstanceHeaders([]);
+        $terminateProcessInstanceHeaders-&gt;xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        $terminateProcessInstanceRequest = new TerminateProcessInstanceRequest([
+            "processInstanceId" =&gt; "a171de6c-8bxxxx",
+            "isSystem" =&gt; true,
+            "remark" =&gt; "终止说明。",
+            "operatingUserId" =&gt; "133743186427339452"
+        ]);
+        try {
+            $client-&gt;terminateProcessInstanceWithOptions($terminateProcessInstanceRequest, $terminateProcessInstanceHeaders, new RuntimeOptions([]));
+        }
+        catch (Exception $err) {
+            if (!($err instanceof TeaError)) {
+                $err = new TeaError([], $err-&gt;getMessage(), $err-&gt;getCode(), $err);
+            }
+            if (!Utils::empty_($err-&gt;code) &amp;&amp; !Utils::empty_($err-&gt;message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+        }
+    }
+}
+$path = __DIR__ . \DIRECTORY_SEPARATOR . '..' . \DIRECTORY_SEPARATOR . 'vendor' . \DIRECTORY_SEPARATOR . 'autoload.php';
+if (file_exists($path)) {
+    require_once $path;
+}
+Sample::main(array_slice($argv, 1));</code></pre></div><input type="radio" name="check-figure-df5-bcy-pts" id="figure-df5-bcy-pts-go-tab" /><label for="figure-df5-bcy-pts-go-tab">Go</label><div class="codeblock-item"><pre id="codeblock-7lp-z14-hro" outputclass="language-go" data-tag="codeblock" code-type="xCode" class="pre codeblock language-go"><code>// This file is auto-generated, don't edit it. Thanks.
+package main
+
+import (
+  "encoding/json"
+  "strings"
+  "fmt"
+  "os"
+  util  "github.com/alibabacloud-go/tea-utils/v2/service"
+  dingtalkworkflow_1_0  "github.com/alibabacloud-go/dingtalk/workflow_1_0"
+  openapi  "github.com/alibabacloud-go/darabonba-openapi/v2/client"
+  "github.com/alibabacloud-go/tea/tea"
+)
+
+
+// Description:
+// 
+// 使用 Token 初始化账号Client
+// 
+// @return Client
+// 
+// @throws Exception
+func CreateClient () (_result *dingtalkworkflow_1_0.Client, _err error) {
+  config := &amp;openapi.Config{}
+  config.Protocol = tea.String("https")
+  config.RegionId = tea.String("central")
+  _result = &amp;dingtalkworkflow_1_0.Client{}
+  _result, _err = dingtalkworkflow_1_0.NewClient(config)
+  return _result, _err
+}
+
+func _main (args []*string) (_err error) {
+  client, _err := CreateClient()
+  if _err != nil {
+    return _err
+  }
+
+  terminateProcessInstanceHeaders := &amp;dingtalkworkflow_1_0.TerminateProcessInstanceHeaders{}
+  terminateProcessInstanceHeaders.XAcsDingtalkAccessToken = tea.String("&lt;your access token&gt;")
+  terminateProcessInstanceRequest := &amp;dingtalkworkflow_1_0.TerminateProcessInstanceRequest{
+    ProcessInstanceId: tea.String("a171de6c-8bxxxx"),
+    IsSystem: tea.Bool(true),
+    Remark: tea.String("终止说明。"),
+    OperatingUserId: tea.String("133743186427339452"),
+  }
+  tryErr := func()(_e error) {
+    defer func() {
+      if r := tea.Recover(recover()); r != nil {
+        _e = r
+      }
+    }()
+    _, _err = client.TerminateProcessInstanceWithOptions(terminateProcessInstanceRequest, terminateProcessInstanceHeaders, &amp;util.RuntimeOptions{})
+    if _err != nil {
+      return _err
+    }
+
+    return nil
+  }()
+
+  if tryErr != nil {
+    var err = &amp;tea.SDKError{}
+    if _t, ok := tryErr.(*tea.SDKError); ok {
+      err = _t
+    } else {
+      err.Message = tea.String(tryErr.Error())
+    }
+    if !tea.BoolValue(util.Empty(err.Code)) &amp;&amp; !tea.BoolValue(util.Empty(err.Message)) {
+      // err 中含有 code 和 message 属性，可帮助开发定位问题
+    }
+
+  }
+  return _err
+}
+
+
+func main() {
+  err := _main(tea.StringSlice(os.Args[1:]))
+  if err != nil {
+    panic(err)
+  }
+}</code></pre></div><input type="radio" name="check-figure-df5-bcy-pts" id="figure-df5-bcy-pts-nodejs-tab" /><label for="figure-df5-bcy-pts-nodejs-tab">Node.js</label><div class="codeblock-item"><pre id="codeblock-bcc-sxm-abk" outputclass="language-nodejs" data-tag="codeblock" code-type="xCode" class="pre codeblock language-nodejs"><code>'use strict';
+// This file is auto-generated, don't edit it
+const Util = require('@alicloud/tea-util');
+const dingtalkworkflow_1_0 = require('@alicloud/dingtalk/workflow_1_0');
+const OpenApi = require('@alicloud/openapi-client');
+const Tea = require('@alicloud/tea-typescript');
+
+class Client {
+
+  /**
+   * 使用 Token 初始化账号Client
+   * @return Client
+   * @throws Exception
+   */
+  static createClient() {
+    let config = new OpenApi.Config({ });
+    config.protocol = 'https';
+    config.regionId = 'central';
+    return new dingtalkworkflow_1_0.default(config);
+  }
+
+  static async main(args) {
+    let client = Client.createClient();
+    let terminateProcessInstanceHeaders = new dingtalkworkflow_1_0.TerminateProcessInstanceHeaders({ });
+    terminateProcessInstanceHeaders.xAcsDingtalkAccessToken = '&lt;your access token&gt;';
+    let terminateProcessInstanceRequest = new dingtalkworkflow_1_0.TerminateProcessInstanceRequest({
+      processInstanceId: 'a171de6c-8bxxxx',
+      isSystem: true,
+      remark: '终止说明。',
+      operatingUserId: '133743186427339452',
+    });
+    try {
+      await client.terminateProcessInstanceWithOptions(terminateProcessInstanceRequest, terminateProcessInstanceHeaders, new Util.RuntimeOptions({ }));
+    } catch (err) {
+      if (!Util.default.empty(err.code) &amp;&amp; !Util.default.empty(err.message)) {
+        // err 中含有 code 和 message 属性，可帮助开发定位问题
+      }
+
+    }    
+  }
+
+}
+
+exports.Client = Client;
+Client.main(process.argv.slice(2));</code></pre></div><input type="radio" name="check-figure-df5-bcy-pts" id="figure-df5-bcy-pts-csharp-tab" /><label for="figure-df5-bcy-pts-csharp-tab">C#</label><div class="codeblock-item"><pre id="codeblock-f96-der-x1l" outputclass="language-csharp" data-tag="codeblock" code-type="xCode" class="pre codeblock language-csharp"><code>// This file is auto-generated, don't edit it. Thanks.
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
+
+using Tea;
+using Tea.Utils;
+
+
+namespace AlibabaCloud.SDK.Sample
+{
+    public class Sample 
+    {
+
+        /// &lt;term&gt;&lt;b&gt;Description:&lt;/b&gt;&lt;/term&gt;
+        /// &lt;description&gt;
+        /// &lt;para&gt;使用 Token 初始化账号Client&lt;/para&gt;
+        /// &lt;/description&gt;
+        /// 
+        /// &lt;returns&gt;
+        /// Client
+        /// &lt;/returns&gt;
+        /// 
+        /// &lt;term&gt;&lt;b&gt;Exception:&lt;/b&gt;&lt;/term&gt;
+        /// Exception
+        public static AlibabaCloud.SDK.Dingtalkworkflow_1_0.Client CreateClient()
+        {
+            AlibabaCloud.OpenApiClient.Models.Config config = new AlibabaCloud.OpenApiClient.Models.Config();
+            config.Protocol = "https";
+            config.RegionId = "central";
+            return new AlibabaCloud.SDK.Dingtalkworkflow_1_0.Client(config);
+        }
+
+        public static void Main(string[] args)
+        {
+            AlibabaCloud.SDK.Dingtalkworkflow_1_0.Client client = CreateClient();
+            AlibabaCloud.SDK.Dingtalkworkflow_1_0.Models.TerminateProcessInstanceHeaders terminateProcessInstanceHeaders = new AlibabaCloud.SDK.Dingtalkworkflow_1_0.Models.TerminateProcessInstanceHeaders();
+            terminateProcessInstanceHeaders.XAcsDingtalkAccessToken = "&lt;your access token&gt;";
+            AlibabaCloud.SDK.Dingtalkworkflow_1_0.Models.TerminateProcessInstanceRequest terminateProcessInstanceRequest = new AlibabaCloud.SDK.Dingtalkworkflow_1_0.Models.TerminateProcessInstanceRequest
+            {
+                ProcessInstanceId = "a171de6c-8bxxxx",
+                IsSystem = true,
+                Remark = "终止说明。",
+                OperatingUserId = "133743186427339452",
+            };
+            try
+            {
+                client.TerminateProcessInstanceWithOptions(terminateProcessInstanceRequest, terminateProcessInstanceHeaders, new AlibabaCloud.TeaUtil.Models.RuntimeOptions());
+            }
+            catch (TeaException err)
+            {
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+            catch (Exception _err)
+            {
+                TeaException err = new TeaException(new Dictionary&lt;string, object&gt;
+                {
+                    { "message", _err.Message }
+                });
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+        }
+
+
+    }
+}</code></pre></div></div></section></section><section id="section-response-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-response-1" data-tag="h2" class="h2">响应</h2><section id="section-response-parameter" class="section"><h3 data-tag="h3" id="h2-xp2-jha-tcc" class="h3 title">响应体</h3><table id="47edf9fca4myj" tablewidth="710" tablecolswidth="213 142 355" autofit="false" class="table"><colgroup colwidth="0.9*" style="width:30.00%"></colgroup><colgroup colwidth="0.6*" style="width:20.00%"></colgroup><colgroup colwidth="1.5*" style="width:50.00%"></colgroup><tbody class="tbody"><tr id="9bac611665g1i"><td id="19758c4d2c8ec" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="cd07f548dd3e2">名称</p></td><td id="5ed7e9e2193f5" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="ef15a4a08b9gh">类型</p></td><td id="d4646c60b3mtq" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="829b9724d7zii">描述</p></td></tr><tr outputclass="row row-level-1" id="c1f2545094pdz" class="row row-level-1"><td id="fcc953be0cave" rowspan="1" colspan="1"><p id="4fa2f8b4b0zkj">result</p></td><td id="de5c75b576zcx" rowspan="1" colspan="1"><p id="215f3b1512maj">Boolean</p></td><td id="eddfc3068fceu" rowspan="1" colspan="1"><p id="6f09016867e1x">是否撤销成功。</p><ul id="dda898755ci8p"><li id="c888ab935akql"><p id="ac84dfb28d72y"><b>true</b>：成功</p></li><li id="91f7a942826qd"><p id="5c561c635299a"><b>false</b>：失败</p></li></ul></td></tr><tr outputclass="row row-level-2" id="8babf63451o6p" class="row row-level-2"><td id="566920f76fxtt" rowspan="1" colspan="1"><p id="03697d4c28iws">success</p></td><td id="05f62cf4f0u6v" rowspan="1" colspan="1"><p id="48eb18c5denmq">Boolean</p></td><td id="1e269153f1miq" rowspan="1" colspan="1"><p id="ef40558e938vg">接口调用是否成功。</p><ul id="49e4b77db5i5h"><li id="b46b2f7c8fii6"><p id="2721b12cb4jkw"><b>true</b>：成功</p></li><li id="de3eab299dbxu"><p id="91440d49cfq5g"><b>false</b>：失败</p></li></ul></td></tr></tbody></table></section><section id="section-response-body-example" class="section"><h3 id="h3-response-body-example" data-tag="h3" class="h3">响应体示例</h3><pre outputclass="language-json" data-tag="codeblock" code-type="xCode" id="4988b9c5732io" class="pre codeblock language-json"><code>HTTP/1.1 200 OK
+Content-Type:application/json
+
+{
+  "result" : true,
+  "success" : true
+}</code></pre></section><section id="section-error-code-1" class="section"><h3 id="h3-error-code-1" data-tag="h3" class="h3">错误码</h3><p data-tag="p" id="p-error-code-global-guide" class="p">若调用该接口报错，可根据错误信息在<a href="https://open.dingtalk.com/document/development/server-api-error-codes-1" id="a-error-code-global-guide">全局错误码</a>文档中查找解决方案。</p><table id="d4028093a2yjj" tablewidth="709" tablecolswidth="142 177 177 213" autofit="false" class="table"><colgroup colwidth="0.8*" style="width:20.03%"></colgroup><colgroup colwidth="1*" style="width:24.96%"></colgroup><colgroup colwidth="1*" style="width:24.96%"></colgroup><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><tbody class="tbody"><tr id="c71320e4199fm"><td id="acd9c30b08gx0" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="5a577363449g8">HttpCode</p></td><td id="085fedd7f5tqi" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="0b694b1237b37">错误码</p></td><td id="370826828bksj" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="cbc14177bejjw">错误信息</p></td><td id="0e3b9969b679x" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="7267c6a2b8p9x">说明</p></td></tr><tr id="1369ef79deyx8"><td id="c847d58e3c5yv" rowspan="1" colspan="1"><p id="a74178bfc83ix">400</p></td><td id="53c10bc837w13" rowspan="1" colspan="1"><p id="10889a37f7a59">invalidParameter</p></td><td id="a05cbfbb79q91" rowspan="1" colspan="1"><p id="8b8df266b19nt">撤销审批实例参数错误</p></td><td id="f68c6b2ab6rn0" rowspan="1" colspan="1"><p id="26fcd6e88361r">撤销审批实例参数错误</p></td></tr><tr id="438808167asqc"><td id="ce292ca7fdfqt" rowspan="1" colspan="1"><p id="202c06faaawqj">400</p></td><td id="7010a630556f9" rowspan="1" colspan="1"><p id="94785aceffjpt">userNotExist</p></td><td id="46d83f62aa47d" rowspan="1" colspan="1"><p id="faa8d41218k2h">用户不存在</p></td><td id="c59aab4515xrb" rowspan="1" colspan="1"><p id="7de425751flma">请检查operatingUserId参数是否正确</p></td></tr><tr id="49ffe8be23if6"><td id="9efe966ecexwi" rowspan="1" colspan="1"><p id="472229be27sev">400</p></td><td id="b66adf0e8coad" rowspan="1" colspan="1"><p id="a8e26492868bb">aflowProcessInstNotExist</p></td><td id="e3eb3bdd020t8" rowspan="1" colspan="1"><p id="077494f1b9wju">审批实例不存在</p></td><td id="9ac9178e18ayq" rowspan="1" colspan="1"><p id="3a86a811df5ga">请检查processInstanceId参数是否正确</p></td></tr><tr id="cee60717c6fof"><td id="dd11c6095b0cs" rowspan="1" colspan="1"><p id="252dbf1067cf6">400</p></td><td id="08328f86fdu6r" rowspan="1" colspan="1"><p id="a4c6af8af3t9b">aflowProcessInstStatusException</p></td><td id="7a2dbd04b0lt1" rowspan="1" colspan="1"><p id="8f20e151428ia">%s</p></td><td id="659d44b015of1" rowspan="1" colspan="1"><p id="0e74e966d4zu9">审批单状态异常，具体可能为：提交审批单后15秒内不能进行撤回、审批单已结束等</p></td></tr><tr id="fc001f463d6xp"><td id="51584bda2aptg" rowspan="1" colspan="1"><p id="1308bb600fmzp">400</p></td><td id="cf209fd6da3vb" rowspan="1" colspan="1"><p id="dd4dd0fdb9th2">invalidInstanceId</p></td><td id="1b894933dc37k" rowspan="1" colspan="1"><p id="e2465bda94kx8">审批实例ID不能为空</p></td><td id="f52d9eeedcyz2" rowspan="1" colspan="1"><p id="1d74b4f589ydg">请检查processInstanceId参数是否正确</p></td></tr><tr id="8707752d09x8w"><td id="97a79d58e1pxe" rowspan="1" colspan="1"><p id="0c6ac5d615cw3">400</p></td><td id="3e0414da767ax" rowspan="1" colspan="1"><p id="a9f23b72eefbk">invalidInstanceTerminateIsSystem</p></td><td id="a96054806fziu" rowspan="1" colspan="1"><p id="430f124efev0i">撤销审批实例，是否通过系统操作参数不能为空</p></td><td id="150780f9a2udw" rowspan="1" colspan="1"><p id="7736b62cafwnf">撤销审批实例，是否通过系统操作参数不能为空</p></td></tr><tr id="0a46b8a84fkl2"><td id="95087b5a22pec" rowspan="1" colspan="1"><p id="3f47532b32djr">400</p></td><td id="228df3c85b0yq" rowspan="1" colspan="1"><p id="cc73f8c394y60">invalidInstanceTerminateOperatingUserId</p></td><td id="c460f9c460zwj" rowspan="1" colspan="1"><p id="dd39db457d1yv">撤销审批实例，当isSystem为false时，操作人的userId不能为空</p></td><td id="ee7eeee24aax3" rowspan="1" colspan="1"><p id="e201ed5b122ip">撤销审批实例，当isSystem为false时，操作人的userId不能为空</p></td></tr><tr id="6edf5e73fbbdy"><td id="5c88098c5f93i" rowspan="1" colspan="1"><p id="bd1b6bb558jmb">400</p></td><td id="6e1d28d047tx5" rowspan="1" colspan="1"><p id="2985acc9bd8wy">internalError</p></td><td id="a8b4c71c9axim" rowspan="1" colspan="1"><p id="9f264a2063s6f">%s</p></td><td id="6966d89c5bz3l" rowspan="1" colspan="1"><p id="bbaf7626c76rz">系统内部异常，具体可能为：管理后台未设置允许提交人撤销审批中的审批单，导致您没有任务处理的权限</p></td></tr><tr id="2609c2d857riu"><td id="3f54fc77953vk" rowspan="1" colspan="1"><p id="340863496es6u">500</p></td><td id="c6e835d9666hb" rowspan="1" colspan="1"><p id="f245ec3844g6w">systemError</p></td><td id="8453df93e5dsy" rowspan="1" colspan="1"><p id="ac3c3ba67des3">系统异常</p></td><td id="21459c700cnv2" rowspan="1" colspan="1"><p id="07673cbfc22hr">系统异常</p></td></tr></tbody></table></section></section></div></main></body></html>

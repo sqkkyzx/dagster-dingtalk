@@ -1,5 +1,5 @@
 from dagster import In, OpExecutionContext, op, Out
-from dagster_dingtalk.app_client import DingTalkClient
+from dingtalk_oapi_zhcn.app_client import DingTalkClient
 from dagster_dingtalk.resources import DingTalkWebhookResource
 
 

@@ -1,0 +1,76 @@
+<!DOCTYPE html><html><head><meta charset="utf8" / /><meta name="searchtitle" content="" / /><meta name="keywords" content="" / /><meta name="author" content="" / /><title>自定义机器人发送群聊消息</title><meta name="gmtModify" content="2026-05-27 17:04:35" / /></head><body data-tag="topic" id="topic-2324434" class="topic"><main id="main-2324434"><h1 data-tag="title" id="65a6a3c0ddmq6" class="title">自定义机器人发送群聊消息</h1><p id="65a6a3c2ddg3j" data-tag="shortdesc" class="shortdesc">本文档介绍使用自定义机器人发送群聊消息的步骤。</p><div data-tag="body" class="body"><section id="736d283b8c704" class="section"><h2 uuid="lrq7z7hga8sp14katdn" id="5c49263dbd5ro">明确需求</h2><p uuid="lrr90hq35jze059uz2v" id="ebe53ef379mfi">在正式开发之前，你可以提前了解，本文档将帮助你使用自定义机器人 Webhook 对应的 <a data-tag="xref" id="84f41dae2cm7u" href="/document/development/custom-robots-send-group-messages#" class="xref">自定义机器人发送群消息</a>接口发送群聊消息。它将以加签的方式来演示自定义机器人的使用。为了帮助你快速上手，您可以尝试运行“快速体验”提供的示例 demo。这将帮助你对自定义机器人的使用有一个直观的体验。</p></section><section id="ba0a358a972po" class="section"><h2 uuid="lrr908pt5l3ygg526mt" id="8dd1c5cb68axo">前提条件</h2><ol id="b1ed92cd57a99" start="1"><li id="c9a11afac172a"><p id="7fd8701c7c69y">完成<a data-tag="xref" id="944bb35e18sht" href="/document/dingstart/custom-bot-creation-and-installation#" class="xref">创建自定义机器人</a>流程。</p><blockquote uuid="lrr91a8tgip4a9cf2f4" id="c90ea5b0f3kxb" jc="left" style="text-align:left">自定义机器人的安全设置选择<b>加签</b>的方式，详情参考<a data-tag="xref" id="7e135de4d6uhj" href="/document/dingstart/customize-robot-security-settings#" class="xref">自定义机器人安全设置</a>。</blockquote></li><li id="6ba84d30a3jdh"><p id="4ab8e8f7b0im2">完成<a data-tag="xref" id="83fbc8fa52f8p" href="/document/dingstart/obtain-the-webhook-address-of-a-custom-robot#" class="xref">获取自定义机器人 Webhook 地址</a>流程。</p></li><li id="c31936caebp2w"><p id="11ae45514a03z">开发环境准备：</p><table id="c82fa07b61phv" tablewidth="100" tablecolswidth="50 50" autofit="true" class="table"><colgroup colwidth="1*" style="width:50.00%"></colgroup><colgroup colwidth="1*" style="width:50.00%"></colgroup><tbody class="tbody"><tr id="8b2ded15cb9ne"><td id="23851267f09c8" rowspan="1" style="background-color:#e5e5e5;vertical-align:middle" colspan="1"><p id="9867b5b676z0s"><b>开发环境</b></p></td><td id="0494091509arj" rowspan="1" style="background-color:#e5e5e5;vertical-align:middle" colspan="1"><p id="bef305794b4v8"><b>说明</b></p></td></tr><tr id="e69b3af40fpk9"><td id="9e7fe355ec9b3" rowspan="1" style="vertical-align:middle" colspan="1"><p id="5d3c9c299ac74">Java</p></td><td id="d7d1c8e083bd8" rowspan="1" style="vertical-align:middle" colspan="1"><ul id="cd73fc802cz39"><li id="5032719a6fskh"><p id="37ef56efee1d8">已安装 JDK 1.8 及以上</p></li><li id="7af5613265ipf"><p id="09e6e904e16pl">已安装 Maven 3 </p></li></ul></td></tr><tr id="f798949db5l7g"><td id="9822cbea42fqn" rowspan="1" style="vertical-align:middle" colspan="1"><p id="ae276c4312qbk">Python</p></td><td id="7fb9e9342a97a" rowspan="1" style="vertical-align:middle" colspan="1"><ul id="baccb062d8tni"><li id="fcbde0cb192ob"><p id="2ff5f10d0fde3">Python 3 </p></li></ul></td></tr></tbody></table></li></ol></section><section id="8f26263c92yza" class="section"><h2 uuid="lsb48uyz9y3xfdp7ijj" id="c1452266bfy1y" left="0"><b>快速体验</b></h2><ol id="4359a39024vn5" start="1"><li id="d5d2d1e738wj5"><p id="a0503708af80y">你可以下载示例 demo：</p><table id="ae6357aa23t4n" tablewidth="100" tablecolswidth="50 50" autofit="true" class="table"><colgroup colwidth="1*" style="width:50.00%"></colgroup><colgroup colwidth="1*" style="width:50.00%"></colgroup><tbody class="tbody"><tr id="efa2f150cash5"><td id="852a8bc2a20ty" rowspan="1" style="background-color:#e5e5e5;vertical-align:middle" colspan="1"><p id="c7a08db96ao5c"><b>示例</b></p></td><td id="c2011578b1y6g" rowspan="1" style="background-color:#e5e5e5;vertical-align:middle" colspan="1"><p id="11b4b936f8n8v"><b>说明</b></p></td></tr><tr id="9e2a371d17onf"><td id="db8cb334bf2u6" rowspan="1" style="vertical-align:middle" colspan="1"><p id="30be70dab6aig">Java</p></td><td id="aaafcf273dfj7" rowspan="1" style="vertical-align:middle" colspan="1"><p id="cb56723de4a20"><a id="4afaa0aac2oj4" href="https://help-static-aliyun-doc.aliyuncs.com/file-manage-files/zh-CN/20250519/cvzdoy/custom-robot-group-message-quick-start-java.zip" data-tag="file" class="file">custom-robot-group-message-quick-start-java.zip</a></p></td></tr><tr id="877fb3ffe22m3"><td id="bee1db5df57rc" rowspan="1" style="vertical-align:middle" colspan="1"><p id="36b02dfabahf4">Python</p></td><td id="397b9eb1c2st6" rowspan="1" style="vertical-align:middle" colspan="1"><p id="1e7e0fa5a9pqp"><a id="88072d3d65nmj" href="https://help-static-aliyun-doc.aliyuncs.com/file-manage-files/zh-CN/20250519/qspdnf/custom-robot-group-message-quick-start-python.zip" data-tag="file" class="file">custom-robot-group-message-quick-start-python.zip</a></p></td></tr></tbody></table></li><li id="d4e1368c6db8j"><p id="003a897661pn3">启动示例 demo：</p><table id="faf1bb9a83gt4" tablewidth="100" tablecolswidth="19.28 80.72" autofit="true" class="table"><colgroup colwidth="0.39*" style="width:19.28%"></colgroup><colgroup colwidth="1.61*" style="width:80.72%"></colgroup><tbody class="tbody"><tr id="9d8c84ef66pu3"><td id="68b9a3afbbgm0" rowspan="1" style="background-color:#e5e5e5;vertical-align:middle" colspan="1"><p id="eedc478bf4axw"><b>类型</b></p></td><td id="c5f0fda3912se" rowspan="1" style="background-color:#e5e5e5;vertical-align:middle" colspan="1"><p id="4f09b57c8c4m2"><b>说明</b></p></td></tr><tr id="27fc5a8130ybe"><td id="19115857701dt" rowspan="1" style="vertical-align:middle" colspan="1"><p id="789e265d4b2kd">Java</p></td><td id="944b59131a0lb" rowspan="1" style="vertical-align:middle" colspan="1"><p id="167f7f3ccauu4">1. 修改 customRobotGroupMessage.java 的 main 方法参数：</p><ul id="640aea1871bnv"><li id="0bca1586e0rfm"><p id="1f4ea76721ifh">CUSTOM_ROBOT_TOKEN：机器人应用的 access_token 的值，详情参考<a data-tag="xref" id="2f7879e05dpk4" href="/document/dingstart/obtain-the-webhook-address-of-a-custom-robot#" class="xref">获取自定义机器人 Webhook 地址</a>。</p><div type="note" id="47d38fc19b7sc" class="note note-note"><div class="note-icon-wrapper"><i class="icon-note note note"></i></div><div class="noteContentSpan"><strong>说明 </strong><p id="383dcdd419rsn">仅需填写 Webhook 地址后access_token的值。不是整个webhook地址。</p><p id="aabba46e87aza"><img id="98cd75b1d6kk8" src="https://help-static-aliyun-doc.aliyuncs.com/assets/img/zh-CN/5259958471/p960464.png" alt="image" placement="break" class="image break" / /></p></div></div></li><li id="b8b40a2540sdk"><p id="3b616f2c9f8fy">SECRET：安全设置，加签密钥。详情参考<a data-tag="xref" id="7886da0d460fl" href="/document/dingstart/customize-robot-security-settings#" class="xref">自定义机器人安全设置</a>。</p></li><li id="f7d945d0d8g4a"><p id="4fbf79aa09dsw">（可选）USER_ID：用户的 userId 信息，详情参考<a data-tag="xref" id="698dbe1819u6t" href="/document/dingstart/basic-concepts-beta#section-aa9-zk1-os6" class="xref">用户 UserId</a>。</p><blockquote id="7d0faf2824nne">内部群：可以填写用户的 UserId 实现 @ 能力。</blockquote><blockquote id="149c2ea2bcph4">外部群：机器人调用 OpenAPI 发送消息时，无法实现 @ 能力。</blockquote></li></ul><p id="ca3066dfa5d2i">2. 启动 main 方法。</p><p id="e55aaaada0bhi">3. 此时，你可以在群内看到自定义机器人发送的消息了。</p><p id="e272dcf2a3xe6"><img src="https://help-static-aliyun-doc.aliyuncs.com/assets/img/zh-CN/8834868071/p768588.png" alt="image.png" placement="break" id="3b7189e13akj2" class="image break" / /></p></td></tr><tr id="ddcea5e4b930e"><td id="6ea26488fa8v1" rowspan="1" style="vertical-align:middle" colspan="1"><p id="08cb145415ho9">Python</p></td><td id="677a93f833m55" rowspan="1" style="vertical-align:middle" colspan="1"><p id="a8b778a3c2cu6">1. 在当前文件的目录下，输入启动命令：<code data-tag="code" id="02bcc07562aof" class="code">python3 send_custom_robot_group_message.py --access_token="<span style="color:rgb(0, 177, 77)">your custom robot token</span>" --secret="<span style="color:rgb(0, 177, 77)">your custom robot secret</span>" --userid="<span style="color:rgb(0, 177, 77)">you need @ group user's userid</span>"</code>。</p><blockquote id="6840d8c7d5zyb">注意替换机器人 webhook 的 access_token、机器人的加签 secret 和用户 userid，参数如何获取请参考 Java 中的说明。</blockquote><p id="a00a2750954c6">2. 此时，你可以在群内看到自定义机器人发送的消息了。</p></td></tr></tbody></table></li></ol></section><section id="1394d5bda531l" class="section"><h2 id="81f1c2e4540vi"><b>操作步骤</b></h2><blockquote id="2b16e49162cfw">下方为 Java 示例，Python 示例请下载上方体验 demo。</blockquote><ol id="dfdf63ce51qs1" start="1"><li id="77cf90aa9du0p"><p id="65aeb12f022o1">添加依赖项到工程的<code data-tag="code" uuid="lrq47p4ys00y1z3c3z" id="1ffa018268v01" class="code">pom.xml</code>文件。</p><pre id="d6gteb" data-tag="codeblock" outputclass="language-xml" code-type="xCode" class="pre codeblock language-xml"><code> &lt;dependencies&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;com.aliyun&lt;/groupId&gt;
+            &lt;artifactId&gt;alibaba-dingtalk-service-sdk&lt;/artifactId&gt;
+            &lt;version&gt;2.0.0&lt;/version&gt;
+        &lt;/dependency&gt;
+
+        &lt;dependency&gt;
+            &lt;groupId&gt;commons-codec&lt;/groupId&gt;
+            &lt;artifactId&gt;commons-codec&lt;/artifactId&gt;
+            &lt;version&gt;1.11&lt;/version&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;</code></pre></li><li id="3f1913ad24ssn"><p id="13f05d4845p1t">创建 main 方法，并启动。</p><pre id="htabdb" data-tag="codeblock" outputclass="language-java" code-type="xCode" class="pre codeblock language-java"><code>import com.dingtalk.api.DefaultDingTalkClient;
+import com.dingtalk.api.DingTalkClient;
+import com.dingtalk.api.request.OapiRobotSendRequest;
+import com.dingtalk.api.response.OapiRobotSendResponse;
+import com.taobao.api.ApiException;
+import org.apache.commons.codec.binary.Base64;
+
+import javax.crypto.Mac;
+import javax.crypto.spec.SecretKeySpec;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
+
+public class customRobotGroupMessage {
+
+    public static final String CUSTOM_ROBOT_TOKEN = "&lt;your custom robot token&gt;";
+
+    public static final String USER_ID= "&lt;you need @ group user's userId&gt;";
+
+    public static final String SECRET = "&lt;your custom robot SECRET&gt;";
+
+    public static void main(String[] args) {
+        try {
+            Long timestamp = System.currentTimeMillis();
+            System.out.println(timestamp);
+            String secret = SECRET;
+            String stringToSign = timestamp + "\n" + secret;
+            Mac mac = Mac.getInstance("HmacSHA256");
+            mac.init(new SecretKeySpec(secret.getBytes("UTF-8"), "HmacSHA256"));
+            byte[] signData = mac.doFinal(stringToSign.getBytes("UTF-8"));
+            String sign = URLEncoder.encode(new String(Base64.encodeBase64(signData)),"UTF-8");
+            System.out.println(sign);
+
+            //sign字段和timestamp字段必须拼接到请求URL上，否则会出现 310000 的错误信息
+            DingTalkClient client = new DefaultDingTalkClient("https://oapi.dingtalk.com/robot/send?sign="+sign+"&amp;timestamp="+timestamp);
+            OapiRobotSendRequest req = new OapiRobotSendRequest();
+            /**
+             * 发送文本消息
+             */
+            //定义文本内容
+            OapiRobotSendRequest.Text text = new OapiRobotSendRequest.Text();
+            text.setContent("钉钉，让进步发生");
+            //定义 @ 对象
+            OapiRobotSendRequest.At at = new OapiRobotSendRequest.At();
+            at.setAtUserIds(Arrays.asList(USER_ID));
+            //设置消息类型
+            req.setMsgtype("text");
+            req.setText(text);
+            req.setAt(at);
+            OapiRobotSendResponse rsp = client.execute(req, CUSTOM_ROBOT_TOKEN);
+            System.out.println(rsp.getBody());
+        } catch (ApiException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            throw new RuntimeException(e);
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        } catch (InvalidKeyException e) {
+            throw new RuntimeException(e);
+        }
+    }
+}</code></pre><p uuid="lrr7l6u7he2yfdt5phj" id="3601bd745ctof">此时，你可以在群内看到自定义机器人发送的消息了。</p><p id="b5a68d3217fag"><img src="https://help-static-aliyun-doc.aliyuncs.com/assets/img/zh-CN/8834868071/p768588.png" alt="image.png" placement="break" id="d3ff834e56axb" class="image break" / /></p></li></ol></section><section id="ed4cb9f014k1x" class="section"><h2 id="1b327a900b9xw"><b>常见问题</b></h2><section id="c4aeaec1d56pu" class="section"><h3 id="title-a6f-vvl-omb" data-tag="title" uuid="ls9r1ygwwgvx6knm8h" class="title"><b>调用频率限制</b></h3><p uuid="ls9r19zkju3vpd3vqo" id="149dae6036aa2">由于消息发送太频繁会严重影响群的使用体验，因此自定义机器人发送消息的频率限制如下：</p><p uuid="ls9r1r7wkvntnch50b" id="69153259d6vpr"><b>每个机器人每分钟最多发送20条消息到群里，如果超过20条，会限流10分钟。</b></p><blockquote uuid="ls9r25j2r3iw5mbr47g" id="f107a52e4bc7w">如果你有大量发消息的场景（譬如系统监控报警）可以将这些信息进行整合，通过markdown消息以摘要的形式发送到群里。</blockquote></section></section><section id="a5c024a22cfed" class="section"><h2 id="26ed204423k4t"><b>相关文档</b></h2><ul id="6639883727nhm"><li id="901b70b981tw4"><p id="fd9a77fc163l5"><a data-tag="xref" id="143b4877593kp" href="/document/dingstart/customize-robot-security-settings#" class="xref">自定义机器人安全设置</a></p></li><li id="76f9be783djvi"><p id="a652a3bfec260"><a data-tag="xref" id="d6e5bc97abi03" href="/document/development/robot-message-type#" class="xref">消息发送与接收类型</a></p></li><li id="d485f6c389cv6"><p id="c7c751539epum"><a data-tag="xref" id="52d397c65ax7r" href="/document/development/custom-robots-send-group-messages#" class="xref">自定义机器人发送群消息</a></p></li></ul></section></div></main></body></html>

@@ -1,0 +1,366 @@
+<!DOCTYPE html><html><head><meta charset="utf8" / /><meta name="searchtitle" content="" / /><meta name="keywords" content="" / /><meta name="author" content="" / /><title>批量获取文件缩略图</title><meta name="gmtModify" content="2026-06-15 11:26:25" / /></head><body data-tag="topic" id="doc-api-dingtalk-GetDentryThumbnails" class="topic"><main id="405fc9b765ewn" data-init-id="doc-api-dingtalk_GetDentryThumbnails"><h1 data-tag="title" id="h1-5fk-534-z90" class="title">批量获取文件缩略图</h1><p data-tag="shortdesc" id="8ef2bea6751ek" class="shortdesc">调用本接口，批量获取文件的缩略图信息。</p><div data-tag="conbody" outputclass="icms-api-reference" class="icms-api-reference conbody"><section id="089896bb05a8h" class="section"><h2 id="f5c181e92008x"><b>接口调用说明</b></h2><p id="18d20aa3ce94z"><span style="color:rgb(23, 26, 29)">在存储空间内上传的图片、wps格式文档（Word、Excel和PowerPoint）、PDF格式文件和txt格式文件，会异步自动生成缩略图。</span></p></section><section id="section-request-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-request-1" data-tag="h2" class="h2">请求</h2><table id="e8f1869193eu4" tablewidth="648" tablecolswidth="216 432" autofit="false" class="table"><colgroup colwidth="0.67*" style="width:33.33%"></colgroup><colgroup colwidth="1.33*" style="width:66.67%"></colgroup><tbody class="tbody"><tr id="ad508cd86a0xl"><td id="2427c8a893exv" rowspan="1" style="background-color:#e5e5e5" colspan="2"><p id="2fcf08b3c0y0x" data-tag="h3" class="h3"><b>基本信息</b></p></td></tr><tr id="50420ab4ecfbf"><td id="e787b40084y0g" rowspan="1" colspan="1"><p id="beab43c616kye">HTTP URL</p></td><td id="721f8a9c1auk4" rowspan="1" colspan="1"><p id="2d84d9ca4de7e">https://api.dingtalk.com/v1.0/storage/spaces/{spaceId}/thumbnails/query</p></td></tr><tr id="4c263a83e68k8"><td id="c06cc52c319x8" rowspan="1" colspan="1"><p id="9db4a4bc32q8t">HTTP Method</p></td><td id="1d298dffbcc96" rowspan="1" colspan="1"><p id="fb85ca99d0e75">POST</p></td></tr><tr id="717cdcdf15y58"><td id="c930ca67fafxt" rowspan="1" colspan="1"><p id="7641d4f673p6q">支持的应用类型</p></td><td id="d252fb6021k46" rowspan="1" colspan="1"><p id="469cfd50a05p4"><span data-tag="ph" id="16e8b55e11x36" class="ph">appType-企业内部应用</span><span data-tag="ph" id="8dcb014d8bgs3" class="ph">appType-第三方企业应用</span></p></td></tr><tr id="6aab1ca1431en"><td id="e09bc72cf6pty" rowspan="1" colspan="1"><p id="78fdce1168vu7">权限要求</p></td><td id="8eeea0b142l8a" rowspan="1" colspan="1"><p id="594811ccd02yk"><span data-tag="ph" id="60031c599fkev" class="ph">permission-Storage.File.Read-<span style="color:rgba(0, 0, 0, 0.88)">企业存储文件读权限</span></span></p></td></tr></tbody></table><section id="section-request-header-parameter" class="section"><h3 data-tag="h3" id="h2-0fz-a5v-81e" class="h3">请求头</h3><table id="ff6665fea357u" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="d0eb2730ea9ma"><td id="2d4c784adf23b" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="ceb191b853m8m">名称</p></td><td id="68cf7872e6ntk" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="8668b2952502p">类型</p></td><td id="08ccfb39bbghz" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="0b87cca4f74l9">是否必填</p></td><td id="14c6f15b389ab" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="acb375b09bzsw">描述</p></td></tr><tr id="eb34d1b488s94"><td id="647645c1740lq" rowspan="1" colspan="1"><p id="f511d3ca151mo">x-acs-dingtalk-access-token</p></td><td id="2f40d15849l3j" rowspan="1" colspan="1"><p id="783d544fd10t7">String</p></td><td id="37880f84cdwp5" rowspan="1" colspan="1"><p id="091ba867d79c6">是</p></td><td id="aa28184b7dnoa" rowspan="1" colspan="1"><p id="966ae0f02e0rz">调用该接口的访问凭证，通过以下获取：</p><ul id="d5ab8dd0f5lh0"><li id="e133471a0ek1d"><p id="479e7e0991cno">企业内部应用，调用<a data-tag="xref" id="e13a3f4ac999y" href="/document/development/obtain-the-access-token-of-an-internal-app#" class="xref">获取企业内部应用的accessToken</a>接口获取。</p></li><li id="03395d41696ax"><p id="d5c524dfe70kj">第三方企业应用，调用<a data-tag="xref" id="a5a545bc83z4g" href="/document/development/obtain-the-access-token-of-the-authorized-enterprise-1#" class="xref">获取第三方应用授权企业的accessToken</a>接口获取。</p></li></ul></td></tr></tbody></table></section><section id="section-request-path-parameter" class="section"><h3 data-tag="h3" id="h2-x5a-k03-rap" class="h3">路径参数</h3><table id="dfc1886d143xf" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="c563f266f7bhd"><td id="bd2ecf232b175" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="506e7a9599zrd">名称</p></td><td id="f2aeb45e6b0ms" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="2e47d29627yjj">类型</p></td><td id="83336ddedfsqr" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="78369dd63cqfw">是否必填</p></td><td id="642e3fc595sch" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="78c1f804310gc">描述</p></td></tr><tr id="d67fb6fcc9oed"><td id="005a4e6e45zfh" rowspan="1" colspan="1"><p id="450dcbabd2ugy">spaceId</p></td><td id="d5d05fd485gpy" rowspan="1" colspan="1"><p id="1e5b5c0b9cvdu">String</p></td><td id="e99288b508qgu" rowspan="1" colspan="1"><p id="d82870cdf89zo">是</p></td><td id="dd686b243cyjh" rowspan="1" colspan="1"><p id="41c38f1148m74">空间ID，调用<a data-tag="xref" id="250c9d023cnsk" href="/document/development/add-space#" class="xref">添加空间</a>接口获取id参数值。</p></td></tr></tbody></table></section><section id="section-request-query-parameter" class="section"><h3 data-tag="h3" id="h2-tdv-xrv-bvd" class="h3">查询参数</h3><table id="fbb68af52fvtd" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="dbbb1f0454dtw"><td id="2b95c0c0bf91c" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="b79da26d005yg">名称</p></td><td id="7abec22041o77" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="48f219abeex2j">类型</p></td><td id="fb7c718716ph6" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="1bea9937674jc">是否必填</p></td><td id="b35ce81587ytd" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="54ed5c003101a">描述</p></td></tr><tr id="38d1b1095bakt"><td id="55307e2a533wx" rowspan="1" colspan="1"><p id="0573862069pbd">unionId</p></td><td id="69b057fa21i0j" rowspan="1" colspan="1"><p id="67c98e4b085lq">String</p></td><td id="a7779176273o0" rowspan="1" colspan="1"><p id="ae56ec721e5wi">是</p></td><td id="7aee973d56uos" rowspan="1" colspan="1"><p id="2771db8886dsv">操作人的unionId，可调用<a data-tag="xref" id="5f1b4ba612r3p" href="/document/development/query-user-details#" class="xref">查询用户详情</a>接口获取。</p></td></tr></tbody></table></section><section id="section-request-body-parameter" class="section"><h3 data-tag="h3" id="h2-kco-zsf-l0i" class="h3">请求体</h3><table id="095ea8100aqee" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="363b5c07femgp"><td id="713ba17755e5l" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="7a70930949l5y">名称</p></td><td id="c163cfe67cmhc" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="7c44364e01wqg">类型</p></td><td id="923b566bdaxjb" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="607ff8678198g">是否必填</p></td><td id="fadfed27f5lrh" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="27e5efcb0ec3a">描述</p></td></tr><tr outputclass="row row-level-3" id="81dbf267d4zjj" class="row row-level-3"><td id="924b222049mut" rowspan="1" colspan="1"><p id="e84b8c8cf668i">dentryIds</p></td><td id="9baf95e7d3l7g" rowspan="1" colspan="1"><p id="1377a8db07et4">Array of String</p></td><td id="52691f86f0zhw" rowspan="1" colspan="1"><p id="5c800217bd7p8">是</p></td><td id="a6f7f9c42b6yl" rowspan="1" colspan="1"><p id="6fc04c66cfvb2">文件ID，最大值30，调用<a data-tag="xref" id="84de7b32b1snw" href="/document/development/get-a-list-of-files-or-folders#" class="xref">获取文件或文件夹列表</a>接口获取id参数值。</p></td></tr></tbody></table></section><section id="section-request-body-example" class="section"><h3 id="h3-request-body-example" data-tag="h3" class="h3">请求示例</h3><div outputclass="tabbed-codeblock" data-tag="fig" id="section-request-example-1-figure" class="tabbed-codeblock-box"><div class="tab-box"></div><input type="radio" name="check-section-request-example-1-figure" id="section-request-example-1-figure-HTTP-tab" checked="checked" /><label for="section-request-example-1-figure-HTTP-tab">HTTP</label><div class="codeblock-item"><pre data-tag="codeblock" id="section-request-example-1-codeblock-http" outputclass="language-HTTP" code-type="xCode" class="pre codeblock language-HTTP"><code>POST /v1.0/storage/spaces/785xxxxx/thumbnails/query?unionId=chyxxxxx HTTP/1.1
+Host:api.dingtalk.com
+x-acs-dingtalk-access-token:xxxxx
+Content-Type:application/json
+
+{
+  "dentryIds" : [ "790xxxxx" ]
+}</code></pre></div><input type="radio" name="check-section-request-example-1-figure" id="section-request-example-1-figure-java-tab" /><label for="section-request-example-1-figure-java-tab">Java</label><div class="codeblock-item"><pre data-tag="codeblock" id="section-request-example-1-codeblock-java" outputclass="language-java" code-type="xCode" class="pre codeblock language-java"><code>package com.aliyun.sample;
+
+import com.aliyun.tea.*;
+
+public class Sample {
+
+    /**
+     * &lt;b&gt;description&lt;/b&gt; :
+     * &lt;p&gt;使用 Token 初始化账号Client&lt;/p&gt;
+     * @return Client
+     * 
+     * @throws Exception
+     */
+    public static com.aliyun.dingtalkstorage_1_0.Client createClient() throws Exception {
+        com.aliyun.teaopenapi.models.Config config = new com.aliyun.teaopenapi.models.Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        return new com.aliyun.dingtalkstorage_1_0.Client(config);
+    }
+
+    public static void main(String[] args_) throws Exception {
+        
+        com.aliyun.dingtalkstorage_1_0.Client client = Sample.createClient();
+        com.aliyun.dingtalkstorage_1_0.models.GetDentryThumbnailsHeaders getDentryThumbnailsHeaders = new com.aliyun.dingtalkstorage_1_0.models.GetDentryThumbnailsHeaders();
+        getDentryThumbnailsHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        com.aliyun.dingtalkstorage_1_0.models.GetDentryThumbnailsRequest getDentryThumbnailsRequest = new com.aliyun.dingtalkstorage_1_0.models.GetDentryThumbnailsRequest();
+        try {
+            client.getDentryThumbnailsWithOptions("", getDentryThumbnailsRequest, getDentryThumbnailsHeaders, new com.aliyun.teautil.models.RuntimeOptions());
+        } catch (TeaException err) {
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        } catch (Exception _err) {
+            TeaException err = new TeaException(_err.getMessage(), _err);
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        }        
+    }
+}
+</code></pre></div><input type="radio" name="check-section-request-example-1-figure" id="section-request-example-1-figure-python-tab" /><label for="section-request-example-1-figure-python-tab">Python</label><div class="codeblock-item"><pre data-tag="codeblock" id="section-request-example-1-codeblock-python" outputclass="language-python" code-type="xCode" class="pre codeblock language-python"><code># -*- coding: utf-8 -*-
+# This file is auto-generated, don't edit it. Thanks.
+import os
+import sys
+import json
+
+from typing import List
+
+from alibabacloud_dingtalk.storage_1_0.client import Client as dingtalkstorage_1_0Client
+from alibabacloud_tea_openapi import models as open_api_models
+from alibabacloud_dingtalk.storage_1_0 import models as dingtalkstorage__1__0_models
+from alibabacloud_tea_util import models as util_models
+from alibabacloud_tea_util.client import Client as UtilClient
+
+
+class Sample:
+    def __init__(self):
+        pass
+
+    @staticmethod
+    def create_client() -&gt; dingtalkstorage_1_0Client:
+        """
+        使用 Token 初始化账号Client
+        @return: Client
+        @throws Exception
+        """
+        config = open_api_models.Config()
+        config.protocol = 'https'
+        config.region_id = 'central'
+        return dingtalkstorage_1_0Client(config)
+
+    @staticmethod
+    def main(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        get_dentry_thumbnails_headers = dingtalkstorage__1__0_models.GetDentryThumbnailsHeaders()
+        get_dentry_thumbnails_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        get_dentry_thumbnails_request = dingtalkstorage__1__0_models.GetDentryThumbnailsRequest()
+        try:
+            client.get_dentry_thumbnails_with_options('', get_dentry_thumbnails_request, get_dentry_thumbnails_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+    @staticmethod
+    async def main_async(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        get_dentry_thumbnails_headers = dingtalkstorage__1__0_models.GetDentryThumbnailsHeaders()
+        get_dentry_thumbnails_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        get_dentry_thumbnails_request = dingtalkstorage__1__0_models.GetDentryThumbnailsRequest()
+        try:
+            await client.get_dentry_thumbnails_with_options_async('', get_dentry_thumbnails_request, get_dentry_thumbnails_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+
+if __name__ == '__main__':
+    Sample.main(sys.argv[1:])
+</code></pre></div><input type="radio" name="check-section-request-example-1-figure" id="section-request-example-1-figure-php-tab" /><label for="section-request-example-1-figure-php-tab">PHP</label><div class="codeblock-item"><pre data-tag="codeblock" id="section-request-example-1-codeblock-php" outputclass="language-php" code-type="xCode" class="pre codeblock language-php"><code>&lt;?php
+
+// This file is auto-generated, don't edit it. Thanks.
+namespace AlibabaCloud\SDK\Sample;
+
+use AlibabaCloud\SDK\Dingtalk\Vstorage_1_0\Dingtalk;
+use \Exception;
+use AlibabaCloud\Tea\Exception\TeaError;
+use AlibabaCloud\Tea\Utils\Utils;
+
+use Darabonba\OpenApi\Models\Config;
+use AlibabaCloud\SDK\Dingtalk\Vstorage_1_0\Models\GetDentryThumbnailsHeaders;
+use AlibabaCloud\SDK\Dingtalk\Vstorage_1_0\Models\GetDentryThumbnailsRequest;
+use AlibabaCloud\Tea\Utils\Utils\RuntimeOptions;
+
+class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Dingtalk Client
+     */
+    public static function createClient(){
+        $config = new Config([]);
+        $config-&gt;protocol = "https";
+        $config-&gt;regionId = "central";
+        return new Dingtalk($config);
+    }
+
+    /**
+     * @param string[] $args
+     * @return void
+     */
+    public static function main($args){
+        $client = self::createClient();
+        $getDentryThumbnailsHeaders = new GetDentryThumbnailsHeaders([]);
+        $getDentryThumbnailsHeaders-&gt;xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        $getDentryThumbnailsRequest = new GetDentryThumbnailsRequest([]);
+        try {
+            $client-&gt;getDentryThumbnailsWithOptions("", $getDentryThumbnailsRequest, $getDentryThumbnailsHeaders, new RuntimeOptions([]));
+        }
+        catch (Exception $err) {
+            if (!($err instanceof TeaError)) {
+                $err = new TeaError([], $err-&gt;getMessage(), $err-&gt;getCode(), $err);
+            }
+            if (!Utils::empty_($err-&gt;code) &amp;&amp; !Utils::empty_($err-&gt;message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+        }
+    }
+}
+$path = __DIR__ . \DIRECTORY_SEPARATOR . '..' . \DIRECTORY_SEPARATOR . 'vendor' . \DIRECTORY_SEPARATOR . 'autoload.php';
+if (file_exists($path)) {
+    require_once $path;
+}
+Sample::main(array_slice($argv, 1));
+</code></pre></div><input type="radio" name="check-section-request-example-1-figure" id="section-request-example-1-figure-go-tab" /><label for="section-request-example-1-figure-go-tab">Go</label><div class="codeblock-item"><pre data-tag="codeblock" id="section-request-example-1-codeblock-go" outputclass="language-go" code-type="xCode" class="pre codeblock language-go"><code>package main
+
+import (
+  "encoding/json"
+  "strings"
+  "fmt"
+  "os"
+  util  "github.com/alibabacloud-go/tea-utils/v2/service"
+  dingtalkstorage_1_0  "github.com/alibabacloud-go/dingtalk/storage_1_0"
+  openapi  "github.com/alibabacloud-go/darabonba-openapi/v2/client"
+  "github.com/alibabacloud-go/tea/tea"
+)
+
+
+// Description:
+// 
+// 使用 Token 初始化账号Client
+// 
+// @return Client
+// 
+// @throws Exception
+func CreateClient () (_result *dingtalkstorage_1_0.Client, _err error) {
+  config := &amp;openapi.Config{}
+  config.Protocol = tea.String("https")
+  config.RegionId = tea.String("central")
+  _result = &amp;dingtalkstorage_1_0.Client{}
+  _result, _err = dingtalkstorage_1_0.NewClient(config)
+  return _result, _err
+}
+
+func _main (args []*string) (_err error) {
+  client, _err := CreateClient()
+  if _err != nil {
+    return _err
+  }
+
+  getDentryThumbnailsHeaders := &amp;dingtalkstorage_1_0.GetDentryThumbnailsHeaders{}
+  getDentryThumbnailsHeaders.XAcsDingtalkAccessToken = tea.String("&lt;your access token&gt;")
+  getDentryThumbnailsRequest := &amp;dingtalkstorage_1_0.GetDentryThumbnailsRequest{}
+  tryErr := func()(_e error) {
+    defer func() {
+      if r := tea.Recover(recover()); r != nil {
+        _e = r
+      }
+    }()
+    _, _err = client.GetDentryThumbnailsWithOptions(tea.String(""), getDentryThumbnailsRequest, getDentryThumbnailsHeaders, &amp;util.RuntimeOptions{})
+    if _err != nil {
+      return _err
+    }
+
+    return nil
+  }()
+
+  if tryErr != nil {
+    var err = &amp;tea.SDKError{}
+    if _t, ok := tryErr.(*tea.SDKError); ok {
+      err = _t
+    } else {
+      err.Message = tea.String(tryErr.Error())
+    }
+    if !tea.BoolValue(util.Empty(err.Code)) &amp;&amp; !tea.BoolValue(util.Empty(err.Message)) {
+      // err 中含有 code 和 message 属性，可帮助开发定位问题
+    }
+
+  }
+  return _err
+}
+
+
+func main() {
+  err := _main(tea.StringSlice(os.Args[1:]))
+  if err != nil {
+    panic(err)
+  }
+}
+</code></pre></div><input type="radio" name="check-section-request-example-1-figure" id="section-request-example-1-figure-nodejs-tab" /><label for="section-request-example-1-figure-nodejs-tab">Node.js</label><div class="codeblock-item"><pre data-tag="codeblock" id="section-request-example-1-codeblock-nodejs" outputclass="language-nodejs" code-type="xCode" class="pre codeblock language-nodejs"><code>'use strict';
+// This file is auto-generated, don't edit it
+const Util = require('@alicloud/tea-util');
+const dingtalkstorage_1_0 = require('@alicloud/dingtalk/storage_1_0');
+const OpenApi = require('@alicloud/openapi-client');
+const Tea = require('@alicloud/tea-typescript');
+
+class Client {
+
+  /**
+   * 使用 Token 初始化账号Client
+   * @return Client
+   * @throws Exception
+   */
+  static createClient() {
+    let config = new OpenApi.Config({ });
+    config.protocol = 'https';
+    config.regionId = 'central';
+    return new dingtalkstorage_1_0.default(config);
+  }
+
+  static async main(args) {
+    let client = Client.createClient();
+    let getDentryThumbnailsHeaders = new dingtalkstorage_1_0.GetDentryThumbnailsHeaders({ });
+    getDentryThumbnailsHeaders.xAcsDingtalkAccessToken = '&lt;your access token&gt;';
+    let getDentryThumbnailsRequest = new dingtalkstorage_1_0.GetDentryThumbnailsRequest({ });
+    try {
+      await client.getDentryThumbnailsWithOptions('', getDentryThumbnailsRequest, getDentryThumbnailsHeaders, new Util.RuntimeOptions({ }));
+    } catch (err) {
+      if (!Util.default.empty(err.code) &amp;&amp; !Util.default.empty(err.message)) {
+        // err 中含有 code 和 message 属性，可帮助开发定位问题
+      }
+
+    }    
+  }
+
+}
+
+exports.Client = Client;
+Client.main(process.argv.slice(2));</code></pre></div><input type="radio" name="check-section-request-example-1-figure" id="section-request-example-1-figure-csharp-tab" /><label for="section-request-example-1-figure-csharp-tab">C#</label><div class="codeblock-item"><pre data-tag="codeblock" id="section-request-example-1-codeblock-csharp" outputclass="language-csharp" code-type="xCode" class="pre codeblock language-csharp"><code>using Newtonsoft.Json;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
+
+using Tea;
+using Tea.Utils;
+
+
+namespace AlibabaCloud.SDK.Sample
+{
+    public class Sample 
+    {
+
+        /// &lt;term&gt;&lt;b&gt;Description:&lt;/b&gt;&lt;/term&gt;
+        /// &lt;description&gt;
+        /// &lt;para&gt;使用 Token 初始化账号Client&lt;/para&gt;
+        /// &lt;/description&gt;
+        /// 
+        /// &lt;returns&gt;
+        /// Client
+        /// &lt;/returns&gt;
+        /// 
+        /// &lt;term&gt;&lt;b&gt;Exception:&lt;/b&gt;&lt;/term&gt;
+        /// Exception
+        public static AlibabaCloud.SDK.Dingtalkstorage_1_0.Client CreateClient()
+        {
+            AlibabaCloud.OpenApiClient.Models.Config config = new AlibabaCloud.OpenApiClient.Models.Config();
+            config.Protocol = "https";
+            config.RegionId = "central";
+            return new AlibabaCloud.SDK.Dingtalkstorage_1_0.Client(config);
+        }
+
+        public static void Main(string[] args)
+        {
+            AlibabaCloud.SDK.Dingtalkstorage_1_0.Client client = CreateClient();
+            AlibabaCloud.SDK.Dingtalkstorage_1_0.Models.GetDentryThumbnailsHeaders getDentryThumbnailsHeaders = new AlibabaCloud.SDK.Dingtalkstorage_1_0.Models.GetDentryThumbnailsHeaders();
+            getDentryThumbnailsHeaders.XAcsDingtalkAccessToken = "&lt;your access token&gt;";
+            AlibabaCloud.SDK.Dingtalkstorage_1_0.Models.GetDentryThumbnailsRequest getDentryThumbnailsRequest = new AlibabaCloud.SDK.Dingtalkstorage_1_0.Models.GetDentryThumbnailsRequest();
+            try
+            {
+                client.GetDentryThumbnailsWithOptions("", getDentryThumbnailsRequest, getDentryThumbnailsHeaders, new AlibabaCloud.TeaUtil.Models.RuntimeOptions());
+            }
+            catch (TeaException err)
+            {
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+            catch (Exception _err)
+            {
+                TeaException err = new TeaException(new Dictionary&lt;string, object&gt;
+                {
+                    { "message", _err.Message }
+                });
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+        }
+
+
+    }
+}
+</code></pre></div></div></section></section><section id="section-response-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-response-1" data-tag="h2" class="h2">响应</h2><section id="section-response-parameter" class="section"><h3 data-tag="h3" id="h2-wa9-ibs-5xb" class="h3">响应体</h3><table id="15c968363963y" tablewidth="710" tablecolswidth="213 142 355" autofit="false" class="table"><colgroup colwidth="0.9*" style="width:30.00%"></colgroup><colgroup colwidth="0.6*" style="width:20.00%"></colgroup><colgroup colwidth="1.5*" style="width:50.00%"></colgroup><tbody class="tbody"><tr id="56ae7ceaee937"><td id="f5f16199e1mes" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="3801d283779on">名称</p></td><td id="c0d78219ebyl2" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="4be544f85edwy">类型</p></td><td id="a8390cb2e791b" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="39ee048e3cyzn">描述</p></td></tr><tr outputclass="row row-level-1 has-child" id="f518b07985qom" class="row row-level-1 has-child"><td id="7044e4e4fbxlk" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="322f2a4880t9t">resultItems</p></td><td id="8584477ce0iou" rowspan="1" colspan="1"><p id="261a0990a54k3">Array</p></td><td id="5420739f96zg4" rowspan="1" colspan="1"><p id="1e8416da86cv1">缩略图获取结果列表。</p></td></tr><tr outputclass="row row-level-1-1" id="df9164c724410" class="row row-level-1-1"><td id="3483bd02832jy" rowspan="1" colspan="1"><p id="6dfad84c5cepy">spaceId</p></td><td id="514469ad837nm" rowspan="1" colspan="1"><p id="d807c5e5abqso">String</p></td><td id="77a87d187dead" rowspan="1" colspan="1"><p id="320d45e192c8f">文件所在空间ID。</p></td></tr><tr outputclass="row row-level-1-2" id="fcf5720c70rwq" class="row row-level-1-2"><td id="9b2b2caf1cfdo" rowspan="1" colspan="1"><p id="f5b115f1219c3">dentryId</p></td><td id="3423cefae8jmb" rowspan="1" colspan="1"><p id="4f37c4b173pgy">String</p></td><td id="ab849ee73106a" rowspan="1" colspan="1"><p id="2b3eefc70d5r6">文件ID。</p></td></tr><tr outputclass="row row-level-1-3" id="82affdbc01h7i" class="row row-level-1-3"><td id="5fc95e9b323qf" rowspan="1" colspan="1"><p id="467502d130owg">success</p></td><td id="672eba90e83nr" rowspan="1" colspan="1"><p id="259c250340jnp">Boolean</p></td><td id="4fe4bb94d9500" rowspan="1" colspan="1"><p id="16d0636dc3b84">是否成功获取到缩略图信息，true表示成功。</p></td></tr><tr outputclass="row row-level-1-4" id="841ac041177ys" class="row row-level-1-4"><td id="bd8e6f33ed9vm" rowspan="1" colspan="1"><p id="fad61cb14deth">errorCode</p></td><td id="83ac72c4265r5" rowspan="1" colspan="1"><p id="8b732cfdd21ef">String</p></td><td id="c791af51974pz" rowspan="1" colspan="1"><p id="55a24a9dd2ftp">错误原因。</p></td></tr><tr outputclass="row row-level-1-5 has-child" id="d8e0eeb0b9adk" class="row row-level-1-5 has-child"><td id="2133e9e26faqu" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="e8dd9b6ecdufm">thumbnail</p></td><td id="2a47c7aeb1v3q" rowspan="1" colspan="1"><p id="78ec6eb1b1lnc">Object</p></td><td id="80c2641e6058m" rowspan="1" colspan="1"><p id="85e651101amf1">缩略图信息。</p></td></tr><tr outputclass="row row-level-1-5-1" id="901f4c51f68gf" class="row row-level-1-5-1"><td id="5b3e9b9244lna" rowspan="1" colspan="1"><p id="f6d9d691e9pzn">width</p></td><td id="e3d7d27880iy0" rowspan="1" colspan="1"><p id="a83247e5ddh3p">Integer</p></td><td id="533674abe7ca5" rowspan="1" colspan="1"><p id="6c9fd20863l2v">缩略图宽度，单位px。</p></td></tr><tr outputclass="row row-level-1-5-2" id="acc01763a4jva" class="row row-level-1-5-2"><td id="f5510a8978jrq" rowspan="1" colspan="1"><p id="35ea29eb1ce2w">height</p></td><td id="b439bfc241qt0" rowspan="1" colspan="1"><p id="f73c1b6445k7g">Integer</p></td><td id="12085f9c884yf" rowspan="1" colspan="1"><p id="8f2356f9ffqp9">缩略图高度，单位px。</p></td></tr><tr outputclass="row row-level-1-5-3" id="031cb87145t6e" class="row row-level-1-5-3"><td id="8fca08b06ae07" rowspan="1" colspan="1"><p id="067aafca89muz">url</p></td><td id="384d87ad52oqq" rowspan="1" colspan="1"><p id="b4c6f15eef0kx">String</p></td><td id="65926512aaf27" rowspan="1" colspan="1"><p id="0dd0bf1828h23">缩略图url。</p></td></tr></tbody></table></section><section id="9b3a95fe80ztm" class="section"><h3 id="b103002230qgi"><b>响应体示例</b></h3><pre code-type="xCode" id="bb357a2f775iy" index="0" data-tag="codeblock" outputclass="language-json" class="pre codeblock language-json"><code>HTTP/1.1 200 OK
+Content-Type:application/json
+
+{
+  "resultItems" : [ {
+    "spaceId" : "785xxxxx",
+    "dentryId" : "790xxxxx",
+    "success" : true,
+    "errorCode" : "permissionDenied",
+    "thumbnail" : {
+      "width" : 64,
+      "height" : 64,
+      "url" : "url"
+    }
+  } ]
+}</code></pre></section><section id="section-error-code-1" class="section"><h3 id="h3-error-code-1" data-tag="h3" class="h3">错误码</h3><p id="2dfe3de12273q">若调用该接口报错，可根据错误信息在<a data-tag="xref" id="95b5858d4fb93" href="/document/development/server-api-error-codes-1#" class="xref">全局错误码</a>文档中查找解决方案。</p><table id="eb310b62632z6" tablewidth="709" tablecolswidth="142 177 177 213" autofit="false" class="table"><colgroup colwidth="0.8*" style="width:20.03%"></colgroup><colgroup colwidth="1*" style="width:24.96%"></colgroup><colgroup colwidth="1*" style="width:24.96%"></colgroup><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><tbody class="tbody"><tr id="84a27f9982eyx"><td id="4f18052018cmy" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="cd9675005bdqe">HttpCode</p></td><td id="7894b8fd71rtu" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="d0636387fe4y2">错误码</p></td><td id="e267685cdah31" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="ccea5726a512f">错误信息</p></td><td id="7b089fe589vm3" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="f3620588b8xho">说明</p></td></tr><tr id="d7dc6efd7diy2"><td id="34ad930ea46nc" rowspan="1" colspan="1"><p id="f505ab4dd7083">400</p></td><td id="f85cc081fbtj1" rowspan="1" colspan="1"><p id="a4d2013a2be3v">paramError</p></td><td id="71fdbb0f971ux" rowspan="1" colspan="1"><p id="1578b7a5b5s3g">%s</p></td><td id="bddde5575ca4u" rowspan="1" colspan="1"><p id="2923e398b19wt">参数错误</p></td></tr><tr id="65a9dfb1d0ln4"><td id="e9d8fd7d0bf7v" rowspan="1" colspan="1"><p id="e4dc9de02affs">400</p></td><td id="29eaa4b690k3r" rowspan="1" colspan="1"><p id="4ab5b8ab46roq">paramError.spaceId</p></td><td id="22757ad6bdnjk" rowspan="1" colspan="1"><p id="8b8ae4e1dfjvl">%s</p></td><td id="12f286345am8l" rowspan="1" colspan="1"><p id="4a603a9f68ci7">参数错误-spaceId</p></td></tr><tr id="b2bbef0e48zug"><td id="dc9b5a25e5ntx" rowspan="1" colspan="1"><p id="4f057799e5jwq">400</p></td><td id="a1b4aad3a9hdr" rowspan="1" colspan="1"><p id="b1e2d93d9ej0k">paramError.dentryIds</p></td><td id="d6ff68b0e2h3o" rowspan="1" colspan="1"><p id="bddc321778uoj">%s</p></td><td id="48aaf0a6e3umq" rowspan="1" colspan="1"><p id="614d4d21f2np8">参数错误-dentryIds</p></td></tr><tr id="9a94cbb74ewq2"><td id="fc2085cb9awgt" rowspan="1" colspan="1"><p id="46991006b7oaw">400</p></td><td id="f24d735057jme" rowspan="1" colspan="1"><p id="57c371bfa8u09">permissionDenied</p></td><td id="7c10ee7d62ehm" rowspan="1" colspan="1"><p id="6b0894f7d5una">%s</p></td><td id="b1230ed1a85dy" rowspan="1" colspan="1"><p id="01b5db97d0t7i">无权限获取缩略图</p></td></tr><tr id="45e2478c4d76l"><td id="cc16d7e479jii" rowspan="1" colspan="1"><p id="ae7e3f4127iqv">400</p></td><td id="e81ddc5a35h42" rowspan="1" colspan="1"><p id="b37bca6654olj">dentryNotExist</p></td><td id="dd6be0556drun" rowspan="1" colspan="1"><p id="e0a7b903dazqi">%s</p></td><td id="e6219bb5f0iqa" rowspan="1" colspan="1"><p id="db7491cdef3i4">文件不存在</p></td></tr><tr id="9ae3a24a33ead"><td id="b0230f9505z9z" rowspan="1" colspan="1"><p id="ce76a0d075mmw">400</p></td><td id="4eb55b0270m2d" rowspan="1" colspan="1"><p id="aaec88bccayzq">dentryFormatNotSupport</p></td><td id="0125f10990rgt" rowspan="1" colspan="1"><p id="91fb5dc9e0vec">%s</p></td><td id="d15693f04dsgz" rowspan="1" colspan="1"><p id="373bf82fccg6q">该格式不支持获取缩略图</p></td></tr><tr id="fbd2a00e3cbk6"><td id="25945aa204g9w" rowspan="1" colspan="1"><p id="df31485a1a55b">400</p></td><td id="77e6eeafe81ie" rowspan="1" colspan="1"><p id="7f236a5ed7g4s">fileViral</p></td><td id="999e655a5eqen" rowspan="1" colspan="1"><p id="27cda83d16t5o">%s</p></td><td id="5f6cf5e4ff0qy" rowspan="1" colspan="1"><p id="8d58e4442377r">病毒文件</p></td></tr><tr id="cd2f9fe0303so"><td id="b5a665103ak1h" rowspan="1" colspan="1"><p id="0b7f8835dejhl">400</p></td><td id="dce606fa275o0" rowspan="1" colspan="1"><p id="35a4c2d148q6t">fileMalicious</p></td><td id="ab22c365e3h8f" rowspan="1" colspan="1"><p id="4767ed971bv1e">%s</p></td><td id="9c554cdc3dzxt" rowspan="1" colspan="1"><p id="1668c525b8nie">恶意文件</p></td></tr><tr id="b3201888005uk"><td id="b9659278a5woo" rowspan="1" colspan="1"><p id="3c9a512071cae">403</p></td><td id="d77ec5b20cwb6" rowspan="1" colspan="1"><p id="c9f0e36191cq1">thumbnailNotExist</p></td><td id="fa66ac0ca9x4a" rowspan="1" colspan="1"><p id="e66e427e1ct51">%s</p></td><td id="9c0b77b767lar" rowspan="1" colspan="1"><p id="f81bedbad08tp">缩略图不存在</p></td></tr><tr id="ee018161dakjj"><td id="b3fa05b75ckpu" rowspan="1" colspan="1"><p id="032b62241a2cx">500</p></td><td id="894facbf42nlg" rowspan="1" colspan="1"><p id="1c8aaa9e73p3v">systemError</p></td><td id="565822ab01yhm" rowspan="1" colspan="1"><p id="b49837b8beskx">%s</p></td><td id="1bfe3b6ec89m6" rowspan="1" colspan="1"><p id="9fe4331784h3h">系统错误</p></td></tr><tr id="0f9a06e726oju"><td id="73e74da69czmc" rowspan="1" colspan="1"><p id="71278904abuoe">500</p></td><td id="040f83d277lwt" rowspan="1" colspan="1"><p id="06845b09da90f">unknownError</p></td><td id="7f8aeaaccfggc" rowspan="1" colspan="1"><p id="0324278355pol">Unknown Error</p></td><td id="e2149347d837l" rowspan="1" colspan="1"><p id="2028ebe573j7c">未知错误</p></td></tr></tbody></table></section></section></div></main></body></html>

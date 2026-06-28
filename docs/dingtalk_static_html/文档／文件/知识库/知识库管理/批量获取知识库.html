@@ -1,0 +1,473 @@
+<!DOCTYPE html><html><head><meta charset="utf8" / /><meta name="searchtitle" content="" / /><meta name="keywords" content="" / /><meta name="author" content="" / /><title>批量获取知识库</title><meta name="gmtModify" content="2025-09-12 17:19:56" / /><meta name="gmtModify" content="2026-06-02 17:37:10" / /></head><body data-tag="topic" id="doc-api-dingtalk-GetWorkspaces" class="topic"><main id="253fa99423xa1" data-init-id="doc-api-dingtalk_GetWorkspaces"><h1 data-tag="title" id="h1-s5x-zmh-wdb" class="title">批量获取知识库</h1><p data-tag="shortdesc" id="1c2344bb40tdy" class="shortdesc">用于批量获取知识库。调用时通过 POST 请求提交 workspaceIds、option、withPermissionRole 等业务字段。</p><div data-tag="conbody" outputclass="icms-api-reference" class="icms-api-reference conbody"><section id="section-request-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-request-1" data-tag="h2" class="h2">请求</h2><section id="section-request-basic-info" class="section"><h3 id="heading-request-basic-info" data-tag="h3" class="h3">基本信息</h3><table tablewidth="648" tablecolswidth="216 432" autofit="false" class="table"><colgroup colwidth="1*" style="width:33.33%"></colgroup><colgroup colwidth="2*" style="width:66.67%"></colgroup><tbody class="tbody"><tr><td rowspan="1" style="background-color:#e5e5e5" colspan="1"><p>字段</p></td><td rowspan="1" style="background-color:#e5e5e5" colspan="1"><p>值</p></td></tr><tr><td rowspan="1" colspan="1"><p>HTTP URL</p></td><td rowspan="1" colspan="1"><p>https://api.dingtalk.com/v2.0/wiki/workspaces/batchQuery</p></td></tr><tr><td rowspan="1" colspan="1"><p>HTTP Method</p></td><td rowspan="1" colspan="1"><p>POST</p></td></tr><tr><td rowspan="1" colspan="1"><p>支持的应用类型</p></td><td rowspan="1" colspan="1"><p><span data-tag="ph" id="ph-request-basic-app-type-apptype-0" class="ph ph-app-type" data-ph-raw-text="appType-企业内部应用">appType-企业内部应用</span>　<span data-tag="ph" id="ph-request-basic-app-type-apptype-1" class="ph ph-app-type" data-ph-raw-text="appType-第三方企业应用">appType-第三方企业应用</span></p></td></tr><tr><td rowspan="1" colspan="1"><p>权限要求</p></td><td rowspan="1" colspan="1"><p><span data-tag="ph" id="ph-request-basic-permission-permission-wiki-workspace-read-0" class="ph-permission ph" data-ph-raw-text="permission-Wiki.Workspace.Read-知识库读权限" data-permission-id="permission-Wiki.Workspace.Read" data-permission-code="Wiki.Workspace.Read" data-permission-detail-api="/document/api/permission/detail" data-permission-query-param="code">permission-Wiki.Workspace.Read-知识库读权限</span></p></td></tr></tbody></table></section><section id="section-request-header-parameter" class="section"><h3 data-tag="h3" id="h2-ceq-jvm-lhp" class="h3 title">请求头</h3><table id="f051d1683aani" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="f609e0f24bjcf"><td id="840fdac6bf42u" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="b8fe523d44bt8">名称</p></td><td id="830c8006b4ch8" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="8257e2c474rm1">类型</p></td><td id="7e1ab17348in7" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="272226ee693yv">是否必填</p></td><td id="23eef7ac8djn0" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="8533ddd17ao6q">描述</p></td></tr><tr id="c0c1933a84wgj"><td id="95a24ee91fcje" rowspan="1" colspan="1"><p id="972e935646cgy">x-acs-dingtalk-access-token</p></td><td id="760e8be06dzes" rowspan="1" colspan="1"><p id="40f7ff9337zjh">String</p></td><td id="1c561723dbsv7" rowspan="1" colspan="1"><p id="f7027afb5di4w">是</p></td><td id="44bdd97d71ggu" rowspan="1" colspan="1"><p id="83bd04b4ae5j6">调用该接口的访问凭证，通过以下获取：</p><ul id="d84ed6a5d4h0q"><li id="dd7f742ab1rxa"><p id="ddfe42b3a75h3">企业内部应用，调用<a id="a981a87b84fln" href="https://open.dingtalk.com/document/development/obtain-the-access-token-of-an-internal-app#" class="xref">获取企业内部应用的accessToken</a>接口获取。</p></li><li id="bcca42bba6icd"><p id="e81ae73157pth">第三方企业应用，调用<a id="ded697d3cbgll" href="https://open.dingtalk.com/document/development/obtain-the-access-token-of-the-authorized-enterprise-1#" class="xref">获取第三方应用授权企业的accessToken</a>接口获取。</p></li></ul></td></tr></tbody></table></section><section id="section-request-query-parameter" class="section"><h3 data-tag="h3" id="h2-kot-amb-mif" class="h3 title">查询参数</h3><table id="04cb5b12e2i51" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="f84a68e7da4nc"><td id="c68504170912h" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="a7b9524440u37">名称</p></td><td id="b2cbe25104x37" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="476b8162c240k">类型</p></td><td id="3985eaf145p8d" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="0de0da42bdz4l">是否必填</p></td><td id="8181852893o3u" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="f2bc36f1f0cf0">描述</p></td></tr><tr id="19370e2356w16"><td id="61691a34358gp" rowspan="1" colspan="1"><p id="0e1645baacwx3">operatorId</p></td><td id="8ea0172f3aubl" rowspan="1" colspan="1"><p id="291e5052097iq">String</p></td><td id="bd8b3aed00rw9" rowspan="1" colspan="1"><p id="344f42b986143">是</p></td><td id="edae390bf8qp2" rowspan="1" colspan="1"><p id="daabc5902a39x">操作人unionId。</p></td></tr></tbody></table></section><section id="section-request-body-parameter" class="section"><h3 data-tag="h3" id="h2-ggq-xhd-8xf" class="h3 title">请求体</h3><table id="82bfa841a1c2n" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="3487f64d26tt6"><td id="fee8c59a47shi" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="dc28abda02p6i">名称</p></td><td id="f8a0fc63aceh8" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="d6663fe798bc3">类型</p></td><td id="4b62ef12b0sne" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="5841334e65loa">是否必填</p></td><td id="f1bea262c5xuh" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="bf186a40d7vkh">描述</p></td></tr><tr outputclass="row row-level-2" id="15dab58e7c02u" class="row row-level-2 row-level-2 row"><td id="9cbc803e6elhp" rowspan="1" colspan="1"><p id="189332ae7au1u">workspaceIds</p></td><td id="162cb048e8g3e" rowspan="1" colspan="1"><p id="4487f91209xvk">Array of String</p></td><td id="04a0b58f5bcu9" rowspan="1" colspan="1"><p id="e083977ef157k">是</p></td><td id="c16ccf9a08hcr" rowspan="1" colspan="1"><p id="f42f5fc9faare">知识库id，可通过调用<a id="c2c4d8d6bcnbu" href="https://open.dingtalk.com/document/development/get-knowledge-base-list#" class="xref">获取知识库列表</a>接口，获取返回参数<code data-tag="inlineCode" id="fd6173d4cb0mr" class="inlineCode">workspaceId</code>字段。</p><div type="note" id="e463d3fcc5iuv" class="note note-note"><div class="note-icon-wrapper"><i class="icon-note note note"></i></div><div class="noteContentSpan"><p data-tag="p" id="360182a5ebky9" class="p"></p><p id="d54219b41e6ik">最大size20。</p><p id="4672f6fc3fj7t"></p></div></div></td></tr><tr outputclass="row row-level-3 has-child" id="dc5a951a57xy4" class="has-child row row-level-3 has-child row row-level-3"><td id="102f7cfc008tw" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><span class="icms-tree-table-trigger" type="checkbox"></span><p id="74378851647pn">option</p></td><td id="b2dd0923f10al" rowspan="1" colspan="1"><p id="6b4c95541apzn">Object</p></td><td id="cadb53da8dkqs" rowspan="1" colspan="1"><p id="d540e32890n6a">否</p></td><td id="75d856594cwq9" rowspan="1" colspan="1"><p id="a20811a1f6tta">可选参数</p></td></tr><tr outputclass="row row-level-3-1" id="ba863ef4eans9" class="row-level-3-1 row row row-level-3-1"><td id="7756c6b8c4or2" rowspan="1" colspan="1"><p id="4de8f4cdb0u4g">withPermissionRole</p></td><td id="f242d299a4m6j" rowspan="1" colspan="1"><p id="5d819cbb3bsu6">Boolean</p></td><td id="e686dd03afed1" rowspan="1" colspan="1"><p id="bdec017821cmy">否</p></td><td id="a33d948168jtt" rowspan="1" colspan="1"><p id="8ae08a72de0oh">是否获取权限信息：</p><ul id="496d7ab925vqx"><li id="724a231ef247m"><p id="cf9c58d126i5m"><b>true</b>：获取</p></li><li id="7afd48a40cfkl"><p id="fa5f950020g75"><b>false</b>：不获取</p></li></ul><div type="note" id="9a7779401crs2" class="note note-note"><div class="note-icon-wrapper"><i class="icon-note note note"></i></div><div class="noteContentSpan"><p id="ab491838b0fvv">默认值false。</p></div></div></td></tr></tbody></table></section><section id="section-request-body-example" class="section"><h3 id="h3-request-body-example" data-tag="h3" class="h3">请求示例</h3><div id="figure-alz-0es-eag" outputclass="tabbed-codeblock" data-tag="fig" class="tabbed-codeblock-box"><div class="tab-box"></div><input type="radio" name="check-figure-alz-0es-eag" id="figure-alz-0es-eag-HTTP-tab" checked="checked" /><label for="figure-alz-0es-eag-HTTP-tab">HTTP</label><div class="codeblock-item"><pre id="codeblock-6qa-59a-lhp" outputclass="language-HTTP" code-type="xCode" data-tag="codeblock" class="pre codeblock language-HTTP"><code>POST /v2.0/wiki/workspaces/batchQuery?operatorId=tXguN309iPhE4roSKPlLURAiEiE HTTP/1.1
+Host:api.dingtalk.com
+x-acs-dingtalk-access-token:access_token
+Content-Type:application/json
+
+{
+  "workspaceIds" : [ "9r09jSO3WARyxd8A" ],
+  "option" : {
+    "withPermissionRole" : false
+  }
+}</code></pre></div><input type="radio" name="check-figure-alz-0es-eag" id="figure-alz-0es-eag-java-tab" /><label for="figure-alz-0es-eag-java-tab">Java</label><div class="codeblock-item"><pre id="codeblock-iwk-9o2-fma" outputclass="language-java" code-type="xCode" data-tag="codeblock" class="pre codeblock language-java"><code>// This file is auto-generated, don't edit it. Thanks.
+package com.aliyun.sample;
+
+import com.aliyun.tea.*;
+
+public class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Client
+     * @throws Exception
+     */
+    public static com.aliyun.dingtalkwiki_2_0.Client createClient() throws Exception {
+        com.aliyun.teaopenapi.models.Config config = new com.aliyun.teaopenapi.models.Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        return new com.aliyun.dingtalkwiki_2_0.Client(config);
+    }
+
+    public static void main(String[] args_) throws Exception {
+        java.util.List&lt;String&gt; args = java.util.Arrays.asList(args_);
+        com.aliyun.dingtalkwiki_2_0.Client client = Sample.createClient();
+        com.aliyun.dingtalkwiki_2_0.models.GetWorkspacesHeaders getWorkspacesHeaders = new com.aliyun.dingtalkwiki_2_0.models.GetWorkspacesHeaders();
+        getWorkspacesHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        com.aliyun.dingtalkwiki_2_0.models.GetWorkspacesRequest.GetWorkspacesRequestOption option = new com.aliyun.dingtalkwiki_2_0.models.GetWorkspacesRequest.GetWorkspacesRequestOption()
+                .setWithPermissionRole(false);
+        com.aliyun.dingtalkwiki_2_0.models.GetWorkspacesRequest getWorkspacesRequest = new com.aliyun.dingtalkwiki_2_0.models.GetWorkspacesRequest()
+                .setOperatorId("tXguN309iPhE4roSKPlLURAiEiE")
+                .setWorkspaceIds(java.util.Arrays.asList(
+                    "9r09jSO3WARyxd8A"
+                ))
+                .setOption(option);
+        try {
+            client.getWorkspacesWithOptions(getWorkspacesRequest, getWorkspacesHeaders, new com.aliyun.teautil.models.RuntimeOptions());
+        } catch (TeaException err) {
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        } catch (Exception _err) {
+            TeaException err = new TeaException(_err.getMessage(), _err);
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        }        
+    }
+}</code></pre></div><input type="radio" name="check-figure-alz-0es-eag" id="figure-alz-0es-eag-python-tab" /><label for="figure-alz-0es-eag-python-tab">Python</label><div class="codeblock-item"><pre id="codeblock-yii-wqq-hcm" outputclass="language-python" code-type="xCode" data-tag="codeblock" class="pre codeblock language-python"><code># -*- coding: utf-8 -*-
+# This file is auto-generated, don't edit it. Thanks.
+import sys
+
+from typing import List
+
+from alibabacloud_dingtalk.wiki_2_0.client import Client as dingtalkwiki_2_0Client
+from alibabacloud_tea_openapi import models as open_api_models
+from alibabacloud_dingtalk.wiki_2_0 import models as dingtalkwiki__2__0_models
+from alibabacloud_tea_util import models as util_models
+from alibabacloud_tea_util.client import Client as UtilClient
+
+
+class Sample:
+    def __init__(self):
+        pass
+
+    @staticmethod
+    def create_client() -&gt; dingtalkwiki_2_0Client:
+        """
+        使用 Token 初始化账号Client
+        @return: Client
+        @throws Exception
+        """
+        config = open_api_models.Config()
+        config.protocol = 'https'
+        config.region_id = 'central'
+        return dingtalkwiki_2_0Client(config)
+
+    @staticmethod
+    def main(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        get_workspaces_headers = dingtalkwiki__2__0_models.GetWorkspacesHeaders()
+        get_workspaces_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        option = dingtalkwiki__2__0_models.GetWorkspacesRequestOption(
+            with_permission_role=False
+        )
+        get_workspaces_request = dingtalkwiki__2__0_models.GetWorkspacesRequest(
+            operator_id='tXguN309iPhE4roSKPlLURAiEiE',
+            workspace_ids=[
+                '9r09jSO3WARyxd8A'
+            ],
+            option=option
+        )
+        try:
+            client.get_workspaces_with_options(get_workspaces_request, get_workspaces_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+    @staticmethod
+    async def main_async(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        get_workspaces_headers = dingtalkwiki__2__0_models.GetWorkspacesHeaders()
+        get_workspaces_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        option = dingtalkwiki__2__0_models.GetWorkspacesRequestOption(
+            with_permission_role=False
+        )
+        get_workspaces_request = dingtalkwiki__2__0_models.GetWorkspacesRequest(
+            operator_id='tXguN309iPhE4roSKPlLURAiEiE',
+            workspace_ids=[
+                '9r09jSO3WARyxd8A'
+            ],
+            option=option
+        )
+        try:
+            await client.get_workspaces_with_options_async(get_workspaces_request, get_workspaces_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+
+if __name__ == '__main__':
+    Sample.main(sys.argv[1:])</code></pre></div><input type="radio" name="check-figure-alz-0es-eag" id="figure-alz-0es-eag-php-tab" /><label for="figure-alz-0es-eag-php-tab">PHP</label><div class="codeblock-item"><pre id="codeblock-cnz-4jq-l5j" outputclass="language-php" code-type="xCode" data-tag="codeblock" class="pre codeblock language-php"><code>&lt;?php
+
+// This file is auto-generated, don't edit it. Thanks.
+namespace AlibabaCloud\SDK\Sample;
+
+use AlibabaCloud\SDK\Dingtalk\Vwiki_2_0\Dingtalk;
+use \Exception;
+use AlibabaCloud\Tea\Exception\TeaError;
+use AlibabaCloud\Tea\Utils\Utils;
+
+use Darabonba\OpenApi\Models\Config;
+use AlibabaCloud\SDK\Dingtalk\Vwiki_2_0\Models\GetWorkspacesHeaders;
+use AlibabaCloud\SDK\Dingtalk\Vwiki_2_0\Models\GetWorkspacesRequest\option;
+use AlibabaCloud\SDK\Dingtalk\Vwiki_2_0\Models\GetWorkspacesRequest;
+use AlibabaCloud\Tea\Utils\Utils\RuntimeOptions;
+
+class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Dingtalk Client
+     */
+    public static function createClient(){
+        $config = new Config([]);
+        $config-&gt;protocol = "https";
+        $config-&gt;regionId = "central";
+        return new Dingtalk($config);
+    }
+
+    /**
+     * @param string[] $args
+     * @return void
+     */
+    public static function main($args){
+        $client = self::createClient();
+        $getWorkspacesHeaders = new GetWorkspacesHeaders([]);
+        $getWorkspacesHeaders-&gt;xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        $option = new option([
+            "withPermissionRole" =&gt; false
+        ]);
+        $getWorkspacesRequest = new GetWorkspacesRequest([
+            "operatorId" =&gt; "tXguN309iPhE4roSKPlLURAiEiE",
+            "workspaceIds" =&gt; [
+                "9r09jSO3WARyxd8A"
+            ],
+            "option" =&gt; $option
+        ]);
+        try {
+            $client-&gt;getWorkspacesWithOptions($getWorkspacesRequest, $getWorkspacesHeaders, new RuntimeOptions([]));
+        }
+        catch (Exception $err) {
+            if (!($err instanceof TeaError)) {
+                $err = new TeaError([], $err-&gt;getMessage(), $err-&gt;getCode(), $err);
+            }
+            if (!Utils::empty_($err-&gt;code) &amp;&amp; !Utils::empty_($err-&gt;message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+        }
+    }
+}
+$path = __DIR__ . \DIRECTORY_SEPARATOR . '..' . \DIRECTORY_SEPARATOR . 'vendor' . \DIRECTORY_SEPARATOR . 'autoload.php';
+if (file_exists($path)) {
+    require_once $path;
+}
+Sample::main(array_slice($argv, 1));</code></pre></div><input type="radio" name="check-figure-alz-0es-eag" id="figure-alz-0es-eag-go-tab" /><label for="figure-alz-0es-eag-go-tab">Go</label><div class="codeblock-item"><pre id="codeblock-vpd-ei9-bam" outputclass="language-go" code-type="xCode" data-tag="codeblock" class="pre codeblock language-go"><code>// This file is auto-generated, don't edit it. Thanks.
+package main
+
+import (
+  "os"
+  util  "github.com/alibabacloud-go/tea-utils/v2/service"
+  dingtalkwiki_2_0  "github.com/alibabacloud-go/dingtalk/wiki_2_0"
+  openapi  "github.com/alibabacloud-go/darabonba-openapi/v2/client"
+  "github.com/alibabacloud-go/tea/tea"
+)
+
+
+/**
+ * 使用 Token 初始化账号Client
+ * @return Client
+ * @throws Exception
+ */
+func CreateClient () (_result *dingtalkwiki_2_0.Client, _err error) {
+  config := &amp;openapi.Config{}
+  config.Protocol = tea.String("https")
+  config.RegionId = tea.String("central")
+  _result = &amp;dingtalkwiki_2_0.Client{}
+  _result, _err = dingtalkwiki_2_0.NewClient(config)
+  return _result, _err
+}
+
+func _main (args []*string) (_err error) {
+  client, _err := CreateClient()
+  if _err != nil {
+    return _err
+  }
+
+  getWorkspacesHeaders := &amp;dingtalkwiki_2_0.GetWorkspacesHeaders{}
+  getWorkspacesHeaders.XAcsDingtalkAccessToken = tea.String("&lt;your access token&gt;")
+  option := &amp;dingtalkwiki_2_0.GetWorkspacesRequestOption{
+    WithPermissionRole: tea.Bool(false),
+  }
+  getWorkspacesRequest := &amp;dingtalkwiki_2_0.GetWorkspacesRequest{
+    OperatorId: tea.String("tXguN309iPhE4roSKPlLURAiEiE"),
+    WorkspaceIds: []*string{tea.String("9r09jSO3WARyxd8A")},
+    Option: option,
+  }
+  tryErr := func()(_e error) {
+    defer func() {
+      if r := tea.Recover(recover()); r != nil {
+        _e = r
+      }
+    }()
+    _, _err = client.GetWorkspacesWithOptions(getWorkspacesRequest, getWorkspacesHeaders, &amp;util.RuntimeOptions{})
+    if _err != nil {
+      return _err
+    }
+
+    return nil
+  }()
+
+  if tryErr != nil {
+    var err = &amp;tea.SDKError{}
+    if _t, ok := tryErr.(*tea.SDKError); ok {
+      err = _t
+    } else {
+      err.Message = tea.String(tryErr.Error())
+    }
+    if !tea.BoolValue(util.Empty(err.Code)) &amp;&amp; !tea.BoolValue(util.Empty(err.Message)) {
+      // err 中含有 code 和 message 属性，可帮助开发定位问题
+    }
+
+  }
+  return _err
+}
+
+
+func main() {
+  err := _main(tea.StringSlice(os.Args[1:]))
+  if err != nil {
+    panic(err)
+  }
+}</code></pre></div><input type="radio" name="check-figure-alz-0es-eag" id="figure-alz-0es-eag-nodejs-tab" /><label for="figure-alz-0es-eag-nodejs-tab">Node.js</label><div class="codeblock-item"><pre id="codeblock-kgj-jaf-zmu" outputclass="language-nodejs" code-type="xCode" data-tag="codeblock" class="pre codeblock language-nodejs"><code>// This file is auto-generated, don't edit it
+import Util, * as $Util from '@alicloud/tea-util';
+import dingtalkwiki_2_0, * as $dingtalkwiki_2_0 from '@alicloud/dingtalk/wiki_2_0';
+import OpenApi, * as $OpenApi from '@alicloud/openapi-client';
+import * as $tea from '@alicloud/tea-typescript';
+
+
+export default class Client {
+
+  /**
+   * 使用 Token 初始化账号Client
+   * @return Client
+   * @throws Exception
+   */
+  static createClient(): dingtalkwiki_2_0 {
+    let config = new $OpenApi.Config({ });
+    config.protocol = "https";
+    config.regionId = "central";
+    return new dingtalkwiki_2_0(config);
+  }
+
+  static async main(args: string[]): Promise&lt;void&gt; {
+    let client = Client.createClient();
+    let getWorkspacesHeaders = new $dingtalkwiki_2_0.GetWorkspacesHeaders({ });
+    getWorkspacesHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+    let option = new $dingtalkwiki_2_0.GetWorkspacesRequestOption({
+      withPermissionRole: false,
+    });
+    let getWorkspacesRequest = new $dingtalkwiki_2_0.GetWorkspacesRequest({
+      operatorId: "tXguN309iPhE4roSKPlLURAiEiE",
+      workspaceIds: [
+        "9r09jSO3WARyxd8A"
+      ],
+      option: option,
+    });
+    try {
+      await client.getWorkspacesWithOptions(getWorkspacesRequest, getWorkspacesHeaders, new $Util.RuntimeOptions({ }));
+    } catch (err) {
+      if (!Util.empty(err.code) &amp;&amp; !Util.empty(err.message)) {
+        // err 中含有 code 和 message 属性，可帮助开发定位问题
+      }
+
+    }    
+  }
+
+}
+
+Client.main(process.argv.slice(2));</code></pre></div><input type="radio" name="check-figure-alz-0es-eag" id="figure-alz-0es-eag-csharp-tab" /><label for="figure-alz-0es-eag-csharp-tab">C#</label><div class="codeblock-item"><pre id="codeblock-hvv-u6z-wfl" outputclass="language-csharp" code-type="xCode" data-tag="codeblock" class="pre codeblock language-csharp"><code>// This file is auto-generated, don't edit it. Thanks.
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
+
+using Tea;
+using Tea.Utils;
+
+
+namespace AlibabaCloud.SDK.Sample
+{
+    public class Sample 
+    {
+
+        /**
+         * 使用 Token 初始化账号Client
+         * @return Client
+         * @throws Exception
+         */
+        public static AlibabaCloud.SDK.Dingtalkwiki_2_0.Client CreateClient()
+        {
+            AlibabaCloud.OpenApiClient.Models.Config config = new AlibabaCloud.OpenApiClient.Models.Config();
+            config.Protocol = "https";
+            config.RegionId = "central";
+            return new AlibabaCloud.SDK.Dingtalkwiki_2_0.Client(config);
+        }
+
+        public static void Main(string[] args)
+        {
+            AlibabaCloud.SDK.Dingtalkwiki_2_0.Client client = CreateClient();
+            AlibabaCloud.SDK.Dingtalkwiki_2_0.Models.GetWorkspacesHeaders getWorkspacesHeaders = new AlibabaCloud.SDK.Dingtalkwiki_2_0.Models.GetWorkspacesHeaders();
+            getWorkspacesHeaders.XAcsDingtalkAccessToken = "&lt;your access token&gt;";
+            AlibabaCloud.SDK.Dingtalkwiki_2_0.Models.GetWorkspacesRequest.GetWorkspacesRequestOption option = new AlibabaCloud.SDK.Dingtalkwiki_2_0.Models.GetWorkspacesRequest.GetWorkspacesRequestOption
+            {
+                WithPermissionRole = false,
+            };
+            AlibabaCloud.SDK.Dingtalkwiki_2_0.Models.GetWorkspacesRequest getWorkspacesRequest = new AlibabaCloud.SDK.Dingtalkwiki_2_0.Models.GetWorkspacesRequest
+            {
+                OperatorId = "tXguN309iPhE4roSKPlLURAiEiE",
+                WorkspaceIds = new List&lt;string&gt;
+                {
+                    "9r09jSO3WARyxd8A"
+                },
+                Option = option,
+            };
+            try
+            {
+                client.GetWorkspacesWithOptions(getWorkspacesRequest, getWorkspacesHeaders, new AlibabaCloud.TeaUtil.Models.RuntimeOptions());
+            }
+            catch (TeaException err)
+            {
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+            catch (Exception _err)
+            {
+                TeaException err = new TeaException(new Dictionary&lt;string, object&gt;
+                {
+                    { "message", _err.Message }
+                });
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+        }
+
+
+    }
+}</code></pre></div></div></section></section><section id="section-response-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-response-1" data-tag="h2" class="h2">响应</h2><section id="section-response-parameter" class="section"><h3 data-tag="h3" id="h2-ebc-4ph-xqc" class="h3 title">响应体</h3><table id="543b3d3e4bp3r" tablewidth="710" tablecolswidth="213 142 355" autofit="false" class="table"><colgroup colwidth="0.9*" style="width:30.00%"></colgroup><colgroup colwidth="0.6*" style="width:20.00%"></colgroup><colgroup colwidth="1.5*" style="width:50.00%"></colgroup><tbody class="tbody"><tr id="9485945a88ans"><td id="d516beffd0qgk" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="fe13e30be5uwh">名称</p></td><td id="1a974651134sa" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="34e31a108bjw1">类型</p></td><td id="01ad0b7de72gu" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="dfc31698b47zn">描述</p></td></tr><tr outputclass="row row-level-1 has-child" id="7676ff429anpj" class="has-child row row-level-1 has-child row-level-1 row"><td id="a93983716cy0i" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><span class="icms-tree-table-trigger" type="checkbox"></span><p id="d92629e79a03w">workspaces</p></td><td id="fcf2a54d20fwr" rowspan="1" colspan="1"><p id="f87e696aa93tk">Array</p></td><td id="ccdeb98a07w6g" rowspan="1" colspan="1"><p id="f8944da9867v4">知识库列表。</p></td></tr><tr outputclass="row row-level-1-1" id="4abfc1fbeepeb" class="row-level-1-1 row row row-level-1-1"><td id="26b0d65a76vc1" rowspan="1" colspan="1"><p id="767184c7bfv06">workspaceId</p></td><td id="cd38b1f2d4txp" rowspan="1" colspan="1"><p id="95cad7306aa74">String</p></td><td id="b022d4c603q9z" rowspan="1" colspan="1"><p id="ce6e56f4aa8q6">知识库id(spaceUuid)。</p></td></tr><tr outputclass="row row-level-1-2" id="358d78537fztd" class="row-level-1-2 row row row-level-1-2"><td id="25b9fa0f03y9v" rowspan="1" colspan="1"><p id="5f130e9ffcu0m">corpId</p></td><td id="324002208cwo4" rowspan="1" colspan="1"><p id="4d5c8a5b61jse">String</p></td><td id="3852132d0454f" rowspan="1" colspan="1"><p id="711372c8b11wz">知识库归属企业的corpId。</p></td></tr><tr outputclass="row row-level-1-3" id="4c2f694ca5fe7" class="row-level-1-3 row row row-level-1-3"><td id="8c6ea1db1c0oy" rowspan="1" colspan="1"><p id="988f1faf259s2">teamId</p></td><td id="d448b4a5696jd" rowspan="1" colspan="1"><p id="23525cbe17eib">String</p></td><td id="7f11289d1bwi9" rowspan="1" colspan="1"><p id="f2db21018dn2z">知识库归属知识小组的id。</p><div type="note" id="06e78077f7o1w" class="note note-note"><div class="note-icon-wrapper"><i class="icon-note note note"></i></div><div class="noteContentSpan"><p data-tag="p" id="308a4c7350v8g" class="p"></p><p id="d49044fa3ezc9">不归属任何知识小组的时候, 返回空。</p><p id="240d51003cz3z"></p></div></div></td></tr><tr outputclass="row row-level-1-4" id="9fcd122973f3l" class="row-level-1-4 row row row-level-1-4"><td id="5b4a92a9302nr" rowspan="1" colspan="1"><p id="2fbcbbafb3pms">rootNodeId</p></td><td id="ae5d8a2fc97fn" rowspan="1" colspan="1"><p id="21444e520cndw">String</p></td><td id="582ff79a1eon2" rowspan="1" colspan="1"><p id="112f93a403721">根节点id(根节点dentryUuid)。</p></td></tr><tr outputclass="row row-level-1-5" id="5fcf61310ey6i" class="row-level-1-5 row row row-level-1-5"><td id="94f1b98db366q" rowspan="1" colspan="1"><p id="d868bdeacf9yr">name</p></td><td id="86fc2ea343vvd" rowspan="1" colspan="1"><p id="a9dcb300e1obr">String</p></td><td id="d87f1d6225erj" rowspan="1" colspan="1"><p id="b790db7ab0ql6">知识库名称。</p></td></tr><tr outputclass="row row-level-1-6" id="6ac82010c3hog" class="row row-level-1-6 row-level-1-6 row"><td id="3eea99ebe40c5" rowspan="1" colspan="1"><p id="4dd65b5c0dxte">type</p></td><td id="2311915028kw8" rowspan="1" colspan="1"><p id="ba86ff3557psl">String</p></td><td id="d71ca3e491sg6" rowspan="1" colspan="1"><p id="f3396722cds7a">知识库类型，枚举值:</p><ul id="6572cfb00e7kr"><li id="3a3896080bnnu"><p id="b90bc2908et1j"><b>TEAM</b>：知识库</p></li><li id="3e77d0b19dlen"><p id="7c8c4b0b74gmy"><b>PERSONAL</b>：我的文档</p></li></ul></td></tr><tr outputclass="row row-level-1-7" id="a5b585c527ppm" class="row row-level-1-7 row-level-1-7 row"><td id="c4fcba6f87hjs" rowspan="1" colspan="1"><p id="b2d692adfay1f">description</p></td><td id="aeab5d9d4cw9a" rowspan="1" colspan="1"><p id="0fc5d4653awjy">String</p></td><td id="d0f1c00cc328m" rowspan="1" colspan="1"><p id="9654fd4249v5v">知识库简介。</p></td></tr><tr outputclass="row row-level-1-8" id="1d6ac40d69lh9" class="row row-level-1-8 row row-level-1-8"><td id="b9107de134g2a" rowspan="1" colspan="1"><p id="5a21a9a6fd1kd">url</p></td><td id="0ed2af5491pgs" rowspan="1" colspan="1"><p id="f356e808a37jj">String</p></td><td id="ffa184fa3fk5j" rowspan="1" colspan="1"><p id="a49b9ae37f9y8">知识库访问url。</p></td></tr><tr outputclass="row row-level-1-9 has-child" id="9d1f5b0ac5wfs" class="has-child row row-level-1-9 has-child row row-level-1-9"><td id="0bff459f32r02" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><span class="icms-tree-table-trigger" type="checkbox"></span><p id="bbee0222632hm">icon</p></td><td id="f13e4b3920zpr" rowspan="1" colspan="1"><p id="54ad758b37a4l">Object</p></td><td id="c197603e740bm" rowspan="1" colspan="1"><p id="4e6840a368doz">知识库图标。</p></td></tr><tr outputclass="row row-level-1-9-1" id="4721450b10rjm" class="row row-level-1-9-1 row row-level-1-9-1"><td id="f260ff60944q5" rowspan="1" colspan="1"><p id="7d5ca11deblvd">type</p></td><td id="d97a91ac2b3xf" rowspan="1" colspan="1"><p id="d474add444kvf">String</p></td><td id="a0768134425ew" rowspan="1" colspan="1"><p id="1cdb362bf8r7s">图标类型，枚举值:</p><ul id="b88b40313a3tb"><li id="334cb89369kcj"><p id="8fed35d018tsd"><b>URL</b>：链接</p></li><li id="d2cabe9f00xtt"><p id="a00e26c95ac2o"><b>EMOJI</b>：emoji图标</p></li></ul></td></tr><tr outputclass="row row-level-1-9-2" id="a20f1058fef5w" class="row row-level-1-9-2 row row-level-1-9-2"><td id="db3725c8ec0mt" rowspan="1" colspan="1"><p id="4061b5d4241su">value</p></td><td id="d021bd7a39vv4" rowspan="1" colspan="1"><p id="cdb04e76cbu2n">String</p></td><td id="c6b1efb65dzzb" rowspan="1" colspan="1"><p id="b471a899435zo">图标值：</p><ul id="584f2a643ayr9"><li id="608c2e1db7so3"><p id="a8d8bf87baldv">当 type 为 URL 时，返回图标链接。</p></li><li id="ce19c0a735nif"><p id="c6a9a20b270r5">当 type 为 EMOJI 时，返回 emoji 图标的 unicode 值。</p></li></ul></td></tr><tr outputclass="row row-level-1-10" id="6fd2ac1b5c45x" class="row row-level-1-10 row-level-1-10 row"><td id="216275973fxus" rowspan="1" colspan="1"><p id="637704267fuqg">cover</p></td><td id="c39ac7b58birf" rowspan="1" colspan="1"><p id="b6fc06e5ba1ir">String</p></td><td id="4e21a7cf9ab9i" rowspan="1" colspan="1"><p id="b3b0c40709wa9">知识库封面url。</p></td></tr><tr outputclass="row row-level-1-11" id="c9a73877b9lq0" class="row row-level-1-11 row-level-1-11 row"><td id="af763cc493p65" rowspan="1" colspan="1"><p id="feeac224e40r0">creatorId</p></td><td id="7f0dce87f56xg" rowspan="1" colspan="1"><p id="5be8935cbd8ft">String</p></td><td id="b68f15c2e592s" rowspan="1" colspan="1"><p id="002fc5263c9i8">知识库创建者userId。</p></td></tr><tr outputclass="row row-level-1-12" id="2ea1f8e75ff1s" class="row row-level-1-12 row row-level-1-12"><td id="0de368ff53q8b" rowspan="1" colspan="1"><p id="a76c3ea9aelxg">modifierId</p></td><td id="c9002b87783zd" rowspan="1" colspan="1"><p id="f734f6c3648i2">String</p></td><td id="faf69f5d59e8z" rowspan="1" colspan="1"><p id="6b7d701abeck5">知识库修改者userId。</p></td></tr><tr outputclass="row row-level-1-13" id="45f3508766ula" class="row-level-1-13 row row row-level-1-13"><td id="b33cc44369cp7" rowspan="1" colspan="1"><p id="80c847f9a465u">createTime</p></td><td id="10720f7f36oom" rowspan="1" colspan="1"><p id="37b017553cwds">String</p></td><td id="6fd4479d60jqx" rowspan="1" colspan="1"><p id="9ff4836816r69">知识库创建时间。</p></td></tr><tr outputclass="row row-level-1-14" id="f0e937cbf4aas" class="row-level-1-14 row row row-level-1-14"><td id="2519870d61wjo" rowspan="1" colspan="1"><p id="1a189c059fbus">modifiedTime</p></td><td id="f157085ca7a9u" rowspan="1" colspan="1"><p id="30c7703e4dm6o">String</p></td><td id="00c50bbabdqaw" rowspan="1" colspan="1"><p id="a95018cb76wyk">知识库修改时间。</p></td></tr><tr outputclass="row row-level-1-15" id="2047debfc6h55" class="row row-level-1-15 row row-level-1-15"><td id="877719489e1dx" rowspan="1" colspan="1"><p id="f4ca4e63d8rw2">permissionRole</p></td><td id="78a954ffbekca" rowspan="1" colspan="1"><p id="ec206fde6di9z">String</p></td><td id="917e380741k8p" rowspan="1" colspan="1"><p id="71acdfd1c9vwe">查询人对知识库的权限角色，枚举值:</p><ul id="3c98e68cab18o"><li id="f37d987125hao"><p id="f4c4479953rtm"><b>OWNER</b>：拥有者</p></li><li id="645904edaesdf"><p id="45842ef9530r9"><b>MANAGER</b>：管理者</p></li><li id="450f8dd5137mk"><p id="2ce9b9cda77cx"><b>EDITOR</b>：编辑者</p></li><li id="67976322d5u6x"><p id="4d88fc16deiv8"><b>DOWNLOADER</b>：可查看下载者</p></li><li id="7679c0457eddv"><p id="0edaf8d443q2c"><b>READER</b>：仅可查看者</p></li><li id="1543ccf8ec5q1"><p id="531c4c16c1e0l"><b>NONE</b>：无权限者</p></li></ul></td></tr></tbody></table></section><section id="section-response-body-example" class="section"><h3 id="h3-response-body-example" data-tag="h3" class="h3">响应体示例</h3><pre id="61219759bam1u" outputclass="language-json" code-type="xCode" data-tag="codeblock" class="pre codeblock language-json"><code>HTTP/1.1 200 OK
+Content-Type:application/json
+
+{
+  "workspaces" : [ {
+    "workspaceId" : "By8jQS1ZYjGn5b0M",
+    "corpId" : "ding16b241fd05********288",
+    "teamId" : "lHiicjNFM2iSFYSdz2iPuI8ZwiEiE",
+    "rootNodeId" : "ZgpG2NdyVXXjrKKzIBqMp5zkVMwvDqPk",
+    "name" : "workspace_name",
+    "type" : "TEAM",
+    "description" : "workspace_description",
+    "url" : "workspace_url",
+    "icon" : {
+      "type" : "URL",
+      "value" : "https://example/file-manage-files/zh-CN/202***13/ldet/avatar3.jpg"
+    },
+    "cover" : "https://example/file-manage-files/zh-CN/202***13/ldet/XXXX.jpg",
+    "creatorId" : "01472825524039877041",
+    "modifierId" : "01472825524039877041",
+    "createTime" : "2023-05-15T11:29Z",
+    "modifiedTime" : "2023-05-15T11:29Z",
+    "permissionRole" : "READER"
+  } ]
+}</code></pre></section><section id="section-error-code-1" class="section"><h3 id="h3-error-code-1" data-tag="h3" class="h3">错误码</h3><p data-tag="p" id="p-error-code-global-guide" class="p">若调用该接口报错，可根据错误信息在<a id="a-error-code-global-guide" href="https://open.dingtalk.com/document/development/server-api-error-codes-1">全局错误码</a>文档中查找解决方案。</p><table id="4d02fd4c4c6f3" tablewidth="709" tablecolswidth="142 177 177 213" autofit="false" class="table">
+  <colgroup colwidth="0.8*" style="width:20.03%"></colgroup>
+  <colgroup colwidth="1*" style="width:24.96%"></colgroup>
+  <colgroup colwidth="1*" style="width:24.96%"></colgroup>
+  <colgroup colwidth="1.2*" style="width:30.04%"></colgroup>
+  <tbody class="tbody">
+   <tr id="7cdf3e92d5bpr">
+    <td id="6b48801e9ef52" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="23961b82d1yl3">HttpCode</p></td>
+    <td id="3784769ee7qer" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="df53787c619vq">错误码</p></td>
+    <td id="c8d504c11dttt" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="bfc1369596p4r">错误信息</p></td>
+    <td id="79ba9e6a51ahz" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="1503768660ty1">说明</p></td>
+   </tr>
+   <tr id="29d7c0bd0fcl6">
+    <td id="f6cc463014zu5" rowspan="1" colspan="1"><p id="922ab3a82buri">400</p></td>
+    <td id="8678ba7e13yoz" rowspan="1" colspan="1"><p id="e67d0e4b74qs3">paramError</p></td>
+    <td id="11b7ce273bb51" rowspan="1" colspan="1"><p id="ee10557880au4">%s</p></td>
+    <td id="35c7308cb0xxr" rowspan="1" colspan="1"><p id="df7c9d6c00yos">参数错误</p></td>
+   </tr>
+   <tr id="2a5df9f04328i">
+    <td id="e76434d6d9aot" rowspan="1" colspan="1"><p id="e06290878e945">403</p></td>
+    <td id="c2441e4705ilo" rowspan="1" colspan="1"><p id="3d9c87028clpp">permissionDenied</p></td>
+    <td id="c5019e0d6d2tm" rowspan="1" colspan="1"><p id="3b93cf522fnaa">%s</p></td>
+    <td id="aa83837ae56pe" rowspan="1" colspan="1"><p id="78e0b3697e5a5">当前用户无此操作权限</p></td>
+   </tr>
+   <tr id="46fd15451b55y">
+    <td id="38eba6bdbdz2t" rowspan="1" colspan="1"><p id="5ba91afc4fkqy">404</p></td>
+    <td id="f87e223db17t5" rowspan="1" colspan="1"><p id="639f4a6abfb60">workspaceNotExist</p></td>
+    <td id="92de475c664hh" rowspan="1" colspan="1"><p id="53d4a1d5e9223">%s</p></td>
+    <td id="b7ff2475a94pr" rowspan="1" colspan="1"><p id="308ac0c1a0nn8">知识库不存在</p></td>
+   </tr>
+   <tr id="48ce2996c8viv">
+    <td id="b8c32c06f75pl" rowspan="1" colspan="1"><p id="c4469b1396cty">500</p></td>
+    <td id="d75ad1ca33526" rowspan="1" colspan="1"><p id="4c413a9bf6em9">systemError</p></td>
+    <td id="a0d4ea0a38xez" rowspan="1" colspan="1"><p id="d58566ae9cmkv">%s</p></td>
+    <td id="b52ef4f4f26rb" rowspan="1" colspan="1"><p id="04a4633d0613k">服务繁忙，请稍后重试</p></td>
+   </tr>
+   <tr id="c6e724d5e7nri">
+    <td id="029d714929r42" rowspan="1" colspan="1"><p id="2eba52a50csxe">500</p></td>
+    <td id="360b3d21e9u9p" rowspan="1" colspan="1"><p id="54fdffc8ddq93">unknownError</p></td>
+    <td id="b8b81b9676agm" rowspan="1" colspan="1"><p id="d25f7b0309kfs">Unknown Error</p></td>
+    <td id="e1e50a1b92ko5" rowspan="1" colspan="1"><p id="c6348f5a82zfc">未知错误</p></td>
+   </tr>
+   <tr id="be67946e5d95o">
+    <td id="29ecbbdddbirg" rowspan="1" colspan="1"><p id="e4ed462e34dai">503</p></td>
+    <td id="6637fff0557zp" rowspan="1" colspan="1"><p id="6ed326cce5q0q">operationTimeout</p></td>
+    <td id="a1fa702690gd2" rowspan="1" colspan="1"><p id="f6838930b8v5s">%s</p></td>
+    <td id="a8cbb58d1cup9" rowspan="1" colspan="1"><p id="c04568ed67pzj">请求超时</p></td>
+   </tr>
+  </tbody>
+ </table></section></section></div></main>
+</body></html>

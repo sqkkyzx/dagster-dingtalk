@@ -1,0 +1,737 @@
+<!DOCTYPE html><html lang="zh-CN"><head>
+    <meta charset="utf8" / />
+    <title>批量删除文件或文件夹</title>
+<meta name="gmtModify" content="2026-03-27 18:51:32" / /><meta name="gmtModify" content="2026-06-02 18:48:59" / /></head>
+<body data-tag="topic" id="doc-api-dingtalk-DeleteDentries" class="topic">
+    <main id="doc-api-dingtalk-DeleteDentries">
+        <h1 data-tag="title" id="h1-yxe-vcb-pru" class="title">批量删除文件或文件夹</h1>
+        <p data-tag="shortdesc" class="shortdesc">调用本接口，可实现批量删除文件或文件夹。</p>
+        <div data-tag="conbody" outputclass="icms-api-reference" class="icms-api-reference conbody"><section id="section-request-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-request-1" data-tag="h2" class="h2">请求</h2><section id="section-request-basic-info" class="section"><h3 id="heading-request-basic-info" data-tag="h3" class="h3">基本信息</h3><table tablewidth="648" tablecolswidth="216 432" autofit="false" class="table"><colgroup colwidth="1*" style="width:33.33%"></colgroup><colgroup colwidth="2*" style="width:66.67%"></colgroup><tbody class="tbody"><tr><td rowspan="1" style="background-color:#e5e5e5" colspan="1"><p>字段</p></td><td rowspan="1" style="background-color:#e5e5e5" colspan="1"><p>值</p></td></tr><tr><td rowspan="1" colspan="1"><p>HTTP URL</p></td><td rowspan="1" colspan="1"><p>https://api.dingtalk.com/v1.0/storage/spaces/{spaceId}/dentries/batchRemove</p></td></tr><tr><td rowspan="1" colspan="1"><p>HTTP Method</p></td><td rowspan="1" colspan="1"><p>POST</p></td></tr><tr><td rowspan="1" colspan="1"><p>支持的应用类型</p></td><td rowspan="1" colspan="1"><p><span data-tag="ph" id="ph-request-basic-app-type-apptype-0" class="ph ph-app-type" data-ph-raw-text="appType-企业内部应用">appType-企业内部应用</span>　<span data-tag="ph" id="ph-request-basic-app-type-apptype-1" class="ph ph-app-type" data-ph-raw-text="appType-第三方企业应用">appType-第三方企业应用</span></p></td></tr><tr><td rowspan="1" colspan="1"><p>权限要求</p></td><td rowspan="1" colspan="1"><p><span data-tag="ph" id="ph-request-basic-permission-permission-storage-file-write-0" class="ph-permission ph" data-ph-raw-text="permission-Storage.File.Write-企业存储文件写权限" data-permission-id="permission-Storage.File.Write" data-permission-code="Storage.File.Write" data-permission-detail-api="/document/api/permission/detail" data-permission-query-param="code">permission-Storage.File.Write-企业存储文件写权限</span></p></td></tr></tbody></table></section><section id="section-request-header-parameter" class="section">
+                    <h3 data-tag="h3" id="h2-rgv-wy0-8l7" class="h3 title">请求头</h3>
+                    <table class="table">
+                        <colgroup colnum="1" colname="col1" colwidth="3*" style="width:30%"></colgroup>
+                        <colgroup colnum="2" colname="col2" colwidth="1.5*" style="width:15%"></colgroup>
+                        <colgroup colnum="3" colname="col3" colwidth="1.5*" style="width:15%"></colgroup>
+                        <colgroup colnum="4" colname="col4" colwidth="4*" style="width:40%"></colgroup>
+                        <thead class="thead">
+                        <tr>
+                            <th><p>名称</p></th>
+                            <th><p>类型</p></th>
+                            <th><p>是否必填</p></th>
+                            <th><p>描述</p></th>
+                        </tr>
+                        </thead>
+                        <tbody class="tbody">
+                            <tr>
+                                <td><p>x-acs-dingtalk-access-token</p></td>
+                                <td><p>String</p></td>
+                                <td><p>是</p></td>
+                                <td><p>调用该接口的访问凭证，通过以下获取：</p>
+<ul>
+<li>
+<p>企业内部应用，调用<a href="https://open.dingtalk.com/document/development/obtain-the-access-token-of-an-internal-app">获取企业内部应用的accessToken</a>接口获取。</p>
+</li>
+<li>
+<p>第三方企业应用，调用<a href="https://open.dingtalk.com/document/development/obtain-the-access-token-of-the-authorized-enterprise-1">获取第三方应用授权企业的accessToken</a>接口获取。</p>
+</li>
+</ul>
+</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section><section id="section-request-path-parameter" class="section">
+        <h3 data-tag="h3" id="h2-x5p-fpc-epx" class="h3 title">路径参数</h3>
+        <table class="table">
+            <colgroup colnum="1" colname="col1" colwidth="3*" style="width:30%"></colgroup>
+            <colgroup colnum="2" colname="col2" colwidth="1.5*" style="width:15%"></colgroup>
+            <colgroup colnum="3" colname="col3" colwidth="1.5*" style="width:15%"></colgroup>
+            <colgroup colnum="4" colname="col4" colwidth="4*" style="width:40%"></colgroup>
+            <thead class="thead">
+            <tr>
+                <th><p>名称</p></th>
+                <th><p>类型</p></th>
+                <th><p>是否必填</p></th>
+                <th><p>描述</p></th>
+            </tr>
+            </thead>
+            <tbody class="tbody">
+                    <tr>
+                        <td><p>spaceId</p></td>
+                        <td><p>String</p></td>
+                        <td><p>是</p></td>
+                        <td><p>空间Id，可调用<a href="https://open.dingtalk.com/document/development/add-space">添加空间</a>接口获取id参数值。</p>
+</td>
+                    </tr>
+            </tbody>
+        </table>
+    </section><section id="section-request-query-parameter" class="section">
+        <h3 data-tag="h3" id="h2-70k-wwn-yn9" class="h3 title">查询参数</h3>
+        <table class="table">
+            <colgroup colnum="1" colname="col1" colwidth="3*" style="width:30%"></colgroup>
+            <colgroup colnum="2" colname="col2" colwidth="1.5*" style="width:15%"></colgroup>
+            <colgroup colnum="3" colname="col3" colwidth="1.5*" style="width:15%"></colgroup>
+            <colgroup colnum="4" colname="col4" colwidth="4*" style="width:40%"></colgroup>
+            <thead class="thead">
+            <tr>
+                <th><p>名称</p></th>
+                <th><p>类型</p></th>
+                <th><p>是否必填</p></th>
+                <th><p>描述</p></th>
+            </tr>
+            </thead>
+            <tbody class="tbody">
+                    <tr>
+                        <td><p>unionId</p></td>
+                        <td><p>String</p></td>
+                        <td><p>是</p></td>
+                        <td><p>操作者unionId，可调用<a href="https://open.dingtalk.com/document/development/query-user-details">查询用户详情</a>接口获取unionid参数值。</p>
+</td>
+                    </tr>
+            </tbody>
+        </table>
+    </section><section id="section-request-body-parameter" class="section">
+                <h3 data-tag="h3" id="h2-c93-xvb-jcd" class="h3 title">请求体</h3>
+                <table class="table">
+                    <colgroup colnum="1" colname="col1" colwidth="3*" style="width:30%"></colgroup>
+                    <colgroup colnum="2" colname="col2" colwidth="1.5*" style="width:15%"></colgroup>
+                    <colgroup colnum="3" colname="col3" colwidth="1.5*" style="width:15%"></colgroup>
+                    <colgroup colnum="4" colname="col4" colwidth="4*" style="width:40%"></colgroup>
+                    <thead class="thead">
+                        <tr>
+                            <th><p>名称</p></th>
+                            <th><p>类型</p></th>
+                            <th><p>是否必填</p></th>
+                            <th><p>描述</p></th>
+                        </tr>
+                    </thead>
+                    <tbody class="tbody">
+    <tr outputclass="row row-level-3" class="row row-level-3 row row-level-3">
+        <td><p>dentryIds</p></td>
+        <td><p>Array of String</p></td>
+            <td><p>是</p></td>
+        <td><p>文件或文件夹ID列表，最多50个，可调用<a href="https://open.dingtalk.com/document/development/get-a-list-of-files-or-folders">获取文件或文件夹列表</a>或<a href="https://open.dingtalk.com/document/development/api-getdentryidbyuuid">根据dentryUuid获取spaceId和dentryId</a>接口获取id参数值。</p>
+</td>
+    </tr>
+    <tr outputclass="row row-level-4 has-child" class="has-child row-level-4 row row-level-4 has-child row">
+        <td><span class="icms-tree-table-trigger" type="checkbox"></span><span class="icms-tree-table-trigger" type="checkbox"></span><p>option</p></td>
+        <td><p>Object</p></td>
+            <td><p>否</p></td>
+        <td><p>可选参数。</p>
+</td>
+    </tr>
+    <tr outputclass="row row-level-4-1" class="row-level-4-1 row row row-level-4-1">
+        <td><p>toRecycleBin</p></td>
+        <td><p>Boolean</p></td>
+            <td><p>否</p></td>
+        <td><p>是否删除到回收站。</p>
+<ul>
+<li>
+<p><b>true</b>：回收</p>
+</li>
+<li>
+<p><b>false</b>（默认）：不回收，直接删除</p>
+</li>
+</ul>
+</td>
+    </tr>
+                    </tbody>
+                </table>
+            </section><section id="section-request-body-example" class="section"><h3 id="h3-request-body-example" data-tag="h3" class="h3">请求示例</h3><div id="figure-cu9-to7-eeh" outputclass="tabbed-codeblock" data-tag="fig" class="tabbed-codeblock-box"><div class="tab-box"></div><input type="radio" name="check-figure-cu9-to7-eeh" id="figure-cu9-to7-eeh-HTTP-tab" checked="checked" /><label for="figure-cu9-to7-eeh-HTTP-tab">HTTP</label><div class="codeblock-item"><pre id="codeblock-nc2-zzb-hf1" outputclass="language-HTTP" data-tag="codeblock" code-type="xCode" class="pre codeblock language-HTTP"><code>POST /v1.0/storage/spaces/457xxxxx/dentries/batchRemove?unionId=CHYxxxxx HTTP/1.1
+Host:api.dingtalk.com
+x-acs-dingtalk-access-token:xxxxx
+Content-Type:application/json
+
+{
+  "dentryIds" : [ "658xxxxx" ],
+  "option" : {
+    "toRecycleBin" : true
+  }
+}</code></pre></div><input type="radio" name="check-figure-cu9-to7-eeh" id="figure-cu9-to7-eeh-java-tab" /><label for="figure-cu9-to7-eeh-java-tab">Java</label><div class="codeblock-item"><pre id="codeblock-ece-iq9-cif" outputclass="language-java" data-tag="codeblock" code-type="xCode" class="pre codeblock language-java"><code>package com.aliyun.sample;
+
+import com.aliyun.tea.*;
+
+public class Sample {
+
+    /**
+     * &lt;b&gt;description&lt;/b&gt; :
+     * &lt;p&gt;使用 Token 初始化账号Client&lt;/p&gt;
+     * @return Client
+     * 
+     * @throws Exception
+     */
+    public static com.aliyun.dingtalkstorage_1_0.Client createClient() throws Exception {
+        com.aliyun.teaopenapi.models.Config config = new com.aliyun.teaopenapi.models.Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        return new com.aliyun.dingtalkstorage_1_0.Client(config);
+    }
+
+    public static void main(String[] args_) throws Exception {
+        
+        com.aliyun.dingtalkstorage_1_0.Client client = Sample.createClient();
+        com.aliyun.dingtalkstorage_1_0.models.DeleteDentriesHeaders deleteDentriesHeaders = new com.aliyun.dingtalkstorage_1_0.models.DeleteDentriesHeaders();
+        deleteDentriesHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        com.aliyun.dingtalkstorage_1_0.models.DeleteDentriesRequest.DeleteDentriesRequestOption option = new com.aliyun.dingtalkstorage_1_0.models.DeleteDentriesRequest.DeleteDentriesRequestOption()
+                .setToRecycleBin(true);
+        com.aliyun.dingtalkstorage_1_0.models.DeleteDentriesRequest deleteDentriesRequest = new com.aliyun.dingtalkstorage_1_0.models.DeleteDentriesRequest()
+                .setUnionId("CHYxxxxx")
+                .setDentryIds(java.util.Arrays.asList(
+                    "658xxxxx"
+                ))
+                .setOption(option);
+        try {
+            client.deleteDentriesWithOptions("457xxxxx", deleteDentriesRequest, deleteDentriesHeaders, new com.aliyun.teautil.models.RuntimeOptions());
+        } catch (TeaException err) {
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        } catch (Exception _err) {
+            TeaException err = new TeaException(_err.getMessage(), _err);
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        }        
+    }
+}</code></pre></div><input type="radio" name="check-figure-cu9-to7-eeh" id="figure-cu9-to7-eeh-python-tab" /><label for="figure-cu9-to7-eeh-python-tab">Python</label><div class="codeblock-item"><pre id="codeblock-fjk-kdl-xot" outputclass="language-python" data-tag="codeblock" code-type="xCode" class="pre codeblock language-python"><code># -*- coding: utf-8 -*-
+# This file is auto-generated, don't edit it. Thanks.
+import os
+import sys
+import json
+
+from typing import List
+
+from alibabacloud_dingtalk.storage_1_0.client import Client as dingtalkstorage_1_0Client
+from alibabacloud_tea_openapi import models as open_api_models
+from alibabacloud_dingtalk.storage_1_0 import models as dingtalkstorage__1__0_models
+from alibabacloud_tea_util import models as util_models
+from alibabacloud_tea_util.client import Client as UtilClient
+
+
+class Sample:
+    def __init__(self):
+        pass
+
+    @staticmethod
+    def create_client() -&gt; dingtalkstorage_1_0Client:
+        """
+        使用 Token 初始化账号Client
+        @return: Client
+        @throws Exception
+        """
+        config = open_api_models.Config()
+        config.protocol = 'https'
+        config.region_id = 'central'
+        return dingtalkstorage_1_0Client(config)
+
+    @staticmethod
+    def main(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        delete_dentries_headers = dingtalkstorage__1__0_models.DeleteDentriesHeaders()
+        delete_dentries_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        option = dingtalkstorage__1__0_models.DeleteDentriesRequestOption(
+            to_recycle_bin=True
+        )
+        delete_dentries_request = dingtalkstorage__1__0_models.DeleteDentriesRequest(
+            union_id='CHYxxxxx',
+            dentry_ids=[
+                '658xxxxx'
+            ],
+            option=option
+        )
+        try:
+            client.delete_dentries_with_options('457xxxxx', delete_dentries_request, delete_dentries_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+    @staticmethod
+    async def main_async(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        delete_dentries_headers = dingtalkstorage__1__0_models.DeleteDentriesHeaders()
+        delete_dentries_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        option = dingtalkstorage__1__0_models.DeleteDentriesRequestOption(
+            to_recycle_bin=True
+        )
+        delete_dentries_request = dingtalkstorage__1__0_models.DeleteDentriesRequest(
+            union_id='CHYxxxxx',
+            dentry_ids=[
+                '658xxxxx'
+            ],
+            option=option
+        )
+        try:
+            await client.delete_dentries_with_options_async('457xxxxx', delete_dentries_request, delete_dentries_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+
+if __name__ == '__main__':
+    Sample.main(sys.argv[1:])</code></pre></div><input type="radio" name="check-figure-cu9-to7-eeh" id="figure-cu9-to7-eeh-php-tab" /><label for="figure-cu9-to7-eeh-php-tab">PHP</label><div class="codeblock-item"><pre id="codeblock-n9m-rqh-sgg" outputclass="language-php" data-tag="codeblock" code-type="xCode" class="pre codeblock language-php"><code>&lt;?php
+
+// This file is auto-generated, don't edit it. Thanks.
+namespace AlibabaCloud\SDK\Sample;
+
+use AlibabaCloud\SDK\Dingtalk\Vstorage_1_0\Dingtalk;
+use \Exception;
+use AlibabaCloud\Tea\Exception\TeaError;
+use AlibabaCloud\Tea\Utils\Utils;
+
+use Darabonba\OpenApi\Models\Config;
+use AlibabaCloud\SDK\Dingtalk\Vstorage_1_0\Models\DeleteDentriesHeaders;
+use AlibabaCloud\SDK\Dingtalk\Vstorage_1_0\Models\DeleteDentriesRequest\option;
+use AlibabaCloud\SDK\Dingtalk\Vstorage_1_0\Models\DeleteDentriesRequest;
+use AlibabaCloud\Tea\Utils\Utils\RuntimeOptions;
+
+class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Dingtalk Client
+     */
+    public static function createClient(){
+        $config = new Config([]);
+        $config-&gt;protocol = "https";
+        $config-&gt;regionId = "central";
+        return new Dingtalk($config);
+    }
+
+    /**
+     * @param string[] $args
+     * @return void
+     */
+    public static function main($args){
+        $client = self::createClient();
+        $deleteDentriesHeaders = new DeleteDentriesHeaders([]);
+        $deleteDentriesHeaders-&gt;xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        $option = new option([
+            "toRecycleBin" =&gt; true
+        ]);
+        $deleteDentriesRequest = new DeleteDentriesRequest([
+            "unionId" =&gt; "CHYxxxxx",
+            "dentryIds" =&gt; [
+                "658xxxxx"
+            ],
+            "option" =&gt; $option
+        ]);
+        try {
+            $client-&gt;deleteDentriesWithOptions("457xxxxx", $deleteDentriesRequest, $deleteDentriesHeaders, new RuntimeOptions([]));
+        }
+        catch (Exception $err) {
+            if (!($err instanceof TeaError)) {
+                $err = new TeaError([], $err-&gt;getMessage(), $err-&gt;getCode(), $err);
+            }
+            if (!Utils::empty_($err-&gt;code) &amp;&amp; !Utils::empty_($err-&gt;message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+        }
+    }
+}
+$path = __DIR__ . \DIRECTORY_SEPARATOR . '..' . \DIRECTORY_SEPARATOR . 'vendor' . \DIRECTORY_SEPARATOR . 'autoload.php';
+if (file_exists($path)) {
+    require_once $path;
+}
+Sample::main(array_slice($argv, 1));</code></pre></div><input type="radio" name="check-figure-cu9-to7-eeh" id="figure-cu9-to7-eeh-go-tab" /><label for="figure-cu9-to7-eeh-go-tab">Go</label><div class="codeblock-item"><pre id="codeblock-62y-i7j-dig" outputclass="language-go" data-tag="codeblock" code-type="xCode" class="pre codeblock language-go"><code>package main
+
+import (
+  "encoding/json"
+  "strings"
+  "fmt"
+  "os"
+  util  "github.com/alibabacloud-go/tea-utils/v2/service"
+  dingtalkstorage_1_0  "github.com/alibabacloud-go/dingtalk/storage_1_0"
+  openapi  "github.com/alibabacloud-go/darabonba-openapi/v2/client"
+  "github.com/alibabacloud-go/tea/tea"
+)
+
+
+// Description:
+// 
+// 使用 Token 初始化账号Client
+// 
+// @return Client
+// 
+// @throws Exception
+func CreateClient () (_result *dingtalkstorage_1_0.Client, _err error) {
+  config := &amp;openapi.Config{}
+  config.Protocol = tea.String("https")
+  config.RegionId = tea.String("central")
+  _result = &amp;dingtalkstorage_1_0.Client{}
+  _result, _err = dingtalkstorage_1_0.NewClient(config)
+  return _result, _err
+}
+
+func _main (args []*string) (_err error) {
+  client, _err := CreateClient()
+  if _err != nil {
+    return _err
+  }
+
+  deleteDentriesHeaders := &amp;dingtalkstorage_1_0.DeleteDentriesHeaders{}
+  deleteDentriesHeaders.XAcsDingtalkAccessToken = tea.String("&lt;your access token&gt;")
+  option := &amp;dingtalkstorage_1_0.DeleteDentriesRequestOption{
+    ToRecycleBin: tea.Bool(true),
+  }
+  deleteDentriesRequest := &amp;dingtalkstorage_1_0.DeleteDentriesRequest{
+    UnionId: tea.String("CHYxxxxx"),
+    DentryIds: []*string{tea.String("658xxxxx")},
+    Option: option,
+  }
+  tryErr := func()(_e error) {
+    defer func() {
+      if r := tea.Recover(recover()); r != nil {
+        _e = r
+      }
+    }()
+    _, _err = client.DeleteDentriesWithOptions(tea.String("457xxxxx"), deleteDentriesRequest, deleteDentriesHeaders, &amp;util.RuntimeOptions{})
+    if _err != nil {
+      return _err
+    }
+
+    return nil
+  }()
+
+  if tryErr != nil {
+    var err = &amp;tea.SDKError{}
+    if _t, ok := tryErr.(*tea.SDKError); ok {
+      err = _t
+    } else {
+      err.Message = tea.String(tryErr.Error())
+    }
+    if !tea.BoolValue(util.Empty(err.Code)) &amp;&amp; !tea.BoolValue(util.Empty(err.Message)) {
+      // err 中含有 code 和 message 属性，可帮助开发定位问题
+    }
+
+  }
+  return _err
+}
+
+
+func main() {
+  err := _main(tea.StringSlice(os.Args[1:]))
+  if err != nil {
+    panic(err)
+  }
+}</code></pre></div><input type="radio" name="check-figure-cu9-to7-eeh" id="figure-cu9-to7-eeh-nodejs-tab" /><label for="figure-cu9-to7-eeh-nodejs-tab">Node.js</label><div class="codeblock-item"><pre id="codeblock-3vj-bd9-a09" outputclass="language-nodejs" data-tag="codeblock" code-type="xCode" class="pre codeblock language-nodejs"><code>'use strict';
+// This file is auto-generated, don't edit it
+const Util = require('@alicloud/tea-util');
+const dingtalkstorage_1_0 = require('@alicloud/dingtalk/storage_1_0');
+const OpenApi = require('@alicloud/openapi-client');
+const Tea = require('@alicloud/tea-typescript');
+
+class Client {
+
+  /**
+   * 使用 Token 初始化账号Client
+   * @return Client
+   * @throws Exception
+   */
+  static createClient() {
+    let config = new OpenApi.Config({ });
+    config.protocol = 'https';
+    config.regionId = 'central';
+    return new dingtalkstorage_1_0.default(config);
+  }
+
+  static async main(args) {
+    let client = Client.createClient();
+    let deleteDentriesHeaders = new dingtalkstorage_1_0.DeleteDentriesHeaders({ });
+    deleteDentriesHeaders.xAcsDingtalkAccessToken = '&lt;your access token&gt;';
+    let option = new dingtalkstorage_1_0.DeleteDentriesRequestOption({
+      toRecycleBin: true,
+    });
+    let deleteDentriesRequest = new dingtalkstorage_1_0.DeleteDentriesRequest({
+      unionId: 'CHYxxxxx',
+      dentryIds: [
+        '658xxxxx'
+      ],
+      option: option,
+    });
+    try {
+      await client.deleteDentriesWithOptions('457xxxxx', deleteDentriesRequest, deleteDentriesHeaders, new Util.RuntimeOptions({ }));
+    } catch (err) {
+      if (!Util.default.empty(err.code) &amp;&amp; !Util.default.empty(err.message)) {
+        // err 中含有 code 和 message 属性，可帮助开发定位问题
+      }
+
+    }    
+  }
+
+}
+
+exports.Client = Client;
+Client.main(process.argv.slice(2));</code></pre></div><input type="radio" name="check-figure-cu9-to7-eeh" id="figure-cu9-to7-eeh-csharp-tab" /><label for="figure-cu9-to7-eeh-csharp-tab">C#</label><div class="codeblock-item"><pre id="codeblock-2ka-qfb-lsa" outputclass="language-csharp" data-tag="codeblock" code-type="xCode" class="pre codeblock language-csharp"><code>using Newtonsoft.Json;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
+
+using Tea;
+using Tea.Utils;
+
+
+namespace AlibabaCloud.SDK.Sample
+{
+    public class Sample 
+    {
+
+        /// &lt;term&gt;&lt;b&gt;Description:&lt;/b&gt;&lt;/term&gt;
+        /// &lt;description&gt;
+        /// &lt;para&gt;使用 Token 初始化账号Client&lt;/para&gt;
+        /// &lt;/description&gt;
+        /// 
+        /// &lt;returns&gt;
+        /// Client
+        /// &lt;/returns&gt;
+        /// 
+        /// &lt;term&gt;&lt;b&gt;Exception:&lt;/b&gt;&lt;/term&gt;
+        /// Exception
+        public static AlibabaCloud.SDK.Dingtalkstorage_1_0.Client CreateClient()
+        {
+            AlibabaCloud.OpenApiClient.Models.Config config = new AlibabaCloud.OpenApiClient.Models.Config();
+            config.Protocol = "https";
+            config.RegionId = "central";
+            return new AlibabaCloud.SDK.Dingtalkstorage_1_0.Client(config);
+        }
+
+        public static void Main(string[] args)
+        {
+            AlibabaCloud.SDK.Dingtalkstorage_1_0.Client client = CreateClient();
+            AlibabaCloud.SDK.Dingtalkstorage_1_0.Models.DeleteDentriesHeaders deleteDentriesHeaders = new AlibabaCloud.SDK.Dingtalkstorage_1_0.Models.DeleteDentriesHeaders();
+            deleteDentriesHeaders.XAcsDingtalkAccessToken = "&lt;your access token&gt;";
+            AlibabaCloud.SDK.Dingtalkstorage_1_0.Models.DeleteDentriesRequest.DeleteDentriesRequestOption option = new AlibabaCloud.SDK.Dingtalkstorage_1_0.Models.DeleteDentriesRequest.DeleteDentriesRequestOption
+            {
+                ToRecycleBin = true,
+            };
+            AlibabaCloud.SDK.Dingtalkstorage_1_0.Models.DeleteDentriesRequest deleteDentriesRequest = new AlibabaCloud.SDK.Dingtalkstorage_1_0.Models.DeleteDentriesRequest
+            {
+                UnionId = "CHYxxxxx",
+                DentryIds = new List&lt;string&gt;
+                {
+                    "658xxxxx"
+                },
+                Option = option,
+            };
+            try
+            {
+                client.DeleteDentriesWithOptions("457xxxxx", deleteDentriesRequest, deleteDentriesHeaders, new AlibabaCloud.TeaUtil.Models.RuntimeOptions());
+            }
+            catch (TeaException err)
+            {
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+            catch (Exception _err)
+            {
+                TeaException err = new TeaException(new Dictionary&lt;string, object&gt;
+                {
+                    { "message", _err.Message }
+                });
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+        }
+
+
+    }
+}</code></pre></div></div></section></section><section id="section-response-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-response-1" data-tag="h2" class="h2">响应</h2><section id="section-response-parameter" class="section">
+                <h3 data-tag="h3" id="h2-5bd-bcq-h5l" class="h3 title">响应体</h3>
+                <table class="table">
+                    <colgroup colnum="1" colname="col1" colwidth="3*" style="width:30%"></colgroup>
+                    <colgroup colnum="2" colname="col2" colwidth="2*" style="width:20%"></colgroup>
+                    <colgroup colnum="3" colname="col3" colwidth="5*" style="width:50%"></colgroup>
+                    <thead class="thead">
+                    <tr>
+                        <th><p>名称</p></th>
+                        <th><p>类型</p></th>
+                        <th><p>描述</p></th>
+                    </tr>
+                    </thead>
+                    <tbody class="tbody">
+    <tr outputclass="row row-level-1 has-child" class="has-child row row-level-1 has-child row-level-1 row">
+        <td><span class="icms-tree-table-trigger" type="checkbox"></span><span class="icms-tree-table-trigger" type="checkbox"></span><p>resultItems</p></td>
+        <td><p>Array</p></td>
+        <td><p>批量删除文件结果列表。</p>
+</td>
+    </tr>
+    <tr outputclass="row row-level-1-1" class="row-level-1-1 row row row-level-1-1">
+        <td><p>spaceId</p></td>
+        <td><p>String</p></td>
+        <td><p>源文件或文件夹的空间ID。</p>
+</td>
+    </tr>
+    <tr outputclass="row row-level-1-2" class="row-level-1-2 row row row-level-1-2">
+        <td><p>dentryId</p></td>
+        <td><p>String</p></td>
+        <td><p>源文件或文件夹的ID。</p>
+</td>
+    </tr>
+    <tr outputclass="row row-level-1-3" class="row-level-1-3 row row row-level-1-3">
+        <td><p>async</p></td>
+        <td><p>Boolean</p></td>
+        <td><p>是否是异步任务。</p>
+<ul>
+<li>
+<p><b>true</b>：是</p>
+</li>
+<li>
+<p><b>false</b>：否</p>
+</li>
+</ul>
+<div type="note" class="note note-note"><div class="note-icon-wrapper"><i class="icon-note note note"></i></div><div class="noteContentSpan"><p data-tag="p" class="p">
+</p><p>如果操作对象有子节点，则会异步处理。</p>
+<p></p></div></div>
+</td>
+    </tr>
+    <tr outputclass="row row-level-1-4" class="row-level-1-4 row row row-level-1-4">
+        <td><p>success</p></td>
+        <td><p>Boolean</p></td>
+        <td><p>是否成功。</p>
+<ul>
+<li>
+<p><b>true</b>：成功</p>
+</li>
+<li>
+<p><b>false</b>：失败</p>
+</li>
+</ul>
+<div type="note" class="note note-note"><div class="note-icon-wrapper"><i class="icon-note note note"></i></div><div class="noteContentSpan"><p data-tag="p" class="p">
+</p><p>如果为异步任务，该字段为空。</p>
+<p></p></div></div>
+</td>
+    </tr>
+    <tr outputclass="row row-level-1-5" class="row-level-1-5 row row row-level-1-5">
+        <td><p>errorCode</p></td>
+        <td><p>String</p></td>
+        <td><p>错误原因。</p>
+<div type="note" class="note note-note"><div class="note-icon-wrapper"><i class="icon-note note note"></i></div><div class="noteContentSpan"><p data-tag="p" class="p">
+</p><p>如果为异步任务，该字段为空。</p>
+<p></p></div></div>
+</td>
+    </tr>
+    <tr outputclass="row row-level-1-6" class="row row-level-1-6 row-level-1-6 row">
+        <td><p>taskId</p></td>
+        <td><p>String</p></td>
+        <td><p>异步任务ID，可用于查询任务执行状态。</p>
+</td>
+    </tr>
+                    </tbody>
+                </table>
+            </section><section id="section-response-body-example" class="section"><h3 id="h3-response-body-example" data-tag="h3" class="h3">响应体示例</h3><pre outputclass="language-json" data-tag="codeblock" code-type="xCode" class="pre codeblock language-json"><code>HTTP/1.1 200 OK
+Content-Type:application/json
+
+{
+  "resultItems" : [ {
+    "spaceId" : "654xxxxx",
+    "dentryId" : "655xxxxx",
+    "async" : true,
+    "success" : true,
+    "errorCode" : "permissionDenied",
+    "taskId" : "123xxxx"
+  } ]
+}</code></pre></section><section id="section-error-code-1" class="section"><h3 id="h3-error-code-1" data-tag="h3" class="h3">错误码</h3><p data-tag="p" id="p-error-code-global-guide" class="p">若调用该接口报错，可根据错误信息在<a id="a-error-code-global-guide" href="https://open.dingtalk.com/document/development/server-api-error-codes-1">全局错误码</a>文档中查找解决方案。</p><table class="table"> 
+  <colgroup colnum="1" colname="col1" colwidth="2*" style="width:20%"></colgroup> 
+  <colgroup colnum="2" colname="col2" colwidth="2.5*" style="width:25%"></colgroup> 
+  <colgroup colnum="3" colname="col3" colwidth="2.5*" style="width:25%"></colgroup> 
+  <colgroup colnum="4" colname="col4" colwidth="3*" style="width:30%"></colgroup> 
+  <thead class="thead"> 
+   <tr> 
+    <th><p>HttpCode</p></th> 
+    <th><p>错误码</p></th> 
+    <th><p>错误信息</p></th> 
+    <th><p>说明</p></th> 
+   </tr> 
+  </thead> 
+  <tbody class="tbody"> 
+   <tr> 
+    <td><p>400</p></td> 
+    <td><p>paramError</p></td> 
+    <td><p>%s</p></td> 
+    <td><p>参数错误</p></td> 
+   </tr> 
+   <tr> 
+    <td><p>400</p></td> 
+    <td><p>operationConcurrentControl</p></td> 
+    <td><p>%s</p></td> 
+    <td><p>并发控制</p></td> 
+   </tr> 
+   <tr> 
+    <td><p>400</p></td> 
+    <td><p>paramError.spaceId</p></td> 
+    <td><p>%s</p></td> 
+    <td><p>参数错误-spaceId</p></td> 
+   </tr> 
+   <tr> 
+    <td><p>400</p></td> 
+    <td><p>paramError.dentryIds</p></td> 
+    <td><p>%s</p></td> 
+    <td><p>参数错误-dentryIds</p></td> 
+   </tr> 
+   <tr> 
+    <td><p>400</p></td> 
+    <td><p>recycleBinNotSupportForSpace</p></td> 
+    <td><p>%s</p></td> 
+    <td><p>空间不支持回收站</p></td> 
+   </tr> 
+   <tr> 
+    <td><p>403</p></td> 
+    <td><p>permissionDenied</p></td> 
+    <td><p>%s</p></td> 
+    <td><p>用户缺少删除文件(夹)的权限</p></td> 
+   </tr> 
+   <tr> 
+    <td><p>403</p></td> 
+    <td><p>operationNotSupported</p></td> 
+    <td><p>%s</p></td> 
+    <td><p>不支持删除到回收站</p></td> 
+   </tr> 
+   <tr> 
+    <td><p>404</p></td> 
+    <td><p>spaceNotExist</p></td> 
+    <td><p>%s</p></td> 
+    <td><p>空间不存在</p></td> 
+   </tr> 
+   <tr> 
+    <td><p>404</p></td> 
+    <td><p>dentryNotExist</p></td> 
+    <td><p>%s</p></td> 
+    <td><p>文件不存在</p></td> 
+   </tr> 
+   <tr> 
+    <td><p>500</p></td> 
+    <td><p>systemError</p></td> 
+    <td><p>%s</p></td> 
+    <td><p>系统错误</p></td> 
+   </tr> 
+   <tr> 
+    <td><p>500</p></td> 
+    <td><p>unknownError</p></td> 
+    <td><p>Unknown Error</p></td> 
+    <td><p>未知错误</p></td> 
+   </tr> 
+   <tr> 
+    <td><p>503</p></td> 
+    <td><p>operationTimeout</p></td> 
+    <td><p>%s</p></td> 
+    <td><p>请求超时</p></td> 
+   </tr> 
+  </tbody> 
+ </table></section></section></div>
+    </main>
+
+
+
+</body></html>

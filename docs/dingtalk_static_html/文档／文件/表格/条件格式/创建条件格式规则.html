@@ -1,0 +1,505 @@
+<!DOCTYPE html><html><head><meta charset="utf8" / /><meta name="gmtModify" content="2026-04-10 10:45:29" / /><meta name="searchtitle" content="" / /><meta name="keywords" content="" / /><meta name="author" content="" / /><title>创建条件格式规则</title><meta name="gmtModify" content="2026-06-04 19:09:17" / /></head><body data-tag="topic" id="doc-api-dingtalk-CreateConditionalFormattingRule" class="topic"><main id="fcb1bb08363su" data-init-id="doc-api-dingtalk-CreateConditionalFormattingRule"><h1 data-tag="title" id="h1-7vi-oan-ec9" class="title">创建条件格式规则</h1><p data-tag="shortdesc" class="shortdesc" id="d326baa68e3cv">调用本接口可在钉钉表格的指定工作表中创建条件格式规则，根据单元格的值或重复情况自动应用高亮样式。适用于需要对数据进行可视化标记的场景，例如将低于目标值的单元格标红、将重复录入的数据高亮显示以便排查，或将某个区间内的数值以特定背景色区分。规则创建后，满足条件的单元格将自动应用指定的字体颜色或背景色，无需手动逐一设置。</p><div data-tag="conbody" outputclass="icms-api-reference" class="icms-api-reference conbody"><p id="f9c21d5e1113u"></p><section id="section-request-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-request-1" data-tag="h2" class="h2">请求</h2><section id="section-request-basic-info" class="section"><h3 id="heading-request-basic-info" data-tag="h3" class="h3">基本信息</h3><table id="b2e9074276cwt" tablewidth="648" tablecolswidth="216 432" autofit="false" class="table"><colgroup colwidth="0.67*" style="width:33.33%"></colgroup><colgroup colwidth="1.33*" style="width:66.67%"></colgroup><tbody class="tbody"><tr id="9fb187a752q94"><td id="58f1837f55t0e" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="92e54626cbyxj">字段</p></td><td id="1b38c66d53wio" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="ac0c1430c0cc5">值</p></td></tr><tr id="d088c0a092chd"><td id="dc06880a2557x" rowspan="1" colspan="1"><p id="8000d8f8aayag">HTTP URL</p></td><td id="f6b58658ffdcb" rowspan="1" colspan="1"><p id="2271f47e742eo">https://api.dingtalk.com/v1.0/doc/workbooks/{workbookId}/sheets/{sheetId}/conditionalFormattingRules</p></td></tr><tr id="cd694bb73aom5"><td id="5988b1bb2c7o2" rowspan="1" colspan="1"><p id="2856c001b9org">HTTP Method</p></td><td id="0838d4ee36dju" rowspan="1" colspan="1"><p id="243c15b6371dt">POST</p></td></tr><tr id="d120177078jwn"><td id="aff073563bdup" rowspan="1" colspan="1"><p id="461f1f09feuvc">支持的应用类型</p></td><td id="73e0e00927ml1" rowspan="1" colspan="1"><p id="9b2864f835p3e"><span data-tag="ph" id="ph-request-basic-app-type-apptype-0" class="ph ph-app-type" data-ph-raw-text="appType-企业内部应用">appType-企业内部应用</span></p></td></tr><tr id="19ab37e426oly"><td id="1efb809cfc817" rowspan="1" colspan="1"><p id="3f63cee6185mm">权限要求</p></td><td id="fe7b375fbbpv1" rowspan="1" colspan="1"><p id="f8a0fee59fxmu"><span data-tag="ph" id="ph-request-basic-permission-permission-document-workbook-write-0" class="ph-permission ph" data-ph-raw-text="permission-Document.Workbook.Write-钉钉表格写权限" data-permission-id="permission-Document.Workbook.Write" data-permission-code="Document.Workbook.Write" data-permission-detail-api="/document/api/permission/detail" data-permission-query-param="code">permission-Document.Workbook.Write-钉钉表格写权限</span></p></td></tr></tbody></table></section><section id="section-request-header-parameter" class="section"><h3 data-tag="h3" id="h2-z2z-upe-tyg" class="h3 title">请求头</h3><table id="9caa5a22e5cun" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="6af121af960bq"><td id="92fa35247ctwd" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="4cb821f1bb34x">名称</p></td><td id="4923d4bf86bn4" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="2daace969bk1g">类型</p></td><td id="2b7c496fa022p" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="10fdc9b7ec0rk">是否必填</p></td><td id="20aa1a303emxt" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="59cd69766f7ym">描述</p></td></tr><tr id="12e309b20bg43"><td id="a63fade2049uv" rowspan="1" colspan="1"><p id="1258c5b6af2fa">x-acs-dingtalk-access-token</p></td><td id="37e2b3a8b3gaf" rowspan="1" colspan="1"><p id="c568891070c7x">String</p></td><td id="9b80888ed1dp1" rowspan="1" colspan="1"><p id="239a43df6eb53">是</p></td><td id="922a89ed0eq7e" rowspan="1" colspan="1"><p id="da8100371029l">调用该接口的访问凭证，可调用<a href="https://open.dingtalk.com/document/development/obtain-the-access-token-of-an-internal-app" id="26a572bb6e9tk">获取企业内部应用的accessToken</a>接口获取。</p></td></tr></tbody></table></section><section id="section-request-path-parameter" class="section"><h3 data-tag="h3" id="h2-t2i-ofm-p19" class="h3 title">路径参数</h3><table id="d180b455901nm" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="9161a1cf017sn"><td id="4793aeeb42lkz" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="68da04392bprh">名称</p></td><td id="99742e2e05ul4" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="6b7f3532c0ige">类型</p></td><td id="a1c3993afb4m5" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="9ac2f9454fumw">是否必填</p></td><td id="d15a7f6319661" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="c0ecd8fca2ww8">描述</p></td></tr><tr id="0268a732598dd"><td id="f597c1e221m79" rowspan="1" colspan="1"><p id="859e19e16ejt9">workbookId</p></td><td id="01961ad3c3dj1" rowspan="1" colspan="1"><p id="926c374b68vob">String</p></td><td id="71c9f7369bnmy" rowspan="1" colspan="1"><p id="8dfcee675eell">是</p></td><td id="c83e8d7793kqz" rowspan="1" colspan="1"><p id="e73cb58cd6et5">表格文件&nbsp;ID ，<a href="https://open.dingtalk.com/document/development/knowledge-base-overview" id="8d71f2fa563sv">知识库 API</a> 返回的<code data-tag="inlineCode" id="2f631a31886xr" class="inlineCode">nodeId(dentryUuid)</code>即是表格<code data-tag="inlineCode" id="f096ee6469b3x" class="inlineCode">workbookId</code>，可通过调用<a href="https://open.dingtalk.com/document/development/get-node" id="c20c9a00ccsn8">获取节点</a>和<a href="https://open.dingtalk.com/document/development/create-team-space-document" id="9a366134bc1uo">创建知识库文档</a>接口获取。</p></td></tr><tr id="2251dceb73g3u"><td id="f380f664a3mov" rowspan="1" colspan="1"><p id="78507d323fv01">sheetId</p></td><td id="6eee5521a00y8" rowspan="1" colspan="1"><p id="15b9304660qnn">String</p></td><td id="21cfaaf8df2lj" rowspan="1" colspan="1"><p id="35b21c49b8o4f">是</p></td><td id="4bbef928abgok" rowspan="1" colspan="1"><p id="21704928aap6l">工作表ID或标题，可调用<a href="https://open.dingtalk.com/document/development/obtain-all-worksheets" id="2313ffdd10qxj">获取所有工作表</a>接口获取id和工作表的标题。</p></td></tr></tbody></table></section><section id="section-request-query-parameter" class="section"><h3 data-tag="h3" id="h2-75r-vwx-fit" class="h3 title">查询参数</h3><table id="b5cd1eec83uhy" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="0f4b424b87yk2"><td id="bfda7be286tnv" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="3b5df2eed0bzj">名称</p></td><td id="c33230818fp7t" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="9e03ac999a6m2">类型</p></td><td id="f71d103f28r8s" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="5cfd85e0deniq">是否必填</p></td><td id="1576d45c3eigh" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="22e611a84081z">描述</p></td></tr><tr id="7e431037ab09a"><td id="6862ab647azg5" rowspan="1" colspan="1"><p id="1845281777mqa">operatorId</p></td><td id="ef35894461yfu" rowspan="1" colspan="1"><p id="010188e55978h">String</p></td><td id="4015af3c30el6" rowspan="1" colspan="1"><p id="e5a612f6bbepq">是</p></td><td id="a2709f51c7rj5" rowspan="1" colspan="1"><p id="9df77311bbzs4">操作人的unionId，可调用<a href="https://open.dingtalk.com/document/development/query-user-details" id="19a517149aaf7">查询用户详情</a>接口获取。</p><p class="note-icon-wrapper" id="7aeeec8902yjc"></p><p data-tag="p" class="p" id="b8d19bdda6b0x"></p><p id="0bd7e23e364s2">若操作人无权限，接口会报错 <code data-tag="inlineCode" id="b696746c86oxx" class="inlineCode">The operator has no permission</code>。</p><p id="116e1c7129b6n"></p></td></tr></tbody></table></section><section id="section-request-body-parameter" class="section"><h3 data-tag="h3" id="h2-kfv-qwn-bam" class="h3 title">请求体</h3><table id="d0346e623fxxw" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="4a7186580ff34"><td id="641ac37701mmk" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="3388b13941est">名称</p></td><td id="28a02751efmse" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="c472be6dbfp53">类型</p></td><td id="201b0e48d2laf" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="7af4140af9518">是否必填</p></td><td id="9f9b393cdfy68" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="ee96e5b702y8o">描述</p></td></tr><tr outputclass="row row-level-4" id="54ad583bd8u8y" class="row row-level-4"><td id="6b3bc6a424sk8" rowspan="1" colspan="1"><p id="28a9c91a74vo9">ranges</p></td><td id="a56c1aa50amf8" rowspan="1" colspan="1"><p id="f1eabc1f8d0kk">Array of String</p></td><td id="bb1f09b4d911p" rowspan="1" colspan="1"><p id="81060fa2647ue">是</p></td><td id="ad9bbb12562zr" rowspan="1" colspan="1"><p id="3eefa5a678bl7">单元格地址，使用A1表示法。</p></td></tr><tr outputclass="row row-level-5 has-child" id="3d8a039246r6l" class="row row-level-5 has-child"><td id="b751b28e63frz" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="f8aa8c1112ogo">duplicateCondition</p></td><td id="616d4d5344i1t" rowspan="1" colspan="1"><p id="1a84357f476q1">Object</p></td><td id="0e369d7cb7t9e" rowspan="1" colspan="1"><p id="77fc6ce009x9n">否</p></td><td id="1cdfef3b9cv0b" rowspan="1" colspan="1"><p id="51de4daebekjf">重复值规则。</p></td></tr><tr outputclass="row row-level-5-1" id="cfc93890ba2dd" class="row row-level-5-1"><td id="df2138e4edxei" rowspan="1" colspan="1"><p id="0a1036ef232cq">operator</p></td><td id="57e9832474soe" rowspan="1" colspan="1"><p id="a3171a8a38uwg">String</p></td><td id="7aed5d6038soy" rowspan="1" colspan="1"><p id="4ff5b8a63dki1">否</p></td><td id="ad2209a0b7gld" rowspan="1" colspan="1"><p id="143d5e4185pf1">运算符。目前仅支持duplicate，代表重复项。</p></td></tr><tr outputclass="row row-level-6 has-child" id="11f05a44f0xpr" class="row row-level-6 has-child"><td id="45ec3499d6shb" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="5a041ccfa7cya">numberCondition</p></td><td id="5b7284630431r" rowspan="1" colspan="1"><p id="4369dad6efyou">Object</p></td><td id="e4d7448317imq" rowspan="1" colspan="1"><p id="80c2a53a02tt1">否</p></td><td id="392fbfe634g8w" rowspan="1" colspan="1"><p id="0c34d89406qv4">数字规则。</p></td></tr><tr outputclass="row row-level-6-1" id="808c66852ccv4" class="row row-level-6-1"><td id="cd5159e7b0og3" rowspan="1" colspan="1"><p id="5c8d94f396bo7">operator</p></td><td id="560c665d471tg" rowspan="1" colspan="1"><p id="313ae589ddrr5">String</p></td><td id="61a9642c06soh" rowspan="1" colspan="1"><p id="dedba00854k8s">否</p></td><td id="757ea6b73byr2" rowspan="1" colspan="1"><p id="3c7e2b8d97v03">比较运算符。可选值：</p><ul id="ffec9f3ffadzl"><li id="d6fcbd9626k3i"><p id="ec3832fcc8fqb"><b>equal</b>： 等于</p></li><li id="8429cca3f71zt"><p id="d9331645da2wc"><b>not-equal</b>：不等于</p></li><li id="d9c9e8a9ea9fu"><p id="2b8d13e247prx"><b>greater</b>：大于</p></li><li id="097d2433b68yk"><p id="f7c85740b5uh1"><b>greater-equal</b>：大于等于</p></li><li id="5c41e4b7edew3"><p id="f61bce876fe0g"><b>less</b>：小于</p></li><li id="fa5e69357chka"><p id="4a31af47fdl0f"><b>less-equal</b>：小于等于</p></li><li id="3ae30e7bcaama"><p id="37449e4429wyu"><b>between</b>：在两者之间（含边界）</p></li><li id="fb118248a5knl"><p id="fcf877d986ai3"><b>not-between</b>：不在两者之间</p></li></ul></td></tr><tr outputclass="row row-level-6-2" id="622803583ezx3" class="row row-level-6-2"><td id="1c6a632f82ptt" rowspan="1" colspan="1"><p id="a96f05cbd20vt">value1</p></td><td id="8085e2e80a8jg" rowspan="1" colspan="1"><p id="572991feb7v17">Any</p></td><td id="7cb399f9bakgs" rowspan="1" colspan="1"><p id="56400f92195ka">否</p></td><td id="916eb527d2t47" rowspan="1" colspan="1"><p id="27e89e6c12mo1">value1 — 第一个比较值（必填）。</p></td></tr><tr outputclass="row row-level-6-3" id="fb87291c743fh" class="row row-level-6-3"><td id="4662b4d2a77bx" rowspan="1" colspan="1"><p id="769b23950cleu">value2</p></td><td id="0acd16f253v38" rowspan="1" colspan="1"><p id="dbbecaa733ixo">Any</p></td><td id="ec3cb6e5d73zp" rowspan="1" colspan="1"><p id="655bbf720914e">否</p></td><td id="90cca3b9a27cm" rowspan="1" colspan="1"><p id="72bd26997dfy9">value2 — 第二个比较值（可选，仅在 operator 为 between 或 not-between 时需要提供，作为范围的上界。</p></td></tr><tr outputclass="row row-level-7 has-child" id="c5607afad1qze" class="row row-level-7 has-child"><td id="cc40f8383dtal" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="945f46ae5ahdh">cellStyle</p></td><td id="ae0cd663344fd" rowspan="1" colspan="1"><p id="1c126ad807m6z">Object</p></td><td id="ab98d80ed0thg" rowspan="1" colspan="1"><p id="52c4548233sx8">否</p></td><td id="e560984911mdn" rowspan="1" colspan="1"><p id="e4fd03c3c9728">设定当前配置的规则的单元格样式。</p></td></tr><tr outputclass="row row-level-7-1" id="b89706275ce59" class="row row-level-7-1"><td id="cc2e456f3cwd0" rowspan="1" colspan="1"><p id="67e143afc8gjy">backgroundColor</p></td><td id="e4e9b60d967b2" rowspan="1" colspan="1"><p id="308bbf7a22a6a">String</p></td><td id="1a0bb15556iww" rowspan="1" colspan="1"><p id="e50a91fbe1mz0">否</p></td><td id="18da12f35d3iw" rowspan="1" colspan="1"><p id="870bd16b02nbm">背景色，使用十六进制颜色表示法，如#ff0000。</p></td></tr><tr outputclass="row row-level-7-2" id="4441fcf42chhm" class="row row-level-7-2"><td id="5bee1d337bilh" rowspan="1" colspan="1"><p id="4a02f4ffde7wu">fontColor</p></td><td id="bfda627128hq5" rowspan="1" colspan="1"><p id="8c1fd25bcfrc9">String</p></td><td id="b5569a339a6px" rowspan="1" colspan="1"><p id="28dbcdd68aamn">否</p></td><td id="83440865bavc4" rowspan="1" colspan="1"><p id="7143c2364fkqb">字体颜色。</p></td></tr></tbody></table></section><section id="section-request-body-example" class="section"><h3 id="h3-request-body-example" data-tag="h3" class="h3">请求示例</h3><div outputclass="tabbed-codeblock" data-tag="fig" id="figure-ijk-bri-hei" class="tabbed-codeblock-box"><div class="tab-box"></div><input type="radio" name="check-figure-ijk-bri-hei" id="figure-ijk-bri-hei-HTTP-tab" checked="checked" /><label for="figure-ijk-bri-hei-HTTP-tab">HTTP</label><div class="codeblock-item"><pre id="codeblock-c24-n9l-b4g" outputclass="language-HTTP" data-tag="codeblock" code-type="xCode" class="pre codeblock language-HTTP"><code>POST /v1.0/doc/workbooks/e54Lq3xxx/sheets/Sheet1/conditionalFormattingRules?operatorId=ppgAxxx HTTP/1.1
+Host:api.dingtalk.com
+x-acs-dingtalk-access-token:xxxxx
+Content-Type:application/json
+
+{
+  "ranges" : [ "A1:B2" ],
+  "duplicateCondition" : {
+    "operator" : "duplicate"
+  },
+  "numberCondition" : {
+    "operator" : "between",
+    "value1" : "10",
+    "value2" : "50"
+  },
+  "cellStyle" : {
+    "backgroundColor" : "#ff0000",
+    "fontColor" : "#ff0000"
+  }
+}</code></pre></div><input type="radio" name="check-figure-ijk-bri-hei" id="figure-ijk-bri-hei-java-tab" /><label for="figure-ijk-bri-hei-java-tab">Java</label><div class="codeblock-item"><pre id="codeblock-nqx-nzg-6kd" outputclass="language-java" data-tag="codeblock" code-type="xCode" class="pre codeblock language-java"><code>package com.aliyun.sample;
+
+import com.aliyun.tea.*;
+
+public class Sample {
+
+    /**
+     * &lt;b&gt;description&lt;/b&gt; :
+     * &lt;p&gt;使用 Token 初始化账号Client&lt;/p&gt;
+     * @return Client
+     * 
+     * @throws Exception
+     */
+    public static com.aliyun.dingtalkdoc_1_0.Client createClient() throws Exception {
+        com.aliyun.teaopenapi.models.Config config = new com.aliyun.teaopenapi.models.Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        return new com.aliyun.dingtalkdoc_1_0.Client(config);
+    }
+
+    public static void main(String[] args_) throws Exception {
+        
+        com.aliyun.dingtalkdoc_1_0.Client client = Sample.createClient();
+        com.aliyun.dingtalkdoc_1_0.models.CreateConditionalFormattingRuleHeaders createConditionalFormattingRuleHeaders = new com.aliyun.dingtalkdoc_1_0.models.CreateConditionalFormattingRuleHeaders();
+        createConditionalFormattingRuleHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        com.aliyun.dingtalkdoc_1_0.models.CreateConditionalFormattingRuleRequest.CreateConditionalFormattingRuleRequestCellStyle cellStyle = new com.aliyun.dingtalkdoc_1_0.models.CreateConditionalFormattingRuleRequest.CreateConditionalFormattingRuleRequestCellStyle()
+                .setBackgroundColor("#ff0000")
+                .setFontColor("#ff0000");
+        com.aliyun.dingtalkdoc_1_0.models.CreateConditionalFormattingRuleRequest.CreateConditionalFormattingRuleRequestNumberCondition numberCondition = new com.aliyun.dingtalkdoc_1_0.models.CreateConditionalFormattingRuleRequest.CreateConditionalFormattingRuleRequestNumberCondition()
+                .setOperator("between")
+                .setValue1(10)
+                .setValue2(50);
+        com.aliyun.dingtalkdoc_1_0.models.CreateConditionalFormattingRuleRequest.CreateConditionalFormattingRuleRequestDuplicateCondition duplicateCondition = new com.aliyun.dingtalkdoc_1_0.models.CreateConditionalFormattingRuleRequest.CreateConditionalFormattingRuleRequestDuplicateCondition()
+                .setOperator("duplicate");
+        com.aliyun.dingtalkdoc_1_0.models.CreateConditionalFormattingRuleRequest createConditionalFormattingRuleRequest = new com.aliyun.dingtalkdoc_1_0.models.CreateConditionalFormattingRuleRequest()
+                .setOperatorId("ppgAxxx")
+                .setRanges(java.util.Arrays.asList(
+                    "A1:B2"
+                ))
+                .setDuplicateCondition(duplicateCondition)
+                .setNumberCondition(numberCondition)
+                .setCellStyle(cellStyle);
+        try {
+            client.createConditionalFormattingRuleWithOptions("e54Lq3xxx", "Sheet1", createConditionalFormattingRuleRequest, createConditionalFormattingRuleHeaders, new com.aliyun.teautil.models.RuntimeOptions());
+        } catch (TeaException err) {
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        } catch (Exception _err) {
+            TeaException err = new TeaException(_err.getMessage(), _err);
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        }        
+    }
+}</code></pre></div><input type="radio" name="check-figure-ijk-bri-hei" id="figure-ijk-bri-hei-python-tab" /><label for="figure-ijk-bri-hei-python-tab">Python</label><div class="codeblock-item"><pre id="codeblock-hwi-zbq-zxv" outputclass="language-python" data-tag="codeblock" code-type="xCode" class="pre codeblock language-python"><code># -*- coding: utf-8 -*-
+# This file is auto-generated, don't edit it. Thanks.
+import os
+import sys
+import json
+
+from typing import List
+
+from alibabacloud_dingtalk.doc_1_0.client import Client as dingtalkdoc_1_0Client
+from alibabacloud_tea_openapi import models as open_api_models
+from alibabacloud_dingtalk.doc_1_0 import models as dingtalkdoc__1__0_models
+from alibabacloud_tea_util import models as util_models
+from alibabacloud_tea_util.client import Client as UtilClient
+
+
+class Sample:
+    def __init__(self):
+        pass
+
+    @staticmethod
+    def create_client() -&gt; dingtalkdoc_1_0Client:
+        """
+        使用 Token 初始化账号Client
+        @return: Client
+        @throws Exception
+        """
+        config = open_api_models.Config()
+        config.protocol = 'https'
+        config.region_id = 'central'
+        return dingtalkdoc_1_0Client(config)
+
+    @staticmethod
+    def main(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        create_conditional_formatting_rule_headers = dingtalkdoc__1__0_models.CreateConditionalFormattingRuleHeaders()
+        create_conditional_formatting_rule_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        cell_style = dingtalkdoc__1__0_models.CreateConditionalFormattingRuleRequestCellStyle(
+            background_color='#ff0000',
+            font_color='#ff0000'
+        )
+        number_condition = dingtalkdoc__1__0_models.CreateConditionalFormattingRuleRequestNumberCondition(
+            operator='between',
+            value_1=10,
+            value_2=50
+        )
+        duplicate_condition = dingtalkdoc__1__0_models.CreateConditionalFormattingRuleRequestDuplicateCondition(
+            operator='duplicate'
+        )
+        create_conditional_formatting_rule_request = dingtalkdoc__1__0_models.CreateConditionalFormattingRuleRequest(
+            operator_id='ppgAxxx',
+            ranges=[
+                'A1:B2'
+            ],
+            duplicate_condition=duplicate_condition,
+            number_condition=number_condition,
+            cell_style=cell_style
+        )
+        try:
+            client.create_conditional_formatting_rule_with_options('e54Lq3xxx', 'Sheet1', create_conditional_formatting_rule_request, create_conditional_formatting_rule_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+    @staticmethod
+    async def main_async(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        create_conditional_formatting_rule_headers = dingtalkdoc__1__0_models.CreateConditionalFormattingRuleHeaders()
+        create_conditional_formatting_rule_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        cell_style = dingtalkdoc__1__0_models.CreateConditionalFormattingRuleRequestCellStyle(
+            background_color='#ff0000',
+            font_color='#ff0000'
+        )
+        number_condition = dingtalkdoc__1__0_models.CreateConditionalFormattingRuleRequestNumberCondition(
+            operator='between',
+            value_1=10,
+            value_2=50
+        )
+        duplicate_condition = dingtalkdoc__1__0_models.CreateConditionalFormattingRuleRequestDuplicateCondition(
+            operator='duplicate'
+        )
+        create_conditional_formatting_rule_request = dingtalkdoc__1__0_models.CreateConditionalFormattingRuleRequest(
+            operator_id='ppgAxxx',
+            ranges=[
+                'A1:B2'
+            ],
+            duplicate_condition=duplicate_condition,
+            number_condition=number_condition,
+            cell_style=cell_style
+        )
+        try:
+            await client.create_conditional_formatting_rule_with_options_async('e54Lq3xxx', 'Sheet1', create_conditional_formatting_rule_request, create_conditional_formatting_rule_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+
+if __name__ == '__main__':
+    Sample.main(sys.argv[1:])</code></pre></div><input type="radio" name="check-figure-ijk-bri-hei" id="figure-ijk-bri-hei-php-tab" /><label for="figure-ijk-bri-hei-php-tab">PHP</label><div class="codeblock-item"><pre id="codeblock-9jn-sz2-ufm" outputclass="language-php" data-tag="codeblock" code-type="xCode" class="pre codeblock language-php"><code>&lt;?php
+
+// This file is auto-generated, don't edit it. Thanks.
+namespace AlibabaCloud\SDK\Sample;
+
+use AlibabaCloud\SDK\Dingtalk\Vdoc_1_0\Dingtalk;
+use \Exception;
+use AlibabaCloud\Tea\Exception\TeaError;
+use AlibabaCloud\Tea\Utils\Utils;
+
+use Darabonba\OpenApi\Models\Config;
+use AlibabaCloud\SDK\Dingtalk\Vdoc_1_0\Models\CreateConditionalFormattingRuleHeaders;
+use AlibabaCloud\SDK\Dingtalk\Vdoc_1_0\Models\CreateConditionalFormattingRuleRequest\cellStyle;
+use AlibabaCloud\SDK\Dingtalk\Vdoc_1_0\Models\CreateConditionalFormattingRuleRequest\numberCondition;
+use AlibabaCloud\SDK\Dingtalk\Vdoc_1_0\Models\CreateConditionalFormattingRuleRequest\duplicateCondition;
+use AlibabaCloud\SDK\Dingtalk\Vdoc_1_0\Models\CreateConditionalFormattingRuleRequest;
+use AlibabaCloud\Tea\Utils\Utils\RuntimeOptions;
+
+class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Dingtalk Client
+     */
+    public static function createClient(){
+        $config = new Config([]);
+        $config-&gt;protocol = "https";
+        $config-&gt;regionId = "central";
+        return new Dingtalk($config);
+    }
+
+    /**
+     * @param string[] $args
+     * @return void
+     */
+    public static function main($args){
+        $client = self::createClient();
+        $createConditionalFormattingRuleHeaders = new CreateConditionalFormattingRuleHeaders([]);
+        $createConditionalFormattingRuleHeaders-&gt;xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        $cellStyle = new cellStyle([
+            "backgroundColor" =&gt; "#ff0000",
+            "fontColor" =&gt; "#ff0000"
+        ]);
+        $numberCondition = new numberCondition([
+            "operator" =&gt; "between",
+            "value1" =&gt; 10,
+            "value2" =&gt; 50
+        ]);
+        $duplicateCondition = new duplicateCondition([
+            "operator" =&gt; "duplicate"
+        ]);
+        $createConditionalFormattingRuleRequest = new CreateConditionalFormattingRuleRequest([
+            "operatorId" =&gt; "ppgAxxx",
+            "ranges" =&gt; [
+                "A1:B2"
+            ],
+            "duplicateCondition" =&gt; $duplicateCondition,
+            "numberCondition" =&gt; $numberCondition,
+            "cellStyle" =&gt; $cellStyle
+        ]);
+        try {
+            $client-&gt;createConditionalFormattingRuleWithOptions("e54Lq3xxx", "Sheet1", $createConditionalFormattingRuleRequest, $createConditionalFormattingRuleHeaders, new RuntimeOptions([]));
+        }
+        catch (Exception $err) {
+            if (!($err instanceof TeaError)) {
+                $err = new TeaError([], $err-&gt;getMessage(), $err-&gt;getCode(), $err);
+            }
+            if (!Utils::empty_($err-&gt;code) &amp;&amp; !Utils::empty_($err-&gt;message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+        }
+    }
+}
+$path = __DIR__ . \DIRECTORY_SEPARATOR . '..' . \DIRECTORY_SEPARATOR . 'vendor' . \DIRECTORY_SEPARATOR . 'autoload.php';
+if (file_exists($path)) {
+    require_once $path;
+}
+Sample::main(array_slice($argv, 1));</code></pre></div><input type="radio" name="check-figure-ijk-bri-hei" id="figure-ijk-bri-hei-go-tab" /><label for="figure-ijk-bri-hei-go-tab">Go</label><div class="codeblock-item"><pre id="codeblock-uy5-gd5-2rq" outputclass="language-go" data-tag="codeblock" code-type="xCode" class="pre codeblock language-go"><code>package main
+
+import (
+  "encoding/json"
+  "strings"
+  "fmt"
+  "os"
+  util  "github.com/alibabacloud-go/tea-utils/v2/service"
+  dingtalkdoc_1_0  "github.com/alibabacloud-go/dingtalk/doc_1_0"
+  openapi  "github.com/alibabacloud-go/darabonba-openapi/v2/client"
+  "github.com/alibabacloud-go/tea/tea"
+)
+
+
+// Description:
+// 
+// 使用 Token 初始化账号Client
+// 
+// @return Client
+// 
+// @throws Exception
+func CreateClient () (_result *dingtalkdoc_1_0.Client, _err error) {
+  config := &amp;openapi.Config{}
+  config.Protocol = tea.String("https")
+  config.RegionId = tea.String("central")
+  _result = &amp;dingtalkdoc_1_0.Client{}
+  _result, _err = dingtalkdoc_1_0.NewClient(config)
+  return _result, _err
+}
+
+func _main (args []*string) (_err error) {
+  client, _err := CreateClient()
+  if _err != nil {
+    return _err
+  }
+
+  createConditionalFormattingRuleHeaders := &amp;dingtalkdoc_1_0.CreateConditionalFormattingRuleHeaders{}
+  createConditionalFormattingRuleHeaders.XAcsDingtalkAccessToken = tea.String("&lt;your access token&gt;")
+  cellStyle := &amp;dingtalkdoc_1_0.CreateConditionalFormattingRuleRequestCellStyle{
+    BackgroundColor: tea.String("#ff0000"),
+    FontColor: tea.String("#ff0000"),
+  }
+  numberCondition := &amp;dingtalkdoc_1_0.CreateConditionalFormattingRuleRequestNumberCondition{
+    Operator: tea.String("between"),
+    Value1: tea.Int(10),
+    Value2: tea.Int(50),
+  }
+  duplicateCondition := &amp;dingtalkdoc_1_0.CreateConditionalFormattingRuleRequestDuplicateCondition{
+    Operator: tea.String("duplicate"),
+  }
+  createConditionalFormattingRuleRequest := &amp;dingtalkdoc_1_0.CreateConditionalFormattingRuleRequest{
+    OperatorId: tea.String("ppgAxxx"),
+    Ranges: []*string{tea.String("A1:B2")},
+    DuplicateCondition: duplicateCondition,
+    NumberCondition: numberCondition,
+    CellStyle: cellStyle,
+  }
+  tryErr := func()(_e error) {
+    defer func() {
+      if r := tea.Recover(recover()); r != nil {
+        _e = r
+      }
+    }()
+    _, _err = client.CreateConditionalFormattingRuleWithOptions(tea.String("e54Lq3xxx"), tea.String("Sheet1"), createConditionalFormattingRuleRequest, createConditionalFormattingRuleHeaders, &amp;util.RuntimeOptions{})
+    if _err != nil {
+      return _err
+    }
+
+    return nil
+  }()
+
+  if tryErr != nil {
+    var err = &amp;tea.SDKError{}
+    if _t, ok := tryErr.(*tea.SDKError); ok {
+      err = _t
+    } else {
+      err.Message = tea.String(tryErr.Error())
+    }
+    if !tea.BoolValue(util.Empty(err.Code)) &amp;&amp; !tea.BoolValue(util.Empty(err.Message)) {
+      // err 中含有 code 和 message 属性，可帮助开发定位问题
+    }
+
+  }
+  return _err
+}
+
+
+func main() {
+  err := _main(tea.StringSlice(os.Args[1:]))
+  if err != nil {
+    panic(err)
+  }
+}</code></pre></div><input type="radio" name="check-figure-ijk-bri-hei" id="figure-ijk-bri-hei-nodejs-tab" /><label for="figure-ijk-bri-hei-nodejs-tab">Node.js</label><div class="codeblock-item"><pre id="codeblock-0uq-3yl-wmo" outputclass="language-nodejs" data-tag="codeblock" code-type="xCode" class="pre codeblock language-nodejs"><code>'use strict';
+// This file is auto-generated, don't edit it
+const Util = require('@alicloud/tea-util');
+const dingtalkdoc_1_0 = require('@alicloud/dingtalk/doc_1_0');
+const OpenApi = require('@alicloud/openapi-client');
+const Tea = require('@alicloud/tea-typescript');
+
+class Client {
+
+  /**
+   * 使用 Token 初始化账号Client
+   * @return Client
+   * @throws Exception
+   */
+  static createClient() {
+    let config = new OpenApi.Config({ });
+    config.protocol = 'https';
+    config.regionId = 'central';
+    return new dingtalkdoc_1_0.default(config);
+  }
+
+  static async main(args) {
+    let client = Client.createClient();
+    let createConditionalFormattingRuleHeaders = new dingtalkdoc_1_0.CreateConditionalFormattingRuleHeaders({ });
+    createConditionalFormattingRuleHeaders.xAcsDingtalkAccessToken = '&lt;your access token&gt;';
+    let cellStyle = new dingtalkdoc_1_0.CreateConditionalFormattingRuleRequestCellStyle({
+      backgroundColor: '#ff0000',
+      fontColor: '#ff0000',
+    });
+    let numberCondition = new dingtalkdoc_1_0.CreateConditionalFormattingRuleRequestNumberCondition({
+      operator: 'between',
+      value1: 10,
+      value2: 50,
+    });
+    let duplicateCondition = new dingtalkdoc_1_0.CreateConditionalFormattingRuleRequestDuplicateCondition({
+      operator: 'duplicate',
+    });
+    let createConditionalFormattingRuleRequest = new dingtalkdoc_1_0.CreateConditionalFormattingRuleRequest({
+      operatorId: 'ppgAxxx',
+      ranges: [
+        'A1:B2'
+      ],
+      duplicateCondition: duplicateCondition,
+      numberCondition: numberCondition,
+      cellStyle: cellStyle,
+    });
+    try {
+      await client.createConditionalFormattingRuleWithOptions('e54Lq3xxx', 'Sheet1', createConditionalFormattingRuleRequest, createConditionalFormattingRuleHeaders, new Util.RuntimeOptions({ }));
+    } catch (err) {
+      if (!Util.default.empty(err.code) &amp;&amp; !Util.default.empty(err.message)) {
+        // err 中含有 code 和 message 属性，可帮助开发定位问题
+      }
+
+    }    
+  }
+
+}
+
+exports.Client = Client;
+Client.main(process.argv.slice(2));</code></pre></div><input type="radio" name="check-figure-ijk-bri-hei" id="figure-ijk-bri-hei-csharp-tab" /><label for="figure-ijk-bri-hei-csharp-tab">C#</label><div class="codeblock-item"><pre id="codeblock-4dw-zmg-r2i" outputclass="language-csharp" data-tag="codeblock" code-type="xCode" class="pre codeblock language-csharp"><code>using Newtonsoft.Json;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
+
+using Tea;
+using Tea.Utils;
+
+
+namespace AlibabaCloud.SDK.Sample
+{
+    public class Sample 
+    {
+
+        /// &lt;term&gt;&lt;b&gt;Description:&lt;/b&gt;&lt;/term&gt;
+        /// &lt;description&gt;
+        /// &lt;para&gt;使用 Token 初始化账号Client&lt;/para&gt;
+        /// &lt;/description&gt;
+        /// 
+        /// &lt;returns&gt;
+        /// Client
+        /// &lt;/returns&gt;
+        /// 
+        /// &lt;term&gt;&lt;b&gt;Exception:&lt;/b&gt;&lt;/term&gt;
+        /// Exception
+        public static AlibabaCloud.SDK.Dingtalkdoc_1_0.Client CreateClient()
+        {
+            AlibabaCloud.OpenApiClient.Models.Config config = new AlibabaCloud.OpenApiClient.Models.Config();
+            config.Protocol = "https";
+            config.RegionId = "central";
+            return new AlibabaCloud.SDK.Dingtalkdoc_1_0.Client(config);
+        }
+
+        public static void Main(string[] args)
+        {
+            AlibabaCloud.SDK.Dingtalkdoc_1_0.Client client = CreateClient();
+            AlibabaCloud.SDK.Dingtalkdoc_1_0.Models.CreateConditionalFormattingRuleHeaders createConditionalFormattingRuleHeaders = new AlibabaCloud.SDK.Dingtalkdoc_1_0.Models.CreateConditionalFormattingRuleHeaders();
+            createConditionalFormattingRuleHeaders.XAcsDingtalkAccessToken = "&lt;your access token&gt;";
+            AlibabaCloud.SDK.Dingtalkdoc_1_0.Models.CreateConditionalFormattingRuleRequest.CreateConditionalFormattingRuleRequestCellStyle cellStyle = new AlibabaCloud.SDK.Dingtalkdoc_1_0.Models.CreateConditionalFormattingRuleRequest.CreateConditionalFormattingRuleRequestCellStyle
+            {
+                BackgroundColor = "#ff0000",
+                FontColor = "#ff0000",
+            };
+            AlibabaCloud.SDK.Dingtalkdoc_1_0.Models.CreateConditionalFormattingRuleRequest.CreateConditionalFormattingRuleRequestNumberCondition numberCondition = new AlibabaCloud.SDK.Dingtalkdoc_1_0.Models.CreateConditionalFormattingRuleRequest.CreateConditionalFormattingRuleRequestNumberCondition
+            {
+                Operator = "between",
+                Value1 = 10,
+                Value2 = 50,
+            };
+            AlibabaCloud.SDK.Dingtalkdoc_1_0.Models.CreateConditionalFormattingRuleRequest.CreateConditionalFormattingRuleRequestDuplicateCondition duplicateCondition = new AlibabaCloud.SDK.Dingtalkdoc_1_0.Models.CreateConditionalFormattingRuleRequest.CreateConditionalFormattingRuleRequestDuplicateCondition
+            {
+                Operator = "duplicate",
+            };
+            AlibabaCloud.SDK.Dingtalkdoc_1_0.Models.CreateConditionalFormattingRuleRequest createConditionalFormattingRuleRequest = new AlibabaCloud.SDK.Dingtalkdoc_1_0.Models.CreateConditionalFormattingRuleRequest
+            {
+                OperatorId = "ppgAxxx",
+                Ranges = new List&lt;string&gt;
+                {
+                    "A1:B2"
+                },
+                DuplicateCondition = duplicateCondition,
+                NumberCondition = numberCondition,
+                CellStyle = cellStyle,
+            };
+            try
+            {
+                client.CreateConditionalFormattingRuleWithOptions("e54Lq3xxx", "Sheet1", createConditionalFormattingRuleRequest, createConditionalFormattingRuleHeaders, new AlibabaCloud.TeaUtil.Models.RuntimeOptions());
+            }
+            catch (TeaException err)
+            {
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+            catch (Exception _err)
+            {
+                TeaException err = new TeaException(new Dictionary&lt;string, object&gt;
+                {
+                    { "message", _err.Message }
+                });
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+        }
+
+
+    }
+}</code></pre></div></div></section></section><section id="section-response-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-response-1" data-tag="h2" class="h2">响应</h2><section id="section-response-parameter" class="section"><h3 data-tag="h3" id="h2-u9l-dsv-2vi" class="h3 title">响应体</h3><table id="636b0ea8f30t3" tablewidth="710" tablecolswidth="213 142 355" autofit="false" class="table"><colgroup colwidth="0.9*" style="width:30.00%"></colgroup><colgroup colwidth="0.6*" style="width:20.00%"></colgroup><colgroup colwidth="1.5*" style="width:50.00%"></colgroup><tbody class="tbody"><tr id="05f6518c89cvr"><td id="1aee7d9300jil" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="b9983752756ng">名称</p></td><td id="b6141d49f9w4s" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="2278b78539t6u">类型</p></td><td id="2ef9321be6nqg" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="8dc2ae063fpb3">描述</p></td></tr><tr outputclass="row row-level-1" id="febbc458482mp" class="row row-level-1"><td id="5a519d28b0ns1" rowspan="1" colspan="1"><p id="8e4c3c3a3fgko">id</p></td><td id="e63277e666vym" rowspan="1" colspan="1"><p id="c282e7f444d50">String</p></td><td id="a11c8c42b465o" rowspan="1" colspan="1"><p id="29b6721ce1ymp">条件格式ID。</p></td></tr></tbody></table></section><section id="section-response-body-example" class="section"><h3 id="h3-response-body-example" data-tag="h3" class="h3">响应体示例</h3><pre outputclass="language-json" data-tag="codeblock" code-type="xCode" id="af898357cdd4y" class="pre codeblock language-json"><code>HTTP/1.1 200 OK
+Content-Type:application/json
+
+{
+  "id" : "cf-xxxxx"
+}</code></pre></section><section id="section-error-code-1" class="section"><h3 id="h3-error-code-1" data-tag="h3" class="h3">错误码</h3><p data-tag="p" id="p-error-code-global-guide" class="p">若调用该接口报错，可根据错误信息在<a href="https://open.dingtalk.com/document/development/server-api-error-codes-1" id="a-error-code-global-guide">全局错误码</a>文档中查找解决方案。</p><table id="bac84e464ftm4" tablewidth="709" tablecolswidth="142 177 177 213" autofit="false" class="table"><colgroup colwidth="0.8*" style="width:20.03%"></colgroup><colgroup colwidth="1*" style="width:24.96%"></colgroup><colgroup colwidth="1*" style="width:24.96%"></colgroup><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><tbody class="tbody"><tr id="23dbcf40a0fus"><td id="316ddefb2f0lv" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="851182fe84dal">HttpCode</p></td><td id="fbeaaa0bb6slm" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="b18a37fd97cm9">错误码</p></td><td id="b4dbd0c7f4gxa" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="633c4c224dh61">错误信息</p></td><td id="509e640149q81" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="f5b9d0f8c3wuk">说明</p></td></tr><tr id="12869fcb81d0s"><td id="58a3b311d934i" rowspan="1" colspan="1"><p id="ca8e8ee3d75c3">400</p></td><td id="3eddca5a780yb" rowspan="1" colspan="1"><p id="f1a5595841bvl">invalidRequest.inputArgs.invalid</p></td><td id="05673eccc74od" rowspan="1" colspan="1"><p id="7f436f71c6auo">%s</p></td><td id="79e04add13i7k" rowspan="1" colspan="1"><p id="e6b1d6f4d80k9">请求参数不合法，请查看错误信息。</p></td></tr><tr id="67d587365djze"><td id="7de4edf23fy4j" rowspan="1" colspan="1"><p id="b98eac07a0ojj">400</p></td><td id="9b3ee378d65om" rowspan="1" colspan="1"><p id="7efeefe73cbzh">invalidRequest.inputArgs.workbookIdIllegal</p></td><td id="e75a2c8d563bw" rowspan="1" colspan="1"><p id="738b40caaa630">The workbookId is illegal.</p></td><td id="916a2bde7aniu" rowspan="1" colspan="1"><p id="2cdb06c92bhyd">workbookId不合法。</p></td></tr><tr id="648847d31dvl8"><td id="58b120d91fqfx" rowspan="1" colspan="1"><p id="24a4b44f11mpv">400</p></td><td id="58a5a5a57f8je" rowspan="1" colspan="1"><p id="7a4a1e12bdnsn">invalidRequest.resource.notWorkbook</p></td><td id="404e93b88ehvl" rowspan="1" colspan="1"><p id="6d229ac693fv0">%s</p></td><td id="de84dd05d1wk2" rowspan="1" colspan="1"><p id="a59ee332c2xpw">不支持的文档类型，请检查workbookId。</p></td></tr><tr id="645138212crhb"><td id="19b603008144u" rowspan="1" colspan="1"><p id="8d228b0cfb44u">400</p></td><td id="896b12134ch46" rowspan="1" colspan="1"><p id="294088f9b8o9k">invalidRequest.document.stillInitializing</p></td><td id="eaa9cb3fa5uum" rowspan="1" colspan="1"><p id="439aaa0d7084f">The document is still initializing. Please try again later.</p></td><td id="bcd097e96ea9s" rowspan="1" colspan="1"><p id="56caed58a68mo">文档初始化中，请稍后重试。</p></td></tr><tr id="ba33a558ebe5l"><td id="a19dbbcef15y3" rowspan="1" colspan="1"><p id="a24020d75be4z">403</p></td><td id="63430783dcd0n" rowspan="1" colspan="1"><p id="4787752b0clr8">forbidden.accessDenied</p></td><td id="6f38919623en3" rowspan="1" colspan="1"><p id="ed88650bc3tx6">The operator has no permission.</p></td><td id="af60005567hc1" rowspan="1" colspan="1"><p id="5730a99e42n5x">当前用户无此操作权限。</p></td></tr><tr id="50228b654fexh"><td id="f8b7d3a8f8qic" rowspan="1" colspan="1"><p id="d46df3ac56cor">403</p></td><td id="beb6be50f4d01" rowspan="1" colspan="1"><p id="84473bf02fjvy">forbidden.acrossOrg</p></td><td id="af71432762fin" rowspan="1" colspan="1"><p id="e11021be081m6">%s</p></td><td id="55e1f0eff27l6" rowspan="1" colspan="1"><p id="b4d5c3da3195s">请求不合法，请检查要访问的文档是否归属于accessToken指定的组织。</p></td></tr><tr id="cb8a9850c2fo0"><td id="a2412453039x8" rowspan="1" colspan="1"><p id="5e6b92a3adgfl">403</p></td><td id="f0fa49aebc5kw" rowspan="1" colspan="1"><p id="16a25db086r25">forbidden.operationIllegal</p></td><td id="d6c0ba676ew3e" rowspan="1" colspan="1"><p id="d36eaab6652ca">%s</p></td><td id="c9416659ade5j" rowspan="1" colspan="1"><p id="2593748318ac9">请求操作不合法，请查看错误信息。</p></td></tr><tr id="b9d7e2c9e1lvm"><td id="b4ef5f903cczu" rowspan="1" colspan="1"><p id="725fa988db3fk">403</p></td><td id="95bd397ad8dae" rowspan="1" colspan="1"><p id="4722ed5f25kam">forbidden.document.sizeOverLimit</p></td><td id="a1466b9447h76" rowspan="1" colspan="1"><p id="fde6e457c11hr">The document size is over limit and the server is unable to complete your request. Retry is unlikely to work unless the document size is decreased.</p></td><td id="270bc0db42o9j" rowspan="1" colspan="1"><p id="41a87437c3to2">表格内容过大，请尝试缩减表格内容。</p></td></tr><tr id="18daf6711fckw"><td id="6d01d64bbfq4s" rowspan="1" colspan="1"><p id="0847fde16fifv">404</p></td><td id="24759807f43cv" rowspan="1" colspan="1"><p id="7cbbe0e3d0xgq">invalidRequest.resource.notFound</p></td><td id="4530f36b3duug" rowspan="1" colspan="1"><p id="df12948692yrc">%s</p></td><td id="04fbdaa759mrm" rowspan="1" colspan="1"><p id="71dceb4678qr5">请求失败，无法找到要访问的资源。</p></td></tr><tr id="8adf8c1f49th4"><td id="67af159bd3543" rowspan="1" colspan="1"><p id="f79a9a36e6nsr">500</p></td><td id="ec729e468a8jg" rowspan="1" colspan="1"><p id="87b4c84564hf1">serviceBusy</p></td><td id="45528b5321d3y" rowspan="1" colspan="1"><p id="ba28113178ukf">The server is busy and unable to complete your request. Please try again later.</p></td><td id="4d1aae2134fze" rowspan="1" colspan="1"><p id="44c68c98dawyn">服务繁忙，请稍后重试。</p></td></tr><tr id="56a4d22964ltg"><td id="3f9a8278beppm" rowspan="1" colspan="1"><p id="b7d95f8a2bjfk">500</p></td><td id="183c6377bdnp3" rowspan="1" colspan="1"><p id="84b1343a4elob">internalError</p></td><td id="15365d4070b30" rowspan="1" colspan="1"><p id="2ed3c866a4hsm">The server encountered an internal error and was unable to complete your request. Please try again later.</p></td><td id="4e792ffd4flpf" rowspan="1" colspan="1"><p id="6b14f0e1dawcu">服务内部错误，请稍后再试。</p></td></tr></tbody></table></section></section></div></main></body></html>

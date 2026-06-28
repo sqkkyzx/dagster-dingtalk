@@ -1,0 +1,372 @@
+<!DOCTYPE html><html><head><meta charset="utf8" / /><meta name="gmtModify" content="2026-04-10 10:44:02" / /><meta name="searchtitle" content="" / /><meta name="keywords" content="" / /><meta name="author" content="" / /><title>合并单元格</title><meta name="gmtModify" content="2026-06-04 19:09:12" / /></head><body data-tag="topic" id="doc-api-dingtalk-MergeRange" class="topic"><main id="2c55ef65e3xvg" data-init-id="doc-api-dingtalk-MergeRange"><h1 data-tag="title" id="h1-283-mes-wj2" class="title">合并单元格</h1><p data-tag="shortdesc" class="shortdesc" id="48419fae6fqi3">调用本接口，可将钉钉表格中指定区域内的多个单元格合并为一个整体。适用于制作表头跨列标题、合并相同分类行等需要调整单元格布局的场景。支持全部合并、按行合并、按列合并三种模式，合并后仅保留左上角单元格的数据，其余单元格内容将被清除，接口返回实际操作的单元格地址。</p><div data-tag="conbody" outputclass="icms-api-reference" class="icms-api-reference conbody"><section id="section-request-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-request-1" data-tag="h2" class="h2">请求</h2><section id="section-request-basic-info" class="section"><h3 id="heading-request-basic-info" data-tag="h3" class="h3">基本信息</h3><table id="ae2f1efad6iht" tablewidth="648" tablecolswidth="216 432" autofit="false" class="table"><colgroup colwidth="0.67*" style="width:33.33%"></colgroup><colgroup colwidth="1.33*" style="width:66.67%"></colgroup><tbody class="tbody"><tr id="efcd0e1cafsm4"><td id="e2bb3bdd6ciq4" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="97b68319cdwzt">字段</p></td><td id="083b0760dewr2" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="21eac9f810eca">值</p></td></tr><tr id="de2792bb4ad2g"><td id="7455e50e67jkw" rowspan="1" colspan="1"><p id="9062a18f90dfk">HTTP URL</p></td><td id="554ca9c578kpr" rowspan="1" colspan="1"><p id="2016689065yao">https://api.dingtalk.com/v1.0/doc/workbooks/{workbookId}/sheets/{sheetId}/ranges/{rangeAddress}/merge</p></td></tr><tr id="4cbf1a2278rhx"><td id="31a1db38faw2j" rowspan="1" colspan="1"><p id="81855b8a1fe6c">HTTP Method</p></td><td id="ab35713298ncd" rowspan="1" colspan="1"><p id="bce33ab653xyf">POST</p></td></tr><tr id="e7376f8ba3c5a"><td id="3fe26b393annm" rowspan="1" colspan="1"><p id="aeb62986787yt">支持的应用类型</p></td><td id="f40dcb8ca2394" rowspan="1" colspan="1"><p id="d19fd9fa145f7"><span data-tag="ph" id="ph-request-basic-app-type-apptype-0" class="ph ph-app-type" data-ph-raw-text="appType-企业内部应用">appType-企业内部应用</span></p></td></tr><tr id="568ef42c0e2gi"><td id="29dafb16752gt" rowspan="1" colspan="1"><p id="6ac966810d0ux">权限要求</p></td><td id="3240561c6bt9r" rowspan="1" colspan="1"><p id="a70e4041a5yjy"><span data-tag="ph" id="ph-request-basic-permission-permission-document-workbook-write-0" class="ph-permission ph" data-ph-raw-text="permission-Document.Workbook.Write-钉钉表格写权限" data-permission-id="permission-Document.Workbook.Write" data-permission-code="Document.Workbook.Write" data-permission-detail-api="/document/api/permission/detail" data-permission-query-param="code">permission-Document.Workbook.Write-钉钉表格写权限</span></p></td></tr></tbody></table></section><section id="section-request-header-parameter" class="section"><h3 data-tag="h3" id="h2-6qa-ghv-gvg" class="h3 title">请求头</h3><table id="16f11e80c904x" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="3a7084a066n8h"><td id="629e5d5a39jdy" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="523f2257dazlv">名称</p></td><td id="e017b919f8f43" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="3c92ca77a76b7">类型</p></td><td id="a31fe0bb65jo3" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="2bb1d7d90507q">是否必填</p></td><td id="3644bf118cje4" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="c3c7b1a276vba">描述</p></td></tr><tr id="78dd0baed8wo7"><td id="d932f51876opk" rowspan="1" colspan="1"><p id="e35a02b865w4m">x-acs-dingtalk-access-token</p></td><td id="3a22253b0dd9x" rowspan="1" colspan="1"><p id="dd935fd388hn5">String</p></td><td id="52ee19dd78cd1" rowspan="1" colspan="1"><p id="385c127842an8">是</p></td><td id="fbb5f5a067v8i" rowspan="1" colspan="1"><p id="8d413375efbhm">调用该接口的访问凭证，可调用<a href="https://open.dingtalk.com/document/development/obtain-the-access-token-of-an-internal-app" id="cbed4450c2cpk">获取企业内部应用的accessToken</a>接口获取。</p></td></tr></tbody></table></section><section id="section-request-path-parameter" class="section"><h3 data-tag="h3" id="h2-pgk-tnm-zf7" class="h3 title">路径参数</h3><table id="8eb01863655zs" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="98ae5ea9b1mtx"><td id="102f25b284qjy" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="9ffd85f3d3e9p">名称</p></td><td id="93be5043bc5v5" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="70f3d91cc5hzx">类型</p></td><td id="fdd06a3f74t0a" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="ed9251a6c6u3z">是否必填</p></td><td id="13284f548d7ok" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="d316159ae7y67">描述</p></td></tr><tr id="0c655ae584nfs"><td id="8bb4c7f5e4cb5" rowspan="1" colspan="1"><p id="1c253f8911a85">workbookId</p></td><td id="6e44083437e01" rowspan="1" colspan="1"><p id="79b5d5f33bg9z">String</p></td><td id="51fb4382f33ag" rowspan="1" colspan="1"><p id="b71746e28b3j6">是</p></td><td id="1c86a9e515uin" rowspan="1" colspan="1"><p id="e7dc18f65701x">表格文件 ID ，<a href="https://open.dingtalk.com/document/development/knowledge-base-overview" id="278248eae2h59">知识库 API</a> 返回的nodeId(dentryUuid)即是表格workbookId，可通过调用<a href="https://open.dingtalk.com/document/development/get-knowledge-base-acquisition-node" id="e0f0b3e1905kj">获取节点</a>和<a href="https://open.dingtalk.com/document/development/create-team-space-document" id="6b0cb3f3eat4u">创建知识库文档</a>接口获取。</p></td></tr><tr id="610a84ef421ta"><td id="d6cfc897c5tan" rowspan="1" colspan="1"><p id="235f9ba3b581f">sheetId</p></td><td id="0c3ddf81ddxse" rowspan="1" colspan="1"><p id="e7c7e1ad5961l">String</p></td><td id="cb95444d34vbz" rowspan="1" colspan="1"><p id="3a6ce13f47i7i">是</p></td><td id="2c7592168epeo" rowspan="1" colspan="1"><p id="0e7ed5925c1t8">工作表ID或标题，可调用<a href="https://open.dingtalk.com/document/development/obtain-all-worksheets" id="c38483ae686qv">获取所有工作表</a>接口获取id和工作表的标题。</p></td></tr><tr id="a10146e466exx"><td id="597a95b913jng" rowspan="1" colspan="1"><p id="d92d4639f43hn">rangeAddress</p></td><td id="bc409bbb0avbo" rowspan="1" colspan="1"><p id="f230278fe9hou">String</p></td><td id="e3bca4dd5dfn5" rowspan="1" colspan="1"><p id="9bd9230622s19">是</p></td><td id="3345da2300r4o" rowspan="1" colspan="1"><p id="c4edac11000so">需要合并的单元格范围，格式为<code data-tag="inlineCode" id="1242749cfdxol" class="inlineCode">区域内左上角单元格:区域内右下角单元格</code>。</p><p id="ec7a428df9y9o">例如：B2:C3</p></td></tr></tbody></table></section><section id="section-request-query-parameter" class="section"><h3 data-tag="h3" id="h2-wis-4du-2bo" class="h3 title">查询参数</h3><table id="f28c4974962dn" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="5242472c88q9h"><td id="d5e1aeef72kbh" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="4ba7499feag3r">名称</p></td><td id="40e7eab2a9790" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="ef7e2cd2615fp">类型</p></td><td id="18c48b993efb2" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="07066f615fgdd">是否必填</p></td><td id="14ad5f947all1" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="1e722dfa6bnrx">描述</p></td></tr><tr id="7b7132bbb865s"><td id="c7bb4b44e9npn" rowspan="1" colspan="1"><p id="30a9cf4f714m2">operatorId</p></td><td id="8d12782ad2ne8" rowspan="1" colspan="1"><p id="f7ed5e6600etn">String</p></td><td id="c19f98e1044o6" rowspan="1" colspan="1"><p id="b6c9a79e7dccs">是</p></td><td id="b721c860a6w42" rowspan="1" colspan="1"><p id="8c350988cfavv">操作人的unionId，可调用<a href="https://open.dingtalk.com/document/development/query-user-details" id="a2f7128048p0d">查询用户详情</a>接口获取。</p><p class="note-icon-wrapper" id="fda19a906abev"></p><p data-tag="p" class="p" id="7181fbf9ed7hu"></p><p id="80df973f02zzw">若操作人无权限，接口会报错 <code data-tag="inlineCode" id="fa17e2b085fhr" class="inlineCode">The operator has no permission</code>。</p><p id="02bf647d84s2o"></p></td></tr></tbody></table></section><section id="section-request-body-parameter" class="section"><h3 data-tag="h3" id="h2-ojz-agl-opk" class="h3 title">请求体</h3><table id="cdef60b995h02" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="8480bc41c4d1o"><td id="fe9379ecaafrt" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="c8cc46c1f8kue">名称</p></td><td id="c2c77c9151hpf" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="f19e09ec3829a">类型</p></td><td id="ae4d7d705dln5" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="4675a43e163p8">是否必填</p></td><td id="989fc8f855779" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="342e762379ond">描述</p></td></tr><tr outputclass="row row-level-5" id="9a9c223219ki9" class="row row-level-5"><td id="22e71da5ce68e" rowspan="1" colspan="1"><p id="4f65d857628n7">mergeType</p></td><td id="ee864cd0e65rg" rowspan="1" colspan="1"><p id="6210651c8bq5r">String</p></td><td id="cc98957a9el9n" rowspan="1" colspan="1"><p id="a9b493c0fbnzp">否</p></td><td id="986cf0a5dacbe" rowspan="1" colspan="1"><p id="100c25b024i4i">指定合并单元格的方式。可选值：</p><ul id="3956aee9581ef"><li id="cd4f36f566sz0"><p id="269535da09e14"><b>mergeAll</b>：合并所有单元格（默认值）</p></li><li id="fa07f8f401zo6"><p id="b933bd0696p1t"><b>mergeRows</b>：按行合并，即在选定的区域内，将同一行相邻的单元格合并成一个单元格</p></li><li id="350be9f209k8m"><p id="73768bc1c08ur"><b>mergeColumns</b>：按列合并，即在选定的区域内，将同一列中相邻的单元格合并成一个单元格</p></li></ul></td></tr></tbody></table></section><section id="section-request-body-example" class="section"><h3 id="h3-request-body-example" data-tag="h3" class="h3">请求示例</h3><div outputclass="tabbed-codeblock" data-tag="fig" id="figure-bdq-kc6-qe7" class="tabbed-codeblock-box"><div class="tab-box"></div><input type="radio" name="check-figure-bdq-kc6-qe7" id="figure-bdq-kc6-qe7-HTTP-tab" checked="checked" /><label for="figure-bdq-kc6-qe7-HTTP-tab">HTTP</label><div class="codeblock-item"><pre id="codeblock-ngo-58v-tjm" outputclass="language-HTTP" data-tag="codeblock" code-type="xCode" class="pre codeblock language-HTTP"><code>POST /v1.0/doc/workbooks/e54Lq3xxx/sheets/Sheet1/ranges/A1:B1/merge?operatorId=ppgAQuxxx HTTP/1.1
+Host:api.dingtalk.com
+x-acs-dingtalk-access-token:token:f86e0bxxx
+Content-Type:application/json
+
+{
+  "mergeType" : "mergeRows"
+}</code></pre></div><input type="radio" name="check-figure-bdq-kc6-qe7" id="figure-bdq-kc6-qe7-java-tab" /><label for="figure-bdq-kc6-qe7-java-tab">Java</label><div class="codeblock-item"><pre id="codeblock-uz3-4on-kod" outputclass="language-java" data-tag="codeblock" code-type="xCode" class="pre codeblock language-java"><code>package com.aliyun.sample;
+
+import com.aliyun.tea.*;
+
+public class Sample {
+
+    /**
+     * &lt;b&gt;description&lt;/b&gt; :
+     * &lt;p&gt;使用 Token 初始化账号Client&lt;/p&gt;
+     * @return Client
+     * 
+     * @throws Exception
+     */
+    public static com.aliyun.dingtalkdoc_1_0.Client createClient() throws Exception {
+        com.aliyun.teaopenapi.models.Config config = new com.aliyun.teaopenapi.models.Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        return new com.aliyun.dingtalkdoc_1_0.Client(config);
+    }
+
+    public static void main(String[] args_) throws Exception {
+        
+        com.aliyun.dingtalkdoc_1_0.Client client = Sample.createClient();
+        com.aliyun.dingtalkdoc_1_0.models.MergeRangeHeaders mergeRangeHeaders = new com.aliyun.dingtalkdoc_1_0.models.MergeRangeHeaders();
+        mergeRangeHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        com.aliyun.dingtalkdoc_1_0.models.MergeRangeRequest mergeRangeRequest = new com.aliyun.dingtalkdoc_1_0.models.MergeRangeRequest()
+                .setOperatorId("ppgAQuxxx")
+                .setMergeType("mergeRows");
+        try {
+            client.mergeRangeWithOptions("e54Lq3xxx", "Sheet1", "A1:B1", mergeRangeRequest, mergeRangeHeaders, new com.aliyun.teautil.models.RuntimeOptions());
+        } catch (TeaException err) {
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        } catch (Exception _err) {
+            TeaException err = new TeaException(_err.getMessage(), _err);
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        }        
+    }
+}</code></pre></div><input type="radio" name="check-figure-bdq-kc6-qe7" id="figure-bdq-kc6-qe7-python-tab" /><label for="figure-bdq-kc6-qe7-python-tab">Python</label><div class="codeblock-item"><pre id="codeblock-5ez-fob-pw1" outputclass="language-python" data-tag="codeblock" code-type="xCode" class="pre codeblock language-python"><code># -*- coding: utf-8 -*-
+# This file is auto-generated, don't edit it. Thanks.
+import os
+import sys
+import json
+
+from typing import List
+
+from alibabacloud_dingtalk.doc_1_0.client import Client as dingtalkdoc_1_0Client
+from alibabacloud_tea_openapi import models as open_api_models
+from alibabacloud_dingtalk.doc_1_0 import models as dingtalkdoc__1__0_models
+from alibabacloud_tea_util import models as util_models
+from alibabacloud_tea_util.client import Client as UtilClient
+
+
+class Sample:
+    def __init__(self):
+        pass
+
+    @staticmethod
+    def create_client() -&gt; dingtalkdoc_1_0Client:
+        """
+        使用 Token 初始化账号Client
+        @return: Client
+        @throws Exception
+        """
+        config = open_api_models.Config()
+        config.protocol = 'https'
+        config.region_id = 'central'
+        return dingtalkdoc_1_0Client(config)
+
+    @staticmethod
+    def main(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        merge_range_headers = dingtalkdoc__1__0_models.MergeRangeHeaders()
+        merge_range_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        merge_range_request = dingtalkdoc__1__0_models.MergeRangeRequest(
+            operator_id='ppgAQuxxx',
+            merge_type='mergeRows'
+        )
+        try:
+            client.merge_range_with_options('e54Lq3xxx', 'Sheet1', 'A1:B1', merge_range_request, merge_range_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+    @staticmethod
+    async def main_async(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        merge_range_headers = dingtalkdoc__1__0_models.MergeRangeHeaders()
+        merge_range_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        merge_range_request = dingtalkdoc__1__0_models.MergeRangeRequest(
+            operator_id='ppgAQuxxx',
+            merge_type='mergeRows'
+        )
+        try:
+            await client.merge_range_with_options_async('e54Lq3xxx', 'Sheet1', 'A1:B1', merge_range_request, merge_range_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+
+if __name__ == '__main__':
+    Sample.main(sys.argv[1:])</code></pre></div><input type="radio" name="check-figure-bdq-kc6-qe7" id="figure-bdq-kc6-qe7-php-tab" /><label for="figure-bdq-kc6-qe7-php-tab">PHP</label><div class="codeblock-item"><pre id="codeblock-hcs-vbe-n2p" outputclass="language-php" data-tag="codeblock" code-type="xCode" class="pre codeblock language-php"><code>&lt;?php
+
+// This file is auto-generated, don't edit it. Thanks.
+namespace AlibabaCloud\SDK\Sample;
+
+use AlibabaCloud\SDK\Dingtalk\Vdoc_1_0\Dingtalk;
+use \Exception;
+use AlibabaCloud\Tea\Exception\TeaError;
+use AlibabaCloud\Tea\Utils\Utils;
+
+use Darabonba\OpenApi\Models\Config;
+use AlibabaCloud\SDK\Dingtalk\Vdoc_1_0\Models\MergeRangeHeaders;
+use AlibabaCloud\SDK\Dingtalk\Vdoc_1_0\Models\MergeRangeRequest;
+use AlibabaCloud\Tea\Utils\Utils\RuntimeOptions;
+
+class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Dingtalk Client
+     */
+    public static function createClient(){
+        $config = new Config([]);
+        $config-&gt;protocol = "https";
+        $config-&gt;regionId = "central";
+        return new Dingtalk($config);
+    }
+
+    /**
+     * @param string[] $args
+     * @return void
+     */
+    public static function main($args){
+        $client = self::createClient();
+        $mergeRangeHeaders = new MergeRangeHeaders([]);
+        $mergeRangeHeaders-&gt;xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        $mergeRangeRequest = new MergeRangeRequest([
+            "operatorId" =&gt; "ppgAQuxxx",
+            "mergeType" =&gt; "mergeRows"
+        ]);
+        try {
+            $client-&gt;mergeRangeWithOptions("e54Lq3xxx", "Sheet1", "A1:B1", $mergeRangeRequest, $mergeRangeHeaders, new RuntimeOptions([]));
+        }
+        catch (Exception $err) {
+            if (!($err instanceof TeaError)) {
+                $err = new TeaError([], $err-&gt;getMessage(), $err-&gt;getCode(), $err);
+            }
+            if (!Utils::empty_($err-&gt;code) &amp;&amp; !Utils::empty_($err-&gt;message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+        }
+    }
+}
+$path = __DIR__ . \DIRECTORY_SEPARATOR . '..' . \DIRECTORY_SEPARATOR . 'vendor' . \DIRECTORY_SEPARATOR . 'autoload.php';
+if (file_exists($path)) {
+    require_once $path;
+}
+Sample::main(array_slice($argv, 1));</code></pre></div><input type="radio" name="check-figure-bdq-kc6-qe7" id="figure-bdq-kc6-qe7-go-tab" /><label for="figure-bdq-kc6-qe7-go-tab">Go</label><div class="codeblock-item"><pre id="codeblock-j18-rvl-yod" outputclass="language-go" data-tag="codeblock" code-type="xCode" class="pre codeblock language-go"><code>package main
+
+import (
+  "encoding/json"
+  "strings"
+  "fmt"
+  "os"
+  util  "github.com/alibabacloud-go/tea-utils/v2/service"
+  dingtalkdoc_1_0  "github.com/alibabacloud-go/dingtalk/doc_1_0"
+  openapi  "github.com/alibabacloud-go/darabonba-openapi/v2/client"
+  "github.com/alibabacloud-go/tea/tea"
+)
+
+
+// Description:
+// 
+// 使用 Token 初始化账号Client
+// 
+// @return Client
+// 
+// @throws Exception
+func CreateClient () (_result *dingtalkdoc_1_0.Client, _err error) {
+  config := &amp;openapi.Config{}
+  config.Protocol = tea.String("https")
+  config.RegionId = tea.String("central")
+  _result = &amp;dingtalkdoc_1_0.Client{}
+  _result, _err = dingtalkdoc_1_0.NewClient(config)
+  return _result, _err
+}
+
+func _main (args []*string) (_err error) {
+  client, _err := CreateClient()
+  if _err != nil {
+    return _err
+  }
+
+  mergeRangeHeaders := &amp;dingtalkdoc_1_0.MergeRangeHeaders{}
+  mergeRangeHeaders.XAcsDingtalkAccessToken = tea.String("&lt;your access token&gt;")
+  mergeRangeRequest := &amp;dingtalkdoc_1_0.MergeRangeRequest{
+    OperatorId: tea.String("ppgAQuxxx"),
+    MergeType: tea.String("mergeRows"),
+  }
+  tryErr := func()(_e error) {
+    defer func() {
+      if r := tea.Recover(recover()); r != nil {
+        _e = r
+      }
+    }()
+    _, _err = client.MergeRangeWithOptions(tea.String("e54Lq3xxx"), tea.String("Sheet1"), tea.String("A1:B1"), mergeRangeRequest, mergeRangeHeaders, &amp;util.RuntimeOptions{})
+    if _err != nil {
+      return _err
+    }
+
+    return nil
+  }()
+
+  if tryErr != nil {
+    var err = &amp;tea.SDKError{}
+    if _t, ok := tryErr.(*tea.SDKError); ok {
+      err = _t
+    } else {
+      err.Message = tea.String(tryErr.Error())
+    }
+    if !tea.BoolValue(util.Empty(err.Code)) &amp;&amp; !tea.BoolValue(util.Empty(err.Message)) {
+      // err 中含有 code 和 message 属性，可帮助开发定位问题
+    }
+
+  }
+  return _err
+}
+
+
+func main() {
+  err := _main(tea.StringSlice(os.Args[1:]))
+  if err != nil {
+    panic(err)
+  }
+}</code></pre></div><input type="radio" name="check-figure-bdq-kc6-qe7" id="figure-bdq-kc6-qe7-nodejs-tab" /><label for="figure-bdq-kc6-qe7-nodejs-tab">Node.js</label><div class="codeblock-item"><pre id="codeblock-pcz-97k-zhf" outputclass="language-nodejs" data-tag="codeblock" code-type="xCode" class="pre codeblock language-nodejs"><code>'use strict';
+// This file is auto-generated, don't edit it
+const Util = require('@alicloud/tea-util');
+const dingtalkdoc_1_0 = require('@alicloud/dingtalk/doc_1_0');
+const OpenApi = require('@alicloud/openapi-client');
+const Tea = require('@alicloud/tea-typescript');
+
+class Client {
+
+  /**
+   * 使用 Token 初始化账号Client
+   * @return Client
+   * @throws Exception
+   */
+  static createClient() {
+    let config = new OpenApi.Config({ });
+    config.protocol = 'https';
+    config.regionId = 'central';
+    return new dingtalkdoc_1_0.default(config);
+  }
+
+  static async main(args) {
+    let client = Client.createClient();
+    let mergeRangeHeaders = new dingtalkdoc_1_0.MergeRangeHeaders({ });
+    mergeRangeHeaders.xAcsDingtalkAccessToken = '&lt;your access token&gt;';
+    let mergeRangeRequest = new dingtalkdoc_1_0.MergeRangeRequest({
+      operatorId: 'ppgAQuxxx',
+      mergeType: 'mergeRows',
+    });
+    try {
+      await client.mergeRangeWithOptions('e54Lq3xxx', 'Sheet1', 'A1:B1', mergeRangeRequest, mergeRangeHeaders, new Util.RuntimeOptions({ }));
+    } catch (err) {
+      if (!Util.default.empty(err.code) &amp;&amp; !Util.default.empty(err.message)) {
+        // err 中含有 code 和 message 属性，可帮助开发定位问题
+      }
+
+    }    
+  }
+
+}
+
+exports.Client = Client;
+Client.main(process.argv.slice(2));</code></pre></div><input type="radio" name="check-figure-bdq-kc6-qe7" id="figure-bdq-kc6-qe7-csharp-tab" /><label for="figure-bdq-kc6-qe7-csharp-tab">C#</label><div class="codeblock-item"><pre id="codeblock-bfh-e8s-u4x" outputclass="language-csharp" data-tag="codeblock" code-type="xCode" class="pre codeblock language-csharp"><code>using Newtonsoft.Json;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
+
+using Tea;
+using Tea.Utils;
+
+
+namespace AlibabaCloud.SDK.Sample
+{
+    public class Sample 
+    {
+
+        /// &lt;term&gt;&lt;b&gt;Description:&lt;/b&gt;&lt;/term&gt;
+        /// &lt;description&gt;
+        /// &lt;para&gt;使用 Token 初始化账号Client&lt;/para&gt;
+        /// &lt;/description&gt;
+        /// 
+        /// &lt;returns&gt;
+        /// Client
+        /// &lt;/returns&gt;
+        /// 
+        /// &lt;term&gt;&lt;b&gt;Exception:&lt;/b&gt;&lt;/term&gt;
+        /// Exception
+        public static AlibabaCloud.SDK.Dingtalkdoc_1_0.Client CreateClient()
+        {
+            AlibabaCloud.OpenApiClient.Models.Config config = new AlibabaCloud.OpenApiClient.Models.Config();
+            config.Protocol = "https";
+            config.RegionId = "central";
+            return new AlibabaCloud.SDK.Dingtalkdoc_1_0.Client(config);
+        }
+
+        public static void Main(string[] args)
+        {
+            AlibabaCloud.SDK.Dingtalkdoc_1_0.Client client = CreateClient();
+            AlibabaCloud.SDK.Dingtalkdoc_1_0.Models.MergeRangeHeaders mergeRangeHeaders = new AlibabaCloud.SDK.Dingtalkdoc_1_0.Models.MergeRangeHeaders();
+            mergeRangeHeaders.XAcsDingtalkAccessToken = "&lt;your access token&gt;";
+            AlibabaCloud.SDK.Dingtalkdoc_1_0.Models.MergeRangeRequest mergeRangeRequest = new AlibabaCloud.SDK.Dingtalkdoc_1_0.Models.MergeRangeRequest
+            {
+                OperatorId = "ppgAQuxxx",
+                MergeType = "mergeRows",
+            };
+            try
+            {
+                client.MergeRangeWithOptions("e54Lq3xxx", "Sheet1", "A1:B1", mergeRangeRequest, mergeRangeHeaders, new AlibabaCloud.TeaUtil.Models.RuntimeOptions());
+            }
+            catch (TeaException err)
+            {
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+            catch (Exception _err)
+            {
+                TeaException err = new TeaException(new Dictionary&lt;string, object&gt;
+                {
+                    { "message", _err.Message }
+                });
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+        }
+
+
+    }
+}</code></pre></div></div></section></section><section id="section-response-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-response-1" data-tag="h2" class="h2">响应</h2><section id="section-response-parameter" class="section"><h3 data-tag="h3" id="h2-m0s-aml-y8d" class="h3 title">响应体</h3><table id="e65f2eb7cdddh" tablewidth="710" tablecolswidth="213 142 355" autofit="false" class="table"><colgroup colwidth="0.9*" style="width:30.00%"></colgroup><colgroup colwidth="0.6*" style="width:20.00%"></colgroup><colgroup colwidth="1.5*" style="width:50.00%"></colgroup><tbody class="tbody"><tr id="fb689e98ddnoc"><td id="9dea5bf9c4nby" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="2f610ca327y2e">名称</p></td><td id="fcd1688a83uyy" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="de1ae38688xkg">类型</p></td><td id="e10d1bad7buii" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="1394560519wi2">描述</p></td></tr><tr outputclass="row row-level-1" id="94eeb94c70cfx" class="row row-level-1"><td id="3313d8c87bo4o" rowspan="1" colspan="1"><p id="9bff100f55pel">a1Notation</p></td><td id="4f4fc598c6ffe" rowspan="1" colspan="1"><p id="cf52bb4738m09">String</p></td><td id="3cde1dc31b688" rowspan="1" colspan="1"><p id="eb5d5ce3d8nnq">合并的单元格范围，格式为<code data-tag="inlineCode" id="32b261f140gbm" class="inlineCode">区域内左上角单元格:区域内右下角单元格</code>。</p><p id="3ab75836e4ju3">例如：B2:C3</p></td></tr></tbody></table></section><section id="section-response-body-example" class="section"><h3 id="h3-response-body-example" data-tag="h3" class="h3">响应体示例</h3><pre outputclass="language-json" data-tag="codeblock" code-type="xCode" id="b451c65d260rc" class="pre codeblock language-json"><code>HTTP/1.1 200 OK
+Content-Type:application/json
+
+{
+  "a1Notation" : "A1:B1"
+}</code></pre></section><section id="section-error-code-1" class="section"><h3 id="h3-error-code-1" data-tag="h3" class="h3">错误码</h3><p data-tag="p" id="p-error-code-global-guide" class="p">若调用该接口报错，可根据错误信息在<a href="https://open.dingtalk.com/document/development/server-api-error-codes-1" id="a-error-code-global-guide">全局错误码</a>文档中查找解决方案。</p><table id="ea06ddaf6enp6" tablewidth="709" tablecolswidth="142 177 177 213" autofit="false" class="table"><colgroup colwidth="0.8*" style="width:20.03%"></colgroup><colgroup colwidth="1*" style="width:24.96%"></colgroup><colgroup colwidth="1*" style="width:24.96%"></colgroup><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><tbody class="tbody"><tr id="357b23eb556au"><td id="2bd91bc1773cj" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="f004ccd0b3f57">HttpCode</p></td><td id="4bbb013b00zqa" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="28c6d8f825pzd">错误码</p></td><td id="7ec5d90debf30" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="9f1966f465wds">错误信息</p></td><td id="b847b201c23j1" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="dd49349c0e7gk">说明</p></td></tr><tr id="30014e7099khq"><td id="95800dd186arq" rowspan="1" colspan="1"><p id="31bf92f5d4avz">400</p></td><td id="2532e371ff8x1" rowspan="1" colspan="1"><p id="8f1b45ebf4648">invalidRequest.inputArgs.workbookIdIllegal</p></td><td id="62c74c49acrci" rowspan="1" colspan="1"><p id="c23f2d46f7lr1">The workbookId is illegal.</p></td><td id="d88f0ed6e0hxe" rowspan="1" colspan="1"><p id="d3ef6c5334dja">workbookId不合法。</p></td></tr><tr id="a68004a3b4pww"><td id="b1de1b4accyyf" rowspan="1" colspan="1"><p id="c470702c6abkn">400</p></td><td id="30ac1dc5936l6" rowspan="1" colspan="1"><p id="c96f1ac5874km">invalidRequest.inputArgs.unionIdIllegal</p></td><td id="fec72e412f18z" rowspan="1" colspan="1"><p id="eb1577d184njo">The operatorId is illegal.</p></td><td id="d0261a4ca566w" rowspan="1" colspan="1"><p id="3c9c35b5f87ok">operatorId不合法。</p></td></tr><tr id="9b26665796evm"><td id="71aac9be89pde" rowspan="1" colspan="1"><p id="a9669fd725n6n">400</p></td><td id="ad575134e7sri" rowspan="1" colspan="1"><p id="7251f8f490nwp">invalidRequest.inputArgs.invalid</p></td><td id="9485145fb3ko0" rowspan="1" colspan="1"><p id="2812b165ebo82">%s</p></td><td id="61d8850063osh" rowspan="1" colspan="1"><p id="f2b253a360ws5">请求参数不合法，请查看错误信息。</p></td></tr><tr id="5dedad1abfr4c"><td id="7ead4efc394v9" rowspan="1" colspan="1"><p id="8cd5dc3b91wmd">403</p></td><td id="e95f71af3ehzx" rowspan="1" colspan="1"><p id="b1d1db265e8mz">forbidden.operationIllegal</p></td><td id="43bd9d183fgat" rowspan="1" colspan="1"><p id="073fa35fbcne7">%s</p></td><td id="53fd8189fchel" rowspan="1" colspan="1"><p id="bc4feeae2azld">请求操作不合法，请查看错误信息。</p></td></tr><tr id="b5725aa9b2zu3"><td id="2386dfeea6wbv" rowspan="1" colspan="1"><p id="4e1c482fa4iaf">403</p></td><td id="1b06cd8875c7t" rowspan="1" colspan="1"><p id="22eb106c5dckf">forbidden.accessDenied</p></td><td id="96e6f5a3ff47w" rowspan="1" colspan="1"><p id="00175e1d38qdh">The operator has no permission.</p></td><td id="4fb76937ad0ao" rowspan="1" colspan="1"><p id="f6e96ce7c5cr9">当前用户无此操作权限。</p></td></tr><tr id="fe374d8f6e0l7"><td id="4d59aa394etrs" rowspan="1" colspan="1"><p id="37e0e156fdq1q">403</p></td><td id="fd14e398270fi" rowspan="1" colspan="1"><p id="bc34de4e3alql">forbidden.document.sizeOverLimit</p></td><td id="b0a24f1950m8i" rowspan="1" colspan="1"><p id="48914d9164971">The document size is over limit and the server is unable to complete your request. Retry is unlikely to work unless the document size is decreased.</p></td><td id="64f427ecc5vzu" rowspan="1" colspan="1"><p id="b25060f190jof">表格内容过大，请尝试缩减表格内容。</p></td></tr><tr id="b52b475e508jg"><td id="54b27c2ca6q67" rowspan="1" colspan="1"><p id="58cdc214a9dix">404</p></td><td id="818201de13qc4" rowspan="1" colspan="1"><p id="dd96b7c0b2op7">invalidRequest.resource.notFound</p></td><td id="a7263ef86c57t" rowspan="1" colspan="1"><p id="55fd5ce289flt">%s</p></td><td id="8db6816e62q0a" rowspan="1" colspan="1"><p id="73f62dddacyl9">请求失败，无法找到要访问的资源。</p></td></tr><tr id="3a211a8c32pg4"><td id="43a5e9a3d2rsf" rowspan="1" colspan="1"><p id="730b7155380lw">500</p></td><td id="ef66a3d6e4rai" rowspan="1" colspan="1"><p id="b89cc433553ya">internalError</p></td><td id="b2326108a9i34" rowspan="1" colspan="1"><p id="3e7f7ecf8a0b5">The server encountered an internal error and was unable to complete your request. Please try again later.</p></td><td id="36dc7e1dd01hy" rowspan="1" colspan="1"><p id="1512f8449dto8">服务内部错误，请稍后再试。</p></td></tr><tr id="157f5ca5b16fj"><td id="623da575f7wis" rowspan="1" colspan="1"><p id="143df469eeiqt">503</p></td><td id="e7d547cc718wk" rowspan="1" colspan="1"><p id="76c9005b86oo8">serviceBusy</p></td><td id="114a5f7ca9xd0" rowspan="1" colspan="1"><p id="0c45f17b71un5">The server is busy and unable to complete your request. Please try again later.</p></td><td id="8173c27a0esa5" rowspan="1" colspan="1"><p id="f0858b3e11akq">服务繁忙，请稍后重试。</p></td></tr></tbody></table></section></section></div></main></body></html>

@@ -1,0 +1,395 @@
+<!DOCTYPE html><html><head><meta charset="utf8" / /><meta name="searchtitle" content="" / /><meta name="keywords" content="" / /><meta name="author" content="" / /><title>分页获取补卡规则列表</title><meta name="gmtModify" content="2025-09-11 21:02:13" / /><meta name="gmtModify" content="2026-06-01 16:47:20" / /></head><body data-tag="topic" id="doc-api-dingtalk-GetAdjustments" class="topic"><main id="cc7c279fd1p20" data-init-id="doc-api-dingtalk_GetAdjustments"><h1 data-tag="title" id="h1-k35-iyu-wxp" class="title">分页获取补卡规则列表</h1><p data-tag="shortdesc" id="22bb63f646ary" class="shortdesc">调用本接口，分页获取考勤打卡中设置的补卡规则列表，包括规则名称和规则ID。</p><div data-tag="conbody" outputclass="icms-api-reference" class="icms-api-reference conbody"><section id="section-prerequisites-1" class="section icms-module" data-tag="section" data-source="latest-mounted-icms-html"><h2 id="h2-prerequisites-1" data-tag="h2" class="h2">接口调用说明</h2><p>例如，企业的考勤规则管理内有两个补卡规则，分别为<b>测试补卡规则</b>和<b>默认补卡规则</b>，如下图所示。</p><p>调用本接口可获取两个补卡规则的规则名称和规则ID。 <img src="https://help-static-aliyun-doc.aliyuncs.com/assets/img/zh-CN/2885238471/p961085.png" alt="image" placement="break" class="image break" / /></p></section><section id="section-request-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-request-1" data-tag="h2" class="h2">请求</h2><section id="section-request-basic-info" class="section"><h3 id="heading-request-basic-info" data-tag="h3" class="h3">基本信息</h3><table tablewidth="648" tablecolswidth="216 432" autofit="false" class="table"><colgroup colwidth="1*" style="width:33.33%"></colgroup><colgroup colwidth="2*" style="width:66.67%"></colgroup><tbody class="tbody"><tr><td rowspan="1" style="background-color:#e5e5e5" colspan="1"><p>字段</p></td><td rowspan="1" style="background-color:#e5e5e5" colspan="1"><p>值</p></td></tr><tr><td rowspan="1" colspan="1"><p>HTTP URL</p></td><td rowspan="1" colspan="1"><p>https://api.dingtalk.com/v1.0/attendance/adjustments</p></td></tr><tr><td rowspan="1" colspan="1"><p>HTTP Method</p></td><td rowspan="1" colspan="1"><p>GET</p></td></tr><tr><td rowspan="1" colspan="1"><p>支持的应用类型</p></td><td rowspan="1" colspan="1"><p><span data-tag="ph" id="ph-request-basic-app-type-apptype-0" class="ph ph-app-type" data-ph-raw-text="appType-企业内部应用">appType-企业内部应用</span>　<span data-tag="ph" id="ph-request-basic-app-type-apptype-1" class="ph ph-app-type" data-ph-raw-text="appType-第三方企业应用">appType-第三方企业应用</span></p></td></tr><tr><td rowspan="1" colspan="1"><p>权限要求</p></td><td rowspan="1" colspan="1"><p><span data-tag="ph" id="ph-request-basic-permission-permission-qyapi-attendance-group-read-0" class="ph-permission ph" data-ph-raw-text="permission-qyapi_attendance_group_read-考勤组查询权限" data-permission-id="permission-qyapi_attendance_group_read" data-permission-code="qyapi_attendance_group_read" data-permission-detail-api="/document/api/permission/detail" data-permission-query-param="code">permission-qyapi_attendance_group_read-考勤组查询权限</span></p></td></tr></tbody></table></section><section id="section-request-header-parameter" class="section"><h3 data-tag="h3" id="h2-cok-6wf-wfd" class="h3 title">请求头</h3><table id="768d1a3343o8a" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="464b83efd43ep"><td id="2b7a4dd41c96p" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="6268f375e8c4c">名称</p></td><td id="881f379a82o0o" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="b641891aebsk7">类型</p></td><td id="da41e5a874sc8" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="4e054ef443wrx">是否必填</p></td><td id="f76e195ef8ibn" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="5e01146f8cbvz">描述</p></td></tr><tr id="ec33b3c95bakp"><td id="d9faf35d1bfm2" rowspan="1" colspan="1"><p id="7ef6a9054ax3q">x-acs-dingtalk-access-token</p></td><td id="e0cbe79d84tf1" rowspan="1" colspan="1"><p id="ed654ec578exq">String</p></td><td id="58a582383eqkl" rowspan="1" colspan="1"><p id="0209d8750cnj5">是</p></td><td id="d16b9e5f1cna1" rowspan="1" colspan="1"><p id="6b7f3c7e1ea18">调用该接口的访问凭证，通过以下获取：</p><ul id="8fba8ccbectnj"><li id="dace943c20vbe"><p id="ca09404059yfy">企业内部应用，调用<a id="916f2a1048dg8" href="https://open.dingtalk.com/document/development/obtain-the-access-token-of-an-internal-app#" class="xref">获取企业内部应用的accessToken</a>接口获取。</p></li><li id="4198465b2bgql"><p id="65bfc18266teh">第三方企业应用，调用<a id="e4b62da06cw13" href="https://open.dingtalk.com/document/development/obtain-the-access-token-of-the-authorized-enterprise-1#" class="xref">获取第三方应用授权企业的accessToken</a>接口获取。</p></li></ul></td></tr></tbody></table></section><section id="section-request-query-parameter" class="section"><h3 data-tag="h3" id="h2-kfk-dpi-que" class="h3 title">查询参数</h3><table id="882e1cf526xuh" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="9c44f4b847tsf"><td id="c896e9d03fzel" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="8b1183f770bel">名称</p></td><td id="9456c300dcq7n" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="c2ea251c96hzp">类型</p></td><td id="9fe556327770q" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="5318d82b54g9k">是否必填</p></td><td id="190da073bben1" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="b7df5e30562ki">描述</p></td></tr><tr id="63959c81a1cv8"><td id="b833cfc5fev43" rowspan="1" colspan="1"><p id="456cb5b91434c">pageNumber</p></td><td id="7e61a4c76baqi" rowspan="1" colspan="1"><p id="501ac0f7a8b7w">Long</p></td><td id="0798b82d56d3l" rowspan="1" colspan="1"><p id="53a31f8a7c6uq">是</p></td><td id="f17beda0e1mbg" rowspan="1" colspan="1"><p id="6afadbce99sv6">分页起始页。</p><div type="note" id="53b523e8b42oa" class="note note-note"><div class="note-icon-wrapper"><i class="icon-note note note"></i></div><div class="noteContentSpan"><p data-tag="p" id="7f54809bb7n21" class="p"></p><p id="4ddc0ab5a0iba">该参数值从1开始。</p><p id="64b448ed44pgt"></p></div></div></td></tr><tr id="f3e99d7deeadj"><td id="c706d7fdd0c59" rowspan="1" colspan="1"><p id="326f9a3799rxb">pageSize</p></td><td id="b7cd767228leb" rowspan="1" colspan="1"><p id="b40dfa9008iht">Long</p></td><td id="7c951f1723q4d" rowspan="1" colspan="1"><p id="9ad0a9804e8fb">是</p></td><td id="9d89a50e49lat" rowspan="1" colspan="1"><p id="b7c67738f2kb7">分页大小。</p><div type="note" id="344b49943cz5w" class="note note-note"><div class="note-icon-wrapper"><i class="icon-note note note"></i></div><div class="noteContentSpan"><p data-tag="p" id="9e86ef1cc4f44" class="p"></p><p id="2fde3a10c7e5a">该参数最大不能超过50。</p><p id="cf986e03e6ez8"></p></div></div></td></tr></tbody></table></section><section id="section-request-body-example" class="section"><h3 id="h3-request-body-example" data-tag="h3" class="h3">请求示例</h3><div id="figure-gay-tqu-bhx" outputclass="tabbed-codeblock" data-tag="fig" class="tabbed-codeblock-box"><div class="tab-box"></div><input type="radio" name="check-figure-gay-tqu-bhx" id="figure-gay-tqu-bhx-HTTP-tab" checked="checked" /><label for="figure-gay-tqu-bhx-HTTP-tab">HTTP</label><div class="codeblock-item"><pre id="codeblock-o54-3pb-rrt" outputclass="language-HTTP" code-type="xCode" data-tag="codeblock" class="pre codeblock language-HTTP"><code>GET /v1.0/attendance/adjustments?pageNumber=1&amp;pageSize=10 HTTP/1.1
+Host:api.dingtalk.com
+x-acs-dingtalk-access-token:xxxxx
+Content-Type:application/json</code></pre></div><input type="radio" name="check-figure-gay-tqu-bhx" id="figure-gay-tqu-bhx-java-tab" /><label for="figure-gay-tqu-bhx-java-tab">Java</label><div class="codeblock-item"><pre id="codeblock-daa-uje-de6" outputclass="language-java" code-type="xCode" data-tag="codeblock" class="pre codeblock language-java"><code>// This file is auto-generated, don't edit it. Thanks.
+package com.aliyun.sample;
+
+import com.aliyun.tea.*;
+import com.aliyun.teautil.*;
+import com.aliyun.teautil.models.*;
+import com.aliyun.dingtalkattendance_1_0.*;
+import com.aliyun.dingtalkattendance_1_0.models.*;
+import com.aliyun.teaopenapi.*;
+import com.aliyun.teaopenapi.models.*;
+
+public class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Client
+     * @throws Exception
+     */
+    public static com.aliyun.dingtalkattendance_1_0.Client createClient() throws Exception {
+        Config config = new Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        return new com.aliyun.dingtalkattendance_1_0.Client(config);
+    }
+
+    public static void main(String[] args_) throws Exception {
+        java.util.List&lt;String&gt; args = java.util.Arrays.asList(args_);
+        com.aliyun.dingtalkattendance_1_0.Client client = Sample.createClient();
+        GetAdjustmentsHeaders getAdjustmentsHeaders = new GetAdjustmentsHeaders();
+        getAdjustmentsHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        GetAdjustmentsRequest getAdjustmentsRequest = new GetAdjustmentsRequest()
+                .setPageNumber(1L)
+                .setPageSize(10L);
+        try {
+            client.getAdjustmentsWithOptions(getAdjustmentsRequest, getAdjustmentsHeaders, new RuntimeOptions());
+        } catch (TeaException err) {
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        } catch (Exception _err) {
+            TeaException err = new TeaException(_err.getMessage(), _err);
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        }        
+    }
+}</code></pre></div><input type="radio" name="check-figure-gay-tqu-bhx" id="figure-gay-tqu-bhx-python-tab" /><label for="figure-gay-tqu-bhx-python-tab">Python</label><div class="codeblock-item"><pre id="codeblock-ksw-4wk-url" outputclass="language-python" code-type="xCode" data-tag="codeblock" class="pre codeblock language-python"><code># -*- coding: utf-8 -*-
+# This file is auto-generated, don't edit it. Thanks.
+import sys
+
+from typing import List
+
+from alibabacloud_dingtalk.attendance_1_0.client import Client as dingtalkattendance_1_0Client
+from alibabacloud_tea_openapi import models as open_api_models
+from alibabacloud_dingtalk.attendance_1_0 import models as dingtalkattendance__1__0_models
+from alibabacloud_tea_util import models as util_models
+from alibabacloud_tea_util.client import Client as UtilClient
+
+
+class Sample:
+    def __init__(self):
+        pass
+
+    @staticmethod
+    def create_client() -&gt; dingtalkattendance_1_0Client:
+        """
+        使用 Token 初始化账号Client
+        @return: Client
+        @throws Exception
+        """
+        config = open_api_models.Config()
+        config.protocol = 'https'
+        config.region_id = 'central'
+        return dingtalkattendance_1_0Client(config)
+
+    @staticmethod
+    def main(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        get_adjustments_headers = dingtalkattendance__1__0_models.GetAdjustmentsHeaders()
+        get_adjustments_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        get_adjustments_request = dingtalkattendance__1__0_models.GetAdjustmentsRequest(
+            page_number=1,
+            page_size=10
+        )
+        try:
+            client.get_adjustments_with_options(get_adjustments_request, get_adjustments_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+    @staticmethod
+    async def main_async(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        get_adjustments_headers = dingtalkattendance__1__0_models.GetAdjustmentsHeaders()
+        get_adjustments_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        get_adjustments_request = dingtalkattendance__1__0_models.GetAdjustmentsRequest(
+            page_number=1,
+            page_size=10
+        )
+        try:
+            await client.get_adjustments_with_options_async(get_adjustments_request, get_adjustments_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+
+if __name__ == '__main__':
+    Sample.main(sys.argv[1:])</code></pre></div><input type="radio" name="check-figure-gay-tqu-bhx" id="figure-gay-tqu-bhx-php-tab" /><label for="figure-gay-tqu-bhx-php-tab">PHP</label><div class="codeblock-item"><pre id="codeblock-exo-wjm-ja5" outputclass="language-php" code-type="xCode" data-tag="codeblock" class="pre codeblock language-php"><code>&lt;?php
+
+// This file is auto-generated, don't edit it. Thanks.
+namespace AlibabaCloud\SDK\Sample;
+
+use AlibabaCloud\SDK\Dingtalk\Vattendance_1_0\Dingtalk;
+use \Exception;
+use AlibabaCloud\Tea\Exception\TeaError;
+use AlibabaCloud\Tea\Utils\Utils;
+
+use Darabonba\OpenApi\Models\Config;
+use AlibabaCloud\SDK\Dingtalk\Vattendance_1_0\Models\GetAdjustmentsHeaders;
+use AlibabaCloud\SDK\Dingtalk\Vattendance_1_0\Models\GetAdjustmentsRequest;
+use AlibabaCloud\Tea\Utils\Utils\RuntimeOptions;
+
+class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Dingtalk Client
+     */
+    public static function createClient(){
+        $config = new Config([]);
+        $config-&gt;protocol = "https";
+        $config-&gt;regionId = "central";
+        return new Dingtalk($config);
+    }
+
+    /**
+     * @param string[] $args
+     * @return void
+     */
+    public static function main($args){
+        $client = self::createClient();
+        $getAdjustmentsHeaders = new GetAdjustmentsHeaders([]);
+        $getAdjustmentsHeaders-&gt;xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        $getAdjustmentsRequest = new GetAdjustmentsRequest([
+            "pageNumber" =&gt; 1,
+            "pageSize" =&gt; 10
+        ]);
+        try {
+            $client-&gt;getAdjustmentsWithOptions($getAdjustmentsRequest, $getAdjustmentsHeaders, new RuntimeOptions([]));
+        }
+        catch (Exception $err) {
+            if (!($err instanceof TeaError)) {
+                $err = new TeaError([], $err-&gt;getMessage(), $err-&gt;getCode(), $err);
+            }
+            if (!Utils::empty_($err-&gt;code) &amp;&amp; !Utils::empty_($err-&gt;message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+        }
+    }
+}
+$path = __DIR__ . \DIRECTORY_SEPARATOR . '..' . \DIRECTORY_SEPARATOR . 'vendor' . \DIRECTORY_SEPARATOR . 'autoload.php';
+if (file_exists($path)) {
+    require_once $path;
+}
+Sample::main(array_slice($argv, 1));</code></pre></div><input type="radio" name="check-figure-gay-tqu-bhx" id="figure-gay-tqu-bhx-go-tab" /><label for="figure-gay-tqu-bhx-go-tab">Go</label><div class="codeblock-item"><pre id="codeblock-ttv-lit-wuu" outputclass="language-go" code-type="xCode" data-tag="codeblock" class="pre codeblock language-go"><code>// This file is auto-generated, don't edit it. Thanks.
+package main
+
+import (
+  "os"
+  util  "github.com/alibabacloud-go/tea-utils/service"
+  dingtalkattendance_1_0  "github.com/alibabacloud-go/dingtalk/attendance_1_0"
+  openapi  "github.com/alibabacloud-go/darabonba-openapi/client"
+  "github.com/alibabacloud-go/tea/tea"
+)
+
+
+/**
+ * 使用 Token 初始化账号Client
+ * @return Client
+ * @throws Exception
+ */
+func CreateClient () (_result *dingtalkattendance_1_0.Client, _err error) {
+  config := &amp;openapi.Config{}
+  config.Protocol = tea.String("https")
+  config.RegionId = tea.String("central")
+  _result = &amp;dingtalkattendance_1_0.Client{}
+  _result, _err = dingtalkattendance_1_0.NewClient(config)
+  return _result, _err
+}
+
+func _main (args []*string) (_err error) {
+  client, _err := CreateClient()
+  if _err != nil {
+    return _err
+  }
+
+  getAdjustmentsHeaders := &amp;dingtalkattendance_1_0.GetAdjustmentsHeaders{}
+  getAdjustmentsHeaders.XAcsDingtalkAccessToken = tea.String("&lt;your access token&gt;")
+  getAdjustmentsRequest := &amp;dingtalkattendance_1_0.GetAdjustmentsRequest{
+    PageNumber: tea.Int64(1),
+    PageSize: tea.Int64(10),
+  }
+  tryErr := func()(_e error) {
+    defer func() {
+      if r := tea.Recover(recover()); r != nil {
+        _e = r
+      }
+    }()
+    _, _err = client.GetAdjustmentsWithOptions(getAdjustmentsRequest, getAdjustmentsHeaders, &amp;util.RuntimeOptions{})
+    if _err != nil {
+      return _err
+    }
+
+    return nil
+  }()
+
+  if tryErr != nil {
+    var err = &amp;tea.SDKError{}
+    if _t, ok := tryErr.(*tea.SDKError); ok {
+      err = _t
+    } else {
+      err.Message = tea.String(tryErr.Error())
+    }
+    if !tea.BoolValue(util.Empty(err.Code)) &amp;&amp; !tea.BoolValue(util.Empty(err.Message)) {
+      // err 中含有 code 和 message 属性，可帮助开发定位问题
+    }
+
+  }
+  return _err
+}
+
+
+func main() {
+  err := _main(tea.StringSlice(os.Args[1:]))
+  if err != nil {
+    panic(err)
+  }
+}</code></pre></div><input type="radio" name="check-figure-gay-tqu-bhx" id="figure-gay-tqu-bhx-nodejs-tab" /><label for="figure-gay-tqu-bhx-nodejs-tab">Node.js</label><div class="codeblock-item"><pre id="codeblock-enu-gne-nha" outputclass="language-nodejs" code-type="xCode" data-tag="codeblock" class="pre codeblock language-nodejs"><code>// This file is auto-generated, don't edit it
+import Util, * as $Util from '@alicloud/tea-util';
+import dingtalkattendance_1_0, * as $dingtalkattendance_1_0 from '@alicloud/dingtalk/attendance_1_0';
+import OpenApi, * as $OpenApi from '@alicloud/openapi-client';
+import * as $tea from '@alicloud/tea-typescript';
+
+
+export default class Client {
+
+  /**
+   * 使用 Token 初始化账号Client
+   * @return Client
+   * @throws Exception
+   */
+  static createClient(): dingtalkattendance_1_0 {
+    let config = new $OpenApi.Config({ });
+    config.protocol = "https";
+    config.regionId = "central";
+    return new dingtalkattendance_1_0(config);
+  }
+
+  static async main(args: string[]): Promise&lt;void&gt; {
+    let client = Client.createClient();
+    let getAdjustmentsHeaders = new $dingtalkattendance_1_0.GetAdjustmentsHeaders({ });
+    getAdjustmentsHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+    let getAdjustmentsRequest = new $dingtalkattendance_1_0.GetAdjustmentsRequest({
+      pageNumber: 1,
+      pageSize: 10,
+    });
+    try {
+      await client.getAdjustmentsWithOptions(getAdjustmentsRequest, getAdjustmentsHeaders, new $Util.RuntimeOptions({ }));
+    } catch (err) {
+      if (!Util.empty(err.code) &amp;&amp; !Util.empty(err.message)) {
+        // err 中含有 code 和 message 属性，可帮助开发定位问题
+      }
+
+    }    
+  }
+
+}
+
+Client.main(process.argv.slice(2));</code></pre></div><input type="radio" name="check-figure-gay-tqu-bhx" id="figure-gay-tqu-bhx-csharp-tab" /><label for="figure-gay-tqu-bhx-csharp-tab">C#</label><div class="codeblock-item"><pre id="codeblock-uw2-wwx-oaw" outputclass="language-csharp" code-type="xCode" data-tag="codeblock" class="pre codeblock language-csharp"><code>// This file is auto-generated, don't edit it. Thanks.
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
+
+using Tea;
+using Tea.Utils;
+
+
+namespace AlibabaCloud.SDK.Sample
+{
+    public class Sample 
+    {
+
+        /**
+         * 使用 Token 初始化账号Client
+         * @return Client
+         * @throws Exception
+         */
+        public static AlibabaCloud.SDK.Dingtalkattendance_1_0.Client CreateClient()
+        {
+            AlibabaCloud.OpenApiClient.Models.Config config = new AlibabaCloud.OpenApiClient.Models.Config();
+            config.Protocol = "https";
+            config.RegionId = "central";
+            return new AlibabaCloud.SDK.Dingtalkattendance_1_0.Client(config);
+        }
+
+        public static void Main(string[] args)
+        {
+            AlibabaCloud.SDK.Dingtalkattendance_1_0.Client client = CreateClient();
+            AlibabaCloud.SDK.Dingtalkattendance_1_0.Models.GetAdjustmentsHeaders getAdjustmentsHeaders = new AlibabaCloud.SDK.Dingtalkattendance_1_0.Models.GetAdjustmentsHeaders();
+            getAdjustmentsHeaders.XAcsDingtalkAccessToken = "&lt;your access token&gt;";
+            AlibabaCloud.SDK.Dingtalkattendance_1_0.Models.GetAdjustmentsRequest getAdjustmentsRequest = new AlibabaCloud.SDK.Dingtalkattendance_1_0.Models.GetAdjustmentsRequest
+            {
+                PageNumber = 1,
+                PageSize = 10,
+            };
+            try
+            {
+                client.GetAdjustmentsWithOptions(getAdjustmentsRequest, getAdjustmentsHeaders, new AlibabaCloud.TeaUtil.Models.RuntimeOptions());
+            }
+            catch (TeaException err)
+            {
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+            catch (Exception _err)
+            {
+                TeaException err = new TeaException(new Dictionary&lt;string, object&gt;
+                {
+                    { "message", _err.Message }
+                });
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+        }
+
+
+    }
+}</code></pre></div></div></section></section><section id="section-response-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-response-1" data-tag="h2" class="h2">响应</h2><section id="section-response-parameter" class="section"><h3 data-tag="h3" id="h2-kif-rh1-mua" class="h3 title">响应体</h3><table id="b1216dec7cdx3" tablewidth="710" tablecolswidth="213 142 355" autofit="false" class="table"><colgroup colwidth="0.9*" style="width:30.00%"></colgroup><colgroup colwidth="0.6*" style="width:20.00%"></colgroup><colgroup colwidth="1.5*" style="width:50.00%"></colgroup><tbody class="tbody"><tr id="68271fe8141di"><td id="67c7a62136ybp" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="9da64a90440rp">名称</p></td><td id="360732268dvpl" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="1f2cc54141zxp">类型</p></td><td id="05ec312a7dpki" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="d955c48ee11nv">描述</p></td></tr><tr outputclass="row row-level-1 has-child" id="a58d7c25d8m6t" class="has-child row row-level-1 has-child row-level-1 row"><td id="bbff1b16fe1fs" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><span class="icms-tree-table-trigger" type="checkbox"></span><p id="3892d16e9fdh9">result</p></td><td id="e0cd34d0a4cwi" rowspan="1" colspan="1"><p id="9325cc9a10z3t">Object</p></td><td id="079593c7e25md" rowspan="1" colspan="1"><p id="5515a3f0c8aum">获取的结果。</p></td></tr><tr outputclass="row row-level-1-1" id="ecc8357f877vr" class="row-level-1-1 row row row-level-1-1"><td id="df0eddf07dmj8" rowspan="1" colspan="1"><p id="9bfe56827eor1">pageNumber</p></td><td id="88ce03ab08k8k" rowspan="1" colspan="1"><p id="9db303a912mi7">Long</p></td><td id="24a86fd07e88g" rowspan="1" colspan="1"><p id="38b0f5a5c98t9">当前页码。</p></td></tr><tr outputclass="row row-level-1-2" id="783cfd302244p" class="row-level-1-2 row row row-level-1-2"><td id="0be996bc78su0" rowspan="1" colspan="1"><p id="45ccb9b8e4d70">totalPage</p></td><td id="6680ef7b5a0xg" rowspan="1" colspan="1"><p id="01985ba74f4uc">Long</p></td><td id="343dead255n37" rowspan="1" colspan="1"><p id="7294cd9eccdy1">总页数。</p></td></tr><tr outputclass="row row-level-1-3 has-child" id="4c2cbb776cr69" class="has-child row-level-1-3 row row-level-1-3 has-child row"><td id="fc4e95f0bdq1n" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><span class="icms-tree-table-trigger" type="checkbox"></span><p id="54ad8c1acbbus">items</p></td><td id="37b0a58ef2ryf" rowspan="1" colspan="1"><p id="8efdc701abrtn">Array</p></td><td id="6606a262b0mev" rowspan="1" colspan="1"><p id="545981b003f9x">补卡规则列表。</p></td></tr><tr outputclass="row row-level-1-3-1" id="c3e5c206b5sk7" class="row-level-1-3-1 row row-level-1-3-1 row"><td id="fae9d46519cyx" rowspan="1" colspan="1"><p id="9dceadcd1c3cn">id</p></td><td id="ad6c6296fe27v" rowspan="1" colspan="1"><p id="4e03ae7873nuz">Long</p></td><td id="9e0bf6f0720tb" rowspan="1" colspan="1"><p id="c6a30e96bdo5a">补卡规则ID。</p></td></tr><tr outputclass="row row-level-1-3-2" id="9337520e0c23d" class="row row-level-1-3-2 row row-level-1-3-2"><td id="e105a3cdb92qc" rowspan="1" colspan="1"><p id="4f70430325kgv">name</p></td><td id="1a13b20bfcd7n" rowspan="1" colspan="1"><p id="a6b4c873abwaq">String</p></td><td id="1459d2d61anyy" rowspan="1" colspan="1"><p id="854698bb8etqk">补卡规则名称。</p></td></tr><tr outputclass="row row-level-1-3-3" id="9281f57ab7m6b" class="row row-level-1-3-3 row-level-1-3-3 row"><td id="40bd3071b88av" rowspan="1" colspan="1"><p id="42f47e9f89cu4">settingId</p></td><td id="e28275194fvpn" rowspan="1" colspan="1"><p id="ba5031b3a5wwe">Long</p></td><td id="019286cbeb75t" rowspan="1" colspan="1"><p id="326809b3c3x19">补卡规则settingId。</p></td></tr></tbody></table></section><section id="section-response-body-example" class="section"><h3 id="h3-response-body-example" data-tag="h3" class="h3">响应体示例</h3><pre id="c3e0f8f82690q" outputclass="language-json" code-type="xCode" data-tag="codeblock" class="pre codeblock language-json"><code>HTTP/1.1 200 OK
+Content-Type:application/json
+
+{
+  "result" : {
+    "pageNumber" : 1,
+    "totalPage" : 3,
+    "items" : [ {
+      "id" : 447010124,
+      "name" : "默认补卡规则",
+      "settingId" : 447010124
+    } ]
+  }
+}</code></pre></section><section id="section-error-code-1" class="section"><h3 id="h3-error-code-1" data-tag="h3" class="h3">错误码</h3><p data-tag="p" id="p-error-code-global-guide" class="p">若调用该接口报错，可根据错误信息在<a id="a-error-code-global-guide" href="https://open.dingtalk.com/document/development/server-api-error-codes-1">全局错误码</a>文档中查找解决方案。</p><table id="4ec8028bb9isc" tablewidth="709" tablecolswidth="142 177 177 213" autofit="false" class="table">
+  <colgroup colwidth="0.8*" style="width:20.03%"></colgroup>
+  <colgroup colwidth="1*" style="width:24.96%"></colgroup>
+  <colgroup colwidth="1*" style="width:24.96%"></colgroup>
+  <colgroup colwidth="1.2*" style="width:30.04%"></colgroup>
+  <tbody class="tbody">
+   <tr id="d9816a2922kc5">
+    <td id="f68986b108roi" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="732671a3fb1qn">HttpCode</p></td>
+    <td id="503d34d9ael87" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="38d2bb76818a4">错误码</p></td>
+    <td id="8d481656bbal5" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="ae017f0e70quj">错误信息</p></td>
+    <td id="81e4acfcc44at" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="98fd8dec82jcz">说明</p></td>
+   </tr>
+   <tr id="7b3a24b93et6u">
+    <td id="1e54f1ddd2bgu" rowspan="1" colspan="1"><p id="08eb0516773x1">400</p></td>
+    <td id="e1601bfab71m0" rowspan="1" colspan="1"><p id="45e6ba305032o">system.error</p></td>
+    <td id="f2bf8d98f0lwd" rowspan="1" colspan="1"><p id="80a25fa560bye">系统异常</p></td>
+    <td id="fbbef459333mb" rowspan="1" colspan="1"><p id="3308509f823e6">系统异常</p></td>
+   </tr>
+   <tr id="853b35f1495l1">
+    <td id="dffaabe378sxd" rowspan="1" colspan="1"><p id="566f97ad4fmb6">400</p></td>
+    <td id="08dbc11850ilz" rowspan="1" colspan="1"><p id="5ce86a4cd5iks">paging.parameter.error</p></td>
+    <td id="eb6562b9136o4" rowspan="1" colspan="1"><p id="33d2ede54436c">分页参数错误</p></td>
+    <td id="d2485f43b826k" rowspan="1" colspan="1"><p id="0a0fe9ae974gt">分页参数错误</p></td>
+   </tr>
+  </tbody>
+ </table></section></section></div></main>
+</body></html>

@@ -1,0 +1,459 @@
+<!DOCTYPE html><html><head><meta charset="utf8" / /><meta name="gmtModify" content="2026-04-24 14:10:40" / /><meta name="searchtitle" content="" / /><meta name="keywords" content="" / /><meta name="author" content="" / /><title>获取表单 schema</title><meta name="gmtModify" content="2026-06-03 10:12:21" / /></head><body data-tag="topic" id="doc-api-dingtalk-QuerySchemaByProcessCode" class="topic"><main id="e146d63b36jv3" data-init-id="doc-api-dingtalk_QuerySchemaByProcessCode"><h1 data-tag="title" id="h1-omw-mzh-umz" class="title">获取表单 schema</h1><p data-tag="shortdesc" id="c157b083d424v" class="shortdesc">调用本接口，通过 processCode，获取对应表单的 schema 信息。</p><div data-tag="conbody" outputclass="icms-api-reference" class="icms-api-reference conbody"><section id="section-prerequisites-1" class="section icms-module" data-tag="section" data-source="latest-mounted-icms-html"><h2 id="h2-prerequisites-1" data-tag="h2" class="h2">接口调用说明</h2><p id="6961ef807263o">第三方企业应用没有权限获取组织内的表单schema。</p></section><section id="section-request-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-request-1" data-tag="h2" class="h2">请求</h2><section id="section-request-basic-info" class="section"><h3 id="heading-request-basic-info" data-tag="h3" class="h3">基本信息</h3><table id="e685d51d6efbw" tablewidth="648" tablecolswidth="216 432" autofit="false" class="table"><colgroup colwidth="0.67*" style="width:33.33%"></colgroup><colgroup colwidth="1.33*" style="width:66.67%"></colgroup><tbody class="tbody"><tr id="3713a5bcc8xwc"><td id="61e8741994ia8" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="b8cad15267cuj">字段</p></td><td id="b2cb19d13edog" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="fbf0ef1397nv8">值</p></td></tr><tr id="8d92da8a81noh"><td id="b7acfa532e26h" rowspan="1" colspan="1"><p id="298ec65e21o3e">HTTP URL</p></td><td id="57a97e76fd8sl" rowspan="1" colspan="1"><p id="9610df4cc5cri">https://api.dingtalk.com/v1.0/workflow/forms/schemas/processCodes</p></td></tr><tr id="f667ddf7b54ss"><td id="69ea8accd2sv4" rowspan="1" colspan="1"><p id="1a9a89fb4286i">HTTP Method</p></td><td id="86883c1c26hir" rowspan="1" colspan="1"><p id="a65d5cecb431r">GET</p></td></tr><tr id="7a8139b46en57"><td id="10df17d88fogo" rowspan="1" colspan="1"><p id="618e9f55972kp">支持的应用类型</p></td><td id="a3507d069ey1h" rowspan="1" colspan="1"><p id="222b8755382jk"><span data-tag="ph" id="ph-request-basic-app-type-apptype-0" class="ph ph-app-type" data-ph-raw-text="appType-企业内部应用">appType-企业内部应用</span>　<span data-tag="ph" id="ph-request-basic-app-type-apptype-1" class="ph ph-app-type" data-ph-raw-text="appType-第三方企业应用">appType-第三方企业应用</span></p></td></tr><tr id="44f1c2cfdcw9s"><td id="59ce2e9f0e7y2" rowspan="1" colspan="1"><p id="1c919aaa51ctg">权限要求</p></td><td id="f11ffa5c97zq7" rowspan="1" colspan="1"><p id="f7c6beed79kc7"><span data-tag="ph" id="ph-request-basic-permission-permission-workflow-form-read-0" class="ph-permission ph" data-ph-raw-text="permission-Workflow.Form.Read-工作流模板读权限" data-permission-id="permission-Workflow.Form.Read" data-permission-code="Workflow.Form.Read" data-permission-detail-api="/document/api/permission/detail" data-permission-query-param="code">permission-Workflow.Form.Read-工作流模板读权限</span></p></td></tr></tbody></table></section><section id="section-request-header-parameter" class="section"><h3 data-tag="h3" id="h2-mxs-c0y-2gd" class="h3 title">请求头</h3><table id="97f1d9f3b12gy" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="53d21dfae6dc7"><td id="2d695ec062ct0" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="eb23ac7a5dt3t">名称</p></td><td id="e9871c6388aky" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="e1a3497153m67">类型</p></td><td id="8c8af0ed8cjhy" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="712fd8ba05j6t">是否必填</p></td><td id="33c6669d9d95u" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="a44947adf3y0f">描述</p></td></tr><tr id="61fda6285e9fh"><td id="30ca19652bdkz" rowspan="1" colspan="1"><p id="e98ef76827t1t">x-acs-dingtalk-access-token</p></td><td id="f1f485a5e3p3r" rowspan="1" colspan="1"><p id="d4aa117a69f13">String</p></td><td id="3f1e0a4471gh3" rowspan="1" colspan="1"><p id="affe778034oy9">是</p></td><td id="0f481685ef4ak" rowspan="1" colspan="1"><p id="6b7f3c7e1ea18">调用该接口的访问凭证，通过以下获取：</p><ul id="8fba8ccbectnj"><li id="dace943c20vbe"><p id="ca09404059yfy">企业内部应用，调用<a href="https://open.dingtalk.com/document/development/obtain-the-access-token-of-an-internal-app#" id="4a1f49f8f2pww" class="xref">获取企业内部应用的accessToken</a>接口获取。</p></li><li id="4198465b2bgql"><p id="65bfc18266teh">第三方企业应用，调用<a href="https://open.dingtalk.com/document/development/obtain-the-access-token-of-the-authorized-enterprise-1#" id="4d77260927p0m" class="xref">获取第三方应用授权企业的accessToken</a>接口获取。</p></li></ul></td></tr></tbody></table></section><section id="section-request-query-parameter" class="section"><h3 data-tag="h3" id="h2-l0r-8ua-vgn" class="h3 title">查询参数</h3><table id="35d93f2004leu" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="9358cd86693sm"><td id="49b67f4bb9xm2" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="9fc205d8f560n">名称</p></td><td id="5b8d27e6b67po" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="42488faa93cf3">类型</p></td><td id="af1d272ac0k3r" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="49965c9f4c6gf">是否必填</p></td><td id="5cd7a695desek" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="a57e13e6f0zp0">描述</p></td></tr><tr id="b81b5bbda1kmi"><td id="1b715c663clzt" rowspan="1" colspan="1"><p id="9e35a9d739ir5">processCode</p></td><td id="d4a8c3fbcbpsw" rowspan="1" colspan="1"><p id="e451f4e7a6ago">String</p></td><td id="2ce0752cef74m" rowspan="1" colspan="1"><p id="c26a9f5d8fv8b">是</p></td><td id="2e379b9cb3x3i" rowspan="1" colspan="1"><p id="3fe3545715qlu">表单的唯一码，<span style="color:rgb(23, 26, 29)">，调用</span><a href="https://open.dingtalk.com/document/development/create-an-approval-form-template#" id="4226629905qol" class="xref doc-preview-card-popover" target="_blank">创建或更新审批表单模板</a><span style="color:rgb(23, 26, 29)">接口或</span><a href="https://open.dingtalk.com/document/development/workflow-overview#" id="5bb8807aearqt" class="xref doc-preview-card-popover" target="_blank">OA审批概述-名词解释</a><span style="color:rgb(23, 26, 29)">获取。</span></p></td></tr><tr id="e598c2b9d0jpu"><td id="a15bc19e7373y" rowspan="1" colspan="1"><p id="ab78c5faa280i">appUuid</p></td><td id="aa4f082e99r4g" rowspan="1" colspan="1"><p id="54349f3cd3jui">String</p></td><td id="21f2b30e95dny" rowspan="1" colspan="1"><p id="739b7c10ddenk">否</p></td><td id="40413b184fptw" rowspan="1" colspan="1"><p id="b3130dcbe2m9o">应用搭建隔离信息。</p></td></tr></tbody></table></section><section id="section-request-body-example" class="section"><h3 id="h3-request-body-example" data-tag="h3" class="h3">请求示例</h3><div outputclass="tabbed-codeblock" data-tag="fig" id="figure-zmm-f6v-mhz" class="tabbed-codeblock-box"><div class="tab-box"></div><input type="radio" name="check-figure-zmm-f6v-mhz" id="figure-zmm-f6v-mhz-HTTP-tab" checked="checked" /><label for="figure-zmm-f6v-mhz-HTTP-tab">HTTP</label><div class="codeblock-item"><pre id="codeblock-yef-uzn-rxq" outputclass="language-HTTP" code-type="xCode" data-tag="codeblock" class="pre codeblock language-HTTP"><code>GET /v1.0/workflow/forms/schemas/processCodes?processCode=PROC-17428B8C-6C60-xxxx-924C-64F1037AE067&amp;appUuid=SWAPP-abcd-example HTTP/1.1
+Host:api.dingtalk.com
+x-acs-dingtalk-access-token:f31f78b59d9438b9859e40xxxx9882f0
+Content-Type:application/json</code></pre></div><input type="radio" name="check-figure-zmm-f6v-mhz" id="figure-zmm-f6v-mhz-java-tab" /><label for="figure-zmm-f6v-mhz-java-tab">Java</label><div class="codeblock-item"><pre id="codeblock-fur-e2n-i02" outputclass="language-java" code-type="xCode" data-tag="codeblock" class="pre codeblock language-java"><code>// This file is auto-generated, don't edit it. Thanks.
+package com.aliyun.sample;
+
+import com.aliyun.tea.*;
+
+public class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Client
+     * @throws Exception
+     */
+    public static com.aliyun.dingtalkworkflow_1_0.Client createClient() throws Exception {
+        com.aliyun.teaopenapi.models.Config config = new com.aliyun.teaopenapi.models.Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        return new com.aliyun.dingtalkworkflow_1_0.Client(config);
+    }
+
+    public static void main(String[] args_) throws Exception {
+        java.util.List&lt;String&gt; args = java.util.Arrays.asList(args_);
+        com.aliyun.dingtalkworkflow_1_0.Client client = Sample.createClient();
+        com.aliyun.dingtalkworkflow_1_0.models.QuerySchemaByProcessCodeHeaders querySchemaByProcessCodeHeaders = new com.aliyun.dingtalkworkflow_1_0.models.QuerySchemaByProcessCodeHeaders();
+        querySchemaByProcessCodeHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        com.aliyun.dingtalkworkflow_1_0.models.QuerySchemaByProcessCodeRequest querySchemaByProcessCodeRequest = new com.aliyun.dingtalkworkflow_1_0.models.QuerySchemaByProcessCodeRequest()
+                .setProcessCode("PROC-17428B8C-6C60-xxxx-924C-64F1037AE067")
+                .setAppUuid("SWAPP-abcd-example");
+        try {
+            client.querySchemaByProcessCodeWithOptions(querySchemaByProcessCodeRequest, querySchemaByProcessCodeHeaders, new com.aliyun.teautil.models.RuntimeOptions());
+        } catch (TeaException err) {
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        } catch (Exception _err) {
+            TeaException err = new TeaException(_err.getMessage(), _err);
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        }        
+    }
+}</code></pre></div><input type="radio" name="check-figure-zmm-f6v-mhz" id="figure-zmm-f6v-mhz-python-tab" /><label for="figure-zmm-f6v-mhz-python-tab">Python</label><div class="codeblock-item"><pre id="codeblock-0fl-4ry-utf" outputclass="language-python" code-type="xCode" data-tag="codeblock" class="pre codeblock language-python"><code># -*- coding: utf-8 -*-
+# This file is auto-generated, don't edit it. Thanks.
+import os
+import sys
+
+from typing import List
+
+from alibabacloud_dingtalk.workflow_1_0.client import Client as dingtalkworkflow_1_0Client
+from alibabacloud_tea_openapi import models as open_api_models
+from alibabacloud_dingtalk.workflow_1_0 import models as dingtalkworkflow__1__0_models
+from alibabacloud_tea_util import models as util_models
+from alibabacloud_tea_util.client import Client as UtilClient
+
+
+class Sample:
+    def __init__(self):
+        pass
+
+    @staticmethod
+    def create_client() -&gt; dingtalkworkflow_1_0Client:
+        """
+        使用 Token 初始化账号Client
+        @return: Client
+        @throws Exception
+        """
+        config = open_api_models.Config()
+        config.protocol = 'https'
+        config.region_id = 'central'
+        return dingtalkworkflow_1_0Client(config)
+
+    @staticmethod
+    def main(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        query_schema_by_process_code_headers = dingtalkworkflow__1__0_models.QuerySchemaByProcessCodeHeaders()
+        query_schema_by_process_code_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        query_schema_by_process_code_request = dingtalkworkflow__1__0_models.QuerySchemaByProcessCodeRequest(
+            process_code='PROC-17428B8C-6C60-xxxx-924C-64F1037AE067',
+            app_uuid='SWAPP-abcd-example'
+        )
+        try:
+            client.query_schema_by_process_code_with_options(query_schema_by_process_code_request, query_schema_by_process_code_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+    @staticmethod
+    async def main_async(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        query_schema_by_process_code_headers = dingtalkworkflow__1__0_models.QuerySchemaByProcessCodeHeaders()
+        query_schema_by_process_code_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        query_schema_by_process_code_request = dingtalkworkflow__1__0_models.QuerySchemaByProcessCodeRequest(
+            process_code='PROC-17428B8C-6C60-xxxx-924C-64F1037AE067',
+            app_uuid='SWAPP-abcd-example'
+        )
+        try:
+            await client.query_schema_by_process_code_with_options_async(query_schema_by_process_code_request, query_schema_by_process_code_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+
+if __name__ == '__main__':
+    Sample.main(sys.argv[1:])</code></pre></div><input type="radio" name="check-figure-zmm-f6v-mhz" id="figure-zmm-f6v-mhz-php-tab" /><label for="figure-zmm-f6v-mhz-php-tab">PHP</label><div class="codeblock-item"><pre id="codeblock-d09-xqb-vrs" outputclass="language-php" code-type="xCode" data-tag="codeblock" class="pre codeblock language-php"><code>&lt;?php
+
+// This file is auto-generated, don't edit it. Thanks.
+namespace AlibabaCloud\SDK\Sample;
+
+use AlibabaCloud\SDK\Dingtalk\Vworkflow_1_0\Dingtalk;
+use \Exception;
+use AlibabaCloud\Tea\Exception\TeaError;
+use AlibabaCloud\Tea\Utils\Utils;
+
+use Darabonba\OpenApi\Models\Config;
+use AlibabaCloud\SDK\Dingtalk\Vworkflow_1_0\Models\QuerySchemaByProcessCodeHeaders;
+use AlibabaCloud\SDK\Dingtalk\Vworkflow_1_0\Models\QuerySchemaByProcessCodeRequest;
+use AlibabaCloud\Tea\Utils\Utils\RuntimeOptions;
+
+class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Dingtalk Client
+     */
+    public static function createClient(){
+        $config = new Config([]);
+        $config-&gt;protocol = "https";
+        $config-&gt;regionId = "central";
+        return new Dingtalk($config);
+    }
+
+    /**
+     * @param string[] $args
+     * @return void
+     */
+    public static function main($args){
+        $client = self::createClient();
+        $querySchemaByProcessCodeHeaders = new QuerySchemaByProcessCodeHeaders([]);
+        $querySchemaByProcessCodeHeaders-&gt;xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        $querySchemaByProcessCodeRequest = new QuerySchemaByProcessCodeRequest([
+            "processCode" =&gt; "PROC-17428B8C-6C60-xxxx-924C-64F1037AE067",
+            "appUuid" =&gt; "SWAPP-abcd-example"
+        ]);
+        try {
+            $client-&gt;querySchemaByProcessCodeWithOptions($querySchemaByProcessCodeRequest, $querySchemaByProcessCodeHeaders, new RuntimeOptions([]));
+        }
+        catch (Exception $err) {
+            if (!($err instanceof TeaError)) {
+                $err = new TeaError([], $err-&gt;getMessage(), $err-&gt;getCode(), $err);
+            }
+            if (!Utils::empty_($err-&gt;code) &amp;&amp; !Utils::empty_($err-&gt;message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+        }
+    }
+}
+$path = __DIR__ . \DIRECTORY_SEPARATOR . '..' . \DIRECTORY_SEPARATOR . 'vendor' . \DIRECTORY_SEPARATOR . 'autoload.php';
+if (file_exists($path)) {
+    require_once $path;
+}
+Sample::main(array_slice($argv, 1));</code></pre></div><input type="radio" name="check-figure-zmm-f6v-mhz" id="figure-zmm-f6v-mhz-go-tab" /><label for="figure-zmm-f6v-mhz-go-tab">Go</label><div class="codeblock-item"><pre id="codeblock-xhw-m38-qce" outputclass="language-go" code-type="xCode" data-tag="codeblock" class="pre codeblock language-go"><code>// This file is auto-generated, don't edit it. Thanks.
+package main
+
+import (
+  "os"
+  util  "github.com/alibabacloud-go/tea-utils/v2/service"
+  dingtalkworkflow_1_0  "github.com/alibabacloud-go/dingtalk/workflow_1_0"
+  openapi  "github.com/alibabacloud-go/darabonba-openapi/v2/client"
+  "github.com/alibabacloud-go/tea/tea"
+)
+
+
+/**
+ * 使用 Token 初始化账号Client
+ * @return Client
+ * @throws Exception
+ */
+func CreateClient () (_result *dingtalkworkflow_1_0.Client, _err error) {
+  config := &amp;openapi.Config{}
+  config.Protocol = tea.String("https")
+  config.RegionId = tea.String("central")
+  _result = &amp;dingtalkworkflow_1_0.Client{}
+  _result, _err = dingtalkworkflow_1_0.NewClient(config)
+  return _result, _err
+}
+
+func _main (args []*string) (_err error) {
+  client, _err := CreateClient()
+  if _err != nil {
+    return _err
+  }
+
+  querySchemaByProcessCodeHeaders := &amp;dingtalkworkflow_1_0.QuerySchemaByProcessCodeHeaders{}
+  querySchemaByProcessCodeHeaders.XAcsDingtalkAccessToken = tea.String("&lt;your access token&gt;")
+  querySchemaByProcessCodeRequest := &amp;dingtalkworkflow_1_0.QuerySchemaByProcessCodeRequest{
+    ProcessCode: tea.String("PROC-17428B8C-6C60-xxxx-924C-64F1037AE067"),
+    AppUuid: tea.String("SWAPP-abcd-example"),
+  }
+  tryErr := func()(_e error) {
+    defer func() {
+      if r := tea.Recover(recover()); r != nil {
+        _e = r
+      }
+    }()
+    _, _err = client.QuerySchemaByProcessCodeWithOptions(querySchemaByProcessCodeRequest, querySchemaByProcessCodeHeaders, &amp;util.RuntimeOptions{})
+    if _err != nil {
+      return _err
+    }
+
+    return nil
+  }()
+
+  if tryErr != nil {
+    var err = &amp;tea.SDKError{}
+    if _t, ok := tryErr.(*tea.SDKError); ok {
+      err = _t
+    } else {
+      err.Message = tea.String(tryErr.Error())
+    }
+    if !tea.BoolValue(util.Empty(err.Code)) &amp;&amp; !tea.BoolValue(util.Empty(err.Message)) {
+      // err 中含有 code 和 message 属性，可帮助开发定位问题
+    }
+
+  }
+  return _err
+}
+
+
+func main() {
+  err := _main(tea.StringSlice(os.Args[1:]))
+  if err != nil {
+    panic(err)
+  }
+}</code></pre></div><input type="radio" name="check-figure-zmm-f6v-mhz" id="figure-zmm-f6v-mhz-nodejs-tab" /><label for="figure-zmm-f6v-mhz-nodejs-tab">Node.js</label><div class="codeblock-item"><pre id="codeblock-dbc-2fa-trx" outputclass="language-nodejs" code-type="xCode" data-tag="codeblock" class="pre codeblock language-nodejs"><code>// This file is auto-generated, don't edit it
+import Util, * as $Util from '@alicloud/tea-util';
+import dingtalkworkflow_1_0, * as $dingtalkworkflow_1_0 from '@alicloud/dingtalk/workflow_1_0';
+import OpenApi, * as $OpenApi from '@alicloud/openapi-client';
+import * as $tea from '@alicloud/tea-typescript';
+
+
+export default class Client {
+
+  /**
+   * 使用 Token 初始化账号Client
+   * @return Client
+   * @throws Exception
+   */
+  static createClient(): dingtalkworkflow_1_0 {
+    let config = new $OpenApi.Config({ });
+    config.protocol = "https";
+    config.regionId = "central";
+    return new dingtalkworkflow_1_0(config);
+  }
+
+  static async main(args: string[]): Promise&lt;void&gt; {
+    let client = Client.createClient();
+    let querySchemaByProcessCodeHeaders = new $dingtalkworkflow_1_0.QuerySchemaByProcessCodeHeaders({ });
+    querySchemaByProcessCodeHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+    let querySchemaByProcessCodeRequest = new $dingtalkworkflow_1_0.QuerySchemaByProcessCodeRequest({
+      processCode: "PROC-17428B8C-6C60-xxxx-924C-64F1037AE067",
+      appUuid: "SWAPP-abcd-example",
+    });
+    try {
+      await client.querySchemaByProcessCodeWithOptions(querySchemaByProcessCodeRequest, querySchemaByProcessCodeHeaders, new $Util.RuntimeOptions({ }));
+    } catch (err) {
+      if (!Util.empty(err.code) &amp;&amp; !Util.empty(err.message)) {
+        // err 中含有 code 和 message 属性，可帮助开发定位问题
+      }
+
+    }    
+  }
+
+}
+
+Client.main(process.argv.slice(2));</code></pre></div><input type="radio" name="check-figure-zmm-f6v-mhz" id="figure-zmm-f6v-mhz-csharp-tab" /><label for="figure-zmm-f6v-mhz-csharp-tab">C#</label><div class="codeblock-item"><pre id="codeblock-x2y-jxa-5tp" outputclass="language-csharp" code-type="xCode" data-tag="codeblock" class="pre codeblock language-csharp"><code>// This file is auto-generated, don't edit it. Thanks.
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
+
+using Tea;
+using Tea.Utils;
+
+
+namespace AlibabaCloud.SDK.Sample
+{
+    public class Sample 
+    {
+
+        /**
+         * 使用 Token 初始化账号Client
+         * @return Client
+         * @throws Exception
+         */
+        public static AlibabaCloud.SDK.Dingtalkworkflow_1_0.Client CreateClient()
+        {
+            AlibabaCloud.OpenApiClient.Models.Config config = new AlibabaCloud.OpenApiClient.Models.Config();
+            config.Protocol = "https";
+            config.RegionId = "central";
+            return new AlibabaCloud.SDK.Dingtalkworkflow_1_0.Client(config);
+        }
+
+        public static void Main(string[] args)
+        {
+            AlibabaCloud.SDK.Dingtalkworkflow_1_0.Client client = CreateClient();
+            AlibabaCloud.SDK.Dingtalkworkflow_1_0.Models.QuerySchemaByProcessCodeHeaders querySchemaByProcessCodeHeaders = new AlibabaCloud.SDK.Dingtalkworkflow_1_0.Models.QuerySchemaByProcessCodeHeaders();
+            querySchemaByProcessCodeHeaders.XAcsDingtalkAccessToken = "&lt;your access token&gt;";
+            AlibabaCloud.SDK.Dingtalkworkflow_1_0.Models.QuerySchemaByProcessCodeRequest querySchemaByProcessCodeRequest = new AlibabaCloud.SDK.Dingtalkworkflow_1_0.Models.QuerySchemaByProcessCodeRequest
+            {
+                ProcessCode = "PROC-17428B8C-6C60-xxxx-924C-64F1037AE067",
+                AppUuid = "SWAPP-abcd-example",
+            };
+            try
+            {
+                client.QuerySchemaByProcessCodeWithOptions(querySchemaByProcessCodeRequest, querySchemaByProcessCodeHeaders, new AlibabaCloud.TeaUtil.Models.RuntimeOptions());
+            }
+            catch (TeaException err)
+            {
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+            catch (Exception _err)
+            {
+                TeaException err = new TeaException(new Dictionary&lt;string, object&gt;
+                {
+                    { "message", _err.Message }
+                });
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+        }
+
+
+    }
+}</code></pre></div></div></section></section><section id="section-response-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-response-1" data-tag="h2" class="h2">响应</h2><section id="section-response-parameter" class="section"><h3 data-tag="h3" id="h2-4ks-yyj-rh6" class="h3 title">响应体</h3><table id="02be30eeafca6" tablewidth="710" tablecolswidth="213 142 355" autofit="false" class="table"><colgroup colwidth="0.9*" style="width:30.00%"></colgroup><colgroup colwidth="0.6*" style="width:20.00%"></colgroup><colgroup colwidth="1.5*" style="width:50.00%"></colgroup><tbody class="tbody"><tr id="09c6b86843v89"><td id="1654c1ddd8qoq" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="865e85e7ee978">名称</p></td><td id="f3b53c4341efu" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="2790614780559">类型</p></td><td id="c84b8611c53s4" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="481e41b794r6h">描述</p></td></tr><tr outputclass="row row-level-1 has-child" id="8a263fd1e33u4" class="row row-level-1 has-child"><td id="949500ba55nir" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="131a2e0dacqhy">result</p></td><td id="bb57687674rvx" rowspan="1" colspan="1"><p id="dff631eaa67mw">Object</p></td><td id="8cf8cbbd94y75" rowspan="1" colspan="1"><p id="633c204df3w3o">返回结果详情。</p></td></tr><tr outputclass="row row-level-1-1" id="e13bbd1cdaqm0" class="row row-level-1-1"><td id="8d170e3e226us" rowspan="1" colspan="1"><p id="48c063b50cs80">creatorUserId</p></td><td id="e44ab50dedvmv" rowspan="1" colspan="1"><p id="e0513c7ca9x5z">String</p></td><td id="63e34d3571tga" rowspan="1" colspan="1"><p id="ab6329be3982u">创建人 userId。</p></td></tr><tr outputclass="row row-level-1-2" id="798aab34c39zl" class="row row-level-1-2"><td id="a51e7ba9ee127" rowspan="1" colspan="1"><p id="baec6a6a90yub">appUuid</p></td><td id="a736479da0nla" rowspan="1" colspan="1"><p id="492118e20dss4">String</p></td><td id="24eb4c4c7cn2w" rowspan="1" colspan="1"><p id="bae723f6c2one">表单应用 uuid 或者 corpId。</p></td></tr><tr outputclass="row row-level-1-3" id="13f7ce4cb8xzj" class="row row-level-1-3"><td id="83f6a21fe1hm3" rowspan="1" colspan="1"><p id="295b87b04a7mr">formCode</p></td><td id="a93773fbady41" rowspan="1" colspan="1"><p id="85c9ec23764rp">String</p></td><td id="ad914cf3693y3" rowspan="1" colspan="1"><p id="ee8374ee1fygq">表单的唯一码。</p></td></tr><tr outputclass="row row-level-1-4" id="4fbc3eb14b8lx" class="row row-level-1-4"><td id="5dbf87afd78d5" rowspan="1" colspan="1"><p id="8967f556c8ar5">formUuid</p></td><td id="e9989ea036v6s" rowspan="1" colspan="1"><p id="8e2d8e8e42ycb">String</p></td><td id="8a497dda03qrz" rowspan="1" colspan="1"><p id="2f9d829152ql9">表单 uuid。</p></td></tr><tr outputclass="row row-level-1-5" id="08e532ab79yun" class="row row-level-1-5"><td id="1b94b0fca6m7t" rowspan="1" colspan="1"><p id="4b9ae4fa354v0">name</p></td><td id="363313d590xnw" rowspan="1" colspan="1"><p id="99ee1297641k9">String</p></td><td id="1f7e5ca9579rf" rowspan="1" colspan="1"><p id="4f48b0e32fw5r">表单名称。</p></td></tr><tr outputclass="row row-level-1-6" id="ade7c2018062g" class="row row-level-1-6"><td id="f7fd31123eudw" rowspan="1" colspan="1"><p id="a460864353w1p">memo</p></td><td id="df548bbbbd9ze" rowspan="1" colspan="1"><p id="f23f9940ba9sf">String</p></td><td id="d50412a496hyd" rowspan="1" colspan="1"><p id="c04559881epd7">说明文案。</p></td></tr><tr outputclass="row row-level-1-7" id="caa330a1242qd" class="row row-level-1-7"><td id="f4f42f882f088" rowspan="1" colspan="1"><p id="c89c31d9a4e20">ownerIdType</p></td><td id="3dc98399d2r6h" rowspan="1" colspan="1"><p id="8a5ea4681fmag">String</p></td><td id="000b2f9b80jjo" rowspan="1" colspan="1"><p id="6480e28fackrh">数据归属者的 id 类型，取值：</p><ul id="eaff04a802w1n"><li id="fce620d78dgup"><p id="c75d7d1a89lsr">orgId：企业</p></li><li id="d9ef58f72b4xs"><p id="686309cd589ik">cid：群</p></li><li id="e399a57d44w6v"><p id="28f57994b57cx">uid：人</p></li></ul></td></tr><tr outputclass="row row-level-1-8 has-child" id="91a168905b7bt" class="row row-level-1-8 has-child"><td id="dff12a7f49twh" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="4581fadc6bm7d">schemaContent</p></td><td id="a4bdf6fbb181n" rowspan="1" colspan="1"><p id="189d51ecd7qoy">Object</p></td><td id="d38333c697xrn" rowspan="1" colspan="1"><p id="b4a516cceco07">表单 schema 详情。</p></td></tr><tr outputclass="row row-level-1-8-1" id="5f6dae8647tiy" class="row row-level-1-8-1"><td id="d5a3163b9ekcc" rowspan="1" colspan="1"><p id="a417e2d6968aq">title</p></td><td id="b97f5e5c09aro" rowspan="1" colspan="1"><p id="6a16a662a69me">String</p></td><td id="1a79e22bcbai6" rowspan="1" colspan="1"><p id="355398dd072y0">表单名称。</p></td></tr><tr outputclass="row row-level-1-8-2" id="0b1b847cb7gav" class="row row-level-1-8-2"><td id="c8fddf28752kz" rowspan="1" colspan="1"><p id="50e1821fb9wf1">icon</p></td><td id="5fb9dcff90t40" rowspan="1" colspan="1"><p id="cbf20b1dbdcoj">String</p></td><td id="f3334634e3gch" rowspan="1" colspan="1"><p id="f557221599k9h">图标</p></td></tr><tr outputclass="row row-level-1-8-3 has-child" id="f86cb3fe85ak4" class="row row-level-1-8-3 has-child"><td id="2f3f7751cc78p" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="624009782c2sp">items</p></td><td id="0d6fc63da54dd" rowspan="1" colspan="1"><p id="3900a36a2018l">Array</p></td><td id="57ae89b3b278h" rowspan="1" colspan="1"><p id="6c0508d527vvw">控件列表。</p></td></tr><tr outputclass="row row-level-1-8-3-1" id="db88f328015sf" class="row row-level-1-8-3-1"><td id="54f58564eevib" rowspan="1" colspan="1"><p id="c94dc568ff6rw">componentName</p></td><td id="0bda621c4543r" rowspan="1" colspan="1"><p id="9d7365489abek">String</p></td><td id="644900af83lru" rowspan="1" colspan="1"><p id="532cf5d4dfc7v">控件类型，取值：</p><ul id="a024329b7f8gh"><li id="ee49720bfcv8w"><p id="a7815cf2aecsj">TextField：单行输入框</p></li><li id="7a831b15d6cte"><p id="5b95c2aa3b55p">TextareaField：多行输入框</p></li><li id="60a4258efe06n"><p id="06ee7ac71fntp">NumberField：数字输入框</p></li><li id="b5e3d9798ctge"><p id="4692ba11c8put">DDSelectField：单选框</p></li><li id="451030d84av91"><p id="7bb0101d3ax6f">DDMultiSelectField：多选框</p></li><li id="5b97ca816br1d"><p id="839e33df6bmve">DDDateField：日期控件</p></li><li id="c040724c5dq1p"><p id="8d22aef99b6sm">DDDateRangeField：时间区间控件</p></li><li id="fe5169f755aag"><p id="5aaaecb0e2oqv">TextNote：文字说明控件</p></li><li id="a952eb47b8gtw"><p id="f16bb215f98gl">PhoneField：电话控件</p></li><li id="5d8478b109tqe"><p id="e263a660a0k0j">DDPhotoField：图片控件</p></li><li id="6dd91644645kt"><p id="742f3543a93yn">MoneyField：金额控件</p></li><li id="e8ad2b43c9mw9"><p id="e171d11a8doxe">TableField：明细控件</p></li><li id="e1895f4ce5z25"><p id="ca23e6dee5tk5">DDAttachment：附件</p></li><li id="b1b8a98e3ejxe"><p id="2d29e04e5bl80">InnerContactField：联系人控件</p></li><li id="02f9fb6428zwi"><p id="578e98c5d53kl">DepartmentField：部门控件</p></li><li id="7a542bb6bcr7s"><p id="a62b084a56dar">RelateField：关联审批单</p></li><li id="67285995d661c"><p id="4d96a587bd3cq">AddressField：省市区控件</p></li><li id="a60d830aab3ub"><p id="bd1d30349b3ay">StarRatingField：评分控件</p></li><li id="ccaa71cdb8vg4"><p id="5666b2194bh7u">FormRelateField：关联控件</p></li></ul></td></tr><tr outputclass="row row-level-1-8-3-2 has-child" id="bf1dc3838bahd" class="row row-level-1-8-3-2 has-child"><td id="4c6c40d0c4qhd" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="cafb606f1bf6p">props</p></td><td id="5483d44e02erf" rowspan="1" colspan="1"><p id="411b6239a642l">Object</p></td><td id="cf09734dedbg2" rowspan="1" colspan="1"><p id="5106300b39wq7">控件属性。</p></td></tr><tr outputclass="row row-level-1-8-3-2-1" id="5d218646abc7g" class="row row-level-1-8-3-2-1"><td id="99f37bcc02o33" rowspan="1" colspan="1"><p id="a5941e3f24839">id</p></td><td id="855d907ea8cyx" rowspan="1" colspan="1"><p id="8d69410884qu5">String</p></td><td id="806dd768c2vsu" rowspan="1" colspan="1"><p id="53a4416ab2znk">控件 id。</p></td></tr><tr outputclass="row row-level-1-8-3-2-2" id="0281f87b1f7rp" class="row row-level-1-8-3-2-2"><td id="156de65cc6tin" rowspan="1" colspan="1"><p id="9fffd4cba5u6x">tableViewMode</p></td><td id="ef4fcf618coi1" rowspan="1" colspan="1"><p id="a05333b138tkw">String</p></td><td id="136d7c76faccc" rowspan="1" colspan="1"><p id="f6cc329ac7a3e">明细填写方式，枚举值：</p><ul id="b6932ab5c0hwn"><li id="a297f0427efod"><p id="8145284789iu0">list：列表</p></li><li id="a564378e2cevi"><p id="773639e425dxm">table：表格</p></li></ul></td></tr><tr outputclass="row row-level-1-8-3-2-3" id="f7213d58c6dfv" class="row row-level-1-8-3-2-3"><td id="ec83b860890ur" rowspan="1" colspan="1"><p id="d9a3588fcfybq">label</p></td><td id="8388b643c7ed4" rowspan="1" colspan="1"><p id="ed4705ebccgpy">String</p></td><td id="a0c693a597pm1" rowspan="1" colspan="1"><p id="01e7500cd4b69">控件名称。</p></td></tr><tr outputclass="row row-level-1-8-3-2-4" id="09256298b0a77" class="row row-level-1-8-3-2-4"><td id="a2e0f9ebb45vn" rowspan="1" colspan="1"><p id="05a7d4ffa2fgn">bizAlias</p></td><td id="525c3071c8ztm" rowspan="1" colspan="1"><p id="37e7192aa8pkb">String</p></td><td id="0e052b88b74jl" rowspan="1" colspan="1"><p id="f25e69040cjud">控件业务自定义别名。</p></td></tr><tr outputclass="row row-level-1-8-3-2-5" id="38820d5a039ks" class="row row-level-1-8-3-2-5"><td id="9241a64c6eedp" rowspan="1" colspan="1"><p id="3a0a3364289lm">required</p></td><td id="9b5c85826c7jk" rowspan="1" colspan="1"><p id="91a25153dab84">Boolean</p></td><td id="cd6de940abm8l" rowspan="1" colspan="1"><p id="b13300a82dtqx">是否必填，取值：</p><ul id="bb0b678824grr"><li id="de3a39a571c3r"><p id="cb419b0976usx">true：是</p></li><li id="485ba6ab99qnd"><p id="be324ee28dfd7">false：否</p></li></ul></td></tr><tr outputclass="row row-level-1-8-3-2-6" id="aa997ac89cdt2" class="row row-level-1-8-3-2-6"><td id="286872f4b9o7n" rowspan="1" colspan="1"><p id="c22bf17369igb">placeholder</p></td><td id="41d9e0097e7nl" rowspan="1" colspan="1"><p id="de58700ea98bz">String</p></td><td id="b262cafe7futb" rowspan="1" colspan="1"><p id="32b08853742f0">占位符。</p></td></tr><tr outputclass="row row-level-1-8-3-2-7" id="147d1222271e2" class="row row-level-1-8-3-2-7"><td id="d1fc8571f4ybv" rowspan="1" colspan="1"><p id="38e61ee103ypv">options</p></td><td id="dc84e1dae173u" rowspan="1" colspan="1"><p id="3459187b78fnu">Array of String</p></td><td id="a8a0a1e35a4f7" rowspan="1" colspan="1"><p id="71dee9cba20zn">单选框选项值。</p></td></tr><tr outputclass="row row-level-1-8-3-2-8" id="b968b3f062884" class="row row-level-1-8-3-2-8"><td id="d0caccfef53f2" rowspan="1" colspan="1"><p id="c274a39481du1">appId</p></td><td id="fdbd05938b7ys" rowspan="1" colspan="1"><p id="83461d6e610yo">Long</p></td><td id="52db707062z20" rowspan="1" colspan="1"><p id="6b889665d825w">ISV 微应用 appId，用于ISV身份权限识别，ISV可获得相应数据。</p></td></tr><tr outputclass="row row-level-1-8-3-2-9" id="71d2bdb4b95t4" class="row row-level-1-8-3-2-9"><td id="c8340d0aa0sdp" rowspan="1" colspan="1"><p id="38702824e1vw7">durationLabel</p></td><td id="7a3f3c1fb2182" rowspan="1" colspan="1"><p id="d699354417xy4">String</p></td><td id="3d3e11e545nt0" rowspan="1" colspan="1"><p id="973f4d21d0oyx">兼容字段。</p></td></tr><tr outputclass="row row-level-1-8-3-2-10" id="12b153971ato4" class="row row-level-1-8-3-2-10"><td id="f3d57209b7jgb" rowspan="1" colspan="1"><p id="7b3f12fc67mga">pushToCalendar</p></td><td id="0a5be97c0be7m" rowspan="1" colspan="1"><p id="5c88342110y6x">Integer</p></td><td id="696309908ei6u" rowspan="1" colspan="1"><p id="e4e22de3752ku">是否推送管理日历(DDDateRangeField, 该属性为兼容保留)，取值：</p><ul id="75b20a7771ene"><li id="9569de9e97l4j"><p id="954764df1cwnv">1：推送</p></li><li id="1e18c4aa22b56"><p id="4d25472359fwd">0：不推送</p></li></ul></td></tr><tr outputclass="row row-level-1-8-3-2-11" id="528707564d5aq" class="row row-level-1-8-3-2-11"><td id="9bb2567028ics" rowspan="1" colspan="1"><p id="edaf19b8be6ts">align</p></td><td id="d702e0cc163oc" rowspan="1" colspan="1"><p id="03bc908e856w5">String</p></td><td id="43bd71bf4fm8a" rowspan="1" colspan="1"><p id="d74a43b148byy">textNote的样式，取值：</p><ul id="c669dfd7a4y8s"><li id="82835f8fc6dec"><p id="9201b58aacxm0">top：顶部</p></li><li id="c58dfc6cd5mcm"><p id="245ae95267dhg">middle：中部</p></li><li id="16a2d880e5ype"><p id="dff08af3f8gcx">bottom：底部</p></li></ul></td></tr><tr outputclass="row row-level-1-8-3-2-12 has-child" id="c8d19f817avq6" class="row row-level-1-8-3-2-12 has-child"><td id="bb4c3833deh2f" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="74d4726a19nra">statField</p></td><td id="72adca77275q2" rowspan="1" colspan="1"><p id="3d5f377818c2s">Array</p></td><td id="107f923e154ju" rowspan="1" colspan="1"><p id="4c3d320beewzh">需要计算总和的明细组件。</p></td></tr><tr outputclass="row row-level-1-8-3-2-12-1" id="a36e0f83dd0yn" class="row row-level-1-8-3-2-12-1"><td id="4e9218c401rs5" rowspan="1" colspan="1"><p id="aa57b8b171luu">id</p></td><td id="2ffc807c519hu" rowspan="1" colspan="1"><p id="bced3eaa3dvh9">String</p></td><td id="220a9a65caiec" rowspan="1" colspan="1"><p id="679fd15440fbv">id 值。</p></td></tr><tr outputclass="row row-level-1-8-3-2-12-2" id="92d2b054dbal3" class="row row-level-1-8-3-2-12-2"><td id="5b824a10f76tc" rowspan="1" colspan="1"><p id="78398d3e5flrf">label</p></td><td id="5bcad05088lb3" rowspan="1" colspan="1"><p id="23531bc59d2ty">String</p></td><td id="c06924e92bont" rowspan="1" colspan="1"><p id="43a78f030bwxz">名称。</p></td></tr><tr outputclass="row row-level-1-8-3-2-12-3" id="7f5026fc85vzo" class="row row-level-1-8-3-2-12-3"><td id="f8aac6d47f5e5" rowspan="1" colspan="1"><p id="b61b84398cgvs">upper</p></td><td id="9f10f56f1c1as" rowspan="1" colspan="1"><p id="ba54b23d70g7j">Boolean</p></td><td id="0ead5b977a4fe" rowspan="1" colspan="1"><p id="08bd2f2b0463b">是否大写，取值：</p><ul id="95fd91fed5i1w"><li id="ad095635f8bqv"><p id="615d013955p7m">true：是</p></li><li id="b998b9d0d6cym"><p id="5ea9ac7677xa6">false：否</p></li></ul></td></tr><tr outputclass="row row-level-1-8-3-2-12-4" id="c6d1a3d8cdlse" class="row row-level-1-8-3-2-12-4"><td id="7915a4cfb671o" rowspan="1" colspan="1"><p id="e01da478d8oxl">unit</p></td><td id="919ab8d527yg8" rowspan="1" colspan="1"><p id="a55b37948fnxr">String</p></td><td id="bb0e64c224t6i" rowspan="1" colspan="1"><p id="41d44300aeqf7">单位。</p></td></tr><tr outputclass="row row-level-1-8-3-2-13" id="c69f3b50f4e4j" class="row row-level-1-8-3-2-13"><td id="4c5f2ad6b3oxs" rowspan="1" colspan="1"><p id="75af26eaa5u27">hideLabel</p></td><td id="001ede407aovb" rowspan="1" colspan="1"><p id="e55bfb424b5yf">Boolean</p></td><td id="f3bbd4fa5cj50" rowspan="1" colspan="1"><p id="2df2cf270fojb">加班套件4.0新增，加班明细是否隐藏标签，取值：</p><ul id="ce65b382cblf3"><li id="59b363721bpk3"><p id="4e1c4afb19uv5">true：是</p></li><li id="0aa6cfac90ae1"><p id="d541a4d2d3qzh">false：否</p></li></ul></td></tr><tr outputclass="row row-level-1-8-3-2-14 has-child" id="f400dae8fdax3" class="row row-level-1-8-3-2-14 has-child"><td id="e129e6ca1fqqv" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="42a1bda346rog">objOptions</p></td><td id="7d8bdbfcfctyy" rowspan="1" colspan="1"><p id="daef9ef40bjvo">Array</p></td><td id="2c60db5f95bs3" rowspan="1" colspan="1"><p id="f12945fbfd4pc">选项内容列表，提供给业务方更多的选择器操作。</p></td></tr><tr outputclass="row row-level-1-8-3-2-14-1" id="ece861021c4rp" class="row row-level-1-8-3-2-14-1"><td id="01a21b0a89eg3" rowspan="1" colspan="1"><p id="4b61aebcaco7o">value</p></td><td id="0b884f3bb7gn9" rowspan="1" colspan="1"><p id="0127f5faa914s">String</p></td><td id="53190ad444bd4" rowspan="1" colspan="1"><p id="d56c9c27fct4r">选项值。</p></td></tr><tr outputclass="row row-level-1-8-3-2-15" id="d98bb9e7e737a" class="row row-level-1-8-3-2-15"><td id="c367332efc90j" rowspan="1" colspan="1"><p id="2de212ae0atpp">format</p></td><td id="acd5ebe61f579" rowspan="1" colspan="1"><p id="d00229a93bbys">String</p></td><td id="0a7d62ccefq2r" rowspan="1" colspan="1"><p id="ef119ea8dbgj1">时间格式(DDDateField和DDDateRangeField)。</p></td></tr><tr outputclass="row row-level-1-8-3-2-16" id="adc3f0fb00x0e" class="row row-level-1-8-3-2-16"><td id="4427e8d54d92s" rowspan="1" colspan="1"><p id="4d84d242bbm7p">pushToAttendance</p></td><td id="9b2b385341nr9" rowspan="1" colspan="1"><p id="fc7a8fd14dfqd">Boolean</p></td><td id="e9aece1a90c49" rowspan="1" colspan="1"><p id="4dfde10cf55vo">是否推送到考勤, 子类型(DDSelectField)，取值：</p><ul id="9415f7f946m83"><li id="a407f3e8811s9"><p id="44310a4e72889">true：是</p></li><li id="e2086b4fbatkz"><p id="4c6800f6634aw">false：否</p></li></ul></td></tr><tr outputclass="row row-level-1-8-3-2-17" id="ba64ac9bd5b03" class="row row-level-1-8-3-2-17"><td id="edcf99cbe49rj" rowspan="1" colspan="1"><p id="05985f24c66bd">labelEditableFreeze</p></td><td id="18aac28768mu8" rowspan="1" colspan="1"><p id="3beb7cbbb9eo6">Boolean</p></td><td id="a61484f4f33cn" rowspan="1" colspan="1"><p id="6ccc439981ncn">label是否可修改，取值：</p><ul id="bc327f2d8af19"><li id="f69ac97b4fhmt"><p id="19f9d10716l2s">true：不可修改</p></li><li id="66b800a78834d"><p id="9509cb8c23ym8">false：可修改</p></li></ul></td></tr><tr outputclass="row row-level-1-8-3-2-18 has-child" id="c5a759cee72mu" class="row row-level-1-8-3-2-18 has-child"><td id="85e735935dshh" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="1cef4f312f1sk">push</p></td><td id="99f4462f9ebzv" rowspan="1" colspan="1"><p id="58fa733a44om7">Object</p></td><td id="6e486eda56bqe" rowspan="1" colspan="1"><p id="a3bb7bc84em04">同步到考勤, 表示是否设置为员工状态。</p></td></tr><tr outputclass="row row-level-1-8-3-2-18-1" id="8ec3dcf6a7pd6" class="row row-level-1-8-3-2-18-1"><td id="bc1e910732lcw" rowspan="1" colspan="1"><p id="302a8d0006h30">pushSwitch</p></td><td id="35f441e0bde8h" rowspan="1" colspan="1"><p id="b9f7ef855fcc6">Integer</p></td><td id="f32070add80ns" rowspan="1" colspan="1"><p id="599b2b5c4c2jy">开启状态，取值：</p><ul id="d12ec3591399h"><li id="072f194d7c86f"><p id="e8d13cd63aagf">1：开启</p></li><li id="85c3d3facfvfh"><p id="a8454f7262tm8">0：关闭</p></li></ul></td></tr><tr outputclass="row row-level-1-8-3-2-18-2" id="97f13e0239h7j" class="row row-level-1-8-3-2-18-2"><td id="f6ed0d7138co2" rowspan="1" colspan="1"><p id="8fbb267662x9y">pushTag</p></td><td id="7f62de7973ika" rowspan="1" colspan="1"><p id="2dc9555688bm5">String</p></td><td id="dc38381a866s4" rowspan="1" colspan="1"><p id="baff8826aajk3">状态显示名称</p></td></tr><tr outputclass="row row-level-1-8-3-2-18-3" id="8a04bbe45bpag" class="row row-level-1-8-3-2-18-3"><td id="27e4c6c07b2bo" rowspan="1" colspan="1"><p id="514a770f5a7nn">attendanceRule</p></td><td id="8b4daf05f55u9" rowspan="1" colspan="1"><p id="0cd19154e4wn3">Integer</p></td><td id="2d3abcc5f5m4t" rowspan="1" colspan="1"><p id="908f2cd300usl">考勤类型，取值：</p><ul id="dab165056feq4"><li id="c11bdf98b1iz2"><p id="dcf37f2d63axw">1：请假</p></li><li id="8770166b9fmde"><p id="276e88be39eig">2：出差</p></li><li id="91401b7f67ni2"><p id="658549a7c62kh">3：加班</p></li><li id="5b3615d2b62a8"><p id="b97595e488l4u">4：外出</p></li></ul></td></tr><tr outputclass="row row-level-1-8-3-2-19" id="17e16ef509oty" class="row row-level-1-8-3-2-19"><td id="d85377a630or1" rowspan="1" colspan="1"><p id="ae790c1a15qzx">commonBizType</p></td><td id="41ef429f23r6f" rowspan="1" colspan="1"><p id="2548357671443">String</p></td><td id="f9b1f30fbc272" rowspan="1" colspan="1"><p id="293f0cee8cqgm">common field的commonBizType。</p></td></tr><tr outputclass="row row-level-1-8-3-2-20" id="ee9712fc43r9l" class="row row-level-1-8-3-2-20"><td id="bd749428a6hv0" rowspan="1" colspan="1"><p id="f9399a0ac3gbk">requiredEditableFreeze</p></td><td id="cadca173b7ugm" rowspan="1" colspan="1"><p id="a0a4716e4fowf">Boolean</p></td><td id="5c25bcbf42yqu" rowspan="1" colspan="1"><p id="1bdf2dd3d480z">必填是否可修改，取值：</p><ul id="664414928enzj"><li id="1d97aa68f5w9a"><p id="dd54040da4sr7">true：不可修改</p></li><li id="93acbb31abb4p"><p id="697a6c955e60r">false：可修改</p></li></ul></td></tr><tr outputclass="row row-level-1-8-3-2-21" id="82e8c92363c0x" class="row row-level-1-8-3-2-21"><td id="a5aa751c64nj1" rowspan="1" colspan="1"><p id="2754e22a91dvg">unit</p></td><td id="1d95a3c03157x" rowspan="1" colspan="1"><p id="c2e608c0baocz">String</p></td><td id="b751c76ec5ity" rowspan="1" colspan="1"><p id="babf1fceb5psu">数字组件/日期区间组件单位属性。</p></td></tr><tr outputclass="row row-level-1-8-3-2-22" id="9d14a1ad65ur7" class="row row-level-1-8-3-2-22"><td id="04505daa55sk7" rowspan="1" colspan="1"><p id="6b0b6c75fcb3u">extract</p></td><td id="70b81562f2wgg" rowspan="1" colspan="1"><p id="9bec8ed39fx6h">Boolean</p></td><td id="8f34f2db2e4mc" rowspan="1" colspan="1"><p id="ca18365a2dihf">套件值是否打平，取值：</p><ul id="2001edfe0ebrp"><li id="7c9cf444ddkah"><p id="300682c45blvg">true：是</p></li><li id="1cdf1b8995ai6"><p id="8f324b350a2q7">false：否</p></li></ul></td></tr><tr outputclass="row row-level-1-8-3-2-23" id="7ded24625dyls" class="row row-level-1-8-3-2-23"><td id="4889426d39yg1" rowspan="1" colspan="1"><p id="4a96697d81oc3">link</p></td><td id="51f2366dadiqz" rowspan="1" colspan="1"><p id="3440790df824j">String</p></td><td id="622e60e28diox" rowspan="1" colspan="1"><p id="611fccbbf2a4z">说明文案的链接地址。</p></td></tr><tr outputclass="row row-level-1-8-3-2-24" id="e9b2f5703dazr" class="row row-level-1-8-3-2-24"><td id="7816b43970fmf" rowspan="1" colspan="1"><p id="f7ad96c547hr2">payEnable</p></td><td id="e2b0949fea4o0" rowspan="1" colspan="1"><p id="f70e6adb77znt">Boolean</p></td><td id="d65cc74037mau" rowspan="1" colspan="1"><p id="ceec0acfb690u">是否有支付属性，取值：</p><ul id="1fce44cc086hu"><li id="c1ac87b681gb6"><p id="c74213e8afw57">true：是</p></li><li id="2ba4bfd0cd0h3"><p id="b45dc110b03ed">false：否</p></li></ul></td></tr><tr outputclass="row row-level-1-8-3-2-25" id="73f9b62bacmb6" class="row row-level-1-8-3-2-25"><td id="bd0e8f81102iq" rowspan="1" colspan="1"><p id="36f6ded03c3gf">hidden</p></td><td id="d573d2f880csm" rowspan="1" colspan="1"><p id="e7d4f84f5berr">Boolean</p></td><td id="1d603354adxfa" rowspan="1" colspan="1"><p id="5bf91d1f992lr">加班套件4.0新增 加班明细是否隐藏，取值：</p><ul id="c8863322df914"><li id="b475c2e06b9ev"><p id="b8c53f7f13nfa">true：是</p></li><li id="72ed1e0e634lw"><p id="42eb4fdbe8tiu">false：否</p></li></ul></td></tr><tr outputclass="row row-level-1-8-3-2-26" id="227223aaa72qs" class="row row-level-1-8-3-2-26"><td id="f3814c32a1kv9" rowspan="1" colspan="1"><p id="51af72a8976bc">bizType</p></td><td id="6c96ed77b44ro" rowspan="1" colspan="1"><p id="638fdef7bey7z">String</p></td><td id="030180f8b5tcs" rowspan="1" colspan="1"><p id="2263a8625896q">业务套件类型。</p></td></tr><tr outputclass="row row-level-1-8-3-2-27" id="5c1bffeefblhr" class="row row-level-1-8-3-2-27"><td id="c81c8d9c15akm" rowspan="1" colspan="1"><p id="515fd2c70f6s2">staffStatusEnabled</p></td><td id="96f68d1ed0atg" rowspan="1" colspan="1"><p id="0e9cc69942c7u">Boolean</p></td><td id="e5eac69f40n4l" rowspan="1" colspan="1"><p id="9f3d8309ba6yl">是否开启员工状态，取值：</p><ul id="744e57425ehw0"><li id="1ba31f9735cy9"><p id="8283e41468sx3">true：是</p></li><li id="12ac4e1b2cezq"><p id="e95fcc1a1f431">false：否</p></li></ul></td></tr><tr outputclass="row row-level-1-8-3-2-28" id="d19a151437162" class="row row-level-1-8-3-2-28"><td id="39aaef7f5f9wk" rowspan="1" colspan="1"><p id="58b202186d38b">actionName</p></td><td id="63aa7133f9r8l" rowspan="1" colspan="1"><p id="f1a8abebefeo2">String</p></td><td id="693751d49axw8" rowspan="1" colspan="1"><p id="b966c1db88dcw">加班套件4.0新增 加班明细名称。</p></td></tr><tr outputclass="row row-level-1-8-3-2-29" id="c48466909dcoa" class="row row-level-1-8-3-2-29"><td id="5d0763c831528" rowspan="1" colspan="1"><p id="ed5f30e16a53i">attendTypeLabel</p></td><td id="9d29346725doh" rowspan="1" colspan="1"><p id="f750fa0b4ef1s">String</p></td><td id="8e5b25d92d1jy" rowspan="1" colspan="1"><p id="e9701e9354iic">请假、出差、外出、加班类型标签。</p></td></tr><tr outputclass="row row-level-1-8-3-2-30 has-child" id="c232134f54vdb" class="row row-level-1-8-3-2-30 has-child"><td id="e40d69af20wwj" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="c7593c05cflla">childFieldVisible</p></td><td id="44b3013e4e9sa" rowspan="1" colspan="1"><p id="cd0b2f2768v6o">Map&lt;String, Boolean&gt;</p></td><td id="f488175b13n13" rowspan="1" colspan="1"><p id="fdc521b7aabxj">套件内子组件可见性，取值：</p><ul id="1d0003a233v42"><li id="035c7538b9nsj"><p id="5a8f508460l8j">true：是</p></li><li id="fcab014c99hcc"><p id="f695afbea5p0w">false：否</p></li></ul></td></tr><tr outputclass="row row-level-1-8-3-2-30-1" id="53e3198ec1rhl" class="row row-level-1-8-3-2-30-1"><td id="df137dbb77g61" rowspan="1" colspan="1"><p id="5d1806494fivd"></p></td><td id="fd05ec3bebbra" rowspan="1" colspan="1"><p id="b13c0f3276tzb">Boolean</p></td><td id="74f7e6d98c4y9" rowspan="1" colspan="1"><p id="77715bb835lg7">套件内子组件可见性，取值：</p><ul id="3f99dc758dpfh"><li id="72565a0eeanq7"><p id="1e27b92b22fgw">true：是</p></li><li id="c7334e906537c"><p id="77869ddc08y0s">false：否</p></li></ul></td></tr><tr outputclass="row row-level-1-8-3-2-31" id="a2e173e258u28" class="row row-level-1-8-3-2-31"><td id="ee4b8db9d4zg3" rowspan="1" colspan="1"><p id="fda8db1cb612q">notPrint</p></td><td id="075b6b992a692" rowspan="1" colspan="1"><p id="d5c68c41ac84j">String</p></td><td id="5c37c72bedtlp" rowspan="1" colspan="1"><p id="12128a33203ma">是否参与打印，取值：</p><ul id="202a4e18cfpmj"><li id="cdf8244a284op"><p id="2934b3609690u">1：不打印</p></li><li id="9d1ed599d4dt3"><p id="757a53ada17la">0：打印</p></li></ul></td></tr><tr outputclass="row row-level-1-8-3-2-32" id="c4e839b6d96o8" class="row row-level-1-8-3-2-32"><td id="ac36aca5095gc" rowspan="1" colspan="1"><p id="932bb57822gqr">verticalPrint</p></td><td id="1b996459af0fx" rowspan="1" colspan="1"><p id="f9cf992fe78br">Boolean</p></td><td id="f8754d3815lki" rowspan="1" colspan="1"><p id="bb550a254er0p">明细打印排版方式，取值：</p><ul id="f0671d9acd8rj"><li id="679d74cc37f4e"><p id="8c4117a499mtt">true：纵向</p></li><li id="22a4fae97dzk5"><p id="82a4f0a375iqd">false：横向</p></li></ul></td></tr><tr outputclass="row row-level-1-8-3-2-33" id="e41d7efb222q4" class="row row-level-1-8-3-2-33"><td id="53b0071e29hrw" rowspan="1" colspan="1"><p id="607311e077ggn">duration</p></td><td id="f42f7c0faehsp" rowspan="1" colspan="1"><p id="68b3845f729m5">Boolean</p></td><td id="e6694425a6y7c" rowspan="1" colspan="1"><p id="c27644135bxn4">是否自动计算时长，取值：</p><ul id="c8822042b04pt"><li id="d983451e78y8j"><p id="61ea72ff1fl24">true：是</p></li><li id="c14e703c02ol8"><p id="c62048b58bkoh">false：否</p></li></ul></td></tr><tr outputclass="row row-level-1-8-3-2-34" id="1d1826d901uqg" class="row row-level-1-8-3-2-34"><td id="8a28a73fccfg8" rowspan="1" colspan="1"><p id="703e344121mqq">holidayOptions</p></td><td id="61448455b9415" rowspan="1" colspan="1"><p id="08c3f227136n5">Array of Object</p></td><td id="6cb0ffe542bhs" rowspan="1" colspan="1"><p id="2415348ff8q80">兼容出勤套件类型。</p></td></tr><tr outputclass="row row-level-1-8-3-2-35" id="286dd7c6d8gcf" class="row row-level-1-8-3-2-35"><td id="feeb2ffc46j5o" rowspan="1" colspan="1"><p id="f4ac50e578rp7">useCalendar</p></td><td id="cadb33426atgl" rowspan="1" colspan="1"><p id="0683e44732qbe">Boolean</p></td><td id="addbd0440ec1j" rowspan="1" colspan="1"><p id="9c58cae696bhu">是否使用考勤日历，取值：</p><ul id="44f0e80a1dkvq"><li id="edbc02ab0f8f8"><p id="aaccab1717qwl">true：是</p></li><li id="3c883fb8f2nu7"><p id="d5d862cfd8cqc">false：否</p></li></ul></td></tr><tr outputclass="row row-level-1-8-3-2-36" id="2840bc4fa6ggt" class="row row-level-1-8-3-2-36"><td id="101ad314cel3v" rowspan="1" colspan="1"><p id="e316aa3a7aqb0">hiddenInApprovalDetail</p></td><td id="b06b2c3514jta" rowspan="1" colspan="1"><p id="d39bf417d6c4v">Boolean</p></td><td id="3d108df2bd3xi" rowspan="1" colspan="1"><p id="718b7e1920esc">textnote在详情页是否隐藏，取值：</p><ul id="d0ca5e6427o6d"><li id="1ad95640dc881"><p id="1907e27566cfn">true：是</p></li><li id="8cec683d4fdep"><p id="8fb9a90168e71">false：否</p></li></ul></td></tr><tr outputclass="row row-level-1-8-3-2-37" id="93bc454de06ae" class="row row-level-1-8-3-2-37"><td id="6c94d54dceptx" rowspan="1" colspan="1"><p id="ce4682e188iqy">disabled</p></td><td id="68702fbb829zx" rowspan="1" colspan="1"><p id="1819a8bbcf2v5">Boolean</p></td><td id="7139ad2b9aqop" rowspan="1" colspan="1"><p id="2d60c8a9c57ye">是否可编辑，取值：</p><ul id="91d5b4c922fnp"><li id="7551693012nem"><p id="f1c4decfa56dt">true：是</p></li><li id="f49b9e030f47p"><p id="9b3504498c9ou">false：否</p></li></ul></td></tr><tr outputclass="row row-level-1-8-3-2-38" id="e83e48babef9e" class="row row-level-1-8-3-2-38"><td id="807fd2a828028" rowspan="1" colspan="1"><p id="b0fd2ab57bs78">asyncCondition</p></td><td id="0ecd94dba555t" rowspan="1" colspan="1"><p id="4a0614ec63y3p">Boolean</p></td><td id="f03495744f621" rowspan="1" colspan="1"><p id="f5123104felgj">套件是否开启异步获取分条件规则，取值：</p><ul id="2721dbf7e68os"><li id="4c1486f9417wj"><p id="818b793e4cyv1">true：是</p></li><li id="36b77e1eb2b6y"><p id="3026337473tbk">false：否</p></li></ul></td></tr><tr outputclass="row row-level-1-8-3-2-39 has-child" id="64c977da95yva" class="row row-level-1-8-3-2-39 has-child"><td id="2511ffb7ff616" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="cb7490c7efajs">behaviorLinkage</p></td><td id="6daa51e21f33k" rowspan="1" colspan="1"><p id="f5913a21e6u2e">Array</p></td><td id="893edae22980u" rowspan="1" colspan="1"><p id="d953ca9f88q7s">表单关联控件列表。</p></td></tr><tr outputclass="row row-level-1-8-3-2-39-1" id="3150fb4804hyg" class="row row-level-1-8-3-2-39-1"><td id="94dde83993x8t" rowspan="1" colspan="1"><p id="6974be8e71o0f">value</p></td><td id="65ee178603mlm" rowspan="1" colspan="1"><p id="d382c267feuot">String</p></td><td id="25187bc387p2c" rowspan="1" colspan="1"><p id="8918f359e24uz">控件值。</p></td></tr><tr outputclass="row row-level-1-8-3-2-39-2 has-child" id="fd802a1825271" class="row row-level-1-8-3-2-39-2 has-child"><td id="5a494aa706d0m" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="f7571cc154ukv">targets</p></td><td id="8abd8a46c1t0u" rowspan="1" colspan="1"><p id="193bdae15165b">Array</p></td><td id="e28f9ac358u3g" rowspan="1" colspan="1"><p id="c4b2afb8c5km4">关联控件列表。</p></td></tr><tr outputclass="row row-level-1-8-3-2-39-2-1" id="01c91562a2pxm" class="row row-level-1-8-3-2-39-2-1"><td id="2c0f9c2b803ul" rowspan="1" colspan="1"><p id="415f12fc36zpy">fieldId</p></td><td id="16d5b59f82xys" rowspan="1" colspan="1"><p id="493458c652ea7">String</p></td><td id="c297b8aaf1c3m" rowspan="1" colspan="1"><p id="b17b2445b9sxj">字段 id。</p></td></tr><tr outputclass="row row-level-1-8-3-2-39-2-2" id="6474f07360js7" class="row row-level-1-8-3-2-39-2-2"><td id="8fed7fcdcb6gz" rowspan="1" colspan="1"><p id="6954bc9df3izc">behavior</p></td><td id="c333c809a5vae" rowspan="1" colspan="1"><p id="fd0a825500i3r">String</p></td><td id="354c123993qe4" rowspan="1" colspan="1"><p id="4bf7fae608bir">行为。</p></td></tr><tr outputclass="row row-level-1-8-3-2-40" id="6ca0331ca4hky" class="row row-level-1-8-3-2-40"><td id="ec1935ec6ew05" rowspan="1" colspan="1"><p id="2e69bb3b70imm">showAttendOptions</p></td><td id="c256164a33wwq" rowspan="1" colspan="1"><p id="dc22591ea2cer">Boolean</p></td><td id="6903e1397334n" rowspan="1" colspan="1"><p id="402646273c55g">兼容出勤套件类型。</p></td></tr><tr outputclass="row row-level-1-8-3-2-41" id="2504b7ca43dq6" class="row row-level-1-8-3-2-41"><td id="b022a3c0a57qw" rowspan="1" colspan="1"><p id="a777a0790d2bx">notUpper</p></td><td id="a575033697ck9" rowspan="1" colspan="1"><p id="3c77595c3f8k7">String</p></td><td id="7d08c5393amyq" rowspan="1" colspan="1"><p id="f3aaa6c4e8fbk">是否需要大写，默认是需要，取值：</p><ul id="c8e624265dvaz"><li id="5fb3cd0533gna"><p id="44eb4900b4a26">1：不需要</p></li><li id="10cad1ff6bv30"><p id="dbf58183cagro">0 或空：需要</p></li></ul></td></tr><tr outputclass="row row-level-1-8-3-2-42" id="cf292d933ciov" class="row row-level-1-8-3-2-42"><td id="676cfdf2b3j4x" rowspan="1" colspan="1"><p id="50c5501f7b1e7">fieldsInfo</p></td><td id="1d80f365cc9gm" rowspan="1" colspan="1"><p id="26610ca80f1uw">String</p></td><td id="d898467eb19e0" rowspan="1" colspan="1"><p id="16277ed555rlp">关联表单中的fields存储</p></td></tr><tr outputclass="row row-level-1-8-3-2-43" id="270ee8e5a2v83" class="row row-level-1-8-3-2-43"><td id="4ebe8592f9po7" rowspan="1" colspan="1"><p id="7678af5694ian">eSign</p></td><td id="a3d2bb5a99sih" rowspan="1" colspan="1"><p id="0ebff1775460l">Boolean</p></td><td id="4675b0d74e2xz" rowspan="1" colspan="1"><p id="32cc8214d43xv">e签宝专用标识。</p></td></tr><tr outputclass="row row-level-1-8-3-2-44" id="acc2c697e6l6s" class="row row-level-1-8-3-2-44"><td id="494db619560bz" rowspan="1" colspan="1"><p id="7c30847830223">mainTitle</p></td><td id="eef27c30698ls" rowspan="1" colspan="1"><p id="ebf1ee2cf5fm2">String</p></td><td id="62981595e56y8" rowspan="1" colspan="1"><p id="f9d4321d12jxu">加班套件4.0新增 加班明细描述。</p></td></tr><tr outputclass="row row-level-1-8-3-2-45" id="599cbaf38d87u" class="row row-level-1-8-3-2-45"><td id="fa7eb244769sp" rowspan="1" colspan="1"><p id="f05435a9c064b">formula</p></td><td id="b8adbb612azsb" rowspan="1" colspan="1"><p id="bc5e1c2409fge">String</p></td><td id="90b3f27777af1" rowspan="1" colspan="1"><p id="cc08466958wjm">公式。</p></td></tr><tr outputclass="row row-level-1-8-3-2-46" id="35c7b7c8f2dn3" class="row row-level-1-8-3-2-46"><td id="5824a9a7875x2" rowspan="1" colspan="1"><p id="5b2bfa8f77jil">choice</p></td><td id="6728a8b87en00" rowspan="1" colspan="1"><p id="627ee009a0l2q">Integer</p></td><td id="4f3ea23dado7q" rowspan="1" colspan="1"><p id="08706bd22a7tp">内部联系人choice，取值：</p><ul id="8bfa2cd5063kn"><li id="5a52b5897f0jd"><p id="df3f6cca41ay2">1：多选</p></li><li id="6feb8cf161ybo"><p id="2309ec46d3hks">0：单选</p></li></ul></td></tr><tr outputclass="row row-level-1-8-3-3 has-child" id="d4f1f3da1blw5" class="row row-level-1-8-3-3 has-child"><td id="151eeeb20cbmp" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="c169cbd0c0mwv">children</p></td><td id="7adcd5940a8ul" rowspan="1" colspan="1"><p id="54d25a1894d9w">Array</p></td><td id="973445efa9kg3" rowspan="1" colspan="1"><p id="16f362d299sfv">子控件列表。</p></td></tr><tr outputclass="row row-level-1-8-3-3-1" id="f92fb7749dyo1" class="row row-level-1-8-3-3-1"><td id="a90c9e3265n9b" rowspan="1" colspan="1"><p id="8491497f7cbeg">componentName</p></td><td id="46b4c31925wxt" rowspan="1" colspan="1"><p id="207db85d90rei">String</p></td><td id="be7cd32f4cm2o" rowspan="1" colspan="1"><p id="7844bb4358ddt">子控件类型，取值：</p><ul id="8421b769eai5f"><li id="a28b7862e0gv4"><p id="29f8aa5213lwy">TextField：单行输入框</p></li><li id="2b9a1e48d8vnm"><p id="d8c514051a164">TextareaField：多行输入框</p></li><li id="fa8977ad14waz"><p id="355c8ec3fanr2">NumberField：数字输入框</p></li><li id="f9b5dbd0efmkq"><p id="84976b0f03x33">DDSelectField：单选框</p></li><li id="ebf63571b9g7j"><p id="1604b065aczoq">DDMultiSelectField：多选框</p></li><li id="e7c27c2f0e8k7"><p id="b0fca4a1c7t0l">DDDateField：日期控件</p></li><li id="3483832fe8crd"><p id="9bf2604088e4a">DDDateRangeField：时间区间控件</p></li><li id="4cab87815ao9j"><p id="4054d4ebc6tu1">TextNote：文字说明控件</p></li><li id="c11d140015fu0"><p id="faf2caf39fgvd">PhoneField：电话控件</p></li><li id="d4f87e81112vo"><p id="e68b2e4b298mx">DDPhotoField：图片控件</p></li><li id="703f9bcb762fg"><p id="b6defdab0f3zx">MoneyField：金额控件</p></li><li id="3fa6af15fdwz8"><p id="0967ba357766m">DDAttachment：附件</p></li><li id="54cedbc804klj"><p id="a515113fc123v">InnerContactField：联系人控件</p></li><li id="3c1c208924j5l"><p id="2ad5a76b3cqhc">DepartmentField：部门控件</p></li><li id="2a67b79b0ciwz"><p id="4d548dfb5cn4d">RelateField：关联审批单</p></li><li id="cb05c33515igh"><p id="efcb73955fi13">AddressField：省市区控件</p></li><li id="5846f92a78217"><p id="ed44e6515dfd4">StarRatingField：评分控件</p></li><li id="9c1ad716ffgxs"><p id="ccbcfa1f0a1q5">FormRelateField：关联控件</p></li></ul></td></tr><tr outputclass="row row-level-1-8-3-3-2 has-child" id="4cea16f8a2shz" class="row row-level-1-8-3-3-2 has-child"><td id="cfc1762c806kp" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="a8701d48d5dco">props</p></td><td id="48cce7d08ab9w" rowspan="1" colspan="1"><p id="1594f1024999d">Object</p></td><td id="592ae765f5a1k" rowspan="1" colspan="1"><p id="d57a1171281i7">子控件属性</p></td></tr><tr outputclass="row row-level-1-8-3-3-2-1" id="694839d750dhe" class="row row-level-1-8-3-3-2-1"><td id="82fa8a39510z8" rowspan="1" colspan="1"><p id="167c94d767cro">id</p></td><td id="0d81691ce7p8e" rowspan="1" colspan="1"><p id="719bdb49036ey">String</p></td><td id="fb1a6b2f94zh1" rowspan="1" colspan="1"><p id="2a9adc6605hag">控件id</p></td></tr><tr outputclass="row row-level-1-8-3-3-2-2" id="479d0c77677ee" class="row row-level-1-8-3-3-2-2"><td id="9dc93907712vj" rowspan="1" colspan="1"><p id="29133d8e0cgq8">label</p></td><td id="c087ba7574bk6" rowspan="1" colspan="1"><p id="2e9c401529m0c">String</p></td><td id="b48edb8981j3l" rowspan="1" colspan="1"><p id="82990cc641ki0">控件名称</p></td></tr><tr outputclass="row row-level-1-8-3-3-2-3" id="e6cc92233dt7g" class="row row-level-1-8-3-3-2-3"><td id="c4f0f4e72dpp7" rowspan="1" colspan="1"><p id="c561010a932vd">bizAlias</p></td><td id="30ad665aafjtw" rowspan="1" colspan="1"><p id="44ae3c64cabfp">String</p></td><td id="8992bff797m8q" rowspan="1" colspan="1"><p id="8303733f40dr9">控件业务别名</p></td></tr><tr outputclass="row row-level-1-8-3-3-2-4" id="a5c15e85a6avc" class="row row-level-1-8-3-3-2-4"><td id="fcccc6e0b0rex" rowspan="1" colspan="1"><p id="078ffba4ff0ly">required</p></td><td id="591313f6911k1" rowspan="1" colspan="1"><p id="e25d5247f5r4g">Boolean</p></td><td id="9ac5df36417h9" rowspan="1" colspan="1"><p id="a6d9d4a817enc">是否必填</p></td></tr><tr outputclass="row row-level-1-8-3-3-2-5" id="6a4f158e5eamv" class="row row-level-1-8-3-3-2-5"><td id="1e65dafafbgmw" rowspan="1" colspan="1"><p id="d5b86e3699hf0">options</p></td><td id="84101ea6e66lm" rowspan="1" colspan="1"><p id="85a6c7c760i2n">Array of String</p></td><td id="8cd83d8199sbn" rowspan="1" colspan="1"><p id="8efdd18da1g9d">单选框选项值。</p></td></tr><tr outputclass="row row-level-1-9" id="17451d49a56l4" class="row row-level-1-9"><td id="a2f11f82b7cfo" rowspan="1" colspan="1"><p id="b7462f9123tjr">icon</p></td><td id="7a1853b39a1lh" rowspan="1" colspan="1"><p id="ff0c5daddfrbp">String</p></td><td id="bc0174d3eddl7" rowspan="1" colspan="1"><p id="995e2d3e2b0wt">图标。</p></td></tr><tr outputclass="row row-level-1-10" id="f00067f7cbh9z" class="row row-level-1-10"><td id="8bf71ef7d0k9y" rowspan="1" colspan="1"><p id="36cee92aa70jf">appType</p></td><td id="af781f68e88og" rowspan="1" colspan="1"><p id="0e16d5d0cf6cp">Integer</p></td><td id="de2bd0269a1y7" rowspan="1" colspan="1"><p id="290865bc01xba">表单类型。</p></td></tr><tr outputclass="row row-level-1-11" id="7b1f7002357ko" class="row row-level-1-11"><td id="61b6cd25e4vib" rowspan="1" colspan="1"><p id="9f208fb25c6kf">bizType</p></td><td id="0a2c7cb464fyc" rowspan="1" colspan="1"><p id="dbcbf29089vzq">String</p></td><td id="13874b8357mvs" rowspan="1" colspan="1"><p id="ad955215fexqa">代表表单业务含义的类型。</p></td></tr><tr outputclass="row row-level-1-12" id="31ad7616da4oj" class="row row-level-1-12"><td id="1bca13781c2l1" rowspan="1" colspan="1"><p id="671b424b250xl">engineType</p></td><td id="c6907f3b30v4h" rowspan="1" colspan="1"><p id="68675e3822meh">Integer</p></td><td id="27abdba5c8to6" rowspan="1" colspan="1"><p id="591153fb9bjb4">引擎类型，取值：</p><ul id="92212e92bc26d"><li id="3f9bf0ddbfhkm"><p id="e8f71164396sm">1：页面</p></li><li id="1eb831f687j6a"><p id="3d16cd52a1y5f">0：表单</p></li></ul></td></tr><tr outputclass="row row-level-1-13" id="c8607a39efaba" class="row row-level-1-13"><td id="008fd94984ycw" rowspan="1" colspan="1"><p id="87af85f3252r4">status</p></td><td id="0346307a57k93" rowspan="1" colspan="1"><p id="a4bc72f1018qh">String</p></td><td id="448fd1984e0gu" rowspan="1" colspan="1"><p id="4070188458y11">状态，取值：</p><ul id="a63a851470yxz"><li id="e08428a93ccda"><p id="a149cf64f9r5t">PUBLISHED：启用</p></li><li id="79a7fec358m8x"><p id="f05c1b4553v7y">INVALID：停用</p></li><li id="e695c4c6d3n6v"><p id="cd34e3f9fdvoi">SAVED：草稿</p></li></ul></td></tr><tr outputclass="row row-level-1-14" id="f970496649v5t" class="row row-level-1-14"><td id="b53a0261941iq" rowspan="1" colspan="1"><p id="89b62399430f3">listOrder</p></td><td id="3c759bdab815y" rowspan="1" colspan="1"><p id="1a5559cfacwoe">Integer</p></td><td id="74eea849c4cac" rowspan="1" colspan="1"><p id="23b9e5cc9fxhw">排序 id。</p></td></tr><tr outputclass="row row-level-1-15" id="2b15a04aaeo5q" class="row row-level-1-15"><td id="c5417dc10e5b0" rowspan="1" colspan="1"><p id="3d57864034wvb">customSetting</p></td><td id="58edaac19e1nr" rowspan="1" colspan="1"><p id="c6f2c6f2d5a3q">String</p></td><td id="034127f78dpyw" rowspan="1" colspan="1"><p id="f07539996bhrv">业务自定义设置数据。</p></td></tr><tr outputclass="row row-level-1-16" id="5b4835f574eqm" class="row row-level-1-16"><td id="12c3fcc7belpo" rowspan="1" colspan="1"><p id="d87b7dedadc6x">procType</p></td><td id="223f4bc936hl8" rowspan="1" colspan="1"><p id="3f34df1e74mjs">String</p></td><td id="e33a631939ph9" rowspan="1" colspan="1"><p id="2705dc2b33x29">目标类型，取值：</p><ul id="b9dc79ef85flu"><li id="26090b07d98uu"><p id="41b2c630felx3">inner：内部</p></li><li id="077ad3761bky2"><p id="86eef75d5ftye">outer：外部</p></li><li id="f0301a60b52xm"><p id="c2c08966ba1fv">customer：自定义</p></li></ul></td></tr><tr outputclass="row row-level-1-17" id="494328729dhu8" class="row row-level-1-17"><td id="f3e22bb080533" rowspan="1" colspan="1"><p id="02e29d7caa3ws">visibleRange</p></td><td id="494ead86f2tov" rowspan="1" colspan="1"><p id="26846d13c7an6">String</p></td><td id="2da75bb130lgt" rowspan="1" colspan="1"><p id="24f14a3b85loo">可见范围类型。</p></td></tr><tr outputclass="row row-level-1-18" id="c493510e406ly" class="row row-level-1-18"><td id="ce574ae5ac06z" rowspan="1" colspan="1"><p id="120f3b00fc1wf">gmtCreate</p></td><td id="7c75e53373bw7" rowspan="1" colspan="1"><p id="81fb56def9k1g">String</p></td><td id="8d3a9377b4vut" rowspan="1" colspan="1"><p id="41af33a470dgu">创建时间的时间戳。</p></td></tr><tr outputclass="row row-level-1-19" id="bbd25d5462o4e" class="row row-level-1-19"><td id="4eaef0b5be8ba" rowspan="1" colspan="1"><p id="7ec5b7dbaf1va">gmtModified</p></td><td id="a14faad3f02oz" rowspan="1" colspan="1"><p id="19a3cff27136a">String</p></td><td id="9aeab8d489xxj" rowspan="1" colspan="1"><p id="ec5d2ad0e08t0">修改时间的时间戳。</p></td></tr></tbody></table></section><section id="section-response-body-example" class="section"><h3 id="h3-response-body-example" data-tag="h3" class="h3">响应体示例</h3><pre id="fbaabdde3544n" outputclass="language-json" code-type="xCode" data-tag="codeblock" class="pre codeblock language-json"><code>HTTP/1.1 200 OK
+Content-Type:application/json
+
+{
+  "result" : {
+    "creatorUserId" : "26652461xxxx5992",
+    "appUuid" : "xxxx",
+    "formCode" : "PROC-17428B8C-6C60-470E-xxxx-64F1037AE067",
+    "formUuid" : "FORM-28215C3E-00E3-4118-xxxx-4091F828AF2F",
+    "name" : "示例模板",
+    "memo" : "xxxx",
+    "ownerIdType" : "orgId",
+    "schemaContent" : {
+      "title" : "示例模板",
+      "icon" : "common",
+      "items" : [ {
+        "componentName" : "TextField",
+        "props" : {
+          "id" : "TextField-K2AD4O5B",
+          "label" : "单行输入框",
+          "bizAlias" : "我的单行输入框",
+          "required" : true,
+          "placeholder" : "请输入文字",
+          "options" : [ "选项1" ],
+          "appId" : 1234567,
+          "durationLabel" : "xxxx",
+          "pushToCalendar" : 1,
+          "align" : "top",
+          "statField" : [ {
+            "id" : "TextField-K2AD4O5B",
+            "label" : "单行输入框",
+            "upper" : true,
+            "unit" : "xxxx"
+          } ],
+          "hideLabel" : true,
+          "objOptions" : [ {
+            "value" : "xxxx"
+          } ],
+          "format" : "yyyy-MM-dd",
+          "pushToAttendance" : true,
+          "labelEditableFreeze" : true,
+          "push" : {
+            "pushSwitch" : 1,
+            "pushTag" : "xxxx",
+            "attendanceRule" : 1
+          },
+          "commonBizType" : "xxxx",
+          "requiredEditableFreeze" : true,
+          "unit" : "天",
+          "extract" : true,
+          "link" : "xxxx",
+          "payEnable" : true,
+          "hidden" : true,
+          "bizType" : "hrm.xxxx",
+          "staffStatusEnabled" : true,
+          "actionName" : "添加",
+          "attendTypeLabel" : "请假",
+          "childFieldVisible" : {
+            "key" : true
+          },
+          "notPrint" : "1",
+          "verticalPrint" : true,
+          "duration" : true,
+          "holidayOptions" : [ {
+            "key" : "xxxx"
+          } ],
+          "useCalendar" : true,
+          "hiddenInApprovalDetail" : true,
+          "disabled" : true,
+          "asyncCondition" : true,
+          "behaviorLinkage" : [ {
+            "value" : "xxxx",
+            "targets" : [ {
+              "fieldId" : "TextField-K2AD4O5B",
+              "behavior" : "xxxx"
+            } ]
+          } ],
+          "showAttendOptions" : true,
+          "notUpper" : "1",
+          "fieldsInfo" : "xxxx",
+          "eSign" : true,
+          "mainTitle" : "xxxx",
+          "formula" : "xxxx",
+          "choice" : 1
+        },
+        "children" : [ {
+          "componentName" : "TextField",
+          "props" : {
+            "id" : "TextField-abcd",
+            "label" : "姓名",
+            "bizAlias" : "userName",
+            "required" : true
+          }
+        } ]
+      } ]
+    },
+    "icon" : "null",
+    "appType" : 0,
+    "bizType" : "hrm.xxxx",
+    "engineType" : 0,
+    "status" : "PUBLISHED",
+    "listOrder" : 1,
+    "customSetting" : "null",
+    "procType" : "inner",
+    "visibleRange" : "PRIVATE",
+    "gmtCreate" : "1638326995000",
+    "gmtModified" : "1640344585000"
+  }
+}</code></pre></section><section id="section-error-code-1" class="section"><h3 id="h3-error-code-1" data-tag="h3" class="h3">错误码</h3><p data-tag="p" id="p-error-code-global-guide" class="p">若调用该接口报错，可根据错误信息在<a href="https://open.dingtalk.com/document/development/server-api-error-codes-1" id="a-error-code-global-guide">全局错误码</a>文档中查找解决方案。</p><table id="1df0b3d6593yo" tablewidth="709" tablecolswidth="142 177 177 213" autofit="false" class="table"><colgroup colwidth="0.8*" style="width:20.03%"></colgroup><colgroup colwidth="1*" style="width:24.96%"></colgroup><colgroup colwidth="1*" style="width:24.96%"></colgroup><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><tbody class="tbody"><tr id="56a91e624al63"><td id="57051e6aa4cxy" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="96daad8f180hj">HttpCode</p></td><td id="f50d06453cp74" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="b880edbec7vgh">错误码</p></td><td id="6e5577048fc5w" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="794050c480uhq">错误信息</p></td><td id="bc58a43c343as" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="ae6f683a21bv8">说明</p></td></tr><tr id="fee2483803tr5"><td id="da268be49ch1r" rowspan="1" colspan="1"><p id="f235f714561xr">400</p></td><td id="aa37efee2ad05" rowspan="1" colspan="1"><p id="ca720b1997hzo">formNotExist</p></td><td id="99301aa621km7" rowspan="1" colspan="1"><p id="9c3f2fff80vur">审批表单模板不存在</p></td><td id="82347eb66coat" rowspan="1" colspan="1"><p id="c7b39d61b8e38">审批表单模板不存在</p></td></tr><tr id="f608e55239d5s"><td id="928f737980cpd" rowspan="1" colspan="1"><p id="88a802bd5aww5">400</p></td><td id="88dead75d1crh" rowspan="1" colspan="1"><p id="49b3d8ddb13u0">invalidParameter</p></td><td id="4f3199720deri" rowspan="1" colspan="1"><p id="1dc8defae9vi7">参数错误，具体可能为：企业ID、审批模板code等参数错误</p></td><td id="262d4d2fd3fxe" rowspan="1" colspan="1"><p id="3635075b5dqkc">参数错误，具体可能为：企业ID、审批模板code等参数错误</p></td></tr><tr id="e78e4e0ae1957"><td id="0cca80f91d6a0" rowspan="1" colspan="1"><p id="7ad1a25aabkvp">400</p></td><td id="0db900326be9r" rowspan="1" colspan="1"><p id="6803226ab9nt3">noPermission</p></td><td id="0d9e3923190jc" rowspan="1" colspan="1"><p id="d1464d0c0c6a4">没有权限访问当前表单</p></td><td id="c4677ccdd25re" rowspan="1" colspan="1"><p id="33238f3946j67">权限校验失败</p></td></tr><tr id="d0359853ea569"><td id="397a52d1daau2" rowspan="1" colspan="1"><p id="4dcf221d142s4">400</p></td><td id="2c01b26b8421h" rowspan="1" colspan="1"><p id="80ea067d87cec">aflowProcessCodeIsError</p></td><td id="b7983c1331x5k" rowspan="1" colspan="1"><p id="fbfa6ab55194a">获取审批模板失败或审批模板已被删除</p></td><td id="be05eb5d14kb3" rowspan="1" colspan="1"><p id="8ae94b461fv1t">获取审批模板失败或审批模板已被删除</p></td></tr><tr id="38bc9e271csfx"><td id="6942b6a75eml2" rowspan="1" colspan="1"><p id="2fd72d31431bb">400</p></td><td id="f382633ba6qon" rowspan="1" colspan="1"><p id="4c162fff25jtx">internalError</p></td><td id="049fb1536dour" rowspan="1" colspan="1"><p id="aefc5de668h60">%s</p></td><td id="a951c5d5cctjj" rowspan="1" colspan="1"><p id="4949fb39e8rlo">系统内部异常</p></td></tr><tr id="a5cc4a93b7h3f"><td id="8b7274ecf70op" rowspan="1" colspan="1"><p id="8b4c9dbad9it9">500</p></td><td id="db0ee27cf5id2" rowspan="1" colspan="1"><p id="e9551c034e6il">systemError</p></td><td id="24399eedf4za7" rowspan="1" colspan="1"><p id="e5f0224e65jaz">系统异常</p></td><td id="73ae3cfbb6r49" rowspan="1" colspan="1"><p id="3d3e9f7388yne">系统异常</p></td></tr></tbody></table></section></section></div></main></body></html>

@@ -1,0 +1,489 @@
+<!DOCTYPE html><html><head><meta charset="utf8" / /><meta name="gmtModify" content="2025-09-12 17:20:34" / /><meta name="searchtitle" content="" / /><meta name="keywords" content="" / /><meta name="author" content="" / /><title>添加空间</title><meta name="gmtModify" content="2026-06-04 19:09:31" / /></head><body data-tag="topic" id="doc-api-dingtalk-AddSpace" class="topic"><main id="460cf278890tc" data-init-id="doc-api-dingtalk_AddSpace"><h1 data-tag="title" id="h1-dfg-lj9-xxv" class="title">添加空间</h1><p data-tag="shortdesc" id="b90905ef1878x" class="shortdesc"><span style="color:rgb(23, 26, 29)">调用本接口，在企业云盘下创建一个新的空间，在该空间内可以进行新建文件夹、上传文件等操作。</span></p><div data-tag="conbody" outputclass="icms-api-reference" class="icms-api-reference conbody"><section id="a3f2e96265g9c" class="section"><h2 id="d0004d4efcxd0"><b>接口调用说明</b></h2><p jc="left" id="1ef4e5772et2e" style="text-align:left"><span style="color:rgb(23, 26, 29)"><b>存储空间介绍：</b></span></p><ul id="9177f138cb6kr"><li id="f862f8e938a9g"><p id="186472fb48lk7"><span style="color:rgb(23, 26, 29)">存储空间属于企业云盘的一部分，但是调用本接口添加的空间在客户端云盘内是不可见的。</span></p></li><li id="de5e77ee00cbc"><p id="d4f3a1a77409f"><span style="color:rgb(23, 26, 29)">存储空间会占用企业云盘的空间。</span></p></li></ul><p jc="left" id="60ec284b3708i" style="text-align:left"><span style="color:rgb(23, 26, 29)"><b>存储空间分类：</b></span></p><ul id="5931f8f81bm4a"><li id="1faff4f2c54hu"><p id="a9a0d6e19brsx"><span style="color:rgb(23, 26, 29)">用户空间，即USER空间。该空间的文件只能授予永久权限，要求授权者有管理权限才能授权。</span></p></li><li id="631d99d6ceucu"><p id="f95e89eddbcy2"><span style="color:rgb(23, 26, 29)">应用空间，即APP空间。该空间的文件只能授予临时权限，不要求授权者有管理权限。</span></p></li></ul></section><section id="section-request-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-request-1" data-tag="h2" class="h2">请求</h2><section id="section-request-basic-info" class="section"><h3 id="heading-request-basic-info" data-tag="h3" class="h3">基本信息</h3><table id="3221bf9cd7u63" tablewidth="648" tablecolswidth="216 432" autofit="false" class="table"><colgroup colwidth="0.67*" style="width:33.33%"></colgroup><colgroup colwidth="1.33*" style="width:66.67%"></colgroup><tbody class="tbody"><tr id="9fea11cc4420e"><td id="88cdb3eedd64s" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="aa8265eb829my">字段</p></td><td id="3a84cb667cqci" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="8551d6ce54hem">值</p></td></tr><tr id="b740504797g1j"><td id="069aa25e0bwyg" rowspan="1" colspan="1"><p id="1e736ba6c9ox7">HTTP URL</p></td><td id="72df64ddf96m6" rowspan="1" colspan="1"><p id="82f093bef1kxv">https://api.dingtalk.com/v1.0/storage/spaces</p></td></tr><tr id="e3f1e7ea80jkf"><td id="d0fa59b1fezoy" rowspan="1" colspan="1"><p id="b958064aa9zy2">HTTP Method</p></td><td id="93ea0b7cc30v2" rowspan="1" colspan="1"><p id="b4be6904e0r3l">POST</p></td></tr><tr id="e9d184ecc0a52"><td id="9e69c7ee19ve5" rowspan="1" colspan="1"><p id="d5185eed0fe9b">支持的应用类型</p></td><td id="63cb7465belup" rowspan="1" colspan="1"><p id="b79e39661275k"><span data-tag="ph" id="ph-request-basic-app-type-apptype-0" class="ph ph-app-type" data-ph-raw-text="appType-企业内部应用">appType-企业内部应用</span>　<span data-tag="ph" id="ph-request-basic-app-type-apptype-1" class="ph ph-app-type" data-ph-raw-text="appType-第三方企业应用">appType-第三方企业应用</span></p></td></tr><tr id="0294cb00ed7iy"><td id="afbf5a178eupd" rowspan="1" colspan="1"><p id="bd1bbba0f2yef">权限要求</p></td><td id="1e4b9b4fc5t4c" rowspan="1" colspan="1"><p id="c6fbb249f54oo"><span data-tag="ph" id="ph-request-basic-permission-permission-storage-space-write-0" class="ph-permission ph" data-ph-raw-text="permission-Storage.Space.Write-企业存储空间写权限" data-permission-id="permission-Storage.Space.Write" data-permission-code="Storage.Space.Write" data-permission-detail-api="/document/api/permission/detail" data-permission-query-param="code">permission-Storage.Space.Write-企业存储空间写权限</span></p></td></tr></tbody></table></section><section id="section-request-header-parameter" class="section"><h3 data-tag="h3" id="h2-kkw-7bn-vsd" class="h3 title">请求头</h3><table id="f2e61bf93be91" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="2941578fe8a70"><td id="3cb52750bf0by" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="b2f70431bb59v">名称</p></td><td id="29b678c26d6tu" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="a4b3f7ea97gcs">类型</p></td><td id="27d4c0dffavpe" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="a07a345080h2u">是否必填</p></td><td id="2b112237677eu" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="f18c3a7bfeluc">描述</p></td></tr><tr id="9f83080cbeanu"><td id="0da14fa422vuz" rowspan="1" colspan="1"><p id="9de02f136eqwm">x-acs-dingtalk-access-token</p></td><td id="bd00a083d6vwo" rowspan="1" colspan="1"><p id="699c67bfa5ode">String</p></td><td id="d2f6688c51hh9" rowspan="1" colspan="1"><p id="d958c08050ttm">是</p></td><td id="cd05e7ee9018f" rowspan="1" colspan="1"><p id="b24523bd502iz">调用该接口的访问凭证，通过以下获取：</p><ul id="a0d4f3b0fcqrc"><li id="34af5369c5rsy"><p id="c2c1e514a1ykv">企业内部应用，调用<a href="https://open.dingtalk.com/document/development/obtain-the-access-token-of-an-internal-app#" id="4970c6699df7l" class="xref">获取企业内部应用的accessToken</a>接口获取。</p></li><li id="a020db131bujx"><p id="73d17d89f4vs7">第三方企业应用，调用<a href="https://open.dingtalk.com/document/development/obtain-the-access-token-of-the-authorized-enterprise-1#" id="cd4c014d27ex2" class="xref">获取第三方应用授权企业的accessToken</a>接口获取。</p></li></ul></td></tr></tbody></table></section><section id="section-request-query-parameter" class="section"><h3 data-tag="h3" id="h2-wlh-wh1-d6k" class="h3 title">查询参数</h3><table id="1570cdc397ys1" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="227037c1ac0wh"><td id="e8da34a4c5z8z" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="057fe055ecroq">名称</p></td><td id="ad7f0fb9cd6ak" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="59ca15fcd21o9">类型</p></td><td id="d944d374cc7wy" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="94ca42b6e0wav">是否必填</p></td><td id="c64e932ed987t" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="2fd4525223dl9">描述</p></td></tr><tr id="899de0db6a4jz"><td id="3b2a54516bqmp" rowspan="1" colspan="1"><p id="be68adc972roi">unionId</p></td><td id="22468d87bca1p" rowspan="1" colspan="1"><p id="b4e236bcc6q09">String</p></td><td id="f885ad09c0rqq" rowspan="1" colspan="1"><p id="58b29d32dc49u">是</p></td><td id="49a76dd9f429k" rowspan="1" colspan="1"><p id="ee2360a8ab3b2">操作人的unionId，可调用<a href="https://open.dingtalk.com/document/development/query-user-details#" id="70806de1cehdu" class="xref">查询用户详情</a>接口获取。</p></td></tr></tbody></table></section><section id="section-request-body-parameter" class="section"><h3 data-tag="h3" id="h2-u2d-gnr-vaf" class="h3 title">请求体</h3><table id="5a385e6e375aw" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="57147bbdceami"><td id="6394eadfafb7b" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="16986caa8d0vx">名称</p></td><td id="906ce056fdemj" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="eb8d0b227d98f">类型</p></td><td id="bb070a792ej0p" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="41d41f9b619pt">是否必填</p></td><td id="ecee8d9d7f3k2" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="ddc0c57260ojf">描述</p></td></tr><tr outputclass="row row-level-2 has-child" id="48a6d86bcbhk5" class="row row-level-2 has-child"><td id="83c44db2d4dbv" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="866a000401qh4">option</p></td><td id="d0ff36614258k" rowspan="1" colspan="1"><p id="1872929aafyob">Object</p></td><td id="fdc7c49642tjf" rowspan="1" colspan="1"><p id="4d4622a82bp5m">否</p></td><td id="3f49af658ae16" rowspan="1" colspan="1"><p id="1f0d5560b8pjz">可选参数。</p></td></tr><tr outputclass="row row-level-2-1" id="bf8721044be1i" class="row row-level-2-1"><td id="4c0debec79e6k" rowspan="1" colspan="1"><p id="99d77c47b27fv">name</p></td><td id="a69e5467fdct1" rowspan="1" colspan="1"><p id="ec880c1c50pwl">String</p></td><td id="83104f8904lqy" rowspan="1" colspan="1"><p id="e9b8d93e8cmja">否</p></td><td id="e74e9108acnjh" rowspan="1" colspan="1"><p id="565000a8c8b69">空间名称，默认无空间名称。</p></td></tr><tr outputclass="row row-level-2-2" id="90129db795hfz" class="row row-level-2-2"><td id="a5d48e075eluo" rowspan="1" colspan="1"><p id="e50c27eb361h8">quota</p></td><td id="5511ec482272z" rowspan="1" colspan="1"><p id="07ccba3898y9i">Long</p></td><td id="7ef7a68d68h03" rowspan="1" colspan="1"><p id="3c79aa8a3dzrf">否</p></td><td id="30b0f056a71sr" rowspan="1" colspan="1"><p id="79bbf5a395cl4">空间能使用的最大容量，单位Byte。</p><p class="note-icon-wrapper" id="ad45ef9a3env5"></p><p data-tag="p" id="0acf2309a3e72" class="p"></p><p id="2e8be018f4tp5">该参数不传，表示该空间容量没有具体容量限制，但是不超过企业云盘总容量。</p><p id="ae28058aa1rfi"></p></td></tr><tr outputclass="row row-level-2-3 has-child" id="358ff8900a4bc" class="row row-level-2-3 has-child"><td id="0dbe3006a8l4s" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="2cb23dcea509x">capabilities</p></td><td id="762d291730n6k" rowspan="1" colspan="1"><p id="9dedece105oyt">Object</p></td><td id="4b0ef224db9tp" rowspan="1" colspan="1"><p id="1ce19da368ums">否</p></td><td id="7d13d4dbebfti" rowspan="1" colspan="1"><p id="329d0ad2d95vu">空间能力项，默认表示不设置拓展能力项。</p></td></tr><tr outputclass="row row-level-2-3-1" id="dadff1d441c8f" class="row row-level-2-3-1"><td id="e7e7a47b1c23k" rowspan="1" colspan="1"><p id="5674a3d33chqn">canSearch</p></td><td id="8f02c75d8dwna" rowspan="1" colspan="1"><p id="1a78f0e75bkr6">Boolean</p></td><td id="8f61ac20369wi" rowspan="1" colspan="1"><p id="c6cc257984wd9">否</p></td><td id="b65d32ac56k4s" rowspan="1" colspan="1"><p id="4dab9e016423c">是否支持搜索。</p><ul id="bb660cc951gr7"><li id="68afbfe9c6qtw"><p id="da67525f52a7q"><b>true</b>：支持</p></li><li id="953027c656jco"><p id="01f787ca1aa37"><b>false</b>：不支持，默认值。</p></li></ul></td></tr><tr outputclass="row row-level-2-3-2" id="3ed77df9c987o" class="row row-level-2-3-2"><td id="8735bfa411g8y" rowspan="1" colspan="1"><p id="63dd4d90adzak">canRename</p></td><td id="d5176ea37d2j7" rowspan="1" colspan="1"><p id="190a71fbad9ca">Boolean</p></td><td id="ca6747b7a1c0v" rowspan="1" colspan="1"><p id="d1f7aac46ccn0">否</p></td><td id="6728ac957ckk6" rowspan="1" colspan="1"><p id="b633005d5f424">是否支持重命名空间名称。</p><ul id="ca101d65695pr"><li id="96f51fa84byah"><p id="bf41c601c2dro"><b>true</b>：支持</p></li><li id="f1b76006fdrtw"><p id="4251467eaa70q"><b>false</b>：不支持，默认值。</p></li></ul></td></tr><tr outputclass="row row-level-2-3-3" id="da8f8392da25w" class="row row-level-2-3-3"><td id="203b21852erbb" rowspan="1" colspan="1"><p id="014e5648743om">canRecordRecentFile</p></td><td id="e67b451d9abh1" rowspan="1" colspan="1"><p id="98bccfabaccni">Boolean</p></td><td id="d0f48f1a2c8mk" rowspan="1" colspan="1"><p id="a1769766662l6">否</p></td><td id="a624d723abusu" rowspan="1" colspan="1"><p id="63e0b396fbrle">是否支持被列入最近使用列表。</p><ul id="a2ff5c9fafjv9"><li id="2646e60f4cfl9"><p id="6a90e144a1qbm"><b>true</b>：支持</p></li><li id="d524796303tv5"><p id="f0dcf6c2634xh"><b>false</b>：不支持，默认值。</p></li></ul></td></tr><tr outputclass="row row-level-2-4" id="0a8152593258f" class="row row-level-2-4"><td id="8ad30bf07ep4t" rowspan="1" colspan="1"><p id="7159e49c56nf6">scene</p></td><td id="2877a7110d8gx" rowspan="1" colspan="1"><p id="20917efb1fjyl">String</p></td><td id="bc1d0892e0825" rowspan="1" colspan="1"><p id="5fbd22e96bieq">否</p></td><td id="a6ebfa38f00km" rowspan="1" colspan="1"><p id="122ac65665m3c">空间场景，该参数由开发者自定义传入。</p><p class="note-icon-wrapper" id="91ce21a524j3w"></p><p data-tag="p" id="9930292ac72yd" class="p"></p><ul id="41ddf565c7314"><li id="8e69cc6138k8u"><p id="b1452c05201p1">如果该参数不传，默认值是default。</p></li><li id="426fbd8d14g1a"><p id="9ca8c09ffcdkx">如果该参数值+sceneId已存在，本接口返回已创建的空间，不会创建新空间。</p></li></ul><p id="536b4acad7nm6"></p></td></tr><tr outputclass="row row-level-2-5" id="1f0b4557f6u2n" class="row row-level-2-5"><td id="5c91866d1b446" rowspan="1" colspan="1"><p id="386e9d4bcbk9d">sceneId</p></td><td id="7d716721d0b7n" rowspan="1" colspan="1"><p id="b5913c0eafu71">String</p></td><td id="83f4f65eb4pfx" rowspan="1" colspan="1"><p id="9922e9a0d4yku">否</p></td><td id="ae93c4af89o54" rowspan="1" colspan="1"><p id="f037335999k76">空间场景Id，该参数值由开发者自定义传入。</p><p class="note-icon-wrapper" id="f94cb51514iop"></p><p data-tag="p" id="dcc6486abfqp6" class="p"></p><ul id="0f91b77191xz8"><li id="da0834cda7equ"><p id="4d3079d274yrs">如果该参数不传，默认值是0。</p></li><li id="fbef70d803v8t"><p id="1a451e85c4dm8">如果参数sceneId+该参数值已存在，本接口返回已创建的空间，不会创建新空间。</p></li></ul><p id="cf686d0d76b12"></p></td></tr><tr outputclass="row row-level-2-6" id="b16edc913dxth" class="row row-level-2-6"><td id="0bbfba99e1nlx" rowspan="1" colspan="1"><p id="c0473d7563beu">ownerType</p></td><td id="8287e47731tfw" rowspan="1" colspan="1"><p id="1fa7e7c11ak6g">String</p></td><td id="12401a14e1wt9" rowspan="1" colspan="1"><p id="25dd9dee01n3w">否</p></td><td id="874b364124wcy" rowspan="1" colspan="1"><p id="8e0e98cd11tyk">owner类型。</p><ul id="10fcd0fc55znz"><li id="b1b8301f79s5a"><p id="e8eb80604918m"><b>USER</b>：用户类型，默认值</p></li><li id="7e5bd147702l6"><p id="20a3283378wfm"><b>APP</b>：App类型</p></li></ul></td></tr></tbody></table></section><section id="section-request-body-example" class="section"><h3 id="h3-request-body-example" data-tag="h3" class="h3">请求示例</h3><div outputclass="tabbed-codeblock" data-tag="fig" id="figure-r5b-c21-lzy" class="tabbed-codeblock-box"><div class="tab-box"></div><input type="radio" name="check-figure-r5b-c21-lzy" id="figure-r5b-c21-lzy-HTTP-tab" checked="checked" /><label for="figure-r5b-c21-lzy-HTTP-tab">HTTP</label><div class="codeblock-item"><pre id="codeblock-zm3-jcx-nmy" outputclass="language-HTTP" code-type="xCode" data-tag="codeblock" class="pre codeblock language-HTTP"><code>POST /v1.0/storage/spaces?unionId=cHtUYxxxxx HTTP/1.1
+Host:api.dingtalk.com
+x-acs-dingtalk-access-token:xxxxx
+Content-Type:application/json
+
+{
+  "option" : {
+    "name" : "测试空间",
+    "quota" : 1024,
+    "capabilities" : {
+      "canSearch" : true,
+      "canRename" : true,
+      "canRecordRecentFile" : true
+    },
+    "scene" : "scene",
+    "sceneId" : "123",
+    "ownerType" : "USER"
+  }
+}</code></pre></div><input type="radio" name="check-figure-r5b-c21-lzy" id="figure-r5b-c21-lzy-java-tab" /><label for="figure-r5b-c21-lzy-java-tab">Java</label><div class="codeblock-item"><pre id="codeblock-t5w-hxg-o28" outputclass="language-java" code-type="xCode" data-tag="codeblock" class="pre codeblock language-java"><code>// This file is auto-generated, don't edit it. Thanks.
+package com.aliyun.sample;
+
+import com.aliyun.tea.*;
+import com.aliyun.teautil.*;
+import com.aliyun.teautil.models.*;
+import com.aliyun.dingtalkstorage_1_0.*;
+import com.aliyun.dingtalkstorage_1_0.models.*;
+import com.aliyun.teaopenapi.*;
+import com.aliyun.teaopenapi.models.*;
+
+public class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Client
+     * @throws Exception
+     */
+    public static com.aliyun.dingtalkstorage_1_0.Client createClient() throws Exception {
+        Config config = new Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        return new com.aliyun.dingtalkstorage_1_0.Client(config);
+    }
+
+    public static void main(String[] args_) throws Exception {
+        java.util.List&lt;String&gt; args = java.util.Arrays.asList(args_);
+        com.aliyun.dingtalkstorage_1_0.Client client = Sample.createClient();
+        AddSpaceHeaders addSpaceHeaders = new AddSpaceHeaders();
+        addSpaceHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        AddSpaceRequest.AddSpaceRequestOptionCapabilities optionCapabilities = new AddSpaceRequest.AddSpaceRequestOptionCapabilities()
+                .setCanSearch(true)
+                .setCanRename(true)
+                .setCanRecordRecentFile(true);
+        AddSpaceRequest.AddSpaceRequestOption option = new AddSpaceRequest.AddSpaceRequestOption()
+                .setName("测试空间")
+                .setQuota(1024L)
+                .setCapabilities(optionCapabilities)
+                .setScene("scene")
+                .setSceneId("123")
+                .setOwnerType("USER");
+        AddSpaceRequest addSpaceRequest = new AddSpaceRequest()
+                .setUnionId("cHtUYxxxxx")
+                .setOption(option);
+        try {
+            client.addSpaceWithOptions(addSpaceRequest, addSpaceHeaders, new RuntimeOptions());
+        } catch (TeaException err) {
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        } catch (Exception _err) {
+            TeaException err = new TeaException(_err.getMessage(), _err);
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        }        
+    }
+}</code></pre></div><input type="radio" name="check-figure-r5b-c21-lzy" id="figure-r5b-c21-lzy-python-tab" /><label for="figure-r5b-c21-lzy-python-tab">Python</label><div class="codeblock-item"><pre id="codeblock-s5k-jut-spy" outputclass="language-python" code-type="xCode" data-tag="codeblock" class="pre codeblock language-python"><code># -*- coding: utf-8 -*-
+# This file is auto-generated, don't edit it. Thanks.
+import sys
+
+from typing import List
+
+from alibabacloud_dingtalk.storage_1_0.client import Client as dingtalkstorage_1_0Client
+from alibabacloud_tea_openapi import models as open_api_models
+from alibabacloud_dingtalk.storage_1_0 import models as dingtalkstorage__1__0_models
+from alibabacloud_tea_util import models as util_models
+from alibabacloud_tea_util.client import Client as UtilClient
+
+
+class Sample:
+    def __init__(self):
+        pass
+
+    @staticmethod
+    def create_client() -&gt; dingtalkstorage_1_0Client:
+        """
+        使用 Token 初始化账号Client
+        @return: Client
+        @throws Exception
+        """
+        config = open_api_models.Config()
+        config.protocol = 'https'
+        config.region_id = 'central'
+        return dingtalkstorage_1_0Client(config)
+
+    @staticmethod
+    def main(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        add_space_headers = dingtalkstorage__1__0_models.AddSpaceHeaders()
+        add_space_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        option_capabilities = dingtalkstorage__1__0_models.AddSpaceRequestOptionCapabilities(
+            can_search=True,
+            can_rename=True,
+            can_record_recent_file=True
+        )
+        option = dingtalkstorage__1__0_models.AddSpaceRequestOption(
+            name='测试空间',
+            quota=1024,
+            capabilities=option_capabilities,
+            scene='scene',
+            scene_id='123',
+            owner_type='USER'
+        )
+        add_space_request = dingtalkstorage__1__0_models.AddSpaceRequest(
+            union_id='cHtUYxxxxx',
+            option=option
+        )
+        try:
+            client.add_space_with_options(add_space_request, add_space_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+    @staticmethod
+    async def main_async(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        add_space_headers = dingtalkstorage__1__0_models.AddSpaceHeaders()
+        add_space_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        option_capabilities = dingtalkstorage__1__0_models.AddSpaceRequestOptionCapabilities(
+            can_search=True,
+            can_rename=True,
+            can_record_recent_file=True
+        )
+        option = dingtalkstorage__1__0_models.AddSpaceRequestOption(
+            name='测试空间',
+            quota=1024,
+            capabilities=option_capabilities,
+            scene='scene',
+            scene_id='123',
+            owner_type='USER'
+        )
+        add_space_request = dingtalkstorage__1__0_models.AddSpaceRequest(
+            union_id='cHtUYxxxxx',
+            option=option
+        )
+        try:
+            await client.add_space_with_options_async(add_space_request, add_space_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+
+if __name__ == '__main__':
+    Sample.main(sys.argv[1:])</code></pre></div><input type="radio" name="check-figure-r5b-c21-lzy" id="figure-r5b-c21-lzy-php-tab" /><label for="figure-r5b-c21-lzy-php-tab">PHP</label><div class="codeblock-item"><pre id="codeblock-obv-rzr-4fm" outputclass="language-php" code-type="xCode" data-tag="codeblock" class="pre codeblock language-php"><code>&lt;?php
+
+// This file is auto-generated, don't edit it. Thanks.
+namespace AlibabaCloud\SDK\Sample;
+
+use AlibabaCloud\SDK\Dingtalk\Vstorage_1_0\Dingtalk;
+use \Exception;
+use AlibabaCloud\Tea\Exception\TeaError;
+use AlibabaCloud\Tea\Utils\Utils;
+
+use Darabonba\OpenApi\Models\Config;
+use AlibabaCloud\SDK\Dingtalk\Vstorage_1_0\Models\AddSpaceHeaders;
+use AlibabaCloud\SDK\Dingtalk\Vstorage_1_0\Models\AddSpaceRequest\option\capabilities;
+use AlibabaCloud\SDK\Dingtalk\Vstorage_1_0\Models\AddSpaceRequest\option;
+use AlibabaCloud\SDK\Dingtalk\Vstorage_1_0\Models\AddSpaceRequest;
+use AlibabaCloud\Tea\Utils\Utils\RuntimeOptions;
+
+class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Dingtalk Client
+     */
+    public static function createClient(){
+        $config = new Config([]);
+        $config-&gt;protocol = "https";
+        $config-&gt;regionId = "central";
+        return new Dingtalk($config);
+    }
+
+    /**
+     * @param string[] $args
+     * @return void
+     */
+    public static function main($args){
+        $client = self::createClient();
+        $addSpaceHeaders = new AddSpaceHeaders([]);
+        $addSpaceHeaders-&gt;xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        $optionCapabilities = new capabilities([
+            "canSearch" =&gt; true,
+            "canRename" =&gt; true,
+            "canRecordRecentFile" =&gt; true
+        ]);
+        $option = new option([
+            "name" =&gt; "测试空间",
+            "quota" =&gt; 1024,
+            "capabilities" =&gt; $optionCapabilities,
+            "scene" =&gt; "scene",
+            "sceneId" =&gt; "123",
+            "ownerType" =&gt; "USER"
+        ]);
+        $addSpaceRequest = new AddSpaceRequest([
+            "unionId" =&gt; "cHtUYxxxxx",
+            "option" =&gt; $option
+        ]);
+        try {
+            $client-&gt;addSpaceWithOptions($addSpaceRequest, $addSpaceHeaders, new RuntimeOptions([]));
+        }
+        catch (Exception $err) {
+            if (!($err instanceof TeaError)) {
+                $err = new TeaError([], $err-&gt;getMessage(), $err-&gt;getCode(), $err);
+            }
+            if (!Utils::empty_($err-&gt;code) &amp;&amp; !Utils::empty_($err-&gt;message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+        }
+    }
+}
+$path = __DIR__ . \DIRECTORY_SEPARATOR . '..' . \DIRECTORY_SEPARATOR . 'vendor' . \DIRECTORY_SEPARATOR . 'autoload.php';
+if (file_exists($path)) {
+    require_once $path;
+}
+Sample::main(array_slice($argv, 1));</code></pre></div><input type="radio" name="check-figure-r5b-c21-lzy" id="figure-r5b-c21-lzy-go-tab" /><label for="figure-r5b-c21-lzy-go-tab">Go</label><div class="codeblock-item"><pre id="codeblock-bq2-g3y-fud" outputclass="language-go" code-type="xCode" data-tag="codeblock" class="pre codeblock language-go"><code>// This file is auto-generated, don't edit it. Thanks.
+package main
+
+import (
+  "os"
+  util  "github.com/alibabacloud-go/tea-utils/service"
+  dingtalkstorage_1_0  "github.com/alibabacloud-go/dingtalk/storage_1_0"
+  openapi  "github.com/alibabacloud-go/darabonba-openapi/client"
+  "github.com/alibabacloud-go/tea/tea"
+)
+
+
+/**
+ * 使用 Token 初始化账号Client
+ * @return Client
+ * @throws Exception
+ */
+func CreateClient () (_result *dingtalkstorage_1_0.Client, _err error) {
+  config := &amp;openapi.Config{}
+  config.Protocol = tea.String("https")
+  config.RegionId = tea.String("central")
+  _result = &amp;dingtalkstorage_1_0.Client{}
+  _result, _err = dingtalkstorage_1_0.NewClient(config)
+  return _result, _err
+}
+
+func _main (args []*string) (_err error) {
+  client, _err := CreateClient()
+  if _err != nil {
+    return _err
+  }
+
+  addSpaceHeaders := &amp;dingtalkstorage_1_0.AddSpaceHeaders{}
+  addSpaceHeaders.XAcsDingtalkAccessToken = tea.String("&lt;your access token&gt;")
+  optionCapabilities := &amp;dingtalkstorage_1_0.AddSpaceRequestOptionCapabilities{
+    CanSearch: tea.Bool(true),
+    CanRename: tea.Bool(true),
+    CanRecordRecentFile: tea.Bool(true),
+  }
+  option := &amp;dingtalkstorage_1_0.AddSpaceRequestOption{
+    Name: tea.String("测试空间"),
+    Quota: tea.Int64(1024),
+    Capabilities: optionCapabilities,
+    Scene: tea.String("scene"),
+    SceneId: tea.String("123"),
+    OwnerType: tea.String("USER"),
+  }
+  addSpaceRequest := &amp;dingtalkstorage_1_0.AddSpaceRequest{
+    UnionId: tea.String("cHtUYxxxxx"),
+    Option: option,
+  }
+  tryErr := func()(_e error) {
+    defer func() {
+      if r := tea.Recover(recover()); r != nil {
+        _e = r
+      }
+    }()
+    _, _err = client.AddSpaceWithOptions(addSpaceRequest, addSpaceHeaders, &amp;util.RuntimeOptions{})
+    if _err != nil {
+      return _err
+    }
+
+    return nil
+  }()
+
+  if tryErr != nil {
+    var err = &amp;tea.SDKError{}
+    if _t, ok := tryErr.(*tea.SDKError); ok {
+      err = _t
+    } else {
+      err.Message = tea.String(tryErr.Error())
+    }
+    if !tea.BoolValue(util.Empty(err.Code)) &amp;&amp; !tea.BoolValue(util.Empty(err.Message)) {
+      // err 中含有 code 和 message 属性，可帮助开发定位问题
+    }
+
+  }
+  return _err
+}
+
+
+func main() {
+  err := _main(tea.StringSlice(os.Args[1:]))
+  if err != nil {
+    panic(err)
+  }
+}</code></pre></div><input type="radio" name="check-figure-r5b-c21-lzy" id="figure-r5b-c21-lzy-nodejs-tab" /><label for="figure-r5b-c21-lzy-nodejs-tab">Node.js</label><div class="codeblock-item"><pre id="codeblock-piu-hho-dss" outputclass="language-nodejs" code-type="xCode" data-tag="codeblock" class="pre codeblock language-nodejs"><code>// This file is auto-generated, don't edit it
+import Util, * as $Util from '@alicloud/tea-util';
+import dingtalkstorage_1_0, * as $dingtalkstorage_1_0 from '@alicloud/dingtalk/storage_1_0';
+import OpenApi, * as $OpenApi from '@alicloud/openapi-client';
+import * as $tea from '@alicloud/tea-typescript';
+
+
+export default class Client {
+
+  /**
+   * 使用 Token 初始化账号Client
+   * @return Client
+   * @throws Exception
+   */
+  static createClient(): dingtalkstorage_1_0 {
+    let config = new $OpenApi.Config({ });
+    config.protocol = "https";
+    config.regionId = "central";
+    return new dingtalkstorage_1_0(config);
+  }
+
+  static async main(args: string[]): Promise&lt;void&gt; {
+    let client = Client.createClient();
+    let addSpaceHeaders = new $dingtalkstorage_1_0.AddSpaceHeaders({ });
+    addSpaceHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+    let optionCapabilities = new $dingtalkstorage_1_0.AddSpaceRequestOptionCapabilities({
+      canSearch: true,
+      canRename: true,
+      canRecordRecentFile: true,
+    });
+    let option = new $dingtalkstorage_1_0.AddSpaceRequestOption({
+      name: "测试空间",
+      quota: 1024,
+      capabilities: optionCapabilities,
+      scene: "scene",
+      sceneId: "123",
+      ownerType: "USER",
+    });
+    let addSpaceRequest = new $dingtalkstorage_1_0.AddSpaceRequest({
+      unionId: "cHtUYxxxxx",
+      option: option,
+    });
+    try {
+      await client.addSpaceWithOptions(addSpaceRequest, addSpaceHeaders, new $Util.RuntimeOptions({ }));
+    } catch (err) {
+      if (!Util.empty(err.code) &amp;&amp; !Util.empty(err.message)) {
+        // err 中含有 code 和 message 属性，可帮助开发定位问题
+      }
+
+    }    
+  }
+
+}
+
+Client.main(process.argv.slice(2));</code></pre></div><input type="radio" name="check-figure-r5b-c21-lzy" id="figure-r5b-c21-lzy-csharp-tab" /><label for="figure-r5b-c21-lzy-csharp-tab">C#</label><div class="codeblock-item"><pre id="codeblock-x0h-epx-imp" outputclass="language-csharp" code-type="xCode" data-tag="codeblock" class="pre codeblock language-csharp"><code>// This file is auto-generated, don't edit it. Thanks.
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
+
+using Tea;
+using Tea.Utils;
+
+
+namespace AlibabaCloud.SDK.Sample
+{
+    public class Sample 
+    {
+
+        /**
+         * 使用 Token 初始化账号Client
+         * @return Client
+         * @throws Exception
+         */
+        public static AlibabaCloud.SDK.Dingtalkstorage_1_0.Client CreateClient()
+        {
+            AlibabaCloud.OpenApiClient.Models.Config config = new AlibabaCloud.OpenApiClient.Models.Config();
+            config.Protocol = "https";
+            config.RegionId = "central";
+            return new AlibabaCloud.SDK.Dingtalkstorage_1_0.Client(config);
+        }
+
+        public static void Main(string[] args)
+        {
+            AlibabaCloud.SDK.Dingtalkstorage_1_0.Client client = CreateClient();
+            AlibabaCloud.SDK.Dingtalkstorage_1_0.Models.AddSpaceHeaders addSpaceHeaders = new AlibabaCloud.SDK.Dingtalkstorage_1_0.Models.AddSpaceHeaders();
+            addSpaceHeaders.XAcsDingtalkAccessToken = "&lt;your access token&gt;";
+            AlibabaCloud.SDK.Dingtalkstorage_1_0.Models.AddSpaceRequest.AddSpaceRequestOption.AddSpaceRequestOptionCapabilities optionCapabilities = new AlibabaCloud.SDK.Dingtalkstorage_1_0.Models.AddSpaceRequest.AddSpaceRequestOption.AddSpaceRequestOptionCapabilities
+            {
+                CanSearch = true,
+                CanRename = true,
+                CanRecordRecentFile = true,
+            };
+            AlibabaCloud.SDK.Dingtalkstorage_1_0.Models.AddSpaceRequest.AddSpaceRequestOption option = new AlibabaCloud.SDK.Dingtalkstorage_1_0.Models.AddSpaceRequest.AddSpaceRequestOption
+            {
+                Name = "测试空间",
+                Quota = 1024,
+                Capabilities = optionCapabilities,
+                Scene = "scene",
+                SceneId = "123",
+                OwnerType = "USER",
+            };
+            AlibabaCloud.SDK.Dingtalkstorage_1_0.Models.AddSpaceRequest addSpaceRequest = new AlibabaCloud.SDK.Dingtalkstorage_1_0.Models.AddSpaceRequest
+            {
+                UnionId = "cHtUYxxxxx",
+                Option = option,
+            };
+            try
+            {
+                client.AddSpaceWithOptions(addSpaceRequest, addSpaceHeaders, new AlibabaCloud.TeaUtil.Models.RuntimeOptions());
+            }
+            catch (TeaException err)
+            {
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+            catch (Exception _err)
+            {
+                TeaException err = new TeaException(new Dictionary&lt;string, object&gt;
+                {
+                    { "message", _err.Message }
+                });
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+        }
+
+
+    }
+}</code></pre></div></div></section></section><section id="section-response-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-response-1" data-tag="h2" class="h2">响应</h2><section id="section-response-parameter" class="section"><h3 data-tag="h3" id="h2-mes-3yj-uka" class="h3 title">响应体</h3><table id="e8cf5e323ampv" tablewidth="710" tablecolswidth="213 142 355" autofit="false" class="table"><colgroup colwidth="0.9*" style="width:30.00%"></colgroup><colgroup colwidth="0.6*" style="width:20.00%"></colgroup><colgroup colwidth="1.5*" style="width:50.00%"></colgroup><tbody class="tbody"><tr id="0345eae0921zc"><td id="8e4b8e6765t7q" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="496f4c94c67ho">名称</p></td><td id="891d88572bk0z" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="ed561794cb98e">类型</p></td><td id="7433277ebezzp" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="74e0244e2aeti">描述</p></td></tr><tr outputclass="row row-level-1 has-child" id="a4f17b8caegj0" class="row row-level-1 has-child"><td id="0c6854848a0wu" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="9c7f715bbbcyh">space</p></td><td id="838222ad09t1x" rowspan="1" colspan="1"><p id="d0e8b33fdebb9">Object</p></td><td id="e9f8428f17rhn" rowspan="1" colspan="1"><p id="02a6a74564abm">空间信息。</p></td></tr><tr outputclass="row row-level-1-1" id="1ba85cb406ho7" class="row row-level-1-1"><td id="3ebaa62893v82" rowspan="1" colspan="1"><p id="1577dc8c30dls">id</p></td><td id="0b5d7902f21rx" rowspan="1" colspan="1"><p id="3dabbb98c84py">String</p></td><td id="6c63d8d4b07m3" rowspan="1" colspan="1"><p id="2ff5f54bddzfe">空间id。</p></td></tr><tr outputclass="row row-level-1-2" id="8c36815fa643o" class="row row-level-1-2"><td id="c7305d63779h1" rowspan="1" colspan="1"><p id="3dea923e213d7">corpId</p></td><td id="43460b9fe6lt1" rowspan="1" colspan="1"><p id="f7a35db8e8oxk">String</p></td><td id="2115b14c95mi4" rowspan="1" colspan="1"><p id="172e5a4e95e12">空间所在企业corpId。</p></td></tr><tr outputclass="row row-level-1-3" id="86e4cdc4aagc0" class="row row-level-1-3"><td id="c4ea9dd107pru" rowspan="1" colspan="1"><p id="522c08078eim1">creatorId</p></td><td id="1ff5e0225fii7" rowspan="1" colspan="1"><p id="a2c1cd57ddej7">String</p></td><td id="b4fe383070wbn" rowspan="1" colspan="1"><p id="2e8b62b4c9bs5">创建者unionId。</p></td></tr><tr outputclass="row row-level-1-4" id="b97d5b7094ivb" class="row row-level-1-4"><td id="c6d98d77e83fq" rowspan="1" colspan="1"><p id="1d00fe5acb3ay">ownerType</p></td><td id="de5e2f9ae4lil" rowspan="1" colspan="1"><p id="064c1927643qj">String</p></td><td id="ceb0131b67y5a" rowspan="1" colspan="1"><p id="4939321ea01up">owner类型。</p><ul id="a1565f5bbbls9"><li id="e357bf5618rqb"><p id="1f6b24d3b0eyr"><b>USER</b>：用户类型，默认值</p></li><li id="6e6da12271w04"><p id="ef649aef89c70"><b>APP</b>：App类型</p></li></ul></td></tr><tr outputclass="row row-level-1-5" id="eecefd7dbdapi" class="row row-level-1-5"><td id="3b524e74772l1" rowspan="1" colspan="1"><p id="7e9763faeexby">ownerId</p></td><td id="68f78d9a8ce8b" rowspan="1" colspan="1"><p id="9d12eb660d1mc">String</p></td><td id="77b25157acddl" rowspan="1" colspan="1"><p id="2bea399fd4zql">所有者标识。</p></td></tr><tr outputclass="row row-level-1-6" id="a4d82006e1qlt" class="row row-level-1-6"><td id="b9e22345cbgtf" rowspan="1" colspan="1"><p id="ad6f5472c2pq2">modifierId</p></td><td id="0289c882d7ncc" rowspan="1" colspan="1"><p id="ce67c966e6h6m">String</p></td><td id="912b4ad8adba0" rowspan="1" colspan="1"><p id="20c67d7aeaymn">修改者unionId。</p></td></tr><tr outputclass="row row-level-1-7" id="d995fc127ciu4" class="row row-level-1-7"><td id="b8484e84b0u6u" rowspan="1" colspan="1"><p id="8ad3cc9ce3o8e">usedQuota</p></td><td id="0bd26efeb2n7e" rowspan="1" colspan="1"><p id="76cc4d725c3w7">Long</p></td><td id="d60ee52b12vii" rowspan="1" colspan="1"><p id="ad54961541kra">已使用容量，单位Byte。</p></td></tr><tr outputclass="row row-level-1-8" id="27a0411f389ne" class="row row-level-1-8"><td id="5577964a7dyix" rowspan="1" colspan="1"><p id="ded25fe0cfobv">quota</p></td><td id="9a9254dfa9whr" rowspan="1" colspan="1"><p id="82dc27ae3ap9s">Long</p></td><td id="dc1f6a1ba20mo" rowspan="1" colspan="1"><p id="d687355dd5blj">总容量，单位Byte。</p></td></tr><tr outputclass="row row-level-1-9" id="3e64a20e98sky" class="row row-level-1-9"><td id="c0b6b24978oda" rowspan="1" colspan="1"><p id="1184fd02809b6">status</p></td><td id="cc46a0d8767v1" rowspan="1" colspan="1"><p id="06f30516caymk">String</p></td><td id="5de34df2cd8eo" rowspan="1" colspan="1"><p id="5d82431061j1z">空间状态。</p><ul id="f31018cc7cbzy"><li id="75784411efspu"><p id="9b79fca5c6zs4"><b>NORMAL</b>：正常</p></li><li id="ee5bd87f7bl6h"><p id="9bd172bd58cd7"><b>DELETE</b>：已删除</p></li></ul></td></tr><tr outputclass="row row-level-1-10" id="d7e4bf136fv5j" class="row row-level-1-10"><td id="3563b826f7ooc" rowspan="1" colspan="1"><p id="3eaf5f31cc4x8">createTime</p></td><td id="fdf911c17bnr5" rowspan="1" colspan="1"><p id="d4467bbf4a35r">String</p></td><td id="2ea462f88fhjw" rowspan="1" colspan="1"><p id="6e5977a93bnq9">创建时间，iso8601格式，例如：2022-07-29T14:55Z。</p></td></tr><tr outputclass="row row-level-1-11" id="dfaaa8f5814hh" class="row row-level-1-11"><td id="9e131b949cczz" rowspan="1" colspan="1"><p id="033d38ebc7krd">modifiedTime</p></td><td id="1788786b33srd" rowspan="1" colspan="1"><p id="bd12b127484un">String</p></td><td id="bd0545e5ab87k" rowspan="1" colspan="1"><p id="652c6bd763yyk">修改时间，iso8601格式，例如：2022-07-29T14:55Z。</p></td></tr><tr outputclass="row row-level-1-12" id="67a1277420d0f" class="row row-level-1-12"><td id="da0d12bd04wc4" rowspan="1" colspan="1"><p id="a46d8366057q0">appId</p></td><td id="842d2cf538fg8" rowspan="1" colspan="1"><p id="8b0964ebacoke">String</p></td><td id="f142ce2d98kj1" rowspan="1" colspan="1"><p id="57609b9ce6jj4">开放平台应用appId</p></td></tr><tr outputclass="row row-level-1-13" id="99490c938a8xl" class="row row-level-1-13"><td id="032b3c05c8g9w" rowspan="1" colspan="1"><p id="dc9690bda6a0v">scene</p></td><td id="c9a4af00e02ws" rowspan="1" colspan="1"><p id="665a2c115er3d">String</p></td><td id="a7ccee945c0it" rowspan="1" colspan="1"><p id="18a5fbb11efri">业务场景。</p></td></tr><tr outputclass="row row-level-1-14" id="4b84348b4c6by" class="row row-level-1-14"><td id="59a1440b740c5" rowspan="1" colspan="1"><p id="4aad56ebf5cdq">sceneId</p></td><td id="08600182c3kg0" rowspan="1" colspan="1"><p id="bef3c1ae88d91">String</p></td><td id="e21c0f36d2pvj" rowspan="1" colspan="1"><p id="9fe7c08900299">空间场景Id。</p></td></tr><tr outputclass="row row-level-1-15 has-child" id="da6f0c3440crh" class="row row-level-1-15 has-child"><td id="fd89408f91wv3" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="a497d881d9fg6">capabilities</p></td><td id="80d49fa81dgs7" rowspan="1" colspan="1"><p id="8cfb6432b0cj3">Object</p></td><td id="51c617b0b7eiq" rowspan="1" colspan="1"><p id="160ba310c53ij">空间能力项。</p></td></tr><tr outputclass="row row-level-1-15-1" id="1d7c539cdbgaf" class="row row-level-1-15-1"><td id="4af1afa72dg6s" rowspan="1" colspan="1"><p id="c43b485355bm9">canSearch</p></td><td id="426f86d598ba2" rowspan="1" colspan="1"><p id="0584eb795aupr">Boolean</p></td><td id="d244215150thc" rowspan="1" colspan="1"><p id="62d8c6ac91kln">是否支持搜索。</p><ul id="246b07dab9osh"><li id="d38f90abd5wda"><p id="d406d8f7f72ar"><b>true</b>：支持</p></li><li id="e28ae75c811fp"><p id="e8b15d0b8ev58"><b>false</b>：不支持，默认值。</p></li></ul></td></tr><tr outputclass="row row-level-1-15-2" id="5fff64b5dcqt5" class="row row-level-1-15-2"><td id="241423a0e8su4" rowspan="1" colspan="1"><p id="0559369472781">canRename</p></td><td id="609b481ea3ws4" rowspan="1" colspan="1"><p id="14581951aa01s">Boolean</p></td><td id="d49fdef102vwd" rowspan="1" colspan="1"><p id="e4cd421334tn2">是否支持重命名空间名称。</p><ul id="92db4c32c6crd"><li id="005ca0a5ackqi"><p id="cf6b842af1j1l"><b>true</b>：支持</p></li><li id="39800145276if"><p id="43ce8a2946b9h"><b>false</b>：不支持，默认值。</p></li></ul></td></tr><tr outputclass="row row-level-1-15-3" id="695108a83fakn" class="row row-level-1-15-3"><td id="7f0c1cd27bu5k" rowspan="1" colspan="1"><p id="eaac24103euqp">canRecordRecentFile</p></td><td id="5c4091f133t40" rowspan="1" colspan="1"><p id="0e4b79ef09ukq">Boolean</p></td><td id="953cc05c12m81" rowspan="1" colspan="1"><p id="4f2b0e8c33mg5">是否支持被列入最近使用列表。</p><ul id="5668990847f5s"><li id="d7e063c99an9p"><p id="35547b24bb9ra"><b>true</b>：支持</p></li><li id="09485f2dd71m5"><p id="a80322e489ka1"><b>false</b>：不支持，默认值。</p></li></ul></td></tr><tr outputclass="row row-level-1-16" id="3af844d98b1at" class="row row-level-1-16"><td id="8f313f5306jup" rowspan="1" colspan="1"><p id="1abc489a99k8y">name</p></td><td id="5c01d57bfb58d" rowspan="1" colspan="1"><p id="e1e17bfe867rh">String</p></td><td id="76505ed401cfv" rowspan="1" colspan="1"><p id="f176aaba92mez">空间名称。</p></td></tr><tr outputclass="row row-level-1-17 has-child" id="0e63ad062cw28" class="row row-level-1-17 has-child"><td id="190c8cc9539m4" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="204edc5f0bgd2">partitions</p></td><td id="f38cc4972ad8k" rowspan="1" colspan="1"><p id="2c05d0ce1a1x0">Array</p></td><td id="db10a8dbf65jd" rowspan="1" colspan="1"><p id="dc644e0dcdbjj">分区容量信息，最大值2。</p></td></tr><tr outputclass="row row-level-1-17-1" id="eee19154fegwx" class="row row-level-1-17-1"><td id="3e80bdec6fz45" rowspan="1" colspan="1"><p id="7701956c79e92">partitionType</p></td><td id="4ca294e645uwu" rowspan="1" colspan="1"><p id="9740497f547oh">String</p></td><td id="e3ba6140132qy" rowspan="1" colspan="1"><p id="07c0f3ed87e8j">分区类型。</p><ul id="d54b223b52fm1"><li id="23bc62ce16nw4"><p id="f0961fb97c44o"><b>PUBLIC_OSS_PARTITION</b>：公有云OSS存储分区</p></li><li id="bd1f95ff59uvh"><p id="cbf8d0abd0e0s"><b>MINI_OSS_PARTITION</b>：专属Mini OSS存储分区</p></li></ul></td></tr><tr outputclass="row row-level-1-17-2 has-child" id="98ed727c01ur4" class="row row-level-1-17-2 has-child"><td id="c8481db323847" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="c04ea2cbceqqf">quota</p></td><td id="eecad39e407bl" rowspan="1" colspan="1"><p id="3f63dab125lfa">Object</p></td><td id="2850b789f0e3m" rowspan="1" colspan="1"><p id="9765b50cbbnuc">容量信息。</p></td></tr><tr outputclass="row row-level-1-17-2-1" id="9b7474db31g63" class="row row-level-1-17-2-1"><td id="c368c01d55m4t" rowspan="1" colspan="1"><p id="812e25a593ws8">used</p></td><td id="1e638a16ddr66" rowspan="1" colspan="1"><p id="fa2a93c369of8">Long</p></td><td id="953e5891ddexw" rowspan="1" colspan="1"><p id="c769379ec1l1w">实际已使用容量，单位Byte，最小值0。</p><p class="note-icon-wrapper" id="861b6fddd69dx"></p><p data-tag="p" id="f5b79fcf3faha" class="p"></p><p id="d02d026d6cs8k">表示该应用下所用文件占用容量的总和，文件的上传、复制、删除相关操作会对used的值做相应变更。</p><p id="16825ba0708sw"></p></td></tr><tr outputclass="row row-level-1-17-2-2" id="8179fd53a933k" class="row row-level-1-17-2-2"><td id="4bbc4220aenxg" rowspan="1" colspan="1"><p id="cc8d644cfbygb">max</p></td><td id="5d103c699caev" rowspan="1" colspan="1"><p id="8f599650c2yfc">Long</p></td><td id="0ddc777c08pw1" rowspan="1" colspan="1"><p id="c5063a829dgu5">最大容量，单位Byte。</p><p class="note-icon-wrapper" id="05b7f462b5fbd"></p><p data-tag="p" id="f31393afc7j63" class="p"></p><ul id="abd6002723ky0"><li id="95a8c398e6vti"><p id="1419fe2c10tz1">当前应用容量被设置为max时，代表当前应用容量设置了上限，used参数值不能大于max参数值。</p></li><li id="9f70c77d83e9y"><p id="130c74ab31k16">当前应用容量未设置为max时，返回空，此时应用共享该企业剩余可用容量。</p></li></ul><p id="887e1c8717asy"></p></td></tr><tr outputclass="row row-level-1-17-2-3" id="8e32259a55fe1" class="row row-level-1-17-2-3"><td id="faf484152etxk" rowspan="1" colspan="1"><p id="631d239b041hd">reserved</p></td><td id="021cdf862fdcf" rowspan="1" colspan="1"><p id="a22e03f808z6s">Long</p></td><td id="41cb69fcf6knd" rowspan="1" colspan="1"><p id="7338d82a4bcdh">预分配剩余容量，单位Byte。</p><p class="note-icon-wrapper" id="084b31ef18vs5"></p><p data-tag="p" id="aaa58f57583fv" class="p"></p><p id="3c64c522c202a">管理后台可以给应用或空间预分配容量，此字段表示预分配剩余容量，即预分配容量中未使用部分。如果没有设置预分配容，此字段是空。</p><p id="6ceb9ef998z5a"></p></td></tr><tr outputclass="row row-level-1-17-2-4" id="a1d1b851adwiv" class="row row-level-1-17-2-4"><td id="d9befe291asfk" rowspan="1" colspan="1"><p id="731704d6932d0">type</p></td><td id="9e34df9b17pti" rowspan="1" colspan="1"><p id="577dfb9623d7p">String</p></td><td id="85ce60b4cczxe" rowspan="1" colspan="1"><p id="3f686ea36dmkl">容量类型。</p><ul id="50b4dd05ee1ug"><li id="feea3d944einj"><p id="ea8b7f74c18jb"><b>SHARE</b>: 共享容量。此模式下，Quota.max为空，表示共享企业容量。</p></li><li id="3c50abbbf2t9g"><p id="128d4f0a7fqr3"><b>PRIVATE</b>: 预分配容量（专享容量）。此模式下，Quota.max设置值后，表示容量独占。</p></li></ul><p class="note-icon-wrapper" id="faf85a10d95ef"></p><p data-tag="p" id="0a7002afe93mk" class="p"></p><p id="35b1a0484bn8x">需要保证单个应用的可用容量不受其他应用影响时，可使用预分配容量（专享容量）。</p><p id="db3c11bcd3zza"></p></td></tr></tbody></table></section><section id="section-response-body-example" class="section"><h3 id="h3-response-body-example" data-tag="h3" class="h3">响应体示例</h3><pre id="4848ceebf8bll" outputclass="language-json" code-type="xCode" data-tag="codeblock" class="pre codeblock language-json"><code>HTTP/1.1 200 OK
+Content-Type:application/json
+
+{
+  "space" : {
+    "id" : "833xxxxx",
+    "corpId" : "ding027xxxxx",
+    "creatorId" : "cHtUYxxxxx",
+    "ownerType" : "USER",
+    "ownerId" : "xxxxx",
+    "modifierId" : "cHtUYxxxxx",
+    "usedQuota" : 1024,
+    "quota" : 1048576,
+    "status" : "NORMAL",
+    "createTime" : "2022-01-01T10:00:00Z",
+    "modifiedTime" : "2022-01-01T10:00:00Z",
+    "scene" : "scene",
+    "sceneId" : "123",
+    "capabilities" : {
+      "canSearch" : true,
+      "canRename" : true,
+      "canRecordRecentFile" : true
+    },
+    "name" : "测试空间"
+  }
+}</code></pre></section><section id="section-error-code-1" class="section"><h3 id="h3-error-code-1" data-tag="h3" class="h3">错误码</h3><p data-tag="p" id="p-error-code-global-guide" class="p">若调用该接口报错，可根据错误信息在<a href="https://open.dingtalk.com/document/development/server-api-error-codes-1" id="a-error-code-global-guide">全局错误码</a>文档中查找解决方案。</p><table id="5f51675476ae3" tablewidth="709" tablecolswidth="142 177 177 213" autofit="false" class="table"><colgroup colwidth="0.8*" style="width:20.03%"></colgroup><colgroup colwidth="1*" style="width:24.96%"></colgroup><colgroup colwidth="1*" style="width:24.96%"></colgroup><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><tbody class="tbody"><tr id="987967f8d7yl4"><td id="804e28467ar49" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="b97aace6bbxfq">HttpCode</p></td><td id="7bd1d0fbb7ueo" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="8be7f417376af">错误码</p></td><td id="d7de888ba2zl0" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="efee16d02fm9x">错误信息</p></td><td id="e41e30b294sf0" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="e879a5f880ku4">说明</p></td></tr><tr id="22eaccdf916bg"><td id="5888d381fbp4l" rowspan="1" colspan="1"><p id="b5910eb18ehee">400</p></td><td id="2e1fa7b7a29xv" rowspan="1" colspan="1"><p id="5aa966c8b941n">paramError</p></td><td id="54cf1b8dc0fxg" rowspan="1" colspan="1"><p id="ec6e3353f7rym">%s</p></td><td id="a69fd57df4swj" rowspan="1" colspan="1"><p id="a8a753f658142">参数错误</p></td></tr><tr id="6aba8795d55jt"><td id="d4543a4f1b9eq" rowspan="1" colspan="1"><p id="7060ee28000mv">400</p></td><td id="bdc9df833adpu" rowspan="1" colspan="1"><p id="22e41a6e6cswl">paramError.name</p></td><td id="adaf70af710tz" rowspan="1" colspan="1"><p id="a4dbd5bd54q47">%s</p></td><td id="791bcc533e2y3" rowspan="1" colspan="1"><p id="c3754be2657yi">参数错误-name</p></td></tr><tr id="fe334496fe6i5"><td id="957310cederjg" rowspan="1" colspan="1"><p id="e2c48bf83fhny">400</p></td><td id="74d868a6abitq" rowspan="1" colspan="1"><p id="4b3d177359m1l">paramError.scene</p></td><td id="e23e5e3264rgp" rowspan="1" colspan="1"><p id="7e97ea785cifv">%s</p></td><td id="cd879231d5aeo" rowspan="1" colspan="1"><p id="19f1499cf6d0q">参数错误-scene</p></td></tr><tr id="4b173bcd04zx3"><td id="760dbfc091n9y" rowspan="1" colspan="1"><p id="36e6348dffich">400</p></td><td id="0b386c2400s1x" rowspan="1" colspan="1"><p id="00d58a17ff6r5">paramError.sceneId</p></td><td id="a145d458f5x07" rowspan="1" colspan="1"><p id="610b58056712k">%s</p></td><td id="b7ee957539yyr" rowspan="1" colspan="1"><p id="fc024870d9u16">参数错误-sceneId</p></td></tr><tr id="d7d9821b797wj"><td id="0e53b8384cj4i" rowspan="1" colspan="1"><p id="40dfda475dzt0">403</p></td><td id="a5e8dedcd24zv" rowspan="1" colspan="1"><p id="938693ea63ei1">permissionDenied</p></td><td id="278430c2027sv" rowspan="1" colspan="1"><p id="de976d7de3efb">%s</p></td><td id="74f5fa0204opc" rowspan="1" colspan="1"><p id="88c51accd2yg4">用户缺少创建空间的权限</p></td></tr><tr id="85c08e61a0qzq"><td id="5f8b8f73577vx" rowspan="1" colspan="1"><p id="75345bd4a9avl">500</p></td><td id="196e544243nt4" rowspan="1" colspan="1"><p id="804689bd8aho4">systemError</p></td><td id="a3cce3d6c6901" rowspan="1" colspan="1"><p id="bfb77bbca8y2b">%s</p></td><td id="ece8358114iyz" rowspan="1" colspan="1"><p id="2299eba3d8g2g">系统错误</p></td></tr><tr id="a465860d1b05t"><td id="d48c57657a3r5" rowspan="1" colspan="1"><p id="f176cce86a614">500</p></td><td id="28f4ccb1086qj" rowspan="1" colspan="1"><p id="2ccdacd976yah">unknownError</p></td><td id="5f77e6434586d" rowspan="1" colspan="1"><p id="c3d4e6d490o4l">Unknown Error</p></td><td id="dcede6f68fvqu" rowspan="1" colspan="1"><p id="edc36c8b43k62">未知错误</p></td></tr><tr id="6a556a7bf299w"><td id="a8bb6b663bjnb" rowspan="1" colspan="1"><p id="7726aebe230in">503</p></td><td id="8c1f84746c1n6" rowspan="1" colspan="1"><p id="cb2f744030h4n">operationTimeout</p></td><td id="72a5ec7298zk7" rowspan="1" colspan="1"><p id="7697d7fa2ev8d">%s</p></td><td id="7a09d103f89e6" rowspan="1" colspan="1"><p id="e282a4672bgjt">请求超时</p></td></tr></tbody></table></section></section></div></main></body></html>

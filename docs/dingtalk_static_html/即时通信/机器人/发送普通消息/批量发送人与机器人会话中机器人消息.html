@@ -1,0 +1,437 @@
+<!DOCTYPE html><html><head><meta charset="utf8" / /><meta name="gmtModify" content="2026-04-22 20:36:59" / /><meta name="searchtitle" content="" / /><meta name="keywords" content="" / /><meta name="author" content="" / /><title>批量发送人与机器人会话中机器人消息</title><meta name="gmtModify" content="2026-06-05 13:39:22" / /></head><body data-tag="topic" id="doc-api-dingtalk-BatchSendOTO" class="topic"><main id="a6efedd0derdw"><h1 data-tag="title" id="h1-pkr-ysb-vja" class="title">批量发送人与机器人会话中机器人消息</h1><p data-tag="shortdesc" id="a7218520de3a1" class="shortdesc">调用本接口，批量发送人与机器人会话（人与机器人单聊）中机器人消息。适用于需要向多个用户（最多20个）批量发送机器人消息的场景，如企业通知、系统告警推送等场景。</p><div data-tag="conbody" outputclass="icms-api-reference" class="icms-api-reference conbody"><section id="0373c6f7477gq" class="section"><h2 id="5e3c805998keo"><b>接口调用说明</b></h2><p id="ac35c9fc66sm6">本接口支持企业内部应用机器人，详情参考<a data-tag="xref" id="c26d43270dcz9" href="/document/dingstart/configure-the-robot-application#" class="xref">配置企业机器人</a>。</p></section><section id="section-request-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-request-1" data-tag="h2" class="h2">请求</h2><section id="section-request-basic-info" class="section"><h3 id="heading-request-basic-info" data-tag="h3" class="h3">基本信息</h3><table id="b41b5a0f582ek" tablewidth="648" tablecolswidth="216 432" autofit="false" class="table"><colgroup colwidth="0.67*" style="width:33.33%"></colgroup><colgroup colwidth="1.33*" style="width:66.67%"></colgroup><tbody class="tbody"><tr id="61db089c67s9y"><td id="2eb78acdb8bya" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="ce1e3ebe77h05">字段</p></td><td id="81a4fd57fdxvl" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="ccec49bbe09m3">值</p></td></tr><tr id="24af343835r4h"><td id="c123ab67eb8cp" rowspan="1" colspan="1"><p id="07761695e8s49">HTTP URL</p></td><td id="5293b9069e1nu" rowspan="1" colspan="1"><p id="3743c095a29xe">https://api.dingtalk.com/v1.0/robot/oToMessages/batchSend</p></td></tr><tr id="5a598f9318quc"><td id="bcffb47a44edz" rowspan="1" colspan="1"><p id="4d9426d805jie">HTTP Method</p></td><td id="d2625f5bcdu95" rowspan="1" colspan="1"><p id="a6b874dd6bn81">POST</p></td></tr><tr id="9238744064rhq"><td id="46e683a3b4owy" rowspan="1" colspan="1"><p id="ed38eb3c34sgz">支持的应用类型</p></td><td id="f3b30fbb2eh26" rowspan="1" colspan="1"><p id="11c9461f588km"><span data-tag="ph" id="ph-request-basic-app-type-apptype-0" class="ph ph-app-type" data-ph-raw-text="appType-企业内部应用">appType-企业内部应用</span>　<span data-tag="ph" id="ph-request-basic-app-type-apptype-1" class="ph ph-app-type" data-ph-raw-text="appType-第三方企业应用">appType-第三方企业应用</span></p></td></tr><tr id="fd62186c1146l"><td id="636b9c4a3bkzv" rowspan="1" colspan="1"><p id="e1ed34fdeejve">权限要求</p></td><td id="07410c4882qfn" rowspan="1" colspan="1"><p id="e6b3d62879rul"><span data-tag="ph" id="ph-request-basic-permission-permission-qyapi-robot-sendmsg-0" class="ph-permission ph" data-ph-raw-text="permission-qyapi_robot_sendmsg-企业内机器人发送消息权限" data-permission-id="permission-qyapi_robot_sendmsg" data-permission-code="qyapi_robot_sendmsg" data-permission-detail-api="/document/api/permission/detail" data-permission-query-param="code">permission-qyapi_robot_sendmsg-企业内机器人发送消息权限</span></p></td></tr></tbody></table></section><section id="section-request-header-parameter" class="section"><h3 data-tag="h3" id="h2-qvm-waw-ivk" class="h3 title">请求头</h3><table id="a721fa50dewz4" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="a721fa51dehkj"><td id="a721fa52dew2o" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="a721fa53degc1">名称</p></td><td id="a721fa54dexk6" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="a721fa55deow4">类型</p></td><td id="a721fa56dedd7" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="a721fa57dej60">是否必填</p></td><td id="a721fa58dez67" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="a721fa59dec9s">描述</p></td></tr><tr id="a721fa5ade60u"><td id="a721fa5bdec4i" rowspan="1" colspan="1"><p id="a721fa5cde940">x-acs-dingtalk-access-token</p></td><td id="a721fa5ddeuqt" rowspan="1" colspan="1"><p id="a721fa5edexdl">String</p></td><td id="a721fa5fde3hu" rowspan="1" colspan="1"><p id="a721fa60deipq">是</p></td><td id="a721fa61deq5r" rowspan="1" colspan="1"><p id="6b7f3c7e1ea18">调用该接口的访问凭证，通过以下获取：</p><ul id="8fba8ccbectnj"><li id="dace943c20vbe"><p id="ca09404059yfy">企业内部应用，调用<a href="https://open.dingtalk.com/document/development/obtain-the-access-token-of-an-internal-app#" id="a6af4949efpg0" class="xref">获取企业内部应用的accessToken</a>接口获取。</p></li><li id="4198465b2bgql"><p id="65bfc18266teh">第三方企业应用，调用<a href="https://open.dingtalk.com/document/development/obtain-the-access-token-of-the-authorized-enterprise-1#" id="7ad7dd8d79pie" class="xref">获取第三方应用授权企业的accessToken</a>接口获取。</p></li></ul></td></tr></tbody></table></section><section id="section-request-body-parameter" class="section"><h3 data-tag="h3" id="h2-zem-q9x-kxl" class="h3 title">请求体</h3><table id="a7222166deds6" tablewidth="709" tablecolswidth="209 110 106 284" autofit="false" class="table"><colgroup colwidth="1.18*" style="width:29.48%"></colgroup><colgroup colwidth="0.62*" style="width:15.51%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="a7222167de65v"><td id="a7222168de0n7" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="a7222169de6q0">名称</p></td><td id="a722216ade13y" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="a722216bdewpm">类型</p></td><td id="a722216cdeaae" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="a722216dde5v1">是否必填</p></td><td id="a722216edel4l" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="a722216fdepem">描述</p></td></tr><tr outputclass="row row-level-1" id="a7222170de3ev" class="row row-level-1"><td id="a7224870dej7l" rowspan="1" colspan="1"><p id="a7224871de3hc">robotCode</p></td><td id="a7224872dez7m" rowspan="1" colspan="1"><p id="a7224873delub">String</p></td><td id="a7224874deyuw" rowspan="1" colspan="1"><p id="a7224875de7i4">是</p></td><td id="a7224876de0sd" rowspan="1" colspan="1"><p id="a7224877degzq">机器人的编码，该参数必须使用企业内部应用机器人的robotCode，详情参考<a href="https://open.dingtalk.com/document/development/development-robot-overview#447ec33014hrl" id="38dc26f4fabn3" class="xref">机器人 ID</a>。</p></td></tr><tr outputclass="row row-level-2" id="a722487dde4zd" class="row row-level-2"><td id="a722487ede9s0" rowspan="1" colspan="1"><p id="a722487fdeo6x">userIds</p></td><td id="a7224880deg1t" rowspan="1" colspan="1"><p id="a7226f80deoib">Array of String</p></td><td id="a7226f81de0ak" rowspan="1" colspan="1"><p id="a7226f82deg1p">是</p></td><td id="a7226f83dee8z" rowspan="1" colspan="1"><p id="a7226f84dezjm">接收消息的用户userId列表，每次最多传20个，可通过<a href="https://open.dingtalk.com/document/development/query-user-details#" id="f7deb0b0649jq" class="xref">查询用户详情</a>或<a href="https://open.dingtalk.com/document/development/query-the-list-of-department-userids#" id="48d787cc494j7" class="xref">获取部门用户userid列表</a>接口获取。</p></td></tr><tr outputclass="row row-level-3" id="a7226f88debab" style="height:70px" class="row row-level-3"><td id="a7226f89de316" rowspan="1" colspan="1"><p id="a7226f8adezft">msgKey</p></td><td id="a7226f8bde7jj" rowspan="1" colspan="1"><p id="a7226f8cdewzo">String</p></td><td id="a7226f8dde9lw" rowspan="1" colspan="1"><p id="a7226f8edetmk">是</p></td><td id="a7226f8fdeu7z" rowspan="1" colspan="1"><p id="a7226f90dedun">消息模板key，详情参考<a href="https://open.dingtalk.com/document/dingstart/types-of-messages-sent-by-robots#" id="a250c7600d5nf" class="xref">企业机器人发送消息的消息类型</a>。</p></td></tr><tr outputclass="row row-level-4" id="a7229694dea2d" class="row row-level-4"><td id="a7229695debkb" rowspan="1" colspan="1"><p id="a7229696deh62">msgParam</p></td><td id="a7229697de2ph" rowspan="1" colspan="1"><p id="a7229698dehpw">String</p></td><td id="a7229699dezjj" rowspan="1" colspan="1"><p id="a722969ade3oq">是</p></td><td id="a722969bde5qu" rowspan="1" colspan="1"><p id="a722969cde4op">消息模板参数，消息模板参数，详情参考<a href="https://open.dingtalk.com/document/dingstart/types-of-messages-sent-by-robots#" id="d8b2fc1f7dc7w" class="xref">企业机器人发送消息的消息类型</a>。</p></td></tr></tbody></table></section><section id="section-request-body-example" class="section"><h3 id="h3-request-body-example" data-tag="h3" class="h3">请求示例</h3><div outputclass="tabbed-codeblock" data-tag="fig" id="figure-maz-wws-h7r" class="tabbed-codeblock-box"><div class="tab-box"></div><input type="radio" name="check-figure-maz-wws-h7r" id="figure-maz-wws-h7r-HTTP-tab" checked="checked" /><label for="figure-maz-wws-h7r-HTTP-tab">HTTP</label><div class="codeblock-item"><pre id="codeblock-xln-pfp-yqt" outputclass="language-HTTP" code-type="xCode" data-tag="codeblock" class="pre codeblock language-HTTP"><code>POST /v1.0/robot/oToMessages/batchSend HTTP/1.1
+Host:api.dingtalk.com
+x-acs-dingtalk-access-token:asdasdasdasd
+Content-Type:application/json
+
+{
+  "robotCode" : "dingxxxxxx",
+  "userIds" : [ "manager1234" ],
+  "msgKey" : "sampleMarkdown",
+  "msgParam" : "{\"text\": \"hello text\",\"title\": \"hello title\"}"
+}</code></pre></div><input type="radio" name="check-figure-maz-wws-h7r" id="figure-maz-wws-h7r-java-tab" /><label for="figure-maz-wws-h7r-java-tab">Java</label><div class="codeblock-item"><pre id="codeblock-n5s-krd-jjj" outputclass="language-java" code-type="xCode" data-tag="codeblock" class="pre codeblock language-java"><code>// This file is auto-generated, don't edit it. Thanks.
+package com.aliyun.sample;
+
+import com.aliyun.tea.*;
+import com.aliyun.teautil.*;
+import com.aliyun.teautil.models.*;
+import com.aliyun.dingtalkrobot_1_0.*;
+import com.aliyun.dingtalkrobot_1_0.models.*;
+import com.aliyun.teaopenapi.*;
+import com.aliyun.teaopenapi.models.*;
+
+public class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Client
+     * @throws Exception
+     */
+    public static com.aliyun.dingtalkrobot_1_0.Client createClient() throws Exception {
+        Config config = new Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        return new com.aliyun.dingtalkrobot_1_0.Client(config);
+    }
+
+    public static void main(String[] args_) throws Exception {
+        java.util.List&lt;String&gt; args = java.util.Arrays.asList(args_);
+        com.aliyun.dingtalkrobot_1_0.Client client = Sample.createClient();
+        BatchSendOTOHeaders batchSendOTOHeaders = new BatchSendOTOHeaders();
+        batchSendOTOHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        BatchSendOTORequest batchSendOTORequest = new BatchSendOTORequest()
+                .setRobotCode("dingxxxxxx")
+                .setUserIds(java.util.Arrays.asList(
+                    "manager1234"
+                ))
+                .setMsgKey("sampleMarkdown")
+                .setMsgParam("{\"text\": \"hello text\",\"title\": \"hello title\"}");
+        try {
+            client.batchSendOTOWithOptions(batchSendOTORequest, batchSendOTOHeaders, new RuntimeOptions());
+        } catch (TeaException err) {
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        } catch (Exception _err) {
+            TeaException err = new TeaException(_err.getMessage(), _err);
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        }        
+    }
+}</code></pre></div><input type="radio" name="check-figure-maz-wws-h7r" id="figure-maz-wws-h7r-python-tab" /><label for="figure-maz-wws-h7r-python-tab">Python</label><div class="codeblock-item"><pre id="codeblock-czf-yjq-idh" outputclass="language-python" code-type="xCode" data-tag="codeblock" class="pre codeblock language-python"><code># -*- coding: utf-8 -*-
+# This file is auto-generated, don't edit it. Thanks.
+import sys
+
+from typing import List
+
+from alibabacloud_dingtalk.robot_1_0.client import Client as dingtalkrobot_1_0Client
+from alibabacloud_tea_openapi import models as open_api_models
+from alibabacloud_dingtalk.robot_1_0 import models as dingtalkrobot__1__0_models
+from alibabacloud_tea_util import models as util_models
+from alibabacloud_tea_util.client import Client as UtilClient
+
+
+class Sample:
+    def __init__(self):
+        pass
+
+    @staticmethod
+    def create_client() -&gt; dingtalkrobot_1_0Client:
+        """
+        使用 Token 初始化账号Client
+        @return: Client
+        @throws Exception
+        """
+        config = open_api_models.Config()
+        config.protocol = 'https'
+        config.region_id = 'central'
+        return dingtalkrobot_1_0Client(config)
+
+    @staticmethod
+    def main(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        batch_send_otoheaders = dingtalkrobot__1__0_models.BatchSendOTOHeaders()
+        batch_send_otoheaders.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        batch_send_otorequest = dingtalkrobot__1__0_models.BatchSendOTORequest(
+            robot_code='dingxxxxxx',
+            user_ids=[
+                'manager1234'
+            ],
+            msg_key='sampleMarkdown',
+            msg_param='{"text": "hello text","title": "hello title"}'
+        )
+        try:
+            client.batch_send_otowith_options(batch_send_otorequest, batch_send_otoheaders, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+    @staticmethod
+    async def main_async(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        batch_send_otoheaders = dingtalkrobot__1__0_models.BatchSendOTOHeaders()
+        batch_send_otoheaders.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        batch_send_otorequest = dingtalkrobot__1__0_models.BatchSendOTORequest(
+            robot_code='dingxxxxxx',
+            user_ids=[
+                'manager1234'
+            ],
+            msg_key='sampleMarkdown',
+            msg_param='{"text": "hello text","title": "hello title"}'
+        )
+        try:
+            await client.batch_send_otowith_options_async(batch_send_otorequest, batch_send_otoheaders, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+
+if __name__ == '__main__':
+    Sample.main(sys.argv[1:])</code></pre></div><input type="radio" name="check-figure-maz-wws-h7r" id="figure-maz-wws-h7r-php-tab" /><label for="figure-maz-wws-h7r-php-tab">PHP</label><div class="codeblock-item"><pre id="codeblock-tsm-7x5-e2z" outputclass="language-php" code-type="xCode" data-tag="codeblock" class="pre codeblock language-php"><code>&lt;?php
+
+// This file is auto-generated, don't edit it. Thanks.
+namespace AlibabaCloud\SDK\Sample;
+
+use AlibabaCloud\SDK\Dingtalk\Vrobot_1_0\Dingtalk;
+use \Exception;
+use AlibabaCloud\Tea\Exception\TeaError;
+use AlibabaCloud\Tea\Utils\Utils;
+
+use Darabonba\OpenApi\Models\Config;
+use AlibabaCloud\SDK\Dingtalk\Vrobot_1_0\Models\BatchSendOTOHeaders;
+use AlibabaCloud\SDK\Dingtalk\Vrobot_1_0\Models\BatchSendOTORequest;
+use AlibabaCloud\Tea\Utils\Utils\RuntimeOptions;
+
+class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Dingtalk Client
+     */
+    public static function createClient(){
+        $config = new Config([]);
+        $config-&gt;protocol = "https";
+        $config-&gt;regionId = "central";
+        return new Dingtalk($config);
+    }
+
+    /**
+     * @param string[] $args
+     * @return void
+     */
+    public static function main($args){
+        $client = self::createClient();
+        $batchSendOTOHeaders = new BatchSendOTOHeaders([]);
+        $batchSendOTOHeaders-&gt;xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        $batchSendOTORequest = new BatchSendOTORequest([
+            "robotCode" =&gt; "dingxxxxxx",
+            "userIds" =&gt; [
+                "manager1234"
+            ],
+            "msgKey" =&gt; "sampleMarkdown",
+            "msgParam" =&gt; "{\"text\": \"hello text\",\"title\": \"hello title\"}"
+        ]);
+        try {
+            $client-&gt;batchSendOTOWithOptions($batchSendOTORequest, $batchSendOTOHeaders, new RuntimeOptions([]));
+        }
+        catch (Exception $err) {
+            if (!($err instanceof TeaError)) {
+                $err = new TeaError([], $err-&gt;getMessage(), $err-&gt;getCode(), $err);
+            }
+            if (!Utils::empty_($err-&gt;code) &amp;&amp; !Utils::empty_($err-&gt;message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+        }
+    }
+}
+$path = __DIR__ . \DIRECTORY_SEPARATOR . '..' . \DIRECTORY_SEPARATOR . 'vendor' . \DIRECTORY_SEPARATOR . 'autoload.php';
+if (file_exists($path)) {
+    require_once $path;
+}
+Sample::main(array_slice($argv, 1));</code></pre></div><input type="radio" name="check-figure-maz-wws-h7r" id="figure-maz-wws-h7r-go-tab" /><label for="figure-maz-wws-h7r-go-tab">Go</label><div class="codeblock-item"><pre id="codeblock-mjb-i8w-qzc" outputclass="language-go" code-type="xCode" data-tag="codeblock" class="pre codeblock language-go"><code>// This file is auto-generated, don't edit it. Thanks.
+package main
+
+import (
+  "os"
+  util  "github.com/alibabacloud-go/tea-utils/service"
+  dingtalkrobot_1_0  "github.com/alibabacloud-go/dingtalk/robot_1_0"
+  openapi  "github.com/alibabacloud-go/darabonba-openapi/client"
+  "github.com/alibabacloud-go/tea/tea"
+)
+
+
+/**
+ * 使用 Token 初始化账号Client
+ * @return Client
+ * @throws Exception
+ */
+func CreateClient () (_result *dingtalkrobot_1_0.Client, _err error) {
+  config := &amp;openapi.Config{}
+  config.Protocol = tea.String("https")
+  config.RegionId = tea.String("central")
+  _result = &amp;dingtalkrobot_1_0.Client{}
+  _result, _err = dingtalkrobot_1_0.NewClient(config)
+  return _result, _err
+}
+
+func _main (args []*string) (_err error) {
+  client, _err := CreateClient()
+  if _err != nil {
+    return _err
+  }
+
+  batchSendOTOHeaders := &amp;dingtalkrobot_1_0.BatchSendOTOHeaders{}
+  batchSendOTOHeaders.XAcsDingtalkAccessToken = tea.String("&lt;your access token&gt;")
+  batchSendOTORequest := &amp;dingtalkrobot_1_0.BatchSendOTORequest{
+    RobotCode: tea.String("dingxxxxxx"),
+    UserIds: []*string{tea.String("manager1234")},
+    MsgKey: tea.String("sampleMarkdown"),
+    MsgParam: tea.String("{\"text\": \"hello text\",\"title\": \"hello title\"}"),
+  }
+  tryErr := func()(_e error) {
+    defer func() {
+      if r := tea.Recover(recover()); r != nil {
+        _e = r
+      }
+    }()
+    _, _err = client.BatchSendOTOWithOptions(batchSendOTORequest, batchSendOTOHeaders, &amp;util.RuntimeOptions{})
+    if _err != nil {
+      return _err
+    }
+
+    return nil
+  }()
+
+  if tryErr != nil {
+    var err = &amp;tea.SDKError{}
+    if _t, ok := tryErr.(*tea.SDKError); ok {
+      err = _t
+    } else {
+      err.Message = tea.String(tryErr.Error())
+    }
+    if !tea.BoolValue(util.Empty(err.Code)) &amp;&amp; !tea.BoolValue(util.Empty(err.Message)) {
+      // err 中含有 code 和 message 属性，可帮助开发定位问题
+    }
+
+  }
+  return _err
+}
+
+
+func main() {
+  err := _main(tea.StringSlice(os.Args[1:]))
+  if err != nil {
+    panic(err)
+  }
+}</code></pre></div><input type="radio" name="check-figure-maz-wws-h7r" id="figure-maz-wws-h7r-nodejs-tab" /><label for="figure-maz-wws-h7r-nodejs-tab">Node.js</label><div class="codeblock-item"><pre id="codeblock-wz9-5m7-bn0" outputclass="language-nodejs" code-type="xCode" data-tag="codeblock" class="pre codeblock language-nodejs"><code>// This file is auto-generated, don't edit it
+import Util, * as $Util from '@alicloud/tea-util';
+import dingtalkrobot_1_0, * as $dingtalkrobot_1_0 from '@alicloud/dingtalk/robot_1_0';
+import OpenApi, * as $OpenApi from '@alicloud/openapi-client';
+import * as $tea from '@alicloud/tea-typescript';
+
+
+export default class Client {
+
+  /**
+   * 使用 Token 初始化账号Client
+   * @return Client
+   * @throws Exception
+   */
+  static createClient(): dingtalkrobot_1_0 {
+    let config = new $OpenApi.Config({ });
+    config.protocol = "https";
+    config.regionId = "central";
+    return new dingtalkrobot_1_0(config);
+  }
+
+  static async main(args: string[]): Promise&lt;void&gt; {
+    let client = Client.createClient();
+    let batchSendOTOHeaders = new $dingtalkrobot_1_0.BatchSendOTOHeaders({ });
+    batchSendOTOHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+    let batchSendOTORequest = new $dingtalkrobot_1_0.BatchSendOTORequest({
+      robotCode: "dingxxxxxx",
+      userIds: [
+        "manager1234"
+      ],
+      msgKey: "sampleMarkdown",
+      msgParam: "{\"text\": \"hello text\",\"title\": \"hello title\"}",
+    });
+    try {
+      await client.batchSendOTOWithOptions(batchSendOTORequest, batchSendOTOHeaders, new $Util.RuntimeOptions({ }));
+    } catch (err) {
+      if (!Util.empty(err.code) &amp;&amp; !Util.empty(err.message)) {
+        // err 中含有 code 和 message 属性，可帮助开发定位问题
+      }
+
+    }    
+  }
+
+}
+
+Client.main(process.argv.slice(2));</code></pre></div><input type="radio" name="check-figure-maz-wws-h7r" id="figure-maz-wws-h7r-csharp-tab" /><label for="figure-maz-wws-h7r-csharp-tab">C#</label><div class="codeblock-item"><pre id="codeblock-ob9-1zc-orp" outputclass="language-csharp" code-type="xCode" data-tag="codeblock" class="pre codeblock language-csharp"><code>// This file is auto-generated, don't edit it. Thanks.
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
+
+using Tea;
+using Tea.Utils;
+
+
+namespace AlibabaCloud.SDK.Sample
+{
+    public class Sample 
+    {
+
+        /**
+         * 使用 Token 初始化账号Client
+         * @return Client
+         * @throws Exception
+         */
+        public static AlibabaCloud.SDK.Dingtalkrobot_1_0.Client CreateClient()
+        {
+            AlibabaCloud.OpenApiClient.Models.Config config = new AlibabaCloud.OpenApiClient.Models.Config();
+            config.Protocol = "https";
+            config.RegionId = "central";
+            return new AlibabaCloud.SDK.Dingtalkrobot_1_0.Client(config);
+        }
+
+        public static void Main(string[] args)
+        {
+            AlibabaCloud.SDK.Dingtalkrobot_1_0.Client client = CreateClient();
+            AlibabaCloud.SDK.Dingtalkrobot_1_0.Models.BatchSendOTOHeaders batchSendOTOHeaders = new AlibabaCloud.SDK.Dingtalkrobot_1_0.Models.BatchSendOTOHeaders();
+            batchSendOTOHeaders.XAcsDingtalkAccessToken = "&lt;your access token&gt;";
+            AlibabaCloud.SDK.Dingtalkrobot_1_0.Models.BatchSendOTORequest batchSendOTORequest = new AlibabaCloud.SDK.Dingtalkrobot_1_0.Models.BatchSendOTORequest
+            {
+                RobotCode = "dingxxxxxx",
+                UserIds = new List&lt;string&gt;
+                {
+                    "manager1234"
+                },
+                MsgKey = "sampleMarkdown",
+                MsgParam = "{\"text\": \"hello text\",\"title\": \"hello title\"}",
+            };
+            try
+            {
+                client.BatchSendOTOWithOptions(batchSendOTORequest, batchSendOTOHeaders, new AlibabaCloud.TeaUtil.Models.RuntimeOptions());
+            }
+            catch (TeaException err)
+            {
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+            catch (Exception _err)
+            {
+                TeaException err = new TeaException(new Dictionary&lt;string, object&gt;
+                {
+                    { "message", _err.Message }
+                });
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+        }
+
+
+    }
+}</code></pre></div><input type="radio" name="check-figure-maz-wws-h7r" id="figure-maz-wws-h7r-cpp-tab" /><label for="figure-maz-wws-h7r-cpp-tab">C++</label><div class="codeblock-item"><pre id="codeblock-cuf-inz-vep" outputclass="language-cpp" code-type="xCode" data-tag="codeblock" class="pre codeblock language-cpp"><code>// This file is auto-generated, don't edit it. Thanks.
+
+#include &lt;alibabacloud/dingtalkrobot__1__0.hpp&gt;
+#include &lt;alibabacloud/open_api.hpp&gt;
+#include &lt;boost/any.hpp&gt;
+#include &lt;darabonba/core.hpp&gt;
+#include &lt;darabonba/util.hpp&gt;
+#include &lt;iostream&gt;
+#include &lt;map&gt;
+
+using namespace std;
+
+Alibabacloud_Dingtalkrobot_1_0::Client createClient() {
+  shared_ptr&lt;Alibabacloud_OpenApi::Config&gt; config = make_shared&lt;Alibabacloud_OpenApi::Config&gt;();
+  config-&gt;protocol = make_shared&lt;string&gt;("https");
+  config-&gt;regionId = make_shared&lt;string&gt;("central");
+  return Alibabacloud_Dingtalkrobot_1_0::Client(config);
+}
+
+int main(int argc, char *args[]) {
+  args++;
+  shared_ptr&lt;Alibabacloud_Dingtalkrobot_1_0::Client&gt; client = make_shared&lt;Alibabacloud_Dingtalkrobot_1_0::Client&gt;(createClient());
+  shared_ptr&lt;Alibabacloud_Dingtalkrobot_1_0::BatchSendOTOHeaders&gt; batchSendOTOHeaders = make_shared&lt;Alibabacloud_Dingtalkrobot_1_0::BatchSendOTOHeaders&gt;();
+  batchSendOTOHeaders-&gt;xAcsDingtalkAccessToken = make_shared&lt;string&gt;("&lt;your access token&gt;");
+  shared_ptr&lt;Alibabacloud_Dingtalkrobot_1_0::BatchSendOTORequest&gt; batchSendOTORequest = make_shared&lt;Alibabacloud_Dingtalkrobot_1_0::BatchSendOTORequest&gt;(map&lt;string, boost::any&gt;({
+    {"robotCode", boost::any(string("dingxxxxxx"))},
+    {"userIds", boost::any(vector&lt;string&gt;({
+      "manager1234"
+    }))},
+    {"msgKey", boost::any(string("sampleMarkdown"))},
+    {"msgParam", boost::any(string("{"text": "hello text","title": "hello title"}"))}
+  }));
+  try {
+    client-&gt;batchSendOTOWithOptions(batchSendOTORequest, batchSendOTOHeaders, make_shared&lt;Darabonba_Util::RuntimeOptions&gt;(Darabonba_Util::RuntimeOptions()));
+  }
+  catch (std::exception &amp;err) {
+    if (!Darabonba_Util::Client::empty(err.code) &amp;&amp; !Darabonba_Util::Client::empty(err.message)) {
+      // err 中含有 code 和 message 属性，可帮助开发定位问题
+    }
+  }
+}</code></pre></div></div></section></section><section id="section-response-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-response-1" data-tag="h2" class="h2">响应</h2><section id="section-response-parameter" class="section"><h3 data-tag="h3" id="h2-thx-6jc-r4z" class="h3 title">响应体</h3><table id="a722bda3deg3w" tablewidth="710" tablecolswidth="213 142 355" autofit="false" class="table"><colgroup colwidth="0.9*" style="width:30.00%"></colgroup><colgroup colwidth="0.6*" style="width:20.00%"></colgroup><colgroup colwidth="1.5*" style="width:50.00%"></colgroup><tbody class="tbody"><tr id="a722bda4deqa3"><td id="a722bda5deoc3" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="a722bda6dengz">名称</p></td><td id="a722bda7dee3u" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="a722bda8dech1">类型</p></td><td id="a722bda9denjo" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="a722bdaadeal1">描述</p></td></tr><tr outputclass="row row-level-1" id="a722bdabder00" class="row row-level-1"><td id="a722bdacdecd7" rowspan="1" colspan="1"><p id="a722bdaddex55">processQueryKey</p></td><td id="a722bdaedeezl" rowspan="1" colspan="1"><p id="a722bdafdeqwd">String</p></td><td id="a722bdb0devw8" rowspan="1" colspan="1"><p id="a722bdb1de3fr">消息id，可用于<a href="https://open.dingtalk.com/document/development/chatbot-batch-query-the-read-status-of-messages#" id="fba25f496dcpl" class="xref">批量查询人与机器人会话机器人消息是否已读</a>和<a href="https://open.dingtalk.com/document/development/batch-message-recall-chat#" id="7c42d514f8fh4" class="xref">批量撤回人与机器人会话中机器人消息</a>接口，查询消息是否已读和撤回消息。</p></td></tr><tr outputclass="row row-level-2" id="a722bdb2de0bq" class="row row-level-2"><td id="a722bdb3dek4u" rowspan="1" colspan="1"><p id="a722bdb4deh4u">invalidStaffIdList</p></td><td id="a722e4b0decnv" rowspan="1" colspan="1"><p id="a722e4b1de7y7">Array of String</p></td><td id="a722e4b2dea0h" rowspan="1" colspan="1"><p id="a722e4b3degtf">无效的用户userId列表。</p></td></tr><tr outputclass="row row-level-3" id="a722e4b4devxn" class="row row-level-3"><td id="a722e4b5dep44" rowspan="1" colspan="1"><p id="a722e4b6de5p3">flowControlledStaffIdList</p></td><td id="a722e4b7deq0z" rowspan="1" colspan="1"><p id="a722e4b8degb8">Array of String</p></td><td id="a722e4b9dewv3" rowspan="1" colspan="1"><p id="a722e4badeim7">被限流的userId列表。</p></td></tr></tbody></table></section><section id="section-response-body-example" class="section"><h3 id="h3-response-body-example" data-tag="h3" class="h3">响应体示例</h3><pre id="a6f014e1dezfu" outputclass="language-json" code-type="xCode" data-tag="codeblock" class="pre codeblock language-json"><code>HTTP/1.1 200 OK
+Content-Type:application/json
+
+{
+  "processQueryKey" : "zcxxczasdafasd",
+  "invalidStaffIdList" : [ "manage25231" ],
+  "flowControlledStaffIdList" : [ "manage25232" ]
+}</code></pre></section><section id="section-error-code-1" class="section"><h3 id="h3-error-code-1" data-tag="h3" class="h3">错误码</h3><p data-tag="p" id="p-error-code-global-guide" class="p">若调用该接口报错，可根据错误信息在<a href="https://open.dingtalk.com/document/development/server-api-error-codes-1" id="a-error-code-global-guide">全局错误码</a>文档中查找解决方案。</p><table id="a722e4bddetse" tablewidth="709" tablecolswidth="142 177 177 213" autofit="false" class="table"><colgroup colwidth="0.8*" style="width:20.03%"></colgroup><colgroup colwidth="1*" style="width:24.96%"></colgroup><colgroup colwidth="1*" style="width:24.96%"></colgroup><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><tbody class="tbody"><tr id="a722e4bedemee"><td id="a722e4bfdemsj" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="a722e4c0de8w8">HttpCode</p></td><td id="a722e4c1de74e" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="a722e4c2de7qw">错误码</p></td><td id="a7230bc0den63" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="a7230bc1delbj">错误信息</p></td><td id="a7230bc2de2r3" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="a7230bc3ded1z">说明</p></td></tr><tr id="a7230bc4de9u8"><td id="a7230bc5dez5e" rowspan="1" colspan="1"><p id="a7230bc6de9jg">400</p></td><td id="a7230bc7dea7o" rowspan="1" colspan="1"><p id="a7230bc8der2t">invalidParameter.robotCode.empty</p></td><td id="a7230bc9de76j" rowspan="1" colspan="1"><p id="a7230bcade81u">%s</p></td><td id="a7230bcbdekzi" rowspan="1" colspan="1"><p id="a7230bccdevhg">机器人robotCode无效</p></td></tr><tr id="a7230bcddezl3"><td id="a7230bcede8p0" rowspan="1" colspan="1"><p id="a7230bcfdel8g">400</p></td><td id="a72332d0defsq" rowspan="1" colspan="1"><p id="a72332d1de9b3">invalidParameter.userIds.empty</p></td><td id="a72332d2deo87" rowspan="1" colspan="1"><p id="a72332d3deun4">%s</p></td><td id="a72332d4de088" rowspan="1" colspan="1"><p id="a72332d5dejxw">用户userId列表为空</p></td></tr><tr id="a72332d6dedp7"><td id="a72332d7dex42" rowspan="1" colspan="1"><p id="a72332d8de08w">400</p></td><td id="a72332d9de6tn" rowspan="1" colspan="1"><p id="a72332dadeelr">invalidParameter.userIds.overMax</p></td><td id="a72332dbde3u0" rowspan="1" colspan="1"><p id="a72332dcdetfg">%s</p></td><td id="a72332ddderau" rowspan="1" colspan="1"><p id="a72332dedeq8z">用户userId列表超过最大限制100,请将userId拆分成多个长度不超过100的数组，分批次调用此接口</p></td></tr><tr id="a72332dfde4zp"><td id="a72332e0de86t" rowspan="1" colspan="1"><p id="a72332e1deax0">400</p></td><td id="a72332e2de4d0" rowspan="1" colspan="1"><p id="a72359e0deba0">invalidParameter.msgKey.empty</p></td><td id="a72359e1dewkn" rowspan="1" colspan="1"><p id="a72359e2deb4v">%s</p></td><td id="a72359e3deejz" rowspan="1" colspan="1"><p id="a72359e4de72f">msgKey为空</p></td></tr><tr id="a72359e5deaey"><td id="a72359e6ded3j" rowspan="1" colspan="1"><p id="a72359e7dev04">400</p></td><td id="a72359e8demib" rowspan="1" colspan="1"><p id="a72359e9del3h">invalidParameter.msgKey.invalid</p></td><td id="a72359eade101" rowspan="1" colspan="1"><p id="a72359ebde6oo">%s</p></td><td id="a72359ecde23t" rowspan="1" colspan="1"><p id="a72359edde1l8">msgKey无效，请传入正确的msgKey</p></td></tr><tr id="a72359eededrq"><td id="a72359efden9c" rowspan="1" colspan="1"><p id="a72359f0deiqv">400</p></td><td id="a72359f1den5d" rowspan="1" colspan="1"><p id="a72359f2debja">invalidParameter.msgParam.invalid</p></td><td id="a72359f3det3m" rowspan="1" colspan="1"><p id="a72359f4dehr0">%s</p></td><td id="a72380f0del6k" rowspan="1" colspan="1"><p id="a72380f1deqtu">msgParam格式非法，必须是json格式</p></td></tr><tr id="a72380f2deh39"><td id="a72380f3dewbn" rowspan="1" colspan="1"><p id="a72380f4dequo">400</p></td><td id="a72380f5de8sh" rowspan="1" colspan="1"><p id="a72380f6dere3">invalidParameter.param.invalid</p></td><td id="a72380f7dei2j" rowspan="1" colspan="1"><p id="a72380f8dea0v">%s</p></td><td id="a72380f9dermu" rowspan="1" colspan="1"><p id="a72380fade9qg">参数不合法，请检查是否有参数为空</p></td></tr><tr id="a72380fbdelzi"><td id="a72380fcdep70" rowspan="1" colspan="1"><p id="a72380fddeli4">400</p></td><td id="a72380fedeyt8" rowspan="1" colspan="1"><p id="a72380ffdefo3">invalidParameter.msg.unsupport</p></td><td id="a7238100de5yr" rowspan="1" colspan="1"><p id="a7238101dej75">%s</p></td><td id="a7238102deetx" rowspan="1" colspan="1"><p id="a7238103demf6">不支持的消息类型</p></td></tr><tr id="a7238104deljx"><td id="a7238105de3la" rowspan="1" colspan="1"><p id="a723a800demwp">400</p></td><td id="a723a801de0pc" rowspan="1" colspan="1"><p id="a723a802de1ux">invalidParameter.msgParam.tooLong</p></td><td id="a723a803de3b7" rowspan="1" colspan="1"><p id="a723a804dea1y">%s</p></td><td id="a723a805deauv" rowspan="1" colspan="1"><p id="a723a806de0v8">消息内容太长消息内容太长，请缩减内容长度</p></td></tr><tr id="a723a807dezgx"><td id="a723a808de086" rowspan="1" colspan="1"><p id="a723a809deu8m">400</p></td><td id="a723f620dedy9" rowspan="1" colspan="1"><p id="a723f621debgp">invalidParameter.robotCode.notExsit</p></td><td id="a723f622dea5d" rowspan="1" colspan="1"><p id="a723f623de1hb">%s</p></td><td id="a723f624deo42" rowspan="1" colspan="1"><p id="a7241d30deuz7">机器人不存在，请检查企业内是否安装了robotCode对应的机器人</p></td></tr><tr id="a7241d31ded2j"><td id="a7241d32decsz" rowspan="1" colspan="1"><p id="a7241d33der6o">400</p></td><td id="a7241d34delzg" rowspan="1" colspan="1"><p id="a7241d35dexp7">invalidParameter.msgBody.invalid</p></td><td id="a7241d36des9m" rowspan="1" colspan="1"><p id="a7241d37dem96">%s</p></td><td id="a7241d38dec5z" rowspan="1" colspan="1"><p id="a7241d39de69i">消息体必须是JSON格式</p></td></tr><tr id="a7241d3adegnx"><td id="a7241d3bdeexb" rowspan="1" colspan="1"><p id="a7241d3cdemvv">400</p></td><td id="a7241d3dde2bj" rowspan="1" colspan="1"><p id="a7241d3edejo5">invalidParameter.userId.empty</p></td><td id="a7241d3fde53t" rowspan="1" colspan="1"><p id="a7241d40dergv">%s</p></td><td id="a7241d41depqz" rowspan="1" colspan="1"><p id="a7241d42deak7">缺少staffId</p></td></tr><tr id="a7241d43deweo"><td id="a7241d44detuc" rowspan="1" colspan="1"><p id="a7241d45deums">400</p></td><td id="a7241d46de6jx" rowspan="1" colspan="1"><p id="a7241d47defa1">invalidParameter.token.invalid</p></td><td id="a7244440decoa" rowspan="1" colspan="1"><p id="a724b970demmt">%s</p></td><td id="a724b971dej8m" rowspan="1" colspan="1"><p id="a724b972delhe">无授权的token</p></td></tr><tr id="a724b973del3t"><td id="a724b974dexza" rowspan="1" colspan="1"><p id="a724b975de5fy">400</p></td><td id="a724b976dezoz" rowspan="1" colspan="1"><p id="a724b977dedx0">invalidParameter.robotCode.invalid</p></td><td id="a724b978def8n" rowspan="1" colspan="1"><p id="a724e080de523">%s</p></td><td id="a724e081dexz1" rowspan="1" colspan="1"><p id="a724e082den2a">无效的robotCode</p></td></tr><tr id="a724e083de0z8"><td id="a724e084de8mv" rowspan="1" colspan="1"><p id="a724e085dexrb">400</p></td><td id="a724e086des4t" rowspan="1" colspan="1"><p id="a724e087dedgs">token.notExisted</p></td><td id="a724e088dento" rowspan="1" colspan="1"><p id="a724e089der70">%s</p></td><td id="a724e08ade2om" rowspan="1" colspan="1"><p id="a724e08bder0z">TOKEN不存在</p></td></tr><tr id="a724e08cdeonw"><td id="a724e08dder0k" rowspan="1" colspan="1"><p id="a724e08edetog">400</p></td><td id="a724e08fdeqb0" rowspan="1" colspan="1"><p id="a724e090de41j">template.not.existed</p></td><td id="a724e091de1lu" rowspan="1" colspan="1"><p id="a724e092dentj">%s</p></td><td id="a724e093delhh" rowspan="1" colspan="1"><p id="a724e094degqn">机器人模板不存在，请检查robotCode是否正确</p></td></tr><tr id="a724e095deo7k"><td id="a7250790dejlq" rowspan="1" colspan="1"><p id="a7250791de5ds">400</p></td><td id="a7250792de56x" rowspan="1" colspan="1"><p id="a7250793del7e">template.stopped</p></td><td id="a7250794de1hm" rowspan="1" colspan="1"><p id="a7250795de2fu">%s</p></td><td id="a7250796de2px" rowspan="1" colspan="1"><p id="a7250797de95t">机器人模板已经停用，请检查机器人状态</p></td></tr><tr id="a7250798defod"><td id="a7250799dexhg" rowspan="1" colspan="1"><p id="a725079adeii9">400</p></td><td id="a725079bdegsz" rowspan="1" colspan="1"><p id="a725079cdeapu">miss.param.text</p></td><td id="a725079ddet7g" rowspan="1" colspan="1"><p id="a725079eded5y">%s</p></td><td id="a725079fde8du" rowspan="1" colspan="1"><p id="a72507a0dem2s">消息内容不合法，需要text属性</p></td></tr><tr id="a72507a1dem6p"><td id="a72507a2defnz" rowspan="1" colspan="1"><p id="a72507a3dexno">400</p></td><td id="a72507a4de9lo" rowspan="1" colspan="1"><p id="a72507a5deyyt">miss.param.contentOfText</p></td><td id="a72507a6defrh" rowspan="1" colspan="1"><p id="a72507a7de8hh">%s</p></td><td id="a7252ea0de8zw" rowspan="1" colspan="1"><p id="a7252ea1desqa">消息内容不合法，需要text-&gt;content属性</p></td></tr><tr id="a7252ea2del28"><td id="a7252ea3dezho" rowspan="1" colspan="1"><p id="a7252ea4dedpd">400</p></td><td id="a7252ea5det2i" rowspan="1" colspan="1"><p id="a7252ea6dea01">miss.param.link</p></td><td id="a7252ea7de7xw" rowspan="1" colspan="1"><p id="a7252ea8de8xk">%s</p></td><td id="a7252ea9dexzg" rowspan="1" colspan="1"><p id="a7252eaadedf8">消息内容不合法，需要link属性</p></td></tr><tr id="a7252eabdexyw"><td id="a7252eacdebzp" rowspan="1" colspan="1"><p id="a7252eaddeufd">400</p></td><td id="a7252eaedekrn" rowspan="1" colspan="1"><p id="a7252eafde2n9">miss.param.textOfLink</p></td><td id="a7252eb0de33k" rowspan="1" colspan="1"><p id="a7252eb1devhc">%s</p></td><td id="a7252eb2depbn" rowspan="1" colspan="1"><p id="a7252eb3demue">消息内容不合法，需要link-&gt;text属性</p></td></tr><tr id="a7252eb4devcd"><td id="a7252eb5dei13" rowspan="1" colspan="1"><p id="a7252eb6de1ey">400</p></td><td id="a72555b0de5uf" rowspan="1" colspan="1"><p id="a72555b1de5pd">miss.param.titleOfLink</p></td><td id="a72555b2de8t5" rowspan="1" colspan="1"><p id="a72555b3degog">%s</p></td><td id="a72555b4dehm1" rowspan="1" colspan="1"><p id="a72555b5dehk2">消息内容不合法，需要link-&gt;title属性</p></td></tr><tr id="a72555b6de0sa"><td id="a72555b7dek06" rowspan="1" colspan="1"><p id="a72555b8desmx">400</p></td><td id="a72555b9deaas" rowspan="1" colspan="1"><p id="a72555badelpj">miss.param.messageUrlOfLink</p></td><td id="a72555bbdeq2n" rowspan="1" colspan="1"><p id="a72555bcde01u">%s</p></td><td id="a72555bddeyjj" rowspan="1" colspan="1"><p id="a72555bede05f">消息内容不合法，需要link-&gt;messageUrl属性</p></td></tr><tr id="a72555bfdenvm"><td id="a72555c0de6au" rowspan="1" colspan="1"><p id="a72555c1deyxq">400</p></td><td id="a72555c2de4wr" rowspan="1" colspan="1"><p id="a72555c3de23o">miss.param.markdown</p></td><td id="a72555c4derhq" rowspan="1" colspan="1"><p id="a72555c5debgc">%s</p></td><td id="a7257cc0de2pt" rowspan="1" colspan="1"><p id="a7257cc1debyy">消息内容不合法，需要markdown属性</p></td></tr><tr id="a7257cc2degln"><td id="a7257cc3devg2" rowspan="1" colspan="1"><p id="a7257cc4deqnw">400</p></td><td id="a7257cc5de9q9" rowspan="1" colspan="1"><p id="a7257cc6de2ca">miss.param.markdownTotitle</p></td><td id="a7257cc7de8op" rowspan="1" colspan="1"><p id="a7257cc8deov4">%s</p></td><td id="a7257cc9deqyi" rowspan="1" colspan="1"><p id="a7257ccade8hj">消息内容不合法，需要markdown-&gt;text属性</p></td></tr><tr id="a7257ccbdeuti"><td id="a7257cccde3tv" rowspan="1" colspan="1"><p id="a7257ccddeg1u">400</p></td><td id="a7257ccedewro" rowspan="1" colspan="1"><p id="a7257ccfdelvg">miss.param.markdownTotext</p></td><td id="a7257cd0dehjb" rowspan="1" colspan="1"><p id="a7257cd1dem0e">%s</p></td><td id="a7257cd2dedys" rowspan="1" colspan="1"><p id="a7257cd3de3bh">消息内容不合法，需要markdown-&gt;text属性</p></td></tr><tr id="a7257cd4de0jo"><td id="a7257cd5dekpo" rowspan="1" colspan="1"><p id="a7257cd6dexy9">400</p></td><td id="a7257cd7deapn" rowspan="1" colspan="1"><p id="a725a3d0de7gr">miss.param.actionCard</p></td><td id="a725a3d1de9kz" rowspan="1" colspan="1"><p id="a725a3d2de4j7">%s</p></td><td id="a725a3d3de5px" rowspan="1" colspan="1"><p id="a725a3d4desbl">消息内容不合法，需要actionCard属性</p></td></tr><tr id="a725a3d5deqk2"><td id="a725a3d6dez4d" rowspan="1" colspan="1"><p id="a725a3d7dedbp">400</p></td><td id="a725a3d8deybc" rowspan="1" colspan="1"><p id="a725a3d9de4ao">miss.param.actionCardTotitle</p></td><td id="a725a3dadevej" rowspan="1" colspan="1"><p id="a725a3dbde6rx">%s</p></td><td id="a725a3dcdeozd" rowspan="1" colspan="1"><p id="a725a3dddewyk">消息内容不合法，需要actionCard-&gt;title属性</p></td></tr><tr id="a725a3dede38i"><td id="a725a3dfde3tl" rowspan="1" colspan="1"><p id="a725a3e0denhe">400</p></td><td id="a725a3e1detg1" rowspan="1" colspan="1"><p id="a725a3e2de89z">miss.param.actionCardTotext</p></td><td id="a725a3e3dew69" rowspan="1" colspan="1"><p id="a725a3e4dezb6">%s</p></td><td id="a725a3e5demc8" rowspan="1" colspan="1"><p id="a725a3e6deypx">消息内容不合法，需要actionCard-&gt;text属性</p></td></tr><tr id="a725cae0de55x"><td id="a725cae1dellz" rowspan="1" colspan="1"><p id="a725cae2dem4c">400</p></td><td id="a725cae3dety4" rowspan="1" colspan="1"><p id="a725cae4deovq">miss.param.actionCardTosingleTitle</p></td><td id="a725cae5dej0v" rowspan="1" colspan="1"><p id="a725cae6de9oh">%s</p></td><td id="a725cae7deuav" rowspan="1" colspan="1"><p id="a725cae8de78j">消息内容不合法，需要actionCard-&gt;singleTitle属性</p></td></tr><tr id="a725cae9denf3"><td id="a725caeadeuy8" rowspan="1" colspan="1"><p id="a725caebde3ut">400</p></td><td id="a725caecdecef" rowspan="1" colspan="1"><p id="a725caedde6rb">miss.param.actionCardTosingleUrl</p></td><td id="a725caeedeble" rowspan="1" colspan="1"><p id="a725caefdero7">%s</p></td><td id="a725caf0de319" rowspan="1" colspan="1"><p id="a725caf1dem20">消息内容不合法，需要actionCard-&gt;singleURL属性</p></td></tr><tr id="a725caf2detdk"><td id="a725caf3de4k8" rowspan="1" colspan="1"><p id="a725caf4de7nd">400</p></td><td id="a725caf5deezo" rowspan="1" colspan="1"><p id="a725caf6deb40">miss.param.actionCardTobtns</p></td><td id="a725f1f0deup3" rowspan="1" colspan="1"><p id="a725f1f1dezhw">%s</p></td><td id="a725f1f2debrw" rowspan="1" colspan="1"><p id="a725f1f3debh6">消息内容不合法，需要actionCard-&gt;btns属性</p></td></tr><tr id="a725f1f4debo3"><td id="a725f1f5dek9k" rowspan="1" colspan="1"><p id="a725f1f6des16">400</p></td><td id="a725f1f7deg60" rowspan="1" colspan="1"><p id="a725f1f8deuvz">miss.param.actionCardTobtnsTotitle</p></td><td id="a725f1f9dezip" rowspan="1" colspan="1"><p id="a725f1fadevjm">%s</p></td><td id="a725f1fbde6ty" rowspan="1" colspan="1"><p id="a725f1fcdenjz">消息内容不合法，需要actionCard-&gt;btns-&gt;title属性</p></td></tr><tr id="a725f1fdder1c"><td id="a725f1fedehrk" rowspan="1" colspan="1"><p id="a725f1ffde2mk">400</p></td><td id="a725f200deqxk" rowspan="1" colspan="1"><p id="a725f201dewvo">miss.param.actionCardTobtnsToactionUrl</p></td><td id="a725f202depx3" rowspan="1" colspan="1"><p id="a725f203dea8v">%s</p></td><td id="a725f204detk5" rowspan="1" colspan="1"><p id="a725f205de8ha">消息内容不合法，需要actionCard-&gt;btns-&gt;actionURL属性</p></td></tr><tr id="a725f206decel"><td id="a7261900dex8h" rowspan="1" colspan="1"><p id="a7261901def8v">400</p></td><td id="a7261902deyrf" rowspan="1" colspan="1"><p id="a7261903decwy">invalid.param.actionCardTobtnOrientation</p></td><td id="a7261904de0j8" rowspan="1" colspan="1"><p id="a7261905del69">%s</p></td><td id="a7261906de423" rowspan="1" colspan="1"><p id="a7261907deykl">消息内容不合法，错误的actionCard-&gt;btnOrientation</p></td></tr><tr id="a7261908depfa"><td id="a7261909degkr" rowspan="1" colspan="1"><p id="a726190ade4ys">400</p></td><td id="a726190bdea1b" rowspan="1" colspan="1"><p id="a726190cdent1">invalid.param.actionCardTocanForward</p></td><td id="a726190dde9v4" rowspan="1" colspan="1"><p id="a726190edeiif">%s</p></td><td id="a726190fdes6q" rowspan="1" colspan="1"><p id="a7261910dekr4">消息内容不合法，错误的actionCard-&gt;canForward</p></td></tr><tr id="a7261911de2bu"><td id="a7261912demuc" rowspan="1" colspan="1"><p id="a7261913detec">400</p></td><td id="a7264010dea8u" rowspan="1" colspan="1"><p id="a7264011dewfn">miss.param.feedCard</p></td><td id="a7264012demzg" rowspan="1" colspan="1"><p id="a7264013dehmz">%s</p></td><td id="a7264014dezcz" rowspan="1" colspan="1"><p id="a7264015deefw">消息内容不合法，需要feedCard属性</p></td></tr><tr id="a7264016deh8d"><td id="a7264017delix" rowspan="1" colspan="1"><p id="a7264018dekxs">400</p></td><td id="a7264019devvo" rowspan="1" colspan="1"><p id="a726401adec15">miss.param.feedCardTolinks</p></td><td id="a726401bdesk8" rowspan="1" colspan="1"><p id="a726401cdegyp">%s</p></td><td id="a726401ddex89" rowspan="1" colspan="1"><p id="a726401edehfe">消息内容不合法，需要feedCard-&gt;links属性</p></td></tr><tr id="a726401fderhq"><td id="a7264020der7y" rowspan="1" colspan="1"><p id="a7264021deqcp">400</p></td><td id="a7264022deyqd" rowspan="1" colspan="1"><p id="a7264023deshv">miss.param.feedCardTolinksTotitle</p></td><td id="a7264024de0zq" rowspan="1" colspan="1"><p id="a7264025debdb">%s</p></td><td id="a7264026dezgd" rowspan="1" colspan="1"><p id="a7264027denec">消息内容不合法，需要feedCard-&gt;links-&gt;title属性</p></td></tr><tr id="a7266720de6z1"><td id="a7266721der0b" rowspan="1" colspan="1"><p id="a7266722deg40">400</p></td><td id="a7266723deomu" rowspan="1" colspan="1"><p id="a7266724deenf">miss.param.feedCardTolinksTomessageUrl</p></td><td id="a7266725de6bz" rowspan="1" colspan="1"><p id="a7266726dewg5">%s</p></td><td id="a7266727dex09" rowspan="1" colspan="1"><p id="a7266728dehxf">消息内容不合法，需要feedCard-&gt;links-&gt;messageURL属性</p></td></tr><tr id="a7266729deusk"><td id="a726672ade6sj" rowspan="1" colspan="1"><p id="a726672bde7gv">400</p></td><td id="a726672cdeen0" rowspan="1" colspan="1"><p id="a726672ddeqev">miss.param.feedCardTolinksTopicUrl</p></td><td id="a726672edevrl" rowspan="1" colspan="1"><p id="a726672fdeckq">%s</p></td><td id="a7266730de31w" rowspan="1" colspan="1"><p id="a7266731derh3">消息内容不合法，需要feedCard-&gt;links-&gt;picURL属性</p></td></tr><tr id="a7266732debl5"><td id="a7268e30delzw" rowspan="1" colspan="1"><p id="a7268e31deu1b">400</p></td><td id="a7268e32deafl" rowspan="1" colspan="1"><p id="a7268e33dey4g">miss.param.photo</p></td><td id="a7268e34degtm" rowspan="1" colspan="1"><p id="a7268e35deq65">%s</p></td><td id="a7268e36dea81" rowspan="1" colspan="1"><p id="a7268e37deyqr">消息内容不合法，需要photo属性</p></td></tr><tr id="a7268e38detn7"><td id="a7268e39de6ao" rowspan="1" colspan="1"><p id="a7268e3adel6e">400</p></td><td id="a7268e3bdenbh" rowspan="1" colspan="1"><p id="a7268e3cdese8">miss.param.photoTophotoUrl</p></td><td id="a7268e3ddeso3" rowspan="1" colspan="1"><p id="a7268e3edewwf">%s</p></td><td id="a7268e3fdeva3" rowspan="1" colspan="1"><p id="a7268e40demjb">消息内容不合法，需要photo-&gt;photoURL属性</p></td></tr><tr id="a7268e41dem3h"><td id="a7268e42de7o5" rowspan="1" colspan="1"><p id="a7268e43de744">400</p></td><td id="a7268e44dezvj" rowspan="1" colspan="1"><p id="a7268e45dep6f">miss.param.image</p></td><td id="a726b540de3ry" rowspan="1" colspan="1"><p id="a726b541degdf">%s</p></td><td id="a726b542deaiy" rowspan="1" colspan="1"><p id="a726b543detm4">消息内容不合法，需要image属性</p></td></tr><tr id="a726b544dea54"><td id="a726b545de31i" rowspan="1" colspan="1"><p id="a726b546deskb">400</p></td><td id="a726b547de35z" rowspan="1" colspan="1"><p id="a726b548de9um">miss.param.imageTopicUrl</p></td><td id="a726b549deqol" rowspan="1" colspan="1"><p id="a726b54aderg6">%s</p></td><td id="a726b54bderri" rowspan="1" colspan="1"><p id="a726b54cdein7">消息内容不合法，需要image-&gt;picURL属性</p></td></tr><tr id="a726b54ddeujb"><td id="a726b54edef2n" rowspan="1" colspan="1"><p id="a726b54fdetzg">400</p></td><td id="a726dc50de5hz" rowspan="1" colspan="1"><p id="a726dc51degoo">miss.param.beautifulCard</p></td><td id="a726dc52demh3" rowspan="1" colspan="1"><p id="a726dc53deefz">%s</p></td><td id="a726dc54deziq" rowspan="1" colspan="1"><p id="a726dc55de8hq">消息内容不合法，需要beautifulCard属性</p></td></tr><tr id="a726dc56dejl3"><td id="a726dc57den2y" rowspan="1" colspan="1"><p id="a726dc58de2of">400</p></td><td id="a726dc59delj3" rowspan="1" colspan="1"><p id="a726dc5ade3sf">miss.param.beautifulCardToimage</p></td><td id="a726dc5bdeuk5" rowspan="1" colspan="1"><p id="a726dc5cden0p">%s</p></td><td id="a726dc5ddeu7x" rowspan="1" colspan="1"><p id="a726dc5ede6ac">消息内容不合法，需要beautifulCard-&gt;image属性</p></td></tr><tr id="a726dc5fdee74"><td id="a726dc60de9wm" rowspan="1" colspan="1"><p id="a726dc61deyc5">400</p></td><td id="a726dc62dezof" rowspan="1" colspan="1"><p id="a7270360de1zf">miss.param.beautifulCardTotitle</p></td><td id="a7270361de917" rowspan="1" colspan="1"><p id="a7270362dedjg">%s</p></td><td id="a7270363dec5o" rowspan="1" colspan="1"><p id="a7270364det3r">消息内容不合法，需要beautifulCard-&gt;title属性</p></td></tr><tr id="a7270365deh8w"><td id="a7270366de5gg" rowspan="1" colspan="1"><p id="a7270367deiy0">400</p></td><td id="a7270368dem91" rowspan="1" colspan="1"><p id="a7270369dea3l">miss.param.beautifulCardToactionUrl</p></td><td id="a727036ade725" rowspan="1" colspan="1"><p id="a727036bdeslc">%s</p></td><td id="a727036cde11o" rowspan="1" colspan="1"><p id="a727036ddekc4">消息内容不合法，需要beautifulCard-&gt;actionUrl属性</p></td></tr><tr id="a727036edeofa"><td id="a727036fdef7g" rowspan="1" colspan="1"><p id="a7270370dedqb">400</p></td><td id="a7270371dealp" rowspan="1" colspan="1"><p id="a7270372detmk">miss.param.beautifulCardTointroduction</p></td><td id="a7270373dem2f" rowspan="1" colspan="1"><p id="a7270374dei9l">%s</p></td><td id="a7272a70deu56" rowspan="1" colspan="1"><p id="a7272a71defut">消息内容不合法，需要beautifulCard-&gt;introduction属性</p></td></tr><tr id="a7272a72dezm9"><td id="a7272a73dex4r" rowspan="1" colspan="1"><p id="a7272a74dengy">400</p></td><td id="a7272a75def4j" rowspan="1" colspan="1"><p id="a7272a76de50q">send.byToken.tooFast</p></td><td id="a7272a77deopi" rowspan="1" colspan="1"><p id="a7272a78dejyf">%s</p></td><td id="a7272a79dedxa" rowspan="1" colspan="1"><p id="a7272a7adep57">用TOKEN发送限流错误，请稍后再试</p></td></tr><tr id="a7272a7bdexwp"><td id="a7272a7cde4hx" rowspan="1" colspan="1"><p id="a7272a7dde85s">400</p></td><td id="a7272a7edeken" rowspan="1" colspan="1"><p id="a7272a7fdegst">send.too.fast</p></td><td id="a7272a80depzt" rowspan="1" colspan="1"><p id="a7272a81de19i">%s</p></td><td id="a7272a82deulv" rowspan="1" colspan="1"><p id="a7272a83de6bp">发送消息频率过快，请稍后再试</p></td></tr><tr id="a7272a84deahl"><td id="a7275180deepi" rowspan="1" colspan="1"><p id="a7275181deai7">400</p></td><td id="a7275182defvk" rowspan="1" colspan="1"><p id="a7275183dejim">send.forbidden</p></td><td id="a7275184deqoz" rowspan="1" colspan="1"><p id="a7275185de38o">%s</p></td><td id="a7275186depgj" rowspan="1" colspan="1"><p id="a7275187dedif">此机器人禁止发送消息</p></td></tr><tr id="a7275188dej64"><td id="a7275189delmv" rowspan="1" colspan="1"><p id="a727518adel0e">400</p></td><td id="a727518bdeo1w" rowspan="1" colspan="1"><p id="a727518cdetc9">ip.not.match</p></td><td id="a727518ddek19" rowspan="1" colspan="1"><p id="a727518edee4e">%s</p></td><td id="a727518fden68" rowspan="1" colspan="1"><p id="a7275190de07w">IP不匹配，无权限使用此机器人发送消息</p></td></tr><tr id="a7275191dekh6"><td id="a7277890de4ml" rowspan="1" colspan="1"><p id="a7277891de712">400</p></td><td id="a7277892defuv" rowspan="1" colspan="1"><p id="a7277893der3j">keywords.not.match</p></td><td id="a7277894deg6e" rowspan="1" colspan="1"><p id="a7277895de4ba">%s</p></td><td id="a7277896derq7" rowspan="1" colspan="1"><p id="a7277897denjb">机器人发送消息的关键词不匹配</p></td></tr><tr id="a7277898degim"><td id="a7277899def5k" rowspan="1" colspan="1"><p id="a727789ade1fe">400</p></td><td id="a727789bdecvs" rowspan="1" colspan="1"><p id="a727789cdea3b">sign.not.match</p></td><td id="a727789dderog" rowspan="1" colspan="1"><p id="a727789edeag1">%s</p></td><td id="a727789fde8ny" rowspan="1" colspan="1"><p id="a72778a0de0w3">签名不匹配，无权限发送消息</p></td></tr><tr id="a72778a1deqyl"><td id="a72778a2de5e7" rowspan="1" colspan="1"><p id="a72778a3der2l">400</p></td><td id="a7279fa0deztx" rowspan="1" colspan="1"><p id="a7279fa1defsg">contain.unsafe.url</p></td><td id="a7279fa2deky6" rowspan="1" colspan="1"><p id="a7279fa3debho">%s</p></td><td id="a7279fa4de32f" rowspan="1" colspan="1"><p id="a7279fa5dem52">含有不安全的外链</p></td></tr><tr id="a7279fa6de0ij"><td id="a7279fa7denlh" rowspan="1" colspan="1"><p id="a7279fa8dewdt">400</p></td><td id="a7279fa9de9wz" rowspan="1" colspan="1"><p id="a7279faadehfb">contain.notAllowed.text</p></td><td id="a7279fabdes3u" rowspan="1" colspan="1"><p id="a7279facdet4w">%s</p></td><td id="a7279faddeje0" rowspan="1" colspan="1"><p id="a7279faedeat2">含有不合适的文本</p></td></tr><tr id="a7279fafde5qp"><td id="a7279fb0de77t" rowspan="1" colspan="1"><p id="a7279fb1denab">400</p></td><td id="a7279fb2densa" rowspan="1" colspan="1"><p id="a7279fb3degs6">contain.notAllowed.picture</p></td><td id="a7279fb4deomu" rowspan="1" colspan="1"><p id="a7279fb5dedsv">%s</p></td><td id="a727c6b0dep74" rowspan="1" colspan="1"><p id="a727c6b1de7f9">含有不合适的图片</p></td></tr><tr id="a727c6b2dey82"><td id="a727c6b3de6ww" rowspan="1" colspan="1"><p id="a727c6b4demeb">400</p></td><td id="a727c6b5def7r" rowspan="1" colspan="1"><p id="a727c6b6de0p4">contain.notAllowed.content</p></td><td id="a727c6b7deq88" rowspan="1" colspan="1"><p id="a727c6b8detmd">%s</p></td><td id="a727c6b9dexd3" rowspan="1" colspan="1"><p id="a727c6badej64">含有不合适的内容</p></td></tr><tr id="a727c6bbdeeaf"><td id="a727c6bcde0ef" rowspan="1" colspan="1"><p id="a727c6bddes97">400</p></td><td id="a727edc0dejdi" rowspan="1" colspan="1"><p id="a727edc1devcm">illegal.receivers</p></td><td id="a727edc2de1h0" rowspan="1" colspan="1"><p id="a727edc3dezqx">%s</p></td><td id="a727edc4den5x" rowspan="1" colspan="1"><p id="a727edc5deffv">接收者名单不合法</p></td></tr><tr id="a727edc6dev61"><td id="a727edc7de5za" rowspan="1" colspan="1"><p id="a727edc8de9yz">400</p></td><td id="a727edc9dexgf" rowspan="1" colspan="1"><p id="a727edcadefkp">receivers.exceed</p></td><td id="a727edcbdevwv" rowspan="1" colspan="1"><p id="a727edccde60d">%s</p></td><td id="a727edcddeeab" rowspan="1" colspan="1"><p id="a727edcedevb0">接收者名单超限</p></td></tr><tr id="a727edcfdez49"><td id="a727edd0deqty" rowspan="1" colspan="1"><p id="a727edd1denb4">400</p></td><td id="a727edd2derkx" rowspan="1" colspan="1"><p id="a727edd3de34l">illegal.excludes</p></td><td id="a727edd4dekp3" rowspan="1" colspan="1"><p id="a727edd5delf7">%s</p></td><td id="a72814d0dey3s" rowspan="1" colspan="1"><p id="a72814d1degvg">不接收者名单不合法</p></td></tr><tr id="a72814d2de9o2"><td id="a72814d3dek3v" rowspan="1" colspan="1"><p id="a72814d4dehdt">400</p></td><td id="a72814d5demrq" rowspan="1" colspan="1"><p id="a72814d6derd5">too.many.group</p></td><td id="a72814d7ded8l" rowspan="1" colspan="1"><p id="a72814d8dey6t">%s</p></td><td id="a72814d9degh3" rowspan="1" colspan="1"><p id="a72814daderug">发送频繁限流</p></td></tr><tr id="a72814dbdelm7"><td id="a72814dcdeavz" rowspan="1" colspan="1"><p id="a72814dddesgf">400</p></td><td id="a72814dedeckd" rowspan="1" colspan="1"><p id="a72862f0dek6c">too.many.people</p></td><td id="a7288a00dejxp" rowspan="1" colspan="1"><p id="a7288a01dexqy">%s</p></td><td id="a7288a02deet1" rowspan="1" colspan="1"><p id="a7288a03deqmu">发送频繁限流</p></td></tr><tr id="a7288a04de9km"><td id="a7288a05devry" rowspan="1" colspan="1"><p id="a7288a06deimm">400</p></td><td id="a7288a07de7dn" rowspan="1" colspan="1"><p id="a7288a08dekvh">bot.forbidden.sendMessage</p></td><td id="a7288a09de6cr" rowspan="1" colspan="1"><p id="a7288a0adey6u">%s</p></td><td id="a7288a0bdea3e" rowspan="1" colspan="1"><p id="a7288a0cdermy">账户被禁言</p></td></tr><tr id="a7288a0ddez62"><td id="a7288a0edeow3" rowspan="1" colspan="1"><p id="a7288a0fdeumi">400</p></td><td id="a7288a10deprv" rowspan="1" colspan="1"><p id="a7288a11des36">session.notExisted</p></td><td id="a7288a12de3he" rowspan="1" colspan="1"><p id="a7288a13de8de">%s</p></td><td id="a7288a14def0v" rowspan="1" colspan="1"><p id="a728b110de7fl">session不存在</p></td></tr><tr id="a728b111de6yk"><td id="a728b112def1z" rowspan="1" colspan="1"><p id="a728b113de1qc">400</p></td><td id="a728b114de2oc" rowspan="1" colspan="1"><p id="a728b115dejoh">session.expired</p></td><td id="a728b116deq1o" rowspan="1" colspan="1"><p id="a728b117deovh">%s</p></td><td id="a728b118demmo" rowspan="1" colspan="1"><p id="a728b119derrv">session已过期</p></td></tr><tr id="a728b11adejf8"><td id="a728b11bdei5e" rowspan="1" colspan="1"><p id="a728b11cde1f5">400</p></td><td id="a728b11ddecsw" rowspan="1" colspan="1"><p id="a728b11ede1eh">staffId.notExisted</p></td><td id="a728b11fdelig" rowspan="1" colspan="1"><p id="a728b120deyf2">%s</p></td><td id="a728b121defyu" rowspan="1" colspan="1"><p id="a728b122dejbc">staffId不存在</p></td></tr><tr id="a728b123de8gi"><td id="a728b124dev90" rowspan="1" colspan="1"><p id="a728b125depm8">400</p></td><td id="a728d820de7sr" rowspan="1" colspan="1"><p id="a728d821de4ws">chatbotId.notAllow.sendOTO</p></td><td id="a728d822de3nc" rowspan="1" colspan="1"><p id="a728d823dedre">%s</p></td><td id="a728d824dezto" rowspan="1" colspan="1"><p id="a728d825deiw2">不允许主动发单聊，请检查机器人状态是否已启用</p></td></tr><tr id="a728d826deinj"><td id="a728d827de33i" rowspan="1" colspan="1"><p id="a728d828dekzx">400</p></td><td id="a728d829de6gm" rowspan="1" colspan="1"><p id="a728d82adez4c">robot.oto.notExist</p></td><td id="a728d82bde8er" rowspan="1" colspan="1"><p id="a728d82cdeuts">%s</p></td><td id="a728d82dde5n7" rowspan="1" colspan="1"><p id="a728d82ede1j7">没有有效的机器人单聊会话</p></td></tr><tr id="a728d82fde712"><td id="a728d830derte" rowspan="1" colspan="1"><p id="a728d831de64s">400</p></td><td id="a728d832deajn" rowspan="1" colspan="1"><p id="a728d833depz4">sendMessage.model.notMatch</p></td><td id="a728d834des5a" rowspan="1" colspan="1"><p id="a728d835de68q">%s</p></td><td id="a728ff30deoc5" rowspan="1" colspan="1"><p id="a728ff31de8wc">无匹配的消息模型</p></td></tr><tr id="a728ff32deupt"><td id="a728ff33de4ug" rowspan="1" colspan="1"><p id="a728ff34de76k">400</p></td><td id="a728ff35dezb7" rowspan="1" colspan="1"><p id="a728ff36deh3b">miss.param.file</p></td><td id="a728ff37deb24" rowspan="1" colspan="1"><p id="a728ff38defox">%s</p></td><td id="a728ff39de6cf" rowspan="1" colspan="1"><p id="a728ff3adeaao">消息内容不合法，需要file属性</p></td></tr><tr id="a728ff3bde8s8"><td id="a728ff3cdegjr" rowspan="1" colspan="1"><p id="a728ff3ddek5u">400</p></td><td id="a728ff3edely0" rowspan="1" colspan="1"><p id="a728ff3fdepdw">miss.param.video</p></td><td id="a728ff40deko8" rowspan="1" colspan="1"><p id="a728ff41dezmo">%s</p></td><td id="a728ff42debza" rowspan="1" colspan="1"><p id="a728ff43de5hc">消息内容不合法，需要video-&gt;videoMediaId属性</p></td></tr><tr id="a728ff44deygm"><td id="a728ff45debsm" rowspan="1" colspan="1"><p id="a7292640de8cm">400</p></td><td id="a7292641dev9m" rowspan="1" colspan="1"><p id="a7292642de0h4">miss.param.audio</p></td><td id="a7292643dev91" rowspan="1" colspan="1"><p id="a7292644dedv7">%s</p></td><td id="a7292645dey16" rowspan="1" colspan="1"><p id="a7292646dexsn">消息内容不合法，需要audio属性</p></td></tr><tr id="a7292647desgi"><td id="a7292648dez48" rowspan="1" colspan="1"><p id="a7292649demn2">500</p></td><td id="a729264adehy6" rowspan="1" colspan="1"><p id="a729264bde3be">system.error</p></td><td id="a729264cdeyu3" rowspan="1" colspan="1"><p id="a729264ddes94">%s</p></td><td id="a729264edeb3x" rowspan="1" colspan="1"><p id="a729264fde3s1">未知的系统错误</p></td></tr></tbody></table></section></section></div></main></body></html>

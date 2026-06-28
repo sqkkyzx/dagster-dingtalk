@@ -1,0 +1,493 @@
+<!DOCTYPE html><html><head><meta charset="utf8" / /><meta name="gmtModify" content="2025-09-11 21:01:38" / /><meta name="searchtitle" content="" / /><meta name="keywords" content="" / /><meta name="author" content="" / /><title>设置高管模式</title><meta name="gmtModify" content="2026-06-02 09:18:09" / /></head><body data-tag="topic" id="doc-api-dingtalk-UpdateSeniorSetting" class="topic"><main id="516d38b279q5d" data-init-id="doc-api-dingtalk_UpdateSeniorSetting"><h1 data-tag="title" id="h1-xdp-htd-ze9" class="title">设置高管模式</h1><p data-tag="shortdesc" id="e0fe9978b7pkl" class="shortdesc">调用本接口设置员工的高管模式。</p><div data-tag="conbody" outputclass="icms-api-reference" class="icms-api-reference conbody"><section id="section-prerequisites-1" class="section icms-module" data-tag="section" data-source="latest-mounted-icms-html"><h2 id="h2-prerequisites-1" data-tag="h2" class="h2">接口调用说明</h2><p class="note-icon-wrapper" id="d0e7c14b79tzi">当设置员工为高管，则针对设置的拦截场景，同企业内只有其他高管、高管白名单内用户以及高管的好友可以联系。其他人不可联系。 例如：设置userA为高管，拦截场景为VIDEO_CALL，白名单用户设置了userB。userB、userC为同一企业的普通员工，且跟userA没有好友关系，则userB可以对userA发起视频通话，userC不可以对userA发起视频通话。</p><p id="806ffed721hg8"><img id="571e5f99f4yft" src="https://help-static-aliyun-doc.aliyuncs.com/assets/img/zh-CN/9803630871/p1075866.png" alt="image" placement="break" class="image break" / /></p></section><section id="section-request-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-request-1" data-tag="h2" class="h2">请求</h2><section id="section-request-basic-info" class="section"><h3 id="heading-request-basic-info" data-tag="h3" class="h3">基本信息</h3><table id="2d00f61605yuf" tablewidth="648" tablecolswidth="216 432" autofit="false" class="table"><colgroup colwidth="0.67*" style="width:33.33%"></colgroup><colgroup colwidth="1.33*" style="width:66.67%"></colgroup><tbody class="tbody"><tr id="9002fcde90l1j"><td id="dc80f756d6r0x" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="ebc427328fo0n">字段</p></td><td id="f8a4b575a54my" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="c57383b571xes">值</p></td></tr><tr id="d606df1bf6bdr"><td id="9c808a7ee1m5j" rowspan="1" colspan="1"><p id="23a4bfbc619k8">HTTP URL</p></td><td id="e6aa78239egky" rowspan="1" colspan="1"><p id="2677cd2d44r9d">https://api.dingtalk.com/v1.0/contact/seniorSettings</p></td></tr><tr id="6fac43c4d1fak"><td id="0b832e16ed78x" rowspan="1" colspan="1"><p id="90f988b4588hz">HTTP Method</p></td><td id="6e6694b19ew1c" rowspan="1" colspan="1"><p id="e0df6d19benu4">POST</p></td></tr><tr id="418a5f4946lre"><td id="bf2ee840d3xse" rowspan="1" colspan="1"><p id="bb2acb1a7944r">支持的应用类型</p></td><td id="4a1cbe2bdf1z7" rowspan="1" colspan="1"><p id="110c66e90dnw9"><span data-tag="ph" id="ph-request-basic-app-type-apptype-0" class="ph ph-app-type" data-ph-raw-text="appType-企业内部应用">appType-企业内部应用</span></p></td></tr><tr id="9088eeda21r8g"><td id="fbbd2d3adahqe" rowspan="1" colspan="1"><p id="82c3116b8dbqe">权限要求</p></td><td id="017511c201qsy" rowspan="1" colspan="1"><p id="1ce24a26d1fe9"><span data-tag="ph" id="ph-request-basic-permission-permission-qyapi-manage-addresslist-0" class="ph-permission ph" data-ph-raw-text="permission-qyapi_manage_addresslist-维护通讯录的接口访问权限" data-permission-id="permission-qyapi_manage_addresslist" data-permission-code="qyapi_manage_addresslist" data-permission-detail-api="/document/api/permission/detail" data-permission-query-param="code">permission-qyapi_manage_addresslist-维护通讯录的接口访问权限</span></p></td></tr></tbody></table></section><section id="section-request-header-parameter" class="section"><h3 data-tag="h3" id="h2-b9n-nbu-qc8" class="h3 title">请求头</h3><table id="642cc00a88pii" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="fc2d59c9a5nu8"><td id="d0f94446bbhlc" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="facdfaa5acztl">名称</p></td><td id="fb128248acql3" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="e423d5f485s9m">类型</p></td><td id="c3a8ed4c3a6en" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="182c7a7038jou">是否必填</p></td><td id="a5bf314b71noi" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="863da3ea66a2i">描述</p></td></tr><tr id="5b706edfdcuf4"><td id="a97f771fadhqk" rowspan="1" colspan="1"><p id="cc3c7d86b3nf6">x-acs-dingtalk-access-token</p></td><td id="b0f24260edjdd" rowspan="1" colspan="1"><p id="f9c4c1df7ahdh">String</p></td><td id="1040a1ebfa347" rowspan="1" colspan="1"><p id="8d6e340953pzo">是</p></td><td id="997737bd3dk38" rowspan="1" colspan="1"><p id="5b554e0ea1kk3">调用该接口的访问凭证，通过调用<a href="https://open.dingtalk.com/document/development/obtain-the-access-token-of-an-internal-app#" id="d09f6f1d36r17" class="xref">获取企业内部应用的accessToken</a>接口获取。</p></td></tr></tbody></table></section><section id="section-request-body-parameter" class="section"><h3 data-tag="h3" id="h2-dtm-kmg-dub" class="h3 title">请求体</h3><table id="a91d6029e7l08" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="9b109f82bepdy"><td id="b67cf7fff22pc" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="b2dc1c51140ya">名称</p></td><td id="3106c8e94fatu" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="78ddb99c97v5t">类型</p></td><td id="07066fe1aat9q" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="59095dd3b2wc2">是否必填</p></td><td id="a550c7a228hmv" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="8ae360ce7a9vg">描述</p></td></tr><tr outputclass="row row-level-1" id="80c272d1a2upb" class="row row-level-1"><td id="9b77c29a7b43g" rowspan="1" colspan="1"><p id="5fe47238ecpx4">seniorStaffId</p></td><td id="8420336a84yl4" rowspan="1" colspan="1"><p id="04eeec88deeln">String</p></td><td id="5b5db940544lp" rowspan="1" colspan="1"><p id="081f07a202394">是</p></td><td id="3230da9fd98lf" rowspan="1" colspan="1"><p id="a9df3a5107k8v">需要设置的员工userid。</p></td></tr><tr outputclass="row row-level-2" id="8ff10df0963lx" class="row row-level-2"><td id="345333484ftsr" rowspan="1" colspan="1"><p id="b94ea63d96da5">open</p></td><td id="16a5f23218u8e" rowspan="1" colspan="1"><p id="c89543dd84y2t">Boolean</p></td><td id="48cddb69ba5ji" rowspan="1" colspan="1"><p id="9d75c401460ai">是</p></td><td id="51cba0f4c01ll" rowspan="1" colspan="1"><p id="dbff007150djj">是否开启高管模式，取值：</p><ul id="2c55024e81sjh"><li id="299adb9274dab"><p id="865ea8ec3453j"><b>true</b>：开启高管模式</p></li><li id="df2b36fb34gh2"><p id="5136597f2fhxf"><b>false</b>：关闭高管模式</p></li></ul></td></tr><tr outputclass="row row-level-3" id="ad5825576cmpr" class="row row-level-3"><td id="c51d584f6amxu" rowspan="1" colspan="1"><p id="d607ef8208hfr">permitStaffIds</p></td><td id="d2fcd3a505yiw" rowspan="1" colspan="1"><p id="e1a013824drwn">Array of String</p></td><td id="5f5829f5c1301" rowspan="1" colspan="1"><p id="3206350e5ccxe">否</p></td><td id="8c240ee440h09" rowspan="1" colspan="1"><p id="398dd3e6efjg4">高管白名单员工userid列表。</p><p class="note-icon-wrapper" id="3f79cf9fa6xpx"></p><p data-tag="p" id="1b656f75450nz" class="p"></p><p id="a8c48cb735cdu">参数<b>permitStaffIds</b>、<b>permitDeptIds</b>、<b>permitTagIds</b>列表内元素之和最大为200。</p><p id="bdf606c9f5z9d"></p></td></tr><tr outputclass="row row-level-4" id="3d19b46753r78" class="row row-level-4"><td id="2d7b070157xlp" rowspan="1" colspan="1"><p id="bfe1f49e2fsgk">permitDeptIds</p></td><td id="1765a29b64tlw" rowspan="1" colspan="1"><p id="6b47490a80qs6">Array of Long</p></td><td id="04ad330b03kgt" rowspan="1" colspan="1"><p id="b689551426ztk">否</p></td><td id="5fe6b167249j0" rowspan="1" colspan="1"><p id="75398801b7lr6">高管白名单部门列表。</p><p class="note-icon-wrapper" id="9e7d815171jbt"></p><p data-tag="p" id="d71b4356ech8q" class="p"></p><p id="5d0516f2110p4">参数<b>permitStaffIds</b>、<b>permitDeptIds</b>、<b>permitTagIds</b>列表内元素之和最大为200。</p><p id="f0a1369ebalk0"></p></td></tr><tr outputclass="row row-level-5" id="ebc58dcc90pbq" class="row row-level-5"><td id="d9b174a3bej8p" rowspan="1" colspan="1"><p id="8536d6ffe25fr">permitTagIds</p></td><td id="c6c408b8e65mo" rowspan="1" colspan="1"><p id="2ed7bfed675q7">Array of Long</p></td><td id="e4039568f1hwq" rowspan="1" colspan="1"><p id="a29db510d151p">否</p></td><td id="7c4648d484cwd" rowspan="1" colspan="1"><p id="fba0d15500r34">高管白名单角色列表。</p><p class="note-icon-wrapper" id="ee8ab085f9y2n"></p><p data-tag="p" id="7be7c139c87h6" class="p"></p><p id="0d9fece7a5ayd">参数<b>permitStaffIds</b>、<b>permitDeptIds</b>、<b>permitTagIds</b>列表内元素之和最大为200。</p><p id="fdeb72fed2ie0"></p></td></tr><tr outputclass="row row-level-6" id="4d8d6037759po" class="row row-level-6"><td id="4929affd5eolt" rowspan="1" colspan="1"><p id="9b75250db8dsr">protectScenes</p></td><td id="1ed714b3ce2ld" rowspan="1" colspan="1"><p id="517293f11452z">Array of String</p></td><td id="b83d3eac54t2t" rowspan="1" colspan="1"><p id="109d07db76t6r">否</p></td><td id="4e9d51e961uwz" rowspan="1" colspan="1"><p id="9b84889c63zym">高管拦截场景，取值：</p><ul id="00482c33194bh"><li id="7aea21e7e4tqp"><p id="2089f5cc75uhb"><b>DING_SMS</b>： 短信Ding消息</p></li><li id="613eaa23ee28w"><p id="9b0f69026f3u4"><b>DING_MSG</b>： 应用内Ding消息</p></li><li id="3a3d11463283i"><p id="c9d5edf130htt"><b>CHAT</b>： IM聊天（单聊、群聊）</p></li><li id="f22b8ea687gqh"><p id="22b4dab2f7fr5"><b>CONFERENCE_VIDEO</b>：视频会议</p></li><li id="4250364dfaq0e"><p id="32ef2af5daqbb"><b>CONFERENCE</b>：语音会议</p></li><li id="c03ca23791dot"><p id="8c969adcc4esm"><b>VIDEO_CALL</b>：视频通话</p></li><li id="bfa04c655e7h3"><p id="3401a9cf1f71e"><b>CONFERENCE_VOIP</b>：语音通话</p></li><li id="0fcaf389ae3f0"><p id="5778b5a74fr55"><b>CALL</b>：电话会议、办公电话</p></li><li id="a0d08a1481vji"><p id="012013a66ek2t"><b>SEARCH</b>： 电话会议里搜索功能</p></li><li id="28f7c5e562tti"><p id="2ce521fe41exd"><b>CALL_CENTER</b>：呼叫中心</p></li></ul></td></tr></tbody></table></section><section id="section-request-body-example" class="section"><h3 id="h3-request-body-example" data-tag="h3" class="h3">请求示例</h3><div outputclass="tabbed-codeblock" data-tag="fig" id="figure-xs8-spg-thu" class="tabbed-codeblock-box"><div class="tab-box"></div><input type="radio" name="check-figure-xs8-spg-thu" id="figure-xs8-spg-thu-HTTP-tab" checked="checked" /><label for="figure-xs8-spg-thu-HTTP-tab">HTTP</label><div class="codeblock-item"><pre id="codeblock-ajt-odg-sj7" outputclass="language-HTTP" code-type="xCode" data-tag="codeblock" class="pre codeblock language-HTTP"><code>POST /v1.0/contact/seniorSettings HTTP/1.1
+Host:api.dingtalk.com
+x-acs-dingtalk-access-token:afe8143b88xxx
+Content-Type:application/json
+
+{
+  "seniorStaffId" : "013349365367-1094322561",
+  "open" : true,
+  "permitStaffIds" : [ "manager8723" ],
+  "permitDeptIds" : [ 12345 ],
+  "permitTagIds" : [ 11111 ],
+  "protectScenes" : [ "CHAT" ]
+}</code></pre></div><input type="radio" name="check-figure-xs8-spg-thu" id="figure-xs8-spg-thu-java-tab" /><label for="figure-xs8-spg-thu-java-tab">Java</label><div class="codeblock-item"><pre id="codeblock-nzp-uc4-rrg" outputclass="language-java" code-type="xCode" data-tag="codeblock" class="pre codeblock language-java"><code>// This file is auto-generated, don't edit it. Thanks.
+package com.aliyun.sample;
+
+import com.aliyun.tea.*;
+import com.aliyun.teautil.*;
+import com.aliyun.teautil.models.*;
+import com.aliyun.dingtalkcontact_1_0.*;
+import com.aliyun.dingtalkcontact_1_0.models.*;
+import com.aliyun.teaopenapi.*;
+import com.aliyun.teaopenapi.models.*;
+
+public class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Client
+     * @throws Exception
+     */
+    public static com.aliyun.dingtalkcontact_1_0.Client createClient() throws Exception {
+        Config config = new Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        return new com.aliyun.dingtalkcontact_1_0.Client(config);
+    }
+
+    public static void main(String[] args_) throws Exception {
+        java.util.List&lt;String&gt; args = java.util.Arrays.asList(args_);
+        com.aliyun.dingtalkcontact_1_0.Client client = Sample.createClient();
+        UpdateSeniorSettingHeaders updateSeniorSettingHeaders = new UpdateSeniorSettingHeaders();
+        updateSeniorSettingHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        UpdateSeniorSettingRequest updateSeniorSettingRequest = new UpdateSeniorSettingRequest()
+                .setSeniorStaffId("013349365367-1094322561")
+                .setOpen(true)
+                .setPermitStaffIds(java.util.Arrays.asList(
+                    "manager8723"
+                ))
+                .setPermitDeptIds(java.util.Arrays.asList(
+                    12345L
+                ))
+                .setPermitTagIds(java.util.Arrays.asList(
+                    11111L
+                ))
+                .setProtectScenes(java.util.Arrays.asList(
+                    "CHAT"
+                ));
+        try {
+            client.updateSeniorSettingWithOptions(updateSeniorSettingRequest, updateSeniorSettingHeaders, new RuntimeOptions());
+        } catch (TeaException err) {
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        } catch (Exception _err) {
+            TeaException err = new TeaException(_err.getMessage(), _err);
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        }        
+    }
+}</code></pre></div><input type="radio" name="check-figure-xs8-spg-thu" id="figure-xs8-spg-thu-python-tab" /><label for="figure-xs8-spg-thu-python-tab">Python</label><div class="codeblock-item"><pre id="codeblock-thm-jli-f0i" outputclass="language-python" code-type="xCode" data-tag="codeblock" class="pre codeblock language-python"><code># -*- coding: utf-8 -*-
+# This file is auto-generated, don't edit it. Thanks.
+import sys
+
+from typing import List
+
+from alibabacloud_dingtalk.contact_1_0.client import Client as dingtalkcontact_1_0Client
+from alibabacloud_tea_openapi import models as open_api_models
+from alibabacloud_dingtalk.contact_1_0 import models as dingtalkcontact__1__0_models
+from alibabacloud_tea_util import models as util_models
+from alibabacloud_tea_util.client import Client as UtilClient
+
+
+class Sample:
+    def __init__(self):
+        pass
+
+    @staticmethod
+    def create_client() -&gt; dingtalkcontact_1_0Client:
+        """
+        使用 Token 初始化账号Client
+        @return: Client
+        @throws Exception
+        """
+        config = open_api_models.Config()
+        config.protocol = 'https'
+        config.region_id = 'central'
+        return dingtalkcontact_1_0Client(config)
+
+    @staticmethod
+    def main(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        update_senior_setting_headers = dingtalkcontact__1__0_models.UpdateSeniorSettingHeaders()
+        update_senior_setting_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        update_senior_setting_request = dingtalkcontact__1__0_models.UpdateSeniorSettingRequest(
+            senior_staff_id='013349365367-1094322561',
+            open=True,
+            permit_staff_ids=[
+                'manager8723'
+            ],
+            permit_dept_ids=[
+                12345
+            ],
+            permit_tag_ids=[
+                11111
+            ],
+            protect_scenes=[
+                'CHAT'
+            ]
+        )
+        try:
+            client.update_senior_setting_with_options(update_senior_setting_request, update_senior_setting_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+    @staticmethod
+    async def main_async(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        update_senior_setting_headers = dingtalkcontact__1__0_models.UpdateSeniorSettingHeaders()
+        update_senior_setting_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        update_senior_setting_request = dingtalkcontact__1__0_models.UpdateSeniorSettingRequest(
+            senior_staff_id='013349365367-1094322561',
+            open=True,
+            permit_staff_ids=[
+                'manager8723'
+            ],
+            permit_dept_ids=[
+                12345
+            ],
+            permit_tag_ids=[
+                11111
+            ],
+            protect_scenes=[
+                'CHAT'
+            ]
+        )
+        try:
+            await client.update_senior_setting_with_options_async(update_senior_setting_request, update_senior_setting_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+
+if __name__ == '__main__':
+    Sample.main(sys.argv[1:])</code></pre></div><input type="radio" name="check-figure-xs8-spg-thu" id="figure-xs8-spg-thu-php-tab" /><label for="figure-xs8-spg-thu-php-tab">PHP</label><div class="codeblock-item"><pre id="codeblock-hpr-goy-5lb" outputclass="language-php" code-type="xCode" data-tag="codeblock" class="pre codeblock language-php"><code>&lt;?php
+
+// This file is auto-generated, don't edit it. Thanks.
+namespace AlibabaCloud\SDK\Sample;
+
+use AlibabaCloud\SDK\Dingtalk\Vcontact_1_0\Dingtalk;
+use \Exception;
+use AlibabaCloud\Tea\Exception\TeaError;
+use AlibabaCloud\Tea\Utils\Utils;
+
+use Darabonba\OpenApi\Models\Config;
+use AlibabaCloud\SDK\Dingtalk\Vcontact_1_0\Models\UpdateSeniorSettingHeaders;
+use AlibabaCloud\SDK\Dingtalk\Vcontact_1_0\Models\UpdateSeniorSettingRequest;
+use AlibabaCloud\Tea\Utils\Utils\RuntimeOptions;
+
+class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Dingtalk Client
+     */
+    public static function createClient(){
+        $config = new Config([]);
+        $config-&gt;protocol = "https";
+        $config-&gt;regionId = "central";
+        return new Dingtalk($config);
+    }
+
+    /**
+     * @param string[] $args
+     * @return void
+     */
+    public static function main($args){
+        $client = self::createClient();
+        $updateSeniorSettingHeaders = new UpdateSeniorSettingHeaders([]);
+        $updateSeniorSettingHeaders-&gt;xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        $updateSeniorSettingRequest = new UpdateSeniorSettingRequest([
+            "seniorStaffId" =&gt; "013349365367-1094322561",
+            "open" =&gt; true,
+            "permitStaffIds" =&gt; [
+                "manager8723"
+            ],
+            "permitDeptIds" =&gt; [
+                12345
+            ],
+            "permitTagIds" =&gt; [
+                11111
+            ],
+            "protectScenes" =&gt; [
+                "CHAT"
+            ]
+        ]);
+        try {
+            $client-&gt;updateSeniorSettingWithOptions($updateSeniorSettingRequest, $updateSeniorSettingHeaders, new RuntimeOptions([]));
+        }
+        catch (Exception $err) {
+            if (!($err instanceof TeaError)) {
+                $err = new TeaError([], $err-&gt;getMessage(), $err-&gt;getCode(), $err);
+            }
+            if (!Utils::empty_($err-&gt;code) &amp;&amp; !Utils::empty_($err-&gt;message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+        }
+    }
+}
+$path = __DIR__ . \DIRECTORY_SEPARATOR . '..' . \DIRECTORY_SEPARATOR . 'vendor' . \DIRECTORY_SEPARATOR . 'autoload.php';
+if (file_exists($path)) {
+    require_once $path;
+}
+Sample::main(array_slice($argv, 1));</code></pre></div><input type="radio" name="check-figure-xs8-spg-thu" id="figure-xs8-spg-thu-go-tab" /><label for="figure-xs8-spg-thu-go-tab">Go</label><div class="codeblock-item"><pre id="codeblock-fus-3pf-zvo" outputclass="language-go" code-type="xCode" data-tag="codeblock" class="pre codeblock language-go"><code>// This file is auto-generated, don't edit it. Thanks.
+package main
+
+import (
+  "os"
+  util  "github.com/alibabacloud-go/tea-utils/service"
+  dingtalkcontact_1_0  "github.com/alibabacloud-go/dingtalk/contact_1_0"
+  openapi  "github.com/alibabacloud-go/darabonba-openapi/client"
+  "github.com/alibabacloud-go/tea/tea"
+)
+
+
+/**
+ * 使用 Token 初始化账号Client
+ * @return Client
+ * @throws Exception
+ */
+func CreateClient () (_result *dingtalkcontact_1_0.Client, _err error) {
+  config := &amp;openapi.Config{}
+  config.Protocol = tea.String("https")
+  config.RegionId = tea.String("central")
+  _result = &amp;dingtalkcontact_1_0.Client{}
+  _result, _err = dingtalkcontact_1_0.NewClient(config)
+  return _result, _err
+}
+
+func _main (args []*string) (_err error) {
+  client, _err := CreateClient()
+  if _err != nil {
+    return _err
+  }
+
+  updateSeniorSettingHeaders := &amp;dingtalkcontact_1_0.UpdateSeniorSettingHeaders{}
+  updateSeniorSettingHeaders.XAcsDingtalkAccessToken = tea.String("&lt;your access token&gt;")
+  updateSeniorSettingRequest := &amp;dingtalkcontact_1_0.UpdateSeniorSettingRequest{
+    SeniorStaffId: tea.String("013349365367-1094322561"),
+    Open: tea.Bool(true),
+    PermitStaffIds: []*string{tea.String("manager8723")},
+    PermitDeptIds: []*int64{tea.Int(12345)},
+    PermitTagIds: []*int64{tea.Int(11111)},
+    ProtectScenes: []*string{tea.String("CHAT")},
+  }
+  tryErr := func()(_e error) {
+    defer func() {
+      if r := tea.Recover(recover()); r != nil {
+        _e = r
+      }
+    }()
+    _, _err = client.UpdateSeniorSettingWithOptions(updateSeniorSettingRequest, updateSeniorSettingHeaders, &amp;util.RuntimeOptions{})
+    if _err != nil {
+      return _err
+    }
+
+    return nil
+  }()
+
+  if tryErr != nil {
+    var err = &amp;tea.SDKError{}
+    if _t, ok := tryErr.(*tea.SDKError); ok {
+      err = _t
+    } else {
+      err.Message = tea.String(tryErr.Error())
+    }
+    if !tea.BoolValue(util.Empty(err.Code)) &amp;&amp; !tea.BoolValue(util.Empty(err.Message)) {
+      // err 中含有 code 和 message 属性，可帮助开发定位问题
+    }
+
+  }
+  return _err
+}
+
+
+func main() {
+  err := _main(tea.StringSlice(os.Args[1:]))
+  if err != nil {
+    panic(err)
+  }
+}</code></pre></div><input type="radio" name="check-figure-xs8-spg-thu" id="figure-xs8-spg-thu-nodejs-tab" /><label for="figure-xs8-spg-thu-nodejs-tab">Node.js</label><div class="codeblock-item"><pre id="codeblock-ezm-9sc-jtq" outputclass="language-nodejs" code-type="xCode" data-tag="codeblock" class="pre codeblock language-nodejs"><code>// This file is auto-generated, don't edit it
+import Util, * as $Util from '@alicloud/tea-util';
+import dingtalkcontact_1_0, * as $dingtalkcontact_1_0 from '@alicloud/dingtalk/contact_1_0';
+import OpenApi, * as $OpenApi from '@alicloud/openapi-client';
+import * as $tea from '@alicloud/tea-typescript';
+
+
+export default class Client {
+
+  /**
+   * 使用 Token 初始化账号Client
+   * @return Client
+   * @throws Exception
+   */
+  static createClient(): dingtalkcontact_1_0 {
+    let config = new $OpenApi.Config({ });
+    config.protocol = "https";
+    config.regionId = "central";
+    return new dingtalkcontact_1_0(config);
+  }
+
+  static async main(args: string[]): Promise&lt;void&gt; {
+    let client = Client.createClient();
+    let updateSeniorSettingHeaders = new $dingtalkcontact_1_0.UpdateSeniorSettingHeaders({ });
+    updateSeniorSettingHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+    let updateSeniorSettingRequest = new $dingtalkcontact_1_0.UpdateSeniorSettingRequest({
+      seniorStaffId: "013349365367-1094322561",
+      open: true,
+      permitStaffIds: [
+        "manager8723"
+      ],
+      permitDeptIds: [
+        12345
+      ],
+      permitTagIds: [
+        11111
+      ],
+      protectScenes: [
+        "CHAT"
+      ],
+    });
+    try {
+      await client.updateSeniorSettingWithOptions(updateSeniorSettingRequest, updateSeniorSettingHeaders, new $Util.RuntimeOptions({ }));
+    } catch (err) {
+      if (!Util.empty(err.code) &amp;&amp; !Util.empty(err.message)) {
+        // err 中含有 code 和 message 属性，可帮助开发定位问题
+      }
+
+    }    
+  }
+
+}
+
+Client.main(process.argv.slice(2));</code></pre></div><input type="radio" name="check-figure-xs8-spg-thu" id="figure-xs8-spg-thu-csharp-tab" /><label for="figure-xs8-spg-thu-csharp-tab">C#</label><div class="codeblock-item"><pre id="codeblock-kff-4m3-yvg" outputclass="language-csharp" code-type="xCode" data-tag="codeblock" class="pre codeblock language-csharp"><code>// This file is auto-generated, don't edit it. Thanks.
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
+
+using Tea;
+using Tea.Utils;
+
+
+namespace AlibabaCloud.SDK.Sample
+{
+    public class Sample 
+    {
+
+        /**
+         * 使用 Token 初始化账号Client
+         * @return Client
+         * @throws Exception
+         */
+        public static AlibabaCloud.SDK.Dingtalkcontact_1_0.Client CreateClient()
+        {
+            AlibabaCloud.OpenApiClient.Models.Config config = new AlibabaCloud.OpenApiClient.Models.Config();
+            config.Protocol = "https";
+            config.RegionId = "central";
+            return new AlibabaCloud.SDK.Dingtalkcontact_1_0.Client(config);
+        }
+
+        public static void Main(string[] args)
+        {
+            AlibabaCloud.SDK.Dingtalkcontact_1_0.Client client = CreateClient();
+            AlibabaCloud.SDK.Dingtalkcontact_1_0.Models.UpdateSeniorSettingHeaders updateSeniorSettingHeaders = new AlibabaCloud.SDK.Dingtalkcontact_1_0.Models.UpdateSeniorSettingHeaders();
+            updateSeniorSettingHeaders.XAcsDingtalkAccessToken = "&lt;your access token&gt;";
+            AlibabaCloud.SDK.Dingtalkcontact_1_0.Models.UpdateSeniorSettingRequest updateSeniorSettingRequest = new AlibabaCloud.SDK.Dingtalkcontact_1_0.Models.UpdateSeniorSettingRequest
+            {
+                SeniorStaffId = "013349365367-1094322561",
+                Open = true,
+                PermitStaffIds = new List&lt;string&gt;
+                {
+                    "manager8723"
+                },
+                PermitDeptIds = new List&lt;long?&gt;
+                {
+                    12345
+                },
+                PermitTagIds = new List&lt;long?&gt;
+                {
+                    11111
+                },
+                ProtectScenes = new List&lt;string&gt;
+                {
+                    "CHAT"
+                },
+            };
+            try
+            {
+                client.UpdateSeniorSettingWithOptions(updateSeniorSettingRequest, updateSeniorSettingHeaders, new AlibabaCloud.TeaUtil.Models.RuntimeOptions());
+            }
+            catch (TeaException err)
+            {
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+            catch (Exception _err)
+            {
+                TeaException err = new TeaException(new Dictionary&lt;string, object&gt;
+                {
+                    { "message", _err.Message }
+                });
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+        }
+
+
+    }
+}</code></pre></div><input type="radio" name="check-figure-xs8-spg-thu" id="figure-xs8-spg-thu-cpp-tab" /><label for="figure-xs8-spg-thu-cpp-tab">C++</label><div class="codeblock-item"><pre id="codeblock-hhn-kjp-c7m" outputclass="language-cpp" code-type="xCode" data-tag="codeblock" class="pre codeblock language-cpp"><code>// This file is auto-generated, don't edit it. Thanks.
+
+#include &lt;alibabacloud/dingtalkcontact__1__0.hpp&gt;
+#include &lt;alibabacloud/open_api.hpp&gt;
+#include &lt;boost/any.hpp&gt;
+#include &lt;darabonba/core.hpp&gt;
+#include &lt;darabonba/util.hpp&gt;
+#include &lt;iostream&gt;
+#include &lt;map&gt;
+
+using namespace std;
+
+Alibabacloud_Dingtalkcontact_1_0::Client createClient() {
+  shared_ptr&lt;Alibabacloud_OpenApi::Config&gt; config = make_shared&lt;Alibabacloud_OpenApi::Config&gt;();
+  config-&gt;protocol = make_shared&lt;string&gt;("https");
+  config-&gt;regionId = make_shared&lt;string&gt;("central");
+  return Alibabacloud_Dingtalkcontact_1_0::Client(config);
+}
+
+int main(int argc, char *args[]) {
+  args++;
+  shared_ptr&lt;Alibabacloud_Dingtalkcontact_1_0::Client&gt; client = make_shared&lt;Alibabacloud_Dingtalkcontact_1_0::Client&gt;(createClient());
+  shared_ptr&lt;Alibabacloud_Dingtalkcontact_1_0::UpdateSeniorSettingHeaders&gt; updateSeniorSettingHeaders = make_shared&lt;Alibabacloud_Dingtalkcontact_1_0::UpdateSeniorSettingHeaders&gt;();
+  updateSeniorSettingHeaders-&gt;xAcsDingtalkAccessToken = make_shared&lt;string&gt;("&lt;your access token&gt;");
+  shared_ptr&lt;Alibabacloud_Dingtalkcontact_1_0::UpdateSeniorSettingRequest&gt; updateSeniorSettingRequest = make_shared&lt;Alibabacloud_Dingtalkcontact_1_0::UpdateSeniorSettingRequest&gt;(map&lt;string, boost::any&gt;({
+    {"seniorStaffId", boost::any(string("013349365367-1094322561"))},
+    {"open", boost::any(true)},
+    {"permitStaffIds", boost::any(vector&lt;string&gt;({
+      "manager8723"
+    }))},
+    {"permitDeptIds", boost::any(vector&lt;long&gt;({
+      12345
+    }))},
+    {"permitTagIds", boost::any(vector&lt;long&gt;({
+      11111
+    }))},
+    {"protectScenes", boost::any(vector&lt;string&gt;({
+      "CHAT"
+    }))}
+  }));
+  try {
+    client-&gt;updateSeniorSettingWithOptions(updateSeniorSettingRequest, updateSeniorSettingHeaders, make_shared&lt;Darabonba_Util::RuntimeOptions&gt;(Darabonba_Util::RuntimeOptions()));
+  }
+  catch (std::exception &amp;err) {
+    if (!Darabonba_Util::Client::empty(err.code) &amp;&amp; !Darabonba_Util::Client::empty(err.message)) {
+      // err 中含有 code 和 message 属性，可帮助开发定位问题
+    }
+  }
+}</code></pre></div></div></section></section><section id="section-response-1" class="section icms-module" data-tag="section" data-source="apiMeta"><h2 id="h2-response-1" data-tag="h2" class="h2">响应</h2><section id="section-response-body-example" class="section"><h3 id="h3-response-body-example" data-tag="h3" class="h3">响应体示例</h3><pre id="c1e8fb84fa4qd" outputclass="language-json" code-type="xCode" data-tag="codeblock" class="pre codeblock language-json"><code>HTTP/1.1 200 OK</code></pre></section><section id="section-error-code-1" class="section"><h3 id="h3-error-code-1" data-tag="h3" class="h3">错误码</h3><p data-tag="p" id="p-error-code-global-guide" class="p">若调用该接口报错，可根据错误信息在<a href="https://open.dingtalk.com/document/development/server-api-error-codes-1" id="a-error-code-global-guide">全局错误码</a>文档中查找解决方案。</p><table id="b9f354b118njn" tablewidth="709" tablecolswidth="142 177 177 213" autofit="false" class="table"><colgroup colwidth="0.8*" style="width:20.03%"></colgroup><colgroup colwidth="1*" style="width:24.96%"></colgroup><colgroup colwidth="1*" style="width:24.96%"></colgroup><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><tbody class="tbody"><tr id="c335d786aftl0"><td id="ad51e66c37y5n" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="98b6ea99c1kbi">HttpCode</p></td><td id="9361379be8f6x" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="9f1348d7804sn">错误码</p></td><td id="de89205fe664d" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="6898eeee9fbru">错误信息</p></td><td id="ee10ebc4114vj" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="871e8978a4p6t">说明</p></td></tr><tr id="c520cffdebk3t"><td id="19cabffef51fm" rowspan="1" colspan="1"><p id="2286f69ae585i">400</p></td><td id="2290fcb04404c" rowspan="1" colspan="1"><p id="352f843832uwb">parameter.error</p></td><td id="14f024dfd9afu" rowspan="1" colspan="1"><p id="8885dd3bea3d2">参数错误</p></td><td id="dbe23603a88fe" rowspan="1" colspan="1"><p id="8a1a32f3fayam">参数错误 </p></td></tr><tr id="a9f9c81b49q20"><td id="f2a5863796ha4" rowspan="1" colspan="1"><p id="2813a90a4clbf">500</p></td><td id="26510f80f9mtk" rowspan="1" colspan="1"><p id="9f62f0b623ag5">system.error</p></td><td id="dca64fbdeaqml" rowspan="1" colspan="1"><p id="1754908ca9wwa">获取设置出错</p></td><td id="79bb353d104ko" rowspan="1" colspan="1"><p id="8d284c7139qig">获取设置出错 </p></td></tr><tr id="2300b8074cvcz"><td id="20e5f480283de" rowspan="1" colspan="1"><p id="b0f342c59fr8p">500</p></td><td id="a02aa6f9ddjra" rowspan="1" colspan="1"><p id="2b70e0d47c0nf">parameter.orgNotExists</p></td><td id="6b330a15f4vpa" rowspan="1" colspan="1"><p id="8800adadb1p42">组织不存在</p></td><td id="e287e0d90ev9v" rowspan="1" colspan="1"><p id="c14c782c11oux">组织不存在 </p></td></tr><tr id="e0f9c368fbea9"><td id="fd0ba0fdfdi0m" rowspan="1" colspan="1"><p id="4946a29c9ctoa">500</p></td><td id="124d931cd1o9u" rowspan="1" colspan="1"><p id="ae7efe6c8diiy">parameter.userNotExists</p></td><td id="bae3aa159faym" rowspan="1" colspan="1"><p id="1dad4fda4e6vy">用户不存在</p></td><td id="4d2a45547f5df" rowspan="1" colspan="1"><p id="b7e49aac9c9bo">用户不存在 </p></td></tr></tbody></table></section></section></div></main></body></html>

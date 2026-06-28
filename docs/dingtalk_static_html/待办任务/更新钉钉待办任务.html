@@ -1,0 +1,774 @@
+<!DOCTYPE html><html lang="zh-CN"><head>
+    <meta charset="utf8" / />
+    <title>更新钉钉待办任务</title>
+<meta name="gmtModify" content="2026-04-08 20:37:32" / /><meta name="gmtModify" content="2026-06-02 19:09:48" / /></head>
+<body data-tag="topic" id="doc-api-dingtalk-UpdateTodoTask" class="topic">
+    <main id="doc-api-dingtalk-UpdateTodoTask">
+        <h1 data-tag="title" id="h1-wjp-m9w-4sg" class="title">更新钉钉待办任务</h1>
+        <p data-tag="shortdesc" class="shortdesc">调用本接口，根据待办ID，更新指定钉钉待办的任务信息及状态。ISV在自身应用待办数据被更新后，需调用该接口将钉钉侧待办数据同步更新。</p>
+        <div data-tag="conbody" outputclass="icms-api-reference" class="icms-api-reference conbody"><section id="section-request-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-request-1" data-tag="h2" class="h2">请求</h2><section id="section-request-basic-info" class="section"><h3 id="heading-request-basic-info" data-tag="h3" class="h3">基本信息</h3><table tablewidth="648" tablecolswidth="216 432" autofit="false" class="table"><colgroup colwidth="1*" style="width:33.33%"></colgroup><colgroup colwidth="2*" style="width:66.67%"></colgroup><tbody class="tbody"><tr><td rowspan="1" style="background-color:#e5e5e5" colspan="1"><p>字段</p></td><td rowspan="1" style="background-color:#e5e5e5" colspan="1"><p>值</p></td></tr><tr><td rowspan="1" colspan="1"><p>HTTP URL</p></td><td rowspan="1" colspan="1"><p>https://api.dingtalk.com/v1.0/todo/users/{unionId}/tasks/{taskId}</p></td></tr><tr><td rowspan="1" colspan="1"><p>HTTP Method</p></td><td rowspan="1" colspan="1"><p>PUT</p></td></tr><tr><td rowspan="1" colspan="1"><p>支持的应用类型</p></td><td rowspan="1" colspan="1"><p><span data-tag="ph" id="ph-request-basic-app-type-apptype-0" class="ph ph-app-type" data-ph-raw-text="appType-企业内部应用">appType-企业内部应用</span>　<span data-tag="ph" id="ph-request-basic-app-type-apptype-1" class="ph ph-app-type" data-ph-raw-text="appType-第三方企业应用">appType-第三方企业应用</span></p></td></tr><tr><td rowspan="1" colspan="1"><p>权限要求</p></td><td rowspan="1" colspan="1"><p><span data-tag="ph" id="ph-request-basic-permission-permission-todo-todo-write-0" class="ph-permission ph" data-ph-raw-text="permission-Todo.Todo.Write-待办应用中待办写权限,待办应用中待办读权限" data-permission-id="permission-Todo.Todo.Write" data-permission-code="Todo.Todo.Write" data-permission-detail-api="/document/api/permission/detail" data-permission-query-param="code">permission-Todo.Todo.Write-待办应用中待办写权限,待办应用中待办读权限</span></p></td></tr></tbody></table></section><section id="section-request-header-parameter" class="section">
+                    <h3 data-tag="h3" id="h2-nxv-eed-3zs" class="h3 title">请求头</h3>
+                    <table class="table">
+                        <colgroup colnum="1" colname="col1" colwidth="3*" style="width:30%"></colgroup>
+                        <colgroup colnum="2" colname="col2" colwidth="1.5*" style="width:15%"></colgroup>
+                        <colgroup colnum="3" colname="col3" colwidth="1.5*" style="width:15%"></colgroup>
+                        <colgroup colnum="4" colname="col4" colwidth="4*" style="width:40%"></colgroup>
+                        <thead class="thead">
+                        <tr>
+                            <th><p>名称</p></th>
+                            <th><p>类型</p></th>
+                            <th><p>是否必填</p></th>
+                            <th><p>描述</p></th>
+                        </tr>
+                        </thead>
+                        <tbody class="tbody">
+                            <tr>
+                                <td><p>x-acs-dingtalk-access-token</p></td>
+                                <td><p>String</p></td>
+                                <td><p>是</p></td>
+                                <td><p>调用该接口的访问凭证，通过以下获取：</p>
+<ul>
+<li>
+<p>企业内部应用，调用<a href="https://open.dingtalk.com/document/development/obtain-the-access-token-of-an-internal-app">获取企业内部应用的accessToken</a>接口获取。</p>
+</li>
+<li>
+<p>第三方企业应用，调用<a href="https://open.dingtalk.com/document/development/obtain-the-access-token-of-the-authorized-enterprise-1">获取第三方应用授权企业的accessToken</a>接口获取。</p>
+</li>
+</ul>
+</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section><section id="section-request-path-parameter" class="section">
+        <h3 data-tag="h3" id="h2-s15-cbv-kvn" class="h3 title">路径参数</h3>
+        <table class="table">
+            <colgroup colnum="1" colname="col1" colwidth="3*" style="width:30%"></colgroup>
+            <colgroup colnum="2" colname="col2" colwidth="1.5*" style="width:15%"></colgroup>
+            <colgroup colnum="3" colname="col3" colwidth="1.5*" style="width:15%"></colgroup>
+            <colgroup colnum="4" colname="col4" colwidth="4*" style="width:40%"></colgroup>
+            <thead class="thead">
+            <tr>
+                <th><p>名称</p></th>
+                <th><p>类型</p></th>
+                <th><p>是否必填</p></th>
+                <th><p>描述</p></th>
+            </tr>
+            </thead>
+            <tbody class="tbody">
+                    <tr>
+                        <td><p>unionId</p></td>
+                        <td><p>String</p></td>
+                        <td><p>是</p></td>
+                        <td><p>当前访问资源所归属用户的unionId，需要操作者的unionId保持一致，可调用<a href="https://open.dingtalk.com/document/development/query-user-details">查询用户详情</a>接口获取unionid参数值。</p>
+</td>
+                    </tr>
+                    <tr>
+                        <td><p>taskId</p></td>
+                        <td><p>String</p></td>
+                        <td><p>是</p></td>
+                        <td><p>待办ID。</p>
+</td>
+                    </tr>
+            </tbody>
+        </table>
+    </section><section id="section-request-query-parameter" class="section">
+        <h3 data-tag="h3" id="h2-6oz-ono-er1" class="h3 title">查询参数</h3>
+        <table class="table">
+            <colgroup colnum="1" colname="col1" colwidth="3*" style="width:30%"></colgroup>
+            <colgroup colnum="2" colname="col2" colwidth="1.5*" style="width:15%"></colgroup>
+            <colgroup colnum="3" colname="col3" colwidth="1.5*" style="width:15%"></colgroup>
+            <colgroup colnum="4" colname="col4" colwidth="4*" style="width:40%"></colgroup>
+            <thead class="thead">
+            <tr>
+                <th><p>名称</p></th>
+                <th><p>类型</p></th>
+                <th><p>是否必填</p></th>
+                <th><p>描述</p></th>
+            </tr>
+            </thead>
+            <tbody class="tbody">
+                    <tr>
+                        <td><p>operatorId</p></td>
+                        <td><p>String</p></td>
+                        <td><p>否</p></td>
+                        <td><p>当前操作者的unionId，可调用<a href="https://open.dingtalk.com/document/development/query-user-details">查询用户详情</a>接口获取unionid参数值。</p>
+</td>
+                    </tr>
+            </tbody>
+        </table>
+    </section><section id="section-request-body-parameter" class="section">
+                <h3 data-tag="h3" id="h2-vye-dz7-w0q" class="h3 title">请求体</h3>
+                <table class="table">
+                    <colgroup colnum="1" colname="col1" colwidth="3*" style="width:30%"></colgroup>
+                    <colgroup colnum="2" colname="col2" colwidth="1.5*" style="width:15%"></colgroup>
+                    <colgroup colnum="3" colname="col3" colwidth="1.5*" style="width:15%"></colgroup>
+                    <colgroup colnum="4" colname="col4" colwidth="4*" style="width:40%"></colgroup>
+                    <thead class="thead">
+                        <tr>
+                            <th><p>名称</p></th>
+                            <th><p>类型</p></th>
+                            <th><p>是否必填</p></th>
+                            <th><p>描述</p></th>
+                        </tr>
+                    </thead>
+                    <tbody class="tbody">
+    <tr outputclass="row row-level-4" class="row-level-4 row row row-level-4">
+        <td><p>subject</p></td>
+        <td><p>String</p></td>
+            <td><p>否</p></td>
+        <td><p>待办标题，最大长度1024。</p>
+</td>
+    </tr>
+    <tr outputclass="row row-level-5" class="row-level-5 row row-level-5 row">
+        <td><p>description</p></td>
+        <td><p>String</p></td>
+            <td><p>否</p></td>
+        <td><p>待办描述，最大长度4096。</p>
+</td>
+    </tr>
+    <tr outputclass="row row-level-6" class="row-level-6 row row row-level-6">
+        <td><p>dueTime</p></td>
+        <td><p>Long</p></td>
+            <td><p>否</p></td>
+        <td><p>截止时间，Unix时间戳，单位毫秒。</p>
+</td>
+    </tr>
+    <tr outputclass="row row-level-7" class="row-level-7 row row row-level-7">
+        <td><p>done</p></td>
+        <td><p>Boolean</p></td>
+            <td><p>否</p></td>
+        <td><p>完成状态。</p>
+<ul>
+<li>
+<p><b>true</b>：已完成</p>
+</li>
+<li>
+<p><b>false</b>：未完成</p>
+</li>
+</ul>
+</td>
+    </tr>
+    <tr outputclass="row row-level-8" class="row-level-8 row row row-level-8">
+        <td><p>executorIds</p></td>
+        <td><p>Array of String</p></td>
+            <td><p>否</p></td>
+        <td><p>执行者的unionId列表，可调用<a href="https://open.dingtalk.com/document/development/query-user-details">查询用户详情</a>接口获取，最大数量1000。</p>
+</td>
+    </tr>
+    <tr outputclass="row row-level-9" class="row-level-9 row row row-level-9">
+        <td><p>participantIds</p></td>
+        <td><p>Array of String</p></td>
+            <td><p>否</p></td>
+        <td><p>参与者的unionId列表，可调用<a href="https://open.dingtalk.com/document/development/query-user-details">查询用户详情</a>接口获取，最大数量1000。</p>
+</td>
+    </tr>
+    <tr outputclass="row row-level-10 has-child" class="has-child row row-level-10 has-child row-level-10 row">
+        <td><span class="icms-tree-table-trigger" type="checkbox"></span><span class="icms-tree-table-trigger" type="checkbox"></span><p>contentFieldList</p></td>
+        <td><p>Array</p></td>
+            <td><p>否</p></td>
+        <td><p>内容区表单字段配置。</p>
+</td>
+    </tr>
+    <tr outputclass="row row-level-10-1" class="row row-level-10-1 row row-level-10-1">
+        <td><p>fieldKey</p></td>
+        <td><p>String</p></td>
+            <td><p>否</p></td>
+        <td><p>字段唯一标识。</p>
+</td>
+    </tr>
+    <tr outputclass="row row-level-10-2" class="row-level-10-2 row row-level-10-2 row">
+        <td><p>fieldValue</p></td>
+        <td><p>String</p></td>
+            <td><p>否</p></td>
+        <td><p>字段值。</p>
+</td>
+    </tr>
+                    </tbody>
+                </table>
+            </section><section id="section-request-body-example" class="section"><h3 id="h3-request-body-example" data-tag="h3" class="h3">请求示例</h3><div id="figure-nyx-5wa-i7e" outputclass="tabbed-codeblock" data-tag="fig" class="tabbed-codeblock-box"><div class="tab-box"></div><input type="radio" name="check-figure-nyx-5wa-i7e" id="figure-nyx-5wa-i7e-HTTP-tab" checked="checked" /><label for="figure-nyx-5wa-i7e-HTTP-tab">HTTP</label><div class="codeblock-item"><pre id="codeblock-ukb-gec-69i" outputclass="language-HTTP" data-tag="codeblock" code-type="xCode" class="pre codeblock language-HTTP"><code>PUT /v1.0/todo/users/PUoiinxxx/tasks/OPJpwtxxx?operatorId=PUoiinWxxx HTTP/1.1
+Host:api.dingtalk.com
+x-acs-dingtalk-access-token:b3ba0xxx
+Content-Type:application/json
+
+{
+  "subject" : "更新钉钉待办",
+  "description" : "应用可以调用该接口更新钉钉待办任务信息及状态，isv在自身应用待办数据被更新后，需调用该接口将钉钉侧待办数据同步更新。",
+  "dueTime" : 1617675000000,
+  "done" : true,
+  "executorIds" : [ "PUoiinWxxx" ],
+  "participantIds" : [ "PUoiinWIpxxx" ],
+  "contentFieldList" : [ {
+    "fieldKey" : "来源应用",
+    "fieldValue" : "自建审批系统"
+  } ]
+}</code></pre></div><input type="radio" name="check-figure-nyx-5wa-i7e" id="figure-nyx-5wa-i7e-java-tab" /><label for="figure-nyx-5wa-i7e-java-tab">Java</label><div class="codeblock-item"><pre id="codeblock-epz-ukn-nku" outputclass="language-java" data-tag="codeblock" code-type="xCode" class="pre codeblock language-java"><code>package com.aliyun.sample;
+
+import com.aliyun.tea.*;
+
+public class Sample {
+
+    /**
+     * &lt;b&gt;description&lt;/b&gt; :
+     * &lt;p&gt;使用 Token 初始化账号Client&lt;/p&gt;
+     * @return Client
+     * 
+     * @throws Exception
+     */
+    public static com.aliyun.dingtalktodo_1_0.Client createClient() throws Exception {
+        com.aliyun.teaopenapi.models.Config config = new com.aliyun.teaopenapi.models.Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        return new com.aliyun.dingtalktodo_1_0.Client(config);
+    }
+
+    public static void main(String[] args_) throws Exception {
+        
+        com.aliyun.dingtalktodo_1_0.Client client = Sample.createClient();
+        com.aliyun.dingtalktodo_1_0.models.UpdateTodoTaskHeaders updateTodoTaskHeaders = new com.aliyun.dingtalktodo_1_0.models.UpdateTodoTaskHeaders();
+        updateTodoTaskHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        com.aliyun.dingtalktodo_1_0.models.UpdateTodoTaskRequest.UpdateTodoTaskRequestContentFieldList contentFieldList0 = new com.aliyun.dingtalktodo_1_0.models.UpdateTodoTaskRequest.UpdateTodoTaskRequestContentFieldList()
+                .setFieldKey("来源应用")
+                .setFieldValue("自建审批系统");
+        com.aliyun.dingtalktodo_1_0.models.UpdateTodoTaskRequest updateTodoTaskRequest = new com.aliyun.dingtalktodo_1_0.models.UpdateTodoTaskRequest()
+                .setOperatorId("PUoiinWxxx")
+                .setSubject("更新钉钉待办")
+                .setDescription("应用可以调用该接口更新钉钉待办任务信息及状态，isv在自身应用待办数据被更新后，需调用该接口将钉钉侧待办数据同步更新。")
+                .setDueTime(1617675000000L)
+                .setDone(true)
+                .setExecutorIds(java.util.Arrays.asList(
+                    "PUoiinWxxx"
+                ))
+                .setParticipantIds(java.util.Arrays.asList(
+                    "PUoiinWIpxxx"
+                ))
+                .setContentFieldList(java.util.Arrays.asList(
+                    contentFieldList0
+                ));
+        try {
+            client.updateTodoTaskWithOptions("PUoiinxxx", "OPJpwtxxx", updateTodoTaskRequest, updateTodoTaskHeaders, new com.aliyun.teautil.models.RuntimeOptions());
+        } catch (TeaException err) {
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        } catch (Exception _err) {
+            TeaException err = new TeaException(_err.getMessage(), _err);
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        }        
+    }
+}</code></pre></div><input type="radio" name="check-figure-nyx-5wa-i7e" id="figure-nyx-5wa-i7e-python-tab" /><label for="figure-nyx-5wa-i7e-python-tab">Python</label><div class="codeblock-item"><pre id="codeblock-qsm-zhn-xsn" outputclass="language-python" data-tag="codeblock" code-type="xCode" class="pre codeblock language-python"><code># -*- coding: utf-8 -*-
+# This file is auto-generated, don't edit it. Thanks.
+import os
+import sys
+import json
+
+from typing import List
+
+from alibabacloud_dingtalk.todo_1_0.client import Client as dingtalktodo_1_0Client
+from alibabacloud_tea_openapi import models as open_api_models
+from alibabacloud_dingtalk.todo_1_0 import models as dingtalktodo__1__0_models
+from alibabacloud_tea_util import models as util_models
+from alibabacloud_tea_util.client import Client as UtilClient
+
+
+class Sample:
+    def __init__(self):
+        pass
+
+    @staticmethod
+    def create_client() -&gt; dingtalktodo_1_0Client:
+        """
+        使用 Token 初始化账号Client
+        @return: Client
+        @throws Exception
+        """
+        config = open_api_models.Config()
+        config.protocol = 'https'
+        config.region_id = 'central'
+        return dingtalktodo_1_0Client(config)
+
+    @staticmethod
+    def main(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        update_todo_task_headers = dingtalktodo__1__0_models.UpdateTodoTaskHeaders()
+        update_todo_task_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        content_field_list_0 = dingtalktodo__1__0_models.UpdateTodoTaskRequestContentFieldList(
+            field_key='来源应用',
+            field_value='自建审批系统'
+        )
+        update_todo_task_request = dingtalktodo__1__0_models.UpdateTodoTaskRequest(
+            operator_id='PUoiinWxxx',
+            subject='更新钉钉待办',
+            description='应用可以调用该接口更新钉钉待办任务信息及状态，isv在自身应用待办数据被更新后，需调用该接口将钉钉侧待办数据同步更新。',
+            due_time=1617675000000,
+            done=True,
+            executor_ids=[
+                'PUoiinWxxx'
+            ],
+            participant_ids=[
+                'PUoiinWIpxxx'
+            ],
+            content_field_list=[
+                content_field_list_0
+            ]
+        )
+        try:
+            client.update_todo_task_with_options('PUoiinxxx', 'OPJpwtxxx', update_todo_task_request, update_todo_task_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+    @staticmethod
+    async def main_async(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        update_todo_task_headers = dingtalktodo__1__0_models.UpdateTodoTaskHeaders()
+        update_todo_task_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        content_field_list_0 = dingtalktodo__1__0_models.UpdateTodoTaskRequestContentFieldList(
+            field_key='来源应用',
+            field_value='自建审批系统'
+        )
+        update_todo_task_request = dingtalktodo__1__0_models.UpdateTodoTaskRequest(
+            operator_id='PUoiinWxxx',
+            subject='更新钉钉待办',
+            description='应用可以调用该接口更新钉钉待办任务信息及状态，isv在自身应用待办数据被更新后，需调用该接口将钉钉侧待办数据同步更新。',
+            due_time=1617675000000,
+            done=True,
+            executor_ids=[
+                'PUoiinWxxx'
+            ],
+            participant_ids=[
+                'PUoiinWIpxxx'
+            ],
+            content_field_list=[
+                content_field_list_0
+            ]
+        )
+        try:
+            await client.update_todo_task_with_options_async('PUoiinxxx', 'OPJpwtxxx', update_todo_task_request, update_todo_task_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+
+if __name__ == '__main__':
+    Sample.main(sys.argv[1:])</code></pre></div><input type="radio" name="check-figure-nyx-5wa-i7e" id="figure-nyx-5wa-i7e-php-tab" /><label for="figure-nyx-5wa-i7e-php-tab">PHP</label><div class="codeblock-item"><pre id="codeblock-cmj-5kz-drv" outputclass="language-php" data-tag="codeblock" code-type="xCode" class="pre codeblock language-php"><code>&lt;?php
+
+// This file is auto-generated, don't edit it. Thanks.
+namespace AlibabaCloud\SDK\Sample;
+
+use AlibabaCloud\SDK\Dingtalk\Vtodo_1_0\Dingtalk;
+use \Exception;
+use AlibabaCloud\Tea\Exception\TeaError;
+use AlibabaCloud\Tea\Utils\Utils;
+
+use Darabonba\OpenApi\Models\Config;
+use AlibabaCloud\SDK\Dingtalk\Vtodo_1_0\Models\UpdateTodoTaskHeaders;
+use AlibabaCloud\SDK\Dingtalk\Vtodo_1_0\Models\UpdateTodoTaskRequest\contentFieldList;
+use AlibabaCloud\SDK\Dingtalk\Vtodo_1_0\Models\UpdateTodoTaskRequest;
+use AlibabaCloud\Tea\Utils\Utils\RuntimeOptions;
+
+class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Dingtalk Client
+     */
+    public static function createClient(){
+        $config = new Config([]);
+        $config-&gt;protocol = "https";
+        $config-&gt;regionId = "central";
+        return new Dingtalk($config);
+    }
+
+    /**
+     * @param string[] $args
+     * @return void
+     */
+    public static function main($args){
+        $client = self::createClient();
+        $updateTodoTaskHeaders = new UpdateTodoTaskHeaders([]);
+        $updateTodoTaskHeaders-&gt;xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        $contentFieldList0 = new contentFieldList([
+            "fieldKey" =&gt; "来源应用",
+            "fieldValue" =&gt; "自建审批系统"
+        ]);
+        $updateTodoTaskRequest = new UpdateTodoTaskRequest([
+            "operatorId" =&gt; "PUoiinWxxx",
+            "subject" =&gt; "更新钉钉待办",
+            "description" =&gt; "应用可以调用该接口更新钉钉待办任务信息及状态，isv在自身应用待办数据被更新后，需调用该接口将钉钉侧待办数据同步更新。",
+            "dueTime" =&gt; 1617675000000,
+            "done" =&gt; true,
+            "executorIds" =&gt; [
+                "PUoiinWxxx"
+            ],
+            "participantIds" =&gt; [
+                "PUoiinWIpxxx"
+            ],
+            "contentFieldList" =&gt; [
+                $contentFieldList0
+            ]
+        ]);
+        try {
+            $client-&gt;updateTodoTaskWithOptions("PUoiinxxx", "OPJpwtxxx", $updateTodoTaskRequest, $updateTodoTaskHeaders, new RuntimeOptions([]));
+        }
+        catch (Exception $err) {
+            if (!($err instanceof TeaError)) {
+                $err = new TeaError([], $err-&gt;getMessage(), $err-&gt;getCode(), $err);
+            }
+            if (!Utils::empty_($err-&gt;code) &amp;&amp; !Utils::empty_($err-&gt;message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+        }
+    }
+}
+$path = __DIR__ . \DIRECTORY_SEPARATOR . '..' . \DIRECTORY_SEPARATOR . 'vendor' . \DIRECTORY_SEPARATOR . 'autoload.php';
+if (file_exists($path)) {
+    require_once $path;
+}
+Sample::main(array_slice($argv, 1));</code></pre></div><input type="radio" name="check-figure-nyx-5wa-i7e" id="figure-nyx-5wa-i7e-go-tab" /><label for="figure-nyx-5wa-i7e-go-tab">Go</label><div class="codeblock-item"><pre id="codeblock-lrj-ri6-6qj" outputclass="language-go" data-tag="codeblock" code-type="xCode" class="pre codeblock language-go"><code>package main
+
+import (
+  "encoding/json"
+  "strings"
+  "fmt"
+  "os"
+  util  "github.com/alibabacloud-go/tea-utils/v2/service"
+  dingtalktodo_1_0  "github.com/alibabacloud-go/dingtalk/todo_1_0"
+  openapi  "github.com/alibabacloud-go/darabonba-openapi/v2/client"
+  "github.com/alibabacloud-go/tea/tea"
+)
+
+
+// Description:
+// 
+// 使用 Token 初始化账号Client
+// 
+// @return Client
+// 
+// @throws Exception
+func CreateClient () (_result *dingtalktodo_1_0.Client, _err error) {
+  config := &amp;openapi.Config{}
+  config.Protocol = tea.String("https")
+  config.RegionId = tea.String("central")
+  _result = &amp;dingtalktodo_1_0.Client{}
+  _result, _err = dingtalktodo_1_0.NewClient(config)
+  return _result, _err
+}
+
+func _main (args []*string) (_err error) {
+  client, _err := CreateClient()
+  if _err != nil {
+    return _err
+  }
+
+  updateTodoTaskHeaders := &amp;dingtalktodo_1_0.UpdateTodoTaskHeaders{}
+  updateTodoTaskHeaders.XAcsDingtalkAccessToken = tea.String("&lt;your access token&gt;")
+  contentFieldList0 := &amp;dingtalktodo_1_0.UpdateTodoTaskRequestContentFieldList{
+    FieldKey: tea.String("来源应用"),
+    FieldValue: tea.String("自建审批系统"),
+  }
+  updateTodoTaskRequest := &amp;dingtalktodo_1_0.UpdateTodoTaskRequest{
+    OperatorId: tea.String("PUoiinWxxx"),
+    Subject: tea.String("更新钉钉待办"),
+    Description: tea.String("应用可以调用该接口更新钉钉待办任务信息及状态，isv在自身应用待办数据被更新后，需调用该接口将钉钉侧待办数据同步更新。"),
+    DueTime: tea.Int64(1617675000000),
+    Done: tea.Bool(true),
+    ExecutorIds: []*string{tea.String("PUoiinWxxx")},
+    ParticipantIds: []*string{tea.String("PUoiinWIpxxx")},
+    ContentFieldList: []*dingtalktodo_1_0.UpdateTodoTaskRequestContentFieldList{contentFieldList0},
+  }
+  tryErr := func()(_e error) {
+    defer func() {
+      if r := tea.Recover(recover()); r != nil {
+        _e = r
+      }
+    }()
+    _, _err = client.UpdateTodoTaskWithOptions(tea.String("PUoiinxxx"), tea.String("OPJpwtxxx"), updateTodoTaskRequest, updateTodoTaskHeaders, &amp;util.RuntimeOptions{})
+    if _err != nil {
+      return _err
+    }
+
+    return nil
+  }()
+
+  if tryErr != nil {
+    var err = &amp;tea.SDKError{}
+    if _t, ok := tryErr.(*tea.SDKError); ok {
+      err = _t
+    } else {
+      err.Message = tea.String(tryErr.Error())
+    }
+    if !tea.BoolValue(util.Empty(err.Code)) &amp;&amp; !tea.BoolValue(util.Empty(err.Message)) {
+      // err 中含有 code 和 message 属性，可帮助开发定位问题
+    }
+
+  }
+  return _err
+}
+
+
+func main() {
+  err := _main(tea.StringSlice(os.Args[1:]))
+  if err != nil {
+    panic(err)
+  }
+}</code></pre></div><input type="radio" name="check-figure-nyx-5wa-i7e" id="figure-nyx-5wa-i7e-nodejs-tab" /><label for="figure-nyx-5wa-i7e-nodejs-tab">Node.js</label><div class="codeblock-item"><pre id="codeblock-mjv-qwm-8ii" outputclass="language-nodejs" data-tag="codeblock" code-type="xCode" class="pre codeblock language-nodejs"><code>'use strict';
+// This file is auto-generated, don't edit it
+const Util = require('@alicloud/tea-util');
+const dingtalktodo_1_0 = require('@alicloud/dingtalk/todo_1_0');
+const OpenApi = require('@alicloud/openapi-client');
+const Tea = require('@alicloud/tea-typescript');
+
+class Client {
+
+  /**
+   * 使用 Token 初始化账号Client
+   * @return Client
+   * @throws Exception
+   */
+  static createClient() {
+    let config = new OpenApi.Config({ });
+    config.protocol = 'https';
+    config.regionId = 'central';
+    return new dingtalktodo_1_0.default(config);
+  }
+
+  static async main(args) {
+    let client = Client.createClient();
+    let updateTodoTaskHeaders = new dingtalktodo_1_0.UpdateTodoTaskHeaders({ });
+    updateTodoTaskHeaders.xAcsDingtalkAccessToken = '&lt;your access token&gt;';
+    let contentFieldList0 = new dingtalktodo_1_0.UpdateTodoTaskRequestContentFieldList({
+      fieldKey: '来源应用',
+      fieldValue: '自建审批系统',
+    });
+    let updateTodoTaskRequest = new dingtalktodo_1_0.UpdateTodoTaskRequest({
+      operatorId: 'PUoiinWxxx',
+      subject: '更新钉钉待办',
+      description: '应用可以调用该接口更新钉钉待办任务信息及状态，isv在自身应用待办数据被更新后，需调用该接口将钉钉侧待办数据同步更新。',
+      dueTime: 1617675000000,
+      done: true,
+      executorIds: [
+        'PUoiinWxxx'
+      ],
+      participantIds: [
+        'PUoiinWIpxxx'
+      ],
+      contentFieldList: [
+        contentFieldList0
+      ],
+    });
+    try {
+      await client.updateTodoTaskWithOptions('PUoiinxxx', 'OPJpwtxxx', updateTodoTaskRequest, updateTodoTaskHeaders, new Util.RuntimeOptions({ }));
+    } catch (err) {
+      if (!Util.default.empty(err.code) &amp;&amp; !Util.default.empty(err.message)) {
+        // err 中含有 code 和 message 属性，可帮助开发定位问题
+      }
+
+    }    
+  }
+
+}
+
+exports.Client = Client;
+Client.main(process.argv.slice(2));</code></pre></div><input type="radio" name="check-figure-nyx-5wa-i7e" id="figure-nyx-5wa-i7e-csharp-tab" /><label for="figure-nyx-5wa-i7e-csharp-tab">C#</label><div class="codeblock-item"><pre id="codeblock-pmo-ou9-fsh" outputclass="language-csharp" data-tag="codeblock" code-type="xCode" class="pre codeblock language-csharp"><code>using Newtonsoft.Json;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
+
+using Tea;
+using Tea.Utils;
+
+
+namespace AlibabaCloud.SDK.Sample
+{
+    public class Sample 
+    {
+
+        /// &lt;term&gt;&lt;b&gt;Description:&lt;/b&gt;&lt;/term&gt;
+        /// &lt;description&gt;
+        /// &lt;para&gt;使用 Token 初始化账号Client&lt;/para&gt;
+        /// &lt;/description&gt;
+        /// 
+        /// &lt;returns&gt;
+        /// Client
+        /// &lt;/returns&gt;
+        /// 
+        /// &lt;term&gt;&lt;b&gt;Exception:&lt;/b&gt;&lt;/term&gt;
+        /// Exception
+        public static AlibabaCloud.SDK.Dingtalktodo_1_0.Client CreateClient()
+        {
+            AlibabaCloud.OpenApiClient.Models.Config config = new AlibabaCloud.OpenApiClient.Models.Config();
+            config.Protocol = "https";
+            config.RegionId = "central";
+            return new AlibabaCloud.SDK.Dingtalktodo_1_0.Client(config);
+        }
+
+        public static void Main(string[] args)
+        {
+            AlibabaCloud.SDK.Dingtalktodo_1_0.Client client = CreateClient();
+            AlibabaCloud.SDK.Dingtalktodo_1_0.Models.UpdateTodoTaskHeaders updateTodoTaskHeaders = new AlibabaCloud.SDK.Dingtalktodo_1_0.Models.UpdateTodoTaskHeaders();
+            updateTodoTaskHeaders.XAcsDingtalkAccessToken = "&lt;your access token&gt;";
+            AlibabaCloud.SDK.Dingtalktodo_1_0.Models.UpdateTodoTaskRequest.UpdateTodoTaskRequestContentFieldList contentFieldList0 = new AlibabaCloud.SDK.Dingtalktodo_1_0.Models.UpdateTodoTaskRequest.UpdateTodoTaskRequestContentFieldList
+            {
+                FieldKey = "来源应用",
+                FieldValue = "自建审批系统",
+            };
+            AlibabaCloud.SDK.Dingtalktodo_1_0.Models.UpdateTodoTaskRequest updateTodoTaskRequest = new AlibabaCloud.SDK.Dingtalktodo_1_0.Models.UpdateTodoTaskRequest
+            {
+                OperatorId = "PUoiinWxxx",
+                Subject = "更新钉钉待办",
+                Description = "应用可以调用该接口更新钉钉待办任务信息及状态，isv在自身应用待办数据被更新后，需调用该接口将钉钉侧待办数据同步更新。",
+                DueTime = 1617675000000,
+                Done = true,
+                ExecutorIds = new List&lt;string&gt;
+                {
+                    "PUoiinWxxx"
+                },
+                ParticipantIds = new List&lt;string&gt;
+                {
+                    "PUoiinWIpxxx"
+                },
+                ContentFieldList = new List&lt;AlibabaCloud.SDK.Dingtalktodo_1_0.Models.UpdateTodoTaskRequest.UpdateTodoTaskRequestContentFieldList&gt;
+                {
+                    contentFieldList0
+                },
+            };
+            try
+            {
+                client.UpdateTodoTaskWithOptions("PUoiinxxx", "OPJpwtxxx", updateTodoTaskRequest, updateTodoTaskHeaders, new AlibabaCloud.TeaUtil.Models.RuntimeOptions());
+            }
+            catch (TeaException err)
+            {
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+            catch (Exception _err)
+            {
+                TeaException err = new TeaException(new Dictionary&lt;string, object&gt;
+                {
+                    { "message", _err.Message }
+                });
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+        }
+
+
+    }
+}</code></pre></div></div></section></section><section id="section-response-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-response-1" data-tag="h2" class="h2">响应</h2><section id="section-response-parameter" class="section">
+                <h3 data-tag="h3" id="h2-euf-naw-rua" class="h3 title">响应体</h3>
+                <table class="table">
+                    <colgroup colnum="1" colname="col1" colwidth="3*" style="width:30%"></colgroup>
+                    <colgroup colnum="2" colname="col2" colwidth="2*" style="width:20%"></colgroup>
+                    <colgroup colnum="3" colname="col3" colwidth="5*" style="width:50%"></colgroup>
+                    <thead class="thead">
+                    <tr>
+                        <th><p>名称</p></th>
+                        <th><p>类型</p></th>
+                        <th><p>描述</p></th>
+                    </tr>
+                    </thead>
+                    <tbody class="tbody">
+    <tr outputclass="row row-level-1" class="row row-level-1 row-level-1 row">
+        <td><p>result</p></td>
+        <td><p>Boolean</p></td>
+        <td><p>更新结果，true表示成功。</p>
+</td>
+    </tr>
+                    </tbody>
+                </table>
+            </section><section id="section-response-body-example" class="section"><h3 id="h3-response-body-example" data-tag="h3" class="h3">响应体示例</h3><pre outputclass="language-json" data-tag="codeblock" code-type="xCode" class="pre codeblock language-json"><code>HTTP/1.1 200 OK
+Content-Type:application/json
+
+{
+  "result" : true
+}</code></pre></section><section id="section-error-code-1" class="section"><h3 id="h3-error-code-1" data-tag="h3" class="h3">错误码</h3><p data-tag="p" id="p-error-code-global-guide" class="p">若调用该接口报错，可根据错误信息在<a id="a-error-code-global-guide" href="https://open.dingtalk.com/document/development/server-api-error-codes-1">全局错误码</a>文档中查找解决方案。</p><table class="table"> 
+  <colgroup colnum="1" colname="col1" colwidth="2*" style="width:20%"></colgroup> 
+  <colgroup colnum="2" colname="col2" colwidth="2.5*" style="width:25%"></colgroup> 
+  <colgroup colnum="3" colname="col3" colwidth="2.5*" style="width:25%"></colgroup> 
+  <colgroup colnum="4" colname="col4" colwidth="3*" style="width:30%"></colgroup> 
+  <thead class="thead"> 
+   <tr> 
+    <th><p>HttpCode</p></th> 
+    <th><p>错误码</p></th> 
+    <th><p>错误信息</p></th> 
+    <th><p>说明</p></th> 
+   </tr> 
+  </thead> 
+  <tbody class="tbody"> 
+   <tr> 
+    <td><p>400</p></td> 
+    <td><p>todo.taskUpdate.paramError</p></td> 
+    <td><p>todo.taskUpdate.paramError</p></td> 
+    <td><p>更新待办参数异常</p></td> 
+   </tr> 
+   <tr> 
+    <td><p>400</p></td> 
+    <td><p>todo.taskUpdate.paramError</p></td> 
+    <td><p>subject is oversize</p></td> 
+    <td><p>待办标题长度超出限制</p></td> 
+   </tr> 
+   <tr> 
+    <td><p>400</p></td> 
+    <td><p>todo.taskUpdate.paramError</p></td> 
+    <td><p>description is oversize</p></td> 
+    <td><p>待办描述长度超出限制</p></td> 
+   </tr> 
+   <tr> 
+    <td><p>400</p></td> 
+    <td><p>todo.taskUpdate.paramError</p></td> 
+    <td><p>executors is oversize</p></td> 
+    <td><p>待办执行人超出限制</p></td> 
+   </tr> 
+   <tr> 
+    <td><p>400</p></td> 
+    <td><p>todo.taskUpdate.paramError</p></td> 
+    <td><p>participants is oversize</p></td> 
+    <td><p>待办参与人超出限制</p></td> 
+   </tr> 
+   <tr> 
+    <td><p>400</p></td> 
+    <td><p>todo.taskUpdate.paramError</p></td> 
+    <td><p>dueTime is invalid</p></td> 
+    <td><p>待办截止时间非法</p></td> 
+   </tr> 
+   <tr> 
+    <td><p>400</p></td> 
+    <td><p>todo.taskUpdate.paramError</p></td> 
+    <td><p>task not exist</p></td> 
+    <td><p>待办任务不存在</p></td> 
+   </tr> 
+   <tr> 
+    <td><p>400</p></td> 
+    <td><p>todo.taskUpdate.paramError</p></td> 
+    <td><p>task not belong to bizTag</p></td> 
+    <td><p>待办任务不属于该应用</p></td> 
+   </tr> 
+   <tr> 
+    <td><p>500</p></td> 
+    <td><p>todo.taskUpdate.systemError</p></td> 
+    <td><p>todo.taskUpdate.systemError</p></td> 
+    <td><p>更新待办系统异常</p></td> 
+   </tr> 
+  </tbody> 
+ </table></section></section></div>
+    </main>
+
+
+
+</body></html>

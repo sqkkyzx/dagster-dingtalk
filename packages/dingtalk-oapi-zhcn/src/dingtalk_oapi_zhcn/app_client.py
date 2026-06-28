@@ -1,0 +1,1649 @@
+import logging
+import pickle
+import threading
+import time
+from datetime import datetime
+from enum import Enum
+from pathlib import Path
+from typing import List, Literal, Tuple, Dict
+
+import httpx
+from httpx import Client
+from pydantic import BaseModel, Field
+
+
+def _remove_none_values(data):
+    if isinstance(data, dict):
+        # 使用字典推导式，严格判断 v is not None
+        return {k: _remove_none_values(v) for k, v in data.items() if v is not None}
+    elif isinstance(data, list):
+        # 如果字典中包含列表（例如 formComponents），递归处理列表中的元素
+        return [_remove_none_values(item) for item in data]
+    return data
+
+
+# noinspection NonAsciiCharacters
+class DingTalkClient:
+    def __init__(
+            self,
+            app_id: str,
+            client_id: str,
+            client_secret: str,
+            app_name: str | None = None,
+            agent_id: int | str | None = None,
+    ):
+        self.app_id: str = app_id
+        self.app_name: str | None = app_name
+        self.agent_id: int | None = int(agent_id) if agent_id else None
+        self.robot_code: str = client_id
+        self.__client_id: str = client_id
+        self.__client_secret: str = client_secret
+
+        # 令牌缓存信息
+        self.__access_token_file_cache = Path.home() / f".dingtalk_oapi_zhcn_cache_{self.app_id}"
+        self.__access_token_cache: dict = {}
+        self.__token_lock = threading.Lock()
+
+        # 初始化持久化 HTTP 客户端
+        self.__init_clients()
+
+        # API模块
+        self.智能人事 = 智能人事__(self)
+        self.通讯录管理 = 通讯录管理__(self)
+        self.文档文件 = 文档文件__(self)
+        self.互动卡片 = 互动卡片__(self)
+        self.OA审批 = OA审批__(self)
+        self.即时通信 = 即时通信__(self)
+        self.待办任务 = 待办任务__(self)
+
+    def __init_clients(self):
+        self.__oapi_client = httpx.Client(
+            base_url="https://oapi.dingtalk.com/",
+            timeout=httpx.Timeout(60.0),
+            limits=httpx.Limits(max_connections=100),
+        )
+
+        self.__api_client = httpx.Client(
+            base_url="https://api.dingtalk.com/",
+            timeout=httpx.Timeout(10.0),
+            limits=httpx.Limits(max_connections=100),
+        )
+
+    def __file_cache_read(self) -> dict:
+        if self.__access_token_file_cache.exists():
+            try:
+                with open(self.__access_token_file_cache, 'rb') as f:
+                    return pickle.loads(f.read())
+            except Exception as e:
+                logging.warning(F"不存在 AccessToken 缓存或解析错误：{e}")
+                return {}
+        else:
+            return {}
+
+    def __file_cache_write(self, access_token_cache: dict):
+        try:
+            with open(self.__access_token_file_cache, 'wb') as f:
+                f.write(pickle.dumps(access_token_cache))
+        except Exception as e:
+            logging.error(f"AccessToken 缓存写入失败: {e}")
+
+    def __get_access_token(self) -> str:
+        with self.__token_lock:
+            # 如果实例属性中的缓存不存在，进一步尝试从文件缓存读取。
+            access_token_cache: dict = self.__access_token_cache or self.__file_cache_read()
+            access_token = access_token_cache.get('access_token')
+            expire_in = access_token_cache.get('expire_in', -1)
+
+            # 如果缓存不存在，或者缓存过期，则获取新token
+            if not access_token or expire_in < int(time.time()):
+                try:
+                    response = Client().post(
+                        url="https://api.dingtalk.com/v1.0/oauth2/accessToken",
+                        json={"appKey": self.__client_id, "appSecret": self.__client_secret},
+                    ).json()
+                    # 提前 1 分钟进行续期
+                    access_token_cache = {
+                        "access_token": response.get("accessToken"),
+                        "expire_in": response.get("expireIn") + int(time.time()) - 60
+                    }
+                    self.__access_token_cache = access_token_cache
+                    self.__file_cache_write(self.__access_token_cache)
+                except Exception as e:
+                    logging.error(f"AccessToken 获取失败: {e}")
+                    raise
+
+        return access_token_cache["access_token"]
+
+    def oapi(self, method: str, path: str, **kwargs) -> httpx.Response:
+        params = kwargs.get("params", {})
+        params["access_token"] = self.__get_access_token()
+        return self.__oapi_client.request(
+            method=method.upper(),
+            url=path,
+            params=params,
+            **kwargs
+        )
+
+    def api(self, method: str, path: str, **kwargs) -> httpx.Response:
+        headers = kwargs.get("headers", {})
+        headers["x-acs-dingtalk-access-token"] = self.__get_access_token()
+        return self.__api_client.request(
+            method=method.upper(),
+            url=path,
+            headers=headers,
+            **kwargs
+        )
+
+    def __del__(self):
+        self.__oapi_client.close()
+        self.__api_client.close()
+
+
+# 智能人事模块
+# https://open.dingtalk.com/document/orgapp/intelligent-personnel-call-description
+# todo 职位管理/获取企业职位列表
+# todo 职位管理/获取企业职级列表
+# todo 职位管理/获取企业职务列表
+# todo 花名册/新增或删除花名册选项类型字段的选项
+# todo 员工管理/添加待入职员工
+# todo 员工管理/修改已离职员工信息
+# todo 员工管理/员工加入待离职
+# todo 员工管理/撤销员工待离职
+# todo 员工管理/更新待离职员工离职信息
+# todo 员工管理/获取企业已有的所有离职原因
+# todo 员工关系/智能人事员工调岗
+# todo 员工关系/确认员工离职并删除
+# todo 员工关系/智能人事员工转正
+
+
+# noinspection NonAsciiCharacters, PyPep8Naming
+class 智能人事__:
+    def __init__(self, _client: DingTalkClient):
+        self.__client: DingTalkClient = _client
+        self.花名册 = 智能人事__花名册(_client)
+        self.员工管理 = 智能人事__员工管理(_client)
+
+
+# noinspection NonAsciiCharacters, PyPep8Naming
+class 智能人事__花名册:
+    def __init__(self, _client: DingTalkClient):
+        self.__client: DingTalkClient = _client
+
+    def 获取花名册元数据(self) -> dict:
+        """
+        调用本接口，获取员工花名册的元数据，包括花名册分组、字段等。
+
+        根据文档 [获取花名册元数据](https://open.dingtalk.com/document/development/intelligent-personnel-roster-metadata-query?update_at=2026-05-29) 修订，更新于 2026-05-29。
+
+        :return:
+        """
+        response = self.__client.oapi(
+            method="POST",
+            path="/topapi/smartwork/hrm/roster/meta/get",
+            json={"agentid": self.__client.agent_id},
+        )
+        return response.json()
+
+    def 获取花名册字段组详情(self) -> dict:
+        """
+        调用本接口，查询花名册的员工档案信息中有权限的字段列表。
+
+        根据文档 [获取花名册字段组详情](https://open.dingtalk.com/document/development/get-roster-field-group-details?update_at=2026-05-29) 修订，更新于 2026-05-29。
+
+        :return:
+        """
+        response = self.__client.oapi(
+            method="POST",
+            path="/topapi/smartwork/hrm/employee/field/grouplist",
+            json={"agentid": self.__client.agent_id},
+        )
+        return response.json()
+
+    def 获取员工花名册字段信息(self, user_id_list: List[str], field_filter_list: List[str] | None = None,
+                               text_to_select_convert: bool | None = None) -> dict:
+        """
+        调用本接口，查询员工花名册指定字段的信息，支持明细分组字段。
+
+        根据文档 [获取员工花名册字段信息](https://open.dingtalk.com/document/development/api-getemployeerosterbyfield?update_at=2025-09-12) 修订，更新于 2025-09-12。
+
+        :param user_id_list: 员工的 userId 列表，一次最多支持传100个值。
+        :param field_filter_list: 需要获取的花名册字段 field_code 值列表
+        :param text_to_select_convert: 如果设置为true，岗位职级字段的 label 返回的名称，value返回的对应id
+        :return:
+        """
+        body_dict = {"userIdList": user_id_list, "appAgentId": self.__client.agent_id}
+        if field_filter_list is not None:
+            body_dict["fieldFilterList"] = field_filter_list
+        if text_to_select_convert is not None:
+            body_dict["text2SelectConvert"] = text_to_select_convert
+
+        response = self.__client.api(
+            method="POST",
+            path="/v1.0/hrm/rosters/lists/query", json=body_dict, )
+        return response.json()
+
+    def 更新员工花名册信息(self, user_id: str, groups: List[dict]) -> dict:
+        """
+        调用本接口，更新员工档案信息，支持明细分组。
+
+        根据文档 [更新员工花名册信息](https://open.dingtalk.com/document/development/intelligent-personnel-update-employee-file-information?update_at=2026-05-29) 修订，更新于 2026-05-29。
+
+        :param user_id: 被更新字段信息的员工userid
+        :param groups: 花名册分组
+        :return:
+        """
+        response = self.__client.oapi(
+            method="POST",
+            path="/topapi/smartwork/hrm/employee/v2/update",
+            json={
+                "agentid": self.__client.agent_id,
+                "param": {"groups": groups},
+                "user_id": user_id
+            },
+        )
+        return response.json()
+
+
+# noinspection NonAsciiCharacters, PyPep8Naming
+class 智能人事__员工管理:
+    def __init__(self, _client: DingTalkClient):
+        self.__client: DingTalkClient = _client
+
+    # noinspection NonAsciiCharacters, PyPep8Naming
+    class 在职员工状态(Enum):
+        试用期 = '2'
+        正式 = '3'
+        待离职 = '5'
+        无状态 = '-1'
+
+    def 获取待入职员工列表(self, offset: int, size: int) -> dict:
+        """
+        调用本接口，查询企业待入职员工userid列表。
+
+        根据文档 [获取待入职员工列表](https://open.dingtalk.com/document/development/intelligent-personnel-query-the-list-of-employees-to-be-hired?update_at=2026-05-29) 修订，更新于 2026-05-29。
+
+        :param offset:
+        :param size:
+        :return:
+        """
+        response = self.__client.oapi(
+            method="POST",
+            path="/topapi/smartwork/hrm/employee/querypreentry",
+            json={"offset": offset, "size": size},
+        )
+        return response.json()
+
+    def 获取在职员工列表(self, status_list: List[在职员工状态 | str], offset: int, size: int) -> dict:
+        """
+        调用本接口，查询企业在职员工userid列表。
+
+        根据文档 [获取在职员工列表](https://open.dingtalk.com/document/development/intelligent-personnel-query-the-list-of-on-the-job-employees-of-the?update_at=2026-06-23) 修订，更新于 2026-06-23。
+
+        :param status_list: 在职员工状态筛选，可以查询多个状态。支持在职员工状态枚举或对应状态值字符串。
+        :param offset:
+        :param size:
+        :return:
+        """
+        response = self.__client.oapi(
+            method="POST",
+            path="/topapi/smartwork/hrm/employee/queryonjob",
+            json={
+                "status_list": ",".join(
+                    status.value if isinstance(status, self.在职员工状态) else status
+                    for status in status_list
+                ),
+                "offset": offset,
+                "size": size,
+            },
+        )
+        return response.json()
+
+    def 获取离职员工列表(self, next_token: int, max_results: int) -> dict:
+        """
+        调用本接口，查询企业离职员工userId列表。
+
+        根据文档 [获取离职员工列表](https://open.dingtalk.com/document/development/obtain-the-list-of-employees-who-have-left?update_at=2025-09-12) 修订，更新于 2025-09-12。
+
+        :param next_token:
+        :param max_results:
+        :return:
+        """
+        response = self.__client.api(
+            method="GET",
+            path="/v1.0/hrm/employees/dismissions",
+            params={"nextToken": next_token, "maxResults": max_results},
+        )
+        return response.json()
+
+    def 批量获取员工离职信息(self, user_id_list: List[str]) -> dict:
+        """
+        根据用户userId，批量查询员工的离职信息，如离职人员的部门ID、离职主动原因和被动原因等。
+
+        根据文档 [批量获取员工离职信息](https://open.dingtalk.com/document/development/obtain-resignation-information-of-employees-new-version?update_at=2026-06-04) 修订，更新于 2026-06-04。
+
+        :param user_id_list: 员工 userId 列表，最大长度 50 。
+        :return:
+        """
+        response = self.__client.api(
+            method="GET",
+            path="/v1.0/hrm/employees/dimissionInfos",
+            params={"userIdList": user_id_list},
+        )
+        return response.json()
+
+
+# 通讯录管理模块
+# https://open.dingtalk.com/document/orgapp/contacts-overview
+# todo
+
+
+# noinspection NonAsciiCharacters, PyPep8Naming
+class 通讯录管理__:
+    def __init__(self, _client: DingTalkClient):
+        self.__client: DingTalkClient = _client
+        self.用户管理 = 通讯录管理__用户管理(_client)
+        self.部门管理 = 通讯录管理__部门管理(_client)
+
+    def 查询用户详情(self, user_id: str, language: str = "zh_CN"):
+        return self.用户管理.查询用户详情(user_id, language)
+
+
+# noinspection NonAsciiCharacters, PyPep8Naming
+class 通讯录管理__用户管理:
+    def __init__(self, _client: DingTalkClient):
+        self.__client: DingTalkClient = _client
+
+    def 查询用户详情(self, user_id: str, language: str = "zh_CN") -> dict:
+        """
+        调用本接口获取指定用户的详细信息。
+
+        根据文档 [查询用户详情](https://open.dingtalk.com/document/development/query-user-details?update_at=2026-06-08) 修订，更新于 2026-06-08。
+
+        :param user_id: 用户的userId。
+        :param language: 通讯录语言。zh_CN / en_US。
+        """
+        response = self.__client.oapi(
+            method="POST",
+            path="/topapi/v2/user/get", json={"language": language, "userid": user_id})
+        return response.json()
+
+    def 查询离职记录列表(self, start_time: datetime, end_time: datetime | None, next_token: str,
+                         max_results: int) -> dict:
+        """
+        调用本接口查询企业离职记录列表，包含离职员工的离职日期、手机号码和退出企业方式等信息。
+
+        根据文档 [查询离职记录列表](https://open.dingtalk.com/document/development/query-the-details-of-employees-who-have-left-office?update_at=2025-09-11) 修订，更新于 2025-09-11。
+
+        :param start_time: 开始时间，按 UTC 时间格式化为 YYYY-MM-DDTHH:mm:ssZ。
+        :param end_time: 结束时间，按 UTC 时间格式化为 YYYY-MM-DDTHH:mm:ssZ。
+        :param next_token: 分页游标，首次传 0。
+        :param max_results: 分页大小，最大值 100。
+        """
+        params = {"startTime": start_time.strftime("%Y-%m-%dT%H:%M:%SZ"), "nextToken": next_token,
+                  "maxResults": max_results}
+        if end_time is not None:
+            params["endTime"] = end_time.strftime("%Y-%m-%dT%H:%M:%SZ")
+        response = self.__client.api(
+            method="GET",
+            path="/v1.0/contact/empLeaveRecords", params=params)
+        return response.json()
+
+    def 获取部门用户userid列表(self, dept_id: int):
+        """
+        调用本接口获取指定部门的userid列表。
+
+        根据文档 [获取部门用户userid列表](https://open.dingtalk.com/document/development/query-the-list-of-department-userids?update_at=2026-06-08) 修订，更新于 2026-06-08。
+
+        :param dept_id: 部门 ID。
+        """
+        response = self.__client.oapi(
+            method="POST",
+            path="/topapi/user/listid", json={"dept_id": dept_id})
+        return response.json()
+
+    def 根据unionid获取用户userid(self, unionid: str):
+        """
+        调用本接口根据unionid获取用户的userid。
+
+        根据文档 [根据unionid获取用户userid](https://open.dingtalk.com/document/development/query-a-user-by-the-union-id?update_at=2026-06-08) 修订，更新于 2026-06-08。
+
+        :param unionid: 用户的unionId。
+        """
+        response = self.__client.oapi(
+            method="POST",
+            path="/topapi/user/getbyunionid", json={"unionid": unionid})
+        return response.json()
+
+
+# noinspection NonAsciiCharacters, PyPep8Naming
+class 通讯录管理__部门管理:
+    def __init__(self, _client: DingTalkClient):
+        self.__client: DingTalkClient = _client
+
+    def 获取部门详情(self, dept_id: int, language: str = "zh_CN") -> dict:
+        """
+        调用本接口，根据部门ID获取指定部门详情。
+
+        根据文档 [获取部门详情](https://open.dingtalk.com/document/development/query-department-details0-v2?update_at=2026-06-08) 修订，更新于 2026-06-08。
+
+        :param dept_id: 部门 ID ，根部门 ID 为 1。
+        :param language: 通讯录语言。zh_CN en_US
+        """
+        response = self.__client.oapi(
+            method="POST",
+            path="/topapi/v2/department/get",
+            json={"language": language, "dept_id": dept_id}
+        )
+        return response.json()
+
+    def 获取部门列表(self, dept_id: int, language: str = "zh_CN"):
+        """
+        调用本接口，获取下一级部门基础信息。
+
+        根据文档 [获取部门列表](https://open.dingtalk.com/document/development/obtain-the-department-list-v2?update_at=2025-09-10) 修订，更新于 2025-09-10。
+
+        :param dept_id: 部门 ID ，根部门 ID 为 1。
+        :param language: 通讯录语言。zh_CN en_US
+        """
+        response = self.__client.oapi(
+            method="POST",
+            path="/topapi/v2/department/listsub",
+            json={"language": language, "dept_id": dept_id}
+        )
+        return response.json()
+
+    def 获取子部门ID列表(self, dept_id: int):
+        """
+        调用本接口，获取企业部门下的所有直属子部门列表。
+
+        根据文档 [获取子部门ID列表](https://open.dingtalk.com/document/development/obtain-a-sub-department-id-list-v2?update_at=2025-09-10) 修订，更新于 2025-09-10。
+
+        :param dept_id: 部门 ID ，根部门 ID 为 1。
+        """
+        response = self.__client.oapi(
+            method="POST",
+            path="/topapi/v2/department/listsubid",
+            json={"dept_id": dept_id}
+        )
+        return response.json()
+
+
+# 待办任务模块
+# https://open.dingtalk.com/document/orgapp/dingtalk-todo-task-overview
+# todo
+
+
+# noinspection NonAsciiCharacters, PyPep8Naming
+class 待办任务__:
+    def __init__(self, _client: DingTalkClient):
+        self.__client: DingTalkClient = _client
+
+    def 创建钉钉待办任务(
+            self, owner_union_id: str, source_id: str, subject: str, description: str = None,
+            operator_union_id: str = None, due_time: datetime | int = None, is_only_show_executor=False,
+            executor_union_ids: List[str] = None, participant_union_ids: List[str] = None,
+            priority: Literal[10, 20, 30, 40] = None, ding_notify: bool = False,
+            app_url: str = None, pc_url: str = None, content_field_list: List[dict] = None,
+            send_todo_apn: bool | None = None, send_assistant_chat: bool | None = None,
+            biz_category_id: str = None, action_list: List[dict] = None,
+            todo_type: Literal["TODO", "READ"] = None, reminder_time: datetime | int = None,
+            remind_ding_notify: bool | None = None, remind_send_todo_apn: bool | None = None,
+    ) -> dict:
+        """
+        调用本接口，发起一个钉钉待办任务。
+
+        根据文档 [创建钉钉待办任务](https://open.dingtalk.com/document/development/add-dingtalk-to-do-task?update_at=2026-06-04) 修订，更新于 2026-06-04。
+
+        :param owner_union_id: 待办所属用户的unionId。
+        :param source_id: 接入方业务系统侧的唯一标识。
+        :param subject: 待办标题。
+        :param description: 待办描述。
+        :param operator_union_id: 操作者unionId。
+        :param due_time: 截止时间。datetime 会转换为毫秒时间戳。
+        :param is_only_show_executor: 是否只展示执行者。
+        :param executor_union_ids: 执行者unionId列表。
+        :param participant_union_ids: 参与者unionId列表。
+        :param priority: 优先级。10-较低，20-普通，30-紧急，40-非常紧急。
+        :param ding_notify: 是否发送钉钉通知。
+        :param app_url: 移动端详情页 URL。
+        :param pc_url: PC 端详情页 URL。
+        :param content_field_list: 内容区表单字段配置。元素包含 fieldKey、fieldValue。
+        :param send_todo_apn: 是否推送待办任务系统通知。
+        :param send_assistant_chat: 是否推送待办助手消息。
+        :param biz_category_id: 待办业务分类ID。
+        :param action_list: 待办按钮列表。
+        :param todo_type: 待办业务类型。TODO-待办，READ-待阅。
+        :param reminder_time: 待办任务提醒时间。datetime 会转换为毫秒时间戳。
+        :param remind_ding_notify: 到期提醒时是否发送钉钉弹窗通知。
+        :param remind_send_todo_apn: 到期提醒时是否推送待办任务系统通知。
+        """
+
+        if isinstance(due_time, datetime):
+            due_time = int(due_time.timestamp() * 1000)
+        if isinstance(reminder_time, datetime):
+            reminder_time = int(reminder_time.timestamp() * 1000)
+
+        notify_configs = {
+            "dingNotify": "1" if ding_notify else None,
+            "sendTodoApn": str(send_todo_apn).lower() if send_todo_apn is not None else None,
+            "sendAssistantChat": str(send_assistant_chat).lower() if send_assistant_chat is not None else None,
+        }
+        if not any(value is not None for value in notify_configs.values()):
+            notify_configs = None
+
+        remind_notify_configs = {
+            "dingNotify": str(int(remind_ding_notify)) if remind_ding_notify is not None else None,
+            "sendTodoApn": str(remind_send_todo_apn).lower() if remind_send_todo_apn is not None else None,
+        }
+        if not any(value is not None for value in remind_notify_configs.values()):
+            remind_notify_configs = None
+
+        payload = {
+            "sourceId": source_id,
+            "subject": subject,
+            "creatorId": owner_union_id,
+            "description": description,
+            "dueTime": due_time,
+            "executorIds": executor_union_ids,
+            "participantIds": participant_union_ids,
+            "detailUrl": {
+                "appUrl": app_url,
+                "pcUrl": pc_url
+            } if app_url or pc_url else None,
+            "contentFieldList": content_field_list,
+            "priority": priority,
+            "isOnlyShowExecutor": is_only_show_executor,
+            "notifyConfigs": notify_configs,
+            "bizCategoryId": biz_category_id,
+            "actionList": action_list,
+            "todoType": todo_type,
+            "reminderTimeStamp": reminder_time,
+            "remindNotifyConfigs": remind_notify_configs,
+        }
+
+        path = f"/v1.0/todo/users/{owner_union_id}/tasks"
+        if operator_union_id:
+            path = f"{path}?operatorId={operator_union_id}"
+
+        response = self.__client.api(
+            method="POST",
+            path=path,
+            json=_remove_none_values(payload)
+        )
+        return response.json()
+
+    def 创建钉钉个人待办任务(
+            self, subject: str, executor_union_ids: List[str], description: str = None,
+            due_time: datetime | int = None, participant_union_ids: List[str] = None,
+            ding_notify: bool = False, reminder_time: datetime | int = None,
+    ) -> dict:
+        """
+        调用本接口，创建一个钉钉“个人待办”任务。
+
+        根据文档 [创建钉钉个人待办任务](https://open.dingtalk.com/document/development/api-createpersonaltodotask?update_at=2026-06-04) 修订，更新于 2026-06-04。
+
+        :param subject: 待办标题。
+        :param executor_union_ids: 执行者unionId列表。
+        :param description: 待办备注。
+        :param due_time: 截止时间。datetime 会转换为毫秒时间戳。
+        :param participant_union_ids: 参与者unionId列表。
+        :param ding_notify: 是否发送钉钉弹框通知。
+        :param reminder_time: 待办任务提醒时间。datetime 会转换为毫秒时间戳。
+        """
+
+        if isinstance(due_time, datetime):
+            due_time = int(due_time.timestamp() * 1000)
+        if isinstance(reminder_time, datetime):
+            reminder_time = int(reminder_time.timestamp() * 1000)
+
+        payload = {
+            "subject": subject,
+            "description": description,
+            "dueTime": due_time,
+            "executorIds": executor_union_ids,
+            "participantIds": participant_union_ids,
+            "notifyConfigs": {"dingNotify": "1"} if ding_notify else None,
+            "reminderTimeStamp": reminder_time,
+        }
+
+        response = self.__client.api(
+            method="POST",
+            path="/v1.0/todo/users/me/personalTasks",
+            json=_remove_none_values(payload)
+        )
+        return response.json()
+
+    def 删除钉钉待办任务(
+            self, owner_union_id: str, task_id: str, operator_union_id: str = None
+    ) -> dict:
+        """
+        调用本接口，删除钉钉待办任务信息。
+
+        根据文档 [删除钉钉待办任务](https://open.dingtalk.com/document/development/delete-dingtalk-to-do-tasks?update_at=2026-06-04) 修订，更新于 2026-06-04。
+
+        :param owner_union_id: 待办所属用户的unionId。
+        :param task_id: 待办任务ID。
+        :param operator_union_id: 操作者unionId。
+        """
+
+        path = f"/v1.0/todo/users/{owner_union_id}/tasks/{task_id}"
+        if operator_union_id:
+            path = f"{path}?operatorId={operator_union_id}"
+
+        response = self.__client.api(
+            method="DELETE",
+            path=path
+        )
+        return response.json()
+
+    def 更新钉钉待办任务(
+            self, owner_union_id: str, task_id: str, operator_union_id: str = None,
+            subject: str = None, description: str = None, due_time: datetime | int = None, done: bool = None,
+            executor_union_ids: List[str] = None, participant_union_ids: List[str] = None,
+            content_field_list: List[dict] = None,
+    ) -> dict:
+        """
+        调用本接口，根据待办ID，更新指定钉钉待办的任务信息及状态。
+
+        根据文档 [更新钉钉待办任务](https://open.dingtalk.com/document/development/updates-dingtalk-to-do-tasks?update_at=2026-06-02) 修订，更新于 2026-06-02。
+
+        :param owner_union_id: 待办所属用户的unionId。
+        :param task_id: 待办任务ID。
+        :param operator_union_id: 操作者unionId。
+        :param subject: 待办标题。
+        :param description: 待办描述。
+        :param due_time: 截止时间。datetime 会转换为毫秒时间戳。
+        :param done: 待办是否完成。
+        :param executor_union_ids: 执行者unionId列表。
+        :param participant_union_ids: 参与者unionId列表。
+        :param content_field_list: 内容区表单字段配置。元素包含 fieldKey、fieldValue。
+        """
+
+        if isinstance(due_time, datetime):
+            due_time = int(due_time.timestamp() * 1000)
+
+        path = f"/v1.0/todo/users/{owner_union_id}/tasks/{task_id}"
+        if operator_union_id:
+            path = f"{path}?operatorId={operator_union_id}"
+
+        response = self.__client.api(
+            method="PUT",
+            path=path,
+            json=_remove_none_values({
+                "subject": subject,
+                "description": description,
+                "dueTime": due_time,
+                "done": done,
+                "executorIds": executor_union_ids,
+                "participantIds": participant_union_ids,
+                "contentFieldList": content_field_list,
+            })
+        )
+        return response.json()
+
+    def 更新钉钉待办执行者状态(
+            self, owner_union_id: str, task_id: str, operator_union_id: str = None,
+            done_executor_union_ids: List[str] = None, not_done_executor_union_ids: List[str] = None,
+    ) -> dict:
+        """
+        调用本接口，当待办存在多个执行者时，可更新部分执行者的完成状态。
+
+        根据文档 [更新钉钉待办执行者状态](https://open.dingtalk.com/document/development/update-dingtalk-to-do-status?update_at=2026-06-04) 修订，更新于 2026-06-04。
+
+        :param owner_union_id: 待办所属用户的unionId。
+        :param task_id: 待办任务ID。
+        :param operator_union_id: 操作者unionId。
+        :param done_executor_union_ids: 需要标记为已完成的执行者unionId列表。
+        :param not_done_executor_union_ids: 需要标记为未完成的执行者unionId列表。
+        """
+
+        executor_status_list = []
+
+        if done_executor_union_ids is not None:
+            executor_status_list.extend([{"id": union_id, "isDone": True} for union_id in done_executor_union_ids])
+        if not_done_executor_union_ids is not None:
+            executor_status_list.extend([{"id": union_id, "isDone": False} for union_id in not_done_executor_union_ids])
+
+        path = f"/v1.0/todo/users/{owner_union_id}/tasks/{task_id}/executorStatus"
+        if operator_union_id:
+            path = f"{path}?operatorId={operator_union_id}"
+
+        response = self.__client.api(
+            method="PUT",
+            path=path,
+            json={
+                "executorStatusList": executor_status_list
+            }
+        )
+        return response.json()
+
+    def 查询企业下用户待办列表(
+            self, owner_union_id: str, next_token: str, is_down: bool, role_types: List[List[str]] = None,
+            todo_type: Literal["TODO", "READ"] = None,
+    ) -> dict:
+        """
+        调用本接口，获取该授权企业下某用户的待办列表。
+
+        根据文档 [查询企业下用户待办列表](https://open.dingtalk.com/document/development/query-the-to-do-list-of-enterprise-users?update_at=2026-06-04) 修订，更新于 2026-06-04。
+
+        :param owner_union_id: 待办所属用户的unionId。
+        :param next_token: 分页游标。
+        :param is_down: 是否查询已完成待办。
+        :param role_types: 查询角色类型列表。
+        :param todo_type: 待办业务类型。TODO-待办，READ-待阅。
+        """
+
+        response = self.__client.api(
+            method="POST",
+            path=f"/v1.0/todo/users/{owner_union_id}/org/tasks/query",
+            json=_remove_none_values({
+                "nextToken": next_token,
+                "isDone": is_down,
+                "roleTypes": role_types,
+                "todoType": todo_type,
+            })
+        )
+        return response.json()
+
+
+# 文档文件模块
+# https://open.dingtalk.com/document/orgapp/knowledge-base-base-interface-permission-application
+# todo 知识库
+# todo 钉盘
+# todo 群文件
+# todo 文档
+
+
+# noinspection NonAsciiCharacters, PyPep8Naming
+class 文档文件__:
+    def __init__(self, _client: DingTalkClient):
+        self.__client: DingTalkClient = _client
+        self.群文件 = 文档文件__群文件(_client)
+        self.媒体文件 = 文档文件__媒体文件(_client)
+        self.搜索 = 文档文件__搜索(_client)
+        self.存储管理 = 文档文件__存储管理(_client)
+        self.文件传输 = 文档文件__存储管理__文件传输(_client)
+
+
+# noinspection NonAsciiCharacters, PyPep8Naming
+class 文档文件__群文件:
+    def __init__(self, _client: DingTalkClient):
+        self.__client: DingTalkClient = _client
+
+    def 获取群存储空间信息(self, unionId: str, openConversationId: str) -> dict:
+        """
+        调用本接口，可获取某个指定群的存储空间信息，包括群存储空间的ID、群存储空间创建的时间和修改时间等。
+
+        根据文档 [获取群存储空间信息](https://open.dingtalk.com/document/development/obtain-group-storage-space-information?update_at=2025-09-12) 修订，更新于 2025-09-12。
+
+        :param unionId: 操作人的unionId。
+        :param openConversationId: 会话openConversationId。
+
+        :return:
+            {
+              "space" : {
+                "spaceId" : "798****",
+                "corpId" : "ding1234****",
+                "createTime" : "2022-01-01T10:00:00Z",
+                "modifiedTime" : "2022-01-01T10:00:00Z"
+              }
+            }
+        """
+        response = self.__client.api(
+            method="POST",
+            path=f"/v1.0/convFile/conversations/spaces/query?unionId={unionId}",
+            json={'openConversationId': openConversationId}
+        )
+        return response.json()
+
+    def 以应用身份发送文件给指定用户(self, unionId: str, spaceId: str, dentryId: str) -> dict:
+        """
+        调用本接口，以应用身份发送文件给指定用户。
+
+        根据文档 [以应用身份发送文件给指定用户](https://open.dingtalk.com/document/development/sends-a-storage-file-to-a-specified-user?update_at=2025-09-12) 修订，更新于 2025-09-12。
+
+        :param unionId: 操作人的unionId。
+        :param spaceId: 文件所在空间ID。
+        :param dentryId: 文件ID。
+
+        :return:
+            {
+              "file" : {
+                "id" : "674****",
+                "conversationId" : "cidB1*****",
+                "spaceId" : "864*****",
+                "parentId" : "0",
+                "type" : "FILE",
+                "name" : "测试文件.xls",
+                "size" : 256,
+                "path" : "/测试文件.xls",
+                "version" : 1,
+                "status" : "NORMAL",
+                "extension" : "xls",
+                "creatorId" : "cHtUY****",
+                "modifierId" : "cHtUY****",
+                "createTime" : "2022-01-01T10:00:00Z",
+                "modifiedTime" : "2022-01-01T10:00:00Z"
+              }
+            }
+        """
+        response = self.__client.api(
+            method="POST",
+            path=f"/v1.0/convFile/apps/conversations/files/send?unionId={unionId}",
+            json={"spaceId": spaceId, "dentryId": dentryId}
+        )
+        return response.json()
+
+    def 发送文件到指定会话(self, unionId: str, spaceId: str, dentryId: str, openConversationId: str) -> dict:
+        """
+        调用本接口，发送文件到指定会话。
+
+        根据文档 [发送文件到指定会话](https://open.dingtalk.com/document/development/send-file-to-specified-session?update_at=2025-09-12) 修订，更新于 2025-09-12。
+
+        :param unionId: 操作人的unionId。
+        :param spaceId: 文件所在空间ID。
+        :param dentryId: 文件ID。
+        :param openConversationId: 会话openConversationId。
+
+        :return:
+            {
+              "file" : {
+                "id" : "897*****",
+                "conversationId" : "cid+vIrz*****",
+                "spaceId" : "865*****",
+                "parentId" : "parent_id",
+                "type" : "FILE",
+                "name" : "测试文件.txt",
+                "size" : 256,
+                "path" : "./测试文件.txt",
+                "version" : 1,
+                "status" : "NORMAL",
+                "extension" : "txt",
+                "creatorId" : "chy*****",
+                "modifierId" : "chy*****",
+                "createTime" : "2022-01-01T10:00:00Z",
+                "modifiedTime" : "2022-01-01T10:00:00Z",
+                "uuid" : "123*****"
+              }
+            }
+        """
+        response = self.__client.api(
+            method="POST",
+            path=f"/v1.0/convFile/conversations/files/send?unionId={unionId}",
+            json={"spaceId": spaceId, "dentryId": dentryId, "openConversationId": openConversationId}
+        )
+        return response.json()
+
+    def 发送文件链接到指定会话(self, unionId: str, spaceId: str, dentryId: str, openConversationId: str) -> dict:
+        """
+        调用本接口，发送文件链接到指定会话。
+
+        根据文档 [发送文件链接到指定会话](https://open.dingtalk.com/document/development/send-a-file-link-to-the-specified-session?update_at=2025-09-12) 修订，更新于 2025-09-12。
+
+        :param unionId: 操作人的unionId。
+        :param spaceId: 文件所在空间ID。
+        :param dentryId: 文件ID。
+        :param openConversationId: 会话openConversationId。
+
+        :return:
+            {
+              "file" : {
+                "id" : "file_id",
+                "conversationId" : "open_conversation_id",
+                "spaceId" : "space_id",
+                "parentId" : "parent_id",
+                "type" : "file",
+                "name" : "file_name",
+                "size" : 256,
+                "path" : "file_path",
+                "version" : 1,
+                "status" : "NORMAL",
+                "extension" : "txt",
+                "creatorId" : "creator_id",
+                "modifierId" : "modified_id",
+                "createTime" : "2022-01-01T10:00:00Z",
+                "modifiedTime" : "2022-01-01T10:00:00Z",
+                "uuid" : "uuid"
+              }
+            }
+        """
+        response = self.__client.api(
+            method="POST",
+            path=f"/v1.0/convFile/conversations/files/links/send?unionId={unionId}",
+            json={"spaceId": spaceId, "dentryId": dentryId, "openConversationId": openConversationId}
+        )
+        return response.json()
+
+
+# noinspection NonAsciiCharacters, PyPep8Naming
+class 文档文件__媒体文件:
+    def __init__(self, _client: DingTalkClient):
+        self.__client: DingTalkClient = _client
+
+    def 上传媒体文件(self, file_path: Path | str, media_type: Literal['image', 'voice', 'video', 'file']) -> dict:
+        """
+        调用本接口，上传图片、语音媒体资源文件以及普通文件，接口返回媒体资源标识 media_id。
+
+        根据文档 [上传媒体文件](https://open.dingtalk.com/document/development/upload-media-files?update_at=2026-06-01) 修订，更新于 2026-06-01。
+
+        :param file_path: 本地文件路径
+        :param media_type: 媒体类型，支持 'image', 'voice', 'video', 'file'
+
+        :return:
+            {
+                "errcode": 0,
+                "errmsg": "ok",
+                "media_id": "$iAEKAqDBgTNAk",
+                "created_at": 1605863153573,
+                "type": "image"
+            }
+        """
+        with open(file_path, 'rb') as f:
+            response = self.__client.oapi(
+                method="POST",
+                path=f"/media/upload?type={media_type}", files={'media': f})
+        return response.json()
+
+
+# noinspection NonAsciiCharacters, PyPep8Naming
+class 文档文件__搜索:
+    def __init__(self, _client: DingTalkClient):
+        self.__client: DingTalkClient = _client
+
+    def 搜索文件(
+            self, operatorId: str, keyword: str, nextToken: str = None, maxResults: int = 50,
+            dentryCategories: List[str] = None, creatorIds: List[str] = None, modifierIds: List[str] = None,
+            createTimeRange: Tuple[datetime, datetime] = None, visitTimeRange: Tuple[datetime, datetime] = None
+    ) -> dict:
+        """
+        调用本接口，根据操作者unionId和关键词信息，获取文件信息。
+
+        根据文档 [搜索文件](https://open.dingtalk.com/document/development/search-for-files?update_at=2025-09-12) 修订，更新于 2025-09-12。
+
+        :param nextToken:
+        :param operatorId: 操作人unionId。
+        :param keyword: 搜索关键词。
+        :param nextToken: 分页游标。首次拉取不用传。
+        :param maxResults: 分页大小，默认值50。最大值50。
+        :param dentryCategories: 限定文件类别。
+        :param creatorIds: 限定创建者。
+        :param modifierIds: 限定修改者。
+        :param createTimeRange: 限定创建时间范围。
+        :param visitTimeRange: 限定访问时间范围。
+
+        :return:
+            {
+              "items" : [ {
+                "dentryUuid" : "*****",
+                "name" : "name",
+                "creator" : {
+                  "userId" : "01472825524039877041",
+                  "name" : "user_name"
+                },
+                "modifier" : {
+                  "userId" : "01472825524039877041",
+                  "name" : "user_name"
+                }
+              } ],
+              "nextToken" : "next_token"
+            }
+        """
+        option = {}
+        if nextToken:
+            option["nextToken"] = nextToken
+        if maxResults:
+            option["maxResults"] = maxResults
+        if dentryCategories:
+            option["dentryCategories"] = dentryCategories
+        if creatorIds:
+            option["creatorIds"] = creatorIds
+        if modifierIds:
+            option["modifierIds"] = modifierIds
+        if createTimeRange:
+            option["createTimeRange"] = {"createTimeRange": {"startTime": createTimeRange[0].timestamp(),
+                                                             "endTime": createTimeRange[1].timestamp()}}
+        if visitTimeRange:
+            option["visitTimeRange"] = {"visitTimeRange": {"startTime": visitTimeRange[0].timestamp(),
+                                                           "endTime": visitTimeRange[1].timestamp()}}
+
+        response = self.__client.api(
+            method="POST",
+            path=f"/v2.0/storage/dentries/search",
+            params={"operatorId": operatorId},
+            json={"keyword": keyword, "option": option}
+        )
+        return response.json()
+
+    def 搜索知识库(self, operatorId: str, keyword: str, nextToken: str = None, maxResults: int = 50):
+        """
+        调用本接口，根据操作人unionId和关键词信息，搜索知识库信息。
+
+        根据文档 [搜索知识库](https://open.dingtalk.com/document/development/search-knowledge-base?update_at=2025-09-12) 修订，更新于 2025-09-12。
+
+        :param nextToken:
+        :param operatorId: 操作人unionId。
+        :param keyword: 搜索关键词。
+        :param nextToken: 分页游标。首次拉取不用传。
+        :param maxResults: 分页大小，默认值50。最大值50。
+
+        :return:
+            {
+              "items" : [ {
+                "workspaceId" : "By8jQS1ZYjGn5b0M",
+                "name" : "workspace_name",
+                "url" : "workspace_url"
+              } ],
+              "nextToken" : "next_token"
+            }
+        """
+        option = {}
+        if nextToken:
+            option["nextToken"] = nextToken
+        if maxResults:
+            option["maxResults"] = maxResults
+
+        response = self.__client.api(
+            method="POST",
+            path=f"/v2.0/storage/workspaces/search",
+            params={"operatorId": operatorId},
+            json={"keyword": keyword, "option": option}
+        )
+        return response.json()
+
+
+# noinspection NonAsciiCharacters, PyPep8Naming
+class 文档文件__存储管理:
+    def __init__(self, _client: DingTalkClient):
+        self.__client: DingTalkClient = _client
+        self.文件传输 = 文档文件__存储管理__文件传输(self.__client)
+        self.文件管理 = 文档文件__存储管理__文件管理(self.__client)
+
+
+# noinspection NonAsciiCharacters, PyPep8Naming
+class 文档文件__存储管理__文件传输:
+    def __init__(self, _client: DingTalkClient):
+        self.__client: DingTalkClient = _client
+
+    def 获取文件上传信息(self, parentDentryUuid: str, union_id: str) -> dict:
+        """
+        调用本接口，获取文件上传信息。
+
+        根据文档 [获取文件上传信息](https://open.dingtalk.com/document/development/obtain-file-upload-informations?update_at=2026-03-27) 修订，更新于 2026-03-27。
+
+        :param union_id: 操作者unionId。
+        :param parentDentryUuid: 父节点 dentryUuid，如果是空间根目录, 填空间根目录的dentryUuid。
+
+        :return:
+            {
+              "uploadKey" : "upload_key",
+              "storageDriver" : "DINGTALK",
+              "protocol" : "HEADER_SIGNATURE",
+              "headerSignatureInfo" : {
+                "resourceUrls" : [ "resourceUrl" ],
+                "headers" : {
+                  "key" : "header_value"
+                },
+                "expirationSeconds" : 900,
+                "region" : "ZHANGJIAKOU",
+                "internalResourceUrls" : [ "internalResourceUrl" ]
+              }
+            }
+        """
+        response = self.__client.api(
+            method="POST",
+            path=f"/v2.0/storage/spaces/files/{parentDentryUuid}/uploadInfos/query",
+            params={'unionId': union_id},
+            json={"protocol": "HEADER_SIGNATURE"}
+        )
+        return response.json()
+
+    def 提交文件(
+            self, parentDentryUuid: str, upload_key: str, url: str, headers: dict, file_content: bytes,
+            file_name: str, union_id: str, convert_to_online_doc: bool = False,
+            conflictStrategy: Literal[
+                'AUTO_RENAME', 'OVERWRITE', 'RETURN_DENTRY_IF_EXISTS', 'RETURN_ERROR_IF_EXISTS'] = 'AUTO_RENAME'
+    ) -> dict:
+        """
+        调用本接口，提交文件。
+
+        根据文档 [提交文件](https://open.dingtalk.com/document/development/submittal-file?update_at=2026-03-27) 修订，更新于 2026-03-27。
+
+        :param parentDentryUuid: 父节点 dentryUuid。如果是空间根目录，填空间根目录的dentryUuid。
+        :param upload_key: 添加文件唯一标识。
+        :param url: 获取文件上传信息得到的 resourceUrl。
+        :param headers: 获取文件上传信息得到的 headers。
+        :param file_content: 文件字节内容。
+        :param file_name: 文件的名称，带后缀。
+        :param union_id: 操作者unionId。
+        :param convert_to_online_doc: 是否转换成在线文档。默认值 False
+        :param conflictStrategy: 文件名称冲突策略。AUTO_RENAME：自动重命名，默认值 OVERWRITE：覆盖 RETURN_DENTRY_IF_EXISTS：返回已存在文件 RETURN_ERROR_IF_EXISTS：文件已存在时报错
+
+        :return:
+            {
+                "uploadKey": str,
+                "storageDriver": str,
+                "protocol": str,
+                "headerSignatureInfo": dict,
+            }
+        """
+
+        httpx.put(url=url, content=file_content, headers=headers)
+        response = self.__client.api(
+            method="POST",
+            path=f"/v2.0/storage/spaces/files/{parentDentryUuid}/commit?unionId={union_id}",
+            json={
+                "uploadKey": upload_key,
+                "name": file_name,
+                "convertToOnlineDoc": convert_to_online_doc,
+                "option": {
+                    "conflictStrategy": conflictStrategy
+                }
+            }
+        )
+        return response.json()
+
+
+# noinspection NonAsciiCharacters, PyPep8Naming
+class 文档文件__存储管理__文件管理:
+    def __init__(self, _client: DingTalkClient):
+        self.__client: DingTalkClient = _client
+
+    def 添加文件夹(
+            self, spaceId: str, parentId: str, union_id: str, name: str,
+            conflictStrategy: Literal[
+                'AUTO_RENAME', 'OVERWRITE', 'RETURN_DENTRY_IF_EXISTS', 'RETURN_ERROR_IF_EXISTS'] = 'OVERWRITE'
+    ) -> dict:
+        """
+        调用本接口，在存储空间内添加文件夹。
+
+        根据文档 [添加文件夹](https://open.dingtalk.com/document/development/add-folder?update_at=2025-09-12) 修订，更新于 2025-09-12。
+
+        :param spaceId: 空间Id。
+        :param parentId: 父目录Id。根目录时，该参数是0。
+        :param union_id: 操作者unionId。
+        :param name: 文件夹的名称。
+        :param conflictStrategy: 文件名称冲突策略。AUTO_RENAME：自动重命名，默认值 OVERWRITE：覆盖 RETURN_DENTRY_IF_EXISTS：返回已存在文件 RETURN_ERROR_IF_EXISTS：文件已存在时报错
+
+        :return:
+        """
+        response = self.__client.api(
+            method="POST",
+            path=f"/v1.0/storage/spaces/{spaceId}/dentries/{parentId}/folders",
+            params={'unionId': union_id},
+            json={
+                "name": name,
+                "option": {
+                    "conflictStrategy": conflictStrategy
+                }
+            }
+        )
+        return response.json()
+
+    def 重命名文件或文件夹(self, spaceId: str, dentryId: str, union_id: str, new_name: str) -> dict:
+        """
+        调用本接口，可对文件或文件夹进行重命名，但存储空间中的根目录不支持重命名。
+
+        根据文档 [重命名文件或文件夹](https://open.dingtalk.com/document/development/rename-a-file-or-folder?update_at=2026-03-27) 修订，更新于 2026-03-27。
+
+        :param spaceId: 空间Id。
+        :param dentryId: 文件或文件夹Id。
+        :param union_id: 操作者unionId。
+        :param new_name: 文件或文件夹的新名称。
+
+        :return:
+        """
+        response = self.__client.api(
+            method="POST",
+            path=f"/v1.0/storage/spaces/{spaceId}/dentries/{dentryId}/rename",
+            params={'unionId': union_id},
+            json={"newName": new_name}
+        )
+        return response.json()
+
+
+# noinspection NonAsciiCharacters, PyPep8Naming
+class 互动卡片__:
+    def __init__(self, _client: DingTalkClient):
+        self.__client: DingTalkClient = _client
+
+    def 创建并投放卡片(
+            self, search_type_name: str, search_desc: str, card_template_id: str, card_param_map: dict,
+            alert_content: str, open_space_ids: List[str], out_track_id: str, support_forward: bool = True,
+            call_back_type: str = "STREAM", expired_time_millis: int = 0, call_back_route_key: str = None,
+            private_card_param_map: dict[str, dict] = None, card_at_user_ids: List[str] = None
+    ) -> dict:
+        """
+        创建并投放卡片。当前仅支持 IM群聊, IM机器人单聊, 吊顶 三种场域类型。
+
+        根据文档 [创建并投放卡片](https://open.dingtalk.com/document/development/create-and-deliver-cards?update_at=2026-04-24) 修订，更新于 2026-04-24。
+
+        :param card_template_id: 卡片模板 ID
+        :param out_track_id: 卡片唯一标识
+        :param call_back_type: 回调模式
+        :param call_back_route_key: 回调模式
+        :param open_space_ids: 卡片投放场域 Id
+        :param card_param_map: 卡片数据
+        :param private_card_param_map: 卡片用户私有数据
+        :param search_type_name: 卡片类型名
+        :param search_desc: 卡片消息展示
+        :param alert_content: 通知内容
+        :param support_forward: 是否支持转发
+        :param expired_time_millis: 吊顶投放过期时间。当投放内容为吊顶时必须传参。
+        :param card_at_user_ids: 被@人的userId列表,同时需要在卡片的 markdown 内容中添加：<a atId=example_user_id> 用户昵称<a> ；
+        """
+
+        open_space_id = f"dtv1.card//{';'.join(open_space_ids)}"
+
+        payload: dict = {
+            "cardTemplateId": card_template_id,
+            "outTrackId": out_track_id,
+            "openSpaceId": open_space_id,
+            "callbackType": call_back_type,
+            "callbackRouteKey": call_back_route_key,
+            "cardData": {"cardParamMap": card_param_map}
+        }
+
+        if private_card_param_map:
+            payload["privateData"] = private_card_param_map
+
+        if card_at_user_ids:
+            payload["cardAtUserIds"] = card_at_user_ids
+
+        open_space_model = {
+            "supportForward": support_forward,
+            "searchSupport": {"searchTypeName": search_type_name, "searchDesc": search_desc},
+            "notification": {"alertContent": alert_content, "notificationOff": False}
+        }
+
+        if 'IM_GROUP' in open_space_id.upper():
+            payload["imGroupOpenSpaceModel"] = open_space_model
+            payload["imGroupOpenDeliverModel"] = {"robotCode": self.__client.robot_code}
+
+        if 'IM_ROBOT' in open_space_id.upper():
+            payload["imRobotOpenSpaceModel"] = open_space_model
+            payload["imRobotOpenDeliverModel"] = {"spaceType": "IM_ROBOT", "robotCode": self.__client.robot_code}
+
+        if 'ONE_BOX' in open_space_id.upper():
+            if expired_time_millis == 0:
+                expired_time_millis = int(time.time() + 3600) * 1000
+            payload["topOpenSpaceModel"] = {"spaceType": "ONE_BOX"}
+            payload["topOpenDeliverModel"] = {"platforms": ["android", "ios", "win", "mac"],
+                                              "expiredTimeMillis": expired_time_millis, }
+
+        response = self.__client.api(
+            method="POST",
+            path="/v1.0/card/instances/createAndDeliver",
+            json=payload
+        )
+
+        return response.json()
+
+    def 更新卡片(self, out_track_id: str, card_param_map: dict, update_card_data_by_key: bool = True) -> dict:
+        """
+        调用本接口实现更新卡片。
+
+        根据文档 [更新卡片](https://open.dingtalk.com/document/development/interactive-card-update-interface?update_at=2025-09-23) 修订，更新于 2025-09-23。
+
+        :param out_track_id: 外部卡片实例Id。
+        :param card_param_map: 卡片模板内容。
+        :param update_card_data_by_key: True-按 key 更新 cardData 数据 False-覆盖更新 cardData 数据
+        :return:
+            {success: bool, result: bool}
+        """
+
+        response = self.__client.api(
+            method="PUT",
+            path="/v1.0/card/instances",
+            json={
+                "outTrackId": out_track_id,
+                "cardData": {"cardParamMap": card_param_map},
+                "cardUpdateOptions": {"updateCardDataByKey": update_card_data_by_key}
+            }
+        )
+
+        return response.json()
+
+
+# noinspection NonAsciiCharacters, PyPep8Naming
+class OA审批__:
+    def __init__(self, _client: DingTalkClient):
+        self.__client: DingTalkClient = _client
+        self.审批表单 = OA审批_审批表单__(_client)
+        self.审批实例 = OA审批_审批实例__(_client)
+        self.审批钉盘 = OA审批_审批钉盘__(_client)
+        self.审批任务 = OA审批_审批任务__(_client)
+
+
+# noinspection NonAsciiCharacters, PyPep8Naming
+class OA审批_审批表单__:
+    def __init__(self, _client: DingTalkClient):
+        self.__client: DingTalkClient = _client
+
+    def 创建或更新审批表单模板(
+            self,
+            name: str,
+            form_components: List[Dict],
+            description: str = None,
+            process_code: str = None,
+            template_config__disable_stop_process_button: bool = None,
+            template_config__hidden: bool = None,
+            template_config__disable_delete_process: bool = None,
+            template_config__disable_form_edit: bool = None,
+            template_config__disable_resubmit: bool = None,
+            template_config__disable_homepage: bool = None,
+            template_config__dir_id: str = None,
+            template_config__origin_dir_id: str = None,
+    ) -> dict:
+        """
+        调用本接口，创建或更新一个OA审批的流程表单模板，可指定表单控件列表并生成默认审批流程。
+
+        根据文档 [创建或更新审批表单模板](https://open.dingtalk.com/document/development/create-an-approval-form-template?update_at=2026-04-24) 修订，更新于 2026-04-24。
+
+        :param name: 表单模板名称，最大长度200字符。
+        :param description: 表单模板描述，最大长度300字符。
+        :param process_code: 未填写该参数，表示新建一个模板。填写该参数，表示更新所传值对应的审批模板。
+        :param form_components: 表单控件列表，单一表单最大组件个数不超过200。FormComponent参数说明见上述文档。
+        :param template_config__disable_stop_process_button: 表单全局属性配置: 管理列表页是否禁用停用按钮
+        :param template_config__hidden: 表单全局属性配置: 是否全局隐藏流程模板入口
+        :param template_config__disable_delete_process: 表单全局属性配置: 是否禁用模板删除按钮
+        :param template_config__disable_form_edit: 表单全局属性配置: 是否禁止表单编辑功能
+        :param template_config__disable_resubmit: 表单全局属性配置: 是否禁用详情页再次发起按钮
+        :param template_config__disable_homepage: 表单全局属性配置: 是否在首页隐藏模板
+        :param template_config__dir_id: 表单全局属性配置: 模板的目录ID，创建模板目录时指定
+        :param template_config__origin_dir_id: 表单全局属性配置: 原目录ID，更新模板目录时，需指定源目录ID
+
+        :return:
+            {
+              "result" : {
+                "processCode" : "PROC-abcdef-example"
+              }
+            }
+        """
+        payload = {
+            "name": name,
+            "processCode": process_code,
+            "formComponents": form_components,
+            "description": description,
+            "templateConfig": {
+                "disableStopProcessButton": template_config__disable_stop_process_button,
+                "hidden": template_config__hidden,
+                "disableDeleteProcess": template_config__disable_delete_process,
+                "disableFormEdit": template_config__disable_form_edit,
+                "disableResubmit": template_config__disable_resubmit,
+                "disableHomepage": template_config__disable_homepage,
+                "dirId": template_config__dir_id,
+                "originDirId": template_config__origin_dir_id
+            }
+        }
+        payload = _remove_none_values(payload)
+        response = self.__client.api(method="POST", path="/v1.0/workflow/forms", json=payload)
+        return response.json()
+
+    def 获取表单schema(self, process_code: str) -> dict:
+        """
+        调用本接口，通过 processCode，获取对应表单的 schema 信息。
+
+        根据文档 [获取表单 schema](https://open.dingtalk.com/document/development/obtain-the-form-schema?update_at=2026-04-24) 修订，更新于 2026-04-24。
+
+        :param process_code: 表单的唯一码，，调用创建或更新审批表单模板接口或OA审批概述-名词解释获取。
+
+        :return:
+            {
+                "result": {...}
+            }
+        """
+        response = self.__client.api(method="GET", path="/v1.0/workflow/forms/schemas/processCodes", params={"processCode": process_code})
+        return response.json()
+
+
+# noinspection NonAsciiCharacters, PyPep8Naming
+class OA审批_审批实例__:
+    def __init__(self, _client: DingTalkClient):
+        self.__client: DingTalkClient = _client
+
+    class CommentAttachment(BaseModel):
+        spaceId: str = Field(description="钉盘空间ID")
+        fileSize: str = Field(description="文件大小")
+        fileId: str = Field(description="文件ID")
+        fileName: str = Field(description="文件名称")
+        fileType: str = Field(description="文件类型")
+
+    def 获取单个审批实例详情(self, instance_id: str) -> dict:
+        """
+        调用本接口可以获取审批实例详情数据，根据审批实例ID，获取审批实例详情，包括审批实例标题、发起人userId、审批人userId、操作记录等。
+
+        根据文档 [获取单个审批实例详情](https://open.dingtalk.com/document/development/obtains-the-details-of-a-single-approval-instance-pop?update_at=2025-09-11) 修订，更新于 2025-09-11。
+
+        :param instance_id: 审批实例ID。
+
+        :return:
+            {
+                "success": boolean,
+                "result": {}
+            }
+        """
+        response = self.__client.api(
+            method="GET",
+            path="/v1.0/workflow/processInstances", params={'processInstanceId': instance_id})
+        return response.json()
+
+    def 撤销审批实例(self, instance_id: str, is_system: bool = True, remark: str | None = None,
+                     operating_user_id: str = None) -> dict:
+        """
+        调用本接口，撤销发起的处于流程中的审批实例。
+
+        根据文档 [撤销审批实例](https://open.dingtalk.com/document/development/revoke-an-approval-instance?update_at=2026-06-03) 修订，更新于 2026-06-03。
+
+        :param instance_id: 审批实例ID。
+        :param is_system: 是否通过系统操作。默认为 True。当为 false 时，需要传发起人才能撤销。
+        :param remark: 终止说明。
+        :param operating_user_id: 操作人的userId。is_system 为 false 时必填。
+
+        :return:
+            {
+                "success": boolean,
+                "result": {}
+            }
+        """
+        response = self.__client.api(
+            method="POST",
+            path="/v1.0/workflow/processInstances/terminate",
+            json={
+                "processInstanceId": instance_id,
+                "isSystem": is_system,
+                "remark": remark,
+                "operatingUserId": operating_user_id
+            }
+        )
+        return response.json()
+
+    def 添加审批评论(
+            self, instance_id: str, text: str, comment_user_id: str,
+            photos: List[str] | None = None, attachments: List[CommentAttachment] | None = None
+    ) -> dict:
+        """
+        调用本接口，对审批实例添加评论。
+
+        其中，添加审批评论附件需调用获取审批钉盘空间信息接口，获取钉盘空间的上传权限，并获取审批钉盘空间spaceId。
+
+        根据文档 [添加审批评论](https://open.dingtalk.com/document/app/add-an-approval-comment-1?update_at=2025-11-24) 修订，更新于 2025-11-24。
+
+        :param instance_id: 审批实例 ID。
+        :param text: 评论的内容。
+        :param comment_user_id: 评论人的 UserId
+        :param photos: 图片的 URL 链接的列表，默认为 None。
+        :param attachments: 附件列表，默认为 None。添加审批评论附件需将文件上传至审批钉盘空间，可以获取到相关接口参数。
+
+        :return:
+            {
+                "success": boolean,
+                "result": boolean
+            }
+        """
+
+        data: dict = {
+            'processInstanceId': instance_id,
+            'text': text,
+            'commentUserId': comment_user_id,
+        }
+
+        if photos or attachments:
+            data.update({'file': {"photos": photos, "attachments": attachments}})
+
+        response = self.__client.api(
+            method="POST",
+            path="/v1.0/workflow/processInstances/comments",
+            json=data
+        )
+        return response.json()
+
+    def 获取审批实例ID列表(
+            self, process_code: str, start_time: datetime, end_time: datetime, next_token: int = 0,
+            max_results: int = 20,
+            statuses: Literal["RUNNING", "TERMINATED", "COMPLETED"] | None = None, user_ids=List[str]
+    ) -> dict:
+        """
+        调用本接口，获取权限范围内的相关部门审批实例ID列表。
+
+        根据文档 [获取审批实例ID列表](https://open.dingtalk.com/document/development/obtain-an-approval-list-of-instance-ids?update_at=2026-04-24) 修订，更新于 2026-04-24。
+
+        :param user_ids:
+        :param process_code: 审批流模板的 code。
+        :param start_time: 审批实例开始时间。
+        :param end_time: 审批实例结束时间。
+        :param next_token: 分页游标, 首次调用传 0, 默认值为 0
+        :param max_results: 分页小，最多传20，默认值为 20
+        :param statuses: 筛选流程实例状态，默认为 None，表示不筛选。 RUNNING-审批中 TERMINATED-已撤销 COMPLETED-审批完成
+
+        :return:
+            {
+                "success": boolean,
+                "result": {}
+            }
+        """
+        response = self.__client.api(
+            method="POST",
+            path="/v1.0/workflow/processes/instanceIds/query",
+            json={
+                "processCode": process_code,
+                "startTime": int(start_time.timestamp() * 1000),
+                "endTime": int(end_time.timestamp() * 1000),
+                "nextToken": next_token,
+                "maxResults": max_results,
+                "userIds": user_ids,
+                "statuses": statuses
+            })
+        return response.json()
+
+
+# noinspection NonAsciiCharacters, PyPep8Naming
+class OA审批_审批钉盘__:
+    def __init__(self, _client: DingTalkClient):
+        self.__client: DingTalkClient = _client
+
+    def 获取审批钉盘空间信息(self, user_id: str) -> dict:
+        """
+        调用本接口，获取审批钉盘空间的ID并授予当前用户上传附件的权限。
+
+        根据文档 [获取审批钉盘空间信息](https://open.dingtalk.com/document/development/obtains-the-information-about-approval-nail-disk?update_at=2025-09-11) 修订，更新于 2025-09-11。
+
+        :param user_id: 用户的userId。
+
+        :return:
+            {
+                "success": bool,
+                "result": {
+                    "spaceId": int
+                }
+            }
+        """
+        response = self.__client.api(
+            method="POST",
+            path="/v1.0/workflow/processInstances/spaces/infos/query",
+            json={
+                "userId": user_id,
+                "agentId": self.__client.agent_id
+            })
+        return response.json()
+
+
+# noinspection NonAsciiCharacters, PyPep8Naming
+class OA审批_审批任务__:
+    def __init__(self, _client: DingTalkClient):
+        self.__client: DingTalkClient = _client
+
+    def 同意或拒绝审批任务(self, process_instance_id: str, result: bool, actioner_user_id: str, task_id: str | int,
+                           remark: str = "") -> dict:
+        """
+        调用本接口，根据指定模板ID、审批实例ID、任务节点ID和操作人userId，对单个审批任务进行处理。
+
+        根据文档 [同意或拒绝审批任务](https://open.dingtalk.com/document/development/approve-or-reject-the-approval-task?update_at=2025-11-24) 修订，更新于 2025-11-24。
+
+        :param process_instance_id: 审批实例 ID。
+        :param result: 审批操作, 同意或拒绝。
+        :param remark: 审批意见，可为空。
+        :param actioner_user_id: 操作人 userId。
+        :param task_id: 任务 ID。
+
+        :return:
+            {
+                "success": bool,
+                "result": {
+                    "spaceId": int
+                }
+            }
+        """
+        response = self.__client.api(
+            method="POST",
+            path="/v1.0/workflow/processInstances/execute",
+            json={
+                "processInstanceId": process_instance_id,
+                "remark": remark,
+                "result": "agree" if result else "refuse",
+                "actionerUserId": actioner_user_id,
+                "taskId": int(task_id)
+            })
+        return response.json()
+
+
+# noinspection NonAsciiCharacters, PyPep8Naming
+class 即时通信__:
+    def __init__(self, _client: DingTalkClient):
+        self.__client: DingTalkClient = _client
+        self.工作通知 = 即时通信_工作通知__(_client)
+
+
+# noinspection NonAsciiCharacters, PyPep8Naming
+class 即时通信_工作通知__:
+    def __init__(self, _client: DingTalkClient):
+        self.__client: DingTalkClient = _client
+
+    def 发送工作通知(self, msg: dict, to_all_user: bool = True, user_list: List[str] | None = None,
+                     dept_id_list: List[str] | None = None) -> dict:
+        """
+        调用本接口发送工作通知消息。
+
+        根据文档 [发送工作通知](https://open.dingtalk.com/document/isvapp/send-job-notification?update_at=2025-06-24) 修订，更新于 2025-06-24。
+
+        注意：
+        1. 企业内部应用发送消息单次最多只能给5000人发送。
+        2. 企业内部应用每天给每个员工最多可发送500条消息通知。
+        3. 该接口是异步发送消息，接口返回成功并不表示用户一定会收到消息，需要通过获取工作通知消息的发送结果接口查询是否给用户发送成功。
+
+        :param msg: 消息数据格式参考 [消息通知类型](https://open.dingtalk.com/document/development/message-types-and-data-format?update_at=2026-03-06)。
+        :param to_all_user: 是否发送给企业全部用户。如果为否，则必须传入 user_list 或 dept_id_list
+        :param user_list: 接收者的 userid 列表，最大用户列表长度 100。
+        :param dept_id_list: 接收者的部门 id 列表，最大列表长度 20 。接收者是部门 ID 时，包括子部门下的所有用户。
+        :return:
+        """
+        response = self.__client.oapi(
+            method="POST",
+            path="/topapi/message/corpconversation/asyncsend_v2",
+            json={
+                "agent_id": self.__client.agent_id,
+                "to_all_user": to_all_user,
+                "userid_list": ','.join(user_list) if user_list else None,
+                "dept_id_list": ','.join(dept_id_list) if dept_id_list else None,
+                "msg": msg
+            })
+        return response.json()

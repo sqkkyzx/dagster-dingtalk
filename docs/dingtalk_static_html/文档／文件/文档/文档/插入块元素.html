@@ -1,0 +1,437 @@
+<!DOCTYPE html><html><head><meta charset="utf8" / /><meta name="gmtModify" content="2026-04-10 11:06:53" / /><meta name="searchtitle" content="" / /><meta name="keywords" content="" / /><meta name="author" content="" / /><title>插入块元素</title><meta name="gmtModify" content="2026-06-04 19:09:02" / /></head><body data-tag="topic" id="doc-api-dingtalk-DocInsertBlocks" class="topic"><main id="7bdb3155d68a4" data-init-id="doc-api-dingtalk-DocInsertBlocks"><h1 data-tag="title" id="h1-ls1-xen-tnc" class="title">插入块元素</h1><p data-tag="shortdesc" class="shortdesc" id="b9aeccef1bv4v">调用该接口，可以向指定位置插入一个块元素。</p><div data-tag="conbody" outputclass="icms-api-reference" class="icms-api-reference conbody"><section id="section-prerequisites-1" class="section icms-module" data-tag="section" data-source="latest-mounted-icms-html"><h2 id="h2-prerequisites-1" data-tag="h2" class="h2">接口调用说明</h2><p id="1a8cf44645phj">如需要了解文档内容相关的数据结构，请参考<a href="https://open.dingtalk.com/document/development/document-data-structure" id="c850cc96e59qn">文档数据结构</a>内容。</p></section><section id="section-request-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-request-1" data-tag="h2" class="h2">请求</h2><section id="section-request-basic-info" class="section"><h3 id="heading-request-basic-info" data-tag="h3" class="h3">基本信息</h3><table id="cde5b62e1bunt" tablewidth="648" tablecolswidth="216 432" autofit="false" class="table"><colgroup colwidth="0.67*" style="width:33.33%"></colgroup><colgroup colwidth="1.33*" style="width:66.67%"></colgroup><tbody class="tbody"><tr id="45200840a3j5z"><td id="dfa4322dc3sck" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="803f9b5cb6yi6">字段</p></td><td id="9a41c5a1b61r0" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="154dafc242hyk">值</p></td></tr><tr id="5f269def8bu5c"><td id="dee9af8531u3k" rowspan="1" colspan="1"><p id="a3091c04e5eoi">HTTP URL</p></td><td id="0753bdf8ab053" rowspan="1" colspan="1"><p id="5d73b52f36q9j">https://api.dingtalk.com/v1.0/doc/suites/documents/{docKey}/blocks</p></td></tr><tr id="523c5edf74dox"><td id="25d589fd00oci" rowspan="1" colspan="1"><p id="af614a6f640wl">HTTP Method</p></td><td id="a39f8d994f8qm" rowspan="1" colspan="1"><p id="5e5d4becb77v5">POST</p></td></tr><tr id="2b85400a08c2r"><td id="186ced17a95ok" rowspan="1" colspan="1"><p id="dd3aab716a0yi">支持的应用类型</p></td><td id="d0a15e3dd3r3x" rowspan="1" colspan="1"><p id="6f4397e65a764"><span data-tag="ph" id="ph-request-basic-app-type-apptype-0" class="ph ph-app-type" data-ph-raw-text="appType-企业内部应用">appType-企业内部应用</span></p></td></tr><tr id="8d9b1394a8kid"><td id="68645b4977bwa" rowspan="1" colspan="1"><p id="5827d551aceyc">权限要求</p></td><td id="bc4e22b644zxk" rowspan="1" colspan="1"><p id="ce4383e9fang6"><span data-tag="ph" id="ph-request-basic-permission-permission-storage-file-write-0" class="ph-permission ph" data-ph-raw-text="permission-Storage.File.Write-企业存储文件写权限" data-permission-id="permission-Storage.File.Write" data-permission-code="Storage.File.Write" data-permission-detail-api="/document/api/permission/detail" data-permission-query-param="code">permission-Storage.File.Write-企业存储文件写权限</span></p></td></tr></tbody></table></section><section id="section-request-header-parameter" class="section"><h3 data-tag="h3" id="h2-qhv-q4t-zgt" class="h3 title">请求头</h3><table id="cf0e509f2aa45" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="acc3cc9363mgh"><td id="c0e516f0c1urb" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="7aa78330f47kn">名称</p></td><td id="239ffa0213h1k" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="5594fbde5dhq3">类型</p></td><td id="c10cfff00ffg5" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="b76b3d4718ajj">是否必填</p></td><td id="f99cce105csmx" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="7a8635414396h">描述</p></td></tr><tr id="3691b41af883w"><td id="5c169df9b8o04" rowspan="1" colspan="1"><p id="d469d7dc35f2e">x-acs-dingtalk-access-token</p></td><td id="7499dd8577xs0" rowspan="1" colspan="1"><p id="cec36c295ftdm">String</p></td><td id="6ae4a860b5j2r" rowspan="1" colspan="1"><p id="891848ea26vq6">是</p></td><td id="7e6773330bxwy" rowspan="1" colspan="1"><p id="3c18915527mqz">调用该接口的访问凭证，通过调用<a href="https://open.dingtalk.com/document/development/obtain-the-access-token-of-an-internal-app" id="7e6e27049a8uh">获取企业内部应用的accessToken</a>接口获取。</p></td></tr></tbody></table></section><section id="section-request-path-parameter" class="section"><h3 data-tag="h3" id="h2-edq-ug5-lio" class="h3 title">路径参数</h3><table id="d4e2a251aehhp" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="0288e64d47r9o"><td id="803e0bcbd8xhf" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="23971fc422rbi">名称</p></td><td id="ee2018f63bx8n" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="1115d91a1cyjk">类型</p></td><td id="5885824e6d6mn" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="146f8090549qs">是否必填</p></td><td id="0718e4a6e1z60" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="6356ee59cfk60">描述</p></td></tr><tr id="a4dd53838asyu"><td id="ce9e1b4ab1rhp" rowspan="1" colspan="1"><p id="46cf31423128s">docKey</p></td><td id="32ef104526ftp" rowspan="1" colspan="1"><p id="5dc6e2704959r">String</p></td><td id="91016d31088ui" rowspan="1" colspan="1"><p id="4a51d3a831xnn">是</p></td><td id="85bc0023658zu" rowspan="1" colspan="1"><p id="c54ce069abify">文档ID（文档的 docKey 或 dentryUuid），通过<a href="https://open.dingtalk.com/document/development/create-team-space-document" id="96594f4951uu2">创建知识库文档</a>接口创建文档后，从返回值中获取<code data-tag="inlineCode" id="4ca130bd4a7ky" class="inlineCode">docKey</code>参数。</p><p class="note-icon-wrapper" id="b76d4144b5nbc"></p><p data-tag="p" class="p" id="600d37e265b4f"></p><p id="e58f744e675ur">从文档URL获取<code data-tag="inlineCode" id="802d5b3f36kgk" class="inlineCode">dentryUuid</code>，以https://alidocs.dingtalk.com/i/nodes/Zxxxxa-id为例，dentryUuid就是Zxxxxa-id。</p><p id="5060309bd162d"></p></td></tr></tbody></table></section><section id="section-request-query-parameter" class="section"><h3 data-tag="h3" id="h2-yps-d3n-a15" class="h3 title">查询参数</h3><table id="7698611a818j1" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="8a37730aceef0"><td id="ae2bad6dc4gc5" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="5140222735sgb">名称</p></td><td id="243e12cacem7c" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="960c8e4853fzp">类型</p></td><td id="0c192905797by" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="03c50159c3akn">是否必填</p></td><td id="78cd19d5c574u" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="9433310588wh4">描述</p></td></tr><tr id="2f81ee9270vlt"><td id="38ce656963nyj" rowspan="1" colspan="1"><p id="8217df33d1oct">operatorId</p></td><td id="1325244989sw1" rowspan="1" colspan="1"><p id="659285ea57rlv">String</p></td><td id="db9ba9038b00g" rowspan="1" colspan="1"><p id="8740db368aq7g">是</p></td><td id="660f86fafb9sz" rowspan="1" colspan="1"><p id="7f15f16c3660t">用户unionId，可通过<a href="https://open.dingtalk.com/document/development/query-user-details" id="b4c8fd0b20g18">查询用户详情</a>接口获取unionid参数值。</p></td></tr></tbody></table></section><section id="section-request-body-parameter" class="section"><h3 data-tag="h3" id="h2-dlc-0hh-tyw" class="h3 title">请求体</h3><table id="1aa9690e74hce" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="bd678597fbreq"><td id="0766e1d2ddkul" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="c182459c5c2v6">名称</p></td><td id="4fe4d4a80bjik" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="59fb1f263f6mu">类型</p></td><td id="08ef43e079t71" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="4d7baf800b0hy">是否必填</p></td><td id="c04ba2e83azux" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="cb3bbc5f1afbg">描述</p></td></tr><tr outputclass="row row-level-3" id="d1fd19f3efjt5" class="row row-level-3"><td id="632c252dda83e" rowspan="1" colspan="1"><p id="51db81d174346">blockId</p></td><td id="6137a98d03vg2" rowspan="1" colspan="1"><p id="0a0c811632een">String</p></td><td id="628e444ec5wwp" rowspan="1" colspan="1"><p id="c00ab138b8vxk">否</p></td><td id="8086bdbba7j8u" rowspan="1" colspan="1"><p id="a6a3aef704sv9">目标 Block 的唯一标识，可以通过<a href="https://open.dingtalk.com/document/development/api-docblocksquery" id="f5ac4f489990r">查询块元素</a>接口获取<code data-tag="inlineCode" id="117f8a6859ldm" class="inlineCode">blockId</code> 参数。若未填，则以index 为准。</p></td></tr><tr outputclass="row row-level-4" id="98b1445e064z4" class="row row-level-4"><td id="eb2fbe83ffv05" rowspan="1" colspan="1"><p id="758abc8edaena">index</p></td><td id="afe0c38c0934g" rowspan="1" colspan="1"><p id="67de21353aemq">Integer</p></td><td id="0d9b790569z9b" rowspan="1" colspan="1"><p id="db16e29e52b7u">否</p></td><td id="960b4b2c7df4s" rowspan="1" colspan="1"><p id="0be40037bd0o1">当<code data-tag="inlineCode" id="3a7085ddfbwy5" class="inlineCode">blockId</code>不存在时，尝试使用<code data-tag="inlineCode" id="d1fb07eba8chz" class="inlineCode">index</code>查找文档第<code data-tag="inlineCode" id="bda50c44e8rbf" class="inlineCode">index</code>个一级块元素作为目标位置，<code data-tag="inlineCode" id="8ae91241c0da5" class="inlineCode">index</code>从 0 开始。</p><p class="note-icon-wrapper" id="8415890ae8tu4"></p><p data-tag="p" class="p" id="eb71be69b5lsk"></p><p id="5fa14fe4330dh">若未填，则默认为文档末尾。</p><p id="058884626c6pq"></p></td></tr><tr outputclass="row row-level-5" id="cb05ef63d6ib4" class="row row-level-5"><td id="d53ef89ccfw7i" rowspan="1" colspan="1"><p id="7b77dfacdf8qg">where</p></td><td id="8d3de70749bg1" rowspan="1" colspan="1"><p id="81098075bb9z7">String</p></td><td id="00588c516dt8r" rowspan="1" colspan="1"><p id="9a9e980f682sy">否</p></td><td id="d11d1a9fb8eff" rowspan="1" colspan="1"><p id="7d4e6727d4oux">在目标位置之后或之前插入，取值：</p><ul id="f7a8b5f5bd2ac"><li id="49e3f8ad6auf2"><p id="cf5851a95b0nn"><b>after</b>: 在目标位置之后插入，默认取值</p></li><li id="d9e616cbd1jo5"><p id="35d1bb56831st"><b>before</b>: 在目标位置之前插入</p></li></ul></td></tr><tr outputclass="row row-level-6 has-child" id="48f48d19f7gqy" class="row row-level-6 has-child"><td id="c26e3b2f31bc2" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="5d2ef54bedf2s">element</p></td><td id="ad9eb7070740j" rowspan="1" colspan="1"><p id="41aba6a9d2upk">Map&lt;String, Any&gt;</p></td><td id="639c27abbfh4q" rowspan="1" colspan="1"><p id="5dcb24f6dcdmv">是</p></td><td id="e2270c032e2zg" rowspan="1" colspan="1"><p id="2d2720894ecgr">待插入的 BlockElement 类型和创建对应类型所需的属性（详情参考<a href="https://open.dingtalk.com/document/development/block-data-structure" id="5e5be3c85dwqf">块元素数据结构</a>），结构如下：</p><pre outputclass="nohighlight" data-tag="codeblock" code-type="xCode" id="6d9b4d8d02h08" class="pre codeblock nohighlight"><code>{
+  "blockType": enum(BlockType),
+  [blockType]: Object(CreateElementProperties),
+}
+</code></pre></td></tr><tr outputclass="row row-level-6-1" id="6a2e9c87de3ge" class="row row-level-6-1"><td id="e7d2111316tso" rowspan="1" colspan="1"><p id="350f702b83358"></p></td><td id="9683e7a7f3qj4" rowspan="1" colspan="1"><p id="1ce6d593ba0l3">Any</p></td><td id="18106993af42d" rowspan="1" colspan="1"><p id="e16ac6438fckb">否</p></td><td id="88a0ecad0bxs2" rowspan="1" colspan="1"><p id="533874e31btfi">包含元素类型和创建该元素所需的信息。</p></td></tr></tbody></table></section><section id="section-request-body-example" class="section"><h3 id="h3-request-body-example" data-tag="h3" class="h3">请求示例</h3><div outputclass="tabbed-codeblock" data-tag="fig" id="figure-bsv-mul-u8p" class="tabbed-codeblock-box"><div class="tab-box"></div><input type="radio" name="check-figure-bsv-mul-u8p" id="figure-bsv-mul-u8p-HTTP-tab" checked="checked" /><label for="figure-bsv-mul-u8p-HTTP-tab">HTTP</label><div class="codeblock-item"><pre id="codeblock-ofi-zlf-gng" outputclass="language-HTTP" data-tag="codeblock" code-type="xCode" class="pre codeblock language-HTTP"><code>POST /v1.0/doc/suites/documents/doc_id/blocks?operatorId=union_id HTTP/1.1
+Host:api.dingtalk.com
+x-acs-dingtalk-access-token:7dc9ec4xxx
+Content-Type:application/json
+
+{
+  "blockId" : "block_id",
+  "index" : 1,
+  "where" : "after",
+  "element" : {
+    "blockType" : "paragraph",
+    "paragraph" : {
+      "text" : "foo"
+    }
+  }
+}</code></pre></div><input type="radio" name="check-figure-bsv-mul-u8p" id="figure-bsv-mul-u8p-java-tab" /><label for="figure-bsv-mul-u8p-java-tab">Java</label><div class="codeblock-item"><pre id="codeblock-omb-kwj-gfq" outputclass="language-java" data-tag="codeblock" code-type="xCode" class="pre codeblock language-java"><code>package com.aliyun.sample;
+
+import com.aliyun.tea.*;
+
+public class Sample {
+
+    /**
+     * &lt;b&gt;description&lt;/b&gt; :
+     * &lt;p&gt;使用 Token 初始化账号Client&lt;/p&gt;
+     * @return Client
+     * 
+     * @throws Exception
+     */
+    public static com.aliyun.dingtalkdoc_1_0.Client createClient() throws Exception {
+        com.aliyun.teaopenapi.models.Config config = new com.aliyun.teaopenapi.models.Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        return new com.aliyun.dingtalkdoc_1_0.Client(config);
+    }
+
+    public static void main(String[] args_) throws Exception {
+        
+        com.aliyun.dingtalkdoc_1_0.Client client = Sample.createClient();
+        com.aliyun.dingtalkdoc_1_0.models.DocInsertBlocksHeaders docInsertBlocksHeaders = new com.aliyun.dingtalkdoc_1_0.models.DocInsertBlocksHeaders();
+        docInsertBlocksHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        java.util.Map&lt;String, java.util.Map&lt;String, Object&gt;&gt; element = TeaConverter.buildMap(
+            new TeaPair("key", new java.util.HashMap&lt;&gt;())
+        );
+        com.aliyun.dingtalkdoc_1_0.models.DocInsertBlocksRequest docInsertBlocksRequest = new com.aliyun.dingtalkdoc_1_0.models.DocInsertBlocksRequest()
+                .setOperatorId("union_id")
+                .setBlockId("block_id")
+                .setIndex(1)
+                .setWhere("after")
+                .setElement(element);
+        try {
+            client.docInsertBlocksWithOptions("doc_id", docInsertBlocksRequest, docInsertBlocksHeaders, new com.aliyun.teautil.models.RuntimeOptions());
+        } catch (TeaException err) {
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        } catch (Exception _err) {
+            TeaException err = new TeaException(_err.getMessage(), _err);
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        }        
+    }
+}</code></pre></div><input type="radio" name="check-figure-bsv-mul-u8p" id="figure-bsv-mul-u8p-python-tab" /><label for="figure-bsv-mul-u8p-python-tab">Python</label><div class="codeblock-item"><pre id="codeblock-7pd-uzr-5qp" outputclass="language-python" data-tag="codeblock" code-type="xCode" class="pre codeblock language-python"><code># -*- coding: utf-8 -*-
+# This file is auto-generated, don't edit it. Thanks.
+import os
+import sys
+import json
+
+from typing import List
+
+from alibabacloud_dingtalk.doc_1_0.client import Client as dingtalkdoc_1_0Client
+from alibabacloud_tea_openapi import models as open_api_models
+from alibabacloud_dingtalk.doc_1_0 import models as dingtalkdoc__1__0_models
+from alibabacloud_tea_util import models as util_models
+from alibabacloud_tea_util.client import Client as UtilClient
+
+
+class Sample:
+    def __init__(self):
+        pass
+
+    @staticmethod
+    def create_client() -&gt; dingtalkdoc_1_0Client:
+        """
+        使用 Token 初始化账号Client
+        @return: Client
+        @throws Exception
+        """
+        config = open_api_models.Config()
+        config.protocol = 'https'
+        config.region_id = 'central'
+        return dingtalkdoc_1_0Client(config)
+
+    @staticmethod
+    def main(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        doc_insert_blocks_headers = dingtalkdoc__1__0_models.DocInsertBlocksHeaders()
+        doc_insert_blocks_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        element = {
+            'key': {}
+        }
+        doc_insert_blocks_request = dingtalkdoc__1__0_models.DocInsertBlocksRequest(
+            operator_id='union_id',
+            block_id='block_id',
+            index=1,
+            where='after',
+            element=element
+        )
+        try:
+            client.doc_insert_blocks_with_options('doc_id', doc_insert_blocks_request, doc_insert_blocks_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+    @staticmethod
+    async def main_async(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        doc_insert_blocks_headers = dingtalkdoc__1__0_models.DocInsertBlocksHeaders()
+        doc_insert_blocks_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        element = {
+            'key': {}
+        }
+        doc_insert_blocks_request = dingtalkdoc__1__0_models.DocInsertBlocksRequest(
+            operator_id='union_id',
+            block_id='block_id',
+            index=1,
+            where='after',
+            element=element
+        )
+        try:
+            await client.doc_insert_blocks_with_options_async('doc_id', doc_insert_blocks_request, doc_insert_blocks_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+
+if __name__ == '__main__':
+    Sample.main(sys.argv[1:])</code></pre></div><input type="radio" name="check-figure-bsv-mul-u8p" id="figure-bsv-mul-u8p-php-tab" /><label for="figure-bsv-mul-u8p-php-tab">PHP</label><div class="codeblock-item"><pre id="codeblock-yzm-2lt-lyh" outputclass="language-php" data-tag="codeblock" code-type="xCode" class="pre codeblock language-php"><code>&lt;?php
+
+// This file is auto-generated, don't edit it. Thanks.
+namespace AlibabaCloud\SDK\Sample;
+
+use AlibabaCloud\SDK\Dingtalk\Vdoc_1_0\Dingtalk;
+use \Exception;
+use AlibabaCloud\Tea\Exception\TeaError;
+use AlibabaCloud\Tea\Utils\Utils;
+
+use Darabonba\OpenApi\Models\Config;
+use AlibabaCloud\SDK\Dingtalk\Vdoc_1_0\Models\DocInsertBlocksHeaders;
+use AlibabaCloud\SDK\Dingtalk\Vdoc_1_0\Models\DocInsertBlocksRequest;
+use AlibabaCloud\Tea\Utils\Utils\RuntimeOptions;
+
+class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Dingtalk Client
+     */
+    public static function createClient(){
+        $config = new Config([]);
+        $config-&gt;protocol = "https";
+        $config-&gt;regionId = "central";
+        return new Dingtalk($config);
+    }
+
+    /**
+     * @param string[] $args
+     * @return void
+     */
+    public static function main($args){
+        $client = self::createClient();
+        $docInsertBlocksHeaders = new DocInsertBlocksHeaders([]);
+        $docInsertBlocksHeaders-&gt;xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        $element = [
+            "key" =&gt; []
+        ];
+        $docInsertBlocksRequest = new DocInsertBlocksRequest([
+            "operatorId" =&gt; "union_id",
+            "blockId" =&gt; "block_id",
+            "index" =&gt; 1,
+            "where" =&gt; "after",
+            "element" =&gt; $element
+        ]);
+        try {
+            $client-&gt;docInsertBlocksWithOptions("doc_id", $docInsertBlocksRequest, $docInsertBlocksHeaders, new RuntimeOptions([]));
+        }
+        catch (Exception $err) {
+            if (!($err instanceof TeaError)) {
+                $err = new TeaError([], $err-&gt;getMessage(), $err-&gt;getCode(), $err);
+            }
+            if (!Utils::empty_($err-&gt;code) &amp;&amp; !Utils::empty_($err-&gt;message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+        }
+    }
+}
+$path = __DIR__ . \DIRECTORY_SEPARATOR . '..' . \DIRECTORY_SEPARATOR . 'vendor' . \DIRECTORY_SEPARATOR . 'autoload.php';
+if (file_exists($path)) {
+    require_once $path;
+}
+Sample::main(array_slice($argv, 1));</code></pre></div><input type="radio" name="check-figure-bsv-mul-u8p" id="figure-bsv-mul-u8p-go-tab" /><label for="figure-bsv-mul-u8p-go-tab">Go</label><div class="codeblock-item"><pre id="codeblock-gxb-gq8-cem" outputclass="language-go" data-tag="codeblock" code-type="xCode" class="pre codeblock language-go"><code>package main
+
+import (
+  "encoding/json"
+  "strings"
+  "fmt"
+  "os"
+  util  "github.com/alibabacloud-go/tea-utils/v2/service"
+  dingtalkdoc_1_0  "github.com/alibabacloud-go/dingtalk/doc_1_0"
+  openapi  "github.com/alibabacloud-go/darabonba-openapi/v2/client"
+  "github.com/alibabacloud-go/tea/tea"
+)
+
+
+// Description:
+// 
+// 使用 Token 初始化账号Client
+// 
+// @return Client
+// 
+// @throws Exception
+func CreateClient () (_result *dingtalkdoc_1_0.Client, _err error) {
+  config := &amp;openapi.Config{}
+  config.Protocol = tea.String("https")
+  config.RegionId = tea.String("central")
+  _result = &amp;dingtalkdoc_1_0.Client{}
+  _result, _err = dingtalkdoc_1_0.NewClient(config)
+  return _result, _err
+}
+
+func _main (args []*string) (_err error) {
+  client, _err := CreateClient()
+  if _err != nil {
+    return _err
+  }
+
+  docInsertBlocksHeaders := &amp;dingtalkdoc_1_0.DocInsertBlocksHeaders{}
+  docInsertBlocksHeaders.XAcsDingtalkAccessToken = tea.String("&lt;your access token&gt;")
+  element := map[string]map[string]interface{}{
+    "key": map[string]interface{}{},
+  }
+  docInsertBlocksRequest := &amp;dingtalkdoc_1_0.DocInsertBlocksRequest{
+    OperatorId: tea.String("union_id"),
+    BlockId: tea.String("block_id"),
+    Index: tea.Int32(1),
+    Where: tea.String("after"),
+    Element: element,
+  }
+  tryErr := func()(_e error) {
+    defer func() {
+      if r := tea.Recover(recover()); r != nil {
+        _e = r
+      }
+    }()
+    _, _err = client.DocInsertBlocksWithOptions(tea.String("doc_id"), docInsertBlocksRequest, docInsertBlocksHeaders, &amp;util.RuntimeOptions{})
+    if _err != nil {
+      return _err
+    }
+
+    return nil
+  }()
+
+  if tryErr != nil {
+    var err = &amp;tea.SDKError{}
+    if _t, ok := tryErr.(*tea.SDKError); ok {
+      err = _t
+    } else {
+      err.Message = tea.String(tryErr.Error())
+    }
+    if !tea.BoolValue(util.Empty(err.Code)) &amp;&amp; !tea.BoolValue(util.Empty(err.Message)) {
+      // err 中含有 code 和 message 属性，可帮助开发定位问题
+    }
+
+  }
+  return _err
+}
+
+
+func main() {
+  err := _main(tea.StringSlice(os.Args[1:]))
+  if err != nil {
+    panic(err)
+  }
+}</code></pre></div><input type="radio" name="check-figure-bsv-mul-u8p" id="figure-bsv-mul-u8p-nodejs-tab" /><label for="figure-bsv-mul-u8p-nodejs-tab">Node.js</label><div class="codeblock-item"><pre id="codeblock-cpo-v6t-jtq" outputclass="language-nodejs" data-tag="codeblock" code-type="xCode" class="pre codeblock language-nodejs"><code>'use strict';
+// This file is auto-generated, don't edit it
+const Util = require('@alicloud/tea-util');
+const dingtalkdoc_1_0 = require('@alicloud/dingtalk/doc_1_0');
+const OpenApi = require('@alicloud/openapi-client');
+const Tea = require('@alicloud/tea-typescript');
+
+class Client {
+
+  /**
+   * 使用 Token 初始化账号Client
+   * @return Client
+   * @throws Exception
+   */
+  static createClient() {
+    let config = new OpenApi.Config({ });
+    config.protocol = 'https';
+    config.regionId = 'central';
+    return new dingtalkdoc_1_0.default(config);
+  }
+
+  static async main(args) {
+    let client = Client.createClient();
+    let docInsertBlocksHeaders = new dingtalkdoc_1_0.DocInsertBlocksHeaders({ });
+    docInsertBlocksHeaders.xAcsDingtalkAccessToken = '&lt;your access token&gt;';
+    let element = {
+      key: { },
+    };
+    let docInsertBlocksRequest = new dingtalkdoc_1_0.DocInsertBlocksRequest({
+      operatorId: 'union_id',
+      blockId: 'block_id',
+      index: 1,
+      where: 'after',
+      element: element,
+    });
+    try {
+      await client.docInsertBlocksWithOptions('doc_id', docInsertBlocksRequest, docInsertBlocksHeaders, new Util.RuntimeOptions({ }));
+    } catch (err) {
+      if (!Util.default.empty(err.code) &amp;&amp; !Util.default.empty(err.message)) {
+        // err 中含有 code 和 message 属性，可帮助开发定位问题
+      }
+
+    }    
+  }
+
+}
+
+exports.Client = Client;
+Client.main(process.argv.slice(2));</code></pre></div><input type="radio" name="check-figure-bsv-mul-u8p" id="figure-bsv-mul-u8p-csharp-tab" /><label for="figure-bsv-mul-u8p-csharp-tab">C#</label><div class="codeblock-item"><pre id="codeblock-f9p-xke-q0c" outputclass="language-csharp" data-tag="codeblock" code-type="xCode" class="pre codeblock language-csharp"><code>using Newtonsoft.Json;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
+
+using Tea;
+using Tea.Utils;
+
+
+namespace AlibabaCloud.SDK.Sample
+{
+    public class Sample 
+    {
+
+        /// &lt;term&gt;&lt;b&gt;Description:&lt;/b&gt;&lt;/term&gt;
+        /// &lt;description&gt;
+        /// &lt;para&gt;使用 Token 初始化账号Client&lt;/para&gt;
+        /// &lt;/description&gt;
+        /// 
+        /// &lt;returns&gt;
+        /// Client
+        /// &lt;/returns&gt;
+        /// 
+        /// &lt;term&gt;&lt;b&gt;Exception:&lt;/b&gt;&lt;/term&gt;
+        /// Exception
+        public static AlibabaCloud.SDK.Dingtalkdoc_1_0.Client CreateClient()
+        {
+            AlibabaCloud.OpenApiClient.Models.Config config = new AlibabaCloud.OpenApiClient.Models.Config();
+            config.Protocol = "https";
+            config.RegionId = "central";
+            return new AlibabaCloud.SDK.Dingtalkdoc_1_0.Client(config);
+        }
+
+        public static void Main(string[] args)
+        {
+            AlibabaCloud.SDK.Dingtalkdoc_1_0.Client client = CreateClient();
+            AlibabaCloud.SDK.Dingtalkdoc_1_0.Models.DocInsertBlocksHeaders docInsertBlocksHeaders = new AlibabaCloud.SDK.Dingtalkdoc_1_0.Models.DocInsertBlocksHeaders();
+            docInsertBlocksHeaders.XAcsDingtalkAccessToken = "&lt;your access token&gt;";
+            Dictionary&lt;string, Dictionary&lt;string, object&gt;&gt; element = new Dictionary&lt;string, Dictionary&lt;string, object&gt;&gt;
+            {
+                {"key", new Dictionary&lt;string, object&gt;(){}},
+            };
+            AlibabaCloud.SDK.Dingtalkdoc_1_0.Models.DocInsertBlocksRequest docInsertBlocksRequest = new AlibabaCloud.SDK.Dingtalkdoc_1_0.Models.DocInsertBlocksRequest
+            {
+                OperatorId = "union_id",
+                BlockId = "block_id",
+                Index = 1,
+                Where = "after",
+                Element = element,
+            };
+            try
+            {
+                client.DocInsertBlocksWithOptions("doc_id", docInsertBlocksRequest, docInsertBlocksHeaders, new AlibabaCloud.TeaUtil.Models.RuntimeOptions());
+            }
+            catch (TeaException err)
+            {
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+            catch (Exception _err)
+            {
+                TeaException err = new TeaException(new Dictionary&lt;string, object&gt;
+                {
+                    { "message", _err.Message }
+                });
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+        }
+
+
+    }
+}</code></pre></div></div></section></section><section id="section-response-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-response-1" data-tag="h2" class="h2">响应</h2><section id="section-response-parameter" class="section"><h3 data-tag="h3" id="h2-dst-ne4-8tg" class="h3 title">响应体</h3><table id="5f0140a58e7xq" tablewidth="710" tablecolswidth="213 142 355" autofit="false" class="table"><colgroup colwidth="0.9*" style="width:30.00%"></colgroup><colgroup colwidth="0.6*" style="width:20.00%"></colgroup><colgroup colwidth="1.5*" style="width:50.00%"></colgroup><tbody class="tbody"><tr id="1149420571s7c"><td id="76a4d8afc6jjs" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="705c7dc1d0w9o">名称</p></td><td id="3c78b20428bpu" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="19540529c7935">类型</p></td><td id="697a8054fdbe3" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="5b20e224548j2">描述</p></td></tr><tr outputclass="row row-level-1" id="921449b291w8r" class="row row-level-1"><td id="54c02a80b2dtb" rowspan="1" colspan="1"><p id="7ee25c2026fwv">success</p></td><td id="8818be46b0sjw" rowspan="1" colspan="1"><p id="02f2a23e9cfcl">Boolean</p></td><td id="a1a94e5406u93" rowspan="1" colspan="1"><p id="a853249b170yc">请求是否成功。</p></td></tr><tr outputclass="row row-level-2 has-child" id="aaf0be61edzml" class="row row-level-2 has-child"><td id="04d144352d4xy" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="61566e778cd6c">result</p></td><td id="93ee2c7acdj57" rowspan="1" colspan="1"><p id="89e4d224bdvbu">Object</p></td><td id="d652cffa1fvbz" rowspan="1" colspan="1"><p id="06a2fdfda38s1">请求结果。</p></td></tr><tr outputclass="row row-level-2-1 has-child" id="2b5ec274280wa" class="row row-level-2-1 has-child"><td id="ed33dd7c79et1" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="27218d1aff0y7">data</p></td><td id="03d34003d66w4" rowspan="1" colspan="1"><p id="6b4053be5e1q6">Map&lt;String, Any&gt;</p></td><td id="ba8f996dbcipc" rowspan="1" colspan="1"><p id="db2a25f116qey">被插入的元素。</p></td></tr><tr outputclass="row row-level-2-1-1" id="25766d967dp6a" class="row row-level-2-1-1"><td id="728cdaab1cq23" rowspan="1" colspan="1"><p id="2b85bdef2flt5"></p></td><td id="b3851585f4q4i" rowspan="1" colspan="1"><p id="619d2e5f33aqi">Any</p></td><td id="02ea49512bn1a" rowspan="1" colspan="1"><p id="688b28b6dc7hi">该元素的具体信息。</p></td></tr></tbody></table></section><section id="section-response-body-example" class="section"><h3 id="h3-response-body-example" data-tag="h3" class="h3">响应体示例</h3><pre outputclass="language-json" data-tag="codeblock" code-type="xCode" id="c5127e94ddeki" class="pre codeblock language-json"><code>HTTP/1.1 200 OK
+Content-Type:application/json
+
+{
+  "success": true,
+  "result": {
+    "data": {
+      "blockType": "paragraph",
+      "paragraph": {
+        "text": "foo"
+      },
+      "id": "lmoasis2f3wxmwyyyy",
+      "index": 2,
+    }
+  }
+}</code></pre></section><section id="section-error-code-1" class="section"><h3 id="h3-error-code-1" data-tag="h3" class="h3">错误码</h3><p data-tag="p" id="p-error-code-global-guide" class="p">若调用该接口报错，可根据错误信息在<a href="https://open.dingtalk.com/document/development/server-api-error-codes-1" id="a-error-code-global-guide">全局错误码</a>文档中查找解决方案。</p><table id="9aa138fefcikm" tablewidth="709" tablecolswidth="142 177 177 213" autofit="false" class="table"><colgroup colwidth="0.8*" style="width:20.03%"></colgroup><colgroup colwidth="1*" style="width:24.96%"></colgroup><colgroup colwidth="1*" style="width:24.96%"></colgroup><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><tbody class="tbody"><tr id="2aa1b534c6er7"><td id="f2ccfd1feehyf" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="99059cc38fg1a">HttpCode</p></td><td id="66ea90eefar6o" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="e3638251f7zf8">错误码</p></td><td id="413f750d60si6" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="cbb0649c01m2s">错误信息</p></td><td id="3ca35723edl2u" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="f74783f203l5r">说明</p></td></tr><tr id="af4eadc9bdocd"><td id="3448c6693aqbt" rowspan="1" colspan="1"><p id="5070ee1f61msh">400</p></td><td id="118625514e1po" rowspan="1" colspan="1"><p id="ab9ef72c5d8a4">paramError</p></td><td id="bde1b5b0a40ka" rowspan="1" colspan="1"><p id="6c6033c866kr7">%s</p></td><td id="7b6d570545rks" rowspan="1" colspan="1"><p id="4b96050836tc9">参数错误</p></td></tr><tr id="c21532eaeagz1"><td id="88c4e27e86la4" rowspan="1" colspan="1"><p id="daefc05e8eqpn">400</p></td><td id="a906ee8c32u5o" rowspan="1" colspan="1"><p id="ccb7ff5369wc3">invalidRequest.inputArgs.invalid</p></td><td id="46568bc3e9pp0" rowspan="1" colspan="1"><p id="4ba7e97662u82">%s</p></td><td id="dc240be4ca4i5" rowspan="1" colspan="1"><p id="4afd859d50ymz">参数错误, 请查看错误信息。</p></td></tr><tr id="7a16294ad5onn"><td id="cf547461e4ui8" rowspan="1" colspan="1"><p id="03b207c07b5ox">403</p></td><td id="15df1a7fd2gly" rowspan="1" colspan="1"><p id="6741bc747d3b4">forbidden.accessDenied</p></td><td id="e24084d0d0ho5" rowspan="1" colspan="1"><p id="f7bfaf0113djz">%s</p></td><td id="d551aeea81jee" rowspan="1" colspan="1"><p id="748c3c3915aex">无权限</p></td></tr><tr id="14b0a25768q5d"><td id="0889a771f2jbs" rowspan="1" colspan="1"><p id="26d1ac8127he0">403</p></td><td id="e7bab233cdtl0" rowspan="1" colspan="1"><p id="9b2e687a6fb4n">forbidden.acrossOrg</p></td><td id="3394e1632emlt" rowspan="1" colspan="1"><p id="2a54a7f3detbv">%s</p></td><td id="3bbb0718483jn" rowspan="1" colspan="1"><p id="b443305d25nnj">请求不合法，请检查要访问的文档是否归属于accessToken指定的组织。</p></td></tr><tr id="60a34cc198c8y"><td id="12162f3c7equh" rowspan="1" colspan="1"><p id="252c09b3033gt">404</p></td><td id="34072c8a6djcw" rowspan="1" colspan="1"><p id="6dc0f825d32v3">docNotExist</p></td><td id="24c4cce14d3a3" rowspan="1" colspan="1"><p id="badff0a8d47an">%s</p></td><td id="510a869f2fgjk" rowspan="1" colspan="1"><p id="2e8892abef677">文档不存在</p></td></tr><tr id="6be7bd3198pq9"><td id="63a92283596c8" rowspan="1" colspan="1"><p id="cbd307e6a7h59">404</p></td><td id="90806b26a12vu" rowspan="1" colspan="1"><p id="5d16c348a3wzu">invalidRequest.resource.notFound</p></td><td id="c3389e6d7987v" rowspan="1" colspan="1"><p id="d01d0c1ea71h2">%s</p></td><td id="d2b5a8cf1fp1z" rowspan="1" colspan="1"><p id="5a1b3c8416tca">无法找到要访问的资源</p></td></tr><tr id="1e162066d8mfy"><td id="5b4ce728d2tji" rowspan="1" colspan="1"><p id="d7886868d49m3">500</p></td><td id="9fba7e25bfrah" rowspan="1" colspan="1"><p id="6526e108bf2eu">forbidden.operationIllegal</p></td><td id="863e27f2680xc" rowspan="1" colspan="1"><p id="9ee01cb055gs5">%s</p></td><td id="44a1f5ed7aa49" rowspan="1" colspan="1"><p id="5b045c733eaec">请求操作不合法</p></td></tr><tr id="fa97c9ac18r8d"><td id="6bd1f18a2dy9n" rowspan="1" colspan="1"><p id="a2364ac4ddid9">500</p></td><td id="ced6bd4de2tsa" rowspan="1" colspan="1"><p id="a59226d6c41v2">systemError</p></td><td id="288fd76769a7n" rowspan="1" colspan="1"><p id="16814084fcfp3">%s</p></td><td id="1156aa90effwg" rowspan="1" colspan="1"><p id="7aebdd39a7tjx">服务繁忙，请稍后重试</p></td></tr><tr id="413785196bplr"><td id="fd390e5d18sz7" rowspan="1" colspan="1"><p id="603b207713krr">500</p></td><td id="30065fd9bfffd" rowspan="1" colspan="1"><p id="1aa0c253a2gmn">unknownError</p></td><td id="59132db76eflm" rowspan="1" colspan="1"><p id="5b7fb5fc0dmw9">Unknown Error</p></td><td id="2232deebbbpah" rowspan="1" colspan="1"><p id="c61930bf46sxd">未知错误</p></td></tr><tr id="c0a60d2d7ev72"><td id="cc0e92ac64cc4" rowspan="1" colspan="1"><p id="aa5161c23cabi">503</p></td><td id="a53ea71b90p8k" rowspan="1" colspan="1"><p id="df7b77e53b7iu">operationTimeout</p></td><td id="f61e16898ewmp" rowspan="1" colspan="1"><p id="b7ecfbbe55qu4">%s</p></td><td id="624e53c080uwx" rowspan="1" colspan="1"><p id="d8734d27b4ohv">请求超时</p></td></tr></tbody></table></section></section></div></main></body></html>

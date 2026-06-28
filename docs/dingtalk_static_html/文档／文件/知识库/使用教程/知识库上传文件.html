@@ -1,0 +1,99 @@
+<!DOCTYPE html><html><head><meta charset="utf8" / /><meta name="searchtitle" content="" / /><meta name="keywords" content="" / /><meta name="author" content="" / /><title>知识库上传文件</title><meta name="gmtModify" content="2026-03-27 19:05:57" / /></head><body data-tag="topic" id="topic-3256921" class="topic"><main id="main-3256921"><h1 data-tag="title" id="f4abacc5b8kz4" class="title">知识库上传文件</h1><p id="3091c7f7080v0" data-tag="shortdesc" class="shortdesc"></p><div data-tag="body" class="body"><section id="3610c55e4evrs" class="section"><h2 id="307792d81ebsm">功能说明</h2><p id="740663c118hn3">在知识库（团队空间）目录下上传一个文件，需要按顺序完成以下 3 个步骤：</p><ol id="fa18ebc19fh73"><li id="b096af7d6783m"><p id="72be6e54784wu"><b>获取文件上传信息</b>：向服务端申请上传凭证（OSS 地址 + 签名 Headers）。</p></li><li id="8ce9be8623xh9"><p id="3440e1842cj0n"><b>上传文件到 OSS</b>：使用第一步返回的地址和 Headers，将文件内容 PUT 到 OSS。</p></li><li id="526757e3e7x1n"><p id="61c3d0dbde4x2"><b>提交文件</b>：通知服务端上传完成，完成文件的最终入库。</p></li></ol><div type="important" id="971652ef06k7t" class="note note-important"><div class="note-icon-wrapper"><i class="icon-note note important"></i></div><div class="noteContentSpan"><strong>重要 </strong><p id="8049b9768djzc">三个步骤必须按顺序执行，缺少任何一步都无法完成文件上传。</p></div></div><hr data-path="0,4" id="8454ea5dd0aly" /></section><section id="6bbad4c459opd" class="section"><h2 id="888fab3de97jt">步骤一：获取文件上传信息</h2><p id="8d86dd093bgpr">调用接口 <code data-tag="inlineCode" id="94856b6a565yo" class="inlineCode">POST /v2.0/storage/spaces/files/{parentDentryUuid}/uploadInfos/query</code>，传入目标目录的<code data-tag="inlineCode" id="1d12da592bevd" class="inlineCode">parentDentryUuid</code>（父目录唯一标识）和操作者<code data-tag="inlineCode" id="e4db599ddbd1v" class="inlineCode">unionId</code>，获取本次上传所需的凭证信息。</p><div type="note" id="ef35300555uno" class="note note-note"><div class="note-icon-wrapper"><i class="icon-note note note"></i></div><div class="noteContentSpan"><strong>说明 </strong><p id="e7f80833f1lue">接口请参考<a data-tag="xref" id="edf49820cafvv" href="/document/development/obtain-file-upload-informations#" class="xref">获取文件上传信息</a>文档说明，如何调用请参考<a data-tag="xref" id="b8cea5ef4dns7" href="/document/development/how-to-call-apis#" class="xref">如何调用服务端API</a>文档介绍。</p></div></div><p id="e0845a1bd5h49"><b>关键入参：</b></p><ul id="a1e6b01c06cah"><li id="803cd10ef55ht"><p id="2000000105482"><code data-tag="code" id="aaa837b4acsn9" class="code">parentDentryUuid</code>（Path）：上传目标目录的 dentryUuid。若上传到知识库根目录，可通过以下两种方式获取根目录的dentryUuid：</p><ul id="b663be7fb0jo1"><li id="a16b5d5955068"><p id="b23b25581e76d">调用<a data-tag="xref" id="361da3383f54a" href="/document/development/get-my-documents#" class="xref">获取我的文档知识库信息</a>接口，取返回结果<code data-tag="inlineCode" id="b961c94388v4o" class="inlineCode">workspace</code>下的<code data-tag="inlineCode" id="ea85d8c246u9r" class="inlineCode">rootNodeId</code>字段值；</p></li><li id="2f1ed7edaf9lf"><p id="c9fff95930zqn">调用<a data-tag="xref" id="c8ade9aa29lyi" href="/document/development/get-knowledge-base-list#" class="xref">获取知识库列表</a>接口，取返回结果<code data-tag="inlineCode" id="60f4d1eaa964b" class="inlineCode">workspaces</code>下的<code data-tag="inlineCode" id="05e3793dd0yys" class="inlineCode">rootNodeId</code>字段值。</p></li></ul></li><li id="01538229c3bfw"><p id="22816dc1e46y0"><code data-tag="inlineCode" id="f00d872420zdi" class="inlineCode">unionId</code>（Query）：操作者的 unionId，可调用<a data-tag="xref" id="f62e54f0baeg5" href="/document/development/query-user-details#" class="xref">查询用户详情</a>接口获取。</p></li><li id="1a9d91d40dwbh"><p id="d023694861mrc"><code data-tag="inlineCode" id="7f329f7f47m7h" class="inlineCode">protocol</code>（Body）：固定填 <code data-tag="inlineCode" id="54e061a03e61d" class="inlineCode">HEADER_SIGNATURE</code>。</p></li><li id="b17d9f3d49i96"><p id="6ba44225a1fmf"><code data-tag="inlineCode" id="31d6a0e35b6ej" class="inlineCode">option.preCheckParam.name</code>（Body）：文件名（含后缀），不能包含特殊字符（<code data-tag="inlineCode" id="52065aa53b8la" class="inlineCode">*</code>、<code data-tag="inlineCode" id="07d3985ca4iz7" class="inlineCode">"</code>、<code data-tag="inlineCode" id="69e71c3a6cvp3" class="inlineCode">&lt;</code>、<code data-tag="inlineCode" id="2a5fb898f4qfq" class="inlineCode">&gt;</code>、<code data-tag="inlineCode" id="fef1238ff06q0" class="inlineCode">|</code>），不能以<code data-tag="inlineCode" id="4266a95d45w6w" class="inlineCode">.</code> 结尾。</p></li></ul><p id="1d603fa689qsz"><b>返回参数：</b></p><ul id="79e5d8f0a9aq0"><li id="94a6392aab7yd"><p id="afb73a95c2wju"><code data-tag="inlineCode" id="8a24c03afe7ff" class="inlineCode">uploadKey</code>：本次上传的唯一标识，第三步使用<b>。</b></p></li><li id="916b67be6bnyc"><p id="8a51fcdc87fl0"><code data-tag="inlineCode" id="0e66402723gti" class="inlineCode">headerSignatureInfo.resourceUrls</code>：OSS 上传地址，第二步使用。</p></li><li id="0c48d43e82x4q"><p id="8b9501d0f4k2n"><code data-tag="inlineCode" id="9f65282f009ve" class="inlineCode">headerSignatureInfo.headers</code>：OSS 请求头，第二步使用。</p></li><li id="d1861b61ca8fa"><p id="ff631bb8a83wo"><code data-tag="inlineCode" id="a8ccc402f4zwu" class="inlineCode">expirationSeconds</code>：凭证过期时间（秒），请在过期前完成后续步骤。</p></li></ul><p id="1702d32c8f87d"><b>HTTP示例</b>：</p><pre code-type="xCode" id="0f76aa00d4r3y" data-tag="codeblock" outputclass="language-http" class="pre codeblock language-http"><code>POST /v2.0/storage/spaces/files/{parentDentryUuid}/uploadInfos/query?unionId=union_id HTTP/1.1
+Host: api.dingtalk.com
+x-acs-dingtalk-access-token: access_token
+Content-Type: application/json
+
+{
+  "protocol": "HEADER_SIGNATURE",
+  "option": {
+    "storageDriver": "DINGTALK",
+    "preCheckParam": {
+      "size": 512,
+      "name": "测试文件.xlsx"
+    }
+  }
+}</code></pre></section><section id="3c73707a595zw" class="section"><h2 id="488d5f9016x31">步骤二：上传文件到 OSS</h2><p id="28a57fb918auy">使用第一步返回的 <code data-tag="inlineCode" id="efd1585be174a" class="inlineCode">resourceUrls[0]</code> 作为上传地址、<code data-tag="inlineCode" id="e2e996fc48b3w" class="inlineCode">headers</code> 作为请求头，通过 HTTP <code data-tag="inlineCode" id="bd411d3456rfe" class="inlineCode">PUT</code> 方法将本地文件内容直接上传到 OSS。</p><div type="note" id="87b7100e6dk8j" class="note note-note"><div class="note-icon-wrapper"><i class="icon-note note note"></i></div><div class="noteContentSpan"><strong>说明 </strong><p id="fbfb7cf55281z"><code data-tag="inlineCode" id="b6fc7d2792k8n" class="inlineCode">Content-Type</code> 必须主动设置为空字符串，否则会导致签名校验失败。</p></div></div><p id="5c216edc825je"><b>示例代码</b>：</p><div outputclass="tabbed-codeblock" data-tag="fig" id="a3d7410ea3lw1" class="tabbed-codeblock-box"><div class="tab-box"></div><input type="radio" name="check-a3d7410ea3lw1" id="a3d7410ea3lw1-java-tab" checked="checked" /><label for="a3d7410ea3lw1-java-tab">Java</label><div class="codeblock-item"><pre code-type="xCode" id="ec0204a7a87a7" index="0" data-tag="codeblock" outputclass="language-java" class="pre codeblock language-java"><code>import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.Map;
+
+public void uploadToOss(String resourceUrl, Map&lt;String, String&gt; headers, String filePath) throws Exception {
+  URL url = new URL(resourceUrl);
+  HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
+  // 设置第一步返回的 headers
+  if (headers != null) {
+    for (Map.Entry&lt;String, String&gt; entry : headers.entrySet()) {
+      connection.setRequestProperty(entry.getKey(), entry.getValue());
+    }
+  }
+
+  connection.setDoOutput(true);
+  connection.setRequestMethod("PUT");
+  connection.setUseCaches(false);
+  connection.setReadTimeout(10000);
+  connection.setConnectTimeout(10000);
+  connection.connect();
+
+  // 写入文件内容
+  OutputStream out = connection.getOutputStream();
+  InputStream is = new FileInputStream(new File(filePath));
+
+  byte[ ] buffer = new byte[1024];
+
+  int bytesRead;
+  while ((bytesRead = is.read(buffer)) != -1) {
+    out.write(buffer, 0, bytesRead);
+  }
+  out.flush();
+  out.close();
+  is.close();
+
+  int responseCode = connection.getResponseCode();
+  connection.disconnect();
+
+  if (responseCode == 200) {
+    System.out.println("OSS 上传成功");
+  } else {
+    System.out.println("OSS 上传失败，状态码：" + responseCode);
+  }
+}</code></pre></div><input type="radio" name="check-a3d7410ea3lw1" id="a3d7410ea3lw1-python-tab" /><label for="a3d7410ea3lw1-python-tab">Python</label><div class="codeblock-item"><pre code-type="xCode" id="aacdc751a5q85" index="0" data-tag="codeblock" outputclass="language-python" class="pre codeblock language-python"><code>import requests
+
+resource_url = '&lt;第一步返回的 resourceUrls[0]&gt;'
+headers = &lt;第一步返回的 headers&gt;
+
+  # 注意：content-type 必须设置为空
+  headers['content-type'] = ''
+
+result = requests.put(resource_url, data=open('&lt;本地文件路径&gt;', 'rb'), headers=headers)
+print(result.status_code)  # 200 表示上传成功</code></pre></div><input type="radio" name="check-a3d7410ea3lw1" id="a3d7410ea3lw1-nodejs-tab" /><label for="a3d7410ea3lw1-nodejs-tab">Node.js</label><div class="codeblock-item"><pre code-type="xCode" id="54b183c7c79kg" index="0" data-tag="codeblock" outputclass="language-nodejs" class="pre codeblock language-nodejs"><code>const fs = require('fs');
+const request = require('request-promise');
+
+const url = '&lt;第一步返回的 resourceUrls[0]&gt;';
+const headers = &lt;第一步返回的 headers&gt;;
+
+// 注意：content-type 必须主动设置为空
+headers['content-type'] = '';
+
+fs.createReadStream('/path/to/local/file.txt')
+  .pipe(request({ method: 'PUT', url, headers }))
+  .then(() =&gt; console.log('OSS 上传成功'))
+  .catch(err =&gt; console.log('OSS 上传失败', err));</code></pre></div></div></section><section id="8f05776932i75" class="section"><h2 id="02a45ff99eebv">步骤三：提交文件</h2><p id="3e84076ca9reb">OSS 上传完成后，调用接口 <code data-tag="inlineCode" id="14572fde8b50a" class="inlineCode">POST /v2.0/storage/spaces/files/{parentDentryUuid}/commit</code>，将文件正式写入知识库目录，完成整个上传流程。</p><div type="note" id="3f3f0994870x5" class="note note-note"><div class="note-icon-wrapper"><i class="icon-note note note"></i></div><div class="noteContentSpan"><strong>说明 </strong><ul id="2157aabeacl5z"><li id="5f209ad625yc1"><p id="7b51d39dcdm69">接口成功后会返回文件信息（<code data-tag="inlineCode" id="39e456cbdefkb" class="inlineCode">dentry</code>），包含文件 ID、uuid、所在空间等，上传完成。</p></li><li id="cfd2b79523asw"><p id="d89330fe32q2k">接口请参考<a data-tag="xref" id="f7c3972692o3j" href="/document/development/submittal-file#" class="xref">提交文件</a>文档说明，如何调用请参考<a data-tag="xref" id="47ca4b72f11qc" href="/document/development/how-to-call-apis#" class="xref">如何调用服务端API</a>文档介绍。</p></li></ul></div></div><p id="83c73f5a812t9"><b>关键入参：</b></p><ul id="5c0afc354fg3x"><li id="dac24d72b98c4"><p id="dea3442ec3kvb"><code data-tag="inlineCode" id="396436591ay47" class="inlineCode">parentDentryUuid</code>（Path）：与第一步保持一致。</p></li><li id="31cfb10541gfn"><p id="87d2c8f4e2pib"><code data-tag="inlineCode" id="50712279edln5" class="inlineCode">unionId</code>（Query）：操作者的 unionId，可调用<a data-tag="xref" id="0cc17d226awvu" href="/document/development/query-user-details#" class="xref">查询用户详情</a>接口获取。</p></li><li id="731de92d5b1xx"><p id="284bb68338glg"><code data-tag="inlineCode" id="6ca9240d94eu3" class="inlineCode">uploadKey</code>（Body）：第一步返回的 uploadKey，用于关联本次上传。</p></li><li id="07864f0982syc"><p id="54846c2f65lwg"><code data-tag="inlineCode" id="e0bfe06b6df1v" class="inlineCode">name</code>（Body）：文件名称（含后缀）。</p></li><li id="c263334adaxmv"><p id="0bcfd03394xq8"><code data-tag="inlineCode" id="144cb4f13ar1j" class="inlineCode">option.conflictStrategy</code>（Body）：文件名冲突策略，可选<code data-tag="inlineCode" id="db59377d04l4x" class="inlineCode">AUTO_RENAME</code>（默认，自动重命名）/<code data-tag="inlineCode" id="6ca4f01764aqa" class="inlineCode">OVERWRITE</code>（覆盖）</p></li></ul><p id="f9604dfaf383s"><b>HTTP示例：</b></p><pre code-type="xCode" id="b725bc1889xpl" data-tag="codeblock" outputclass="language-http" class="pre codeblock language-http"><code>POST /v2.0/storage/spaces/files/{parentDentryUuid}/commit?unionId=union_id HTTP/1.1
+Host: api.dingtalk.com
+x-acs-dingtalk-access-token: access_token
+Content-Type: application/json
+
+{
+  "uploadKey": "第一步返回的 uploadKey",
+  "name": "测试文件.xlsx",
+  "option": {
+    "conflictStrategy": "AUTO_RENAME"
+  }
+}</code></pre></section><section id="688934628407m" class="section"><h2 id="5133cd48e1g37">完整流程总结</h2><pre code-type="xCode" id="db258e1763jem" data-tag="codeblock" outputclass="language-plaintext" class="pre codeblock language-plaintext"><code>[步骤一] 调用「获取文件上传信息」接口
+         → 返回 uploadKey + resourceUrls + headers（有过期时间，请尽快完成后续步骤）
+
+[步骤二] 使用 resourceUrls[0] + headers，HTTP PUT 上传文件内容到 OSS
+         → OSS 返回 200 表示上传成功
+
+[步骤三] 调用「提交文件」接口，传入 uploadKey + 文件名
+         → 返回文件信息（dentry），文件正式入库，上传完成</code></pre></section><section id="0d05d22cac08k" class="section"><h2 id="ce63814622m02">注意事项</h2><ul id="e51575b4e8f5y"><li id="96c9ca9af424n"><p id="91e1701140pou">步骤二上传时，<code data-tag="inlineCode" id="29899f1bcbcfq" class="inlineCode">Content-Type</code>必须设置为空字符串，否则会导致 OSS 签名校验失败。</p></li><li id="5d64a2cc19p8x"><p id="1afb1f023c971">步骤一返回的上传凭证有过期时间（<code data-tag="inlineCode" id="8ca2ff6811jxd" class="inlineCode">expirationSeconds</code>），请在过期前完成步骤二和步骤三，否则需要重新调用步骤一。</p></li><li id="be57892bc1y8h"><p id="f386b61479fn8">存储空间类型为<code data-tag="inlineCode" id="4a5b33f309otx" class="inlineCode">USER</code>时，只有空间拥有者和管理者有操作权限，其他员工需要先通过「添加权限」接口授权。</p></li><li id="26830f6b2eyfg"><p id="d6a34e208343f">存储空间类型为<code data-tag="inlineCode" id="0523616b1bw4e" class="inlineCode">APP</code>时，任何人操作都需要先通过「添加权限」接口授权。</p></li></ul></section></div></main></body></html>

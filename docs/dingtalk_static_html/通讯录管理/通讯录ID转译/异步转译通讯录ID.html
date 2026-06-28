@@ -1,0 +1,398 @@
+<!DOCTYPE html><html><head><meta charset="utf8" / /><meta name="gmtModify" content="2025-09-11 21:01:58" / /><meta name="searchtitle" content="" / /><meta name="keywords" content="" / /><meta name="author" content="" / /><title>异步转译通讯录ID</title><meta name="gmtModify" content="2026-06-02 09:18:18" / /></head><body data-tag="topic" id="doc-api-dingtalk-TranslateFile" class="topic"><main id="51f3f64bc0g6g" data-init-id="doc-api-dingtalk_TranslateFile"><h1 data-tag="title" id="h1-syp-mio-yp6" class="title">异步转译通讯录ID</h1><p data-tag="shortdesc" id="b10eb31ca05y8" class="shortdesc">调用本接口，发起异步通讯录ID内容转译，替换产品方案商通讯录权限范围内的用户ID和部门ID。</p><div data-tag="conbody" outputclass="icms-api-reference" class="icms-api-reference conbody"><section id="17a7e8054dyus" class="section"><h2 id="75c71f882fdue"><b>接口调用说明</b></h2><p id="ab49b94669mlc">如果第三方企业应用选择了<a href="https://open.dingtalk.com/document/isvapp/address-book-encryption" id="b0186429d7v1r">通讯录加密</a>部署方式，该应用调用通讯录等相关接口，无法获取授权企业员工姓名、职位和所在部门名称等信息。可以通过以下方法获取：</p><p id="dd366e155ebmq">例如，某企业授权开通一个第三方企业应用，使用应用导出本企业可以使用该第三方应用的员工列表及信息，包含员工userID、员工姓名、员工所在部门ID和员工所在部门名称。可按照以下步骤实现。</p><ol id="9d563edd48d2v"><li id="ad15ae33fbdum"><p id="6650a66eb8xs3">构造需要转译的文档，示例如下图所示。</p><div type="note" id="39513ed5c9z1l" class="note note-note"><div class="note-icon-wrapper"><i class="icon-note note note"></i></div><div class="noteContentSpan"><strong>说明 </strong><p id="ef4a38ec25fqc">只支持xlsx，xls，csv，txt格式文件。</p></div></div><p id="8d341b17eap7z"><img id="31bca298b3nkn" src="https://help-static-aliyun-doc.aliyuncs.com/assets/img/zh-CN/8903630871/p1075878.png" alt="image" placement="break" class="image break" / /></p></li><li id="d972742ac7hp2"><p id="1f03f8dc99cvc">调用<a href="https://open.dingtalk.com/document/isvapp/single-step-file-upload" id="ba11497772a9n">单步文件上传</a>接口，获取media_id。</p></li><li id="b86f087174r01"><p id="0ddd17d3083ry">调用本接口，获取转译任务ID。</p><div type="note" id="e8c0f535bcwos" class="note note-note"><div class="note-icon-wrapper"><i class="icon-note note note"></i></div><div class="noteContentSpan"><strong>说明 </strong><p id="ba37233c64tmy">调用本接口后，如果文件转译成功，会触发异步任务回调通知。</p></div></div></li><li id="ceadfe502b3m4"><p id="8f2aa2c82avqn">调用<a href="https://open.dingtalk.com/document/isvapp/obtains-the-results-of-an-asynchronous-translation-task" id="431ad644b7dlu">获取异步转译任务结果</a>接口，获取转译后的文件下载链接。</p><div type="note" id="5cd1ab8466exe" class="note note-note"><div class="note-icon-wrapper"><i class="icon-note note note"></i></div><div class="noteContentSpan"><strong>说明 </strong><p id="6f9484cdd2msg">返回的文件下载链接建议使用<code data-tag="inlineCode" id="8d87428b0a8jd" class="inlineCode">&lt;a&gt;标签</code>引用，<code data-tag="inlineCode" id="fc619e366f9e8" class="inlineCode">download</code>属性不可指定（浏览器兼容性问题）。</p></div></div></li><li id="7c9eb9d54d9hc"><p id="00103ddb44ybb">用户下载得到的文件内容，如下图所示。</p><p id="f3e23171afw9z"><img id="addf1e49f6ttp" src="https://help-static-aliyun-doc.aliyuncs.com/assets/img/zh-CN/8903630871/p1075879.png" alt="image" placement="break" class="image break" / /></p></li></ol><p id="f8c40fa09awi8">在调用本接口的过程中，你可能会遇到以下问题：</p><ul id="805c9716c4phn"><li id="2aa051917355x"><p id="b7e8ffab78wt9"><b>问题</b>：使用<code data-tag="inlineCode" id="ceb68ee6dcb1o" class="inlineCode">NodeJs</code>第三方库<code data-tag="inlineCode" id="8ad90770b3p7s" class="inlineCode">exceljs</code>生成的<code data-tag="inlineCode" id="61b4a67552b0p" class="inlineCode">excel</code>文件，文件内容看上去正常，但是转译不成功。</p></li><li id="d0a52246dc6w7"><p id="3432145de35ap"><b>问题原因</b>：<code data-tag="inlineCode" id="dcf6bc65e4vot" class="inlineCode">exceljs</code>在不开启<code data-tag="inlineCode" id="a719ed1292q9m" class="inlineCode">sharedString</code>的情况下，会默认使用<code data-tag="inlineCode" id="30838f2fe5e06" class="inlineCode">formula string</code>进行文件内容写入，这种行为不合规范，导致转译失败。</p></li><li id="e728bbd7c511c"><p id="a20d46ee80ezz"><b>解决方法</b>：查看<code data-tag="inlineCode" id="26e83bb36fw0r" class="inlineCode">exceljs</code>文档，强制开启<code data-tag="inlineCode" id="58e5f278a6wcq" class="inlineCode">useSharedStrings</code>选项。</p></li></ul></section><section id="section-request-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-request-1" data-tag="h2" class="h2">请求</h2><section id="section-request-basic-info" class="section"><h3 id="heading-request-basic-info" data-tag="h3" class="h3">基本信息</h3><table id="d0b710b43dmj0" tablewidth="648" tablecolswidth="216 432" autofit="false" class="table"><colgroup colwidth="0.67*" style="width:33.33%"></colgroup><colgroup colwidth="1.33*" style="width:66.67%"></colgroup><tbody class="tbody"><tr id="b21fd263e3jdn"><td id="889083e643tov" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="07dbf45328q26">字段</p></td><td id="13d76af07cg4h" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="882deded60273">值</p></td></tr><tr id="38ec01436108g"><td id="a0b4c56d18tny" rowspan="1" colspan="1"><p id="b33732114127r">HTTP URL</p></td><td id="adf75a9d2efj9" rowspan="1" colspan="1"><p id="3f24975c367mz">https://api.dingtalk.com/v1.0/contact/files/translate</p></td></tr><tr id="58954d27d032h"><td id="cd6194957dr9v" rowspan="1" colspan="1"><p id="5c3e1b67ebj04">HTTP Method</p></td><td id="4c7bd836ab62x" rowspan="1" colspan="1"><p id="dca0531cbejxh">POST</p></td></tr><tr id="cbd082270focf"><td id="f7c4649dc6hlh" rowspan="1" colspan="1"><p id="b5de5b8b93bnf">支持的应用类型</p></td><td id="6bb5f3fdd9883" rowspan="1" colspan="1"><p id="1cafe95c0e65a"><span data-tag="ph" id="ph-request-basic-app-type-apptype-0" class="ph ph-app-type" data-ph-raw-text="appType-第三方企业应用">appType-第三方企业应用</span></p></td></tr><tr id="e524e54da49sl"><td id="ad6bca25be8l9" rowspan="1" colspan="1"><p id="707bbf14fafop">权限要求</p></td><td id="857d9b7bd0usu" rowspan="1" colspan="1"><p id="cb65ac3c5bvie"><span data-tag="ph" id="ph-request-basic-permission-permission-qyapi-get-member-0" class="ph-permission ph" data-ph-raw-text="permission-qyapi_get_member-成员信息读权限" data-permission-id="permission-qyapi_get_member" data-permission-code="qyapi_get_member" data-permission-detail-api="/document/api/permission/detail" data-permission-query-param="code">permission-qyapi_get_member-成员信息读权限</span></p></td></tr></tbody></table></section><section id="section-request-header-parameter" class="section"><h3 data-tag="h3" id="h2-axm-dqi-fsj" class="h3 title">请求头</h3><table id="f92dff38dfg5y" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="0ead27c789zg4"><td id="ac0462444907k" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="d3ec861576iai">名称</p></td><td id="e3255410a13ue" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="c21aa7f1e60nx">类型</p></td><td id="769ea994983iu" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="170c863286272">是否必填</p></td><td id="c6329e7b90y68" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="7e2cb4074djue">描述</p></td></tr><tr id="70f35d564ejec"><td id="e6f3bf10acpg2" rowspan="1" colspan="1"><p id="d07e0685286gw">x-acs-dingtalk-access-token</p></td><td id="62f6bccde3f1d" rowspan="1" colspan="1"><p id="d9b2d82d92z49">String</p></td><td id="5cbec8b58da08" rowspan="1" colspan="1"><p id="e73a61f1e8pkj">是</p></td><td id="339adcf43fbzj" rowspan="1" colspan="1"><p id="b591d01cdddkd">调用该接口的访问凭证，通过调用<a href="https://open.dingtalk.com/document/development/obtain-the-access-token-of-the-authorized-enterprise-1#" id="5d389d2266kwu" class="xref">获取第三方应用授权企业的accessToken</a>接口获取。</p></td></tr></tbody></table></section><section id="section-request-body-parameter" class="section"><h3 data-tag="h3" id="h2-uqz-zao-lrm" class="h3 title">请求体</h3><table id="12e6d48046ib9" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="d5a98f9518uq9"><td id="576651576c7hz" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="7a577ede3edy6">名称</p></td><td id="a93178e399bpj" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="c50f553e842tl">类型</p></td><td id="8f5678ee51tkd" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="9fd48f587chry">是否必填</p></td><td id="a8b2f648826hu" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="6bf1103e88oih">描述</p></td></tr><tr outputclass="row row-level-1" id="b54cee1e8eeug" class="row row-level-1"><td id="188838e07egzt" rowspan="1" colspan="1"><p id="d67e4211dbrxm">medias</p></td><td id="3fe2426e5a7vu" rowspan="1" colspan="1"><p id="f3257ca9a5tzk">Map&lt;String, String&gt;</p></td><td id="ba2ff87eee0sf" rowspan="1" colspan="1"><p id="89fd7428c1pzm">是</p></td><td id="b5f1f6849djxf" rowspan="1" colspan="1"><p id="d871c25142228">需要转译的文件信息。</p><ul id="49d497d9e6zqs"><li id="9e4572000by6e"><p id="aa6f79f297bxv">Map类型，key为钉盘文件media_id，调用<a href="https://open.dingtalk.com/document/development/obtain-file-upload-informations#" id="09cee8b202pfz" class="xref">获取文件上传信息</a>接口获取。</p></li><li id="d0cbdd9ee9bra"><p id="d1068c91aeho9">value为文件名，需要包含文件扩展名，与调用<a href="https://open.dingtalk.com/document/development/obtain-file-upload-informations#" id="e6ea2e7307aue" class="xref">获取文件上传信息</a>接口时传入的文件名称保持一致。</p></li></ul><p class="note-icon-wrapper" id="b2eec89bbfh3t"></p><p data-tag="p" id="ef67495c5a3im" class="p"></p><ul id="783b683d990dh"><li id="0a4e83042a7bv"><p id="e3b6a6ced2vuh">只支持xlsx，xls，csv，txt类型文件。</p></li><li id="9b28f331a19kn"><p id="dbd4247cabn5w">最大数量20个文件。</p></li></ul><p id="5ffb750f78t2e"></p></td></tr><tr outputclass="row row-level-2" id="9d702f01fegai" class="row row-level-2"><td id="4d0d256ea7crl" rowspan="1" colspan="1"><p id="c38f40e7962ss">outputFileName</p></td><td id="c564fdf0da5nn" rowspan="1" colspan="1"><p id="5623432494hz3">String</p></td><td id="0aa2b7faa0gjg" rowspan="1" colspan="1"><p id="3265a39c79spu">否</p></td><td id="26f22bacf011y" rowspan="1" colspan="1"><p id="d785966e09zf3">转译完打包的文件名，不需带后缀。</p><p class="note-icon-wrapper" id="7254084b70tn5"></p><p data-tag="p" id="19753ca65amn2" class="p"></p><p id="0dc802e2000ac">若medias中文件个数大于1，则该参数必填。</p><p id="051fc2f1c6q3l"></p></td></tr><tr outputclass="row row-level-3" id="ec8afb800b58u" class="row row-level-3"><td id="746f3c08c9e45" rowspan="1" colspan="1"><p id="1a157828c74za">unionId</p></td><td id="136f0dd53ffu1" rowspan="1" colspan="1"><p id="6dccc81ef84wn">String</p></td><td id="0cff52f090uyb" rowspan="1" colspan="1"><p id="85cd388f23v5g">是</p></td><td id="9142f6691avt8" rowspan="1" colspan="1"><p id="edbeb30151ouq">当前操作导出文档的用户的unionId，可以调用<a href="https://open.dingtalk.com/document/development/obtain-the-userid-of-a-user-by-using-the-log-free#" id="e8e8f0ff51x6a" class="xref">通过免登码获取用户信息</a>接口获取。</p></td></tr></tbody></table></section><section id="section-request-body-example" class="section"><h3 id="h3-request-body-example" data-tag="h3" class="h3">请求示例</h3><div outputclass="tabbed-codeblock" data-tag="fig" id="figure-ael-tjf-mwc" class="tabbed-codeblock-box"><div class="tab-box"></div><input type="radio" name="check-figure-ael-tjf-mwc" id="figure-ael-tjf-mwc-HTTP-tab" checked="checked" /><label for="figure-ael-tjf-mwc-HTTP-tab">HTTP</label><div class="codeblock-item"><pre id="codeblock-mhu-ww4-p6d" outputclass="language-HTTP" code-type="xCode" data-tag="codeblock" class="pre codeblock language-HTTP"><code>POST /v1.0/contact/files/translate HTTP/1.1
+Host:api.dingtalk.com
+x-acs-dingtalk-access-token:BWe2xxxx
+Content-Type:application/json
+
+{
+  "medias" : {
+    "key" : "xxxx"
+  },
+  "outputFileName" : "学习手册",
+  "unionId" : "fXRUNxxx"
+}</code></pre></div><input type="radio" name="check-figure-ael-tjf-mwc" id="figure-ael-tjf-mwc-java-tab" /><label for="figure-ael-tjf-mwc-java-tab">Java</label><div class="codeblock-item"><pre id="codeblock-j33-o7h-wxm" outputclass="language-java" code-type="xCode" data-tag="codeblock" class="pre codeblock language-java"><code>// This file is auto-generated, don't edit it. Thanks.
+package com.aliyun.sample;
+
+import com.aliyun.tea.*;
+import com.aliyun.teautil.*;
+import com.aliyun.teautil.models.*;
+import com.aliyun.dingtalkcontact_1_0.*;
+import com.aliyun.dingtalkcontact_1_0.models.*;
+import com.aliyun.teaopenapi.*;
+import com.aliyun.teaopenapi.models.*;
+
+public class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Client
+     * @throws Exception
+     */
+    public static com.aliyun.dingtalkcontact_1_0.Client createClient() throws Exception {
+        Config config = new Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        return new com.aliyun.dingtalkcontact_1_0.Client(config);
+    }
+
+    public static void main(String[] args_) throws Exception {
+        java.util.List&lt;String&gt; args = java.util.Arrays.asList(args_);
+        com.aliyun.dingtalkcontact_1_0.Client client = Sample.createClient();
+        TranslateFileHeaders translateFileHeaders = new TranslateFileHeaders();
+        translateFileHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        java.util.Map&lt;String, String&gt; medias = TeaConverter.buildMap(
+            new TeaPair("key", "xxxx")
+        );
+        TranslateFileRequest translateFileRequest = new TranslateFileRequest()
+                .setMedias(medias)
+                .setOutputFileName("学习手册")
+                .setUnionId("fXRUNxxx");
+        try {
+            client.translateFileWithOptions(translateFileRequest, translateFileHeaders, new RuntimeOptions());
+        } catch (TeaException err) {
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        } catch (Exception _err) {
+            TeaException err = new TeaException(_err.getMessage(), _err);
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        }        
+    }
+}</code></pre></div><input type="radio" name="check-figure-ael-tjf-mwc" id="figure-ael-tjf-mwc-python-tab" /><label for="figure-ael-tjf-mwc-python-tab">Python</label><div class="codeblock-item"><pre id="codeblock-ebx-sdi-fmk" outputclass="language-python" code-type="xCode" data-tag="codeblock" class="pre codeblock language-python"><code># -*- coding: utf-8 -*-
+# This file is auto-generated, don't edit it. Thanks.
+import sys
+
+from typing import List
+
+from alibabacloud_dingtalk.contact_1_0.client import Client as dingtalkcontact_1_0Client
+from alibabacloud_tea_openapi import models as open_api_models
+from alibabacloud_dingtalk.contact_1_0 import models as dingtalkcontact__1__0_models
+from alibabacloud_tea_util import models as util_models
+from alibabacloud_tea_util.client import Client as UtilClient
+
+
+class Sample:
+    def __init__(self):
+        pass
+
+    @staticmethod
+    def create_client() -&gt; dingtalkcontact_1_0Client:
+        """
+        使用 Token 初始化账号Client
+        @return: Client
+        @throws Exception
+        """
+        config = open_api_models.Config()
+        config.protocol = 'https'
+        config.region_id = 'central'
+        return dingtalkcontact_1_0Client(config)
+
+    @staticmethod
+    def main(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        translate_file_headers = dingtalkcontact__1__0_models.TranslateFileHeaders()
+        translate_file_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        medias = {
+            'key': 'xxxx'
+        }
+        translate_file_request = dingtalkcontact__1__0_models.TranslateFileRequest(
+            medias=medias,
+            output_file_name='学习手册',
+            union_id='fXRUNxxx'
+        )
+        try:
+            client.translate_file_with_options(translate_file_request, translate_file_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+    @staticmethod
+    async def main_async(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        translate_file_headers = dingtalkcontact__1__0_models.TranslateFileHeaders()
+        translate_file_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        medias = {
+            'key': 'xxxx'
+        }
+        translate_file_request = dingtalkcontact__1__0_models.TranslateFileRequest(
+            medias=medias,
+            output_file_name='学习手册',
+            union_id='fXRUNxxx'
+        )
+        try:
+            await client.translate_file_with_options_async(translate_file_request, translate_file_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+
+if __name__ == '__main__':
+    Sample.main(sys.argv[1:])</code></pre></div><input type="radio" name="check-figure-ael-tjf-mwc" id="figure-ael-tjf-mwc-php-tab" /><label for="figure-ael-tjf-mwc-php-tab">PHP</label><div class="codeblock-item"><pre id="codeblock-92s-qb5-2vq" outputclass="language-php" code-type="xCode" data-tag="codeblock" class="pre codeblock language-php"><code>&lt;?php
+
+// This file is auto-generated, don't edit it. Thanks.
+namespace AlibabaCloud\SDK\Sample;
+
+use AlibabaCloud\SDK\Dingtalk\Vcontact_1_0\Dingtalk;
+use \Exception;
+use AlibabaCloud\Tea\Exception\TeaError;
+use AlibabaCloud\Tea\Utils\Utils;
+
+use Darabonba\OpenApi\Models\Config;
+use AlibabaCloud\SDK\Dingtalk\Vcontact_1_0\Models\TranslateFileHeaders;
+use AlibabaCloud\SDK\Dingtalk\Vcontact_1_0\Models\TranslateFileRequest;
+use AlibabaCloud\Tea\Utils\Utils\RuntimeOptions;
+
+class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Dingtalk Client
+     */
+    public static function createClient(){
+        $config = new Config([]);
+        $config-&gt;protocol = "https";
+        $config-&gt;regionId = "central";
+        return new Dingtalk($config);
+    }
+
+    /**
+     * @param string[] $args
+     * @return void
+     */
+    public static function main($args){
+        $client = self::createClient();
+        $translateFileHeaders = new TranslateFileHeaders([]);
+        $translateFileHeaders-&gt;xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        $medias = [
+            "key" =&gt; "xxxx"
+        ];
+        $translateFileRequest = new TranslateFileRequest([
+            "medias" =&gt; $medias,
+            "outputFileName" =&gt; "学习手册",
+            "unionId" =&gt; "fXRUNxxx"
+        ]);
+        try {
+            $client-&gt;translateFileWithOptions($translateFileRequest, $translateFileHeaders, new RuntimeOptions([]));
+        }
+        catch (Exception $err) {
+            if (!($err instanceof TeaError)) {
+                $err = new TeaError([], $err-&gt;getMessage(), $err-&gt;getCode(), $err);
+            }
+            if (!Utils::empty_($err-&gt;code) &amp;&amp; !Utils::empty_($err-&gt;message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+        }
+    }
+}
+$path = __DIR__ . \DIRECTORY_SEPARATOR . '..' . \DIRECTORY_SEPARATOR . 'vendor' . \DIRECTORY_SEPARATOR . 'autoload.php';
+if (file_exists($path)) {
+    require_once $path;
+}
+Sample::main(array_slice($argv, 1));</code></pre></div><input type="radio" name="check-figure-ael-tjf-mwc" id="figure-ael-tjf-mwc-go-tab" /><label for="figure-ael-tjf-mwc-go-tab">Go</label><div class="codeblock-item"><pre id="codeblock-v7m-l75-40g" outputclass="language-go" code-type="xCode" data-tag="codeblock" class="pre codeblock language-go"><code>// This file is auto-generated, don't edit it. Thanks.
+package main
+
+import (
+  "os"
+  util  "github.com/alibabacloud-go/tea-utils/service"
+  dingtalkcontact_1_0  "github.com/alibabacloud-go/dingtalk/contact_1_0"
+  openapi  "github.com/alibabacloud-go/darabonba-openapi/client"
+  "github.com/alibabacloud-go/tea/tea"
+)
+
+
+/**
+ * 使用 Token 初始化账号Client
+ * @return Client
+ * @throws Exception
+ */
+func CreateClient () (_result *dingtalkcontact_1_0.Client, _err error) {
+  config := &amp;openapi.Config{}
+  config.Protocol = tea.String("https")
+  config.RegionId = tea.String("central")
+  _result = &amp;dingtalkcontact_1_0.Client{}
+  _result, _err = dingtalkcontact_1_0.NewClient(config)
+  return _result, _err
+}
+
+func _main (args []*string) (_err error) {
+  client, _err := CreateClient()
+  if _err != nil {
+    return _err
+  }
+
+  translateFileHeaders := &amp;dingtalkcontact_1_0.TranslateFileHeaders{}
+  translateFileHeaders.XAcsDingtalkAccessToken = tea.String("&lt;your access token&gt;")
+  medias := map[string]*string{
+    "key": tea.String("xxxx"),
+  }
+  translateFileRequest := &amp;dingtalkcontact_1_0.TranslateFileRequest{
+    Medias: medias,
+    OutputFileName: tea.String("学习手册"),
+    UnionId: tea.String("fXRUNxxx"),
+  }
+  tryErr := func()(_e error) {
+    defer func() {
+      if r := tea.Recover(recover()); r != nil {
+        _e = r
+      }
+    }()
+    _, _err = client.TranslateFileWithOptions(translateFileRequest, translateFileHeaders, &amp;util.RuntimeOptions{})
+    if _err != nil {
+      return _err
+    }
+
+    return nil
+  }()
+
+  if tryErr != nil {
+    var err = &amp;tea.SDKError{}
+    if _t, ok := tryErr.(*tea.SDKError); ok {
+      err = _t
+    } else {
+      err.Message = tea.String(tryErr.Error())
+    }
+    if !tea.BoolValue(util.Empty(err.Code)) &amp;&amp; !tea.BoolValue(util.Empty(err.Message)) {
+      // err 中含有 code 和 message 属性，可帮助开发定位问题
+    }
+
+  }
+  return _err
+}
+
+
+func main() {
+  err := _main(tea.StringSlice(os.Args[1:]))
+  if err != nil {
+    panic(err)
+  }
+}</code></pre></div><input type="radio" name="check-figure-ael-tjf-mwc" id="figure-ael-tjf-mwc-nodejs-tab" /><label for="figure-ael-tjf-mwc-nodejs-tab">Node.js</label><div class="codeblock-item"><pre id="codeblock-h7d-wxh-lkf" outputclass="language-nodejs" code-type="xCode" data-tag="codeblock" class="pre codeblock language-nodejs"><code>// This file is auto-generated, don't edit it
+import Util, * as $Util from '@alicloud/tea-util';
+import dingtalkcontact_1_0, * as $dingtalkcontact_1_0 from '@alicloud/dingtalk/contact_1_0';
+import OpenApi, * as $OpenApi from '@alicloud/openapi-client';
+import * as $tea from '@alicloud/tea-typescript';
+
+
+export default class Client {
+
+  /**
+   * 使用 Token 初始化账号Client
+   * @return Client
+   * @throws Exception
+   */
+  static createClient(): dingtalkcontact_1_0 {
+    let config = new $OpenApi.Config({ });
+    config.protocol = "https";
+    config.regionId = "central";
+    return new dingtalkcontact_1_0(config);
+  }
+
+  static async main(args: string[]): Promise&lt;void&gt; {
+    let client = Client.createClient();
+    let translateFileHeaders = new $dingtalkcontact_1_0.TranslateFileHeaders({ });
+    translateFileHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+    let medias = {
+      key: "xxxx",
+    };
+    let translateFileRequest = new $dingtalkcontact_1_0.TranslateFileRequest({
+      medias: medias,
+      outputFileName: "学习手册",
+      unionId: "fXRUNxxx",
+    });
+    try {
+      await client.translateFileWithOptions(translateFileRequest, translateFileHeaders, new $Util.RuntimeOptions({ }));
+    } catch (err) {
+      if (!Util.empty(err.code) &amp;&amp; !Util.empty(err.message)) {
+        // err 中含有 code 和 message 属性，可帮助开发定位问题
+      }
+
+    }    
+  }
+
+}
+
+Client.main(process.argv.slice(2));</code></pre></div><input type="radio" name="check-figure-ael-tjf-mwc" id="figure-ael-tjf-mwc-csharp-tab" /><label for="figure-ael-tjf-mwc-csharp-tab">C#</label><div class="codeblock-item"><pre id="codeblock-dng-qp7-pho" outputclass="language-csharp" code-type="xCode" data-tag="codeblock" class="pre codeblock language-csharp"><code>// This file is auto-generated, don't edit it. Thanks.
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
+
+using Tea;
+using Tea.Utils;
+
+
+namespace AlibabaCloud.SDK.Sample
+{
+    public class Sample 
+    {
+
+        /**
+         * 使用 Token 初始化账号Client
+         * @return Client
+         * @throws Exception
+         */
+        public static AlibabaCloud.SDK.Dingtalkcontact_1_0.Client CreateClient()
+        {
+            AlibabaCloud.OpenApiClient.Models.Config config = new AlibabaCloud.OpenApiClient.Models.Config();
+            config.Protocol = "https";
+            config.RegionId = "central";
+            return new AlibabaCloud.SDK.Dingtalkcontact_1_0.Client(config);
+        }
+
+        public static void Main(string[] args)
+        {
+            AlibabaCloud.SDK.Dingtalkcontact_1_0.Client client = CreateClient();
+            AlibabaCloud.SDK.Dingtalkcontact_1_0.Models.TranslateFileHeaders translateFileHeaders = new AlibabaCloud.SDK.Dingtalkcontact_1_0.Models.TranslateFileHeaders();
+            translateFileHeaders.XAcsDingtalkAccessToken = "&lt;your access token&gt;";
+            Dictionary&lt;string, string&gt; medias = new Dictionary&lt;string, string&gt;
+            {
+                {"key", "xxxx"},
+            };
+            AlibabaCloud.SDK.Dingtalkcontact_1_0.Models.TranslateFileRequest translateFileRequest = new AlibabaCloud.SDK.Dingtalkcontact_1_0.Models.TranslateFileRequest
+            {
+                Medias = medias,
+                OutputFileName = "学习手册",
+                UnionId = "fXRUNxxx",
+            };
+            try
+            {
+                client.TranslateFileWithOptions(translateFileRequest, translateFileHeaders, new AlibabaCloud.TeaUtil.Models.RuntimeOptions());
+            }
+            catch (TeaException err)
+            {
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+            catch (Exception _err)
+            {
+                TeaException err = new TeaException(new Dictionary&lt;string, object&gt;
+                {
+                    { "message", _err.Message }
+                });
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+        }
+
+
+    }
+}</code></pre></div></div></section></section><section id="section-response-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-response-1" data-tag="h2" class="h2">响应</h2><section id="section-response-parameter" class="section"><h3 data-tag="h3" id="h2-gwa-r2m-dmg" class="h3 title">响应体</h3><table id="9f4b8165c0l5s" tablewidth="710" tablecolswidth="213 142 355" autofit="false" class="table"><colgroup colwidth="0.9*" style="width:30.00%"></colgroup><colgroup colwidth="0.6*" style="width:20.00%"></colgroup><colgroup colwidth="1.5*" style="width:50.00%"></colgroup><tbody class="tbody"><tr id="165aa66207fiz"><td id="47b3736b153yr" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="35186b11c8907">名称</p></td><td id="67f2b482f1f9f" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="e970408001fal">类型</p></td><td id="7069471592ms2" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="a1eb921302s4m">描述</p></td></tr><tr outputclass="row row-level-1" id="5306e1c4424bi" class="row row-level-1"><td id="6c23ed15ec110" rowspan="1" colspan="1"><p id="7f781e89f6s89">jobId</p></td><td id="9437c8c3dfgbx" rowspan="1" colspan="1"><p id="678d053ac56cv">String</p></td><td id="3b74102d74lmd" rowspan="1" colspan="1"><p id="5206e1e2112ti">异步转译任务ID，最大长度为64字符。</p><p class="note-icon-wrapper" id="82136fa75du1r"></p><p id="abae270851t23"><b>jobId</b>用于接口<a href="https://open.dingtalk.com/document/development/obtains-the-results-of-an-asynchronous-translation-task#" id="935e3c7ba9ixj" class="xref">获取异步转译任务结果</a>传递。</p></td></tr></tbody></table></section><section id="section-response-body-example" class="section"><h3 id="h3-response-body-example" data-tag="h3" class="h3">响应体示例</h3><pre id="c586854c26rf5" outputclass="language-json" code-type="xCode" data-tag="codeblock" class="pre codeblock language-json"><code>HTTP/1.1 200 OK
+Content-Type:application/json
+
+{
+  "jobId" : "fXrgPrvsNxxx"
+}</code></pre></section><section id="section-error-code-1" class="section"><h3 id="h3-error-code-1" data-tag="h3" class="h3">错误码</h3><p data-tag="p" id="p-error-code-global-guide" class="p">若调用该接口报错，可根据错误信息在<a href="https://open.dingtalk.com/document/development/server-api-error-codes-1" id="a-error-code-global-guide">全局错误码</a>文档中查找解决方案。</p><table id="038c40cc66gxr" tablewidth="709" tablecolswidth="142 177 177 213" autofit="false" class="table"><colgroup colwidth="0.8*" style="width:20.03%"></colgroup><colgroup colwidth="1*" style="width:24.96%"></colgroup><colgroup colwidth="1*" style="width:24.96%"></colgroup><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><tbody class="tbody"><tr id="fb196361564wy"><td id="1cc7b93e06lci" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="cd54d342fajlk">HttpCode</p></td><td id="652314bde1bwe" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="5f46bf207e79f">错误码</p></td><td id="d48d9b0e32gz4" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="8fce5474d1hjf">错误信息</p></td><td id="04ca6a45f95mm" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="ee3a6f0f37m3t">说明</p></td></tr><tr id="a14534278e2sn"><td id="ac7a6ec644i2m" rowspan="1" colspan="1"><p id="c723f89481por">400</p></td><td id="b55ac2d036wub" rowspan="1" colspan="1"><p id="a82c65b11anum">param.invalid</p></td><td id="aae6a3db12hag" rowspan="1" colspan="1"><p id="10631b43555yq">%s</p></td><td id="7efb69c6f15z8" rowspan="1" colspan="1"><p id="3da95f34efpwd">参数不合法</p></td></tr><tr id="d053f3e489ldy"><td id="5ec84f1d3f1yp" rowspan="1" colspan="1"><p id="e3eaa35bbecxb">500</p></td><td id="742399a3a92ae" rowspan="1" colspan="1"><p id="f1389f588427r">system.busy</p></td><td id="44a90da6abev7" rowspan="1" colspan="1"><p id="78bca508car50">系统繁忙</p></td><td id="8900550574tke" rowspan="1" colspan="1"><p id="09a4a09ea0pu1">系统繁忙</p></td></tr></tbody></table></section></section></div></main></body></html>

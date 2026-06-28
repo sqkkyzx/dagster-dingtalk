@@ -7,7 +7,7 @@ import urllib.parse
 from typing import Optional, Tuple, List, Literal
 import httpx
 from pydantic import Field
-from dagster_dingtalk.app_client import DingTalkClient
+from dingtalk_oapi_zhcn.app_client import DingTalkClient
 from dagster import ConfigurableResource, InitResourceContext
 
 

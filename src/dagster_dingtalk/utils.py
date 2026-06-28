@@ -2,7 +2,7 @@ from datetime import datetime
 
 from dagster import OpExecutionContext
 
-from app_client import DingTalkClient
+from dingtalk_oapi_zhcn.app_client import DingTalkClient
 
 
 def upload_file_to_dingtalk(

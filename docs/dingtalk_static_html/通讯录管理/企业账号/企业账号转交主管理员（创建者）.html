@@ -1,0 +1,461 @@
+<!DOCTYPE html><html><head><meta charset="utf8" / /><meta name="searchtitle" content="" / /><meta name="keywords" content="" / /><meta name="author" content="" / /><title>企业账号转交主管理员（创建者）</title><meta name="gmtModify" content="2025-09-11 21:01:51" / /><meta name="gmtModify" content="2026-06-01 16:05:16" / /></head><body data-tag="topic" id="doc-api-dingtalk-ChangeMainAdmin" class="topic"><main id="7f34a9e41amcj" data-init-id="doc-api-dingtalk_ChangeMainAdmin"><h1 data-tag="title" id="h1-e7x-xkv-bcj" class="title">企业账号转交主管理员（创建者）</h1><p data-tag="shortdesc" id="7fc1f55496kyo" class="shortdesc">调用本接口，将本组织内某企业账号有所有权的组织，转交给另一企业账号，如果接收的账号不在该组织内则自动加入。</p><div data-tag="conbody" outputclass="icms-api-reference" class="icms-api-reference conbody"><section id="section-prerequisites-1" class="section icms-module" data-tag="section" data-source="latest-mounted-icms-html"><h2 id="h2-prerequisites-1" data-tag="h2" class="h2">接口调用说明</h2><p>例如，钉钉组织A下有两个企业账号，分别为企业账号A1和企业账号A2，其中企业账号A1是另一企业名称为钉钉组织B的创建者身份（当前测试企业OA管理后台-安全与权限-主管理员列表可查看）。调用本接口可用于把钉钉组织B的创建者身份变更为企业账号A2。</p></section><section id="section-request-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-request-1" data-tag="h2" class="h2">请求</h2><section id="section-request-basic-info" class="section"><h3 id="heading-request-basic-info" data-tag="h3" class="h3">基本信息</h3><table tablewidth="648" tablecolswidth="216 432" autofit="false" class="table"><colgroup colwidth="1*" style="width:33.33%"></colgroup><colgroup colwidth="2*" style="width:66.67%"></colgroup><tbody class="tbody"><tr><td rowspan="1" style="background-color:#e5e5e5" colspan="1"><p>字段</p></td><td rowspan="1" style="background-color:#e5e5e5" colspan="1"><p>值</p></td></tr><tr><td rowspan="1" colspan="1"><p>HTTP URL</p></td><td rowspan="1" colspan="1"><p>https://api.dingtalk.com/v1.0/contact/orgAccounts/mainAdministrators/change</p></td></tr><tr><td rowspan="1" colspan="1"><p>HTTP Method</p></td><td rowspan="1" colspan="1"><p>POST</p></td></tr><tr><td rowspan="1" colspan="1"><p>支持的应用类型</p></td><td rowspan="1" colspan="1"><p><span data-tag="ph" id="ph-request-basic-app-type-apptype-0" class="ph ph-app-type" data-ph-raw-text="appType-企业内部应用">appType-企业内部应用</span></p></td></tr><tr><td rowspan="1" colspan="1"><p>权限要求</p></td><td rowspan="1" colspan="1"><p><span data-tag="ph" id="ph-request-basic-permission-permission-contact-orgaccountsecurity-readwrite-0" class="ph-permission ph" data-ph-raw-text="permission-Contact.OrgAccountSecurity.ReadWrite-通讯录企业账号安全数据读写权限" data-permission-id="permission-Contact.OrgAccountSecurity.ReadWrite" data-permission-code="Contact.OrgAccountSecurity.ReadWrite" data-permission-detail-api="/document/api/permission/detail" data-permission-query-param="code">permission-Contact.OrgAccountSecurity.ReadWrite-通讯录企业账号安全数据读写权限</span></p></td></tr></tbody></table></section><section id="section-request-header-parameter" class="section"><h3 data-tag="h3" id="h2-e7k-lpx-ysq" class="h3 title">请求头</h3><table id="c09cb003675n5" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="e07dd324d4ik9"><td id="c319c8e4aaz25" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="3b3b2bca8ahmv">名称</p></td><td id="fde9b410de8y1" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="43a3018645825">类型</p></td><td id="d8e38c896ab70" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="bf5c524bb1vjh">是否必填</p></td><td id="883819cd02qc8" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="580099924f3c9">描述</p></td></tr><tr id="74efd89554kdq"><td id="4199ee891bnht" rowspan="1" colspan="1"><p id="fd656bc303g6o">x-acs-dingtalk-access-token</p></td><td id="3dbe56d53d1zt" rowspan="1" colspan="1"><p id="bf7725517er2m">String</p></td><td id="51fce6285592m" rowspan="1" colspan="1"><p id="72fb1669a133b">是</p></td><td id="d0a34be279n7l" rowspan="1" colspan="1"><p id="bf0d8518a2qxd">调用该接口的访问凭证，通过调用<a id="93d00b63b1iaa" href="https://open.dingtalk.com/document/development/obtain-the-access-token-of-an-internal-app#" class="xref">获取企业内部应用的accessToken</a>接口获取。</p></td></tr></tbody></table></section><section id="section-request-body-parameter" class="section"><h3 data-tag="h3" id="h2-a30-8ic-fjg" class="h3 title">请求体</h3><table id="591bbfaa5bqpc" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="f8734b3117lft"><td id="983461e863eqp" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="9f9adb5d19jd6">名称</p></td><td id="6d6a20ab877yq" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="092dc27b3e0ne">类型</p></td><td id="79239f7ce9j0c" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="803905660czu6">是否必填</p></td><td id="7c94256558v4q" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="cbb4611a3csx4">描述</p></td></tr><tr outputclass="row row-level-1" id="b7570e99c3eea" class="row row-level-1 row-level-1 row"><td id="9c627834f85hu" rowspan="1" colspan="1"><p id="ecb098fc5anxy">sourceUserId</p></td><td id="b5f2d0cb79ohu" rowspan="1" colspan="1"><p id="0eed44cf89lx0">String</p></td><td id="4cf98f646a4w7" rowspan="1" colspan="1"><p id="0e64543bacf04">是</p></td><td id="3891141250vap" rowspan="1" colspan="1"><p id="4d7d1d53eewaf">原企业账号userid，可通过以下四种方式获得：</p><ul id="10ec352bc9sh0"><li id="e261b3d549a0e"><p id="88b1f4b20f1iu"><a id="c9e6973a81xn2" href="https://open.dingtalk.com/document/development/obtain-the-userid-of-your-mobile-phone-number#" class="xref">根据手机号查询企业账号用户</a></p></li><li id="64c4b328a0dsm"><p id="ee080346747xr"><a id="376245c774vck" href="https://open.dingtalk.com/document/development/create-an-sso-account#" class="xref">创建SSO企业账号</a></p></li><li id="41aeeb0baamji"><p id="c1ece4f75dhsn"><a id="e474ff566b9ck" href="https://open.dingtalk.com/document/development/create-dingtalk-user-created-dedicated-account#" class="xref">创建钉钉自建企业账号</a></p></li><li id="13281152120mi"><p id="cb47ab37c391d"><a id="e420ec4ec2bz5" href="https://open.dingtalk.com/document/development/invite-other-organization-specific-accounts-to-join#" class="xref">邀请其他组织企业账号加入</a></p></li></ul></td></tr><tr outputclass="row row-level-2" id="3d2e03971cpdy" class="row row-level-2 row-level-2 row"><td id="61b1463a93vsv" rowspan="1" colspan="1"><p id="32703a380e2yc">targetUserId</p></td><td id="3c3fbdca806q3" rowspan="1" colspan="1"><p id="a1105f818cfk7">String</p></td><td id="79512e42befqq" rowspan="1" colspan="1"><p id="6c4d682d814ll">是</p></td><td id="b980c7eaa6jhf" rowspan="1" colspan="1"><p id="2c19807a1e4ff">接收专属账号userid，可通过以下四种方式获得：</p><ul id="a4b76db29c2qn"><li id="a869f59cadygx"><p id="59d21d7bdejnx"><a id="d2abd56ab0eab" href="https://open.dingtalk.com/document/development/obtain-the-userid-of-your-mobile-phone-number#" class="xref">根据手机号查询企业账号用户</a></p></li><li id="4f237940bb5th"><p id="6123657c527ud"><a id="fdc3561c9bsrn" href="https://open.dingtalk.com/document/development/create-an-sso-account#" class="xref">创建SSO企业账号</a></p></li><li id="ba87049911j7l"><p id="6bbe5b02feksa"><a id="f2f0c2245f3rh" href="https://open.dingtalk.com/document/development/create-dingtalk-user-created-dedicated-account#" class="xref">创建钉钉自建企业账号</a></p></li><li id="c7d8d8aa0c0wu"><p id="f5b124a5e9udo"><a id="8f9ce5b7d4gk6" href="https://open.dingtalk.com/document/development/invite-other-organization-specific-accounts-to-join#" class="xref">邀请其他组织企业账号加入</a></p></li></ul></td></tr><tr outputclass="row row-level-3" id="0c129881cfvo4" class="row row-level-3 row row-level-3"><td id="df107e8ea33t1" rowspan="1" colspan="1"><p id="3cd3966f359in">effectCorpId</p></td><td id="5e14b784e9wn7" rowspan="1" colspan="1"><p id="b8a2e8da4eqvw">String</p></td><td id="90d134d5f8fes" rowspan="1" colspan="1"><p id="6f36dcbc38myt">是</p></td><td id="1ec5a50332xbs" rowspan="1" colspan="1"><p id="c77fc04a9fs4w">被转交的组织corpId。详情参见基础概念-<a id="6199715a7a5l4" href="https://open.dingtalk.com/document/development/basic-concepts-beta#section-bbk-mv0-oxd" class="xref">CorpId</a>。</p></td></tr></tbody></table></section><section id="section-request-body-example" class="section"><h3 id="h3-request-body-example" data-tag="h3" class="h3">请求示例</h3><div id="figure-ehr-hnf-kyc" outputclass="tabbed-codeblock" data-tag="fig" class="tabbed-codeblock-box"><div class="tab-box"></div><input type="radio" name="check-figure-ehr-hnf-kyc" id="figure-ehr-hnf-kyc-HTTP-tab" checked="checked" /><label for="figure-ehr-hnf-kyc-HTTP-tab">HTTP</label><div class="codeblock-item"><pre id="codeblock-pdk-mxh-g7w" outputclass="language-HTTP" code-type="xCode" data-tag="codeblock" class="pre codeblock language-HTTP"><code>POST /v1.0/contact/orgAccounts/mainAdministrators/change HTTP/1.1
+Host:api.dingtalk.com
+x-acs-dingtalk-access-token:BExxx
+Content-Type:application/json
+
+{
+  "sourceUserId" : "userIdAA",
+  "targetUserId" : "userIdBB",
+  "effectCorpId" : "corpIdCCC"
+}</code></pre></div><input type="radio" name="check-figure-ehr-hnf-kyc" id="figure-ehr-hnf-kyc-java-tab" /><label for="figure-ehr-hnf-kyc-java-tab">Java</label><div class="codeblock-item"><pre id="codeblock-nrx-ter-yph" outputclass="language-java" code-type="xCode" data-tag="codeblock" class="pre codeblock language-java"><code>// This file is auto-generated, don't edit it. Thanks.
+package com.aliyun.sample;
+
+import com.aliyun.tea.*;
+import com.aliyun.teautil.*;
+import com.aliyun.teautil.models.*;
+import com.aliyun.dingtalkcontact_1_0.*;
+import com.aliyun.dingtalkcontact_1_0.models.*;
+import com.aliyun.teaopenapi.*;
+import com.aliyun.teaopenapi.models.*;
+
+public class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Client
+     * @throws Exception
+     */
+    public static com.aliyun.dingtalkcontact_1_0.Client createClient() throws Exception {
+        Config config = new Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        return new com.aliyun.dingtalkcontact_1_0.Client(config);
+    }
+
+    public static void main(String[] args_) throws Exception {
+        java.util.List&lt;String&gt; args = java.util.Arrays.asList(args_);
+        com.aliyun.dingtalkcontact_1_0.Client client = Sample.createClient();
+        ChangeMainAdminHeaders changeMainAdminHeaders = new ChangeMainAdminHeaders();
+        changeMainAdminHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        ChangeMainAdminRequest changeMainAdminRequest = new ChangeMainAdminRequest()
+                .setSourceUserId("userIdAA")
+                .setTargetUserId("userIdBB")
+                .setEffectCorpId("corpIdCCC");
+        try {
+            client.changeMainAdminWithOptions(changeMainAdminRequest, changeMainAdminHeaders, new RuntimeOptions());
+        } catch (TeaException err) {
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        } catch (Exception _err) {
+            TeaException err = new TeaException(_err.getMessage(), _err);
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        }        
+    }
+}</code></pre></div><input type="radio" name="check-figure-ehr-hnf-kyc" id="figure-ehr-hnf-kyc-python-tab" /><label for="figure-ehr-hnf-kyc-python-tab">Python</label><div class="codeblock-item"><pre id="codeblock-ebk-g48-czc" outputclass="language-python" code-type="xCode" data-tag="codeblock" class="pre codeblock language-python"><code># -*- coding: utf-8 -*-
+# This file is auto-generated, don't edit it. Thanks.
+import sys
+
+from typing import List
+
+from alibabacloud_dingtalk.contact_1_0.client import Client as dingtalkcontact_1_0Client
+from alibabacloud_tea_openapi import models as open_api_models
+from alibabacloud_dingtalk.contact_1_0 import models as dingtalkcontact__1__0_models
+from alibabacloud_tea_util import models as util_models
+from alibabacloud_tea_util.client import Client as UtilClient
+
+
+class Sample:
+    def __init__(self):
+        pass
+
+    @staticmethod
+    def create_client() -&gt; dingtalkcontact_1_0Client:
+        """
+        使用 Token 初始化账号Client
+        @return: Client
+        @throws Exception
+        """
+        config = open_api_models.Config()
+        config.protocol = 'https'
+        config.region_id = 'central'
+        return dingtalkcontact_1_0Client(config)
+
+    @staticmethod
+    def main(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        change_main_admin_headers = dingtalkcontact__1__0_models.ChangeMainAdminHeaders()
+        change_main_admin_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        change_main_admin_request = dingtalkcontact__1__0_models.ChangeMainAdminRequest(
+            source_user_id='userIdAA',
+            target_user_id='userIdBB',
+            effect_corp_id='corpIdCCC'
+        )
+        try:
+            client.change_main_admin_with_options(change_main_admin_request, change_main_admin_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+    @staticmethod
+    async def main_async(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        change_main_admin_headers = dingtalkcontact__1__0_models.ChangeMainAdminHeaders()
+        change_main_admin_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        change_main_admin_request = dingtalkcontact__1__0_models.ChangeMainAdminRequest(
+            source_user_id='userIdAA',
+            target_user_id='userIdBB',
+            effect_corp_id='corpIdCCC'
+        )
+        try:
+            await client.change_main_admin_with_options_async(change_main_admin_request, change_main_admin_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+
+if __name__ == '__main__':
+    Sample.main(sys.argv[1:])</code></pre></div><input type="radio" name="check-figure-ehr-hnf-kyc" id="figure-ehr-hnf-kyc-php-tab" /><label for="figure-ehr-hnf-kyc-php-tab">PHP</label><div class="codeblock-item"><pre id="codeblock-kcx-0hm-ibi" outputclass="language-php" code-type="xCode" data-tag="codeblock" class="pre codeblock language-php"><code>&lt;?php
+
+// This file is auto-generated, don't edit it. Thanks.
+namespace AlibabaCloud\SDK\Sample;
+
+use AlibabaCloud\SDK\Dingtalk\Vcontact_1_0\Dingtalk;
+use \Exception;
+use AlibabaCloud\Tea\Exception\TeaError;
+use AlibabaCloud\Tea\Utils\Utils;
+
+use Darabonba\OpenApi\Models\Config;
+use AlibabaCloud\SDK\Dingtalk\Vcontact_1_0\Models\ChangeMainAdminHeaders;
+use AlibabaCloud\SDK\Dingtalk\Vcontact_1_0\Models\ChangeMainAdminRequest;
+use AlibabaCloud\Tea\Utils\Utils\RuntimeOptions;
+
+class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Dingtalk Client
+     */
+    public static function createClient(){
+        $config = new Config([]);
+        $config-&gt;protocol = "https";
+        $config-&gt;regionId = "central";
+        return new Dingtalk($config);
+    }
+
+    /**
+     * @param string[] $args
+     * @return void
+     */
+    public static function main($args){
+        $client = self::createClient();
+        $changeMainAdminHeaders = new ChangeMainAdminHeaders([]);
+        $changeMainAdminHeaders-&gt;xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        $changeMainAdminRequest = new ChangeMainAdminRequest([
+            "sourceUserId" =&gt; "userIdAA",
+            "targetUserId" =&gt; "userIdBB",
+            "effectCorpId" =&gt; "corpIdCCC"
+        ]);
+        try {
+            $client-&gt;changeMainAdminWithOptions($changeMainAdminRequest, $changeMainAdminHeaders, new RuntimeOptions([]));
+        }
+        catch (Exception $err) {
+            if (!($err instanceof TeaError)) {
+                $err = new TeaError([], $err-&gt;getMessage(), $err-&gt;getCode(), $err);
+            }
+            if (!Utils::empty_($err-&gt;code) &amp;&amp; !Utils::empty_($err-&gt;message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+        }
+    }
+}
+$path = __DIR__ . \DIRECTORY_SEPARATOR . '..' . \DIRECTORY_SEPARATOR . 'vendor' . \DIRECTORY_SEPARATOR . 'autoload.php';
+if (file_exists($path)) {
+    require_once $path;
+}
+Sample::main(array_slice($argv, 1));</code></pre></div><input type="radio" name="check-figure-ehr-hnf-kyc" id="figure-ehr-hnf-kyc-go-tab" /><label for="figure-ehr-hnf-kyc-go-tab">Go</label><div class="codeblock-item"><pre id="codeblock-jsv-ynq-dsj" outputclass="language-go" code-type="xCode" data-tag="codeblock" class="pre codeblock language-go"><code>// This file is auto-generated, don't edit it. Thanks.
+package main
+
+import (
+  "os"
+  util  "github.com/alibabacloud-go/tea-utils/service"
+  dingtalkcontact_1_0  "github.com/alibabacloud-go/dingtalk/contact_1_0"
+  openapi  "github.com/alibabacloud-go/darabonba-openapi/client"
+  "github.com/alibabacloud-go/tea/tea"
+)
+
+
+/**
+ * 使用 Token 初始化账号Client
+ * @return Client
+ * @throws Exception
+ */
+func CreateClient () (_result *dingtalkcontact_1_0.Client, _err error) {
+  config := &amp;openapi.Config{}
+  config.Protocol = tea.String("https")
+  config.RegionId = tea.String("central")
+  _result = &amp;dingtalkcontact_1_0.Client{}
+  _result, _err = dingtalkcontact_1_0.NewClient(config)
+  return _result, _err
+}
+
+func _main (args []*string) (_err error) {
+  client, _err := CreateClient()
+  if _err != nil {
+    return _err
+  }
+
+  changeMainAdminHeaders := &amp;dingtalkcontact_1_0.ChangeMainAdminHeaders{}
+  changeMainAdminHeaders.XAcsDingtalkAccessToken = tea.String("&lt;your access token&gt;")
+  changeMainAdminRequest := &amp;dingtalkcontact_1_0.ChangeMainAdminRequest{
+    SourceUserId: tea.String("userIdAA"),
+    TargetUserId: tea.String("userIdBB"),
+    EffectCorpId: tea.String("corpIdCCC"),
+  }
+  tryErr := func()(_e error) {
+    defer func() {
+      if r := tea.Recover(recover()); r != nil {
+        _e = r
+      }
+    }()
+    _, _err = client.ChangeMainAdminWithOptions(changeMainAdminRequest, changeMainAdminHeaders, &amp;util.RuntimeOptions{})
+    if _err != nil {
+      return _err
+    }
+
+    return nil
+  }()
+
+  if tryErr != nil {
+    var err = &amp;tea.SDKError{}
+    if _t, ok := tryErr.(*tea.SDKError); ok {
+      err = _t
+    } else {
+      err.Message = tea.String(tryErr.Error())
+    }
+    if !tea.BoolValue(util.Empty(err.Code)) &amp;&amp; !tea.BoolValue(util.Empty(err.Message)) {
+      // err 中含有 code 和 message 属性，可帮助开发定位问题
+    }
+
+  }
+  return _err
+}
+
+
+func main() {
+  err := _main(tea.StringSlice(os.Args[1:]))
+  if err != nil {
+    panic(err)
+  }
+}</code></pre></div><input type="radio" name="check-figure-ehr-hnf-kyc" id="figure-ehr-hnf-kyc-nodejs-tab" /><label for="figure-ehr-hnf-kyc-nodejs-tab">Node.js</label><div class="codeblock-item"><pre id="codeblock-tfp-ves-1ix" outputclass="language-nodejs" code-type="xCode" data-tag="codeblock" class="pre codeblock language-nodejs"><code>// This file is auto-generated, don't edit it
+import Util, * as $Util from '@alicloud/tea-util';
+import dingtalkcontact_1_0, * as $dingtalkcontact_1_0 from '@alicloud/dingtalk/contact_1_0';
+import OpenApi, * as $OpenApi from '@alicloud/openapi-client';
+import * as $tea from '@alicloud/tea-typescript';
+
+
+export default class Client {
+
+  /**
+   * 使用 Token 初始化账号Client
+   * @return Client
+   * @throws Exception
+   */
+  static createClient(): dingtalkcontact_1_0 {
+    let config = new $OpenApi.Config({ });
+    config.protocol = "https";
+    config.regionId = "central";
+    return new dingtalkcontact_1_0(config);
+  }
+
+  static async main(args: string[]): Promise&lt;void&gt; {
+    let client = Client.createClient();
+    let changeMainAdminHeaders = new $dingtalkcontact_1_0.ChangeMainAdminHeaders({ });
+    changeMainAdminHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+    let changeMainAdminRequest = new $dingtalkcontact_1_0.ChangeMainAdminRequest({
+      sourceUserId: "userIdAA",
+      targetUserId: "userIdBB",
+      effectCorpId: "corpIdCCC",
+    });
+    try {
+      await client.changeMainAdminWithOptions(changeMainAdminRequest, changeMainAdminHeaders, new $Util.RuntimeOptions({ }));
+    } catch (err) {
+      if (!Util.empty(err.code) &amp;&amp; !Util.empty(err.message)) {
+        // err 中含有 code 和 message 属性，可帮助开发定位问题
+      }
+
+    }    
+  }
+
+}
+
+Client.main(process.argv.slice(2));</code></pre></div><input type="radio" name="check-figure-ehr-hnf-kyc" id="figure-ehr-hnf-kyc-csharp-tab" /><label for="figure-ehr-hnf-kyc-csharp-tab">C#</label><div class="codeblock-item"><pre id="codeblock-frt-sp3-65l" outputclass="language-csharp" code-type="xCode" data-tag="codeblock" class="pre codeblock language-csharp"><code>// This file is auto-generated, don't edit it. Thanks.
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
+
+using Tea;
+using Tea.Utils;
+
+
+namespace AlibabaCloud.SDK.Sample
+{
+    public class Sample 
+    {
+
+        /**
+         * 使用 Token 初始化账号Client
+         * @return Client
+         * @throws Exception
+         */
+        public static AlibabaCloud.SDK.Dingtalkcontact_1_0.Client CreateClient()
+        {
+            AlibabaCloud.OpenApiClient.Models.Config config = new AlibabaCloud.OpenApiClient.Models.Config();
+            config.Protocol = "https";
+            config.RegionId = "central";
+            return new AlibabaCloud.SDK.Dingtalkcontact_1_0.Client(config);
+        }
+
+        public static void Main(string[] args)
+        {
+            AlibabaCloud.SDK.Dingtalkcontact_1_0.Client client = CreateClient();
+            AlibabaCloud.SDK.Dingtalkcontact_1_0.Models.ChangeMainAdminHeaders changeMainAdminHeaders = new AlibabaCloud.SDK.Dingtalkcontact_1_0.Models.ChangeMainAdminHeaders();
+            changeMainAdminHeaders.XAcsDingtalkAccessToken = "&lt;your access token&gt;";
+            AlibabaCloud.SDK.Dingtalkcontact_1_0.Models.ChangeMainAdminRequest changeMainAdminRequest = new AlibabaCloud.SDK.Dingtalkcontact_1_0.Models.ChangeMainAdminRequest
+            {
+                SourceUserId = "userIdAA",
+                TargetUserId = "userIdBB",
+                EffectCorpId = "corpIdCCC",
+            };
+            try
+            {
+                client.ChangeMainAdminWithOptions(changeMainAdminRequest, changeMainAdminHeaders, new AlibabaCloud.TeaUtil.Models.RuntimeOptions());
+            }
+            catch (TeaException err)
+            {
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+            catch (Exception _err)
+            {
+                TeaException err = new TeaException(new Dictionary&lt;string, object&gt;
+                {
+                    { "message", _err.Message }
+                });
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+        }
+
+
+    }
+}</code></pre></div><input type="radio" name="check-figure-ehr-hnf-kyc" id="figure-ehr-hnf-kyc-cpp-tab" /><label for="figure-ehr-hnf-kyc-cpp-tab">C++</label><div class="codeblock-item"><pre id="codeblock-5vc-tiv-fup" outputclass="language-cpp" code-type="xCode" data-tag="codeblock" class="pre codeblock language-cpp"><code>// This file is auto-generated, don't edit it. Thanks.
+
+#include &lt;alibabacloud/dingtalkcontact__1__0.hpp&gt;
+#include &lt;alibabacloud/open_api.hpp&gt;
+#include &lt;boost/any.hpp&gt;
+#include &lt;darabonba/core.hpp&gt;
+#include &lt;darabonba/util.hpp&gt;
+#include &lt;iostream&gt;
+#include &lt;map&gt;
+
+using namespace std;
+
+Alibabacloud_Dingtalkcontact_1_0::Client createClient() {
+  shared_ptr&lt;Alibabacloud_OpenApi::Config&gt; config = make_shared&lt;Alibabacloud_OpenApi::Config&gt;();
+  config-&gt;protocol = make_shared&lt;string&gt;("https");
+  config-&gt;regionId = make_shared&lt;string&gt;("central");
+  return Alibabacloud_Dingtalkcontact_1_0::Client(config);
+}
+
+int main(int argc, char *args[]) {
+  args++;
+  shared_ptr&lt;Alibabacloud_Dingtalkcontact_1_0::Client&gt; client = make_shared&lt;Alibabacloud_Dingtalkcontact_1_0::Client&gt;(createClient());
+  shared_ptr&lt;Alibabacloud_Dingtalkcontact_1_0::ChangeMainAdminHeaders&gt; changeMainAdminHeaders = make_shared&lt;Alibabacloud_Dingtalkcontact_1_0::ChangeMainAdminHeaders&gt;();
+  changeMainAdminHeaders-&gt;xAcsDingtalkAccessToken = make_shared&lt;string&gt;("&lt;your access token&gt;");
+  shared_ptr&lt;Alibabacloud_Dingtalkcontact_1_0::ChangeMainAdminRequest&gt; changeMainAdminRequest = make_shared&lt;Alibabacloud_Dingtalkcontact_1_0::ChangeMainAdminRequest&gt;(map&lt;string, boost::any&gt;({
+    {"sourceUserId", boost::any(string("userIdAA"))},
+    {"targetUserId", boost::any(string("userIdBB"))},
+    {"effectCorpId", boost::any(string("corpIdCCC"))}
+  }));
+  try {
+    client-&gt;changeMainAdminWithOptions(changeMainAdminRequest, changeMainAdminHeaders, make_shared&lt;Darabonba_Util::RuntimeOptions&gt;(Darabonba_Util::RuntimeOptions()));
+  }
+  catch (std::exception &amp;err) {
+    if (!Darabonba_Util::Client::empty(err.code) &amp;&amp; !Darabonba_Util::Client::empty(err.message)) {
+      // err 中含有 code 和 message 属性，可帮助开发定位问题
+    }
+  }
+}</code></pre></div></div></section></section><section id="section-response-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-response-1" data-tag="h2" class="h2">响应</h2><section id="section-response-parameter" class="section"><h3 data-tag="h3" id="h2-tf3-53w-cht" class="h3 title">响应体</h3><table id="6f8daa507c13x" tablewidth="710" tablecolswidth="213 142 355" autofit="false" class="table"><colgroup colwidth="0.9*" style="width:30.00%"></colgroup><colgroup colwidth="0.6*" style="width:20.00%"></colgroup><colgroup colwidth="1.5*" style="width:50.00%"></colgroup><tbody class="tbody"><tr id="2ae57b6a8cinq"><td id="efc075c7dczbb" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="fc1c83bd83vjm">名称</p></td><td id="7d33857f8ajnm" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="b4262dc660qur">类型</p></td><td id="45be9e9cd3e1h" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="446a0d810er7q">描述</p></td></tr><tr outputclass="row row-level-1" id="72eb4f5c3ffic" class="row row-level-1 row-level-1 row"><td id="0f279abc07s16" rowspan="1" colspan="1"><p id="735f81bf4cp68">result</p></td><td id="361db56a23prv" rowspan="1" colspan="1"><p id="908e189b4fd8y">Boolean</p></td><td id="71e99dacfc5l4" rowspan="1" colspan="1"><p id="68fcee575d4z3">转接操作结果。</p></td></tr></tbody></table></section><section id="section-response-body-example" class="section"><h3 id="h3-response-body-example" data-tag="h3" class="h3">响应体示例</h3><pre id="3809d5cc19dtt" outputclass="language-json" code-type="xCode" data-tag="codeblock" class="pre codeblock language-json"><code>HTTP/1.1 200 OK
+Content-Type:application/json
+
+{
+  "result" : true
+}</code></pre></section><section id="section-error-code-1" class="section"><h3 id="h3-error-code-1" data-tag="h3" class="h3">错误码</h3><p data-tag="p" id="p-error-code-global-guide" class="p">若调用该接口报错，可根据错误信息在<a id="a-error-code-global-guide" href="https://open.dingtalk.com/document/development/server-api-error-codes-1">全局错误码</a>文档中查找解决方案。</p><table id="a48f363784t3f" tablewidth="709" tablecolswidth="142 177 177 213" autofit="false" class="table">
+  <colgroup colwidth="0.8*" style="width:20.03%"></colgroup>
+  <colgroup colwidth="1*" style="width:24.96%"></colgroup>
+  <colgroup colwidth="1*" style="width:24.96%"></colgroup>
+  <colgroup colwidth="1.2*" style="width:30.04%"></colgroup>
+  <tbody class="tbody">
+   <tr id="ac8dd72ef4wut">
+    <td id="ed0df1d4d8gv9" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="d9416e843eovx">HttpCode</p></td>
+    <td id="ee296f991ed72" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="12c480fe79bkt">错误码</p></td>
+    <td id="10db3cc9e3pl6" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="47b1cf4bbd2ty">错误信息</p></td>
+    <td id="381ee414c2kee" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="668229d735jph">说明</p></td>
+   </tr>
+   <tr id="04a9825b19grt">
+    <td id="f23cf7d696z75" rowspan="1" colspan="1"><p id="b3ca09f309871">400</p></td>
+    <td id="a6786f80acn9a" rowspan="1" colspan="1"><p id="826f3bd506yei">not.main.administrator</p></td>
+    <td id="90b599ae6cvsp" rowspan="1" colspan="1"><p id="4b2a197187ldc">不是主管理员(创建者)</p></td>
+    <td id="1f72c51d84vbe" rowspan="1" colspan="1"><p id="3700e0ea0f9t5">不是主管理员(创建者)</p></td>
+   </tr>
+   <tr id="327ddccf55j0d">
+    <td id="7f1b70470bv3o" rowspan="1" colspan="1"><p id="a9da216168ihk">400</p></td>
+    <td id="b22759b8f7von" rowspan="1" colspan="1"><p id="31c4958b95jeb">exclusive.account.limit</p></td>
+    <td id="847d80b91befh" rowspan="1" colspan="1"><p id="4a3debe3c6r26">只能操作归属该组织的专属账号</p></td>
+    <td id="191a183532gu9" rowspan="1" colspan="1"><p id="7412d241119tr">只能操作归属该组织的专属账号</p></td>
+   </tr>
+   <tr id="30e545460cfkq">
+    <td id="07fe889e95m3a" rowspan="1" colspan="1"><p id="1a167fc28b1x1">400</p></td>
+    <td id="1171b3c414ltb" rowspan="1" colspan="1"><p id="5f3cd2b049f4f">profile.not.exist</p></td>
+    <td id="cbf1a7c36bt7y" rowspan="1" colspan="1"><p id="9176940174yj3">账号不存在</p></td>
+    <td id="110b9003f75jh" rowspan="1" colspan="1"><p id="f5f4c3da80ub9">账号不存在</p></td>
+   </tr>
+   <tr id="257d2ac475aa8">
+    <td id="37cc0560f8sck" rowspan="1" colspan="1"><p id="1eccd162edbv4">400</p></td>
+    <td id="95881bef37rs4" rowspan="1" colspan="1"><p id="df11f7c0c9uoj">employee.not.exist</p></td>
+    <td id="0a689b4120qab" rowspan="1" colspan="1"><p id="79f522a71fdc5">员工不存在</p></td>
+    <td id="738487a0dahew" rowspan="1" colspan="1"><p id="9accd6ed5cag0">员工不存在</p></td>
+   </tr>
+   <tr id="c6ad3f148a9cb">
+    <td id="cc62f8f2bewlu" rowspan="1" colspan="1"><p id="3ca1a2cc76rdb">400</p></td>
+    <td id="490f187f131g2" rowspan="1" colspan="1"><p id="4c09db2b30b8k">invalid.param</p></td>
+    <td id="e4a37af1448dy" rowspan="1" colspan="1"><p id="91d14457acbgi">无效参数</p></td>
+    <td id="950b3eb78d8nd" rowspan="1" colspan="1"><p id="293ec437f0yhi">sourceUserId/targetUserId/effectCorpId不能为空，并且effectCorpId需要是真实存在的组织id</p></td>
+   </tr>
+   <tr id="5a3b7ace248fb">
+    <td id="80f9d9e183avv" rowspan="1" colspan="1"><p id="f739c59313avs">500</p></td>
+    <td id="8566dff33698q" rowspan="1" colspan="1"><p id="08a457aec5eq0">system.busy</p></td>
+    <td id="c7868d1c78b06" rowspan="1" colspan="1"><p id="7bdd13961esbe">系统繁忙，请稍后再试</p></td>
+    <td id="a83c166b92h28" rowspan="1" colspan="1"><p id="44c3dba9f3ky9">系统繁忙，请稍后再试</p></td>
+   </tr>
+  </tbody>
+ </table></section></section></div></main>
+</body></html>

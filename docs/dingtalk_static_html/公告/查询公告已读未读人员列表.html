@@ -1,0 +1,568 @@
+<!DOCTYPE html><html lang="zh-CN"><head>
+    <meta charset="utf8" / />
+    <title>查询公告已读未读人员列表</title>
+<meta name="gmtModify" content="2025-10-21 13:56:42" / /><meta name="gmtModify" content="2026-06-01 18:25:31" / /></head>
+<body data-tag="topic" id="doc-api-dingtalk-QueryBlackboardReadUnRead" class="topic">
+    <main id="doc-api-dingtalk-QueryBlackboardReadUnRead">
+        <h1 data-tag="title" id="h1-rgo-648-3em" class="title">查询公告已读未读人员列表</h1>
+        <p data-tag="shortdesc" class="shortdesc">调用本接口，获取指定公告的已读未读人员列表。</p>
+        <div data-tag="conbody" outputclass="icms-api-reference" class="icms-api-reference conbody"><section id="section-request-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-request-1" data-tag="h2" class="h2">请求</h2><section id="section-request-basic-info" class="section"><h3 id="heading-request-basic-info" data-tag="h3" class="h3">基本信息</h3><table tablewidth="648" tablecolswidth="216 432" autofit="false" class="table"><colgroup colwidth="1*" style="width:33.33%"></colgroup><colgroup colwidth="2*" style="width:66.67%"></colgroup><tbody class="tbody"><tr><td rowspan="1" style="background-color:#e5e5e5" colspan="1"><p>字段</p></td><td rowspan="1" style="background-color:#e5e5e5" colspan="1"><p>值</p></td></tr><tr><td rowspan="1" colspan="1"><p>HTTP URL</p></td><td rowspan="1" colspan="1"><p>https://api.dingtalk.com/v1.0/blackboard/readers</p></td></tr><tr><td rowspan="1" colspan="1"><p>HTTP Method</p></td><td rowspan="1" colspan="1"><p>GET</p></td></tr><tr><td rowspan="1" colspan="1"><p>支持的应用类型</p></td><td rowspan="1" colspan="1"><p><span data-tag="ph" id="ph-request-basic-app-type-apptype-0" class="ph ph-app-type" data-ph-raw-text="appType-企业内部应用">appType-企业内部应用</span></p></td></tr><tr><td rowspan="1" colspan="1"><p>权限要求</p></td><td rowspan="1" colspan="1"><p><span data-tag="ph" id="ph-request-basic-permission-permission-qyapi-blackboard-manage-0" class="ph-permission ph" data-ph-raw-text="permission-qyapi_blackboard_manage-钉钉公告管理权限" data-permission-id="permission-qyapi_blackboard_manage" data-permission-code="qyapi_blackboard_manage" data-permission-detail-api="/document/api/permission/detail" data-permission-query-param="code">permission-qyapi_blackboard_manage-钉钉公告管理权限</span></p></td></tr></tbody></table></section><section id="section-request-header-parameter" class="section">
+                    <h3 data-tag="h3" id="h2-sim-a5m-kyw" class="h3 title">请求头</h3>
+                    <table class="table">
+                        <colgroup colnum="1" colname="col1" colwidth="3*" style="width:30%"></colgroup>
+                        <colgroup colnum="2" colname="col2" colwidth="1.5*" style="width:15%"></colgroup>
+                        <colgroup colnum="3" colname="col3" colwidth="1.5*" style="width:15%"></colgroup>
+                        <colgroup colnum="4" colname="col4" colwidth="4*" style="width:40%"></colgroup>
+                        <thead class="thead">
+                        <tr>
+                            <th><p>名称</p></th>
+                            <th><p>类型</p></th>
+                            <th><p>是否必填</p></th>
+                            <th><p>描述</p></th>
+                        </tr>
+                        </thead>
+                        <tbody class="tbody">
+                            <tr>
+                                <td><p>x-acs-dingtalk-access-token</p></td>
+                                <td><p>String</p></td>
+                                <td><p>是</p></td>
+                                <td><p>调用该接口的访问凭证，通过调用<a href="https://open.dingtalk.com/document/development/obtain-the-access-token-of-an-internal-app">获取企业内部应用的accessToken</a>接口获取。</p>
+</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section><section id="section-request-query-parameter" class="section">
+        <h3 data-tag="h3" id="h2-yog-you-qan" class="h3 title">查询参数</h3>
+        <table class="table">
+            <colgroup colnum="1" colname="col1" colwidth="3*" style="width:30%"></colgroup>
+            <colgroup colnum="2" colname="col2" colwidth="1.5*" style="width:15%"></colgroup>
+            <colgroup colnum="3" colname="col3" colwidth="1.5*" style="width:15%"></colgroup>
+            <colgroup colnum="4" colname="col4" colwidth="4*" style="width:40%"></colgroup>
+            <thead class="thead">
+            <tr>
+                <th><p>名称</p></th>
+                <th><p>类型</p></th>
+                <th><p>是否必填</p></th>
+                <th><p>描述</p></th>
+            </tr>
+            </thead>
+            <tbody class="tbody">
+                    <tr>
+                        <td><p>operationUserId</p></td>
+                        <td><p>String</p></td>
+                        <td><p>是</p></td>
+                        <td><p>操作人userId。</p>
+</td>
+                    </tr>
+                    <tr>
+                        <td><p>maxResults</p></td>
+                        <td><p>Integer</p></td>
+                        <td><p>是</p></td>
+                        <td><p>每页条目数，最大500。</p>
+</td>
+                    </tr>
+                    <tr>
+                        <td><p>nextToken</p></td>
+                        <td><p>String</p></td>
+                        <td><p>否</p></td>
+                        <td><p>分页游标。</p>
+<div type="note" class="note note-note"><div class="note-icon-wrapper"><i class="icon-note note note"></i></div><div class="noteContentSpan"><p data-tag="p" class="p">
+</p><ul>
+<li>如果是首次调用，该参数不传。</li>
+<li>如果是非首次调用，该参数传上次调用时返回的nextToken。</li>
+</ul>
+<p></p></div></div>
+</td>
+                    </tr>
+                    <tr>
+                        <td><p>blackboardId</p></td>
+                        <td><p>String</p></td>
+                        <td><p>是</p></td>
+                        <td><p>公告id，可通过调用<a href="https://open.dingtalk.com/document/development/obtains-the-id-list-of-announcements-that-are-not-deleted">获取公告ID列表</a>接口获取。</p>
+</td>
+                    </tr>
+            </tbody>
+        </table>
+    </section><section id="section-request-body-example" class="section"><h3 id="h3-request-body-example" data-tag="h3" class="h3">请求示例</h3><div id="figure-auf-lqn-ecz" outputclass="tabbed-codeblock" data-tag="fig" class="tabbed-codeblock-box"><div class="tab-box"></div><input type="radio" name="check-figure-auf-lqn-ecz" id="figure-auf-lqn-ecz-HTTP-tab" checked="checked" /><label for="figure-auf-lqn-ecz-HTTP-tab">HTTP</label><div class="codeblock-item"><pre id="codeblock-chy-ssi-y74" outputclass="language-HTTP" data-tag="codeblock" code-type="xCode" class="pre codeblock language-HTTP"><code>GET /v1.0/blackboard/readers?operationUserId=manager01&amp;maxResults=200&amp;nextToken=xb1dc&amp;blackboardId=49dc87dc1b30cd099b13a HTTP/1.1
+Host:api.dingtalk.com
+x-acs-dingtalk-access-token:a9deamsdk978
+Content-Type:application/json</code></pre></div><input type="radio" name="check-figure-auf-lqn-ecz" id="figure-auf-lqn-ecz-java-tab" /><label for="figure-auf-lqn-ecz-java-tab">Java</label><div class="codeblock-item"><pre id="codeblock-6lu-ksh-xqb" outputclass="language-java" data-tag="codeblock" code-type="xCode" class="pre codeblock language-java"><code>// This file is auto-generated, don't edit it. Thanks.
+package com.aliyun.sample;
+
+import com.aliyun.tea.*;
+
+public class Sample {
+
+    /**
+     * &lt;b&gt;description&lt;/b&gt; :
+     * &lt;p&gt;使用 Token 初始化账号Client&lt;/p&gt;
+     * @return Client
+     * 
+     * @throws Exception
+     */
+    public static com.aliyun.dingtalkblackboard_1_0.Client createClient() throws Exception {
+        com.aliyun.teaopenapi.models.Config config = new com.aliyun.teaopenapi.models.Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        return new com.aliyun.dingtalkblackboard_1_0.Client(config);
+    }
+
+    public static void main(String[] args_) throws Exception {
+        
+        com.aliyun.dingtalkblackboard_1_0.Client client = Sample.createClient();
+        com.aliyun.dingtalkblackboard_1_0.models.QueryBlackboardReadUnReadHeaders queryBlackboardReadUnReadHeaders = new com.aliyun.dingtalkblackboard_1_0.models.QueryBlackboardReadUnReadHeaders();
+        queryBlackboardReadUnReadHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        com.aliyun.dingtalkblackboard_1_0.models.QueryBlackboardReadUnReadRequest queryBlackboardReadUnReadRequest = new com.aliyun.dingtalkblackboard_1_0.models.QueryBlackboardReadUnReadRequest()
+                .setOperationUserId("manager01")
+                .setMaxResults(200)
+                .setNextToken("xb1dc")
+                .setBlackboardId("49dc87dc1b30cd099b13a");
+        try {
+            client.queryBlackboardReadUnReadWithOptions(queryBlackboardReadUnReadRequest, queryBlackboardReadUnReadHeaders, new com.aliyun.teautil.models.RuntimeOptions());
+        } catch (TeaException err) {
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        } catch (Exception _err) {
+            TeaException err = new TeaException(_err.getMessage(), _err);
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        }        
+    }
+}</code></pre></div><input type="radio" name="check-figure-auf-lqn-ecz" id="figure-auf-lqn-ecz-python-tab" /><label for="figure-auf-lqn-ecz-python-tab">Python</label><div class="codeblock-item"><pre id="codeblock-esr-4bn-yxz" outputclass="language-python" data-tag="codeblock" code-type="xCode" class="pre codeblock language-python"><code># -*- coding: utf-8 -*-
+# This file is auto-generated, don't edit it. Thanks.
+import os
+import sys
+
+from typing import List
+
+from alibabacloud_dingtalk.blackboard_1_0.client import Client as dingtalkblackboard_1_0Client
+from alibabacloud_tea_openapi import models as open_api_models
+from alibabacloud_dingtalk.blackboard_1_0 import models as dingtalkblackboard__1__0_models
+from alibabacloud_tea_util import models as util_models
+from alibabacloud_tea_util.client import Client as UtilClient
+
+
+class Sample:
+    def __init__(self):
+        pass
+
+    @staticmethod
+    def create_client() -&gt; dingtalkblackboard_1_0Client:
+        """
+        使用 Token 初始化账号Client
+        @return: Client
+        @throws Exception
+        """
+        config = open_api_models.Config()
+        config.protocol = 'https'
+        config.region_id = 'central'
+        return dingtalkblackboard_1_0Client(config)
+
+    @staticmethod
+    def main(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        query_blackboard_read_un_read_headers = dingtalkblackboard__1__0_models.QueryBlackboardReadUnReadHeaders()
+        query_blackboard_read_un_read_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        query_blackboard_read_un_read_request = dingtalkblackboard__1__0_models.QueryBlackboardReadUnReadRequest(
+            operation_user_id='manager01',
+            max_results=200,
+            next_token='xb1dc',
+            blackboard_id='49dc87dc1b30cd099b13a'
+        )
+        try:
+            client.query_blackboard_read_un_read_with_options(query_blackboard_read_un_read_request, query_blackboard_read_un_read_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+    @staticmethod
+    async def main_async(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        query_blackboard_read_un_read_headers = dingtalkblackboard__1__0_models.QueryBlackboardReadUnReadHeaders()
+        query_blackboard_read_un_read_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        query_blackboard_read_un_read_request = dingtalkblackboard__1__0_models.QueryBlackboardReadUnReadRequest(
+            operation_user_id='manager01',
+            max_results=200,
+            next_token='xb1dc',
+            blackboard_id='49dc87dc1b30cd099b13a'
+        )
+        try:
+            await client.query_blackboard_read_un_read_with_options_async(query_blackboard_read_un_read_request, query_blackboard_read_un_read_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+
+if __name__ == '__main__':
+    Sample.main(sys.argv[1:])</code></pre></div><input type="radio" name="check-figure-auf-lqn-ecz" id="figure-auf-lqn-ecz-php-tab" /><label for="figure-auf-lqn-ecz-php-tab">PHP</label><div class="codeblock-item"><pre id="codeblock-k9p-x6g-ovk" outputclass="language-php" data-tag="codeblock" code-type="xCode" class="pre codeblock language-php"><code>&lt;?php
+
+// This file is auto-generated, don't edit it. Thanks.
+namespace AlibabaCloud\SDK\Sample;
+
+use AlibabaCloud\SDK\Dingtalk\Vblackboard_1_0\Dingtalk;
+use \Exception;
+use AlibabaCloud\Tea\Exception\TeaError;
+use AlibabaCloud\Tea\Utils\Utils;
+
+use Darabonba\OpenApi\Models\Config;
+use AlibabaCloud\SDK\Dingtalk\Vblackboard_1_0\Models\QueryBlackboardReadUnReadHeaders;
+use AlibabaCloud\SDK\Dingtalk\Vblackboard_1_0\Models\QueryBlackboardReadUnReadRequest;
+use AlibabaCloud\Tea\Utils\Utils\RuntimeOptions;
+
+class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Dingtalk Client
+     */
+    public static function createClient(){
+        $config = new Config([]);
+        $config-&gt;protocol = "https";
+        $config-&gt;regionId = "central";
+        return new Dingtalk($config);
+    }
+
+    /**
+     * @param string[] $args
+     * @return void
+     */
+    public static function main($args){
+        $client = self::createClient();
+        $queryBlackboardReadUnReadHeaders = new QueryBlackboardReadUnReadHeaders([]);
+        $queryBlackboardReadUnReadHeaders-&gt;xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        $queryBlackboardReadUnReadRequest = new QueryBlackboardReadUnReadRequest([
+            "operationUserId" =&gt; "manager01",
+            "maxResults" =&gt; 200,
+            "nextToken" =&gt; "xb1dc",
+            "blackboardId" =&gt; "49dc87dc1b30cd099b13a"
+        ]);
+        try {
+            $client-&gt;queryBlackboardReadUnReadWithOptions($queryBlackboardReadUnReadRequest, $queryBlackboardReadUnReadHeaders, new RuntimeOptions([]));
+        }
+        catch (Exception $err) {
+            if (!($err instanceof TeaError)) {
+                $err = new TeaError([], $err-&gt;getMessage(), $err-&gt;getCode(), $err);
+            }
+            if (!Utils::empty_($err-&gt;code) &amp;&amp; !Utils::empty_($err-&gt;message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+        }
+    }
+}
+$path = __DIR__ . \DIRECTORY_SEPARATOR . '..' . \DIRECTORY_SEPARATOR . 'vendor' . \DIRECTORY_SEPARATOR . 'autoload.php';
+if (file_exists($path)) {
+    require_once $path;
+}
+Sample::main(array_slice($argv, 1));</code></pre></div><input type="radio" name="check-figure-auf-lqn-ecz" id="figure-auf-lqn-ecz-go-tab" /><label for="figure-auf-lqn-ecz-go-tab">Go</label><div class="codeblock-item"><pre id="codeblock-ypp-8ne-dow" outputclass="language-go" data-tag="codeblock" code-type="xCode" class="pre codeblock language-go"><code>// This file is auto-generated, don't edit it. Thanks.
+package main
+
+import (
+  "encoding/json"
+  "strings"
+  "fmt"
+  "os"
+  util  "github.com/alibabacloud-go/tea-utils/v2/service"
+  dingtalkblackboard_1_0  "github.com/alibabacloud-go/dingtalk/blackboard_1_0"
+  openapi  "github.com/alibabacloud-go/darabonba-openapi/v2/client"
+  "github.com/alibabacloud-go/tea/tea"
+)
+
+
+// Description:
+// 
+// 使用 Token 初始化账号Client
+// 
+// @return Client
+// 
+// @throws Exception
+func CreateClient () (_result *dingtalkblackboard_1_0.Client, _err error) {
+  config := &amp;openapi.Config{}
+  config.Protocol = tea.String("https")
+  config.RegionId = tea.String("central")
+  _result = &amp;dingtalkblackboard_1_0.Client{}
+  _result, _err = dingtalkblackboard_1_0.NewClient(config)
+  return _result, _err
+}
+
+func _main (args []*string) (_err error) {
+  client, _err := CreateClient()
+  if _err != nil {
+    return _err
+  }
+
+  queryBlackboardReadUnReadHeaders := &amp;dingtalkblackboard_1_0.QueryBlackboardReadUnReadHeaders{}
+  queryBlackboardReadUnReadHeaders.XAcsDingtalkAccessToken = tea.String("&lt;your access token&gt;")
+  queryBlackboardReadUnReadRequest := &amp;dingtalkblackboard_1_0.QueryBlackboardReadUnReadRequest{
+    OperationUserId: tea.String("manager01"),
+    MaxResults: tea.Int32(200),
+    NextToken: tea.String("xb1dc"),
+    BlackboardId: tea.String("49dc87dc1b30cd099b13a"),
+  }
+  tryErr := func()(_e error) {
+    defer func() {
+      if r := tea.Recover(recover()); r != nil {
+        _e = r
+      }
+    }()
+    _, _err = client.QueryBlackboardReadUnReadWithOptions(queryBlackboardReadUnReadRequest, queryBlackboardReadUnReadHeaders, &amp;util.RuntimeOptions{})
+    if _err != nil {
+      return _err
+    }
+
+    return nil
+  }()
+
+  if tryErr != nil {
+    var err = &amp;tea.SDKError{}
+    if _t, ok := tryErr.(*tea.SDKError); ok {
+      err = _t
+    } else {
+      err.Message = tea.String(tryErr.Error())
+    }
+    if !tea.BoolValue(util.Empty(err.Code)) &amp;&amp; !tea.BoolValue(util.Empty(err.Message)) {
+      // err 中含有 code 和 message 属性，可帮助开发定位问题
+    }
+
+  }
+  return _err
+}
+
+
+func main() {
+  err := _main(tea.StringSlice(os.Args[1:]))
+  if err != nil {
+    panic(err)
+  }
+}</code></pre></div><input type="radio" name="check-figure-auf-lqn-ecz" id="figure-auf-lqn-ecz-nodejs-tab" /><label for="figure-auf-lqn-ecz-nodejs-tab">Node.js</label><div class="codeblock-item"><pre id="codeblock-1gj-bhy-3nq" outputclass="language-nodejs" data-tag="codeblock" code-type="xCode" class="pre codeblock language-nodejs"><code>'use strict';
+// This file is auto-generated, don't edit it
+const Util = require('@alicloud/tea-util');
+const dingtalkblackboard_1_0 = require('@alicloud/dingtalk/blackboard_1_0');
+const OpenApi = require('@alicloud/openapi-client');
+const Tea = require('@alicloud/tea-typescript');
+
+class Client {
+
+  /**
+   * 使用 Token 初始化账号Client
+   * @return Client
+   * @throws Exception
+   */
+  static createClient() {
+    let config = new OpenApi.Config({ });
+    config.protocol = 'https';
+    config.regionId = 'central';
+    return new dingtalkblackboard_1_0.default(config);
+  }
+
+  static async main(args) {
+    let client = Client.createClient();
+    let queryBlackboardReadUnReadHeaders = new dingtalkblackboard_1_0.QueryBlackboardReadUnReadHeaders({ });
+    queryBlackboardReadUnReadHeaders.xAcsDingtalkAccessToken = '&lt;your access token&gt;';
+    let queryBlackboardReadUnReadRequest = new dingtalkblackboard_1_0.QueryBlackboardReadUnReadRequest({
+      operationUserId: 'manager01',
+      maxResults: 200,
+      nextToken: 'xb1dc',
+      blackboardId: '49dc87dc1b30cd099b13a',
+    });
+    try {
+      await client.queryBlackboardReadUnReadWithOptions(queryBlackboardReadUnReadRequest, queryBlackboardReadUnReadHeaders, new Util.RuntimeOptions({ }));
+    } catch (err) {
+      if (!Util.default.empty(err.code) &amp;&amp; !Util.default.empty(err.message)) {
+        // err 中含有 code 和 message 属性，可帮助开发定位问题
+      }
+
+    }    
+  }
+
+}
+
+exports.Client = Client;
+Client.main(process.argv.slice(2));</code></pre></div><input type="radio" name="check-figure-auf-lqn-ecz" id="figure-auf-lqn-ecz-csharp-tab" /><label for="figure-auf-lqn-ecz-csharp-tab">C#</label><div class="codeblock-item"><pre id="codeblock-sze-wa6-d7u" outputclass="language-csharp" data-tag="codeblock" code-type="xCode" class="pre codeblock language-csharp"><code>// This file is auto-generated, don't edit it. Thanks.
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
+
+using Tea;
+using Tea.Utils;
+
+
+namespace AlibabaCloud.SDK.Sample
+{
+    public class Sample 
+    {
+
+        /// &lt;term&gt;&lt;b&gt;Description:&lt;/b&gt;&lt;/term&gt;
+        /// &lt;description&gt;
+        /// &lt;para&gt;使用 Token 初始化账号Client&lt;/para&gt;
+        /// &lt;/description&gt;
+        /// 
+        /// &lt;returns&gt;
+        /// Client
+        /// &lt;/returns&gt;
+        /// 
+        /// &lt;term&gt;&lt;b&gt;Exception:&lt;/b&gt;&lt;/term&gt;
+        /// Exception
+        public static AlibabaCloud.SDK.Dingtalkblackboard_1_0.Client CreateClient()
+        {
+            AlibabaCloud.OpenApiClient.Models.Config config = new AlibabaCloud.OpenApiClient.Models.Config();
+            config.Protocol = "https";
+            config.RegionId = "central";
+            return new AlibabaCloud.SDK.Dingtalkblackboard_1_0.Client(config);
+        }
+
+        public static void Main(string[] args)
+        {
+            AlibabaCloud.SDK.Dingtalkblackboard_1_0.Client client = CreateClient();
+            AlibabaCloud.SDK.Dingtalkblackboard_1_0.Models.QueryBlackboardReadUnReadHeaders queryBlackboardReadUnReadHeaders = new AlibabaCloud.SDK.Dingtalkblackboard_1_0.Models.QueryBlackboardReadUnReadHeaders();
+            queryBlackboardReadUnReadHeaders.XAcsDingtalkAccessToken = "&lt;your access token&gt;";
+            AlibabaCloud.SDK.Dingtalkblackboard_1_0.Models.QueryBlackboardReadUnReadRequest queryBlackboardReadUnReadRequest = new AlibabaCloud.SDK.Dingtalkblackboard_1_0.Models.QueryBlackboardReadUnReadRequest
+            {
+                OperationUserId = "manager01",
+                MaxResults = 200,
+                NextToken = "xb1dc",
+                BlackboardId = "49dc87dc1b30cd099b13a",
+            };
+            try
+            {
+                client.QueryBlackboardReadUnReadWithOptions(queryBlackboardReadUnReadRequest, queryBlackboardReadUnReadHeaders, new AlibabaCloud.TeaUtil.Models.RuntimeOptions());
+            }
+            catch (TeaException err)
+            {
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+            catch (Exception _err)
+            {
+                TeaException err = new TeaException(new Dictionary&lt;string, object&gt;
+                {
+                    { "message", _err.Message }
+                });
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+        }
+
+
+    }
+}</code></pre></div></div></section></section><section id="section-response-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-response-1" data-tag="h2" class="h2">响应</h2><section id="section-response-parameter" class="section">
+                <h3 data-tag="h3" id="h2-iho-9zn-h1c" class="h3 title">响应体</h3>
+                <table class="table">
+                    <colgroup colnum="1" colname="col1" colwidth="3*" style="width:30%"></colgroup>
+                    <colgroup colnum="2" colname="col2" colwidth="2*" style="width:20%"></colgroup>
+                    <colgroup colnum="3" colname="col3" colwidth="5*" style="width:50%"></colgroup>
+                    <thead class="thead">
+                    <tr>
+                        <th><p>名称</p></th>
+                        <th><p>类型</p></th>
+                        <th><p>描述</p></th>
+                    </tr>
+                    </thead>
+                    <tbody class="tbody">
+    <tr outputclass="row row-level-1" class="row row-level-1 row-level-1 row">
+        <td><p>nextToken</p></td>
+        <td><p>String</p></td>
+        <td><p>分页游标。</p>
+</td>
+    </tr>
+    <tr outputclass="row row-level-2 has-child" class="has-child row-level-2 row row-level-2 has-child row">
+        <td><span class="icms-tree-table-trigger" type="checkbox"></span><span class="icms-tree-table-trigger" type="checkbox"></span><p>users</p></td>
+        <td><p>Array</p></td>
+        <td><p>已读未读用户列表。</p>
+</td>
+    </tr>
+    <tr outputclass="row row-level-2-1" class="row-level-2-1 row row row-level-2-1">
+        <td><p>userId</p></td>
+        <td><p>String</p></td>
+        <td><p>员工userId。</p>
+</td>
+    </tr>
+    <tr outputclass="row row-level-2-2" class="row-level-2-2 row row row-level-2-2">
+        <td><p>read</p></td>
+        <td><p>String</p></td>
+        <td><p>是否已读：</p>
+<ul>
+<li><b>true</b>：已读</li>
+<li><b>false</b>：未读</li>
+</ul>
+</td>
+    </tr>
+    <tr outputclass="row row-level-2-3" class="row-level-2-3 row row row-level-2-3">
+        <td><p>readTimestamp</p></td>
+        <td><p>Long</p></td>
+        <td><p>员工已读的时间戳，单位毫秒。</p>
+</td>
+    </tr>
+                    </tbody>
+                </table>
+            </section><section id="section-response-body-example" class="section"><h3 id="h3-response-body-example" data-tag="h3" class="h3">响应体示例</h3><pre outputclass="language-json" data-tag="codeblock" code-type="xCode" class="pre codeblock language-json"><code>HTTP/1.1 200 OK
+Content-Type:application/json
+
+{
+  "nextToken" : "sometokenabc",
+  "users" : [ {
+    "userId" : "12039",
+    "read" : "true",
+    "readTimestamp" : 1688010569000
+  } ]
+}</code></pre></section><section id="section-error-code-1" class="section"><h3 id="h3-error-code-1" data-tag="h3" class="h3">错误码</h3><p data-tag="p" id="p-error-code-global-guide" class="p">若调用该接口报错，可根据错误信息在<a id="a-error-code-global-guide" href="https://open.dingtalk.com/document/development/server-api-error-codes-1">全局错误码</a>文档中查找解决方案。</p><table class="table"> 
+  <colgroup colnum="1" colname="col1" colwidth="2*" style="width:20%"></colgroup> 
+  <colgroup colnum="2" colname="col2" colwidth="2.5*" style="width:25%"></colgroup> 
+  <colgroup colnum="3" colname="col3" colwidth="2.5*" style="width:25%"></colgroup> 
+  <colgroup colnum="4" colname="col4" colwidth="3*" style="width:30%"></colgroup> 
+  <thead class="thead"> 
+   <tr> 
+    <th><p>HttpCode</p></th> 
+    <th><p>错误码</p></th> 
+    <th><p>错误信息</p></th> 
+    <th><p>说明</p></th> 
+   </tr> 
+  </thead> 
+  <tbody class="tbody"> 
+   <tr> 
+    <td><p>400</p></td> 
+    <td><p>badRequest</p></td> 
+    <td><p>%s</p></td> 
+    <td><p>参数错误，请确保 operationUserId、bid、nextToken 等参数合法。</p></td> 
+   </tr> 
+   <tr> 
+    <td><p>403</p></td> 
+    <td><p>accessDenied</p></td> 
+    <td><p>%s</p></td> 
+    <td><p>请求被拒绝，请确认操作人是企业主管理员或者是公告的发送人，并且公告归属于当前组织。</p></td> 
+   </tr> 
+   <tr> 
+    <td><p>500</p></td> 
+    <td><p>serviceBusy</p></td> 
+    <td><p>The server is busy and unable to complete your request. Please try again later.</p></td> 
+    <td><p>服务繁忙，请稍后重试。</p></td> 
+   </tr> 
+   <tr> 
+    <td><p>500</p></td> 
+    <td><p>internalError</p></td> 
+    <td><p>The server encountered an internal error and was unable to complete your request. Please try again later.</p></td> 
+    <td><p>服务内部错误，请稍后再试。</p></td> 
+   </tr> 
+  </tbody> 
+ </table></section></section></div>
+    </main>
+
+
+
+</body></html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html><html><head><meta charset="utf8" / /><meta name="searchtitle" content="" / /><meta name="keywords" content="" / /><meta name="author" content="" / /><title>创建、查询、修改及管理群会话</title><meta name="gmtModify" content="2026-05-15 18:23:23" / /></head><body data-tag="topic" id="topic-2184272" class="topic"><main id="168e368071h1z"><h1 data-tag="title" id="title-sta-i8w-do3" class="title">创建、查询、修改及管理群会话</h1><p data-tag="shortdesc" id="shortdesc-isf-ppw-nbo" class="shortdesc">本文档介绍了如何调用群会话相关接口实现群会话操作的相关流程。首先创建一个企业内部应用，再使用群会话提供的API，实现创建群会话、获取群会话信息、群会话管理操作、修改群会话流程。</p><div data-tag="conbody" id="conbody-dx5-wmq-mnf" class="conbody"><section id="section-l4f-a43-y9m" class="section"><h2 data-tag="title" id="title-eqd-7ug-xnf" class="title">流程简介</h2><p id="p-lr6-rjl-162">步骤一：获取应用 Client ID 和 Client Secret。</p><p id="p-tr6-cjr-rv3">步骤二：申请接口权限，申请“场景群”和“群管理”相应权限。</p><p id="p-eae-rjr-pm6">步骤三：获取应用访问凭证<a data-tag="xref" id="aebfc61f9bx4e" href="/document/development/obtain-the-access-token-of-an-internal-app#" class="xref">获取企业内部应用的accessToken</a>。</p><p id="p-9yx-diy-ayt">步骤四：调用服务端群会话相关API。</p><ol id="ol-1j8-gxn-5ll"><li id="li-sxe-0hk-g2m"><p id="p-qwj-tsa-2hw">调用服务端API-<a data-tag="xref" id="a3c0c0bb0bbfw" href="/document/development/session-management-creates-groups#" class="xref">创建群</a>接口，进行创建群会话，获取群会话<code data-tag="code" id="141390263b3hj" class="code">chatId</code>。</p></li><li id="li-h58-h42-k4u"><p id="p-afw-3i4-jsp">根据群会话<code data-tag="code" id="d059a48af8fwf" class="code">chatId</code>，调用服务端API-<a data-tag="xref" id="29f8c9e9d0xh2" href="/document/development/obtain-a-group-session#" class="xref">查询群信息</a>接口，获取群会话的信息。</p></li><li id="li-pv4-b8m-z5t"><p id="p-sky-gag-7zr">根据群会话chatId进行群会话管理操作。</p><ul id="ol-g54-g06-ojq"><li id="li-8cj-cvu-v2h"><p id="p-9lf-gor-zfh">根据群会话<code data-tag="code" id="c254b0602bhap" class="code">chatId</code>，调用新版服务端API-<a data-tag="xref" id="c7e275b334dve" href="/document/development/obtain-group-openconversationid#" class="xref">获取群会话的OpenConversationId</a>接口，获取群会话<code data-tag="code" id="ded9bfa8e3h2a" class="code">openConversationId</code>。</p><ul id="46e162513axma"><li id="4696ebd13ah55"><p id="4696ebd03a4ne">根据群会话<code data-tag="code" id="9f7842b967jeq" class="code">openConversationId</code>，调用新版服务端API-<a data-tag="xref" id="69793ccaa3kaf" href="/document/development/batch-setup-group#" class="xref">批量设置企业群管理员</a>接口，批量设置群管理员。</p></li></ul></li><li id="078f5cb13a919"><p id="078f5cb03az0v">根据群会话<code data-tag="code" id="4c9c8ef1540k3" class="code">chatId</code>，调用服务端API-<a data-tag="xref" id="c789f4da16z1d" href="/document/development/set-chat-admin#" class="xref">更新群管理员</a>接口，进行群会话管理员的设置。</p></li><li id="li-8vf-t3j-kew"><p id="p-3mb-42i-ntg">根据群会话<code data-tag="code" id="32929c7672ibr" class="code">chatId</code>，调用服务端API-<a data-tag="xref" id="f71fb706375oj" href="/document/development/set-private-chat#" class="xref">设置禁止群成员私聊</a>接口，设置群会话群成员间是否可以私聊。</p></li><li id="li-lkp-qw2-rzs"><p id="p-g0b-cnw-iow">根据群会话<code data-tag="code" id="3ad4b76600tly" class="code">chatId</code>，调用服务端API-<a data-tag="xref" id="2b09ca7fc90ba" href="/document/development/set-a-group-nickname#" class="xref">更新群成员的群昵称</a>接口，进行设置群会话成员的昵称。</p></li><li id="3e68db113922p"><p id="3e68db1039nu9">根据群会话<code data-tag="code" id="1bac7cc253d4n" class="code">chatId</code>，调用服务端API-<a data-tag="xref" id="726b8feb38fke" href="/document/development/obtain-a-qr-code-link#" class="xref">获取入群二维码链接</a>接口，其他的企业成员点击链接即可申请加入群聊。</p></li></ul></li><li id="li-7ge-w6k-7y3"><p id="p-njv-8o7-1hh">根据群会话<code data-tag="code" id="abd658d88cnku" class="code">chatId</code>，调用服务端API-<a data-tag="xref" id="0ff2990d04mn8" href="/document/development/modify-a-group-session#" class="xref">更新群</a>接口，进行群会话信息的修改。</p></li></ol></section><section id="0abdbb306a1g5" class="section"><h2 id="e25faed1046m1"><b>前提条件</b></h2><p id="cbf1911eefyjt">完成<a data-tag="xref" id="e7f4884fe5ap5" href="/document/dingstart/create-application#" class="xref">应用创建与配置</a>的流程。</p></section><section id="58aa1270e6vkx" class="section"><h2 id="26cfa9bb8dax4" sourcekey="2000000042116"><b>步骤一：获取应用凭证</b></h2><ol id="33b606fdcfm88" start="1" sourcekey="2000000042119"><li id="df6c4a9e438u1" sourcekey="2000000042121"><p id="14ee1214e9766">选择目标应用，进入应用详情页，单击<b>基础信息</b> &gt; <b>凭证与基础信息</b>。</p></li><li id="5753addcaafk1" sourcekey="2000000042126"><p id="39b8a68b7ankf">获取应用 Client ID 和 Client Secret。</p></li></ol></section><section id="654b06b5c7kwg" class="section"><h2 id="6dac75b6e6048"><b>步骤二：添加接口权限</b></h2><p id="fea6f443ad9he"><span style="color:rgb(23, 26, 29)">单击</span><span style="color:rgb(23, 26, 29)"><b>开发配置</b></span><span style="color:rgb(23, 26, 29)">&gt;</span><span style="color:rgb(23, 26, 29)"><b>权限管理</b></span><span style="color:rgb(23, 26, 29)">，在权限搜索框中分别输入</span><code data-tag="code" id="ac7b2339a77s8" class="code"><span style="color:rgba(0, 0, 0, 0.85)">qyapi_chat_manage</span></code><span style="color:rgba(0, 0, 0, 0.85)">、</span><code data-tag="code" id="163200495c3un" class="code"><span style="color:rgba(0, 0, 0, 0.85);background-color:rgba(250, 250, 250, 0.008)">qyapi_chat_read</span></code>和<code data-tag="code" id="2427e62caaxmi" class="code"><span style="color:rgba(0, 0, 0, 0.85)">qyapi_chat_base_read</span></code><span style="color:rgb(102, 102, 102)">，并申请权限。</span></p></section><section id="18d79860398u8" class="section"><h2 id="18d7986139gtz" data-tag="title" class="title">步骤三：获取应用访问凭证accessToken</h2><div id="18d7986239mm9" type="notice" class="note note-notice"><div class="note-icon-wrapper"><i class="icon-note note notice"></i></div><div class="noteContentSpan"><strong>重要 </strong><p id="a0a83b117boni">服务端API差异详情参见<a data-tag="xref" id="0d0841a88cybt" href="/document/development/how-to-call-apis#section-8lr-id4-rbz" class="xref">旧版API VS 新版API</a>。以下接口均使用新服务端API接口，SDK下载详情参见<a data-tag="xref" id="2fa137955fjnm" href="/document/development/download-the-server-side-sdk#" class="xref">服务端SDK下载</a>。</p></div></div><p id="9635574439hkg">根据步骤一中的 Client ID 和 Client Secret，获取应用访问凭证<a data-tag="xref" id="9d60217a86fjv" href="/document/development/obtain-the-access-token-of-an-internal-app#" class="xref">获取企业内部应用的accessToken</a>。</p><pre data-tag="codeblock" id="18d7986b39kjr" outputclass="language-javascript" code-type="xCode" class="pre codeblock language-javascript"><code> public void getAccessToken() throws Exception {
+        Config config = new Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        com.aliyun.dingtalkoauth2_1_0.Client client = new com.aliyun.dingtalkoauth2_1_0.Client(config);
+        GetAccessTokenRequest accessTokenRequest = new GetAccessTokenRequest()
+                .setAppKey("din*********hgn")
+                .setAppSecret("9G_O************mBkhgGIO");
+        GetAccessTokenResponse accessToken = client.getAccessToken(accessTokenRequest);
+        System.out.println(JSON.toJSONString(accessToken.getBody()));
+    }</code></pre></section><section id="section-pmc-4w8-kef" class="section"><h2 id="title-k11-iqv-a00" data-tag="title" class="title">步骤四：调用服务端群会话相关API</h2><ol id="ol-mal-qkn-tp1"><li id="li-l3s-5gu-5cm"><p id="p-u5l-yeo-7o7">调用服务端API-<a data-tag="xref" id="442314ae50x4t" href="/document/development/session-management-creates-groups#" class="xref">创建群</a>接口，进行创建群会话，获取群会话chatId。</p><pre outputclass="language-java" data-tag="codeblock" id="3q2bbh" code-type="xCode" class="pre codeblock language-java"><code>public void createChat() {
+        DingTalkClient client = new DefaultDingTalkClient("https://oapi.dingtalk.com/chat/create");
+        OapiChatCreateRequest req = new OapiChatCreateRequest();
+        req.setName("全员群");
+        req.setOwner("manager4220");
+        req.setUseridlist(Arrays.asList("userid1","userid2"));
+        OapiChatCreateResponse rsp = client.execute(req, access_token);
+        System.out.println(rsp);
+    }</code></pre></li><li id="9188bcf039wjp"><p id="p-tad-xx1-ov9">根据群会话chatId，调用服务端API-<a data-tag="xref" id="297c52ce19t6t" href="/document/development/obtain-a-group-session#" class="xref">查询群信息</a>接口，获取群会话的信息。</p><pre id="f7duhc" data-tag="codeblock" outputclass="language-java" code-type="xCode" class="pre codeblock language-java"><code>public void getChatInfo() {
+        DingTalkClient client = new DefaultDingTalkClient("https://oapi.dingtalk.com/chat/get");
+        OapiChatGetRequest req = new OapiChatGetRequest();
+        req.setChatid("chate39f540dxxxx");
+        req.setHttpMethod("GET");
+        OapiChatGetResponse rsp = client.execute(req, access_token);
+        System.out.println(rsp.getChatInfo());
+    }</code></pre></li><li id="li-tfc-ooo-7oa"><p id="p-wge-tf5-2ug">根据群会话chatId进行群会话管理操作。</p><ul id="e8de31f13a9ij"><li id="e89542103axob"><p id="e8951b003ahp9">根据群会话<code data-tag="code" id="eb0767afb37k4" class="code">chatId</code>，调用新版服务端API-<a data-tag="xref" id="2f168bbf99qgq" href="/document/development/obtain-group-openconversationid#" class="xref">获取群会话的OpenConversationId</a>接口，获取群会话<code data-tag="code" id="8bc50c2f18hx1" class="code">openConversationId</code>。</p><pre id="mx6lmf" data-tag="codeblock" outputclass="language-java" code-type="xCode" class="pre codeblock language-java"><code>public void ConversationId() throws Exception {
+        Config config = new Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        com.aliyun.dingtalkim_1_0.Client client = new com.aliyun.dingtalkim_1_0.Client(config);
+        ChatIdToOpenConversationIdHeaders chatIdToOpenConversationIdHeaders = new ChatIdToOpenConversationIdHeaders();
+        chatIdToOpenConversationIdHeaders.xAcsDingtalkAccessToken = "accessToken";
+        try {
+            ChatIdToOpenConversationIdResponse response = client.chatIdToOpenConversationIdWithOptions("chatId", chatIdToOpenConversationIdHeaders, new RuntimeOptions());
+            System.out.println(JSON.toJSONString(response.getBody()));
+        } catch (TeaException err) {
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+                System.out.println(err.code);
+                System.out.println(err.message);
+            }
+
+        } catch (Exception _err) {
+            TeaException err = new TeaException(_err.getMessage(), _err);
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+                System.out.println(err.code);
+                System.out.println(err.message);
+            }
+        }
+    }</code></pre><ul id="f6c32be03aiix"><li id="f68c64703avka"><p id="f68c3d603a27b">根据群会话<code data-tag="code" id="a6144e6d1bvwt" class="code">openConversationId</code>，调用新版服务端API-<a data-tag="xref" id="7a7337f280w50" href="/document/development/batch-setup-group#" class="xref">批量设置企业群管理员</a>接口，批量设置群管理员。</p><pre id="inwmvb" data-tag="codeblock" outputclass="language-java" code-type="xCode" class="pre codeblock language-java"><code>public void subAdministrators() throws Exception {
+        Config config = new Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        com.aliyun.dingtalkim_1_0.Client client = new com.aliyun.dingtalkim_1_0.Client(config);
+        ChatSubAdminUpdateHeaders chatSubAdminUpdateHeaders = new ChatSubAdminUpdateHeaders();
+        chatSubAdminUpdateHeaders.xAcsDingtalkAccessToken = "accessToken";
+        ChatSubAdminUpdateRequest chatSubAdminUpdateRequest = new ChatSubAdminUpdateRequest()
+                .setOpenConversationId("cid55SzIIO********=")
+                .setUserIds(java.util.Arrays.asList(
+                        "0147********7041"
+                ))
+                .setRole(2);
+        try {
+            ChatSubAdminUpdateResponse chatSubAdminUpdateResponse = client.chatSubAdminUpdateWithOptions(chatSubAdminUpdateRequest, chatSubAdminUpdateHeaders, new RuntimeOptions());
+            System.out.println(JSON.toJSONString(chatSubAdminUpdateResponse.getBody()));
+        } catch (TeaException err) {
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+                System.out.println(err.code);
+                System.out.println(err.message);
+            }
+        } catch (Exception _err) {
+            TeaException err = new TeaException(_err.getMessage(), _err);
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+                System.out.println(err.code);
+                System.out.println(err.message);
+            }
+        }
+    }</code></pre></li></ul></li><li id="fc3c89e13a40z"><p id="fc3c89e03aads">根据群会话<code data-tag="code" id="141deb6d60law" class="code">chatId</code>，调用服务端API-<a data-tag="xref" id="a25cda725aae2" href="/document/development/set-chat-admin#" class="xref">更新群管理员</a>接口，进行设置群会话管理员。</p><pre id="zrz9xt" data-tag="codeblock" outputclass="language-java" code-type="xCode" class="pre codeblock language-java"><code>public void setChatAdmin() {
+        DingTalkClient client = new DefaultDingTalkClient("https://oapi.dingtalk.com/topapi/chat/subadmin/update");
+        OapiChatSubadminUpdateRequest req = new OapiChatSubadminUpdateRequest();
+        req.setChatid("chat14432xxxx");
+        req.setUserids("userid1");
+        req.setRole(2L);
+        OapiChatSubadminUpdateResponse rsp = client.execute(req, access_token);
+        System.out.println(rsp.getBody());
+    }</code></pre></li><li id="57eecff13a24v"><p id="p-7xo-9yw-rnf">根据群会话<code data-tag="code" id="786d243110p27" class="code">chatId</code>，调用服务端API-<a data-tag="xref" id="eab9c8757b923" href="/document/development/set-private-chat#" class="xref">设置禁止群成员私聊</a>接口，设置群会话群成员间是否可以私聊。</p><pre id="58g6ce" data-tag="codeblock" outputclass="language-java" code-type="xCode" class="pre codeblock language-java"><code>public void updateChatMemberFriendswitch() {
+        DingTalkClient client = new DefaultDingTalkClient("https://oapi.dingtalk.com/topapi/chat/member/friendswitch/update");
+        OapiChatMemberFriendswitchUpdateRequest req = new OapiChatMemberFriendswitchUpdateRequest();
+        req.setChatid("chatdafe234xxxx");
+        req.setIsProhibit(true);
+        OapiChatMemberFriendswitchUpdateResponse rsp = client.execute(req, access_token);
+        System.out.println(rsp.getBody());
+    }</code></pre></li><li id="6d5e54a13adjk"><p id="p-akp-u6k-yxv">根据群会话<code data-tag="code" id="7dc7b69c2f9gc" class="code">chatId</code>，调用服务端API-<a data-tag="xref" id="6866c2bdedxod" href="/document/development/set-a-group-nickname#" class="xref">更新群成员的群昵称</a>接口，进行设置群会话成员的昵称。</p><pre id="pq60gp" data-tag="codeblock" outputclass="language-java" code-type="xCode" class="pre codeblock language-java"><code>public void updateChatMemberNick() {
+        DingTalkClient client = new DefaultDingTalkClient("https://oapi.dingtalk.com/topapi/chat/updategroupnick");
+        OapiChatUpdategroupnickRequest req = new OapiChatUpdategroupnickRequest();
+        req.setUserid("user123");
+        req.setChatid("chate39f540d572b71cf97a556d95929fxxxx");
+        req.setGroupNick("钉钉小二");
+        OapiChatUpdategroupnickResponse rsp = client.execute(req, access_token);
+        System.out.println(rsp.getBody());
+    }</code></pre></li><li id="7e0889103adts"><p id="38e3e023395m4">根据群会话<code data-tag="code" id="3539fde8794ie" class="code">chatId</code>，调用服务端API-<a data-tag="xref" id="15afb3d76cmee" href="/document/development/obtain-a-qr-code-link#" class="xref">获取入群二维码链接</a>接口，其他的企业成员点击链接即可申请加入群聊。</p><pre id="pffovr" data-tag="codeblock" outputclass="language-java" code-type="xCode" class="pre codeblock language-java"><code>public void getChatURL() {
+        DingTalkClient client = new DefaultDingTalkClient("https://oapi.dingtalk.com/topapi/chat/qrcode/get");
+        OapiChatQrcodeGetRequest req = new OapiChatQrcodeGetRequest();
+        req.setChatid("chat32****3a");
+        req.setUserid("manager4220");
+        OapiChatQrcodeGetResponse rsp = client.execute(req, access_token);
+        System.out.println(rsp.getBody());
+    }</code></pre></li></ul></li><li id="db64ae913a90m"><p id="p-84u-12g-uov">根据群会话<code data-tag="code" id="dcec669f8bguh" class="code">chatId</code>，调用服务端API-<a data-tag="xref" id="ad533a5073fav" href="/document/development/modify-a-group-session#" class="xref">更新群</a>接口，进行群会话信息的修改。</p><pre id="1lnafa" data-tag="codeblock" outputclass="language-java" code-type="xCode" class="pre codeblock language-java"><code>public void updateChat() {
+        DingTalkClient client = new DefaultDingTalkClient("https://oapi.dingtalk.com/chat/update");
+        OapiChatUpdateRequest req = new OapiChatUpdateRequest();
+        req.setChatid("chatxxxx");
+        req.setName("群名称1");
+        req.setOwner("04201724372xxxx");
+        req.setOwnerType("emp");
+        req.setAddUseridlist(Arrays.asList("userid2"));
+        req.setDelUseridlist(Arrays.asList("userid1"));
+        req.setIcon("@mediaId");
+        req.setIsBan(true);
+        req.setSearchable(0L);
+        req.setValidationType(0L);
+        req.setMentionAllAuthority(0L);
+        req.setManagementType(0L);
+        req.setChatBannedType(0L);
+        req.setShowHistoryType(0L);
+        OapiChatUpdateResponse rsp = client.execute(req,access_token);
+        System.out.println(rsp.getBody());
+    }</code></pre></li></ol></section><p id="d0e49b7ec0z5r"></p></div></main></body></html>

@@ -1,0 +1,526 @@
+<!DOCTYPE html><html><head><meta charset="utf8" / /><meta name="gmtModify" content="2025-09-11 21:02:03" / /><meta name="searchtitle" content="" / /><meta name="keywords" content="" / /><meta name="author" content="" / /><title>新增或修改限制查看通讯录设置</title><meta name="gmtModify" content="2026-06-02 09:24:45" / /></head><body data-tag="topic" id="doc-api-dingtalk-UpdateContactRestrictSetting" class="topic"><main id="d73cc8ea6ey06" data-init-id="doc-api-dingtalk_UpdateContactRestrictSetting"><h1 data-tag="title" id="h1-fu0-tlk-v8a" class="title">新增或修改限制查看通讯录设置</h1><p data-tag="shortdesc" id="fba4e1aa6ai84" class="shortdesc">调用本接口，新增或修改员工、部门、角色限制查看通讯录的设置。</p><div data-tag="conbody" outputclass="icms-api-reference" class="icms-api-reference conbody"><section id="e83acd9fe8437" class="section"><h2 id="28749466e64lq"><b>接口调用说明</b></h2><p id="2000000007839">钉钉OA管理后台中，可以限制本部门成员查看通讯录，本接口的能力是对限制本部门成员查看通讯录的拓展，不仅能实现限制部门内成员查看通讯录，也可以实现限制员工和角色查看通讯录。</p><div type="note" id="afeb9fce54wxx" class="note note-note"><div class="note-icon-wrapper"><i class="icon-note note note"></i></div><div class="noteContentSpan"><strong>说明 </strong><p id="ed29375518zw5">本接口的限制查看设置与OA后台的限制查看设置是相互独立存储，最终生效结果两边的设置是或的关系。比如：同一个部门，本接口或者OA后台有任意一方设置了仅能查看自己，最终这个部门就只能查看自己。</p></div></div><p id="89a4734239dw5" data-init-id="2000000007839"><img src="https://img.alicdn.com/imgextra/i2/O1CN01c1IHaB1maJG9jwkSO_!!6000000004970-0-tps-2400-1350.jpg" alt="" uuid="mpuy207aqze8q0xer6" class="image break" / /></p></section><section id="section-request-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-request-1" data-tag="h2" class="h2">请求</h2><section id="section-request-basic-info" class="section"><h3 id="heading-request-basic-info" data-tag="h3" class="h3">基本信息</h3><table id="5abe55d8dai30" tablewidth="648" tablecolswidth="216 432" autofit="false" class="table"><colgroup colwidth="0.67*" style="width:33.33%"></colgroup><colgroup colwidth="1.33*" style="width:66.67%"></colgroup><tbody class="tbody"><tr id="4f1025d025rh4"><td id="90fd4ecc37gcc" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="93d07cb3214tr">字段</p></td><td id="dd4f36bccctvx" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="5c93a0624boqb">值</p></td></tr><tr id="75e8ceb0ce73l"><td id="970c76c092jww" rowspan="1" colspan="1"><p id="de13dbd7eaxc2">HTTP URL</p></td><td id="ac5bcedc4e9p6" rowspan="1" colspan="1"><p id="036f969750an0">https://api.dingtalk.com/v1.0/contact/restrictions/settings</p></td></tr><tr id="f8d923780dgn5"><td id="5064824378lv3" rowspan="1" colspan="1"><p id="778919ef340yx">HTTP Method</p></td><td id="06793241862mn" rowspan="1" colspan="1"><p id="d656201765akp">PUT</p></td></tr><tr id="16ce658a1euga"><td id="f4d196156dua9" rowspan="1" colspan="1"><p id="0c03763fb273n">支持的应用类型</p></td><td id="6be002a44atvf" rowspan="1" colspan="1"><p id="2b2b2c05cavuu"><span data-tag="ph" id="ph-request-basic-app-type-apptype-0" class="ph ph-app-type" data-ph-raw-text="appType-企业内部应用">appType-企业内部应用</span></p></td></tr><tr id="27f8c5bb37w44"><td id="a39f308a75021" rowspan="1" colspan="1"><p id="ab9125aee6e1h">权限要求</p></td><td id="1900d2b000gvz" rowspan="1" colspan="1"><p id="64520d4955ct3"><span data-tag="ph" id="ph-request-basic-permission-permission-contact-visibility-readwrite-0" class="ph-permission ph" data-ph-raw-text="permission-Contact.Visibility.ReadWrite-通讯录数据可见范围管理权限" data-permission-id="permission-Contact.Visibility.ReadWrite" data-permission-code="Contact.Visibility.ReadWrite" data-permission-detail-api="/document/api/permission/detail" data-permission-query-param="code">permission-Contact.Visibility.ReadWrite-通讯录数据可见范围管理权限</span></p></td></tr></tbody></table></section><section id="section-request-header-parameter" class="section"><h3 data-tag="h3" id="h2-rtc-1kd-uf2" class="h3 title">请求头</h3><table id="64918cb387m2f" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="a5c06625edynp"><td id="e9c830747737p" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="d82abf0f25fzk">名称</p></td><td id="c8f931264fzet" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="e7b0d8b91cq7i">类型</p></td><td id="24342fea56pt6" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="d12f64b83bhqn">是否必填</p></td><td id="b61fca7ae18o6" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="d8b3c82434dsf">描述</p></td></tr><tr id="40bbdd79f3iur"><td id="a8f61a3570bfv" rowspan="1" colspan="1"><p id="186deb7d74rwy">x-acs-dingtalk-access-token</p></td><td id="347b7e5f54jm2" rowspan="1" colspan="1"><p id="6d938e8d4bn2u">String</p></td><td id="75adc23206sxj" rowspan="1" colspan="1"><p id="df1b23bf5crb1">是</p></td><td id="862700819eq0i" rowspan="1" colspan="1"><p id="b7e2387f263yn">调用该接口的访问凭证，通过调用<a href="https://open.dingtalk.com/document/development/obtain-the-access-token-of-an-internal-app#" id="9aebbccf99j17" class="xref">获取企业内部应用的accessToken</a>接口获取。</p></td></tr></tbody></table></section><section id="section-request-body-parameter" class="section"><h3 data-tag="h3" id="h2-zde-29c-mvf" class="h3 title">请求体</h3><table id="97be1e61acm4l" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="b408304481ddg"><td id="cdbd5aa29clgq" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="1b8212e7a4ox6">名称</p></td><td id="99cf6c2e1a5p1" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="7588de9a3agxu">类型</p></td><td id="494e6f63822bi" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="87b1f0b48ct0r">是否必填</p></td><td id="de30a95db1ndx" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="cd57bdc4c9gv8">描述</p></td></tr><tr outputclass="row row-level-1" id="9aec390220hb2" class="row row-level-1"><td id="44ef7140f0bln" rowspan="1" colspan="1"><p id="f3a9d16d014da">id</p></td><td id="ea6edcbd57waa" rowspan="1" colspan="1"><p id="497145f413rs4">Long</p></td><td id="f5aeecc456ak8" rowspan="1" colspan="1"><p id="f5e44134d6t8l">否</p></td><td id="71bd37eaf35u9" rowspan="1" colspan="1"><p id="3c9445f64022d">设置ID。</p><ul id="7ebaae3bf6yd9"><li id="8b00678c34evj"><p id="5a0f8a9dcfefp">如果需要新增设置，该参数不传。</p></li><li id="b514302b22taw"><p id="91134cb9edepx">如果需要修改已有的设置，需要指定该参数，通过调用<a href="https://open.dingtalk.com/document/development/gets-a-list-of-address-book-limit-visibility-settings#" id="01dd281dfb90m" class="xref">获取限制查看通讯录设置列表</a>接口获取。</p></li></ul></td></tr><tr outputclass="row row-level-2" id="7b0375f849x5a" class="row row-level-2"><td id="f274c7164d05b" rowspan="1" colspan="1"><p id="cde0ebb04f1jk">name</p></td><td id="33a28ec528rg5" rowspan="1" colspan="1"><p id="3870c439a81y8">String</p></td><td id="68adfb0bbefsh" rowspan="1" colspan="1"><p id="72189d1abahak">否</p></td><td id="55f8dad089kc8" rowspan="1" colspan="1"><p id="f198b8978a4o3">设置名称。</p></td></tr><tr outputclass="row row-level-3" id="e84b1052f2264" class="row row-level-3"><td id="86e2fb867ebyh" rowspan="1" colspan="1"><p id="b0e3838d4aiiv">description</p></td><td id="18010c3fc67f2" rowspan="1" colspan="1"><p id="4b8fe105baur3">String</p></td><td id="c9e1c8a9807x9" rowspan="1" colspan="1"><p id="8b131481bbyrz">否</p></td><td id="a47f27fc0512m" rowspan="1" colspan="1"><p id="173483ae6d18m">设置描述。</p></td></tr><tr outputclass="row row-level-4" id="c44db29e61qqb" class="row row-level-4"><td id="9f4666b0f71nn" rowspan="1" colspan="1"><p id="9d4623cf7eh94">subjectUserIds</p></td><td id="5f8db7577111q" rowspan="1" colspan="1"><p id="c9ba603a9ejx7">Array of String</p></td><td id="7f53b45263k6c" rowspan="1" colspan="1"><p id="3c5b683c1bs7q">否</p></td><td id="4b89afbb69imz" rowspan="1" colspan="1"><p id="3991e61f5byr0">需要限制查看通讯录的用户userId列表，可调用<a href="https://open.dingtalk.com/document/development/query-the-list-of-department-userids#" id="5bc78a50247uk" class="xref">获取部门用户userid列表</a>接口获取userId。</p><p class="note-icon-wrapper" id="e61c0f3c22hfp"></p><p data-tag="p" id="a5a131dc83q4j" class="p"></p><p id="8c88edba38bxl">subjectUserIds、subjectDeptIds、subjectTagIds三个参数内元素个数之和不能超过50。</p><p id="ca8e83441a552"></p></td></tr><tr outputclass="row row-level-5" id="be65c4b482h83" class="row row-level-5"><td id="c90610e5e6x2p" rowspan="1" colspan="1"><p id="c546051fb9pr2">subjectDeptIds</p></td><td id="94728caa05mqu" rowspan="1" colspan="1"><p id="1208fde324vfg">Array of Long</p></td><td id="9613d8c7951hb" rowspan="1" colspan="1"><p id="50ef88480ekro">否</p></td><td id="4a30fcdf3126i" rowspan="1" colspan="1"><p id="4f818949e28sj">需要限制查看通讯录的部门ID列表，可调用<a href="https://open.dingtalk.com/document/development/obtain-the-department-list-v2#" id="e1663e0c7fsg8" class="xref">获取部门列表</a>接口获取dept_id。</p><p class="note-icon-wrapper" id="3ee423c5964ab"></p><p data-tag="p" id="4cceaab64f3ej" class="p"></p><p id="7e7477c4f5fsm">subjectUserIds、subjectDeptIds、subjectTagIds三个参数内元素个数之和不能超过50。</p><p id="30d833dc709dk"></p></td></tr><tr outputclass="row row-level-6" id="4626a0d46ebjf" class="row row-level-6"><td id="fe5d1b1833jxv" rowspan="1" colspan="1"><p id="2d832f728dd0a">subjectTagIds</p></td><td id="67b7004c25a9c" rowspan="1" colspan="1"><p id="1fc525b138yi8">Array of Long</p></td><td id="5c7daeb81aog7" rowspan="1" colspan="1"><p id="cd8a2fbc96x2i">否</p></td><td id="09e13a9436xd8" rowspan="1" colspan="1"><p id="5cd090004862u">需要限制查看通讯录的角色ID，通过调用<a href="https://open.dingtalk.com/document/development/obtains-a-list-of-enterprise-roles#" id="b0c398c460yt9" class="xref">获取角色列表</a>接口获取。</p><p class="note-icon-wrapper" id="666fd58d50vb5"></p><p data-tag="p" id="c1f883fa504p8" class="p"></p><p id="9352e908a9470">subjectUserIds、subjectDeptIds、subjectTagIds三个参数内元素个数之和不能超过50。</p><p id="caa221da3cuyt"></p></td></tr><tr outputclass="row row-level-7" id="f36a9b36adqbd" class="row row-level-7"><td id="febb202dfe99y" rowspan="1" colspan="1"><p id="e6751bf7b8s8k">type</p></td><td id="81bc73a1780wx" rowspan="1" colspan="1"><p id="27eeb842b5m69">String</p></td><td id="7d3600eb76ile" rowspan="1" colspan="1"><p id="b13ef8d327he9">是</p></td><td id="abb0fb185d9mm" rowspan="1" colspan="1"><p id="588b6ba0ccuaw">限制类型，有以下取值：</p><ul id="2f0539e055cye"><li id="c57be72425k3w"><p id="baf88edb62zbh"><b>onlySelf</b>：只能查看自己，不能看自己之外的其他部门和人。</p></li><li id="d8c036b05c7cq"><p id="fe9e7dd288r4p"><b>onlySelfDeptAndChild</b>：只能看到自己所在的部门及子部门，不能看到其他部门和人。</p></li><li id="c4aafb3facz4o"><p id="df871f5fb22rp"><b>excludeNode</b>：默认值，只能看到白名单列表中的部门和人。</p></li></ul><p class="note-icon-wrapper" id="73ed6bc2b2p5a"></p><p data-tag="p" id="96173ebe633ca" class="p"></p><p id="62f9655ebc94c">当该参数值为excludeNode时，设置的白名单才生效。</p><p id="178c3795aekmc"></p></td></tr><tr outputclass="row row-level-8" id="8fafee1ec8p4b" class="row row-level-8"><td id="96941b64a6o8q" rowspan="1" colspan="1"><p id="07c3235087owy">excludeUserIds</p></td><td id="f205d72a25unz" rowspan="1" colspan="1"><p id="8d7c4a2412694">Array of String</p></td><td id="f3bb2e1f9arfx" rowspan="1" colspan="1"><p id="d96691ef4am66">否</p></td><td id="457abbdcaezju" rowspan="1" colspan="1"><p id="ce2f3fcffevul">白名单用户userId，可调用<a href="https://open.dingtalk.com/document/development/query-the-list-of-department-userids#" id="75be279647e7s" class="xref">获取部门用户userid列表</a>接口获取userId。</p><p class="note-icon-wrapper" id="aee61978015lb"></p><p data-tag="p" id="bac3d107b9y4e" class="p"></p><ul id="e8866df2d79i0"><li id="84c6bf0650a3v"><p id="154ff44d097eb">excludeUserIds、excludeDeptIds、excludeTagIds三个参数内元素个数之和不能超过50。</p></li><li id="b7e41d4fe2468"><p id="27985c6fddiok">当type参数值为excludeNode时，设置的白名单才生效。</p></li></ul><p id="4b4fcce854m8p"></p></td></tr><tr outputclass="row row-level-9" id="087f875a307lh" class="row row-level-9"><td id="bbc1f4b068yca" rowspan="1" colspan="1"><p id="76c1dcb5745h6">excludeDeptIds</p></td><td id="e8183942e2m4u" rowspan="1" colspan="1"><p id="c3d6846e88tha">Array of Long</p></td><td id="247e1a73b6ba0" rowspan="1" colspan="1"><p id="36fc97bf38aie">否</p></td><td id="96a7ae6954a8k" rowspan="1" colspan="1"><p id="56587e5c9fogt">白名单部门ID，通过调用<a href="https://open.dingtalk.com/document/development/obtain-the-department-list-v2#" id="805b56dbabuqx" class="xref">获取部门列表</a>接口获取。</p><p class="note-icon-wrapper" id="8092f8d5296ig"></p><p data-tag="p" id="70953f452ejog" class="p"></p><ul id="8076bf32c3726"><li id="527a653970f12"><p id="bf063c0991bfq">excludeUserIds、excludeDeptIds、excludeTagIds三个参数内元素之和不能超过50。</p></li><li id="a31c2e9274vs3"><p id="58e9485ed7oa6">当type参数值为excludeNode时，设置的白名单才生效。</p></li></ul><p id="8bf6e788a6fe8"></p></td></tr><tr outputclass="row row-level-10" id="08160630f70tv" class="row row-level-10"><td id="e5ff0fad77lth" rowspan="1" colspan="1"><p id="03b1ad94d4c90">excludeTagIds</p></td><td id="78e389c212tsj" rowspan="1" colspan="1"><p id="49a845b832tre">Array of Long</p></td><td id="f2ae4cbf76z18" rowspan="1" colspan="1"><p id="f764980bccrvs">否</p></td><td id="03bb9b5665k5n" rowspan="1" colspan="1"><p id="c22dd486fcwp5">白名单角色ID，通过调用<a href="https://open.dingtalk.com/document/development/obtains-a-list-of-enterprise-roles#" id="095ec2299e9qe" class="xref">获取角色列表</a>接口获取。</p><p class="note-icon-wrapper" id="21713bc60dlzo"></p><p data-tag="p" id="e9334ad5eb8ld" class="p"></p><ul id="1bf468d811mt9"><li id="cb49b96946rc2"><p id="574df079dcihd">excludeUserIds、excludeDeptIds、excludeTagIds三个参数内元素个数之和不能超过50。</p></li><li id="265d51c396w00"><p id="50a77f615clj0">当type参数值为excludeNode时，设置的白名单才生效。</p></li></ul><p id="b1c0c39676sva"></p></td></tr><tr outputclass="row row-level-11" id="658a0e8c7ei02" class="row row-level-11"><td id="2c65e4d900tcg" rowspan="1" colspan="1"><p id="e3f589d0415c3">active</p></td><td id="d546ff44a2ju5" rowspan="1" colspan="1"><p id="e8463413cbu42">Boolean</p></td><td id="e6c73b3b351o2" rowspan="1" colspan="1"><p id="6ee79db0e3gmg">否</p></td><td id="904639aa18li3" rowspan="1" colspan="1"><p id="84103e9892ks4">本次设置是否生效。</p><ul id="372fa4896cxug"><li id="a66ea8c16ck1v"><p id="1dfaf77f3649m">true：生效</p></li><li id="6cc8cd34e9pjq"><p id="cfe86b54f55bv">false：不生效</p></li></ul></td></tr><tr outputclass="row row-level-12" id="72aea32abdvb5" class="row row-level-12"><td id="da20f3171771b" rowspan="1" colspan="1"><p id="317df7f1e0w73">restrictInUserProfile</p></td><td id="36347ee789eq8" rowspan="1" colspan="1"><p id="c493bf1ee2u9s">Boolean</p></td><td id="cc0870cdd69dg" rowspan="1" colspan="1"><p id="4cb26dab83hqt">否</p></td><td id="1e2d2f756e7pu" rowspan="1" colspan="1"><p id="69adf7995a04x">是否同时限制查看个人资料页。</p><ul id="8b2f8e39d1j8a"><li id="91038400c1rv7"><p id="f2b912e79919f">true：是</p></li><li id="0706cf87d3mjw"><p id="6ff46aec3bjaj">false：否</p></li></ul><p class="note-icon-wrapper" id="2b6aed9fbdyvf"></p><p data-tag="p" id="598757f0c81ul" class="p"></p><p id="e3ae9ee31fb7s">如果限制查看，在钉钉客户端点击不在可看见范围内的员工头像，不会展示当前组织的资料信息。</p><p id="a6266e0983pa8"></p></td></tr><tr outputclass="row row-level-13" id="7778cce793rqy" class="row row-level-13"><td id="22a41eae67ipj" rowspan="1" colspan="1"><p id="cc0164a03dshy">restrictInSearch</p></td><td id="83d97cd924d8g" rowspan="1" colspan="1"><p id="7c64767a6f7kc">Boolean</p></td><td id="d2eb4051fexm6" rowspan="1" colspan="1"><p id="29b7272da1wqe">否</p></td><td id="d296eeeeb65g2" rowspan="1" colspan="1"><p id="1198660b51wy2">是否同时限制搜索。</p><ul id="8fb11c38497ok"><li id="c789fdc4ba1t1"><p id="63fbe342ce8vz">true：是</p></li><li id="f3bfcc9e1dla1"><p id="1aca7eabf9c07">false：否</p></li></ul><p class="note-icon-wrapper" id="b946e0f175nwt"></p><p data-tag="p" id="9efc42c4ffcfr" class="p"></p><p id="4a644ff66dbog">如果限制搜索，在钉钉客户端搜索不在可看见范围内的员工，会搜索不到结果。</p><p id="b430aae3de4ys"></p></td></tr></tbody></table></section><section id="section-request-body-example" class="section"><h3 id="h3-request-body-example" data-tag="h3" class="h3">请求示例</h3><div outputclass="tabbed-codeblock" data-tag="fig" id="figure-nqy-2xr-lm1" class="tabbed-codeblock-box"><div class="tab-box"></div><input type="radio" name="check-figure-nqy-2xr-lm1" id="figure-nqy-2xr-lm1-HTTP-tab" checked="checked" /><label for="figure-nqy-2xr-lm1-HTTP-tab">HTTP</label><div class="codeblock-item"><pre id="codeblock-16b-zyb-aj5" outputclass="language-HTTP" code-type="xCode" data-tag="codeblock" class="pre codeblock language-HTTP"><code>PUT /v1.0/contact/restrictions/settings HTTP/1.1
+Host:api.dingtalk.com
+x-acs-dingtalk-access-token:xxxxx
+Content-Type:application/json
+
+{
+  "id" : 10001,
+  "name" : "xxx部门的人只能查看自己",
+  "description" : "xxx部门的人限制查看外部门的人",
+  "subjectUserIds" : [ "userId1" ],
+  "subjectDeptIds" : [ 10000 ],
+  "subjectTagIds" : [ 20000 ],
+  "type" : "excludeNode",
+  "excludeUserIds" : [ "userId2" ],
+  "excludeDeptIds" : [ 10000 ],
+  "excludeTagIds" : [ 20000 ],
+  "active" : true,
+  "restrictInUserProfile" : true,
+  "restrictInSearch" : true
+}</code></pre></div><input type="radio" name="check-figure-nqy-2xr-lm1" id="figure-nqy-2xr-lm1-java-tab" /><label for="figure-nqy-2xr-lm1-java-tab">Java</label><div class="codeblock-item"><pre id="codeblock-ztv-qzs-hml" outputclass="language-java" code-type="xCode" data-tag="codeblock" class="pre codeblock language-java"><code>// This file is auto-generated, don't edit it. Thanks.
+package com.aliyun.sample;
+
+import com.aliyun.tea.*;
+
+public class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Client
+     * @throws Exception
+     */
+    public static com.aliyun.dingtalkcontact_1_0.Client createClient() throws Exception {
+        com.aliyun.teaopenapi.models.Config config = new com.aliyun.teaopenapi.models.Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        return new com.aliyun.dingtalkcontact_1_0.Client(config);
+    }
+
+    public static void main(String[] args_) throws Exception {
+        java.util.List&lt;String&gt; args = java.util.Arrays.asList(args_);
+        com.aliyun.dingtalkcontact_1_0.Client client = Sample.createClient();
+        com.aliyun.dingtalkcontact_1_0.models.UpdateContactRestrictSettingHeaders updateContactRestrictSettingHeaders = new com.aliyun.dingtalkcontact_1_0.models.UpdateContactRestrictSettingHeaders();
+        updateContactRestrictSettingHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        com.aliyun.dingtalkcontact_1_0.models.UpdateContactRestrictSettingRequest updateContactRestrictSettingRequest = new com.aliyun.dingtalkcontact_1_0.models.UpdateContactRestrictSettingRequest()
+                .setId(10001L)
+                .setName("xxx部门的人只能查看自己")
+                .setDescription("xxx部门的人限制查看外部门的人")
+                .setSubjectUserIds(java.util.Arrays.asList(
+                    "userId1"
+                ))
+                .setSubjectDeptIds(java.util.Arrays.asList(
+                    10000L
+                ))
+                .setSubjectTagIds(java.util.Arrays.asList(
+                    20000L
+                ))
+                .setType("excludeNode")
+                .setExcludeUserIds(java.util.Arrays.asList(
+                    "userId2"
+                ))
+                .setExcludeDeptIds(java.util.Arrays.asList(
+                    10000L
+                ))
+                .setExcludeTagIds(java.util.Arrays.asList(
+                    20000L
+                ))
+                .setActive(true)
+                .setRestrictInUserProfile(true)
+                .setRestrictInSearch(true);
+        try {
+            client.updateContactRestrictSettingWithOptions(updateContactRestrictSettingRequest, updateContactRestrictSettingHeaders, new com.aliyun.teautil.models.RuntimeOptions());
+        } catch (TeaException err) {
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        } catch (Exception _err) {
+            TeaException err = new TeaException(_err.getMessage(), _err);
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        }        
+    }
+}</code></pre></div><input type="radio" name="check-figure-nqy-2xr-lm1" id="figure-nqy-2xr-lm1-python-tab" /><label for="figure-nqy-2xr-lm1-python-tab">Python</label><div class="codeblock-item"><pre id="codeblock-k5e-7kl-v5t" outputclass="language-python" code-type="xCode" data-tag="codeblock" class="pre codeblock language-python"><code># -*- coding: utf-8 -*-
+# This file is auto-generated, don't edit it. Thanks.
+import sys
+
+from typing import List
+
+from alibabacloud_dingtalk.contact_1_0.client import Client as dingtalkcontact_1_0Client
+from alibabacloud_tea_openapi import models as open_api_models
+from alibabacloud_dingtalk.contact_1_0 import models as dingtalkcontact__1__0_models
+from alibabacloud_tea_util import models as util_models
+from alibabacloud_tea_util.client import Client as UtilClient
+
+
+class Sample:
+    def __init__(self):
+        pass
+
+    @staticmethod
+    def create_client() -&gt; dingtalkcontact_1_0Client:
+        """
+        使用 Token 初始化账号Client
+        @return: Client
+        @throws Exception
+        """
+        config = open_api_models.Config()
+        config.protocol = 'https'
+        config.region_id = 'central'
+        return dingtalkcontact_1_0Client(config)
+
+    @staticmethod
+    def main(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        update_contact_restrict_setting_headers = dingtalkcontact__1__0_models.UpdateContactRestrictSettingHeaders()
+        update_contact_restrict_setting_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        update_contact_restrict_setting_request = dingtalkcontact__1__0_models.UpdateContactRestrictSettingRequest(
+            id=10001,
+            name='xxx部门的人只能查看自己',
+            description='xxx部门的人限制查看外部门的人',
+            subject_user_ids=[
+                'userId1'
+            ],
+            subject_dept_ids=[
+                10000
+            ],
+            subject_tag_ids=[
+                20000
+            ],
+            type='excludeNode',
+            exclude_user_ids=[
+                'userId2'
+            ],
+            exclude_dept_ids=[
+                10000
+            ],
+            exclude_tag_ids=[
+                20000
+            ],
+            active=True,
+            restrict_in_user_profile=True,
+            restrict_in_search=True
+        )
+        try:
+            client.update_contact_restrict_setting_with_options(update_contact_restrict_setting_request, update_contact_restrict_setting_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+    @staticmethod
+    async def main_async(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        update_contact_restrict_setting_headers = dingtalkcontact__1__0_models.UpdateContactRestrictSettingHeaders()
+        update_contact_restrict_setting_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        update_contact_restrict_setting_request = dingtalkcontact__1__0_models.UpdateContactRestrictSettingRequest(
+            id=10001,
+            name='xxx部门的人只能查看自己',
+            description='xxx部门的人限制查看外部门的人',
+            subject_user_ids=[
+                'userId1'
+            ],
+            subject_dept_ids=[
+                10000
+            ],
+            subject_tag_ids=[
+                20000
+            ],
+            type='excludeNode',
+            exclude_user_ids=[
+                'userId2'
+            ],
+            exclude_dept_ids=[
+                10000
+            ],
+            exclude_tag_ids=[
+                20000
+            ],
+            active=True,
+            restrict_in_user_profile=True,
+            restrict_in_search=True
+        )
+        try:
+            await client.update_contact_restrict_setting_with_options_async(update_contact_restrict_setting_request, update_contact_restrict_setting_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+
+if __name__ == '__main__':
+    Sample.main(sys.argv[1:])</code></pre></div><input type="radio" name="check-figure-nqy-2xr-lm1" id="figure-nqy-2xr-lm1-php-tab" /><label for="figure-nqy-2xr-lm1-php-tab">PHP</label><div class="codeblock-item"><pre id="codeblock-70s-8pw-d7b" outputclass="language-php" code-type="xCode" data-tag="codeblock" class="pre codeblock language-php"><code>&lt;?php
+
+// This file is auto-generated, don't edit it. Thanks.
+namespace AlibabaCloud\SDK\Sample;
+
+use AlibabaCloud\SDK\Dingtalk\Vcontact_1_0\Dingtalk;
+use \Exception;
+use AlibabaCloud\Tea\Exception\TeaError;
+use AlibabaCloud\Tea\Utils\Utils;
+
+use Darabonba\OpenApi\Models\Config;
+use AlibabaCloud\SDK\Dingtalk\Vcontact_1_0\Models\UpdateContactRestrictSettingHeaders;
+use AlibabaCloud\SDK\Dingtalk\Vcontact_1_0\Models\UpdateContactRestrictSettingRequest;
+use AlibabaCloud\Tea\Utils\Utils\RuntimeOptions;
+
+class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Dingtalk Client
+     */
+    public static function createClient(){
+        $config = new Config([]);
+        $config-&gt;protocol = "https";
+        $config-&gt;regionId = "central";
+        return new Dingtalk($config);
+    }
+
+    /**
+     * @param string[] $args
+     * @return void
+     */
+    public static function main($args){
+        $client = self::createClient();
+        $updateContactRestrictSettingHeaders = new UpdateContactRestrictSettingHeaders([]);
+        $updateContactRestrictSettingHeaders-&gt;xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        $updateContactRestrictSettingRequest = new UpdateContactRestrictSettingRequest([
+            "id" =&gt; 10001,
+            "name" =&gt; "xxx部门的人只能查看自己",
+            "description" =&gt; "xxx部门的人限制查看外部门的人",
+            "subjectUserIds" =&gt; [
+                "userId1"
+            ],
+            "subjectDeptIds" =&gt; [
+                10000
+            ],
+            "subjectTagIds" =&gt; [
+                20000
+            ],
+            "type" =&gt; "excludeNode",
+            "excludeUserIds" =&gt; [
+                "userId2"
+            ],
+            "excludeDeptIds" =&gt; [
+                10000
+            ],
+            "excludeTagIds" =&gt; [
+                20000
+            ],
+            "active" =&gt; true,
+            "restrictInUserProfile" =&gt; true,
+            "restrictInSearch" =&gt; true
+        ]);
+        try {
+            $client-&gt;updateContactRestrictSettingWithOptions($updateContactRestrictSettingRequest, $updateContactRestrictSettingHeaders, new RuntimeOptions([]));
+        }
+        catch (Exception $err) {
+            if (!($err instanceof TeaError)) {
+                $err = new TeaError([], $err-&gt;getMessage(), $err-&gt;getCode(), $err);
+            }
+            if (!Utils::empty_($err-&gt;code) &amp;&amp; !Utils::empty_($err-&gt;message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+        }
+    }
+}
+$path = __DIR__ . \DIRECTORY_SEPARATOR . '..' . \DIRECTORY_SEPARATOR . 'vendor' . \DIRECTORY_SEPARATOR . 'autoload.php';
+if (file_exists($path)) {
+    require_once $path;
+}
+Sample::main(array_slice($argv, 1));</code></pre></div><input type="radio" name="check-figure-nqy-2xr-lm1" id="figure-nqy-2xr-lm1-go-tab" /><label for="figure-nqy-2xr-lm1-go-tab">Go</label><div class="codeblock-item"><pre id="codeblock-y7r-e1g-v9s" outputclass="language-go" code-type="xCode" data-tag="codeblock" class="pre codeblock language-go"><code>// This file is auto-generated, don't edit it. Thanks.
+package main
+
+import (
+  "os"
+  util  "github.com/alibabacloud-go/tea-utils/v2/service"
+  dingtalkcontact_1_0  "github.com/alibabacloud-go/dingtalk/contact_1_0"
+  openapi  "github.com/alibabacloud-go/darabonba-openapi/v2/client"
+  "github.com/alibabacloud-go/tea/tea"
+)
+
+
+/**
+ * 使用 Token 初始化账号Client
+ * @return Client
+ * @throws Exception
+ */
+func CreateClient () (_result *dingtalkcontact_1_0.Client, _err error) {
+  config := &amp;openapi.Config{}
+  config.Protocol = tea.String("https")
+  config.RegionId = tea.String("central")
+  _result = &amp;dingtalkcontact_1_0.Client{}
+  _result, _err = dingtalkcontact_1_0.NewClient(config)
+  return _result, _err
+}
+
+func _main (args []*string) (_err error) {
+  client, _err := CreateClient()
+  if _err != nil {
+    return _err
+  }
+
+  updateContactRestrictSettingHeaders := &amp;dingtalkcontact_1_0.UpdateContactRestrictSettingHeaders{}
+  updateContactRestrictSettingHeaders.XAcsDingtalkAccessToken = tea.String("&lt;your access token&gt;")
+  updateContactRestrictSettingRequest := &amp;dingtalkcontact_1_0.UpdateContactRestrictSettingRequest{
+    Id: tea.Int64(10001),
+    Name: tea.String("xxx部门的人只能查看自己"),
+    Description: tea.String("xxx部门的人限制查看外部门的人"),
+    SubjectUserIds: []*string{tea.String("userId1")},
+    SubjectDeptIds: []*int64{tea.Int64(10000)},
+    SubjectTagIds: []*int64{tea.Int64(20000)},
+    Type: tea.String("excludeNode"),
+    ExcludeUserIds: []*string{tea.String("userId2")},
+    ExcludeDeptIds: []*int64{tea.Int64(10000)},
+    ExcludeTagIds: []*int64{tea.Int64(20000)},
+    Active: tea.Bool(true),
+    RestrictInUserProfile: tea.Bool(true),
+    RestrictInSearch: tea.Bool(true),
+  }
+  tryErr := func()(_e error) {
+    defer func() {
+      if r := tea.Recover(recover()); r != nil {
+        _e = r
+      }
+    }()
+    _, _err = client.UpdateContactRestrictSettingWithOptions(updateContactRestrictSettingRequest, updateContactRestrictSettingHeaders, &amp;util.RuntimeOptions{})
+    if _err != nil {
+      return _err
+    }
+
+    return nil
+  }()
+
+  if tryErr != nil {
+    var err = &amp;tea.SDKError{}
+    if _t, ok := tryErr.(*tea.SDKError); ok {
+      err = _t
+    } else {
+      err.Message = tea.String(tryErr.Error())
+    }
+    if !tea.BoolValue(util.Empty(err.Code)) &amp;&amp; !tea.BoolValue(util.Empty(err.Message)) {
+      // err 中含有 code 和 message 属性，可帮助开发定位问题
+    }
+
+  }
+  return _err
+}
+
+
+func main() {
+  err := _main(tea.StringSlice(os.Args[1:]))
+  if err != nil {
+    panic(err)
+  }
+}</code></pre></div><input type="radio" name="check-figure-nqy-2xr-lm1" id="figure-nqy-2xr-lm1-nodejs-tab" /><label for="figure-nqy-2xr-lm1-nodejs-tab">Node.js</label><div class="codeblock-item"><pre id="codeblock-kpz-pnh-rom" outputclass="language-nodejs" code-type="xCode" data-tag="codeblock" class="pre codeblock language-nodejs"><code>// This file is auto-generated, don't edit it
+import Util, * as $Util from '@alicloud/tea-util';
+import dingtalkcontact_1_0, * as $dingtalkcontact_1_0 from '@alicloud/dingtalk/contact_1_0';
+import OpenApi, * as $OpenApi from '@alicloud/openapi-client';
+import * as $tea from '@alicloud/tea-typescript';
+
+
+export default class Client {
+
+  /**
+   * 使用 Token 初始化账号Client
+   * @return Client
+   * @throws Exception
+   */
+  static createClient(): dingtalkcontact_1_0 {
+    let config = new $OpenApi.Config({ });
+    config.protocol = "https";
+    config.regionId = "central";
+    return new dingtalkcontact_1_0(config);
+  }
+
+  static async main(args: string[]): Promise&lt;void&gt; {
+    let client = Client.createClient();
+    let updateContactRestrictSettingHeaders = new $dingtalkcontact_1_0.UpdateContactRestrictSettingHeaders({ });
+    updateContactRestrictSettingHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+    let updateContactRestrictSettingRequest = new $dingtalkcontact_1_0.UpdateContactRestrictSettingRequest({
+      id: 10001,
+      name: "xxx部门的人只能查看自己",
+      description: "xxx部门的人限制查看外部门的人",
+      subjectUserIds: [
+        "userId1"
+      ],
+      subjectDeptIds: [
+        10000
+      ],
+      subjectTagIds: [
+        20000
+      ],
+      type: "excludeNode",
+      excludeUserIds: [
+        "userId2"
+      ],
+      excludeDeptIds: [
+        10000
+      ],
+      excludeTagIds: [
+        20000
+      ],
+      active: true,
+      restrictInUserProfile: true,
+      restrictInSearch: true,
+    });
+    try {
+      await client.updateContactRestrictSettingWithOptions(updateContactRestrictSettingRequest, updateContactRestrictSettingHeaders, new $Util.RuntimeOptions({ }));
+    } catch (err) {
+      if (!Util.empty(err.code) &amp;&amp; !Util.empty(err.message)) {
+        // err 中含有 code 和 message 属性，可帮助开发定位问题
+      }
+
+    }    
+  }
+
+}
+
+Client.main(process.argv.slice(2));</code></pre></div><input type="radio" name="check-figure-nqy-2xr-lm1" id="figure-nqy-2xr-lm1-csharp-tab" /><label for="figure-nqy-2xr-lm1-csharp-tab">C#</label><div class="codeblock-item"><pre id="codeblock-jce-qj2-5xc" outputclass="language-csharp" code-type="xCode" data-tag="codeblock" class="pre codeblock language-csharp"><code>// This file is auto-generated, don't edit it. Thanks.
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
+
+using Tea;
+using Tea.Utils;
+
+
+namespace AlibabaCloud.SDK.Sample
+{
+    public class Sample 
+    {
+
+        /**
+         * 使用 Token 初始化账号Client
+         * @return Client
+         * @throws Exception
+         */
+        public static AlibabaCloud.SDK.Dingtalkcontact_1_0.Client CreateClient()
+        {
+            AlibabaCloud.OpenApiClient.Models.Config config = new AlibabaCloud.OpenApiClient.Models.Config();
+            config.Protocol = "https";
+            config.RegionId = "central";
+            return new AlibabaCloud.SDK.Dingtalkcontact_1_0.Client(config);
+        }
+
+        public static void Main(string[] args)
+        {
+            AlibabaCloud.SDK.Dingtalkcontact_1_0.Client client = CreateClient();
+            AlibabaCloud.SDK.Dingtalkcontact_1_0.Models.UpdateContactRestrictSettingHeaders updateContactRestrictSettingHeaders = new AlibabaCloud.SDK.Dingtalkcontact_1_0.Models.UpdateContactRestrictSettingHeaders();
+            updateContactRestrictSettingHeaders.XAcsDingtalkAccessToken = "&lt;your access token&gt;";
+            AlibabaCloud.SDK.Dingtalkcontact_1_0.Models.UpdateContactRestrictSettingRequest updateContactRestrictSettingRequest = new AlibabaCloud.SDK.Dingtalkcontact_1_0.Models.UpdateContactRestrictSettingRequest
+            {
+                Id = 10001,
+                Name = "xxx部门的人只能查看自己",
+                Description = "xxx部门的人限制查看外部门的人",
+                SubjectUserIds = new List&lt;string&gt;
+                {
+                    "userId1"
+                },
+                SubjectDeptIds = new List&lt;long?&gt;
+                {
+                    10000
+                },
+                SubjectTagIds = new List&lt;long?&gt;
+                {
+                    20000
+                },
+                Type = "excludeNode",
+                ExcludeUserIds = new List&lt;string&gt;
+                {
+                    "userId2"
+                },
+                ExcludeDeptIds = new List&lt;long?&gt;
+                {
+                    10000
+                },
+                ExcludeTagIds = new List&lt;long?&gt;
+                {
+                    20000
+                },
+                Active = true,
+                RestrictInUserProfile = true,
+                RestrictInSearch = true,
+            };
+            try
+            {
+                client.UpdateContactRestrictSettingWithOptions(updateContactRestrictSettingRequest, updateContactRestrictSettingHeaders, new AlibabaCloud.TeaUtil.Models.RuntimeOptions());
+            }
+            catch (TeaException err)
+            {
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+            catch (Exception _err)
+            {
+                TeaException err = new TeaException(new Dictionary&lt;string, object&gt;
+                {
+                    { "message", _err.Message }
+                });
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+        }
+
+
+    }
+}</code></pre></div></div></section></section><section id="section-response-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-response-1" data-tag="h2" class="h2">响应</h2><section id="section-response-parameter" class="section"><h3 data-tag="h3" id="h2-lrz-4mu-rkt" class="h3 title">响应体</h3><table id="598fb57ca2m71" tablewidth="710" tablecolswidth="213 142 355" autofit="false" class="table"><colgroup colwidth="0.9*" style="width:30.00%"></colgroup><colgroup colwidth="0.6*" style="width:20.00%"></colgroup><colgroup colwidth="1.5*" style="width:50.00%"></colgroup><tbody class="tbody"><tr id="d482e9ccdcy5b"><td id="6bb4601925yce" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="decadd96778e8">名称</p></td><td id="ba8444abc66om" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="bb92c5e7d2lo0">类型</p></td><td id="d556b0b9f7pav" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="c3c3c2f1848jl">描述</p></td></tr><tr outputclass="row row-level-1" id="81ac7ed19d6e0" class="row row-level-1"><td id="43524e48a0kvy" rowspan="1" colspan="1"><p id="60d899cb32jbm">result</p></td><td id="95e64db07efva" rowspan="1" colspan="1"><p id="5cef857c3ckwa">Long</p></td><td id="3e8e3b3b21mjj" rowspan="1" colspan="1"><p id="8b202c10297r2">限制设置ID。</p></td></tr></tbody></table></section><section id="section-response-body-example" class="section"><h3 id="h3-response-body-example" data-tag="h3" class="h3">响应体示例</h3><pre id="c4b50f0b81e6a" outputclass="language-json" code-type="xCode" data-tag="codeblock" class="pre codeblock language-json"><code>HTTP/1.1 200 OK
+Content-Type:application/json
+
+{
+  "result" : 10001
+}</code></pre></section><section id="section-error-code-1" class="section"><h3 id="h3-error-code-1" data-tag="h3" class="h3">错误码</h3><p data-tag="p" id="p-error-code-global-guide" class="p">若调用该接口报错，可根据错误信息在<a href="https://open.dingtalk.com/document/development/server-api-error-codes-1" id="a-error-code-global-guide">全局错误码</a>文档中查找解决方案。</p><table id="32ebfb4b1bhuo" tablewidth="709" tablecolswidth="142 177 177 213" autofit="false" class="table"><colgroup colwidth="0.8*" style="width:20.03%"></colgroup><colgroup colwidth="1*" style="width:24.96%"></colgroup><colgroup colwidth="1*" style="width:24.96%"></colgroup><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><tbody class="tbody"><tr id="a89003d5ef31q"><td id="5e569819d828t" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="f2272aa070019">HttpCode</p></td><td id="2805bccd456yl" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="765ee39fdbh1w">错误码</p></td><td id="86a8da0a430vi" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="27ae7f78e3c64">错误信息</p></td><td id="eff7d687a7ofh" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="e2f5a10e16wj6">说明</p></td></tr><tr id="f418fa2f1dqoh"><td id="0908db0c43jtx" rowspan="1" colspan="1"><p id="2cf02ccd812ti">400</p></td><td id="8cbe149d9anqv" rowspan="1" colspan="1"><p id="890bb3e83ebx9">userIdInvalid</p></td><td id="79be1fa6c8wl4" rowspan="1" colspan="1"><p id="7d0890a51ezvg">userId不存在</p></td><td id="445ca1b676k3h" rowspan="1" colspan="1"><p id="a74e934c42eej">userId不存在</p></td></tr><tr id="78d60a7c04vmv"><td id="62ace294f41fg" rowspan="1" colspan="1"><p id="e2d9a08a54313">400</p></td><td id="5681ff94e6isl" rowspan="1" colspan="1"><p id="870a1ad656pxe">excludeNodeExceed</p></td><td id="2859b3b263ktw" rowspan="1" colspan="1"><p id="2dd36bd5a0fnr">excludeUserIds、excludeDeptIds、excludeTagIds三个数组元素之和不能超过50</p></td><td id="fe284abe78tbu" rowspan="1" colspan="1"><p id="c0cafe57b2i2j">excludeUserIds、excludeDeptIds、excludeTagIds三个数组元素之和不能超过50</p></td></tr><tr id="6e8bf67f6cnnn"><td id="9aaf9c7473d4a" rowspan="1" colspan="1"><p id="2d1266edca3kg">400</p></td><td id="56968a722crar" rowspan="1" colspan="1"><p id="d69f995112xch">subjectNodeExceed</p></td><td id="39fa2b5f5ev5q" rowspan="1" colspan="1"><p id="356b05642dnjg">subjectUserIds、subjectDeptIds、subjectTagIds三个数组元素之和不能超过50</p></td><td id="dfa408e6f0zny" rowspan="1" colspan="1"><p id="f3b8f9ba36iyf">subjectUserIds、subjectDeptIds、subjectTagIds三个数组元素之和不能超过50</p></td></tr><tr id="588ad90f28m0x"><td id="115d03ae06zch" rowspan="1" colspan="1"><p id="4d4353358d67w">400</p></td><td id="8780521f830t1" rowspan="1" colspan="1"><p id="8736d5ba49dkl">typeInvalid</p></td><td id="12a1e913699jd" rowspan="1" colspan="1"><p id="8566b8cb9fg8r">type只能是excludeNode、onlySelf、onlySelfDeptAndChild中的一个</p></td><td id="659975c05c8dw" rowspan="1" colspan="1"><p id="1938590c05yl8">type只能是excludeNode、onlySelf、onlySelfDeptAndChild中的一个</p></td></tr><tr id="f5ec7e1942chh"><td id="ef3c12e8a9ssq" rowspan="1" colspan="1"><p id="ed4e2fe7b1fkc">400</p></td><td id="837d8080d8ap6" rowspan="1" colspan="1"><p id="622576dc9anng">subjectNodeEmpty</p></td><td id="777a62fc0eqr6" rowspan="1" colspan="1"><p id="383e61b1d7qjk">subjectUserIds、subjectDeptIds、subjectTagIds不能都为空</p></td><td id="ecd96bcfddw00" rowspan="1" colspan="1"><p id="21e9b09621w45">subjectUserIds、subjectDeptIds、subjectTagIds不能都为空</p></td></tr><tr id="9cfdbf8fc96hx"><td id="7b74ff8d9etwn" rowspan="1" colspan="1"><p id="c523df1562qll">400</p></td><td id="3e42fdaf2a7vv" rowspan="1" colspan="1"><p id="822c2496c9hhe">idInvalid</p></td><td id="6a41449ea4uyz" rowspan="1" colspan="1"><p id="cf84f696383i7">id对应的设置不存在</p></td><td id="4530096d3eppj" rowspan="1" colspan="1"><p id="8fef5bb64c3et">id对应的设置不存在</p></td></tr><tr id="d4603eb5955fz"><td id="84b013452e9c1" rowspan="1" colspan="1"><p id="1139abf14e8lm">500</p></td><td id="b57b89806d1cn" rowspan="1" colspan="1"><p id="d89b4ede30xw6">system.error</p></td><td id="1c068473995yo" rowspan="1" colspan="1"><p id="920917c6b86qp">系统错误</p></td><td id="454dd4aee17pp" rowspan="1" colspan="1"><p id="9d1f26234344f">系统错误</p></td></tr></tbody></table></section></section></div></main></body></html>

@@ -1,0 +1,563 @@
+<!DOCTYPE html><html><head><meta charset="utf8" / /><meta name="gmtModify" content="2025-09-12 17:20:52" / /><meta name="searchtitle" content="" / /><meta name="keywords" content="" / /><meta name="author" content="" / /><title>初始化文件分片上传</title><meta name="gmtModify" content="2026-06-04 19:09:38" / /></head><body data-tag="topic" id="doc-api-dingtalk-InitMultipartFileUpload" class="topic"><main id="f624888037klq"><h1 data-tag="title" id="h1-tqo-8rd-qz4" class="title">初始化文件分片上传</h1><p data-tag="shortdesc" id="f692658037awg" class="shortdesc">调用本接口，初始化文件分片上传。</p><div data-tag="conbody" outputclass="icms-api-reference" class="icms-api-reference conbody"><section id="ac14d352f9ufe" class="section"><h2 id="5832ae2333aci"><b>接口调用说明</b></h2><p id="18ed7e3c26iwq">接口调用流程，请参考下方步骤：</p><p jc="left" id="5bb1157009x26" style="text-align:left"><span style="color:rgb(23, 26, 29)">步骤一：调用本接口，初始化文件分片上传，获取上传标识uploadKey。</span></p><p jc="left" id="584f83f4d87f5" style="text-align:left"><span style="color:rgb(23, 26, 29)">步骤二：调用</span><a data-tag="xref" id="9b8578c3a9bzl" href="/document/development/obtains-the-information-about-multipart-uploads-of-an-object#" class="xref">获取文件分片上传信息</a><span style="color:rgb(23, 26, 29)">接口，获取每片文件的上传信息。</span></p><p jc="left" id="15856d11cf6cv" style="text-align:left"><span style="color:rgb(23, 26, 29)">步骤三：循环对每片文件执行上传操作。</span></p><p jc="left" id="71fadea0213xz" style="text-align:left"><span style="color:rgb(23, 26, 29)">步骤四：使用步骤一接口获取的上传标识uploadKey，调用</span><a data-tag="xref" id="61a7b1abb7efs" href="/document/development/submittal-file#" class="xref">提交文件</a><span style="color:rgb(23, 26, 29)">接口，完成上传。</span></p><p jc="left" id="99cae7f0b65j0" style="text-align:left"><span style="color:rgb(23, 26, 29)">完整示例请参考：</span></p><pre code-type="xCode" id="daa138744c8s2" index="77" data-tag="codeblock" outputclass="language-java" class="pre codeblock language-java"><code>import com.aliyun.dingtalkstorage_1_0.models.*;
+import com.aliyun.teaopenapi.models.Config;
+import com.aliyun.teautil.models.RuntimeOptions;
+import com.util.AccessTokenUtil;
+import org.junit.Test;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.Arrays;
+import java.util.Map;
+
+public class MultipartUpload {
+    public static com.aliyun.dingtalkstorage_1_0.Client createClient() throws Exception {
+        Config config = new Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        return new com.aliyun.dingtalkstorage_1_0.Client(config);
+    }
+    @Test
+    public void test() throws Exception {
+        com.aliyun.dingtalkstorage_1_0.Client client = MultipartUpload.createClient();
+
+        String spaceId = "存储空间ID";
+        String filePath = "/Users/xxxxx/Desktop/音乐.mp3";
+        // 每片文件大小
+        long partSize = 1 * 1024 * 1024L;  // 1MB
+        // 初始化分片上传接口
+        InitMultipartFileUploadHeaders initMultipartFileUploadHeaders = new InitMultipartFileUploadHeaders();
+        initMultipartFileUploadHeaders.xAcsDingtalkAccessToken = "accessToken";
+        InitMultipartFileUploadRequest initMultipartFileUploadRequest = new InitMultipartFileUploadRequest();
+        initMultipartFileUploadRequest.setUnionId(unionId);
+        InitMultipartFileUploadRequest.InitMultipartFileUploadRequestOption initMultipartFileUploadRequestOption = new InitMultipartFileUploadRequest.InitMultipartFileUploadRequestOption();
+        initMultipartFileUploadRequestOption.setStorageDriver("DINGTALK");
+        initMultipartFileUploadRequest.setOption(initMultipartFileUploadRequestOption);
+        String uploadKey = client.initMultipartFileUploadWithOptions(spaceId, initMultipartFileUploadRequest, initMultipartFileUploadHeaders, new RuntimeOptions()).getBody().getUploadKey();
+
+        File file = new File(filePath);
+        long fileLength = file.length();
+        int partCount = (int) (fileLength / partSize) + ((fileLength % partSize != 0) ? 1 : 0);
+
+        for (int i = 0; i &lt; partCount; i++) {
+            long startPos = i * partSize;
+            long curPartSize = (i + 1 == partCount) ? (fileLength - startPos) : partSize;
+            // 获取分片上传信息
+            GetMultipartFileUploadInfosHeaders getMultipartFileUploadInfosHeaders = new GetMultipartFileUploadInfosHeaders();
+            getMultipartFileUploadInfosHeaders.xAcsDingtalkAccessToken = "accessToken";
+            GetMultipartFileUploadInfosRequest getMultipartFileUploadInfosRequest = new GetMultipartFileUploadInfosRequest();
+            getMultipartFileUploadInfosRequest.setUnionId(unionId);
+            getMultipartFileUploadInfosRequest.setUploadKey("第一步初始化分片上传接口获取的uploadKey");
+            getMultipartFileUploadInfosRequest.setPartNumbers(Arrays.asList(i + 1));
+            GetMultipartFileUploadInfosResponseBody.GetMultipartFileUploadInfosResponseBodyMultipartHeaderSignatureInfosHeaderSignatureInfo headerSignatureInfo = client.getMultipartFileUploadInfosWithOptions(getMultipartFileUploadInfosRequest, getMultipartFileUploadInfosHeaders, new RuntimeOptions()).body.multipartHeaderSignatureInfos.get(0).headerSignatureInfo;
+            uploadPartFile(startPos, curPartSize, headerSignatureInfo, file);
+        }
+            // 提交文件，完成上传
+            CommitFileHeaders commitFileHeaders = new CommitFileHeaders();
+            commitFileHeaders.xAcsDingtalkAccessToken = "accessToken";
+            CommitFileRequest.CommitFileRequestOption commitFileRequestOption
+                = new CommitFileRequest.CommitFileRequestOption()
+                .setSize(1024L)
+                .setConflictStrategy("OVERWRITE");
+            CommitFileRequest commitFileRequest = new CommitFileRequest()
+                .setUnionId(unionId)
+                .setUploadKey(“第一步初始化分片上传接口获取的uploadKey”)
+                .setName("音乐.mp3")
+                .setParentId("0")
+                .setOption(commitFileRequestOption);
+            CommitFileResponseBody.CommitFileResponseBodyDentry dentry = client.commitFileWithOptions("存储空间ID", commitFileRequest, commitFileHeaders, new RuntimeOptions()).body.dentry;
+            System.out.println(dentry);
+    }
+
+    private void uploadPartFile(long start, long size, GetMultipartFileUploadInfosResponseBody.GetMultipartFileUploadInfosResponseBodyMultipartHeaderSignatureInfosHeaderSignatureInfo headerSignatureInfo, File file) throws Exception {
+        InputStream inputStream = new FileInputStream(file);
+        if (start &gt; 0) {
+            inputStream.skip(start);
+        }
+
+        URL url = new URL(headerSignatureInfo.getResourceUrls().get(0));
+        HttpURLConnection connection = (HttpURLConnection)url.openConnection();
+        connection.setDoOutput(true);
+        connection.setRequestMethod("PUT");
+        connection.setUseCaches(false);
+        if (headerSignatureInfo.getHeaders() != null) {
+            for (Map.Entry&lt;String, String&gt; entry : headerSignatureInfo.getHeaders().entrySet()) {
+                connection.setRequestProperty(entry.getKey(), entry.getValue());
+            }
+        }
+        connection.setReadTimeout(10000);
+        connection.setConnectTimeout(10000);
+        connection.connect();
+        OutputStream out = connection.getOutputStream();
+        byte[] buffer = new byte[1024];
+        long remain = size;
+        for (;remain &gt; 0;) {
+            int sizeToRead = remain &lt; buffer.length ? (int)remain : buffer.length;
+            int rsz = inputStream.read(buffer, 0, sizeToRead);
+            if (rsz &lt; 0) {
+                break;
+            }
+            out.write(buffer, 0, rsz);
+            remain -= rsz;
+        }
+        out.flush();
+        out.close();
+        int responseCode = connection.getResponseCode();
+        if (responseCode == 200) {
+            System.out.println("上传成功");
+        } else {
+            System.out.println("上传失败");
+        }
+        connection.disconnect();
+    }
+}
+</code></pre></section><section id="section-request-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-request-1" data-tag="h2" class="h2">请求</h2><section id="section-request-basic-info" class="section"><h3 id="heading-request-basic-info" data-tag="h3" class="h3">基本信息</h3><table id="f3776cd6a9lnn" tablewidth="648" tablecolswidth="216 432" autofit="false" class="table"><colgroup colwidth="0.67*" style="width:33.33%"></colgroup><colgroup colwidth="1.33*" style="width:66.67%"></colgroup><tbody class="tbody"><tr id="68907bbe5fay4"><td id="cbebd23395p6y" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="1fb0cf78bd7fe">字段</p></td><td id="2c47028ff8qx4" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="f01ae17ca96kx">值</p></td></tr><tr id="8aa6979a3eusy"><td id="41301c83edruj" rowspan="1" colspan="1"><p id="2736c40755f30">HTTP URL</p></td><td id="289f77a7a3iuf" rowspan="1" colspan="1"><p id="0d4d9c1d2dq52">https://api.dingtalk.com/v1.0/storage/spaces/{spaceId}/files/multiPartUploadInfos/init</p></td></tr><tr id="9ed985d077xif"><td id="b26985b8fapiw" rowspan="1" colspan="1"><p id="baeccbe06fme7">HTTP Method</p></td><td id="9660c2ad5eghb" rowspan="1" colspan="1"><p id="b4e5915877vx6">POST</p></td></tr><tr id="0006756d84t86"><td id="0a817a9808nyi" rowspan="1" colspan="1"><p id="62e5505c270rx">支持的应用类型</p></td><td id="d1df257cc3d43" rowspan="1" colspan="1"><p id="aac6dc2e5csms"><span data-tag="ph" id="ph-request-basic-app-type-apptype-0" class="ph ph-app-type" data-ph-raw-text="appType-企业内部应用">appType-企业内部应用</span>　<span data-tag="ph" id="ph-request-basic-app-type-apptype-1" class="ph ph-app-type" data-ph-raw-text="appType-第三方企业应用">appType-第三方企业应用</span></p></td></tr><tr id="e56e49d070ucu"><td id="12e78bf3eefa6" rowspan="1" colspan="1"><p id="f6cc7b7d96s0f">权限要求</p></td><td id="c3e00713549cg" rowspan="1" colspan="1"><p id="25766692e1mtd"><span data-tag="ph" id="ph-request-basic-permission-permission-storage-uploadinfo-read-0" class="ph-permission ph" data-ph-raw-text="permission-Storage.UploadInfo.Read-企业存储文件上传信息读权限" data-permission-id="permission-Storage.UploadInfo.Read" data-permission-code="Storage.UploadInfo.Read" data-permission-detail-api="/document/api/permission/detail" data-permission-query-param="code">permission-Storage.UploadInfo.Read-企业存储文件上传信息读权限</span></p></td></tr></tbody></table></section><section id="section-request-header-parameter" class="section"><h3 data-tag="h3" id="h2-miv-zrq-cf9" class="h3 title">请求头</h3><table id="f6928ca037las" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="f6928ca137y6x"><td id="f6928ca237fhn" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="f6928ca337c9y">名称</p></td><td id="f6928ca437hxs" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="f6928ca537orx">类型</p></td><td id="f6928ca637kcm" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="f6928ca737s5z">是否必填</p></td><td id="f6928ca837ndp" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="f6928ca937koh">描述</p></td></tr><tr id="f6928caa37o8y"><td id="f6928cab3753e" rowspan="1" colspan="1"><p id="f6928cac37kzf">x-acs-dingtalk-access-token</p></td><td id="f6928cad37low" rowspan="1" colspan="1"><p id="f6928cae37lk1">String</p></td><td id="f6928caf37q06" rowspan="1" colspan="1"><p id="f6928cb037ctx">是</p></td><td id="f6928cb137olp" rowspan="1" colspan="1"><p id="b24523bd502iz">调用该接口的访问凭证，通过以下获取：</p><ul id="a0d4f3b0fcqrc"><li id="34af5369c5rsy"><p id="c2c1e514a1ykv">企业内部应用，调用<a href="https://open.dingtalk.com/document/development/obtain-the-access-token-of-an-internal-app#" id="1d69b6c2d03vg" class="xref">获取企业内部应用的accessToken</a>接口获取。</p></li><li id="a020db131bujx"><p id="73d17d89f4vs7">第三方企业应用，调用<a href="https://open.dingtalk.com/document/development/obtain-the-access-token-of-the-authorized-enterprise-1#" id="b0c5fd587cgpy" class="xref">获取第三方应用授权企业的accessToken</a>接口获取。</p></li></ul></td></tr></tbody></table></section><section id="section-request-path-parameter" class="section"><h3 data-tag="h3" id="h2-jbm-bms-oyh" class="h3 title">路径参数</h3><table id="f692b3a037mn4" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="f692b3a1371ht"><td id="f692b3a237lqk" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="f692b3a337xhy">名称</p></td><td id="f692b3a437rmi" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="f692b3a537y44">类型</p></td><td id="f692b3a6374g5" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="f692b3a737x1m">是否必填</p></td><td id="f692b3a837bor" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="f692b3a937n2v">描述</p></td></tr><tr id="f692b3aa377rv"><td id="f692b3ab37me3" rowspan="1" colspan="1"><p id="f692b3ac37ent">spaceId</p></td><td id="f692b3ad37qo7" rowspan="1" colspan="1"><p id="f692b3ae37sdq">String</p></td><td id="f692b3af37xjy" rowspan="1" colspan="1"><p id="f692b3b0374wz">是</p></td><td id="f692b3b137ozy" rowspan="1" colspan="1"><p id="f692b3b237k30">空间Id，可调用<a href="https://open.dingtalk.com/document/development/add-space#" id="73b76056c1e52" class="xref">添加空间</a>接口获取id参数值。</p></td></tr></tbody></table></section><section id="section-request-query-parameter" class="section"><h3 data-tag="h3" id="h2-crq-r4r-xlq" class="h3 title">查询参数</h3><table id="f692b3ba37c2d" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="f692b3bb37ijv"><td id="f692b3bc37g04" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="f692b3bd37lcz">名称</p></td><td id="f692b3be37u5c" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="f692b3bf3720p">类型</p></td><td id="f692b3c037yub" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="f692b3c137yn8">是否必填</p></td><td id="f692b3c237vo1" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="f692b3c337ofj">描述</p></td></tr><tr id="f692b3c4378rn"><td id="f692b3c537pp0" rowspan="1" colspan="1"><p id="f692b3c6372jh">unionId</p></td><td id="f692b3c737u7h" rowspan="1" colspan="1"><p id="f692b3c837uxz">String</p></td><td id="f692b3c93765f" rowspan="1" colspan="1"><p id="f692b3ca37or0">是</p></td><td id="f692b3cb37n0l" rowspan="1" colspan="1"><p id="f692b3cc37cc9">操作者unionId，可调用<a href="https://open.dingtalk.com/document/development/query-user-details#" id="9003d3a7eeowl" class="xref">查询用户详情</a>接口获取。</p></td></tr></tbody></table></section><section id="section-request-body-parameter" class="section"><h3 data-tag="h3" id="h2-wl5-avy-kkn" class="h3 title">请求体</h3><table id="f692dab637yjq" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="f692dab737l8b"><td id="f692dab837dzu" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="f692dab937p9t">名称</p></td><td id="f692daba3760a" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="f692dabb37pqg">类型</p></td><td id="f692dabc37qor" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="f692dabd377kn">是否必填</p></td><td id="f692dabe37i55" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="f692dabf372ku">描述</p></td></tr><tr outputclass="row row-level-3 has-child" id="f692dac037i9g" class="row row-level-3 has-child"><td id="f692dac137vq8" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="f692dac237n9y">option</p></td><td id="f692dac337zjd" rowspan="1" colspan="1"><p id="f692dac437dr5">Object</p></td><td id="f692dac5378no" rowspan="1" colspan="1"><p id="f692dac63773i">否</p></td><td id="f692dac737ve9" rowspan="1" colspan="1"><p id="f692dac837igd">可选参数。</p></td></tr><tr outputclass="row row-level-3-1" id="f692dac937qn6" class="row row-level-3-1"><td id="f692daca37o1q" rowspan="1" colspan="1"><p id="f692dacb37337">storageDriver</p></td><td id="f692dacc379lo" rowspan="1" colspan="1"><p id="f692dacd37qz0">String</p></td><td id="f692dace37u3z" rowspan="1" colspan="1"><p id="f692dacf37ngb">否</p></td><td id="f692dad037a84" rowspan="1" colspan="1"><p id="f692dad137g0m">文件存储驱动类型，目前只支持DINGTALK。</p></td></tr><tr outputclass="row row-level-3-2 has-child" id="f692dad237bfe" class="row row-level-3-2 has-child"><td id="f692dad337sz8" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="f692dad437cca">preCheckParam</p></td><td id="f692dad537dq5" rowspan="1" colspan="1"><p id="f692dad637yk2">Object</p></td><td id="f692dad73723y" rowspan="1" colspan="1"><p id="f692dad837jm5">否</p></td><td id="f692dad937s44" rowspan="1" colspan="1"><p id="f69301c037qmt">预检查的字段。</p><p class="note-icon-wrapper" id="43c509fe19yf5"></p><section data-tag="p" id="f69301c237dgx" class="p section"><p id="f69301c337mtj">可实现对文件名称、文件完整性、容量的校验。</p></section></td></tr><tr outputclass="row row-level-3-2-1" id="f69301c437o97" class="row row-level-3-2-1"><td id="f69301c5373m3" rowspan="1" colspan="1"><p id="f69301c6379wu">md5</p></td><td id="f69301c73718b" rowspan="1" colspan="1"><p id="f69301c8375sq">String</p></td><td id="f69301c9371gq" rowspan="1" colspan="1"><p id="f69301ca37obg">否</p></td><td id="f69301cb37ho2" rowspan="1" colspan="1"><p id="f69301cc3757h">文件md5值，<code data-tag="code" id="2eccc83647ss9" class="code">DigestUtils.md5Hex()</code>。</p><p class="note-icon-wrapper" id="90addc06d23oh"></p><section data-tag="p" id="f69301ce37o34" class="p section"><p id="f69301cf37cvx">文件完整性校验，不传则不做校验。</p></section></td></tr><tr outputclass="row row-level-3-2-2" id="f69301d037o36" class="row row-level-3-2-2"><td id="f69301d137qj5" rowspan="1" colspan="1"><p id="f69301d237dyu">size</p></td><td id="f69301d337bie" rowspan="1" colspan="1"><p id="f69301d4378pi">Long</p></td><td id="f69301d53725c" rowspan="1" colspan="1"><p id="f69301d637kdx">否</p></td><td id="f69301d737q7y" rowspan="1" colspan="1"><p id="f69301d837smf">文件大小，单位Byte。</p><p class="note-icon-wrapper" id="027ea55cf47mj"></p><section data-tag="p" id="f69301da378yt" class="p section"><p id="f69301db37k2q">容量相关校验，不传则不做校验。</p></section></td></tr><tr outputclass="row row-level-3-2-3" id="f69301dc3796g" class="row row-level-3-2-3"><td id="f69301dd37tng" rowspan="1" colspan="1"><p id="f69301de37e5w">parentId</p></td><td id="f69301df37qub" rowspan="1" colspan="1"><p id="f69301e037nkr">String</p></td><td id="f69301e137kk7" rowspan="1" colspan="1"><p id="f69301e23769h">否</p></td><td id="f69301e337q1a" rowspan="1" colspan="1"><p id="f69301e43771k">父目录Id。根目录时，该参数是0，调用<a href="https://open.dingtalk.com/document/development/obtain-the-file-list-storage#" id="56da891f9ewxt" class="xref">获取文件或文件夹列表</a>接口获取parentId参数值。</p><p class="note-icon-wrapper" id="7e6408b249rmm"></p><section data-tag="p" id="f69328d1370n2" class="p section"><p id="f69328d237c18">用于同目录文件名冲突校验。</p></section></td></tr><tr outputclass="row row-level-3-2-4" id="f69328d337d7e" class="row row-level-3-2-4"><td id="f69328d437ro5" rowspan="1" colspan="1"><p id="f69328d537e2x">name</p></td><td id="f69328d637sf2" rowspan="1" colspan="1"><p id="f69328d737soa">String</p></td><td id="f69328d8372qh" rowspan="1" colspan="1"><p id="f69328d937tsy">否</p></td><td id="f69328da3775s" rowspan="1" colspan="1"><p id="f69328db37c58">文件名称，命名有以下要求：</p><ul id="f69328dc37cax"><li id="f69328dd377pw"><p id="f69328de37x8f">头尾不能包含空格，否则会自动去除</p></li><li id="f69328df37un0"><p id="f69328e037ubt">不能包含特殊字符，包括：制表符、*、"、&lt;、&gt;、|</p></li><li id="f69328e137yhl"><p id="f69328e237s0q">不能以"."结尾</p></li></ul><p class="note-icon-wrapper" id="ec1f6d1a85ax6"></p><section data-tag="p" id="f69328e43721x" class="p section"><p id="f69328e537to1">文件名称合法性和文件名称冲突校验。</p></section></td></tr><tr outputclass="row row-level-3-3" id="f69328e637t5q" class="row row-level-3-3"><td id="f69328e737ke0" rowspan="1" colspan="1"><p id="f69328e837ne5">preferRegion</p></td><td id="f69328e937exd" rowspan="1" colspan="1"><p id="f69328ea375v8">String</p></td><td id="f69328eb37da2" rowspan="1" colspan="1"><p id="f69328ec37a8r">否</p></td><td id="f69328ed37r0s" rowspan="1" colspan="1"><p id="f69328ee37b90">优先地域。</p><ul id="f69328ef37bzb"><li id="f69328f037an7"><p id="f69328f1379r5"><b>ZHANGJIAKOU</b>：张家口</p></li><li id="f69328f23701b"><p id="f69328f3375fr"><b>SHENZHEN</b>：深圳</p></li><li id="f69328f43790p"><p id="f69328f537r5n"><b>SHANGHAI</b>：上海</p></li><li id="f69328f637weg"><p id="f69328f7374sq"><b>SINGAPORE</b>：新加坡</p></li><li id="f69328f837oa3"><p id="f69328f937tlw"><b>UNKNOWN</b>：未知</p></li></ul><p class="note-icon-wrapper" id="d201fc395f3ri"></p><section data-tag="p" id="f69328fb37qlt" class="p section"><p id="f6934fe037bh1">倾向于将资源存到哪个地域，可实现就近上传等功能。</p></section></td></tr></tbody></table></section><section id="section-request-body-example" class="section"><h3 id="h3-request-body-example" data-tag="h3" class="h3">请求示例</h3><div outputclass="tabbed-codeblock" data-tag="fig" id="figure-ikl-lrz-l7t" class="tabbed-codeblock-box"><div class="tab-box"></div><input type="radio" name="check-figure-ikl-lrz-l7t" id="figure-ikl-lrz-l7t-HTTP-tab" checked="checked" /><label for="figure-ikl-lrz-l7t-HTTP-tab">HTTP</label><div class="codeblock-item"><pre id="codeblock-8n1-a9u-djr" outputclass="language-HTTP" code-type="xCode" data-tag="codeblock" class="pre codeblock language-HTTP"><code>POST /v1.0/storage/spaces/568xxxxx/files/multiPartUploadInfos/init?unionId=chyxxxxx HTTP/1.1
+Host:api.dingtalk.com
+x-acs-dingtalk-access-token:xxxxx
+Content-Type:application/json
+
+{
+  "option" : {
+    "storageDriver" : "DINGTALK",
+    "preCheckParam" : {
+      "md5" : "md5",
+      "size" : 512,
+      "parentId" : "897xxxxx",
+      "name" : "测试文件.txt"
+    },
+    "preferRegion" : "ZHANGJIAKOU"
+  }
+}</code></pre></div><input type="radio" name="check-figure-ikl-lrz-l7t" id="figure-ikl-lrz-l7t-java-tab" /><label for="figure-ikl-lrz-l7t-java-tab">Java</label><div class="codeblock-item"><pre id="codeblock-zvl-1z8-bou" outputclass="language-java" code-type="xCode" data-tag="codeblock" class="pre codeblock language-java"><code>// This file is auto-generated, don't edit it. Thanks.
+package com.aliyun.sample;
+
+import com.aliyun.tea.*;
+
+public class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Client
+     * @throws Exception
+     */
+    public static com.aliyun.dingtalkstorage_1_0.Client createClient() throws Exception {
+        com.aliyun.teaopenapi.models.Config config = new com.aliyun.teaopenapi.models.Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        return new com.aliyun.dingtalkstorage_1_0.Client(config);
+    }
+
+    public static void main(String[] args_) throws Exception {
+        java.util.List&lt;String&gt; args = java.util.Arrays.asList(args_);
+        com.aliyun.dingtalkstorage_1_0.Client client = Sample.createClient();
+        com.aliyun.dingtalkstorage_1_0.models.InitMultipartFileUploadHeaders initMultipartFileUploadHeaders = new com.aliyun.dingtalkstorage_1_0.models.InitMultipartFileUploadHeaders();
+        initMultipartFileUploadHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        com.aliyun.dingtalkstorage_1_0.models.InitMultipartFileUploadRequest.InitMultipartFileUploadRequestOptionPreCheckParam optionPreCheckParam = new com.aliyun.dingtalkstorage_1_0.models.InitMultipartFileUploadRequest.InitMultipartFileUploadRequestOptionPreCheckParam()
+                .setMd5("md5")
+                .setSize(512L)
+                .setParentId("897xxxxx")
+                .setName("测试文件.txt");
+        com.aliyun.dingtalkstorage_1_0.models.InitMultipartFileUploadRequest.InitMultipartFileUploadRequestOption option = new com.aliyun.dingtalkstorage_1_0.models.InitMultipartFileUploadRequest.InitMultipartFileUploadRequestOption()
+                .setStorageDriver("DINGTALK")
+                .setPreCheckParam(optionPreCheckParam)
+                .setPreferRegion("ZHANGJIAKOU");
+        com.aliyun.dingtalkstorage_1_0.models.InitMultipartFileUploadRequest initMultipartFileUploadRequest = new com.aliyun.dingtalkstorage_1_0.models.InitMultipartFileUploadRequest()
+                .setUnionId("chyxxxxx")
+                .setOption(option);
+        try {
+            client.initMultipartFileUploadWithOptions("568xxxxx", initMultipartFileUploadRequest, initMultipartFileUploadHeaders, new com.aliyun.teautil.models.RuntimeOptions());
+        } catch (TeaException err) {
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        } catch (Exception _err) {
+            TeaException err = new TeaException(_err.getMessage(), _err);
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        }        
+    }
+}</code></pre></div><input type="radio" name="check-figure-ikl-lrz-l7t" id="figure-ikl-lrz-l7t-python-tab" /><label for="figure-ikl-lrz-l7t-python-tab">Python</label><div class="codeblock-item"><pre id="codeblock-h6a-52w-llq" outputclass="language-python" code-type="xCode" data-tag="codeblock" class="pre codeblock language-python"><code># -*- coding: utf-8 -*-
+# This file is auto-generated, don't edit it. Thanks.
+import sys
+
+from typing import List
+
+from alibabacloud_dingtalk.storage_1_0.client import Client as dingtalkstorage_1_0Client
+from alibabacloud_tea_openapi import models as open_api_models
+from alibabacloud_dingtalk.storage_1_0 import models as dingtalkstorage__1__0_models
+from alibabacloud_tea_util import models as util_models
+from alibabacloud_tea_util.client import Client as UtilClient
+
+
+class Sample:
+    def __init__(self):
+        pass
+
+    @staticmethod
+    def create_client() -&gt; dingtalkstorage_1_0Client:
+        """
+        使用 Token 初始化账号Client
+        @return: Client
+        @throws Exception
+        """
+        config = open_api_models.Config()
+        config.protocol = 'https'
+        config.region_id = 'central'
+        return dingtalkstorage_1_0Client(config)
+
+    @staticmethod
+    def main(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        init_multipart_file_upload_headers = dingtalkstorage__1__0_models.InitMultipartFileUploadHeaders()
+        init_multipart_file_upload_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        option_pre_check_param = dingtalkstorage__1__0_models.InitMultipartFileUploadRequestOptionPreCheckParam(
+            md_5='md5',
+            size=512,
+            parent_id='897xxxxx',
+            name='测试文件.txt'
+        )
+        option = dingtalkstorage__1__0_models.InitMultipartFileUploadRequestOption(
+            storage_driver='DINGTALK',
+            pre_check_param=option_pre_check_param,
+            prefer_region='ZHANGJIAKOU'
+        )
+        init_multipart_file_upload_request = dingtalkstorage__1__0_models.InitMultipartFileUploadRequest(
+            union_id='chyxxxxx',
+            option=option
+        )
+        try:
+            client.init_multipart_file_upload_with_options('568xxxxx', init_multipart_file_upload_request, init_multipart_file_upload_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+    @staticmethod
+    async def main_async(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        init_multipart_file_upload_headers = dingtalkstorage__1__0_models.InitMultipartFileUploadHeaders()
+        init_multipart_file_upload_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        option_pre_check_param = dingtalkstorage__1__0_models.InitMultipartFileUploadRequestOptionPreCheckParam(
+            md_5='md5',
+            size=512,
+            parent_id='897xxxxx',
+            name='测试文件.txt'
+        )
+        option = dingtalkstorage__1__0_models.InitMultipartFileUploadRequestOption(
+            storage_driver='DINGTALK',
+            pre_check_param=option_pre_check_param,
+            prefer_region='ZHANGJIAKOU'
+        )
+        init_multipart_file_upload_request = dingtalkstorage__1__0_models.InitMultipartFileUploadRequest(
+            union_id='chyxxxxx',
+            option=option
+        )
+        try:
+            await client.init_multipart_file_upload_with_options_async('568xxxxx', init_multipart_file_upload_request, init_multipart_file_upload_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+
+if __name__ == '__main__':
+    Sample.main(sys.argv[1:])</code></pre></div><input type="radio" name="check-figure-ikl-lrz-l7t" id="figure-ikl-lrz-l7t-php-tab" /><label for="figure-ikl-lrz-l7t-php-tab">PHP</label><div class="codeblock-item"><pre id="codeblock-et9-o65-pf6" outputclass="language-php" code-type="xCode" data-tag="codeblock" class="pre codeblock language-php"><code>&lt;?php
+
+// This file is auto-generated, don't edit it. Thanks.
+namespace AlibabaCloud\SDK\Sample;
+
+use AlibabaCloud\SDK\Dingtalk\Vstorage_1_0\Dingtalk;
+use \Exception;
+use AlibabaCloud\Tea\Exception\TeaError;
+use AlibabaCloud\Tea\Utils\Utils;
+
+use Darabonba\OpenApi\Models\Config;
+use AlibabaCloud\SDK\Dingtalk\Vstorage_1_0\Models\InitMultipartFileUploadHeaders;
+use AlibabaCloud\SDK\Dingtalk\Vstorage_1_0\Models\InitMultipartFileUploadRequest\option\preCheckParam;
+use AlibabaCloud\SDK\Dingtalk\Vstorage_1_0\Models\InitMultipartFileUploadRequest\option;
+use AlibabaCloud\SDK\Dingtalk\Vstorage_1_0\Models\InitMultipartFileUploadRequest;
+use AlibabaCloud\Tea\Utils\Utils\RuntimeOptions;
+
+class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Dingtalk Client
+     */
+    public static function createClient(){
+        $config = new Config([]);
+        $config-&gt;protocol = "https";
+        $config-&gt;regionId = "central";
+        return new Dingtalk($config);
+    }
+
+    /**
+     * @param string[] $args
+     * @return void
+     */
+    public static function main($args){
+        $client = self::createClient();
+        $initMultipartFileUploadHeaders = new InitMultipartFileUploadHeaders([]);
+        $initMultipartFileUploadHeaders-&gt;xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        $optionPreCheckParam = new preCheckParam([
+            "md5" =&gt; "md5",
+            "size" =&gt; 512,
+            "parentId" =&gt; "897xxxxx",
+            "name" =&gt; "测试文件.txt"
+        ]);
+        $option = new option([
+            "storageDriver" =&gt; "DINGTALK",
+            "preCheckParam" =&gt; $optionPreCheckParam,
+            "preferRegion" =&gt; "ZHANGJIAKOU"
+        ]);
+        $initMultipartFileUploadRequest = new InitMultipartFileUploadRequest([
+            "unionId" =&gt; "chyxxxxx",
+            "option" =&gt; $option
+        ]);
+        try {
+            $client-&gt;initMultipartFileUploadWithOptions("568xxxxx", $initMultipartFileUploadRequest, $initMultipartFileUploadHeaders, new RuntimeOptions([]));
+        }
+        catch (Exception $err) {
+            if (!($err instanceof TeaError)) {
+                $err = new TeaError([], $err-&gt;getMessage(), $err-&gt;getCode(), $err);
+            }
+            if (!Utils::empty_($err-&gt;code) &amp;&amp; !Utils::empty_($err-&gt;message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+        }
+    }
+}
+$path = __DIR__ . \DIRECTORY_SEPARATOR . '..' . \DIRECTORY_SEPARATOR . 'vendor' . \DIRECTORY_SEPARATOR . 'autoload.php';
+if (file_exists($path)) {
+    require_once $path;
+}
+Sample::main(array_slice($argv, 1));</code></pre></div><input type="radio" name="check-figure-ikl-lrz-l7t" id="figure-ikl-lrz-l7t-go-tab" /><label for="figure-ikl-lrz-l7t-go-tab">Go</label><div class="codeblock-item"><pre id="codeblock-i8s-wkc-fpi" outputclass="language-go" code-type="xCode" data-tag="codeblock" class="pre codeblock language-go"><code>// This file is auto-generated, don't edit it. Thanks.
+package main
+
+import (
+  "os"
+  util  "github.com/alibabacloud-go/tea-utils/v2/service"
+  dingtalkstorage_1_0  "github.com/alibabacloud-go/dingtalk/storage_1_0"
+  openapi  "github.com/alibabacloud-go/darabonba-openapi/v2/client"
+  "github.com/alibabacloud-go/tea/tea"
+)
+
+
+/**
+ * 使用 Token 初始化账号Client
+ * @return Client
+ * @throws Exception
+ */
+func CreateClient () (_result *dingtalkstorage_1_0.Client, _err error) {
+  config := &amp;openapi.Config{}
+  config.Protocol = tea.String("https")
+  config.RegionId = tea.String("central")
+  _result = &amp;dingtalkstorage_1_0.Client{}
+  _result, _err = dingtalkstorage_1_0.NewClient(config)
+  return _result, _err
+}
+
+func _main (args []*string) (_err error) {
+  client, _err := CreateClient()
+  if _err != nil {
+    return _err
+  }
+
+  initMultipartFileUploadHeaders := &amp;dingtalkstorage_1_0.InitMultipartFileUploadHeaders{}
+  initMultipartFileUploadHeaders.XAcsDingtalkAccessToken = tea.String("&lt;your access token&gt;")
+  optionPreCheckParam := &amp;dingtalkstorage_1_0.InitMultipartFileUploadRequestOptionPreCheckParam{
+    Md5: tea.String("md5"),
+    Size: tea.Int64(512),
+    ParentId: tea.String("897xxxxx"),
+    Name: tea.String("测试文件.txt"),
+  }
+  option := &amp;dingtalkstorage_1_0.InitMultipartFileUploadRequestOption{
+    StorageDriver: tea.String("DINGTALK"),
+    PreCheckParam: optionPreCheckParam,
+    PreferRegion: tea.String("ZHANGJIAKOU"),
+  }
+  initMultipartFileUploadRequest := &amp;dingtalkstorage_1_0.InitMultipartFileUploadRequest{
+    UnionId: tea.String("chyxxxxx"),
+    Option: option,
+  }
+  tryErr := func()(_e error) {
+    defer func() {
+      if r := tea.Recover(recover()); r != nil {
+        _e = r
+      }
+    }()
+    _, _err = client.InitMultipartFileUploadWithOptions(tea.String("568xxxxx"), initMultipartFileUploadRequest, initMultipartFileUploadHeaders, &amp;util.RuntimeOptions{})
+    if _err != nil {
+      return _err
+    }
+
+    return nil
+  }()
+
+  if tryErr != nil {
+    var err = &amp;tea.SDKError{}
+    if _t, ok := tryErr.(*tea.SDKError); ok {
+      err = _t
+    } else {
+      err.Message = tea.String(tryErr.Error())
+    }
+    if !tea.BoolValue(util.Empty(err.Code)) &amp;&amp; !tea.BoolValue(util.Empty(err.Message)) {
+      // err 中含有 code 和 message 属性，可帮助开发定位问题
+    }
+
+  }
+  return _err
+}
+
+
+func main() {
+  err := _main(tea.StringSlice(os.Args[1:]))
+  if err != nil {
+    panic(err)
+  }
+}</code></pre></div><input type="radio" name="check-figure-ikl-lrz-l7t" id="figure-ikl-lrz-l7t-nodejs-tab" /><label for="figure-ikl-lrz-l7t-nodejs-tab">Node.js</label><div class="codeblock-item"><pre id="codeblock-ci2-bfy-c7b" outputclass="language-nodejs" code-type="xCode" data-tag="codeblock" class="pre codeblock language-nodejs"><code>// This file is auto-generated, don't edit it
+import Util, * as $Util from '@alicloud/tea-util';
+import dingtalkstorage_1_0, * as $dingtalkstorage_1_0 from '@alicloud/dingtalk/storage_1_0';
+import OpenApi, * as $OpenApi from '@alicloud/openapi-client';
+import * as $tea from '@alicloud/tea-typescript';
+
+
+export default class Client {
+
+  /**
+   * 使用 Token 初始化账号Client
+   * @return Client
+   * @throws Exception
+   */
+  static createClient(): dingtalkstorage_1_0 {
+    let config = new $OpenApi.Config({ });
+    config.protocol = "https";
+    config.regionId = "central";
+    return new dingtalkstorage_1_0(config);
+  }
+
+  static async main(args: string[]): Promise&lt;void&gt; {
+    let client = Client.createClient();
+    let initMultipartFileUploadHeaders = new $dingtalkstorage_1_0.InitMultipartFileUploadHeaders({ });
+    initMultipartFileUploadHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+    let optionPreCheckParam = new $dingtalkstorage_1_0.InitMultipartFileUploadRequestOptionPreCheckParam({
+      md5: "md5",
+      size: 512,
+      parentId: "897xxxxx",
+      name: "测试文件.txt",
+    });
+    let option = new $dingtalkstorage_1_0.InitMultipartFileUploadRequestOption({
+      storageDriver: "DINGTALK",
+      preCheckParam: optionPreCheckParam,
+      preferRegion: "ZHANGJIAKOU",
+    });
+    let initMultipartFileUploadRequest = new $dingtalkstorage_1_0.InitMultipartFileUploadRequest({
+      unionId: "chyxxxxx",
+      option: option,
+    });
+    try {
+      await client.initMultipartFileUploadWithOptions("568xxxxx", initMultipartFileUploadRequest, initMultipartFileUploadHeaders, new $Util.RuntimeOptions({ }));
+    } catch (err) {
+      if (!Util.empty(err.code) &amp;&amp; !Util.empty(err.message)) {
+        // err 中含有 code 和 message 属性，可帮助开发定位问题
+      }
+
+    }    
+  }
+
+}
+
+Client.main(process.argv.slice(2));</code></pre></div><input type="radio" name="check-figure-ikl-lrz-l7t" id="figure-ikl-lrz-l7t-csharp-tab" /><label for="figure-ikl-lrz-l7t-csharp-tab">C#</label><div class="codeblock-item"><pre id="codeblock-6hb-atm-run" outputclass="language-csharp" code-type="xCode" data-tag="codeblock" class="pre codeblock language-csharp"><code>// This file is auto-generated, don't edit it. Thanks.
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
+
+using Tea;
+using Tea.Utils;
+
+
+namespace AlibabaCloud.SDK.Sample
+{
+    public class Sample 
+    {
+
+        /**
+         * 使用 Token 初始化账号Client
+         * @return Client
+         * @throws Exception
+         */
+        public static AlibabaCloud.SDK.Dingtalkstorage_1_0.Client CreateClient()
+        {
+            AlibabaCloud.OpenApiClient.Models.Config config = new AlibabaCloud.OpenApiClient.Models.Config();
+            config.Protocol = "https";
+            config.RegionId = "central";
+            return new AlibabaCloud.SDK.Dingtalkstorage_1_0.Client(config);
+        }
+
+        public static void Main(string[] args)
+        {
+            AlibabaCloud.SDK.Dingtalkstorage_1_0.Client client = CreateClient();
+            AlibabaCloud.SDK.Dingtalkstorage_1_0.Models.InitMultipartFileUploadHeaders initMultipartFileUploadHeaders = new AlibabaCloud.SDK.Dingtalkstorage_1_0.Models.InitMultipartFileUploadHeaders();
+            initMultipartFileUploadHeaders.XAcsDingtalkAccessToken = "&lt;your access token&gt;";
+            AlibabaCloud.SDK.Dingtalkstorage_1_0.Models.InitMultipartFileUploadRequest.InitMultipartFileUploadRequestOption.InitMultipartFileUploadRequestOptionPreCheckParam optionPreCheckParam = new AlibabaCloud.SDK.Dingtalkstorage_1_0.Models.InitMultipartFileUploadRequest.InitMultipartFileUploadRequestOption.InitMultipartFileUploadRequestOptionPreCheckParam
+            {
+                Md5 = "md5",
+                Size = 512,
+                ParentId = "897xxxxx",
+                Name = "测试文件.txt",
+            };
+            AlibabaCloud.SDK.Dingtalkstorage_1_0.Models.InitMultipartFileUploadRequest.InitMultipartFileUploadRequestOption option = new AlibabaCloud.SDK.Dingtalkstorage_1_0.Models.InitMultipartFileUploadRequest.InitMultipartFileUploadRequestOption
+            {
+                StorageDriver = "DINGTALK",
+                PreCheckParam = optionPreCheckParam,
+                PreferRegion = "ZHANGJIAKOU",
+            };
+            AlibabaCloud.SDK.Dingtalkstorage_1_0.Models.InitMultipartFileUploadRequest initMultipartFileUploadRequest = new AlibabaCloud.SDK.Dingtalkstorage_1_0.Models.InitMultipartFileUploadRequest
+            {
+                UnionId = "chyxxxxx",
+                Option = option,
+            };
+            try
+            {
+                client.InitMultipartFileUploadWithOptions("568xxxxx", initMultipartFileUploadRequest, initMultipartFileUploadHeaders, new AlibabaCloud.TeaUtil.Models.RuntimeOptions());
+            }
+            catch (TeaException err)
+            {
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+            catch (Exception _err)
+            {
+                TeaException err = new TeaException(new Dictionary&lt;string, object&gt;
+                {
+                    { "message", _err.Message }
+                });
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+        }
+
+
+    }
+}</code></pre></div></div></section></section><section id="section-response-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-response-1" data-tag="h2" class="h2">响应</h2><section id="section-response-parameter" class="section"><h3 data-tag="h3" id="h2-7lp-kxn-ccn" class="h3 title">响应体</h3><table id="f6934fe137v4d" tablewidth="710" tablecolswidth="213 142 355" autofit="false" class="table"><colgroup colwidth="0.9*" style="width:30.00%"></colgroup><colgroup colwidth="0.6*" style="width:20.00%"></colgroup><colgroup colwidth="1.5*" style="width:50.00%"></colgroup><tbody class="tbody"><tr id="f6934fe23772b"><td id="f6934fe337g0m" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="f6934fe437btw">名称</p></td><td id="f6934fe537nm5" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="f6934fe637pl6">类型</p></td><td id="f6934fe737n3d" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="f6934fe837swx">描述</p></td></tr><tr outputclass="row row-level-1" id="f6934fe937xvs" class="row row-level-1"><td id="f6934fea37ojv" rowspan="1" colspan="1"><p id="f6934feb373f3">uploadKey</p></td><td id="f6934fec37iod" rowspan="1" colspan="1"><p id="f6934fed37zu1">String</p></td><td id="f6934fee37156" rowspan="1" colspan="1"><p id="f6934fef37evj">上传唯一标识。</p></td></tr><tr outputclass="row row-level-2" id="f6934ff037jfd" class="row row-level-2"><td id="f6934ff137zie" rowspan="1" colspan="1"><p id="f6934ff2375z8">storageDriver</p></td><td id="f6934ff337dgg" rowspan="1" colspan="1"><p id="f6934ff4374cm">String</p></td><td id="f6934ff5379fb" rowspan="1" colspan="1"><p id="f6934ff637lxy">文件存储类型。</p><ul id="f6934ff73769t"><li id="f6934ff8372s2"><p id="f6934ff937yby"><b>DINGTALK</b>：钉钉统一存储驱动</p></li><li id="f6934ffa37vl3"><p id="f6934ffb37g3a"><b>ALIDOC</b>：钉钉文档存储驱动</p></li><li id="f6934ffc378vh"><p id="f6934ffd3736i"><b>SHANJI</b>：闪记存储驱动</p></li><li id="f6934ffe37323"><p id="f6934fff37td8"><b>UNKNOWN</b>：未知驱动</p></li></ul></td></tr></tbody></table></section><section id="section-response-body-example" class="section"><h3 id="h3-response-body-example" data-tag="h3" class="h3">响应体示例</h3><pre id="f624af9037ttp" outputclass="language-json" code-type="xCode" data-tag="codeblock" class="pre codeblock language-json"><code>HTTP/1.1 200 OK
+Content-Type:application/json
+
+{
+  "uploadKey" : "xhy89xxxxx",
+  "storageDriver" : "DINGTALK"
+}</code></pre></section><section id="section-error-code-1" class="section"><h3 id="h3-error-code-1" data-tag="h3" class="h3">错误码</h3><p data-tag="p" id="p-error-code-global-guide" class="p">若调用该接口报错，可根据错误信息在<a href="https://open.dingtalk.com/document/development/server-api-error-codes-1" id="a-error-code-global-guide">全局错误码</a>文档中查找解决方案。</p><table id="f6935002373pr" tablewidth="709" tablecolswidth="142 177 177 213" autofit="false" class="table"><colgroup colwidth="0.8*" style="width:20.03%"></colgroup><colgroup colwidth="1*" style="width:24.96%"></colgroup><colgroup colwidth="1*" style="width:24.96%"></colgroup><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><tbody class="tbody"><tr id="f693500337b5e"><td id="f693500437rdm" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="f693500537vl1">HttpCode</p></td><td id="f693500637lx4" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="f6935007375kl">错误码</p></td><td id="f693500837qbg" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="f693500937iz2">错误信息</p></td><td id="f693500a374g0" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="f693500b37lpg">说明</p></td></tr><tr id="f693500c37u3u"><td id="f69376f037zpi" rowspan="1" colspan="1"><p id="f69376f137ylr">400</p></td><td id="f69376f237mnm" rowspan="1" colspan="1"><p id="f69376f33767k">paramError</p></td><td id="f69376f437and" rowspan="1" colspan="1"><p id="f69376f537l00">%s</p></td><td id="f69376f637rzb" rowspan="1" colspan="1"><p id="f69376f737k6x">参数错误</p></td></tr><tr id="f69376f837ifq"><td id="f69376f937n35" rowspan="1" colspan="1"><p id="f69376fa37tp2">400</p></td><td id="f69376fb373gx" rowspan="1" colspan="1"><p id="f69376fc37ie3">paramError.multipart</p></td><td id="f69376fd37yto" rowspan="1" colspan="1"><p id="f69376fe37gfr">%s</p></td><td id="f69376ff37hni" rowspan="1" colspan="1"><p id="f69377003742n">参数错误-multipart</p></td></tr><tr id="f6937701378cy"><td id="f693770237pv9" rowspan="1" colspan="1"><p id="f693770337n05">400</p></td><td id="f693770437y3u" rowspan="1" colspan="1"><p id="f693770537sbv">paramError.protocol</p></td><td id="f6937706379zz" rowspan="1" colspan="1"><p id="f6937707371nu">%s</p></td><td id="f693770837l9r" rowspan="1" colspan="1"><p id="f693770937uhi">参数错误-protocol</p></td></tr><tr id="f693770a37zn9"><td id="f693770b3728u" rowspan="1" colspan="1"><p id="f693770c37g66">400</p></td><td id="f693770d3727k" rowspan="1" colspan="1"><p id="f693770e37040">paramError.spaceId</p></td><td id="f693770f37w9l" rowspan="1" colspan="1"><p id="f693771037019">%s</p></td><td id="f693771137gom" rowspan="1" colspan="1"><p id="f6937712374mw">参数错误-spaceId</p></td></tr><tr id="f693771337haz"><td id="f693771437xtx" rowspan="1" colspan="1"><p id="f693771537qcs">400</p></td><td id="f693771637kfj" rowspan="1" colspan="1"><p id="f693771737q08">paramError.storageDriver</p></td><td id="f693771837qlg" rowspan="1" colspan="1"><p id="f693771937dek">%s</p></td><td id="f693771a37p1j" rowspan="1" colspan="1"><p id="f693771b375r1">参数错误-storageDriver</p></td></tr><tr id="f693771c37eot"><td id="f693771d3719j" rowspan="1" colspan="1"><p id="f693771e37q8e">400</p></td><td id="f693771f37d48" rowspan="1" colspan="1"><p id="f69377203792j">spaceQuotaInsufficient</p></td><td id="f6937721378hj" rowspan="1" colspan="1"><p id="f693772237nyc">%s</p></td><td id="f6937723372bl" rowspan="1" colspan="1"><p id="f693772437gd5">空间容量不足</p></td></tr><tr id="f693772537w7s"><td id="f693772637080" rowspan="1" colspan="1"><p id="f6939e0037py5">400</p></td><td id="f6939e013773h" rowspan="1" colspan="1"><p id="f6939e0237bku">sceneQuotaInsufficient</p></td><td id="f6939e0337bi2" rowspan="1" colspan="1"><p id="f6939e043717l">%s</p></td><td id="f6939e0537565" rowspan="1" colspan="1"><p id="f6939e0637e4n">场景容量不足</p></td></tr><tr id="f6939e07377fm"><td id="f6939e0837xmk" rowspan="1" colspan="1"><p id="f6939e0937bd4">400</p></td><td id="f6939e0a378up" rowspan="1" colspan="1"><p id="f6939e0b37f39">appQuotaInsufficient</p></td><td id="f6939e0c37v2m" rowspan="1" colspan="1"><p id="f6939e0d37604">%s</p></td><td id="f6939e0e37vk1" rowspan="1" colspan="1"><p id="f6939e0f37233">应用容量不足</p></td></tr><tr id="f6939e1037irw"><td id="f6939e1137xl1" rowspan="1" colspan="1"><p id="f6939e12372qz">400</p></td><td id="f6939e1337te0" rowspan="1" colspan="1"><p id="f6939e14376lt">orgQuotaInsufficient</p></td><td id="f6939e1537ruv" rowspan="1" colspan="1"><p id="f6939e1637mgg">%s</p></td><td id="f6939e1737zcs" rowspan="1" colspan="1"><p id="f6939e1837k79">企业容量不足</p></td></tr><tr id="f6939e1937who"><td id="f6939e1a3781y" rowspan="1" colspan="1"><p id="f6939e1b3720b">400</p></td><td id="f6939e1c371ej" rowspan="1" colspan="1"><p id="f6939e1d375ua">dentryUploadForbidden</p></td><td id="f6939e1e37eed" rowspan="1" colspan="1"><p id="f6939e1f37x8q">%s</p></td><td id="f6939e2037ftm" rowspan="1" colspan="1"><p id="f6939e2137e4y">禁止上传</p></td></tr><tr id="f6939e2237ajm"><td id="f6939e2337j49" rowspan="1" colspan="1"><p id="f6939e2437njn">400</p></td><td id="f6939e2537mt6" rowspan="1" colspan="1"><p id="f6939e2637vxl">dentryUploadProtocolNotSupport</p></td><td id="f6939e273773v" rowspan="1" colspan="1"><p id="f6939e28376mv">%s</p></td><td id="f6939e2937for" rowspan="1" colspan="1"><p id="f6939e2a37ncs">不支持的上传协议</p></td></tr><tr id="f6939e2b373en"><td id="f6939e2c37rkt" rowspan="1" colspan="1"><p id="f6939e2d37376">403</p></td><td id="f6939e2e373me" rowspan="1" colspan="1"><p id="f6939e2f37q77">permissionDenied</p></td><td id="f6939e3037zd3" rowspan="1" colspan="1"><p id="f6939e31370vb">%s</p></td><td id="f6939e32372w4" rowspan="1" colspan="1"><p id="f6939e33375nv">用户缺少上传文件的权限</p></td></tr><tr id="f6939e3437agw"><td id="f693c510379zb" rowspan="1" colspan="1"><p id="f693c511377wh">404</p></td><td id="f693c51237sw5" rowspan="1" colspan="1"><p id="f693c51337cps">spaceNotExist</p></td><td id="f693c514376ht" rowspan="1" colspan="1"><p id="f693c51537p7l">%s</p></td><td id="f693c51637vjg" rowspan="1" colspan="1"><p id="f693c5173711q">空间不存在</p></td></tr><tr id="f693c51837xsi"><td id="f693c51937szq" rowspan="1" colspan="1"><p id="f693c51a37gr2">500</p></td><td id="f693c51b37o76" rowspan="1" colspan="1"><p id="f693c51c379bw">systemError</p></td><td id="f693c51d37wxw" rowspan="1" colspan="1"><p id="f693c51e37ssa">%s</p></td><td id="f693c51f37d17" rowspan="1" colspan="1"><p id="f693c52037nkf">系统错误</p></td></tr><tr id="f693c52137uk1"><td id="f693c52237adp" rowspan="1" colspan="1"><p id="f693c52337yfq">500</p></td><td id="f693c52437kuf" rowspan="1" colspan="1"><p id="f693c52537a3y">unknownError</p></td><td id="f693c52637dop" rowspan="1" colspan="1"><p id="f693c52737nk4">Unknown Error</p></td><td id="f693c528374bo" rowspan="1" colspan="1"><p id="f693c52937qny">未知错误</p></td></tr><tr id="f693c52a37yh4"><td id="f693c52b37ssc" rowspan="1" colspan="1"><p id="f693c52c37og6">503</p></td><td id="f693c52d37z66" rowspan="1" colspan="1"><p id="f693c52e37krd">operationTimeout</p></td><td id="f693c52f37ubw" rowspan="1" colspan="1"><p id="f693c53037lpg">%s</p></td><td id="f693c531377xx" rowspan="1" colspan="1"><p id="f693c532374jv">请求超时</p></td></tr></tbody></table></section></section></div></main></body></html>

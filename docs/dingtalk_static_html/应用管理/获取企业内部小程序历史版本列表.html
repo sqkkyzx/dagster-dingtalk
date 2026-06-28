@@ -1,0 +1,607 @@
+<!DOCTYPE html><html lang="zh-CN"><head>
+    <meta charset="utf8" / />
+    <title>获取企业内部小程序历史版本列表</title>
+<meta name="gmtModify" content="2026-01-22 21:32:20" / /><meta name="gmtModify" content="2026-06-04 11:22:18" / /></head>
+<body data-tag="topic" id="doc-api-dingtalk-PageInnerAppHistoryVersion" class="topic">
+    <main id="doc-api-dingtalk-PageInnerAppHistoryVersion">
+        <h1 data-tag="title" id="h1-lsh-zyh-4ws" class="title">获取企业内部小程序历史版本列表</h1>
+        <p data-tag="shortdesc" class="shortdesc">通过本接口可获取企业内部小程序的历史版本列表，支持分页查询，便于进行版本追溯、回滚和分析。</p>
+        <div data-tag="conbody" outputclass="icms-api-reference" class="icms-api-reference conbody"><section id="section-request-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-request-1" data-tag="h2" class="h2">请求</h2><section id="section-request-basic-info" class="section"><h3 id="heading-request-basic-info" data-tag="h3" class="h3">基本信息</h3><table tablewidth="648" tablecolswidth="216 432" autofit="false" class="table"><colgroup colwidth="1*" style="width:33.33%"></colgroup><colgroup colwidth="2*" style="width:66.67%"></colgroup><tbody class="tbody"><tr><td rowspan="1" style="background-color:#e5e5e5" colspan="1"><p>字段</p></td><td rowspan="1" style="background-color:#e5e5e5" colspan="1"><p>值</p></td></tr><tr><td rowspan="1" colspan="1"><p>HTTP URL</p></td><td rowspan="1" colspan="1"><p>https://api.dingtalk.com/v1.0/microApp/innerMiniApps/{agentId}/historyVersions</p></td></tr><tr><td rowspan="1" colspan="1"><p>HTTP Method</p></td><td rowspan="1" colspan="1"><p>GET</p></td></tr><tr><td rowspan="1" colspan="1"><p>支持的应用类型</p></td><td rowspan="1" colspan="1"><p><span data-tag="ph" id="ph-request-basic-app-type-apptype-0" class="ph ph-app-type" data-ph-raw-text="appType-企业内部应用">appType-企业内部应用</span></p></td></tr><tr><td rowspan="1" colspan="1"><p>权限要求</p></td><td rowspan="1" colspan="1"><p><span data-tag="ph" id="ph-request-basic-permission-permission-qyapi-get-microapp-list-0" class="ph-permission ph" data-ph-raw-text="permission-qyapi_get_microapp_list-企业已安装的应用列表查询权限" data-permission-id="permission-qyapi_get_microapp_list" data-permission-code="qyapi_get_microapp_list" data-permission-detail-api="/document/api/permission/detail" data-permission-query-param="code">permission-qyapi_get_microapp_list-企业已安装的应用列表查询权限</span></p></td></tr></tbody></table></section><section id="section-request-header-parameter" class="section">
+                    <h3 data-tag="h3" id="h2-ihg-tkb-zzj" class="h3 title">请求头</h3>
+                    <table class="table">
+                        <colgroup colnum="1" colname="col1" colwidth="3*" style="width:30%"></colgroup>
+                        <colgroup colnum="2" colname="col2" colwidth="1.5*" style="width:15%"></colgroup>
+                        <colgroup colnum="3" colname="col3" colwidth="1.5*" style="width:15%"></colgroup>
+                        <colgroup colnum="4" colname="col4" colwidth="4*" style="width:40%"></colgroup>
+                        <thead class="thead">
+                        <tr>
+                            <th><p>名称</p></th>
+                            <th><p>类型</p></th>
+                            <th><p>是否必填</p></th>
+                            <th><p>描述</p></th>
+                        </tr>
+                        </thead>
+                        <tbody class="tbody">
+                            <tr>
+                                <td><p>x-acs-dingtalk-access-token</p></td>
+                                <td><p>String</p></td>
+                                <td><p>是</p></td>
+                                <td><p>调用该接口的访问凭证，通过调用<a href="https://open.dingtalk.com/document/development/obtain-the-access-token-of-an-internal-app">获取企业内部应用的accessToken</a>接口获取。</p>
+</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section><section id="section-request-path-parameter" class="section">
+        <h3 data-tag="h3" id="h2-8hf-xpk-xqr" class="h3 title">路径参数</h3>
+        <table class="table">
+            <colgroup colnum="1" colname="col1" colwidth="3*" style="width:30%"></colgroup>
+            <colgroup colnum="2" colname="col2" colwidth="1.5*" style="width:15%"></colgroup>
+            <colgroup colnum="3" colname="col3" colwidth="1.5*" style="width:15%"></colgroup>
+            <colgroup colnum="4" colname="col4" colwidth="4*" style="width:40%"></colgroup>
+            <thead class="thead">
+            <tr>
+                <th><p>名称</p></th>
+                <th><p>类型</p></th>
+                <th><p>是否必填</p></th>
+                <th><p>描述</p></th>
+            </tr>
+            </thead>
+            <tbody class="tbody">
+                    <tr>
+                        <td><p>agentId</p></td>
+                        <td><p>Long</p></td>
+                        <td><p>是</p></td>
+                        <td><p>应用AgentId。</p>
+<p><img src="https://help-static-aliyun-doc.aliyuncs.com/file-manage-files/zh-CN/20230222/quqd/agentId.png" alt="" class="image break" / /></p>
+</td>
+                    </tr>
+            </tbody>
+        </table>
+    </section><section id="section-request-query-parameter" class="section">
+        <h3 data-tag="h3" id="h2-hgl-txi-rtb" class="h3 title">查询参数</h3>
+        <table class="table">
+            <colgroup colnum="1" colname="col1" colwidth="3*" style="width:30%"></colgroup>
+            <colgroup colnum="2" colname="col2" colwidth="1.5*" style="width:15%"></colgroup>
+            <colgroup colnum="3" colname="col3" colwidth="1.5*" style="width:15%"></colgroup>
+            <colgroup colnum="4" colname="col4" colwidth="4*" style="width:40%"></colgroup>
+            <thead class="thead">
+            <tr>
+                <th><p>名称</p></th>
+                <th><p>类型</p></th>
+                <th><p>是否必填</p></th>
+                <th><p>描述</p></th>
+            </tr>
+            </thead>
+            <tbody class="tbody">
+                    <tr>
+                        <td><p>pageNumber</p></td>
+                        <td><p>Integer</p></td>
+                        <td><p>是</p></td>
+                        <td><p>当前页。</p>
+</td>
+                    </tr>
+                    <tr>
+                        <td><p>pageSize</p></td>
+                        <td><p>Integer</p></td>
+                        <td><p>是</p></td>
+                        <td><p>本次读取的最大数据记录数量。</p>
+</td>
+                    </tr>
+            </tbody>
+        </table>
+    </section><section id="section-request-body-example" class="section"><h3 id="h3-request-body-example" data-tag="h3" class="h3">请求示例</h3><div id="figure-lq6-xvf-y07" outputclass="tabbed-codeblock" data-tag="fig" class="tabbed-codeblock-box"><div class="tab-box"></div><input type="radio" name="check-figure-lq6-xvf-y07" id="figure-lq6-xvf-y07-HTTP-tab" checked="checked" /><label for="figure-lq6-xvf-y07-HTTP-tab">HTTP</label><div class="codeblock-item"><pre id="codeblock-kcn-6rw-ko4" outputclass="language-HTTP" data-tag="codeblock" code-type="xCode" class="pre codeblock language-HTTP"><code>GET /v1.0/microApp/innerMiniApps/1/historyVersions?pageNumber=1&amp;pageSize=1 HTTP/1.1
+Host:api.dingtalk.com
+x-acs-dingtalk-access-token:a582bed908a53b819163a7ef8*****ed
+Content-Type:application/json</code></pre></div><input type="radio" name="check-figure-lq6-xvf-y07" id="figure-lq6-xvf-y07-java-tab" /><label for="figure-lq6-xvf-y07-java-tab">Java</label><div class="codeblock-item"><pre id="codeblock-ial-4kj-psq" outputclass="language-java" data-tag="codeblock" code-type="xCode" class="pre codeblock language-java"><code>package com.aliyun.sample;
+
+import com.aliyun.tea.*;
+
+public class Sample {
+
+    /**
+     * &lt;b&gt;description&lt;/b&gt; :
+     * &lt;p&gt;使用 Token 初始化账号Client&lt;/p&gt;
+     * @return Client
+     * 
+     * @throws Exception
+     */
+    public static com.aliyun.dingtalkmicro_app_1_0.Client createClient() throws Exception {
+        com.aliyun.teaopenapi.models.Config config = new com.aliyun.teaopenapi.models.Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        return new com.aliyun.dingtalkmicro_app_1_0.Client(config);
+    }
+
+    public static void main(String[] args_) throws Exception {
+        
+        com.aliyun.dingtalkmicro_app_1_0.Client client = Sample.createClient();
+        com.aliyun.dingtalkmicro_app_1_0.models.PageInnerAppHistoryVersionHeaders pageInnerAppHistoryVersionHeaders = new com.aliyun.dingtalkmicro_app_1_0.models.PageInnerAppHistoryVersionHeaders();
+        pageInnerAppHistoryVersionHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        com.aliyun.dingtalkmicro_app_1_0.models.PageInnerAppHistoryVersionRequest pageInnerAppHistoryVersionRequest = new com.aliyun.dingtalkmicro_app_1_0.models.PageInnerAppHistoryVersionRequest()
+                .setPageNumber(1)
+                .setPageSize(1);
+        try {
+            client.pageInnerAppHistoryVersionWithOptions("1", pageInnerAppHistoryVersionRequest, pageInnerAppHistoryVersionHeaders, new com.aliyun.teautil.models.RuntimeOptions());
+        } catch (TeaException err) {
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        } catch (Exception _err) {
+            TeaException err = new TeaException(_err.getMessage(), _err);
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        }        
+    }
+}</code></pre></div><input type="radio" name="check-figure-lq6-xvf-y07" id="figure-lq6-xvf-y07-python-tab" /><label for="figure-lq6-xvf-y07-python-tab">Python</label><div class="codeblock-item"><pre id="codeblock-1qh-pmg-qpa" outputclass="language-python" data-tag="codeblock" code-type="xCode" class="pre codeblock language-python"><code># -*- coding: utf-8 -*-
+# This file is auto-generated, don't edit it. Thanks.
+import os
+import sys
+import json
+
+from typing import List
+
+from alibabacloud_dingtalk.micro_app_1_0.client import Client as dingtalkmicroApp_1_0Client
+from alibabacloud_tea_openapi import models as open_api_models
+from alibabacloud_dingtalk.micro_app_1_0 import models as dingtalkmicro_app__1__0_models
+from alibabacloud_tea_util import models as util_models
+from alibabacloud_tea_util.client import Client as UtilClient
+
+
+class Sample:
+    def __init__(self):
+        pass
+
+    @staticmethod
+    def create_client() -&gt; dingtalkmicroApp_1_0Client:
+        """
+        使用 Token 初始化账号Client
+        @return: Client
+        @throws Exception
+        """
+        config = open_api_models.Config()
+        config.protocol = 'https'
+        config.region_id = 'central'
+        return dingtalkmicroApp_1_0Client(config)
+
+    @staticmethod
+    def main(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        page_inner_app_history_version_headers = dingtalkmicro_app__1__0_models.PageInnerAppHistoryVersionHeaders()
+        page_inner_app_history_version_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        page_inner_app_history_version_request = dingtalkmicro_app__1__0_models.PageInnerAppHistoryVersionRequest(
+            page_number=1,
+            page_size=1
+        )
+        try:
+            client.page_inner_app_history_version_with_options('1', page_inner_app_history_version_request, page_inner_app_history_version_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+    @staticmethod
+    async def main_async(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        page_inner_app_history_version_headers = dingtalkmicro_app__1__0_models.PageInnerAppHistoryVersionHeaders()
+        page_inner_app_history_version_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        page_inner_app_history_version_request = dingtalkmicro_app__1__0_models.PageInnerAppHistoryVersionRequest(
+            page_number=1,
+            page_size=1
+        )
+        try:
+            await client.page_inner_app_history_version_with_options_async('1', page_inner_app_history_version_request, page_inner_app_history_version_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+
+if __name__ == '__main__':
+    Sample.main(sys.argv[1:])</code></pre></div><input type="radio" name="check-figure-lq6-xvf-y07" id="figure-lq6-xvf-y07-php-tab" /><label for="figure-lq6-xvf-y07-php-tab">PHP</label><div class="codeblock-item"><pre id="codeblock-jwn-mwi-naq" outputclass="language-php" data-tag="codeblock" code-type="xCode" class="pre codeblock language-php"><code>&lt;?php
+
+// This file is auto-generated, don't edit it. Thanks.
+namespace AlibabaCloud\SDK\Sample;
+
+use AlibabaCloud\SDK\Dingtalk\Vmicro_app_1_0\Dingtalk;
+use \Exception;
+use AlibabaCloud\Tea\Exception\TeaError;
+use AlibabaCloud\Tea\Utils\Utils;
+
+use Darabonba\OpenApi\Models\Config;
+use AlibabaCloud\SDK\Dingtalk\Vmicro_app_1_0\Models\PageInnerAppHistoryVersionHeaders;
+use AlibabaCloud\SDK\Dingtalk\Vmicro_app_1_0\Models\PageInnerAppHistoryVersionRequest;
+use AlibabaCloud\Tea\Utils\Utils\RuntimeOptions;
+
+class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Dingtalk Client
+     */
+    public static function createClient(){
+        $config = new Config([]);
+        $config-&gt;protocol = "https";
+        $config-&gt;regionId = "central";
+        return new Dingtalk($config);
+    }
+
+    /**
+     * @param string[] $args
+     * @return void
+     */
+    public static function main($args){
+        $client = self::createClient();
+        $pageInnerAppHistoryVersionHeaders = new PageInnerAppHistoryVersionHeaders([]);
+        $pageInnerAppHistoryVersionHeaders-&gt;xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        $pageInnerAppHistoryVersionRequest = new PageInnerAppHistoryVersionRequest([
+            "pageNumber" =&gt; 1,
+            "pageSize" =&gt; 1
+        ]);
+        try {
+            $client-&gt;pageInnerAppHistoryVersionWithOptions("1", $pageInnerAppHistoryVersionRequest, $pageInnerAppHistoryVersionHeaders, new RuntimeOptions([]));
+        }
+        catch (Exception $err) {
+            if (!($err instanceof TeaError)) {
+                $err = new TeaError([], $err-&gt;getMessage(), $err-&gt;getCode(), $err);
+            }
+            if (!Utils::empty_($err-&gt;code) &amp;&amp; !Utils::empty_($err-&gt;message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+        }
+    }
+}
+$path = __DIR__ . \DIRECTORY_SEPARATOR . '..' . \DIRECTORY_SEPARATOR . 'vendor' . \DIRECTORY_SEPARATOR . 'autoload.php';
+if (file_exists($path)) {
+    require_once $path;
+}
+Sample::main(array_slice($argv, 1));</code></pre></div><input type="radio" name="check-figure-lq6-xvf-y07" id="figure-lq6-xvf-y07-go-tab" /><label for="figure-lq6-xvf-y07-go-tab">Go</label><div class="codeblock-item"><pre id="codeblock-hkk-ohg-jcl" outputclass="language-go" data-tag="codeblock" code-type="xCode" class="pre codeblock language-go"><code>package main
+
+import (
+  "encoding/json"
+  "strings"
+  "fmt"
+  "os"
+  util  "github.com/alibabacloud-go/tea-utils/v2/service"
+  dingtalkmicroapp_1_0  "github.com/alibabacloud-go/dingtalk/microApp_1_0"
+  openapi  "github.com/alibabacloud-go/darabonba-openapi/v2/client"
+  "github.com/alibabacloud-go/tea/tea"
+)
+
+
+// Description:
+// 
+// 使用 Token 初始化账号Client
+// 
+// @return Client
+// 
+// @throws Exception
+func CreateClient () (_result *dingtalkmicroapp_1_0.Client, _err error) {
+  config := &amp;openapi.Config{}
+  config.Protocol = tea.String("https")
+  config.RegionId = tea.String("central")
+  _result = &amp;dingtalkmicroapp_1_0.Client{}
+  _result, _err = dingtalkmicroapp_1_0.NewClient(config)
+  return _result, _err
+}
+
+func _main (args []*string) (_err error) {
+  client, _err := CreateClient()
+  if _err != nil {
+    return _err
+  }
+
+  pageInnerAppHistoryVersionHeaders := &amp;dingtalkmicroapp_1_0.PageInnerAppHistoryVersionHeaders{}
+  pageInnerAppHistoryVersionHeaders.XAcsDingtalkAccessToken = tea.String("&lt;your access token&gt;")
+  pageInnerAppHistoryVersionRequest := &amp;dingtalkmicroapp_1_0.PageInnerAppHistoryVersionRequest{
+    PageNumber: tea.Int32(1),
+    PageSize: tea.Int32(1),
+  }
+  tryErr := func()(_e error) {
+    defer func() {
+      if r := tea.Recover(recover()); r != nil {
+        _e = r
+      }
+    }()
+    _, _err = client.PageInnerAppHistoryVersionWithOptions(tea.String("1"), pageInnerAppHistoryVersionRequest, pageInnerAppHistoryVersionHeaders, &amp;util.RuntimeOptions{})
+    if _err != nil {
+      return _err
+    }
+
+    return nil
+  }()
+
+  if tryErr != nil {
+    var err = &amp;tea.SDKError{}
+    if _t, ok := tryErr.(*tea.SDKError); ok {
+      err = _t
+    } else {
+      err.Message = tea.String(tryErr.Error())
+    }
+    if !tea.BoolValue(util.Empty(err.Code)) &amp;&amp; !tea.BoolValue(util.Empty(err.Message)) {
+      // err 中含有 code 和 message 属性，可帮助开发定位问题
+    }
+
+  }
+  return _err
+}
+
+
+func main() {
+  err := _main(tea.StringSlice(os.Args[1:]))
+  if err != nil {
+    panic(err)
+  }
+}</code></pre></div><input type="radio" name="check-figure-lq6-xvf-y07" id="figure-lq6-xvf-y07-nodejs-tab" /><label for="figure-lq6-xvf-y07-nodejs-tab">Node.js</label><div class="codeblock-item"><pre id="codeblock-sl9-13o-usl" outputclass="language-nodejs" data-tag="codeblock" code-type="xCode" class="pre codeblock language-nodejs"><code>'use strict';
+// This file is auto-generated, don't edit it
+const Util = require('@alicloud/tea-util');
+const dingtalkmicroApp_1_0 = require('@alicloud/dingtalk/microApp_1_0');
+const OpenApi = require('@alicloud/openapi-client');
+const Tea = require('@alicloud/tea-typescript');
+
+class Client {
+
+  /**
+   * 使用 Token 初始化账号Client
+   * @return Client
+   * @throws Exception
+   */
+  static createClient() {
+    let config = new OpenApi.Config({ });
+    config.protocol = 'https';
+    config.regionId = 'central';
+    return new dingtalkmicroApp_1_0.default(config);
+  }
+
+  static async main(args) {
+    let client = Client.createClient();
+    let pageInnerAppHistoryVersionHeaders = new dingtalkmicroApp_1_0.PageInnerAppHistoryVersionHeaders({ });
+    pageInnerAppHistoryVersionHeaders.xAcsDingtalkAccessToken = '&lt;your access token&gt;';
+    let pageInnerAppHistoryVersionRequest = new dingtalkmicroApp_1_0.PageInnerAppHistoryVersionRequest({
+      pageNumber: 1,
+      pageSize: 1,
+    });
+    try {
+      await client.pageInnerAppHistoryVersionWithOptions('1', pageInnerAppHistoryVersionRequest, pageInnerAppHistoryVersionHeaders, new Util.RuntimeOptions({ }));
+    } catch (err) {
+      if (!Util.default.empty(err.code) &amp;&amp; !Util.default.empty(err.message)) {
+        // err 中含有 code 和 message 属性，可帮助开发定位问题
+      }
+
+    }    
+  }
+
+}
+
+exports.Client = Client;
+Client.main(process.argv.slice(2));</code></pre></div><input type="radio" name="check-figure-lq6-xvf-y07" id="figure-lq6-xvf-y07-csharp-tab" /><label for="figure-lq6-xvf-y07-csharp-tab">C#</label><div class="codeblock-item"><pre id="codeblock-ug0-qe0-htq" outputclass="language-csharp" data-tag="codeblock" code-type="xCode" class="pre codeblock language-csharp"><code>using Newtonsoft.Json;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
+
+using Tea;
+using Tea.Utils;
+
+
+namespace AlibabaCloud.SDK.Sample
+{
+    public class Sample 
+    {
+
+        /// &lt;term&gt;&lt;b&gt;Description:&lt;/b&gt;&lt;/term&gt;
+        /// &lt;description&gt;
+        /// &lt;para&gt;使用 Token 初始化账号Client&lt;/para&gt;
+        /// &lt;/description&gt;
+        /// 
+        /// &lt;returns&gt;
+        /// Client
+        /// &lt;/returns&gt;
+        /// 
+        /// &lt;term&gt;&lt;b&gt;Exception:&lt;/b&gt;&lt;/term&gt;
+        /// Exception
+        public static AlibabaCloud.SDK.Dingtalkmicro_app_1_0.Client CreateClient()
+        {
+            AlibabaCloud.OpenApiClient.Models.Config config = new AlibabaCloud.OpenApiClient.Models.Config();
+            config.Protocol = "https";
+            config.RegionId = "central";
+            return new AlibabaCloud.SDK.Dingtalkmicro_app_1_0.Client(config);
+        }
+
+        public static void Main(string[] args)
+        {
+            AlibabaCloud.SDK.Dingtalkmicro_app_1_0.Client client = CreateClient();
+            AlibabaCloud.SDK.Dingtalkmicro_app_1_0.Models.PageInnerAppHistoryVersionHeaders pageInnerAppHistoryVersionHeaders = new AlibabaCloud.SDK.Dingtalkmicro_app_1_0.Models.PageInnerAppHistoryVersionHeaders();
+            pageInnerAppHistoryVersionHeaders.XAcsDingtalkAccessToken = "&lt;your access token&gt;";
+            AlibabaCloud.SDK.Dingtalkmicro_app_1_0.Models.PageInnerAppHistoryVersionRequest pageInnerAppHistoryVersionRequest = new AlibabaCloud.SDK.Dingtalkmicro_app_1_0.Models.PageInnerAppHistoryVersionRequest
+            {
+                PageNumber = 1,
+                PageSize = 1,
+            };
+            try
+            {
+                client.PageInnerAppHistoryVersionWithOptions("1", pageInnerAppHistoryVersionRequest, pageInnerAppHistoryVersionHeaders, new AlibabaCloud.TeaUtil.Models.RuntimeOptions());
+            }
+            catch (TeaException err)
+            {
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+            catch (Exception _err)
+            {
+                TeaException err = new TeaException(new Dictionary&lt;string, object&gt;
+                {
+                    { "message", _err.Message }
+                });
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+        }
+
+
+    }
+}</code></pre></div></div></section></section><section id="section-response-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-response-1" data-tag="h2" class="h2">响应</h2><section id="section-response-parameter" class="section">
+                <h3 data-tag="h3" id="h2-sdz-we2-dzh" class="h3 title">响应体</h3>
+                <table class="table">
+                    <colgroup colnum="1" colname="col1" colwidth="3*" style="width:30%"></colgroup>
+                    <colgroup colnum="2" colname="col2" colwidth="2*" style="width:20%"></colgroup>
+                    <colgroup colnum="3" colname="col3" colwidth="5*" style="width:50%"></colgroup>
+                    <thead class="thead">
+                    <tr>
+                        <th><p>名称</p></th>
+                        <th><p>类型</p></th>
+                        <th><p>描述</p></th>
+                    </tr>
+                    </thead>
+                    <tbody class="tbody">
+    <tr outputclass="row row-level-1" class="row row-level-1 row-level-1 row">
+        <td><p>totalCount</p></td>
+        <td><p>Long</p></td>
+        <td><p>当前小程序历史版本的总数量。</p>
+</td>
+    </tr>
+    <tr outputclass="row row-level-2 has-child" class="has-child row-level-2 row row-level-2 has-child row">
+        <td><span class="icms-tree-table-trigger" type="checkbox"></span><span class="icms-tree-table-trigger" type="checkbox"></span><p>miniAppVersionList</p></td>
+        <td><p>Array</p></td>
+        <td><p>企业内部小程序版本号列表</p>
+</td>
+    </tr>
+    <tr outputclass="row row-level-2-1" class="row-level-2-1 row row row-level-2-1">
+        <td><p>appVersionId</p></td>
+        <td><p>Long</p></td>
+        <td><p>小程序版本号id，用于小程序的发布和回滚等操作的唯一标识。</p>
+</td>
+    </tr>
+    <tr outputclass="row row-level-2-2" class="row-level-2-2 row row row-level-2-2">
+        <td><p>miniAppId</p></td>
+        <td><p>String</p></td>
+        <td><p>小程序id</p>
+</td>
+    </tr>
+    <tr outputclass="row row-level-2-3" class="row-level-2-3 row row row-level-2-3">
+        <td><p>appVersion</p></td>
+        <td><p>String</p></td>
+        <td><p>小程序版本号</p>
+</td>
+    </tr>
+    <tr outputclass="row row-level-2-4" class="row-level-2-4 row row row-level-2-4">
+        <td><p>appVersionType</p></td>
+        <td><p>Integer</p></td>
+        <td><p>小程序版本类型，取值：</p>
+<ul>
+<li><b>0</b>：开发版本</li>
+<li><b>2</b>：正式版本</li>
+<li><b>3</b>：体验版本</li>
+</ul>
+</td>
+    </tr>
+    <tr outputclass="row row-level-2-5" class="row row-level-2-5 row-level-2-5 row">
+        <td><p>miniAppOnPc</p></td>
+        <td><p>Boolean</p></td>
+        <td><p>是否支持PC端打开小程序，取值：</p>
+<ul>
+<li>
+<p><b>false</b>：只支持移动端</p>
+</li>
+<li>
+<p><b>true</b>：既支持移动端又支持PC端</p>
+</li>
+</ul>
+</td>
+    </tr>
+    <tr outputclass="row row-level-2-6" class="row row-level-2-6 row-level-2-6 row">
+        <td><p>createTime</p></td>
+        <td><p>String</p></td>
+        <td><p>小程序版本创建时间，格式:yyyy-MM-dd HH:mm:ss</p>
+</td>
+    </tr>
+    <tr outputclass="row row-level-2-7" class="row row-level-2-7 row row-level-2-7">
+        <td><p>modifyTime</p></td>
+        <td><p>String</p></td>
+        <td><p>小程序版本号更新时间，格式:yyyy-MM-dd HH:mm:ss</p>
+</td>
+    </tr>
+                    </tbody>
+                </table>
+            </section><section id="section-response-body-example" class="section"><h3 id="h3-response-body-example" data-tag="h3" class="h3">响应体示例</h3><pre outputclass="language-json" data-tag="codeblock" code-type="xCode" class="pre codeblock language-json"><code>HTTP/1.1 200 OK
+Content-Type:application/json
+
+{
+  "totalCount" : 1,
+  "miniAppVersionList" : [ {
+    "appVersionId" : 1,
+    "miniAppId" : "1",
+    "appVersion" : "0.0.1",
+    "appVersionType" : 0,
+    "miniAppOnPc" : false,
+    "createTime" : "2023-01-01 00:00:00",
+    "modifyTime" : "2023-01-01 00:00:00"
+  } ]
+}</code></pre></section><section id="section-error-code-1" class="section"><h3 id="h3-error-code-1" data-tag="h3" class="h3">错误码</h3><p data-tag="p" id="p-error-code-global-guide" class="p">若调用该接口报错，可根据错误信息在<a id="a-error-code-global-guide" href="https://open.dingtalk.com/document/development/server-api-error-codes-1">全局错误码</a>文档中查找解决方案。</p><table class="table"> 
+  <colgroup colnum="1" colname="col1" colwidth="2*" style="width:20%"></colgroup> 
+  <colgroup colnum="2" colname="col2" colwidth="2.5*" style="width:25%"></colgroup> 
+  <colgroup colnum="3" colname="col3" colwidth="2.5*" style="width:25%"></colgroup> 
+  <colgroup colnum="4" colname="col4" colwidth="3*" style="width:30%"></colgroup> 
+  <thead class="thead"> 
+   <tr> 
+    <th><p>HttpCode</p></th> 
+    <th><p>错误码</p></th> 
+    <th><p>错误信息</p></th> 
+    <th><p>说明</p></th> 
+   </tr> 
+  </thead> 
+  <tbody class="tbody"> 
+   <tr> 
+    <td><p>400</p></td> 
+    <td><p>invalidParam</p></td> 
+    <td><p>参数错误: %s</p></td> 
+    <td><p>参数错误</p></td> 
+   </tr> 
+   <tr> 
+    <td><p>400</p></td> 
+    <td><p>preCheckError</p></td> 
+    <td><p>前置校验失败: %s</p></td> 
+    <td><p>前置校验失败</p></td> 
+   </tr> 
+   <tr> 
+    <td><p>400</p></td> 
+    <td><p>invalidAgentId</p></td> 
+    <td><p>不合法的agentId</p></td> 
+    <td><p>不合法的agentId</p></td> 
+   </tr> 
+   <tr> 
+    <td><p>400</p></td> 
+    <td><p>noAppManagePermission</p></td> 
+    <td><p>没有操作应用的权限</p></td> 
+    <td><p>没有操作应用的权限</p></td> 
+   </tr> 
+   <tr> 
+    <td><p>400</p></td> 
+    <td><p>appTypeNotSupport</p></td> 
+    <td><p>只支持企业自建小程序调用</p></td> 
+    <td><p>只支持企业自建小程序调用</p></td> 
+   </tr> 
+   <tr> 
+    <td><p>500</p></td> 
+    <td><p>systemBusy</p></td> 
+    <td><p>系统繁忙</p></td> 
+    <td><p>系统繁忙</p></td> 
+   </tr> 
+  </tbody> 
+ </table></section></section></div>
+    </main>
+
+
+
+</body></html>

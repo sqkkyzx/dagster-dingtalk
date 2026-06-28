@@ -1,0 +1,749 @@
+<!DOCTYPE html><html><head><meta charset="utf8" / /><meta name="gmtModify" content="2026-04-22 18:28:15" / /><meta name="searchtitle" content="" / /><meta name="keywords" content="" / /><meta name="author" content="" / /><title>创建并开启互动卡片吊顶</title><meta name="gmtModify" content="2026-06-08 09:42:43" / /></head><body data-tag="topic" id="doc-api-dingtalk-CreateTopbox" class="topic"><main id="ab4683dbcco05" data-init-id="doc-api-dingtalk_CreateTopbox"><h1 data-tag="title" id="h1-6z8-6tz-ri4" class="title">创建并开启互动卡片吊顶</h1><p data-tag="shortdesc" id="f9b4f27492uba" class="shortdesc">调用本接口，创建并开启会话中的互动卡片吊顶。</p><div data-tag="conbody" outputclass="icms-api-reference" class="icms-api-reference conbody"><section id="58ddb5131bbbh" class="section"><h2 id="fd81c619153y5"><span style="color:rgb(23, 26, 29)"><b>接口调用说明</b></span></h2><ul id="193dbef720tki"><li id="35f9384e83l5x"><p id="5d68e0834elud"><span style="color:rgb(23, 26, 29)">对于群聊会话类型，支持以下场景使用：</span></p><ul id="d3f86184cb3aj" data-init-id="193dbef720tki"><li id="6538a193137rs"><p id="9f9979459b0xg"><span style="color:rgb(23, 26, 29)">基于群模板创建的群，详情参见</span><a data-tag="xref" id="7e1bc5afb33d6" href="/document/development/create-a-scene-group#" class="xref">创建场景群</a><span style="color:rgb(23, 26, 29)">。</span></p></li><li id="794100f328i25"><p id="df4e3c2086zug"><span style="color:rgb(23, 26, 29)">安装群聊酷应用的群，详情参见</span><a href="https://open.dingtalk.com/document/dingstart/coolapp-overview#" data-tag="xref" id="f1e19a79f6zn5" class="xref doc-preview-card-popover" target="_blank"><span style="background-color:initial">酷应用</span></a><span style="color:rgb(23, 26, 29)">。</span></p></li></ul></li><li id="9c0fbe8428pqf"><p id="90e075eab0iel"><span style="color:rgb(23, 26, 29)">对于单聊助手会话类型，支持以下场景：</span></p><p id="218934a3be7tf"><span style="color:rgb(23, 26, 29)">此接口只适用于已经建立会话的单聊助手，即第一次开启吊顶前，需要先使用机器人给用户发送单聊消息，以建立单聊助手会话。</span></p><p id="5acc2741f28wf"><span style="color:rgb(23, 26, 29)">调用</span><a data-tag="xref" id="3c29ec919fawm" href="/document/development/create-and-deliver-cards#" class="xref">创建并投放卡片</a><span style="color:rgb(23, 26, 29)">接口或</span><a data-tag="xref" id="5a5a519f6305r" href="/document/development/chatbots-send-one-on-one-chat-messages-in-batches#" class="xref">批量发送人与机器人会话中机器人消息</a><span style="color:rgb(23, 26, 29)">接口。</span></p></li><li id="d1d20a0d9b71d"><p id="0724abf85c1e0"><span style="color:rgb(23, 26, 29)">单个会话中最多可开启10个吊顶。若会话内已经存在10个未关闭的吊顶，需要关闭已开启的吊顶，然后再开启新的吊顶。</span></p></li><li id="e3f7377de3yym"><p id="abafcdb4a18tp"><span style="color:rgb(23, 26, 29)">接口调用方需要自己记录每个会话内的互动卡片吊顶的相关信息（比如：outTrackId，openConversationId，userId，unionId，robotCode等信息），以便于管理会话中的互动卡片吊顶。</span></p></li></ul></section><section id="section-request-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-request-1" data-tag="h2" class="h2">请求</h2><section id="section-request-basic-info" class="section"><h3 id="heading-request-basic-info" data-tag="h3" class="h3">基本信息</h3><table id="95b7e73687qm2" tablewidth="648" tablecolswidth="216 432" autofit="false" class="table"><colgroup colwidth="0.67*" style="width:33.33%"></colgroup><colgroup colwidth="1.33*" style="width:66.67%"></colgroup><tbody class="tbody"><tr id="bec53f941e76b"><td id="53e5521fa8rku" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="f2f15e3825lmn">字段</p></td><td id="6f8be2a2331eq" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="dd4eb96ac1749">值</p></td></tr><tr id="6658449e66o9j"><td id="29f173182c8rx" rowspan="1" colspan="1"><p id="cc1d4caf99hnc">HTTP URL</p></td><td id="698eeac638yjr" rowspan="1" colspan="1"><p id="9a13969ef4reb">https://api.dingtalk.com/v2.0/im/topBoxes</p></td></tr><tr id="630f166624kgh"><td id="fd7b2c4d69zq0" rowspan="1" colspan="1"><p id="56227494c3g9r">HTTP Method</p></td><td id="6ad59e5786o35" rowspan="1" colspan="1"><p id="4e2c8cd235qdd">POST</p></td></tr><tr id="4fd0d3a96ci0p"><td id="107b65e34dndm" rowspan="1" colspan="1"><p id="8031b60cf2a3e">支持的应用类型</p></td><td id="5ef9fa55e09cm" rowspan="1" colspan="1"><p id="dc4eda7783n3i"><span data-tag="ph" id="ph-request-basic-app-type-apptype-0" class="ph ph-app-type" data-ph-raw-text="appType-企业内部应用">appType-企业内部应用</span>　<span data-tag="ph" id="ph-request-basic-app-type-apptype-1" class="ph ph-app-type" data-ph-raw-text="appType-第三方企业应用">appType-第三方企业应用</span></p></td></tr><tr id="19213e48afbc6"><td id="1b3da99051y88" rowspan="1" colspan="1"><p id="328db8ad789ap">权限要求</p></td><td id="0fb0419946nro" rowspan="1" colspan="1"><p id="8b463cfc4f298"><span data-tag="ph" id="ph-request-basic-permission-permission-qyapi-chat-manage-0" class="ph-permission ph" data-ph-raw-text="permission-qyapi_chat_manage-钉钉群基础信息管理权限" data-permission-id="permission-qyapi_chat_manage" data-permission-code="qyapi_chat_manage" data-permission-detail-api="/document/api/permission/detail" data-permission-query-param="code">permission-qyapi_chat_manage-钉钉群基础信息管理权限</span></p></td></tr></tbody></table></section><section id="section-request-header-parameter" class="section"><h3 data-tag="h3" id="h2-eks-zi2-csp" class="h3 title">请求头</h3><table id="8185a6bc5dyx7" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="c8fa0adc18ciu"><td id="b3b8ca2aa9k6e" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="b3a246debekgb">名称</p></td><td id="d2863371253kr" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="ef622bd9bbcll">类型</p></td><td id="bff8dbfe775pk" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="e4fad4b033rv2">是否必填</p></td><td id="c0474374fd4o5" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="264e78f36aoqf">描述</p></td></tr><tr id="96bd88866c3hs"><td id="403de1cf6ben6" rowspan="1" colspan="1"><p id="e66c119570g7f">x-acs-dingtalk-access-token</p></td><td id="180dcaca0aqre" rowspan="1" colspan="1"><p id="04afc56f4f5zv">String</p></td><td id="ac5c737850vf5" rowspan="1" colspan="1"><p id="0cd08943canh3">是</p></td><td id="1549349c658tq" rowspan="1" colspan="1"><p id="6b7f3c7e1ea18">调用该接口的访问凭证，通过以下获取：</p><ul id="8fba8ccbectnj"><li id="dace943c20vbe"><p id="ca09404059yfy">企业内部应用，调用<a href="https://open.dingtalk.com/document/development/obtain-the-access-token-of-an-internal-app#" id="3c360c70b0jv8" class="xref">获取企业内部应用的accessToken</a>接口获取。</p></li><li id="4198465b2bgql"><p id="65bfc18266teh">第三方企业应用，调用<a href="https://open.dingtalk.com/document/development/obtain-the-access-token-of-the-authorized-enterprise-1#" id="8fb9a29513wjj" class="xref">获取第三方应用授权企业的accessToken</a>接口获取。</p></li></ul></td></tr></tbody></table></section><section id="section-request-body-parameter" class="section"><h3 data-tag="h3" id="h2-dfp-7yh-ptx" class="h3 title">请求体</h3><table id="42619a35c14mt" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="ad0742c54f9al"><td id="e277033eabiqo" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="59570e2882mlc">名称</p></td><td id="2a286068b6lk6" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="5da7ea9e09qg7">类型</p></td><td id="7e4091a98bf7g" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="aa3ede2100dxk">是否必填</p></td><td id="d328e40f9a4hw" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="04effe4116f7v">描述</p></td></tr><tr outputclass="row row-level-1" id="e01271516es4y" class="row row-level-1"><td id="18930611d87x7" rowspan="1" colspan="1"><p id="913db5d0f5ah4">cardTemplateId</p></td><td id="12ceeaaee6bcx" rowspan="1" colspan="1"><p id="7cccf6294alpd">String</p></td><td id="b397e21bd5fjn" rowspan="1" colspan="1"><p id="c145a0e0e1k5r">是</p></td><td id="bfa4faaaa7hr8" rowspan="1" colspan="1"><p id="e362f32dd2ae1">互动卡片的消息模板ID，调用<a href="https://open.dingtalk.com/document/development/create-and-deliver-cards#" id="58af7cd401ufc" class="xref">创建并投放卡片</a>接口获取模板ID。</p></td></tr><tr outputclass="row row-level-2" id="da143f0020s1l" class="row row-level-2"><td id="2bfffd6200xu7" rowspan="1" colspan="1"><p id="91c0393e757d0">outTrackId</p></td><td id="3ba5f8d3e3svj" rowspan="1" colspan="1"><p id="17345389e82ka">String</p></td><td id="8fcae1b27e4mz" rowspan="1" colspan="1"><p id="3f275dbbaeveq">是</p></td><td id="dc17d08d6fb97" rowspan="1" colspan="1"><p id="acaa5fb4ecfn8">一张卡片的外部ID，最大长度64，与<a href="https://open.dingtalk.com/document/development/interface-for-creating-a-card-instance#" id="20f0a869dbdtu" class="xref">创建卡片</a>/<a href="https://open.dingtalk.com/document/development/create-and-deliver-cards#" id="0bc90bf5f3r2j" class="xref">创建并投放卡片</a>中的 outTrackId 保持一致。也可在对应模板的<b>卡片实例管理</b>中获取：</p><p id="849dba761e6e0"><img src="https://help-static-aliyun-doc.aliyuncs.com/assets/img/zh-CN/5353586771/p1070566.png" alt="image" id="eb67bdc709icc" placement="break" class="image break" / /></p><p class="note-icon-wrapper" id="7b865bbb91v97"></p><ul id="c932eb7de232j"><li id="9d1b02b284bsx"><p id="ce8c73dbe22f0">需保存<code data-tag="inlineCode" id="1a3efc494803k" class="inlineCode">outTrackId</code>，否则无法进行关闭互动卡片吊顶。</p></li><li id="b2c684f26c1mz"><p id="4691e63a4azpo">一般情况下，若使用了新的 cardTemplateId 或 cardData 等参数，则需要重新生成全新的 outTrackId，否则更改不会生效。</p></li></ul></td></tr><tr outputclass="row row-level-3" id="069720168e4uy" class="row row-level-3"><td id="7426d505870ys" rowspan="1" colspan="1"><p id="117bf2051dagg">callbackRouteKey</p></td><td id="81fdd559e0aha" rowspan="1" colspan="1"><p id="51fec98ece4jr">String</p></td><td id="9fc426bc324m8" rowspan="1" colspan="1"><p id="4ac67f44b555i">否</p></td><td id="cdfdc5252008q" rowspan="1" colspan="1"><p id="c008ba730bebd">可控制卡片回调时的路由Key，用于指定特定的callbackUrl，调用<a href="https://open.dingtalk.com/document/development/register-card-callback-address#" id="e9d318cce30xt" class="xref">注册卡片回调地址</a>接口获取参数<code data-tag="inlineCode" id="b28ff81d7ccjm" class="inlineCode">callbackRouteKey</code>。</p></td></tr><tr outputclass="row row-level-4 has-child" id="95d25b5515kff" class="row row-level-4 has-child"><td id="44428d3b6dy7f" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="ff4e3c5dbe3cn">cardData</p></td><td id="9322f1f786ima" rowspan="1" colspan="1"><p id="10b050e6f3jc7">Object</p></td><td id="2ce82128ea0e4" rowspan="1" colspan="1"><p id="2a80026fffh6p">是</p></td><td id="a52286a4edogs" rowspan="1" colspan="1"><p id="38087068d9rbi">卡片数据。</p></td></tr><tr outputclass="row row-level-4-1" id="19ec603ddeqq7" class="row row-level-4-1"><td id="736fc27660wqn" rowspan="1" colspan="1"><p id="21a1950c76rk7">cardParamMap</p></td><td id="2ac9035ae6y5p" rowspan="1" colspan="1"><p id="ac7f2760c2ay0">Map&lt;String, String&gt;</p></td><td id="980670515fygl" rowspan="1" colspan="1"><p id="2254e5c178h0f">否</p></td><td id="f08781d3d24gt" rowspan="1" colspan="1"><p id="4bdf009f347xu">卡片模板内容替换参数：</p><ul id="aab2050e9fmui"><li id="32986e04f39li"><p id="9c695e0149kcx"><b>普通文本类型</b>：key为变量名，value为文本内容。</p></li><li id="9092b7e022ma5"><p id="eabf204875dfv"><b>多媒体类型</b>：key为变量名，value为媒体文件：调用<a href="https://open.dingtalk.com/document/development/upload-media-files#" id="a16e408298zx9" class="xref">上传媒体文件</a>接口的获取<code data-tag="inlineCode" id="5b45adbd7564y" class="inlineCode">media_id</code>参数值。</p></li></ul><p class="note-icon-wrapper" id="7dc723aa07hdu"></p><ul id="fac79115bd3wg"><li id="86b97ac432plm"><p id="8ef95bfe3dt1l">属性字段只支持 String 类型，非 String 类型的属性填写请参考文档：<a href="https://open.dingtalk.com/document/development/faq-card#" id="da1f06824d3fp" class="xref">常见问题</a>文档中“设置卡片数据时，如何处理非 String 类型的参数”小节。</p></li><li id="20be45402fk1y"><p id="15bd53b1b6kkp">务必确保属性值的类型与卡片搭建器中所配置的变量类型相匹配，否则可能出现属性不生效，或者在移动端无法显示等问题。</p></li></ul><p id="3737f7489blhk"></p></td></tr><tr outputclass="row row-level-5 has-child" id="9d98cc2cf1do9" class="row row-level-5 has-child"><td id="7a239dfff5kah" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="8f8d40d57egdo">userIdPrivateDataMap</p></td><td id="dd35d89fb8wdn" rowspan="1" colspan="1"><p id="7fbf86aca2ipm">Map&lt;String, Object&gt;</p></td><td id="0de30397a7tpf" rowspan="1" colspan="1"><p id="957ac3c938hlh">否</p></td><td id="0cce24119e9ta" rowspan="1" colspan="1"><p id="cab9599ea9dzw">卡片模板userId差异用户参数。</p><ul id="5582f41e6cff7"><li id="c4b83355e60sh"><p id="bdeb3687b0dsr"><b>key</b>：用户userId。</p></li><li id="29c072e18c6p7"><p id="f06d121638yig"><b>value</b>：卡片数据。</p></li></ul></td></tr><tr outputclass="row row-level-5-1 has-child" id="9fcf67101cnen" class="row row-level-5-1 has-child"><td id="7b49c902d98oz" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="efd207226eamw"></p></td><td id="2eee4acd14s9c" rowspan="1" colspan="1"><p id="88f90340dd66z">Object</p></td><td id="a0327fba5dean" rowspan="1" colspan="1"><p id="7444b80bf08qf">否</p></td><td id="c993528758s9b" rowspan="1" colspan="1"><p id="52555cd242oi6">卡片数据。</p></td></tr><tr outputclass="row row-level-5-1-1" id="17248f7d94kb2" class="row row-level-5-1-1"><td id="afe50a5b95bb2" rowspan="1" colspan="1"><p id="cb05f8592e5t3">cardParamMap</p></td><td id="5c40bad3f4daa" rowspan="1" colspan="1"><p id="4c3f94c72ewtz">Map&lt;String, String&gt;</p></td><td id="6bc0f556021fi" rowspan="1" colspan="1"><p id="0effbd00e96cv">否</p></td><td id="de089e138d23n" rowspan="1" colspan="1"><p id="216f363158m3u">卡片模板内容替换参数：</p><ul id="9bfe55c27e81y"><li id="41c315c849wrs"><p id="fcaf3aa9abku9"><b>普通文本类型</b>：key为变量名，value为文本内容。</p></li><li id="301c76cc44szi"><p id="cc7357a3abncd"><b>多媒体类型</b>：key为变量名，value为媒体文件：调用<a href="https://open.dingtalk.com/document/development/upload-media-files#" id="56d2192266qmq" class="xref">上传媒体文件</a>接口的获取<code data-tag="inlineCode" id="aa9577d4459n6" class="inlineCode">media_id</code>参数值。</p></li></ul><p class="note-icon-wrapper" id="b565c0f789wzv"></p><ul id="6fcb6e4847tl5"><li id="6e93d06a9bpyl"><p id="f701916cefamm">属性字段只支持 String 类型，非 String 类型的属性填写请参考文档：<a href="https://open.dingtalk.com/document/development/faq-card#" id="35bce12033c7w" class="xref">常见问题</a>文档中“设置卡片数据时，如何处理非 String 类型的参数”小节。</p></li><li id="ff473ff2e4z18"><p id="d369a2cbbbx8s">务必确保属性值的类型与卡片搭建器中所配置的变量类型相匹配，否则可能出现属性不生效，或者在移动端无法显示等问题。</p></li></ul></td></tr><tr outputclass="row row-level-6 has-child" id="354387eeb2vwl" class="row row-level-6 has-child"><td id="3194793cf1acq" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="8b33036de01pi">unionIdPrivateDataMap</p></td><td id="b9965de0b242a" rowspan="1" colspan="1"><p id="d39a00d452p75">Map&lt;String, Object&gt;</p></td><td id="e1cc0a5a845tt" rowspan="1" colspan="1"><p id="891d33ffc747u">否</p></td><td id="27192d4e03n2c" rowspan="1" colspan="1"><p id="8620206ea5ujd">卡片模板unionId差异用户参数。</p><ul id="5ff7ca2440qld"><li id="80667f1dfalc2"><p id="af4cd47ba6sof"><b>key</b>：用户unionId。</p></li><li id="92c40fefd07z4"><p id="d6706e6ea9mow"><b>value</b>：卡片数据。</p></li></ul></td></tr><tr outputclass="row row-level-6-1 has-child" id="d9fa53be133c3" class="row row-level-6-1 has-child"><td id="0488ef41aa3kg" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="da86b2eaebg7l"></p></td><td id="da35d3534628v" rowspan="1" colspan="1"><p id="f093487c9cnkv">Object</p></td><td id="f3fcea21628f2" rowspan="1" colspan="1"><p id="1a54a1d834fep">否</p></td><td id="4a33870fackbn" rowspan="1" colspan="1"><p id="0e735b8dednma">卡片数据。</p></td></tr><tr outputclass="row row-level-6-1-1" id="bf809ee0e0m4n" class="row row-level-6-1-1"><td id="77fb71e7c9559" rowspan="1" colspan="1"><p id="0240bfd16c583">cardParamMap</p></td><td id="ead6724914tkb" rowspan="1" colspan="1"><p id="2db13a7be5rmw">Map&lt;String, String&gt;</p></td><td id="6e2c602d2fm0u" rowspan="1" colspan="1"><p id="439b79294adnq">否</p></td><td id="db0e8a8dd74z5" rowspan="1" colspan="1"><p id="746515032et1i">卡片模板内容替换参数：</p><ul id="2ae23865daxbw"><li id="a74c50e140wk4"><p id="77859f23deuzw"><b>普通文本类型</b>：key为变量名，value为文本内容。</p></li><li id="f3ae8baf3eib4"><p id="cead4b01c4du6"><b>多媒体类型</b>：key为变量名，value为媒体文件：调用<a href="https://open.dingtalk.com/document/development/upload-media-files#" id="c83b637a66la9" class="xref">上传媒体文件</a>接口的获取<code data-tag="inlineCode" id="a211355eefrfc" data-init-id="aa9577d4459n6" class="inlineCode">media_id</code>参数值。</p></li></ul><p class="note-icon-wrapper" id="0ddb5d379ejyl"></p><ul id="311bdb7024eqa"><li id="558877669eehd"><p id="292b35035f1rx">属性字段只支持 String 类型，非 String 类型的属性填写请参考文档：<a href="https://open.dingtalk.com/document/development/faq-card#" id="fe2ecbf651eb7" class="xref">常见问题</a>文档中“设置卡片数据时，如何处理非 String 类型的参数”小节。</p></li><li id="c7508b4fbcz31"><p id="e6c82e4735p1l">务必确保属性值的类型与卡片搭建器中所配置的变量类型相匹配，否则可能出现属性不生效，或者在移动端无法显示等问题。</p></li></ul></td></tr><tr outputclass="row row-level-7 has-child" id="859a4f12f2aa3" class="row row-level-7 has-child"><td id="11e58a0fb5mmq" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="686350fbe9o5r">cardSettings</p></td><td id="0fa3c91775irt" rowspan="1" colspan="1"><p id="049d7d874b8bc">Object</p></td><td id="6d629eaebefm1" rowspan="1" colspan="1"><p id="0cf51a7dd4yba">否</p></td><td id="1726b15053dep" rowspan="1" colspan="1"><p id="cfddbcbc57yba">卡片设置项。</p></td></tr><tr outputclass="row row-level-7-1" id="aaf1725f51bqs" class="row row-level-7-1"><td id="d6fa21cc01vex" rowspan="1" colspan="1"><p id="39c75902e820i">pullStrategy</p></td><td id="c6ac6dc4c3oz7" rowspan="1" colspan="1"><p id="276eadee20un0">Boolean</p></td><td id="d801b66c32mqg" rowspan="1" colspan="1"><p id="3e77901e29yzw">否</p></td><td id="28db3f266fsnp" rowspan="1" colspan="1"><p id="d49a3b20e5cf2">是否开启卡片纯拉模式：参见<a href="https://open.dingtalk.com/document/development/pure-pull-mode-process-guide#" id="333fc240ca76u" class="xref">纯拉模式流程指南</a>。</p><ul id="d7aa7c9a764yh"><li id="3581a18ff83u7"><p id="51195a63e6avm"><b>true</b>：开启</p></li><li id="291625e7dd0oz"><p id="5e07231747hky"><b>false</b>：关闭</p></li></ul></td></tr><tr outputclass="row row-level-8" id="36fd7121ae39x" class="row row-level-8"><td id="8594b5e777vdk" rowspan="1" colspan="1"><p id="418c11d3768x0">conversationType</p></td><td id="e787806d17y3l" rowspan="1" colspan="1"><p id="8212604a68k8y">Integer</p></td><td id="bf50f566e2vro" rowspan="1" colspan="1"><p id="9a87f77770sz5">是</p></td><td id="f3622afa59glr" rowspan="1" colspan="1"><p id="b652791a54y8r">会话类型：</p><ul id="2b529f3692erx"><li id="02bccd83504v8"><p id="b1e837b27aspe"><b>1</b>：群聊</p></li><li id="ad7843f8811vs"><p id="3c2e6a42afprt"><b>2</b>：单聊助手</p></li></ul></td></tr><tr outputclass="row row-level-9" id="6e700f57b5p8e" class="row row-level-9"><td id="365f0098b8b00" rowspan="1" colspan="1"><p id="dc7887857eqxu">openConversationId</p></td><td id="7c265c2f50l8z" rowspan="1" colspan="1"><p id="be19e28f5ehur">String</p></td><td id="643399611cwht" rowspan="1" colspan="1"><p id="1f77a2d28dd4m">否</p></td><td id="63e1a67644s1d" rowspan="1" colspan="1"><p id="fae29f8596d8l">会话id：</p><ul id="e9cc71863fgm7"><li id="f3aae0b200fly"><p id="0b6025205aln6"><b>群聊</b>（此参数必传）：</p><ul id="9c15b26a186lm"><li id="7b2090b34ekce"><p id="d36d4045f504w">基于群模板创建的群，调用<a href="https://open.dingtalk.com/document/development/create-a-scene-group-v2#" id="4f6af313b3f34" class="xref">创建群</a>接口获取<code data-tag="inlineCode" id="35df6c46e0070" class="inlineCode">open_conversation_id</code>参数值。</p></li><li id="d186c2de56w2c"><p id="f60905ac81k51">安装群聊酷应用的群，通过<a href="https://open.dingtalk.com/document/dingstart/group-chat-coolapp-event#" id="6cab7b8c3cbem" class="xref">感知群变化（事件订阅）</a>获取回调参数<code data-tag="inlineCode" id="2ee8205d58a7e" class="inlineCode">OpenConversationId</code>参数值。</p></li></ul></li><li id="c8b5445715gyb"><p id="ca91fdc2c6adb"><b>单聊助手</b>：不传入此参数。</p></li></ul></td></tr><tr outputclass="row row-level-10" id="277b54e985q4g" class="row row-level-10"><td id="2671f8974e9h3" rowspan="1" colspan="1"><p id="2f889434e26w0">userId</p></td><td id="65607fc84fjw2" rowspan="1" colspan="1"><p id="47b276cc078ug">String</p></td><td id="c2c5423f0bepw" rowspan="1" colspan="1"><p id="7c1a7b56bdbms">否</p></td><td id="a97e5e56b7nog" rowspan="1" colspan="1"><p id="6d857693c7nh6">用户userId，可通过<a href="https://open.dingtalk.com/document/development/query-the-list-of-department-userids#" id="69c3b2016ezdg" class="xref">获取部门用户userid列表</a>或<a href="https://open.dingtalk.com/document/development/query-user-details#" id="a285c5c2d0bxm" class="xref">查询用户详情</a>接口获取。</p><ul id="f2efa89596k81"><li id="b4ebe12befawc"><p id="67f8e43e6152p">当会话类型为单聊助手时，userId和unionId二选一必填。</p></li><li id="dc2ae7730ab41"><p id="6b8e63d5170j5">其他会话类型，不需要传入此参数。</p></li></ul></td></tr><tr outputclass="row row-level-11" id="d71edb66ae480" class="row row-level-11"><td id="949038ff37j81" rowspan="1" colspan="1"><p id="3c229297f2i6v">unionId</p></td><td id="c81d6e1a13xok" rowspan="1" colspan="1"><p id="f6c3f2821fxni">String</p></td><td id="a7f3d49788bps" rowspan="1" colspan="1"><p id="f18d601b3dxn1">否</p></td><td id="3d2564cc448kt" rowspan="1" colspan="1"><p id="2c361b0b2ajx4">用户unionId，可通过<a href="https://open.dingtalk.com/document/development/query-user-details#" id="fbce8b2180n8q" class="xref">查询用户详情</a>接口获取。</p><ul id="5c5174d5b594q"><li id="fa54d6e30dula"><p id="34b492a26bnte">当会话类型为单聊助手时，userId和unionId二选一必填。</p></li><li id="d01e94e011b2z"><p id="ae35eafb63d4m">其他会话类型，不需要传入此参数。</p></li></ul></td></tr><tr outputclass="row row-level-12" id="5f1d2d0d14v1k" class="row row-level-12"><td id="e508014ae52yt" rowspan="1" colspan="1"><p id="dbc30e0124uvq">robotCode</p></td><td id="219dd1f7e4q7l" rowspan="1" colspan="1"><p id="2bca4c2e87lh6">String</p></td><td id="f4f86c9929z23" rowspan="1" colspan="1"><p id="341cdf5953dpl">否</p></td><td id="b8ce91984068h" rowspan="1" colspan="1"><p id="2889e89ad7l6z">机器人编码：</p><ul id="85e64763e2mb2"><li id="5638762ed4nc4"><p id="753e097c0263q">单聊助手（此参数必填）。
+</p><ul id="db1205509979b"><li id="521c6d0e8es7s"><p id="8740566851sjc">企业内部开发-机器人应用的AppKey值。
+<img src="https://help-static-aliyun-doc.aliyuncs.com/file-manage-files/zh-CN/20221018/qvog/企业内部开发机器人.png" alt="" class="image break" / /></p></li><li id="0cc7cf99ba5t6"><p id="079d48709endj">企业内部应用机器人。
+<img src="https://help-static-aliyun-doc.aliyuncs.com/file-manage-files/zh-CN/20221018/duwl/企业内部应用机器人.png" alt="" class="image break" / /></p></li><li id="82595ae91ba1m"><p id="a3387ac849whb">第三方企业应用机器人 <img src="https://help-static-aliyun-doc.aliyuncs.com/file-manage-files/zh-CN/20221018/bmjl/第三方企业应用机器人.png" alt="" class="image break" / /></p></li></ul></li><li id="e39cab6aeaqkh"><p id="7c0c742463ukv">其他会话类型，不需要传入此参数</p></li></ul></td></tr><tr outputclass="row row-level-13" id="efe9cb19f9xz8" class="row row-level-13"><td id="44ec31e6abfgi" rowspan="1" colspan="1"><p id="2576201f0djzp">coolAppCode</p></td><td id="2d775129340fj" rowspan="1" colspan="1"><p id="612a6fde5cnq7">String</p></td><td id="34a3a8ef0bhbd" rowspan="1" colspan="1"><p id="85eb88245bua2">否</p></td><td id="b458139d634qu" rowspan="1" colspan="1"><p id="69ca1f453dx0t">酷应用编码：</p><ul id="04cce6decbhye"><li id="ab56eb21374s4"><p id="b0df27a3f50e8">群聊：</p><ul id="7a1673b6154sd"><li id="3ba53cdc50lj4"><p id="2c1b3c49f9xkc">基于群模板创建的群，不需要传入此参数。</p></li><li id="bffa89c925quw"><p id="d75b792386ify">安装群聊酷应用的群，<b>必须</b>传入此参数。
+<img src="https://help-static-aliyun-doc.aliyuncs.com/file-manage-files/zh-CN/20221206/tpjx/群聊酷应用编码.jpg" alt="" class="image break" / /></p></li></ul></li><li id="8670ebe5cccpi"><p id="27e948e7c43rq">单聊助手：不需传入此参数。</p></li></ul></td></tr><tr outputclass="row row-level-14" id="eb5752ca3a2vo" class="row row-level-14"><td id="3597df01f1ul0" rowspan="1" colspan="1"><p id="562eae8893rym">groupTemplateId</p></td><td id="9214b314940i6" rowspan="1" colspan="1"><p id="da20705872yv0">String</p></td><td id="f1ac4326026uw" rowspan="1" colspan="1"><p id="65ac8b0e77h9m">否</p></td><td id="53b7107d45t16" rowspan="1" colspan="1"><p id="10a72c41c9qtl">群模板id：</p><ul id="394399388008c"><li id="61c83fd5aee29"><p id="56115df276bug">群聊：</p><ul id="b541947b4631y"><li id="a504023e55pc2"><p id="196caceabf59k">·基于群模板创建的群，<b>必须</b>传入此参数。<img src="https://help-static-aliyun-doc.aliyuncs.com/file-manage-files/zh-CN/20221018/sybz/群模板id.png" alt="" class="image break" / /></p></li><li id="a89c1ae1c1uzr"><p id="5f3982a952n8z">安装群聊酷应用的群，不需要传入此参数。</p></li></ul></li><li id="5fd8005712kdv"><p id="b09a4baf3diq3">其他会话类型，不需传入此参数。</p></li></ul></td></tr><tr outputclass="row row-level-15" id="f859ad494cefz" class="row row-level-15"><td id="c678c8c3daz4d" rowspan="1" colspan="1"><p id="1ae9a43655wpl">receiverUserIdList</p></td><td id="350c9500d976e" rowspan="1" colspan="1"><p id="bc3a38e265bj3">Array of String</p></td><td id="d6ad6a6e52lwb" rowspan="1" colspan="1"><p id="089283970czk2">否</p></td><td id="e865c24ce1pdy" rowspan="1" colspan="1"><p id="255128c4f0k27">吊顶可见者userId，最多100个，可通过<a href="https://open.dingtalk.com/document/development/query-the-list-of-department-userids#" id="a12cc6d650xyd" class="xref">获取部门用户userid列表</a>或<a href="https://open.dingtalk.com/document/development/query-user-details#" id="a7ffdeaa10zz8" class="xref">查询用户详情</a>接口获取。</p><ul id="6c6b8534916hy"><li id="ebdfa66ba7r3p"><p id="515a0b991222i">群聊：</p><ul id="66f078d930exf"><li id="29c7819e47p9d"><p id="a983aab981770">若不传入<code data-tag="code" id="bd7bf56707te9" class="code">receiverUserIdList</code>和<code data-tag="code" id="3d3580785cjjs" class="code">receiverUnionIdList</code>，则默认吊顶对会话内所有人可见。</p></li><li id="86911dbe386bk"><p id="eda93f7d969wr">传入参数<code data-tag="code" id="1b4c74a44eh53" class="code">receiverUserIdList</code>或<code data-tag="code" id="6d950269efp4t" class="code">receiverUnionIdList</code>，则吊顶仅对对应用户可见。</p></li></ul></li><li id="55eb08638f13i"><p id="7a112448f2ove">单聊助手：不需要传入此参数。</p></li></ul></td></tr><tr outputclass="row row-level-16" id="4b719725ba5zz" class="row row-level-16"><td id="c1715e1bbej6o" rowspan="1" colspan="1"><p id="82d42f3774o0p">receiverUnionIdList</p></td><td id="d09aaa17fcde8" rowspan="1" colspan="1"><p id="5569406d2akqw">Array of String</p></td><td id="d4f295f7a9mtp" rowspan="1" colspan="1"><p id="cc4019b589vq4">否</p></td><td id="7964cdd740z3t" rowspan="1" colspan="1"><p id="1ef8e02893pn8">吊顶可见者unionId，最多100个，可通过<a href="https://open.dingtalk.com/document/development/query-user-details#" id="d503b89a32ztn" class="xref">查询用户详情</a>接口获取。</p><p id="f31cc5f586dex">群聊：</p><ul id="71d45d2da2nvw"><li id="f36d605eaf92t"><p id="31304efb2a90y">若不传入receiverUserIdList和receiverUnionIdList，则默认吊顶对会话内所有人可见。</p></li><li id="7dd62ba1b9a69"><p id="aa3ce0dbd0gwt">传入参数receiverUserIdList或receiverUnionIdList，则吊顶仅对对应用户可见。</p></li></ul><p id="e354c5b116dbu">单聊助手：不需要传入此参数。</p></td></tr><tr outputclass="row row-level-17" id="561617a09e6f0" class="row row-level-17"><td id="a8a1836668ea3" rowspan="1" colspan="1"><p id="b8f2c77d41yxp">expiredTime</p></td><td id="5a9e6e3311ar2" rowspan="1" colspan="1"><p id="4afd5270e1n5q">Long</p></td><td id="d25dae3a1enq1" rowspan="1" colspan="1"><p id="971162355a1wo">否</p></td><td id="da08b7591fg4f" rowspan="1" colspan="1"><p id="05d15930786rg">吊顶的过期时间，毫秒级时间戳。</p><p class="note-icon-wrapper" id="385709250dmrt"></p><p data-tag="p" id="0ed4b89005ovk" class="p"></p><p id="db0d72977afln">不传入此值，默认不过期。</p><p id="e4b135e5fak4e"></p></td></tr><tr outputclass="row row-level-18" id="de7ba8fe1d8tn" class="row row-level-18"><td id="cce301f699gw3" rowspan="1" colspan="1"><p id="f2dbd4b1fcub3">platforms</p></td><td id="edda7e3bcdae3" rowspan="1" colspan="1"><p id="81c1134a7eneo">String</p></td><td id="5892691251axk" rowspan="1" colspan="1"><p id="c30305aa03jna">否</p></td><td id="764719ea47qny" rowspan="1" colspan="1"><p id="8fc87c851f0p5">期望吊顶的端，如果有多个用“｜”分隔。 例如：ios|mac|android|win表示iOS、MAC、安卓和windows端。</p></td></tr></tbody></table></section><section id="section-request-body-example" class="section"><h3 id="h3-request-body-example" data-tag="h3" class="h3">请求示例</h3><div outputclass="tabbed-codeblock" data-tag="fig" id="figure-kzw-2yh-gdl" class="tabbed-codeblock-box"><div class="tab-box"></div><input type="radio" name="check-figure-kzw-2yh-gdl" id="figure-kzw-2yh-gdl-HTTP-tab" checked="checked" /><label for="figure-kzw-2yh-gdl-HTTP-tab">HTTP</label><div class="codeblock-item"><pre id="codeblock-kzq-8uv-z4v" outputclass="language-HTTP" code-type="xCode" data-tag="codeblock" class="pre codeblock language-HTTP"><code>POST /v2.0/im/topBoxes HTTP/1.1
+Host:api.dingtalk.com
+x-acs-dingtalk-access-token:xxx
+Content-Type:application/json
+
+{
+  "cardTemplateId" : "xxx",
+  "outTrackId" : "xxx",
+  "callbackRouteKey" : "xxx",
+  "cardData" : {
+    "cardParamMap" : {
+      "key" : "xxx"
+    }
+  },
+  "userIdPrivateDataMap" : {
+    "key" : {
+      "cardParamMap" : {
+        "key" : "xxx"
+      }
+    }
+  },
+  "unionIdPrivateDataMap" : {
+    "key" : {
+      "cardParamMap" : {
+        "key" : "xxx"
+      }
+    }
+  },
+  "cardSettings" : {
+    "pullStrategy" : false
+  },
+  "conversationType" : 1,
+  "openConversationId" : "cidxxxxx==",
+  "userId" : "xxx",
+  "unionId" : "xxx",
+  "robotCode" : "xxx",
+  "coolAppCode" : "COOLAPP-X-XXX",
+  "groupTemplateId" : "xxx-xxx-xxx",
+  "receiverUserIdList" : [ "xxx" ],
+  "receiverUnionIdList" : [ "xxx" ],
+  "expiredTime" : 1850042969000,
+  "platforms" : "ios|win"
+}</code></pre></div><input type="radio" name="check-figure-kzw-2yh-gdl" id="figure-kzw-2yh-gdl-java-tab" /><label for="figure-kzw-2yh-gdl-java-tab">Java</label><div class="codeblock-item"><pre id="codeblock-wbi-hhr-mel" outputclass="language-java" code-type="xCode" data-tag="codeblock" class="pre codeblock language-java"><code>// This file is auto-generated, don't edit it. Thanks.
+package com.aliyun.sample;
+
+import com.aliyun.tea.*;
+
+public class Sample {
+
+    /**
+     * &lt;b&gt;description&lt;/b&gt; :
+     * &lt;p&gt;使用 Token 初始化账号Client&lt;/p&gt;
+     * @return Client
+     * 
+     * @throws Exception
+     */
+    public static com.aliyun.dingtalkim_2_0.Client createClient() throws Exception {
+        com.aliyun.teaopenapi.models.Config config = new com.aliyun.teaopenapi.models.Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        return new com.aliyun.dingtalkim_2_0.Client(config);
+    }
+
+    public static void main(String[] args_) throws Exception {
+        java.util.List&lt;String&gt; args = java.util.Arrays.asList(args_);
+        com.aliyun.dingtalkim_2_0.Client client = Sample.createClient();
+        com.aliyun.dingtalkim_2_0.models.CreateTopboxHeaders createTopboxHeaders = new com.aliyun.dingtalkim_2_0.models.CreateTopboxHeaders();
+        createTopboxHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        com.aliyun.dingtalkim_2_0.models.CreateTopboxRequest.CreateTopboxRequestCardSettings cardSettings = new com.aliyun.dingtalkim_2_0.models.CreateTopboxRequest.CreateTopboxRequestCardSettings()
+                .setPullStrategy(false);
+        java.util.Map&lt;String, String&gt; unionIdPrivateDataMapValueKeyCardParamMap = TeaConverter.buildMap(
+            new TeaPair("key", "xxx")
+        );
+        com.aliyun.dingtalkim_2_0.models.UnionIdPrivateDataMapValue unionIdPrivateDataMapValueKey = new com.aliyun.dingtalkim_2_0.models.UnionIdPrivateDataMapValue()
+                .setCardParamMap(unionIdPrivateDataMapValueKeyCardParamMap);
+        java.util.Map&lt;String, com.aliyun.dingtalkim_2_0.models.UnionIdPrivateDataMapValue&gt; unionIdPrivateDataMap = TeaConverter.buildMap(
+            new TeaPair("unionIdPrivateDataMapValueKey", unionIdPrivateDataMapValueKey)
+        );
+        java.util.Map&lt;String, String&gt; userIdPrivateDataMapValueKeyCardParamMap = TeaConverter.buildMap(
+            new TeaPair("key", "xxx")
+        );
+        com.aliyun.dingtalkim_2_0.models.UserIdPrivateDataMapValue userIdPrivateDataMapValueKey = new com.aliyun.dingtalkim_2_0.models.UserIdPrivateDataMapValue()
+                .setCardParamMap(userIdPrivateDataMapValueKeyCardParamMap);
+        java.util.Map&lt;String, com.aliyun.dingtalkim_2_0.models.UserIdPrivateDataMapValue&gt; userIdPrivateDataMap = TeaConverter.buildMap(
+            new TeaPair("userIdPrivateDataMapValueKey", userIdPrivateDataMapValueKey)
+        );
+        java.util.Map&lt;String, String&gt; cardDataCardParamMap = TeaConverter.buildMap(
+            new TeaPair("key", "xxx")
+        );
+        com.aliyun.dingtalkim_2_0.models.CreateTopboxRequest.CreateTopboxRequestCardData cardData = new com.aliyun.dingtalkim_2_0.models.CreateTopboxRequest.CreateTopboxRequestCardData()
+                .setCardParamMap(cardDataCardParamMap);
+        com.aliyun.dingtalkim_2_0.models.CreateTopboxRequest createTopboxRequest = new com.aliyun.dingtalkim_2_0.models.CreateTopboxRequest()
+                .setCardTemplateId("xxx")
+                .setOutTrackId("xxx")
+                .setCallbackRouteKey("xxx")
+                .setCardData(cardData)
+                .setUserIdPrivateDataMap(userIdPrivateDataMap)
+                .setUnionIdPrivateDataMap(unionIdPrivateDataMap)
+                .setCardSettings(cardSettings)
+                .setConversationType(1)
+                .setOpenConversationId("cidxxxxx==")
+                .setUserId("xxx")
+                .setUnionId("xxx")
+                .setRobotCode("xxx")
+                .setCoolAppCode("COOLAPP-X-XXX")
+                .setGroupTemplateId("xxx-xxx-xxx")
+                .setReceiverUserIdList(java.util.Arrays.asList(
+                    "xxx"
+                ))
+                .setReceiverUnionIdList(java.util.Arrays.asList(
+                    "xxx"
+                ))
+                .setExpiredTime(1850042969000L)
+                .setPlatforms("ios|win");
+        try {
+            client.createTopboxWithOptions(createTopboxRequest, createTopboxHeaders, new com.aliyun.teautil.models.RuntimeOptions());
+        } catch (TeaException err) {
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        } catch (Exception _err) {
+            TeaException err = new TeaException(_err.getMessage(), _err);
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        }        
+    }
+}</code></pre></div><input type="radio" name="check-figure-kzw-2yh-gdl" id="figure-kzw-2yh-gdl-python-tab" /><label for="figure-kzw-2yh-gdl-python-tab">Python</label><div class="codeblock-item"><pre id="codeblock-fwn-kty-56x" outputclass="language-python" code-type="xCode" data-tag="codeblock" class="pre codeblock language-python"><code># -*- coding: utf-8 -*-
+# This file is auto-generated, don't edit it. Thanks.
+import os
+import sys
+
+from typing import List
+
+from alibabacloud_dingtalk.im_2_0.client import Client as dingtalkim_2_0Client
+from alibabacloud_tea_openapi import models as open_api_models
+from alibabacloud_dingtalk.im_2_0 import models as dingtalkim__2__0_models
+from alibabacloud_tea_util import models as util_models
+from alibabacloud_tea_util.client import Client as UtilClient
+
+
+class Sample:
+    def __init__(self):
+        pass
+
+    @staticmethod
+    def create_client() -&gt; dingtalkim_2_0Client:
+        """
+        使用 Token 初始化账号Client
+        @return: Client
+        @throws Exception
+        """
+        config = open_api_models.Config()
+        config.protocol = 'https'
+        config.region_id = 'central'
+        return dingtalkim_2_0Client(config)
+
+    @staticmethod
+    def main(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        create_topbox_headers = dingtalkim__2__0_models.CreateTopboxHeaders()
+        create_topbox_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        card_settings = dingtalkim__2__0_models.CreateTopboxRequestCardSettings(
+            pull_strategy=False
+        )
+        union_id_private_data_map_value_key_card_param_map = {
+            'key': 'xxx'
+        }
+        union_id_private_data_map_value_key = dingtalkim__2__0_models.UnionIdPrivateDataMapValue(
+            card_param_map=union_id_private_data_map_value_key_card_param_map
+        )
+        union_id_private_data_map = {
+            'unionIdPrivateDataMapValueKey': union_id_private_data_map_value_key
+        }
+        user_id_private_data_map_value_key_card_param_map = {
+            'key': 'xxx'
+        }
+        user_id_private_data_map_value_key = dingtalkim__2__0_models.UserIdPrivateDataMapValue(
+            card_param_map=user_id_private_data_map_value_key_card_param_map
+        )
+        user_id_private_data_map = {
+            'userIdPrivateDataMapValueKey': user_id_private_data_map_value_key
+        }
+        card_data_card_param_map = {
+            'key': 'xxx'
+        }
+        card_data = dingtalkim__2__0_models.CreateTopboxRequestCardData(
+            card_param_map=card_data_card_param_map
+        )
+        create_topbox_request = dingtalkim__2__0_models.CreateTopboxRequest(
+            card_template_id='xxx',
+            out_track_id='xxx',
+            callback_route_key='xxx',
+            card_data=card_data,
+            user_id_private_data_map=user_id_private_data_map,
+            union_id_private_data_map=union_id_private_data_map,
+            card_settings=card_settings,
+            conversation_type=1,
+            open_conversation_id='cidxxxxx==',
+            user_id='xxx',
+            union_id='xxx',
+            robot_code='xxx',
+            cool_app_code='COOLAPP-X-XXX',
+            group_template_id='xxx-xxx-xxx',
+            receiver_user_id_list=[
+                'xxx'
+            ],
+            receiver_union_id_list=[
+                'xxx'
+            ],
+            expired_time=1850042969000,
+            platforms='ios|win'
+        )
+        try:
+            client.create_topbox_with_options(create_topbox_request, create_topbox_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+    @staticmethod
+    async def main_async(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        create_topbox_headers = dingtalkim__2__0_models.CreateTopboxHeaders()
+        create_topbox_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        card_settings = dingtalkim__2__0_models.CreateTopboxRequestCardSettings(
+            pull_strategy=False
+        )
+        union_id_private_data_map_value_key_card_param_map = {
+            'key': 'xxx'
+        }
+        union_id_private_data_map_value_key = dingtalkim__2__0_models.UnionIdPrivateDataMapValue(
+            card_param_map=union_id_private_data_map_value_key_card_param_map
+        )
+        union_id_private_data_map = {
+            'unionIdPrivateDataMapValueKey': union_id_private_data_map_value_key
+        }
+        user_id_private_data_map_value_key_card_param_map = {
+            'key': 'xxx'
+        }
+        user_id_private_data_map_value_key = dingtalkim__2__0_models.UserIdPrivateDataMapValue(
+            card_param_map=user_id_private_data_map_value_key_card_param_map
+        )
+        user_id_private_data_map = {
+            'userIdPrivateDataMapValueKey': user_id_private_data_map_value_key
+        }
+        card_data_card_param_map = {
+            'key': 'xxx'
+        }
+        card_data = dingtalkim__2__0_models.CreateTopboxRequestCardData(
+            card_param_map=card_data_card_param_map
+        )
+        create_topbox_request = dingtalkim__2__0_models.CreateTopboxRequest(
+            card_template_id='xxx',
+            out_track_id='xxx',
+            callback_route_key='xxx',
+            card_data=card_data,
+            user_id_private_data_map=user_id_private_data_map,
+            union_id_private_data_map=union_id_private_data_map,
+            card_settings=card_settings,
+            conversation_type=1,
+            open_conversation_id='cidxxxxx==',
+            user_id='xxx',
+            union_id='xxx',
+            robot_code='xxx',
+            cool_app_code='COOLAPP-X-XXX',
+            group_template_id='xxx-xxx-xxx',
+            receiver_user_id_list=[
+                'xxx'
+            ],
+            receiver_union_id_list=[
+                'xxx'
+            ],
+            expired_time=1850042969000,
+            platforms='ios|win'
+        )
+        try:
+            await client.create_topbox_with_options_async(create_topbox_request, create_topbox_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+
+if __name__ == '__main__':
+    Sample.main(sys.argv[1:])</code></pre></div><input type="radio" name="check-figure-kzw-2yh-gdl" id="figure-kzw-2yh-gdl-php-tab" /><label for="figure-kzw-2yh-gdl-php-tab">PHP</label><div class="codeblock-item"><pre id="codeblock-frw-q0k-ju3" outputclass="language-php" code-type="xCode" data-tag="codeblock" class="pre codeblock language-php"><code>&lt;?php
+
+// This file is auto-generated, don't edit it. Thanks.
+namespace AlibabaCloud\SDK\Sample;
+
+use AlibabaCloud\SDK\Dingtalk\Vim_2_0\Dingtalk;
+use \Exception;
+use AlibabaCloud\Tea\Exception\TeaError;
+use AlibabaCloud\Tea\Utils\Utils;
+
+use Darabonba\OpenApi\Models\Config;
+use AlibabaCloud\SDK\Dingtalk\Vim_2_0\Models\CreateTopboxHeaders;
+use AlibabaCloud\SDK\Dingtalk\Vim_2_0\Models\CreateTopboxRequest\cardSettings;
+use AlibabaCloud\SDK\Dingtalk\Vim_2_0\Models\UnionIdPrivateDataMapValue;
+use AlibabaCloud\SDK\Dingtalk\Vim_2_0\Models\UserIdPrivateDataMapValue;
+use AlibabaCloud\SDK\Dingtalk\Vim_2_0\Models\CreateTopboxRequest\cardData;
+use AlibabaCloud\SDK\Dingtalk\Vim_2_0\Models\CreateTopboxRequest;
+use AlibabaCloud\Tea\Utils\Utils\RuntimeOptions;
+
+class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Dingtalk Client
+     */
+    public static function createClient(){
+        $config = new Config([]);
+        $config-&gt;protocol = "https";
+        $config-&gt;regionId = "central";
+        return new Dingtalk($config);
+    }
+
+    /**
+     * @param string[] $args
+     * @return void
+     */
+    public static function main($args){
+        $client = self::createClient();
+        $createTopboxHeaders = new CreateTopboxHeaders([]);
+        $createTopboxHeaders-&gt;xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        $cardSettings = new cardSettings([
+            "pullStrategy" =&gt; false
+        ]);
+        $unionIdPrivateDataMapValueKeyCardParamMap = [
+            "key" =&gt; "xxx"
+        ];
+        $unionIdPrivateDataMapValueKey = new UnionIdPrivateDataMapValue([
+            "cardParamMap" =&gt; $unionIdPrivateDataMapValueKeyCardParamMap
+        ]);
+        $unionIdPrivateDataMap = [
+            "unionIdPrivateDataMapValueKey" =&gt; $unionIdPrivateDataMapValueKey
+        ];
+        $userIdPrivateDataMapValueKeyCardParamMap = [
+            "key" =&gt; "xxx"
+        ];
+        $userIdPrivateDataMapValueKey = new UserIdPrivateDataMapValue([
+            "cardParamMap" =&gt; $userIdPrivateDataMapValueKeyCardParamMap
+        ]);
+        $userIdPrivateDataMap = [
+            "userIdPrivateDataMapValueKey" =&gt; $userIdPrivateDataMapValueKey
+        ];
+        $cardDataCardParamMap = [
+            "key" =&gt; "xxx"
+        ];
+        $cardData = new cardData([
+            "cardParamMap" =&gt; $cardDataCardParamMap
+        ]);
+        $createTopboxRequest = new CreateTopboxRequest([
+            "cardTemplateId" =&gt; "xxx",
+            "outTrackId" =&gt; "xxx",
+            "callbackRouteKey" =&gt; "xxx",
+            "cardData" =&gt; $cardData,
+            "userIdPrivateDataMap" =&gt; $userIdPrivateDataMap,
+            "unionIdPrivateDataMap" =&gt; $unionIdPrivateDataMap,
+            "cardSettings" =&gt; $cardSettings,
+            "conversationType" =&gt; 1,
+            "openConversationId" =&gt; "cidxxxxx==",
+            "userId" =&gt; "xxx",
+            "unionId" =&gt; "xxx",
+            "robotCode" =&gt; "xxx",
+            "coolAppCode" =&gt; "COOLAPP-X-XXX",
+            "groupTemplateId" =&gt; "xxx-xxx-xxx",
+            "receiverUserIdList" =&gt; [
+                "xxx"
+            ],
+            "receiverUnionIdList" =&gt; [
+                "xxx"
+            ],
+            "expiredTime" =&gt; 1850042969000,
+            "platforms" =&gt; "ios|win"
+        ]);
+        try {
+            $client-&gt;createTopboxWithOptions($createTopboxRequest, $createTopboxHeaders, new RuntimeOptions([]));
+        }
+        catch (Exception $err) {
+            if (!($err instanceof TeaError)) {
+                $err = new TeaError([], $err-&gt;getMessage(), $err-&gt;getCode(), $err);
+            }
+            if (!Utils::empty_($err-&gt;code) &amp;&amp; !Utils::empty_($err-&gt;message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+        }
+    }
+}
+$path = __DIR__ . \DIRECTORY_SEPARATOR . '..' . \DIRECTORY_SEPARATOR . 'vendor' . \DIRECTORY_SEPARATOR . 'autoload.php';
+if (file_exists($path)) {
+    require_once $path;
+}
+Sample::main(array_slice($argv, 1));</code></pre></div><input type="radio" name="check-figure-kzw-2yh-gdl" id="figure-kzw-2yh-gdl-go-tab" /><label for="figure-kzw-2yh-gdl-go-tab">Go</label><div class="codeblock-item"><pre id="codeblock-glo-ct4-ixc" outputclass="language-go" code-type="xCode" data-tag="codeblock" class="pre codeblock language-go"><code>// This file is auto-generated, don't edit it. Thanks.
+package main
+
+import (
+  "encoding/json"
+  "strings"
+  "fmt"
+  "os"
+  util  "github.com/alibabacloud-go/tea-utils/v2/service"
+  dingtalkim_2_0  "github.com/alibabacloud-go/dingtalk/im_2_0"
+  openapi  "github.com/alibabacloud-go/darabonba-openapi/v2/client"
+  "github.com/alibabacloud-go/tea/tea"
+)
+
+
+// Description:
+// 
+// 使用 Token 初始化账号Client
+// 
+// @return Client
+// 
+// @throws Exception
+func CreateClient () (_result *dingtalkim_2_0.Client, _err error) {
+  config := &amp;openapi.Config{}
+  config.Protocol = tea.String("https")
+  config.RegionId = tea.String("central")
+  _result = &amp;dingtalkim_2_0.Client{}
+  _result, _err = dingtalkim_2_0.NewClient(config)
+  return _result, _err
+}
+
+func _main (args []*string) (_err error) {
+  client, _err := CreateClient()
+  if _err != nil {
+    return _err
+  }
+
+  createTopboxHeaders := &amp;dingtalkim_2_0.CreateTopboxHeaders{}
+  createTopboxHeaders.XAcsDingtalkAccessToken = tea.String("&lt;your access token&gt;")
+  cardSettings := &amp;dingtalkim_2_0.CreateTopboxRequestCardSettings{
+    PullStrategy: tea.Bool(false),
+  }
+  unionIdPrivateDataMapValueKeyCardParamMap := map[string]*string{
+    "key": tea.String("xxx"),
+  }
+  unionIdPrivateDataMapValueKey := &amp;dingtalkim_2_0.UnionIdPrivateDataMapValue{
+    CardParamMap: unionIdPrivateDataMapValueKeyCardParamMap,
+  }
+  unionIdPrivateDataMap := map[string]*dingtalkim_2_0.UnionIdPrivateDataMapValue{
+    "unionIdPrivateDataMapValueKey": unionIdPrivateDataMapValueKey,
+  }
+  userIdPrivateDataMapValueKeyCardParamMap := map[string]*string{
+    "key": tea.String("xxx"),
+  }
+  userIdPrivateDataMapValueKey := &amp;dingtalkim_2_0.UserIdPrivateDataMapValue{
+    CardParamMap: userIdPrivateDataMapValueKeyCardParamMap,
+  }
+  userIdPrivateDataMap := map[string]*dingtalkim_2_0.UserIdPrivateDataMapValue{
+    "userIdPrivateDataMapValueKey": userIdPrivateDataMapValueKey,
+  }
+  cardDataCardParamMap := map[string]*string{
+    "key": tea.String("xxx"),
+  }
+  cardData := &amp;dingtalkim_2_0.CreateTopboxRequestCardData{
+    CardParamMap: cardDataCardParamMap,
+  }
+  createTopboxRequest := &amp;dingtalkim_2_0.CreateTopboxRequest{
+    CardTemplateId: tea.String("xxx"),
+    OutTrackId: tea.String("xxx"),
+    CallbackRouteKey: tea.String("xxx"),
+    CardData: cardData,
+    UserIdPrivateDataMap: userIdPrivateDataMap,
+    UnionIdPrivateDataMap: unionIdPrivateDataMap,
+    CardSettings: cardSettings,
+    ConversationType: tea.Int32(1),
+    OpenConversationId: tea.String("cidxxxxx=="),
+    UserId: tea.String("xxx"),
+    UnionId: tea.String("xxx"),
+    RobotCode: tea.String("xxx"),
+    CoolAppCode: tea.String("COOLAPP-X-XXX"),
+    GroupTemplateId: tea.String("xxx-xxx-xxx"),
+    ReceiverUserIdList: []*string{tea.String("xxx")},
+    ReceiverUnionIdList: []*string{tea.String("xxx")},
+    ExpiredTime: tea.Int64(1850042969000),
+    Platforms: tea.String("ios|win"),
+  }
+  tryErr := func()(_e error) {
+    defer func() {
+      if r := tea.Recover(recover()); r != nil {
+        _e = r
+      }
+    }()
+    _, _err = client.CreateTopboxWithOptions(createTopboxRequest, createTopboxHeaders, &amp;util.RuntimeOptions{})
+    if _err != nil {
+      return _err
+    }
+
+    return nil
+  }()
+
+  if tryErr != nil {
+    var err = &amp;tea.SDKError{}
+    if _t, ok := tryErr.(*tea.SDKError); ok {
+      err = _t
+    } else {
+      err.Message = tea.String(tryErr.Error())
+    }
+    if !tea.BoolValue(util.Empty(err.Code)) &amp;&amp; !tea.BoolValue(util.Empty(err.Message)) {
+      // err 中含有 code 和 message 属性，可帮助开发定位问题
+    }
+
+  }
+  return _err
+}
+
+
+func main() {
+  err := _main(tea.StringSlice(os.Args[1:]))
+  if err != nil {
+    panic(err)
+  }
+}</code></pre></div><input type="radio" name="check-figure-kzw-2yh-gdl" id="figure-kzw-2yh-gdl-nodejs-tab" /><label for="figure-kzw-2yh-gdl-nodejs-tab">Node.js</label><div class="codeblock-item"><pre id="codeblock-plh-2pu-mby" outputclass="language-nodejs" code-type="xCode" data-tag="codeblock" class="pre codeblock language-nodejs"><code>'use strict';
+// This file is auto-generated, don't edit it
+const Util = require('@alicloud/tea-util');
+const dingtalkim_2_0 = require('@alicloud/dingtalk/im_2_0');
+const OpenApi = require('@alicloud/openapi-client');
+const Tea = require('@alicloud/tea-typescript');
+
+class Client {
+
+  /**
+   * 使用 Token 初始化账号Client
+   * @return Client
+   * @throws Exception
+   */
+  static createClient() {
+    let config = new OpenApi.Config({ });
+    config.protocol = 'https';
+    config.regionId = 'central';
+    return new dingtalkim_2_0.default(config);
+  }
+
+  static async main(args) {
+    let client = Client.createClient();
+    let createTopboxHeaders = new dingtalkim_2_0.CreateTopboxHeaders({ });
+    createTopboxHeaders.xAcsDingtalkAccessToken = '&lt;your access token&gt;';
+    let cardSettings = new dingtalkim_2_0.CreateTopboxRequestCardSettings({
+      pullStrategy: false,
+    });
+    let unionIdPrivateDataMapValueKeyCardParamMap = {
+      key: 'xxx',
+    };
+    let unionIdPrivateDataMapValueKey = new dingtalkim_2_0.UnionIdPrivateDataMapValue({
+      cardParamMap: unionIdPrivateDataMapValueKeyCardParamMap,
+    });
+    let unionIdPrivateDataMap = {
+      unionIdPrivateDataMapValueKey: unionIdPrivateDataMapValueKey,
+    };
+    let userIdPrivateDataMapValueKeyCardParamMap = {
+      key: 'xxx',
+    };
+    let userIdPrivateDataMapValueKey = new dingtalkim_2_0.UserIdPrivateDataMapValue({
+      cardParamMap: userIdPrivateDataMapValueKeyCardParamMap,
+    });
+    let userIdPrivateDataMap = {
+      userIdPrivateDataMapValueKey: userIdPrivateDataMapValueKey,
+    };
+    let cardDataCardParamMap = {
+      key: 'xxx',
+    };
+    let cardData = new dingtalkim_2_0.CreateTopboxRequestCardData({
+      cardParamMap: cardDataCardParamMap,
+    });
+    let createTopboxRequest = new dingtalkim_2_0.CreateTopboxRequest({
+      cardTemplateId: 'xxx',
+      outTrackId: 'xxx',
+      callbackRouteKey: 'xxx',
+      cardData: cardData,
+      userIdPrivateDataMap: userIdPrivateDataMap,
+      unionIdPrivateDataMap: unionIdPrivateDataMap,
+      cardSettings: cardSettings,
+      conversationType: 1,
+      openConversationId: 'cidxxxxx==',
+      userId: 'xxx',
+      unionId: 'xxx',
+      robotCode: 'xxx',
+      coolAppCode: 'COOLAPP-X-XXX',
+      groupTemplateId: 'xxx-xxx-xxx',
+      receiverUserIdList: [
+        'xxx'
+      ],
+      receiverUnionIdList: [
+        'xxx'
+      ],
+      expiredTime: 1850042969000,
+      platforms: 'ios|win',
+    });
+    try {
+      await client.createTopboxWithOptions(createTopboxRequest, createTopboxHeaders, new Util.RuntimeOptions({ }));
+    } catch (err) {
+      if (!Util.default.empty(err.code) &amp;&amp; !Util.default.empty(err.message)) {
+        // err 中含有 code 和 message 属性，可帮助开发定位问题
+      }
+
+    }    
+  }
+
+}
+
+exports.Client = Client;
+Client.main(process.argv.slice(2));</code></pre></div><input type="radio" name="check-figure-kzw-2yh-gdl" id="figure-kzw-2yh-gdl-csharp-tab" /><label for="figure-kzw-2yh-gdl-csharp-tab">C#</label><div class="codeblock-item"><pre id="codeblock-1j3-lby-ojh" outputclass="language-csharp" code-type="xCode" data-tag="codeblock" class="pre codeblock language-csharp"><code>// This file is auto-generated, don't edit it. Thanks.
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
+
+using Tea;
+using Tea.Utils;
+
+
+namespace AlibabaCloud.SDK.Sample
+{
+    public class Sample 
+    {
+
+        /// &lt;term&gt;&lt;b&gt;Description:&lt;/b&gt;&lt;/term&gt;
+        /// &lt;description&gt;
+        /// &lt;para&gt;使用 Token 初始化账号Client&lt;/para&gt;
+        /// &lt;/description&gt;
+        /// 
+        /// &lt;returns&gt;
+        /// Client
+        /// &lt;/returns&gt;
+        /// 
+        /// &lt;term&gt;&lt;b&gt;Exception:&lt;/b&gt;&lt;/term&gt;
+        /// Exception
+        public static AlibabaCloud.SDK.Dingtalkim_2_0.Client CreateClient()
+        {
+            AlibabaCloud.OpenApiClient.Models.Config config = new AlibabaCloud.OpenApiClient.Models.Config();
+            config.Protocol = "https";
+            config.RegionId = "central";
+            return new AlibabaCloud.SDK.Dingtalkim_2_0.Client(config);
+        }
+
+        public static void Main(string[] args)
+        {
+            AlibabaCloud.SDK.Dingtalkim_2_0.Client client = CreateClient();
+            AlibabaCloud.SDK.Dingtalkim_2_0.Models.CreateTopboxHeaders createTopboxHeaders = new AlibabaCloud.SDK.Dingtalkim_2_0.Models.CreateTopboxHeaders();
+            createTopboxHeaders.XAcsDingtalkAccessToken = "&lt;your access token&gt;";
+            AlibabaCloud.SDK.Dingtalkim_2_0.Models.CreateTopboxRequest.CreateTopboxRequestCardSettings cardSettings = new AlibabaCloud.SDK.Dingtalkim_2_0.Models.CreateTopboxRequest.CreateTopboxRequestCardSettings
+            {
+                PullStrategy = false,
+            };
+            Dictionary&lt;string, string&gt; unionIdPrivateDataMapValueKeyCardParamMap = new Dictionary&lt;string, string&gt;
+            {
+                {"key", "xxx"},
+            };
+            AlibabaCloud.SDK.Dingtalkim_2_0.Models.UnionIdPrivateDataMapValue unionIdPrivateDataMapValueKey = new AlibabaCloud.SDK.Dingtalkim_2_0.Models.UnionIdPrivateDataMapValue
+            {
+                CardParamMap = unionIdPrivateDataMapValueKeyCardParamMap,
+            };
+            Dictionary&lt;string, AlibabaCloud.SDK.Dingtalkim_2_0.Models.UnionIdPrivateDataMapValue&gt; unionIdPrivateDataMap = new Dictionary&lt;string, AlibabaCloud.SDK.Dingtalkim_2_0.Models.UnionIdPrivateDataMapValue&gt;
+            {
+                {"unionIdPrivateDataMapValueKey", unionIdPrivateDataMapValueKey},
+            };
+            Dictionary&lt;string, string&gt; userIdPrivateDataMapValueKeyCardParamMap = new Dictionary&lt;string, string&gt;
+            {
+                {"key", "xxx"},
+            };
+            AlibabaCloud.SDK.Dingtalkim_2_0.Models.UserIdPrivateDataMapValue userIdPrivateDataMapValueKey = new AlibabaCloud.SDK.Dingtalkim_2_0.Models.UserIdPrivateDataMapValue
+            {
+                CardParamMap = userIdPrivateDataMapValueKeyCardParamMap,
+            };
+            Dictionary&lt;string, AlibabaCloud.SDK.Dingtalkim_2_0.Models.UserIdPrivateDataMapValue&gt; userIdPrivateDataMap = new Dictionary&lt;string, AlibabaCloud.SDK.Dingtalkim_2_0.Models.UserIdPrivateDataMapValue&gt;
+            {
+                {"userIdPrivateDataMapValueKey", userIdPrivateDataMapValueKey},
+            };
+            Dictionary&lt;string, string&gt; cardDataCardParamMap = new Dictionary&lt;string, string&gt;
+            {
+                {"key", "xxx"},
+            };
+            AlibabaCloud.SDK.Dingtalkim_2_0.Models.CreateTopboxRequest.CreateTopboxRequestCardData cardData = new AlibabaCloud.SDK.Dingtalkim_2_0.Models.CreateTopboxRequest.CreateTopboxRequestCardData
+            {
+                CardParamMap = cardDataCardParamMap,
+            };
+            AlibabaCloud.SDK.Dingtalkim_2_0.Models.CreateTopboxRequest createTopboxRequest = new AlibabaCloud.SDK.Dingtalkim_2_0.Models.CreateTopboxRequest
+            {
+                CardTemplateId = "xxx",
+                OutTrackId = "xxx",
+                CallbackRouteKey = "xxx",
+                CardData = cardData,
+                UserIdPrivateDataMap = userIdPrivateDataMap,
+                UnionIdPrivateDataMap = unionIdPrivateDataMap,
+                CardSettings = cardSettings,
+                ConversationType = 1,
+                OpenConversationId = "cidxxxxx==",
+                UserId = "xxx",
+                UnionId = "xxx",
+                RobotCode = "xxx",
+                CoolAppCode = "COOLAPP-X-XXX",
+                GroupTemplateId = "xxx-xxx-xxx",
+                ReceiverUserIdList = new List&lt;string&gt;
+                {
+                    "xxx"
+                },
+                ReceiverUnionIdList = new List&lt;string&gt;
+                {
+                    "xxx"
+                },
+                ExpiredTime = 1850042969000,
+                Platforms = "ios|win",
+            };
+            try
+            {
+                client.CreateTopboxWithOptions(createTopboxRequest, createTopboxHeaders, new AlibabaCloud.TeaUtil.Models.RuntimeOptions());
+            }
+            catch (TeaException err)
+            {
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+            catch (Exception _err)
+            {
+                TeaException err = new TeaException(new Dictionary&lt;string, object&gt;
+                {
+                    { "message", _err.Message }
+                });
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+        }
+
+
+    }
+}</code></pre></div></div></section></section><section id="section-response-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-response-1" data-tag="h2" class="h2">响应</h2><section id="section-response-parameter" class="section"><h3 data-tag="h3" id="h2-lgu-fdk-kgi" class="h3 title">响应体</h3><table id="bbe76d2e72hch" tablewidth="710" tablecolswidth="213 142 355" autofit="false" class="table"><colgroup colwidth="0.9*" style="width:30.00%"></colgroup><colgroup colwidth="0.6*" style="width:20.00%"></colgroup><colgroup colwidth="1.5*" style="width:50.00%"></colgroup><tbody class="tbody"><tr id="7463d046ad0n8"><td id="160c47a9e2apl" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="cdd3c10332roc">名称</p></td><td id="e8af46e478dom" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="ff5b9206ca4on">类型</p></td><td id="9e3a825f4ej6d" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="a82b4c7acbkxp">描述</p></td></tr><tr outputclass="row row-level-1" id="a9a82c3dcbp9h" class="row row-level-1"><td id="cab3c7e8a5910" rowspan="1" colspan="1"><p id="ed0fb6e2cfogo">success</p></td><td id="93de7def36on9" rowspan="1" colspan="1"><p id="43c2cc25d36z0">Boolean</p></td><td id="187ca8bb31dk0" rowspan="1" colspan="1"><p id="796b1a2c5cnsv">请求是否成功：</p><ul id="45dfecb81empn"><li id="f7adc464c7ylu"><p id="abfef235baqcf"><b>true</b>：成功</p></li><li id="fcdf3a04fd31o"><p id="455a4d3206niq"><b>false</b>：失败</p></li></ul></td></tr></tbody></table></section><section id="section-response-body-example" class="section"><h3 id="h3-response-body-example" data-tag="h3" class="h3">响应体示例</h3><pre id="5ff8c8c63apf4" outputclass="language-json" code-type="xCode" data-tag="codeblock" class="pre codeblock language-json"><code>HTTP/1.1 200 OK
+Content-Type:application/json
+
+{
+  "success" : true
+}</code></pre></section><section id="section-error-code-1" class="section"><h3 id="h3-error-code-1" data-tag="h3" class="h3">错误码</h3><p data-tag="p" id="p-error-code-global-guide" class="p">若调用该接口报错，可根据错误信息在<a href="https://open.dingtalk.com/document/development/server-api-error-codes-1" id="a-error-code-global-guide">全局错误码</a>文档中查找解决方案。</p><table id="b1e0bbe8e4gcn" tablewidth="709" tablecolswidth="142 177 177 213" autofit="false" class="table"><colgroup colwidth="0.8*" style="width:20.03%"></colgroup><colgroup colwidth="1*" style="width:24.96%"></colgroup><colgroup colwidth="1*" style="width:24.96%"></colgroup><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><tbody class="tbody"><tr id="994e5b56cf4g3"><td id="6375a146b4vd9" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="ded994b58ferw">HttpCode</p></td><td id="87ef83cff3j4v" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="d5093e4beaixg">错误码</p></td><td id="129f06d5bcbjn" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="9a20d2be7b33f">错误信息</p></td><td id="689fdc13f81cj" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="3af24eccd4hnr">说明</p></td></tr><tr id="3f9d56c0bcp0z"><td id="0fb5e652cf5ty" rowspan="1" colspan="1"><p id="59d5d56a1ajse">400</p></td><td id="f23b46680bg8b" rowspan="1" colspan="1"><p id="b5046fcc5czh8">param.empty</p></td><td id="7f7435bbe2dx8" rowspan="1" colspan="1"><p id="767781affayr3">请求参数为空</p></td><td id="eea146fe71epl" rowspan="1" colspan="1"><p id="62b3218a82kzl">请求参数为空</p></td></tr><tr id="067331bb00x76"><td id="fb89c53bd5s9i" rowspan="1" colspan="1"><p id="1096f41f620k8">400</p></td><td id="f4e4d8ba39e1y" rowspan="1" colspan="1"><p id="ec98c23608rfp">cidParse.wrong</p></td><td id="7905fbec56egk" rowspan="1" colspan="1"><p id="d6075a71e0es7">会话id解码失败</p></td><td id="e7eb32b068kx3" rowspan="1" colspan="1"><p id="4d4ca2efbfk99">会话id解码失败</p></td></tr><tr id="c881563be51xt"><td id="9fe6441fd4ku8" rowspan="1" colspan="1"><p id="fcd6c55f2a3or">400</p></td><td id="ae20d183d3sni" rowspan="1" colspan="1"><p id="a98e45bb9fy3i">chat.notExist</p></td><td id="09dc868d0efcs" rowspan="1" colspan="1"><p id="1a0deade40ndd">会话不存在</p></td><td id="399e3083c2ki6" rowspan="1" colspan="1"><p id="6ada353d3c7xd">会话不存在</p></td></tr><tr id="d02a724d369im"><td id="bfede4c6b2yo2" rowspan="1" colspan="1"><p id="eb1ba7b66ekvq">400</p></td><td id="ca7d460f317h1" rowspan="1" colspan="1"><p id="2361c3296bv01">group.org.checkFailed</p></td><td id="f7d3ba7065uak" rowspan="1" colspan="1"><p id="910731f8e5e7w">群不属于当前企业</p></td><td id="592de0569dppo" rowspan="1" colspan="1"><p id="4d855761c5jw1">群不属于当前企业</p></td></tr><tr id="3d37052c3e5cs"><td id="177e2e8c037vz" rowspan="1" colspan="1"><p id="ceebe17fdfl0x">400</p></td><td id="56c4ddb1eajh1" rowspan="1" colspan="1"><p id="d0b7d0ef3dvf2">chat.coolApp.notInstalled</p></td><td id="d6bfb724e396e" rowspan="1" colspan="1"><p id="6ac39474e7fit">酷应用未安装到会话内</p></td><td id="14259e175fl2r" rowspan="1" colspan="1"><p id="48ab0a9f1crxv">酷应用未安装到会话内</p></td></tr><tr id="8690a79ef9o0h"><td id="5e8555e4556r3" rowspan="1" colspan="1"><p id="943525f030enj">400</p></td><td id="1889ff35204w9" rowspan="1" colspan="1"><p id="286573dea9p8u">permission.coolApp.checkFailed</p></td><td id="610b800f6c98m" rowspan="1" colspan="1"><p id="8e3b96f436qss">无权限，酷应用不属于当前token对应的应用名下</p></td><td id="2e00104a4ew3l" rowspan="1" colspan="1"><p id="dd33abb54d2tv">无权限，酷应用不属于当前token对应的应用名下</p></td></tr><tr id="0ad6973672aif"><td id="216e08259ao4e" rowspan="1" colspan="1"><p id="9cb591eb13r4s">400</p></td><td id="69b0fac871buh" rowspan="1" colspan="1"><p id="1b04d4a86088b">group.groupTemplate.notInstalled</p></td><td id="211b0000ca9i2" rowspan="1" colspan="1"><p id="de1d02bdf2ooa">群模板未安装到群内</p></td><td id="8f70c7f9abwhm" rowspan="1" colspan="1"><p id="2ad7baa717o1b">群模板未安装到群内</p></td></tr><tr id="7060d68b95rye"><td id="6b127c54adu6z" rowspan="1" colspan="1"><p id="71b4219149ygz">400</p></td><td id="f64bae03bf73u" rowspan="1" colspan="1"><p id="9f72da469dgbr">permission.sceneGroup.checkFailed</p></td><td id="0babc54e3a99z" rowspan="1" colspan="1"><p id="8c68111720ati">无权限，该群安装的群模板不属于当前token对应的应用名下</p></td><td id="b448c24478gm0" rowspan="1" colspan="1"><p id="94d25e6cc67qe">无权限，该群安装的群模板不属于当前token对应的应用名下</p></td></tr><tr id="30c682eb248tz"><td id="e7f289923c4qd" rowspan="1" colspan="1"><p id="02650d847dtjc">400</p></td><td id="50f39ae50bt8z" rowspan="1" colspan="1"><p id="e73e8ad895u2e">card.content.checkFailed</p></td><td id="f76f2c8f42bqn" rowspan="1" colspan="1"><p id="3189ca54b3f69">卡片内容违规</p></td><td id="d76c241d51yzp" rowspan="1" colspan="1"><p id="88f65bcb0f0sk">卡片内容违规</p></td></tr><tr id="dff4bc6c8f47s"><td id="737fdfb27dwpt" rowspan="1" colspan="1"><p id="b9ea4a87607qb">400</p></td><td id="4a7c804f23k55" rowspan="1" colspan="1"><p id="6d01ba1efbhcx">cardInstance.wrong</p></td><td id="49eeb3b25bfvy" rowspan="1" colspan="1"><p id="9aac1b1c3676r">创建卡片实例失败，先检查卡片模板是否已发布</p></td><td id="8b1cb18d64u04" rowspan="1" colspan="1"><p id="ae05d36171jbe">创建卡片实例失败，先检查卡片模板是否已发布</p></td></tr><tr id="a65964efb3491"><td id="aec1a58f5a2je" rowspan="1" colspan="1"><p id="e412bdeef9bpi">400</p></td><td id="ca6e68939bi54" rowspan="1" colspan="1"><p id="eeb74fb3f81tt">receiver.id.parseFailed</p></td><td id="b260981f443pr" rowspan="1" colspan="1"><p id="a4f0395c104rs">吊顶可见者id解析失败</p></td><td id="916f0c74d8i3n" rowspan="1" colspan="1"><p id="92cf686a4cbjq">吊顶可见者id解析失败</p></td></tr><tr id="10afbb4191n41"><td id="c4c6ed7fc2l47" rowspan="1" colspan="1"><p id="ec66a134238yn">400</p></td><td id="b607369c20dt5" rowspan="1" colspan="1"><p id="e236abc8d4r78">open.topbox.failed</p></td><td id="f28a84d7133iy" rowspan="1" colspan="1"><p id="4b67aac37882i">开启吊顶失败</p></td><td id="3f93a4f550sep" rowspan="1" colspan="1"><p id="7d815862ceugr">开启吊顶失败</p></td></tr><tr id="1ae53521efbpp"><td id="ecb52b8d0a20x" rowspan="1" colspan="1"><p id="01413c0fe2ihk">400</p></td><td id="72191a39edte0" rowspan="1" colspan="1"><p id="0ba285acafvmr">user.not.found</p></td><td id="d9480bee98dtt" rowspan="1" colspan="1"><p id="75d98a3b96qpz">用户不存在</p></td><td id="624475006bp2q" rowspan="1" colspan="1"><p id="1ae67f422ahew">用户不存在</p></td></tr><tr id="5c05c37f38ryp"><td id="8a80556b69jf1" rowspan="1" colspan="1"><p id="cf523331295js">400</p></td><td id="28507d92846dg" rowspan="1" colspan="1"><p id="794b9e5945wnk">robot.not.found</p></td><td id="41c4c5f1d9xh0" rowspan="1" colspan="1"><p id="497dccdec0xhq">机器人不存在</p></td><td id="4bb1cd6d30z37" rowspan="1" colspan="1"><p id="8a17cf3064jxd">机器人不存在</p></td></tr><tr id="d06c0ddb57qac"><td id="3b9478498bgcy" rowspan="1" colspan="1"><p id="5490b0dfbbxtq">400</p></td><td id="942ad107444lo" rowspan="1" colspan="1"><p id="5ed72b361aui2">conversationType.illegal</p></td><td id="4e6b435dc1dt6" rowspan="1" colspan="1"><p id="4b2a1fcd41e9c">会话类型值无效</p></td><td id="28b38ea9a3sgc" rowspan="1" colspan="1"><p id="8da2154514xol">会话类型值无效</p></td></tr><tr id="96606bdf80699"><td id="81b2deecaf774" rowspan="1" colspan="1"><p id="d048cec7edhgi">400</p></td><td id="e38e126c6cahk" rowspan="1" colspan="1"><p id="dea880bc63k11">param.illegal</p></td><td id="50de043db9j0r" rowspan="1" colspan="1"><p id="194285059fw9x">请求参数无效</p></td><td id="f0f1ba03027f5" rowspan="1" colspan="1"><p id="ac99f63616a50">请求参数无效</p></td></tr><tr id="9b960a5c24a4v"><td id="4d67f5c446t5h" rowspan="1" colspan="1"><p id="39ed72ad64n2b">400</p></td><td id="ec907c9745bdc" rowspan="1" colspan="1"><p id="602964f8e6foe">robot.queryFalied</p></td><td id="3d99759168y7p" rowspan="1" colspan="1"><p id="d7f7ca2b1fcte">机器人查询失败</p></td><td id="f978137eebdk0" rowspan="1" colspan="1"><p id="b4c28b1dbauq3">机器人查询失败</p></td></tr><tr id="b053a341d1hap"><td id="1ccca20ab35q3" rowspan="1" colspan="1"><p id="7ca59f4d8ezj5">400</p></td><td id="7662e9f4bfqag" rowspan="1" colspan="1"><p id="19e79c5adap1a">mainApp.queryFailed</p></td><td id="cd5e033c8e7hf" rowspan="1" colspan="1"><p id="24576c7b80367">主应用查询失败</p></td><td id="9e7b9a7b02h4w" rowspan="1" colspan="1"><p id="b8fa294cdfc43">主应用查询失败</p></td></tr><tr id="f69dc60074zc2"><td id="dbdc7507dbxgc" rowspan="1" colspan="1"><p id="11554068d58eb">400</p></td><td id="47697bd07fn68" rowspan="1" colspan="1"><p id="942b5872d4ze5">coolAppCode.empty</p></td><td id="2ba8abc67ehov" rowspan="1" colspan="1"><p id="6a47d57198al9">酷应用编码为空</p></td><td id="06b27d016bpdu" rowspan="1" colspan="1"><p id="c9d252c1bczn0">酷应用编码为空</p></td></tr><tr id="76ab3f919e81u"><td id="7b7b79abecq0u" rowspan="1" colspan="1"><p id="3d0bfab2eaabi">400</p></td><td id="3d168e2866b0q" rowspan="1" colspan="1"><p id="fefde1b5c6mva">openConversationId.empty</p></td><td id="243b48a55d1or" rowspan="1" colspan="1"><p id="09d45e01769ry">会话id为空</p></td><td id="9b76182c24cve" rowspan="1" colspan="1"><p id="37f2f115799xy">会话id为空</p></td></tr><tr id="c7a95f59dabgj"><td id="2c7eba60d8n83" rowspan="1" colspan="1"><p id="63fa13f3f4b78">400</p></td><td id="6cb0eff8011bb" rowspan="1" colspan="1"><p id="99ea683eff2tc">userIdOrUnionId.empty</p></td><td id="30faed58f7r2i" rowspan="1" colspan="1"><p id="79cc9d1ecfea8">用户id为空</p></td><td id="c59551539c0ig" rowspan="1" colspan="1"><p id="cd997e00eaep9">用户id为空</p></td></tr><tr id="fda4e5412bmh0"><td id="17d98d1fd7aam" rowspan="1" colspan="1"><p id="e7d9632ecbl2y">400</p></td><td id="0b2d79609a9ju" rowspan="1" colspan="1"><p id="68f43916e29gy">robotCode.empty</p></td><td id="8684f080bb0jx" rowspan="1" colspan="1"><p id="b8eeb76c77ni2">机器人编码为空</p></td><td id="305f0751fabiq" rowspan="1" colspan="1"><p id="907d24fa6aeld">机器人编码为空</p></td></tr><tr id="0d2c3f0291ewu"><td id="1c215fca1fdi6" rowspan="1" colspan="1"><p id="d5ffbd03b1emu">400</p></td><td id="a0469ec73ekbi" rowspan="1" colspan="1"><p id="dade3fce938zm">cardTemplate.not.exist</p></td><td id="0c7cdf37cbizs" rowspan="1" colspan="1"><p id="1d879b98388y8">卡片模板不存在</p></td><td id="8ffeea8069ozf" rowspan="1" colspan="1"><p id="d726dcdb6ch8n">卡片模板不存在</p></td></tr><tr id="14b35d5430ovp"><td id="e299fe59bchk0" rowspan="1" colspan="1"><p id="b6203241f5uu1">400</p></td><td id="e2b4f9abd8cuq" rowspan="1" colspan="1"><p id="b3ef7fe5b8rr3">auth.failed</p></td><td id="208f0b707ccdo" rowspan="1" colspan="1"><p id="d87a7db3ackar">%s</p></td><td id="d18017c5adwdh" rowspan="1" colspan="1"><p id="e726793fc8zwq">权限校验不通过</p></td></tr><tr id="7bcaaddb4e0hh"><td id="18898b20ddl6n" rowspan="1" colspan="1"><p id="d927064a08ovn">500</p></td><td id="779f348c98sst" rowspan="1" colspan="1"><p id="26dc61a764srq">system.busy</p></td><td id="b0ac92ee46eio" rowspan="1" colspan="1"><p id="004d33f452vi3">系统繁忙</p></td><td id="875512ce81pq4" rowspan="1" colspan="1"><p id="43e117919cirz">系统异常错误</p></td></tr></tbody></table></section></section></div></main></body></html>

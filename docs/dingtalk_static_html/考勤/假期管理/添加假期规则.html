@@ -1,0 +1,768 @@
+<!DOCTYPE html><html><head><meta charset="utf8" / /><meta name="searchtitle" content="" / /><meta name="keywords" content="" / /><meta name="author" content="" / /><title>添加假期规则</title><meta name="gmtModify" content="2025-09-11 21:02:19" / /><meta name="gmtModify" content="2026-06-01 16:58:42" / /></head><body data-tag="topic" id="doc-api-dingtalk-AddLeaveType" class="topic"><main id="3bf320cce6cxe" data-init-id="doc-api-dingtalk_AddLeaveType"><h1 data-tag="title" id="h1-b8k-nzb-g18" class="title">添加假期规则</h1><p data-tag="shortdesc" id="03536d45d08ya" class="shortdesc">调用本接口，新建一个假期规则。</p><div data-tag="conbody" outputclass="icms-api-reference" class="icms-api-reference conbody"><section id="section-prerequisites-1" class="section icms-module" data-tag="section" data-source="latest-mounted-icms-html"><h2 id="h2-prerequisites-1" data-tag="h2" class="h2">接口调用说明</h2><p>调用本接口创建的假期规则主要有两类：</p><ul>
+ <li><p>普通假期规则，例如事假、婚假等，此类假期规则可以修改余额，调用本接口创建普通假期后，余额默认是0，需要再调用<a href="https://open.dingtalk.com/document/development/initialize-holiday-balance#" class="xref">初始化假期余额</a>接口，初始化假期余额。</p></li>
+ <li><p>调休假期规则，调用本接口添加的调休假期，默认余额规则是<b>加班时长自动计入调休余额</b>，无需调用初始化余额接口。 <img src="https://img.alicdn.com/imgextra/i4/O1CN01w35q5j1b14xOtYzDs_!!6000000003404-2-tps-1532-718.png" alt="图示" class="image break" / /></p></li>
+</ul></section><section id="section-request-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-request-1" data-tag="h2" class="h2">请求</h2><section id="section-request-basic-info" class="section"><h3 id="heading-request-basic-info" data-tag="h3" class="h3">基本信息</h3><table tablewidth="648" tablecolswidth="216 432" autofit="false" class="table"><colgroup colwidth="1*" style="width:33.33%"></colgroup><colgroup colwidth="2*" style="width:66.67%"></colgroup><tbody class="tbody"><tr><td rowspan="1" style="background-color:#e5e5e5" colspan="1"><p>字段</p></td><td rowspan="1" style="background-color:#e5e5e5" colspan="1"><p>值</p></td></tr><tr><td rowspan="1" colspan="1"><p>HTTP URL</p></td><td rowspan="1" colspan="1"><p>https://api.dingtalk.com/v1.0/attendance/leaves/types</p></td></tr><tr><td rowspan="1" colspan="1"><p>HTTP Method</p></td><td rowspan="1" colspan="1"><p>POST</p></td></tr><tr><td rowspan="1" colspan="1"><p>支持的应用类型</p></td><td rowspan="1" colspan="1"><p><span data-tag="ph" id="ph-request-basic-app-type-apptype-0" class="ph ph-app-type" data-ph-raw-text="appType-企业内部应用">appType-企业内部应用</span>　<span data-tag="ph" id="ph-request-basic-app-type-apptype-1" class="ph ph-app-type" data-ph-raw-text="appType-第三方企业应用">appType-第三方企业应用</span></p></td></tr><tr><td rowspan="1" colspan="1"><p>权限要求</p></td><td rowspan="1" colspan="1"><p><span data-tag="ph" id="ph-request-basic-permission-permission-qyapi-holiday-manage-0" class="ph-permission ph" data-ph-raw-text="permission-qyapi_holiday_manage-钉钉假期管理的权限" data-permission-id="permission-qyapi_holiday_manage" data-permission-code="qyapi_holiday_manage" data-permission-detail-api="/document/api/permission/detail" data-permission-query-param="code">permission-qyapi_holiday_manage-钉钉假期管理的权限</span></p></td></tr></tbody></table></section><section id="section-request-header-parameter" class="section"><h3 data-tag="h3" id="h2-zkt-jvz-fwf" class="h3 title">请求头</h3><table id="301d965844hkt" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="75b93ef654r4o"><td id="a60f63d1c9yqm" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="ae35a2fe89sv4">名称</p></td><td id="7f02108f88pjw" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="3a600880e9p9k">类型</p></td><td id="8e1a381cfbk7o" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="10b6a95b05pyl">是否必填</p></td><td id="1829f63ba5qgn" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="cd2c8f7d7fgls">描述</p></td></tr><tr id="9f9116d8d020x"><td id="9d67f548b5asm" rowspan="1" colspan="1"><p id="1fecd648973qy">x-acs-dingtalk-access-token</p></td><td id="671720b06eukh" rowspan="1" colspan="1"><p id="4deece976fxun">String</p></td><td id="c314f621daipg" rowspan="1" colspan="1"><p id="226443b351riz">是</p></td><td id="b994b79f030mj" rowspan="1" colspan="1"><p id="6b7f3c7e1ea18">调用该接口的访问凭证，通过以下获取：</p><ul id="8fba8ccbectnj"><li id="dace943c20vbe"><p id="ca09404059yfy">企业内部应用，调用<a id="dbf49f7b7fq81" href="https://open.dingtalk.com/document/development/obtain-the-access-token-of-an-internal-app#" class="xref">获取企业内部应用的accessToken</a>接口获取。</p></li><li id="4198465b2bgql"><p id="65bfc18266teh">第三方企业应用，调用<a id="486cd49c566ew" href="https://open.dingtalk.com/document/development/obtain-the-access-token-of-the-authorized-enterprise-1#" class="xref">获取第三方应用授权企业的accessToken</a>接口获取。</p></li></ul></td></tr></tbody></table></section><section id="section-request-query-parameter" class="section"><h3 data-tag="h3" id="h2-z3m-2on-rmw" class="h3 title">查询参数</h3><table id="dda42687b9n9c" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="c97916cc824t1"><td id="97e6cc1d67nbo" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="0bcef21f15fyh">名称</p></td><td id="0960de7e36w2i" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="6e23e12e326ld">类型</p></td><td id="81d4a0fce68yv" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="da3c4db2c73dl">是否必填</p></td><td id="6928cbf1f410s" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="bba029edf3wx5">描述</p></td></tr><tr id="5235186b240ib"><td id="6ec712cac1aop" rowspan="1" colspan="1"><p id="59e91404998pd">opUserId</p></td><td id="f8b742fd503oh" rowspan="1" colspan="1"><p id="3d38a81639am8">String</p></td><td id="d87d2f05f2cn1" rowspan="1" colspan="1"><p id="fe4e196b51w1t">是</p></td><td id="71d08dd108o9a" rowspan="1" colspan="1"><p id="2877217367psg">管理员userId，同时该管理员需拥有OA审批应用的管理权限。</p><div type="note" id="a8a8a97a2ctt7" class="note note-note"><div class="note-icon-wrapper"><i class="icon-note note note"></i></div><div class="noteContentSpan"><p id="57384f81f17r9">如果不满足条件，接口会报错，提示部门的管理员不存在。</p></div></div></td></tr></tbody></table></section><section id="section-request-body-parameter" class="section"><h3 data-tag="h3" id="h2-7gx-ncp-a6k" class="h3 title">请求体</h3><table id="c20076a991f7e" tablewidth="715" tablecolswidth="213 106 106 290" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:29.79%"></colgroup><colgroup colwidth="0.6*" style="width:14.83%"></colgroup><colgroup colwidth="0.6*" style="width:14.83%"></colgroup><colgroup colwidth="1.63*" style="width:40.56%"></colgroup><tbody class="tbody"><tr id="0b12a1416baev"><td id="2bab410aa2jl1" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="3e8495da02pgt">名称</p></td><td id="1fa9af64d07pd" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="3531b97629mta">类型</p></td><td id="b388d71f2369q" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="e4bb047401njy">是否必填</p></td><td id="8e6a41deb967e" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="bced8b8cf7lc0">描述</p></td></tr><tr outputclass="row row-level-2" id="0d6a6cafb5oe7" class="row row-level-2 row-level-2 row"><td id="56f30f4ea4fe7" rowspan="1" colspan="1"><p id="02a24d669bg5t">leaveName</p></td><td id="2ce495c3afbzm" rowspan="1" colspan="1"><p id="0ea4ca753e8mt">String</p></td><td id="37c3771e9371r" rowspan="1" colspan="1"><p id="1f92a0bccbk0a">是</p></td><td id="2cc63c1fb1vv0" rowspan="1" colspan="1"><p id="9b46aa9f16wwy">假期规则名称。</p></td></tr><tr outputclass="row row-level-3" id="4e58dea8b9lgp" class="row row-level-3 row row-level-3"><td id="f5de0c8c40q30" rowspan="1" colspan="1"><p id="7322f6bfc2yj5">leaveViewUnit</p></td><td id="c8223885c66jz" rowspan="1" colspan="1"><p id="1e963fd5b7lcc">String</p></td><td id="bdd07680cf6xr" rowspan="1" colspan="1"><p id="2510937dbb5c2">是</p></td><td id="25ea8e3c4flcj" rowspan="1" colspan="1"><p id="78333e06c7e0c">请假时长单位。</p><ul id="89cb227e782ki"><li id="397fda4e2cknf"><p id="f96e168dffhj6"><b>day</b>：天</p></li><li id="5fd160ed65vf9"><p id="9705e1f8eb7xb"><b>halfDay</b>：半天</p></li><li id="4fbab0fcf99ro"><p id="94b90a000f7kx"><b>hour</b>：小时</p></li></ul></td></tr><tr outputclass="row row-level-4" id="d01f9f189cjfh" class="row-level-4 row row row-level-4"><td id="3183c260dbclf" rowspan="1" colspan="1"><p id="690ac69246gc2">bizType</p></td><td id="fcb97cf148pue" rowspan="1" colspan="1"><p id="a6eee59f47p0u">String</p></td><td id="b0c87d097acpw" rowspan="1" colspan="1"><p id="0bcfbb948bjkc">是</p></td><td id="47298cf19ehvm" rowspan="1" colspan="1"><p id="284de5a5022rl">假期类型。</p><ul id="75535de798kz6"><li id="6dbdbea433ts6"><p id="0b7f7b8f651p1"><b>general_leave</b>：普通假期</p></li><li id="76d5bc5ef6kfk"><p id="4d6871bee707u"><b>lieu_leave</b>：加班转调休</p></li></ul><div type="note" id="5db561a7f5t2i" class="note note-note"><div class="note-icon-wrapper"><i class="icon-note note note"></i></div><div class="noteContentSpan"><p data-tag="p" id="18a8f18b1fbh8" class="p"></p><p id="d8a7ef134bfza">一个企业只能存在一个加班转调休的假期规则。</p><p id="d01fdfae6fvqb"></p></div></div></td></tr><tr outputclass="row row-level-5" id="1e3178c4e0cab" class="row-level-5 row row-level-5 row"><td id="7fc0380c2fzwb" rowspan="1" colspan="1"><p id="65285cce3czvw">naturalDayLeave</p></td><td id="6a8898a3172vx" rowspan="1" colspan="1"><p id="240addc5744p3">Boolean</p></td><td id="f227ba9f49vwz" rowspan="1" colspan="1"><p id="718dab9b94fvx">是</p></td><td id="3711fb0ba6qly" rowspan="1" colspan="1"><p id="93258bd33420z">是否按照自然日统计请假时长。</p><ul id="32f694723byik"><li id="239d5b52ebv5a"><p id="dcc9ea5800mma"><b>true</b>：是</p></li><li id="6a38b4d783cqz"><p id="e80a0b1876c7d"><b>false</b>：否</p></li></ul><div type="note" id="262b7ea49cixe" class="note note-note"><div class="note-icon-wrapper"><i class="icon-note note note"></i></div><div class="noteContentSpan"><p data-tag="p" id="7a99d021een0t" class="p"></p><p id="a1991a79424ln">例如，员工小明提交请假审批单，开始时间是2022年4月11日上午9:30，结束时间是2022年4月18日下午18:30，其中4月16和4月17为周六日休息。</p><ul id="a2583d0d78vun"><li id="f8271adba9727"><p id="c646f702584bt">当该参数传true时，小明发起该请假审批单后，计入的请假天数为8天。包含员工未排班的休息日或者法定节假日。</p></li><li id="1af8343787re2"><p id="f9604ddc04ui8">当该参数传false时，小明发起该请假审批单后，计入的请假天数为6天。不包含员工未排班的休息日或者法定节假日。</p></li></ul><p id="dd98122d0e77z"></p></div></div></td></tr><tr outputclass="row row-level-6" id="976227517fl9k" class="row-level-6 row row row-level-6"><td id="b2fffa1fa2gza" rowspan="1" colspan="1"><p id="e76767563bzj8">hoursInPerDay</p></td><td id="c5f829943dpm8" rowspan="1" colspan="1"><p id="e5dfed8dc51bn">Long</p></td><td id="e89d0d887aj76" rowspan="1" colspan="1"><p id="c85274d21bbcp">是</p></td><td id="bc421ec2fb7lc" rowspan="1" colspan="1"><p id="ec76db57323yf">每天折算的工作时长，为参数值的百分之一。</p><div type="note" id="098b655ea2wrl" class="note note-note"><div class="note-icon-wrapper"><i class="icon-note note note"></i></div><div class="noteContentSpan"><p data-tag="p" id="2ca46665402gl" class="p"></p><p id="625fbf6c86bqo">例如，某企业员工所在的班次工时是8小时，则该参数值为8*100=800。
+<img src="https://img.alicdn.com/imgextra/i2/O1CN01Cr8zh3288kv0CyFwm_!!6000000007888-2-tps-2810-1382.png" alt="" class="image break" / /></p><p id="20fb479ec97ms"></p></div></div></td></tr><tr outputclass="row row-level-7" id="d12daae179zuo" class="row-level-7 row row row-level-7"><td id="2d5842528ajo0" rowspan="1" colspan="1"><p id="e2948595bd18s">extras</p></td><td id="de85cbee353ej" rowspan="1" colspan="1"><p id="15a0b79c51up9">String</p></td><td id="3d5ed8fcbdlqz" rowspan="1" colspan="1"><p id="6880ba7d5b4qh">否</p></td><td id="82a9e13c05obr" rowspan="1" colspan="1"><p id="ef93017246tai">调休假有效期规则。</p><ul id="eba0601882xaa"><li id="7065aca04fq7d"><p id="be30ccfb41l8r"><b>validity_type</b>：有效类型</p><ul id="88bdeee861b7a"><li id="61918b3c77b8g"><p id="00a9323237rat"><b>absolute_time</b>：绝对时间</p></li><li id="4e95e6061dk3y"><p id="51d0e4b64bsse"><b>relative_time</b>：相对时间</p></li></ul></li><li id="a1e1877566xn1"><p id="350d5ec4562sa"><b>validity_value</b>：延长日期</p><ul id="a25d5435fbg9h"><li id="3477edb1bchyd"><p id="fbfdc94cdb5k6">当validity_type为<b>absolute_time</b>，该值不为空且满足“yy-mm”格式。</p></li><li id="246add3b9dku9"><p id="94dec9c70f1kz">当validity_type为<b>relative_time</b>，该值为大于1的整数。</p></li></ul></li></ul><div type="note" id="022997e1682n6" class="note note-note"><div class="note-icon-wrapper"><i class="icon-note note note"></i></div><div class="noteContentSpan"><p id="6e7e2c622c7zp">假期类型biz_type值为<b>lieu_leave</b>时，该参数必传。</p></div></div></td></tr><tr id="94dcf4098dvys"><td id="376b28401bijx" rowspan="1" colspan="1"><p id="a1d251a69f3pf"><span style="background-color:rgb(212, 252, 188)">paidLeave</span></p></td><td id="546840cdf75qt" rowspan="1" colspan="1"><p id="408bd855b0n0q"><span style="background-color:rgb(212, 252, 188)">Boolean</span></p></td><td id="cddd6af13fylc" rowspan="1" colspan="1"><p id="b7acdfccc4mup"><span style="background-color:rgb(212, 252, 188)">否</span></p></td><td id="493693104euvo" rowspan="1" colspan="1"><p id="c9fcefcad5gdf"><span style="background-color:rgb(212, 252, 188)">是否带薪假。</span></p><p id="86f1773d59rby"></p></td></tr><tr outputclass="row row-level-8" id="d244469e2982o" class="row-level-8 row row row-level-8"><td id="91bbbdb84anxt" rowspan="1" colspan="1"><p id="72e962d3cfttq">paidLeave</p></td><td id="562eba3773f87" rowspan="1" colspan="1"><p id="cafc96f87ews2">Boolean</p></td><td id="63045b170d3ct" rowspan="1" colspan="1"><p id="6054f88789pov">否</p></td><td id="ec318ce9a8qij" rowspan="1" colspan="1"><p id="0198ecfe2a8jn">是否带薪假。</p></td></tr><tr outputclass="row row-level-9 has-child" id="1af69ed043eba" class="has-child row-level-9 row row-level-9 has-child row"><td id="3f34649854rqq" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><span class="icms-tree-table-trigger" type="checkbox"></span><p id="4d2edff20ett1">visibilityRules</p></td><td id="1e0e1ba185hvq" rowspan="1" colspan="1"><p id="118d295139bqy">Array</p></td><td id="04990b5624rbn" rowspan="1" colspan="1"><p id="b4eed46ec5c9j">否</p></td><td id="bfd514c6efqvi" rowspan="1" colspan="1"><p id="1e2818d2d4eul">适用范围规则列表，不传默认为全公司。</p></td></tr><tr outputclass="row row-level-9-1" id="681cc97ee7r95" class="row row-level-9-1 row row-level-9-1"><td id="71532ca4f1f8a" rowspan="1" colspan="1"><p id="48587d05df2r5">visible</p></td><td id="973fab2f7c4uz" rowspan="1" colspan="1"><p id="1ad8d0b1c5e0o">Array of String</p></td><td id="80283b9f8b8i9" rowspan="1" colspan="1"><p id="a4505a1fc7hya">否</p></td><td id="a239279b3988u" rowspan="1" colspan="1"><p id="5d0da93775o76">适用范围内数据列表。</p><ul id="357fb2ec9er9b"><li id="adcded0c4dcss"><p id="7ed5ef714fyzm">当type=staff时，传员工userId列表。</p></li><li id="6a0fc942497r5"><p id="429979da0fscu">当type=dept时，传部门id列表。</p></li><li id="95f3c9f7b82as"><p id="2376eb2ea6ctz">当type=label时，传角色id列表。</p></li></ul></td></tr><tr outputclass="row row-level-9-2" id="6ac27b799bb1q" class="row row-level-9-2 row row-level-9-2"><td id="4e4f02ee31hgx" rowspan="1" colspan="1"><p id="5f253ddbb5htv">type</p></td><td id="e0600438c12zy" rowspan="1" colspan="1"><p id="b404eda35bech">String</p></td><td id="6ef81b828ah0i" rowspan="1" colspan="1"><p id="cf3eaacda9un9">否</p></td><td id="97f2bde8a5634" rowspan="1" colspan="1"><p id="f3b7972040pdl">适用范围规则类型。</p><ul id="04de56d9999wd"><li id="86f73d2abd0s6"><p id="eaa9cd2d8fy66"><b>dept</b>：部门</p></li><li id="eebaf91991mwb"><p id="787b5d86ee22j"><b>staff</b>：员工</p></li><li id="e16b435a81bkt"><p id="5d3360496bqee"><b>label</b>：角色</p></li></ul></td></tr><tr outputclass="row row-level-10" id="6e2ac1f118kit" class="row row-level-10 row-level-10 row"><td id="c2e30d14619dm" rowspan="1" colspan="1"><p id="8c292d63a81dr">whenCanLeave</p></td><td id="70ba7f2811zql" rowspan="1" colspan="1"><p id="cac894aad749g">String</p></td><td id="18991d4890leq" rowspan="1" colspan="1"><p id="787a6631c1zin">否</p></td><td id="5b626a8516qbd" rowspan="1" colspan="1"><p id="8fb3a8792cz2d">何时可请假。</p><div type="note" id="5138e00a8e749" class="note note-note"><div class="note-icon-wrapper"><i class="icon-note note note"></i></div><div class="noteContentSpan"><p id="daf86bfa38961">第三方企业应用专属字段。</p></div></div><ul id="2efc415fc1w58"><li id="dbf029bd6a0us"><p id="35eb6d62ffvlr"><b>entry</b> 表示入职可用。</p></li><li id="b067d76d37z1d"><p id="a7cff6a3df306"><b>formal</b> 表示转正可用。</p></li></ul></td></tr><tr outputclass="row row-level-11" id="8618d82addj2m" class="row row-level-11 row row-level-11"><td id="2db2fb2c16ush" rowspan="1" colspan="1"><p id="62c71da5b2404">leaveTimeCeilMinUnit</p></td><td id="2791fac6450tt" rowspan="1" colspan="1"><p id="12ede407375yc">String</p></td><td id="26781a8dcfgwh" rowspan="1" colspan="1"><p id="9214fd0d75qxr">否</p></td><td id="cc18547b34215" rowspan="1" colspan="1"><p id="1122fa983aby6">请假时长向上取整时的最小时长单位。</p><div type="note" id="60fa1f6e693f2" class="note note-note"><div class="note-icon-wrapper"><i class="icon-note note note"></i></div><div class="noteContentSpan"><p id="b2d9286d38bk5">第三方企业应用专属字段。</p></div></div><ul id="1b551bbb83r0o"><li id="729f2648a1xme"><p id="1c093eef8807v"><b>hour</b> 小时，不足1小时按照1小时计算</p></li><li id="25c3f106d9p68"><p id="c2cc6bb928bn9"><b>halfHour</b> 半小时，不足半小时按照半小时计算</p></li></ul></td></tr><tr outputclass="row row-level-12" id="fe7c252a7ckv9" class="row row-level-12 row row-level-12"><td id="185441b685hbs" rowspan="1" colspan="1"><p id="8a8bdb48c0cj8">leaveTimeCeil</p></td><td id="6f52c501d8t7n" rowspan="1" colspan="1"><p id="3237899fdfler">Boolean</p></td><td id="738ccb780cog4" rowspan="1" colspan="1"><p id="dd79624c698vk">否</p></td><td id="4d874fc375mix" rowspan="1" colspan="1"><p id="44c58c85a3vvr">请假时长是否向上取整。</p><div type="note" id="fc2ae63746w3l" class="note note-note"><div class="note-icon-wrapper"><i class="icon-note note note"></i></div><div class="noteContentSpan"><p id="e0d18d2234f0v">第三方企业应用专属字段。</p></div></div></td></tr><tr outputclass="row row-level-13" id="73951dba6e5qv" class="row row-level-13 row row-level-13"><td id="2b4c426a1blkf" rowspan="1" colspan="1"><p id="7bc51079a2qfz">minLeaveHour</p></td><td id="c24012c7695mg" rowspan="1" colspan="1"><p id="1edfc63f3dimx">double</p></td><td id="718efb9d70igr" rowspan="1" colspan="1"><p id="db5805c32fze3">否</p></td><td id="41f66ac9ea0au" rowspan="1" colspan="1"><p id="9c2dc53d3cs6m">最小请假时长（请假单位为hour时生效），请假时长小于该值时自动取该值。</p><div type="note" id="4edde59a712xf" class="note note-note"><div class="note-icon-wrapper"><i class="icon-note note note"></i></div><div class="noteContentSpan"><p id="12cf94796c7il">第三方企业应用专属字段。</p></div></div></td></tr><tr outputclass="row row-level-14 has-child" id="22d1d16519zb5" class="has-child row row row-level-14 has-child row-level-14"><td id="13f56cd19bv3f" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><span class="icms-tree-table-trigger" type="checkbox"></span><p id="c8e58e4e7da3r">submitTimeRule</p></td><td id="7422ca12342xr" rowspan="1" colspan="1"><p id="11ea96ba32d20">Object</p></td><td id="304608f3e1u20" rowspan="1" colspan="1"><p id="e59133658f24t">否</p></td><td id="42c9cf8100peq" rowspan="1" colspan="1"><p id="664138034492g">限时提交规则。</p></td></tr><tr outputclass="row row-level-14-1" id="e786518499bsf" class="row-level-14-1 row row-level-14-1 row"><td id="d475e23e72t0i" rowspan="1" colspan="1"><p id="76ee7331502za">timeValue</p></td><td id="ed36dcbcaf2ed" rowspan="1" colspan="1"><p id="931fcc92c1ich">Long</p></td><td id="ea4e07fe2fm4b" rowspan="1" colspan="1"><p id="00ad31de2e9fa">否</p></td><td id="a7aa386d7d4yu" rowspan="1" colspan="1"><p id="d94fcf1792s4b">限制值。</p><ul id="e9787a6475zx0"><li id="0b3ef65f1b3v9"><p id="d816f21fa4ox5">当timeUnit为day时，有效值范围是0至30天。</p></li><li id="dd4b88e573ly0"><p id="24f5a4695dwsr">当timeUnit为hour时，有效值范围是0至24小时。</p></li></ul></td></tr><tr outputclass="row row-level-14-2" id="d0762ae440a2r" class="row row-level-14-2 row-level-14-2 row"><td id="2ee7e8a755va2" rowspan="1" colspan="1"><p id="6050e84a18zpb">timeUnit</p></td><td id="5bd3ff108eqef" rowspan="1" colspan="1"><p id="92621c5783vpc">String</p></td><td id="ee3e1df7f2i19" rowspan="1" colspan="1"><p id="f344991f82le0">否</p></td><td id="e17447f9dfv3o" rowspan="1" colspan="1"><p id="fd66a36dfcc3l">时间单位。</p><ul id="d85d7e5d8cmpi"><li id="9f0963d8acibz"><p id="15d5669fcfr9i"><b>day</b>：天</p></li><li id="b36787a067ebd"><p id="be4b546860tar"><b>hour</b>：小时</p></li></ul></td></tr><tr outputclass="row row-level-14-3" id="a14a46d2b9okh" class="row-level-14-3 row row-level-14-3 row"><td id="355b0d7f298ai" rowspan="1" colspan="1"><p id="02e9fd8b5aup6">timeType</p></td><td id="238940d961i6z" rowspan="1" colspan="1"><p id="38cde11d8eq9o">String</p></td><td id="6f7e786ae4ifl" rowspan="1" colspan="1"><p id="1640344e2245l">否</p></td><td id="bbfc65dcba5sj" rowspan="1" colspan="1"><p id="40ed673362r7k">限制类型。</p><ul id="cab5ba4c88soe"><li id="faa1248a02j6m"><p id="7aebd7f620lt0"><b>before</b>：提前</p></li><li id="041c0a919der7"><p id="b7c3085566n5d"><b>after</b>：补交</p></li></ul></td></tr><tr outputclass="row row-level-14-4" id="1a35ed9d4c7wv" class="row row-level-14-4 row-level-14-4 row"><td id="35902b0383cj6" rowspan="1" colspan="1"><p id="7cca5a5b7d76v">enableTimeLimit</p></td><td id="8ff332f989oa8" rowspan="1" colspan="1"><p id="99ee4b827545f">Boolean</p></td><td id="4c28140f442n0" rowspan="1" colspan="1"><p id="f2edabedf038e">否</p></td><td id="7fe50b7ab81nt" rowspan="1" colspan="1"><p id="19805a9b59v78">是否开启限时提交功能。</p><ul id="26a3cdd83c3mv"><li id="fbfa8a707bmjl"><p id="cb8e895c59im8"><b>true</b>：开启</p></li><li id="f81809965fscj"><p id="08fd05796anjs"><b>false</b>：不开启</p></li></ul></td></tr><tr outputclass="row row-level-15 has-child" id="f7cde8cfb799w" class="has-child row-level-15 row row-level-15 has-child row"><td id="1fb8e5ed14zyw" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><span class="icms-tree-table-trigger" type="checkbox"></span><p id="c1076fd981bfs">leaveCertificate</p></td><td id="a99a408dadw0d" rowspan="1" colspan="1"><p id="a5c46d6494qit">Object</p></td><td id="eff5ff05fenlz" rowspan="1" colspan="1"><p id="c6df7829a85kc">否</p></td><td id="caa926b50d18j" rowspan="1" colspan="1"><p id="8466a1c061n0c">请假证明。</p></td></tr><tr outputclass="row row-level-15-1" id="39c5e550db9b6" class="row row-level-15-1 row-level-15-1 row"><td id="f19a317e27s98" rowspan="1" colspan="1"><p id="c4d7f14975a13">unit</p></td><td id="7b5220b732eig" rowspan="1" colspan="1"><p id="5d3c68ee06myu">String</p></td><td id="35a7eeb38fbt5" rowspan="1" colspan="1"><p id="b1d9fdb816zve">否</p></td><td id="0cc3cb8229g58" rowspan="1" colspan="1"><p id="91b0ad8005k3f">需提供请假证明时长单位。</p><ul id="1d140c9a8esjp"><li id="54a341f315vcb"><p id="5db6573fddrby"><b>hour</b>：小时</p></li><li id="cfb6ff7d0743i"><p id="d8386ac01bfc1"><b>day</b>：天</p></li></ul></td></tr><tr outputclass="row row-level-15-2" id="ca4897ff87rki" class="row-level-15-2 row row-level-15-2 row"><td id="56fa2de4dcwyb" rowspan="1" colspan="1"><p id="7b3de4c375iet">duration</p></td><td id="513df5824aka1" rowspan="1" colspan="1"><p id="0a9a47ef52z7n">double</p></td><td id="9a282d1d54bdd" rowspan="1" colspan="1"><p id="e3cd7fbab4ba9">否</p></td><td id="e73b0c6c210rv" rowspan="1" colspan="1"><p id="4a4877d9abwjd">超过多长时间需提供请假证明。</p><ul id="f0c0495855j9k"><li id="cfab6e380es1y"><p id="101970358bj1s">如果unit值为day，表示请假超过一天，需要提供请假证明。</p></li><li id="de76bd3232al1"><p id="c6380a2cb7koz">如果unit值为hour，表示请假超过一小时，需要提供请假证明。</p></li></ul><div type="note" id="1556ab9e7f38o" class="note note-note"><div class="note-icon-wrapper"><i class="icon-note note note"></i></div><div class="noteContentSpan"><p id="ae0ba201ffwk9">提交请假超过设置时间，审批单会自动出现请假证明填写项。
+<img src="https://img.alicdn.com/imgextra/i4/O1CN01ZlyMM61vHplHMaWfG_!!6000000006148-2-tps-658-1276.png" alt="" class="image break" / /></p><p id="fc46ef6343n97"></p></div></div></td></tr><tr outputclass="row row-level-15-3" id="74b6e7672fzlx" class="row row-level-15-3 row-level-15-3 row"><td id="9189bd54a2s4p" rowspan="1" colspan="1"><p id="19cf9d34f58s3">enable</p></td><td id="34bb0b35dfnvc" rowspan="1" colspan="1"><p id="92d8a68e67uio">Boolean</p></td><td id="a2c15acacer4p" rowspan="1" colspan="1"><p id="22ab594968ms0">否</p></td><td id="c3e14cec8358w" rowspan="1" colspan="1"><p id="ec1946ffeb9ld">是否开启请假证明。</p><ul id="8a804fa0e7aea"><li id="4959bf68714yl"><p id="c2f8c7d814btv"><b>true</b>：开启</p></li><li id="09abc1ab8b9rp"><p id="6e0b73a433w8c"><b>false</b>：不开启</p></li></ul></td></tr><tr outputclass="row row-level-15-4" id="1ff2f2afa5obh" class="row row-level-15-4 row-level-15-4 row"><td id="e4da21c48063n" rowspan="1" colspan="1"><p id="87b3ea5305ycd">promptInformation</p></td><td id="e07574855cwqh" rowspan="1" colspan="1"><p id="c4fc11e554wcy">String</p></td><td id="d6dbeea342izw" rowspan="1" colspan="1"><p id="074534ce390ps">否</p></td><td id="9187095d3chl0" rowspan="1" colspan="1"><p id="9a2f9de23ckpp">请假提示文案。</p></td></tr><tr outputclass="row row-level-16" id="fc553dfdfe1nb" class="row-level-16 row row-level-16 row"><td id="9098060781e2q" rowspan="1" colspan="1"><p id="7dd2d5cbcc4ee">maxLeaveTime</p></td><td id="246a149fa230w" rowspan="1" colspan="1"><p id="e0c168a978c0j">Long</p></td><td id="1a90afc8541ru" rowspan="1" colspan="1"><p id="edebc69f8d5zx">否</p></td><td id="602c93200fu8g" rowspan="1" colspan="1"><p id="8f3d1e84451v5">最大请假时长（请假单位为hour或day时生效）。</p><div type="note" id="3a12e712cenp4" class="note note-note"><div class="note-icon-wrapper"><i class="icon-note note note"></i></div><div class="noteContentSpan"><p id="bba50285d3ooa">第三方企业应用专属字段。</p></div></div></td></tr><tr outputclass="row row-level-17" id="ca41a1c0ecvos" class="row-level-17 row row-level-17 row"><td id="a54a2e7e4dkr9" rowspan="1" colspan="1"><p id="6793bea75fhee">leaveHourCeil</p></td><td id="20fd1e450941y" rowspan="1" colspan="1"><p id="51292c7feftls">String</p></td><td id="6fe55a0b67zz0" rowspan="1" colspan="1"><p id="f136c17952nk5">否</p></td><td id="3618372227l97" rowspan="1" colspan="1"><p id="72584746f5xq4">请假时长是否向上取整：</p><div type="note" id="343f3c252byti" class="note note-note"><div class="note-icon-wrapper"><i class="icon-note note note"></i></div><div class="noteContentSpan"><p id="8f24d69418cgk">第三方企业应用专属字段。</p></div></div><ul id="33877ae10dd2i"><li id="4a69270ec0bi9"><p id="b799bbe66bsan"><b>up</b> 向上取整</p></li><li id="b87ff20ea0qfu"><p id="131643fcaaauw"><b>down</b> 向下取整</p></li><li id="9be74f883bfce"><p id="617310f260d4n"><b>none</b> 不取整</p></li></ul></td></tr><tr outputclass="row row-level-18" id="2fbaa95a38ck6" class="row-level-18 row row row-level-18"><td id="52a1d0ca40v49" rowspan="1" colspan="1"><p id="f43b68930bzkh">freedomLeave</p></td><td id="1c5ccfaa29xmv" rowspan="1" colspan="1"><p id="832a578630c69">Boolean</p></td><td id="0496a648a45ln" rowspan="1" colspan="1"><p id="765c7c87b6scv">否</p></td><td id="6a93b047bdm39" rowspan="1" colspan="1"><p id="12c82d941dir1">不需要余额控制的请假类型（如事假）。</p><div type="note" id="316cc610a6s4x" class="note note-note"><div class="note-icon-wrapper"><i class="icon-note note note"></i></div><div class="noteContentSpan"><p id="c81ad74642hex">第三方企业应用专属字段。</p></div></div></td></tr></tbody></table></section><section id="section-request-body-example" class="section"><h3 id="h3-request-body-example" data-tag="h3" class="h3">请求示例</h3><div id="figure-8f0-31g-1ce" outputclass="tabbed-codeblock" data-tag="fig" class="tabbed-codeblock-box"><div class="tab-box"></div><input type="radio" name="check-figure-8f0-31g-1ce" id="figure-8f0-31g-1ce-HTTP-tab" checked="checked" /><label for="figure-8f0-31g-1ce-HTTP-tab">HTTP</label><div class="codeblock-item"><pre id="codeblock-c6a-bqj-uad" outputclass="language-HTTP" code-type="xCode" data-tag="codeblock" class="pre codeblock language-HTTP"><code>POST /v1.0/attendance/leaves/types?opUserId=user01 HTTP/1.1
+Host:api.dingtalk.com
+x-acs-dingtalk-access-token:1d97cxxx
+Content-Type:application/json
+
+{
+  "leaveName" : "年假",
+  "leaveViewUnit" : "day",
+  "bizType" : "general_leave",
+  "naturalDayLeave" : true,
+  "hoursInPerDay" : 1000,
+  "extras" : "{\"validity_type\":\"absolute_time\",\"validity_value\":\"12-31\"}",
+  "paidLeave" : true,
+  "visibilityRules" : [ {
+    "visible" : [ "user01" ],
+    "type" : "staff"
+  } ],
+  "whenCanLeave" : "entry",
+  "leaveTimeCeilMinUnit" : "hour",
+  "leaveTimeCeil" : false,
+  "minLeaveHour" : 1.0,
+  "submitTimeRule" : {
+    "timeValue" : 2,
+    "timeUnit" : "day",
+    "timeType" : "before",
+    "enableTimeLimit" : true
+  },
+  "leaveCertificate" : {
+    "unit" : "hour",
+    "duration" : 1.0,
+    "enable" : false,
+    "promptInformation" : "请假文案"
+  },
+  "maxLeaveTime" : 3,
+  "leaveHourCeil" : "up",
+  "freedomLeave" : true
+}</code></pre></div><input type="radio" name="check-figure-8f0-31g-1ce" id="figure-8f0-31g-1ce-java-tab" /><label for="figure-8f0-31g-1ce-java-tab">Java</label><div class="codeblock-item"><pre id="codeblock-oq1-glq-cmo" outputclass="language-java" code-type="xCode" data-tag="codeblock" class="pre codeblock language-java"><code>// This file is auto-generated, don't edit it. Thanks.
+package com.aliyun.sample;
+
+import com.aliyun.tea.*;
+
+public class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Client
+     * @throws Exception
+     */
+    public static com.aliyun.dingtalkattendance_1_0.Client createClient() throws Exception {
+        com.aliyun.teaopenapi.models.Config config = new com.aliyun.teaopenapi.models.Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        return new com.aliyun.dingtalkattendance_1_0.Client(config);
+    }
+
+    public static void main(String[] args_) throws Exception {
+        java.util.List&lt;String&gt; args = java.util.Arrays.asList(args_);
+        com.aliyun.dingtalkattendance_1_0.Client client = Sample.createClient();
+        com.aliyun.dingtalkattendance_1_0.models.AddLeaveTypeHeaders addLeaveTypeHeaders = new com.aliyun.dingtalkattendance_1_0.models.AddLeaveTypeHeaders();
+        addLeaveTypeHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        com.aliyun.dingtalkattendance_1_0.models.AddLeaveTypeRequest.AddLeaveTypeRequestLeaveCertificate leaveCertificate = new com.aliyun.dingtalkattendance_1_0.models.AddLeaveTypeRequest.AddLeaveTypeRequestLeaveCertificate()
+                .setUnit("hour")
+                .setDuration(1D)
+                .setEnable(false)
+                .setPromptInformation("请假文案");
+        com.aliyun.dingtalkattendance_1_0.models.AddLeaveTypeRequest.AddLeaveTypeRequestSubmitTimeRule submitTimeRule = new com.aliyun.dingtalkattendance_1_0.models.AddLeaveTypeRequest.AddLeaveTypeRequestSubmitTimeRule()
+                .setTimeValue(2L)
+                .setTimeUnit("day")
+                .setTimeType("before")
+                .setEnableTimeLimit(true);
+        com.aliyun.dingtalkattendance_1_0.models.AddLeaveTypeRequest.AddLeaveTypeRequestVisibilityRules visibilityRules0 = new com.aliyun.dingtalkattendance_1_0.models.AddLeaveTypeRequest.AddLeaveTypeRequestVisibilityRules()
+                .setVisible(java.util.Arrays.asList(
+                    "user01"
+                ))
+                .setType("staff");
+        com.aliyun.dingtalkattendance_1_0.models.AddLeaveTypeRequest addLeaveTypeRequest = new com.aliyun.dingtalkattendance_1_0.models.AddLeaveTypeRequest()
+                .setOpUserId("user01")
+                .setLeaveName("年假")
+                .setLeaveViewUnit("day")
+                .setBizType("general_leave")
+                .setNaturalDayLeave(true)
+                .setHoursInPerDay(1000L)
+                .setExtras("{\"validity_type\":\"absolute_time\",\"validity_value\":\"12-31\"}")
+                .setPaidLeave(true)
+                .setVisibilityRules(java.util.Arrays.asList(
+                    visibilityRules0
+                ))
+                .setWhenCanLeave("entry")
+                .setLeaveTimeCeilMinUnit("hour")
+                .setLeaveTimeCeil(false)
+                .setMinLeaveHour(1D)
+                .setSubmitTimeRule(submitTimeRule)
+                .setLeaveCertificate(leaveCertificate)
+                .setMaxLeaveTime(3L)
+                .setLeaveHourCeil("up")
+                .setFreedomLeave(true);
+        try {
+            client.addLeaveTypeWithOptions(addLeaveTypeRequest, addLeaveTypeHeaders, new com.aliyun.teautil.models.RuntimeOptions());
+        } catch (TeaException err) {
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        } catch (Exception _err) {
+            TeaException err = new TeaException(_err.getMessage(), _err);
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        }        
+    }
+}</code></pre></div><input type="radio" name="check-figure-8f0-31g-1ce" id="figure-8f0-31g-1ce-python-tab" /><label for="figure-8f0-31g-1ce-python-tab">Python</label><div class="codeblock-item"><pre id="codeblock-t84-aqu-k5g" outputclass="language-python" code-type="xCode" data-tag="codeblock" class="pre codeblock language-python"><code># -*- coding: utf-8 -*-
+# This file is auto-generated, don't edit it. Thanks.
+import os
+import sys
+
+from typing import List
+
+from alibabacloud_dingtalk.attendance_1_0.client import Client as dingtalkattendance_1_0Client
+from alibabacloud_tea_openapi import models as open_api_models
+from alibabacloud_dingtalk.attendance_1_0 import models as dingtalkattendance__1__0_models
+from alibabacloud_tea_util import models as util_models
+from alibabacloud_tea_util.client import Client as UtilClient
+
+
+class Sample:
+    def __init__(self):
+        pass
+
+    @staticmethod
+    def create_client() -&gt; dingtalkattendance_1_0Client:
+        """
+        使用 Token 初始化账号Client
+        @return: Client
+        @throws Exception
+        """
+        config = open_api_models.Config()
+        config.protocol = 'https'
+        config.region_id = 'central'
+        return dingtalkattendance_1_0Client(config)
+
+    @staticmethod
+    def main(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        add_leave_type_headers = dingtalkattendance__1__0_models.AddLeaveTypeHeaders()
+        add_leave_type_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        leave_certificate = dingtalkattendance__1__0_models.AddLeaveTypeRequestLeaveCertificate(
+            unit='hour',
+            duration=1,
+            enable=False,
+            prompt_information='请假文案'
+        )
+        submit_time_rule = dingtalkattendance__1__0_models.AddLeaveTypeRequestSubmitTimeRule(
+            time_value=2,
+            time_unit='day',
+            time_type='before',
+            enable_time_limit=True
+        )
+        visibility_rules_0 = dingtalkattendance__1__0_models.AddLeaveTypeRequestVisibilityRules(
+            visible=[
+                'user01'
+            ],
+            type='staff'
+        )
+        add_leave_type_request = dingtalkattendance__1__0_models.AddLeaveTypeRequest(
+            op_user_id='user01',
+            leave_name='年假',
+            leave_view_unit='day',
+            biz_type='general_leave',
+            natural_day_leave=True,
+            hours_in_per_day=1000,
+            extras='{"validity_type":"absolute_time","validity_value":"12-31"}',
+            paid_leave=True,
+            visibility_rules=[
+                visibility_rules_0
+            ],
+            when_can_leave='entry',
+            leave_time_ceil_min_unit='hour',
+            leave_time_ceil=False,
+            min_leave_hour=1,
+            submit_time_rule=submit_time_rule,
+            leave_certificate=leave_certificate,
+            max_leave_time=3,
+            leave_hour_ceil='up',
+            freedom_leave=True
+        )
+        try:
+            client.add_leave_type_with_options(add_leave_type_request, add_leave_type_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+    @staticmethod
+    async def main_async(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        add_leave_type_headers = dingtalkattendance__1__0_models.AddLeaveTypeHeaders()
+        add_leave_type_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        leave_certificate = dingtalkattendance__1__0_models.AddLeaveTypeRequestLeaveCertificate(
+            unit='hour',
+            duration=1,
+            enable=False,
+            prompt_information='请假文案'
+        )
+        submit_time_rule = dingtalkattendance__1__0_models.AddLeaveTypeRequestSubmitTimeRule(
+            time_value=2,
+            time_unit='day',
+            time_type='before',
+            enable_time_limit=True
+        )
+        visibility_rules_0 = dingtalkattendance__1__0_models.AddLeaveTypeRequestVisibilityRules(
+            visible=[
+                'user01'
+            ],
+            type='staff'
+        )
+        add_leave_type_request = dingtalkattendance__1__0_models.AddLeaveTypeRequest(
+            op_user_id='user01',
+            leave_name='年假',
+            leave_view_unit='day',
+            biz_type='general_leave',
+            natural_day_leave=True,
+            hours_in_per_day=1000,
+            extras='{"validity_type":"absolute_time","validity_value":"12-31"}',
+            paid_leave=True,
+            visibility_rules=[
+                visibility_rules_0
+            ],
+            when_can_leave='entry',
+            leave_time_ceil_min_unit='hour',
+            leave_time_ceil=False,
+            min_leave_hour=1,
+            submit_time_rule=submit_time_rule,
+            leave_certificate=leave_certificate,
+            max_leave_time=3,
+            leave_hour_ceil='up',
+            freedom_leave=True
+        )
+        try:
+            await client.add_leave_type_with_options_async(add_leave_type_request, add_leave_type_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+
+if __name__ == '__main__':
+    Sample.main(sys.argv[1:])</code></pre></div><input type="radio" name="check-figure-8f0-31g-1ce" id="figure-8f0-31g-1ce-php-tab" /><label for="figure-8f0-31g-1ce-php-tab">PHP</label><div class="codeblock-item"><pre id="codeblock-djq-0ul-xcy" outputclass="language-php" code-type="xCode" data-tag="codeblock" class="pre codeblock language-php"><code>&lt;?php
+
+// This file is auto-generated, don't edit it. Thanks.
+namespace AlibabaCloud\SDK\Sample;
+
+use AlibabaCloud\SDK\Dingtalk\Vattendance_1_0\Dingtalk;
+use \Exception;
+use AlibabaCloud\Tea\Exception\TeaError;
+use AlibabaCloud\Tea\Utils\Utils;
+
+use Darabonba\OpenApi\Models\Config;
+use AlibabaCloud\SDK\Dingtalk\Vattendance_1_0\Models\AddLeaveTypeHeaders;
+use AlibabaCloud\SDK\Dingtalk\Vattendance_1_0\Models\AddLeaveTypeRequest\leaveCertificate;
+use AlibabaCloud\SDK\Dingtalk\Vattendance_1_0\Models\AddLeaveTypeRequest\submitTimeRule;
+use AlibabaCloud\SDK\Dingtalk\Vattendance_1_0\Models\AddLeaveTypeRequest\visibilityRules;
+use AlibabaCloud\SDK\Dingtalk\Vattendance_1_0\Models\AddLeaveTypeRequest;
+use AlibabaCloud\Tea\Utils\Utils\RuntimeOptions;
+
+class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Dingtalk Client
+     */
+    public static function createClient(){
+        $config = new Config([]);
+        $config-&gt;protocol = "https";
+        $config-&gt;regionId = "central";
+        return new Dingtalk($config);
+    }
+
+    /**
+     * @param string[] $args
+     * @return void
+     */
+    public static function main($args){
+        $client = self::createClient();
+        $addLeaveTypeHeaders = new AddLeaveTypeHeaders([]);
+        $addLeaveTypeHeaders-&gt;xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        $leaveCertificate = new leaveCertificate([
+            "unit" =&gt; "hour",
+            "duration" =&gt; 1,
+            "enable" =&gt; false,
+            "promptInformation" =&gt; "请假文案"
+        ]);
+        $submitTimeRule = new submitTimeRule([
+            "timeValue" =&gt; 2,
+            "timeUnit" =&gt; "day",
+            "timeType" =&gt; "before",
+            "enableTimeLimit" =&gt; true
+        ]);
+        $visibilityRules0 = new visibilityRules([
+            "visible" =&gt; [
+                "user01"
+            ],
+            "type" =&gt; "staff"
+        ]);
+        $addLeaveTypeRequest = new AddLeaveTypeRequest([
+            "opUserId" =&gt; "user01",
+            "leaveName" =&gt; "年假",
+            "leaveViewUnit" =&gt; "day",
+            "bizType" =&gt; "general_leave",
+            "naturalDayLeave" =&gt; true,
+            "hoursInPerDay" =&gt; 1000,
+            "extras" =&gt; "{\"validity_type\":\"absolute_time\",\"validity_value\":\"12-31\"}",
+            "paidLeave" =&gt; true,
+            "visibilityRules" =&gt; [
+                $visibilityRules0
+            ],
+            "whenCanLeave" =&gt; "entry",
+            "leaveTimeCeilMinUnit" =&gt; "hour",
+            "leaveTimeCeil" =&gt; false,
+            "minLeaveHour" =&gt; 1,
+            "submitTimeRule" =&gt; $submitTimeRule,
+            "leaveCertificate" =&gt; $leaveCertificate,
+            "maxLeaveTime" =&gt; 3,
+            "leaveHourCeil" =&gt; "up",
+            "freedomLeave" =&gt; true
+        ]);
+        try {
+            $client-&gt;addLeaveTypeWithOptions($addLeaveTypeRequest, $addLeaveTypeHeaders, new RuntimeOptions([]));
+        }
+        catch (Exception $err) {
+            if (!($err instanceof TeaError)) {
+                $err = new TeaError([], $err-&gt;getMessage(), $err-&gt;getCode(), $err);
+            }
+            if (!Utils::empty_($err-&gt;code) &amp;&amp; !Utils::empty_($err-&gt;message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+        }
+    }
+}
+$path = __DIR__ . \DIRECTORY_SEPARATOR . '..' . \DIRECTORY_SEPARATOR . 'vendor' . \DIRECTORY_SEPARATOR . 'autoload.php';
+if (file_exists($path)) {
+    require_once $path;
+}
+Sample::main(array_slice($argv, 1));</code></pre></div><input type="radio" name="check-figure-8f0-31g-1ce" id="figure-8f0-31g-1ce-go-tab" /><label for="figure-8f0-31g-1ce-go-tab">Go</label><div class="codeblock-item"><pre id="codeblock-6gp-hsw-wl1" outputclass="language-go" code-type="xCode" data-tag="codeblock" class="pre codeblock language-go"><code>// This file is auto-generated, don't edit it. Thanks.
+package main
+
+import (
+  "os"
+  util  "github.com/alibabacloud-go/tea-utils/v2/service"
+  dingtalkattendance_1_0  "github.com/alibabacloud-go/dingtalk/attendance_1_0"
+  openapi  "github.com/alibabacloud-go/darabonba-openapi/v2/client"
+  "github.com/alibabacloud-go/tea/tea"
+)
+
+
+/**
+ * 使用 Token 初始化账号Client
+ * @return Client
+ * @throws Exception
+ */
+func CreateClient () (_result *dingtalkattendance_1_0.Client, _err error) {
+  config := &amp;openapi.Config{}
+  config.Protocol = tea.String("https")
+  config.RegionId = tea.String("central")
+  _result = &amp;dingtalkattendance_1_0.Client{}
+  _result, _err = dingtalkattendance_1_0.NewClient(config)
+  return _result, _err
+}
+
+func _main (args []*string) (_err error) {
+  client, _err := CreateClient()
+  if _err != nil {
+    return _err
+  }
+
+  addLeaveTypeHeaders := &amp;dingtalkattendance_1_0.AddLeaveTypeHeaders{}
+  addLeaveTypeHeaders.XAcsDingtalkAccessToken = tea.String("&lt;your access token&gt;")
+  leaveCertificate := &amp;dingtalkattendance_1_0.AddLeaveTypeRequestLeaveCertificate{
+    Unit: tea.String("hour"),
+    Duration: tea.Float64(1),
+    Enable: tea.Bool(false),
+    PromptInformation: tea.String("请假文案"),
+  }
+  submitTimeRule := &amp;dingtalkattendance_1_0.AddLeaveTypeRequestSubmitTimeRule{
+    TimeValue: tea.Int64(2),
+    TimeUnit: tea.String("day"),
+    TimeType: tea.String("before"),
+    EnableTimeLimit: tea.Bool(true),
+  }
+  visibilityRules0 := &amp;dingtalkattendance_1_0.AddLeaveTypeRequestVisibilityRules{
+    Visible: []*string{tea.String("user01")},
+    Type: tea.String("staff"),
+  }
+  addLeaveTypeRequest := &amp;dingtalkattendance_1_0.AddLeaveTypeRequest{
+    OpUserId: tea.String("user01"),
+    LeaveName: tea.String("年假"),
+    LeaveViewUnit: tea.String("day"),
+    BizType: tea.String("general_leave"),
+    NaturalDayLeave: tea.Bool(true),
+    HoursInPerDay: tea.Int64(1000),
+    Extras: tea.String("{\"validity_type\":\"absolute_time\",\"validity_value\":\"12-31\"}"),
+    PaidLeave: tea.Bool(true),
+    VisibilityRules: []*dingtalkattendance_1_0.AddLeaveTypeRequestVisibilityRules{visibilityRules0},
+    WhenCanLeave: tea.String("entry"),
+    LeaveTimeCeilMinUnit: tea.String("hour"),
+    LeaveTimeCeil: tea.Bool(false),
+    MinLeaveHour: tea.Float64(1),
+    SubmitTimeRule: submitTimeRule,
+    LeaveCertificate: leaveCertificate,
+    MaxLeaveTime: tea.Int64(3),
+    LeaveHourCeil: tea.String("up"),
+    FreedomLeave: tea.Bool(true),
+  }
+  tryErr := func()(_e error) {
+    defer func() {
+      if r := tea.Recover(recover()); r != nil {
+        _e = r
+      }
+    }()
+    _, _err = client.AddLeaveTypeWithOptions(addLeaveTypeRequest, addLeaveTypeHeaders, &amp;util.RuntimeOptions{})
+    if _err != nil {
+      return _err
+    }
+
+    return nil
+  }()
+
+  if tryErr != nil {
+    var err = &amp;tea.SDKError{}
+    if _t, ok := tryErr.(*tea.SDKError); ok {
+      err = _t
+    } else {
+      err.Message = tea.String(tryErr.Error())
+    }
+    if !tea.BoolValue(util.Empty(err.Code)) &amp;&amp; !tea.BoolValue(util.Empty(err.Message)) {
+      // err 中含有 code 和 message 属性，可帮助开发定位问题
+    }
+
+  }
+  return _err
+}
+
+
+func main() {
+  err := _main(tea.StringSlice(os.Args[1:]))
+  if err != nil {
+    panic(err)
+  }
+}</code></pre></div><input type="radio" name="check-figure-8f0-31g-1ce" id="figure-8f0-31g-1ce-nodejs-tab" /><label for="figure-8f0-31g-1ce-nodejs-tab">Node.js</label><div class="codeblock-item"><pre id="codeblock-jmv-818-ppt" outputclass="language-nodejs" code-type="xCode" data-tag="codeblock" class="pre codeblock language-nodejs"><code>// This file is auto-generated, don't edit it
+import Util, * as $Util from '@alicloud/tea-util';
+import dingtalkattendance_1_0, * as $dingtalkattendance_1_0 from '@alicloud/dingtalk/attendance_1_0';
+import OpenApi, * as $OpenApi from '@alicloud/openapi-client';
+import * as $tea from '@alicloud/tea-typescript';
+
+
+export default class Client {
+
+  /**
+   * 使用 Token 初始化账号Client
+   * @return Client
+   * @throws Exception
+   */
+  static createClient(): dingtalkattendance_1_0 {
+    let config = new $OpenApi.Config({ });
+    config.protocol = "https";
+    config.regionId = "central";
+    return new dingtalkattendance_1_0(config);
+  }
+
+  static async main(args: string[]): Promise&lt;void&gt; {
+    let client = Client.createClient();
+    let addLeaveTypeHeaders = new $dingtalkattendance_1_0.AddLeaveTypeHeaders({ });
+    addLeaveTypeHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+    let leaveCertificate = new $dingtalkattendance_1_0.AddLeaveTypeRequestLeaveCertificate({
+      unit: "hour",
+      duration: 1,
+      enable: false,
+      promptInformation: "请假文案",
+    });
+    let submitTimeRule = new $dingtalkattendance_1_0.AddLeaveTypeRequestSubmitTimeRule({
+      timeValue: 2,
+      timeUnit: "day",
+      timeType: "before",
+      enableTimeLimit: true,
+    });
+    let visibilityRules0 = new $dingtalkattendance_1_0.AddLeaveTypeRequestVisibilityRules({
+      visible: [
+        "user01"
+      ],
+      type: "staff",
+    });
+    let addLeaveTypeRequest = new $dingtalkattendance_1_0.AddLeaveTypeRequest({
+      opUserId: "user01",
+      leaveName: "年假",
+      leaveViewUnit: "day",
+      bizType: "general_leave",
+      naturalDayLeave: true,
+      hoursInPerDay: 1000,
+      extras: "{\"validity_type\":\"absolute_time\",\"validity_value\":\"12-31\"}",
+      paidLeave: true,
+      visibilityRules: [
+        visibilityRules0
+      ],
+      whenCanLeave: "entry",
+      leaveTimeCeilMinUnit: "hour",
+      leaveTimeCeil: false,
+      minLeaveHour: 1,
+      submitTimeRule: submitTimeRule,
+      leaveCertificate: leaveCertificate,
+      maxLeaveTime: 3,
+      leaveHourCeil: "up",
+      freedomLeave: true,
+    });
+    try {
+      await client.addLeaveTypeWithOptions(addLeaveTypeRequest, addLeaveTypeHeaders, new $Util.RuntimeOptions({ }));
+    } catch (err) {
+      if (!Util.empty(err.code) &amp;&amp; !Util.empty(err.message)) {
+        // err 中含有 code 和 message 属性，可帮助开发定位问题
+      }
+
+    }    
+  }
+
+}
+
+Client.main(process.argv.slice(2));</code></pre></div><input type="radio" name="check-figure-8f0-31g-1ce" id="figure-8f0-31g-1ce-csharp-tab" /><label for="figure-8f0-31g-1ce-csharp-tab">C#</label><div class="codeblock-item"><pre id="codeblock-org-gj6-9sx" outputclass="language-csharp" code-type="xCode" data-tag="codeblock" class="pre codeblock language-csharp"><code>// This file is auto-generated, don't edit it. Thanks.
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
+
+using Tea;
+using Tea.Utils;
+
+
+namespace AlibabaCloud.SDK.Sample
+{
+    public class Sample 
+    {
+
+        /**
+         * 使用 Token 初始化账号Client
+         * @return Client
+         * @throws Exception
+         */
+        public static AlibabaCloud.SDK.Dingtalkattendance_1_0.Client CreateClient()
+        {
+            AlibabaCloud.OpenApiClient.Models.Config config = new AlibabaCloud.OpenApiClient.Models.Config();
+            config.Protocol = "https";
+            config.RegionId = "central";
+            return new AlibabaCloud.SDK.Dingtalkattendance_1_0.Client(config);
+        }
+
+        public static void Main(string[] args)
+        {
+            AlibabaCloud.SDK.Dingtalkattendance_1_0.Client client = CreateClient();
+            AlibabaCloud.SDK.Dingtalkattendance_1_0.Models.AddLeaveTypeHeaders addLeaveTypeHeaders = new AlibabaCloud.SDK.Dingtalkattendance_1_0.Models.AddLeaveTypeHeaders();
+            addLeaveTypeHeaders.XAcsDingtalkAccessToken = "&lt;your access token&gt;";
+            AlibabaCloud.SDK.Dingtalkattendance_1_0.Models.AddLeaveTypeRequest.AddLeaveTypeRequestLeaveCertificate leaveCertificate = new AlibabaCloud.SDK.Dingtalkattendance_1_0.Models.AddLeaveTypeRequest.AddLeaveTypeRequestLeaveCertificate
+            {
+                Unit = "hour",
+                Duration = 1,
+                Enable = false,
+                PromptInformation = "请假文案",
+            };
+            AlibabaCloud.SDK.Dingtalkattendance_1_0.Models.AddLeaveTypeRequest.AddLeaveTypeRequestSubmitTimeRule submitTimeRule = new AlibabaCloud.SDK.Dingtalkattendance_1_0.Models.AddLeaveTypeRequest.AddLeaveTypeRequestSubmitTimeRule
+            {
+                TimeValue = 2,
+                TimeUnit = "day",
+                TimeType = "before",
+                EnableTimeLimit = true,
+            };
+            AlibabaCloud.SDK.Dingtalkattendance_1_0.Models.AddLeaveTypeRequest.AddLeaveTypeRequestVisibilityRules visibilityRules0 = new AlibabaCloud.SDK.Dingtalkattendance_1_0.Models.AddLeaveTypeRequest.AddLeaveTypeRequestVisibilityRules
+            {
+                Visible = new List&lt;string&gt;
+                {
+                    "user01"
+                },
+                Type = "staff",
+            };
+            AlibabaCloud.SDK.Dingtalkattendance_1_0.Models.AddLeaveTypeRequest addLeaveTypeRequest = new AlibabaCloud.SDK.Dingtalkattendance_1_0.Models.AddLeaveTypeRequest
+            {
+                OpUserId = "user01",
+                LeaveName = "年假",
+                LeaveViewUnit = "day",
+                BizType = "general_leave",
+                NaturalDayLeave = true,
+                HoursInPerDay = 1000,
+                Extras = "{\"validity_type\":\"absolute_time\",\"validity_value\":\"12-31\"}",
+                PaidLeave = true,
+                VisibilityRules = new List&lt;AlibabaCloud.SDK.Dingtalkattendance_1_0.Models.AddLeaveTypeRequest.AddLeaveTypeRequestVisibilityRules&gt;
+                {
+                    visibilityRules0
+                },
+                WhenCanLeave = "entry",
+                LeaveTimeCeilMinUnit = "hour",
+                LeaveTimeCeil = false,
+                MinLeaveHour = 1,
+                SubmitTimeRule = submitTimeRule,
+                LeaveCertificate = leaveCertificate,
+                MaxLeaveTime = 3,
+                LeaveHourCeil = "up",
+                FreedomLeave = true,
+            };
+            try
+            {
+                client.AddLeaveTypeWithOptions(addLeaveTypeRequest, addLeaveTypeHeaders, new AlibabaCloud.TeaUtil.Models.RuntimeOptions());
+            }
+            catch (TeaException err)
+            {
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+            catch (Exception _err)
+            {
+                TeaException err = new TeaException(new Dictionary&lt;string, object&gt;
+                {
+                    { "message", _err.Message }
+                });
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+        }
+
+
+    }
+}</code></pre></div></div></section></section><section id="section-response-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-response-1" data-tag="h2" class="h2">响应</h2><section id="section-response-parameter" class="section"><h3 data-tag="h3" id="h2-vjb-kfn-uw2" class="h3 title">响应体</h3><table id="fe1f7e084ezmt" tablewidth="710" tablecolswidth="213 142 355" autofit="false" class="table"><colgroup colwidth="0.9*" style="width:30.00%"></colgroup><colgroup colwidth="0.6*" style="width:20.00%"></colgroup><colgroup colwidth="1.5*" style="width:50.00%"></colgroup><tbody class="tbody"><tr id="bec080c9f9ynx"><td id="b27e11bf06g6l" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="8e174ffe40kww">名称</p></td><td id="a2bd073bc9roh" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="99c07fce16at1">类型</p></td><td id="482b39f7a758x" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="212952e7b7xpr">描述</p></td></tr><tr outputclass="row row-level-1 has-child" id="23b386ded0kqz" class="has-child row row-level-1 has-child row-level-1 row"><td id="73bf3d160ccmy" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><span class="icms-tree-table-trigger" type="checkbox"></span><p id="96cab34f2bcpf">result</p></td><td id="f85a508c9b4m9" rowspan="1" colspan="1"><p id="ef48aee703z2a">Object</p></td><td id="d83bc9bc68m01" rowspan="1" colspan="1"><p id="106fa68536fmj">返回信息。</p></td></tr><tr outputclass="row row-level-1-1" id="a6332e5e07fhw" class="row-level-1-1 row row row-level-1-1"><td id="4782e99aeegud" rowspan="1" colspan="1"><p id="e4cd0d4b1edor">leaveName</p></td><td id="60479cb4c3qrx" rowspan="1" colspan="1"><p id="e631c379a2uvi">String</p></td><td id="68802e66ac1ly" rowspan="1" colspan="1"><p id="a05b769bcc8o4">假期名称。</p></td></tr><tr outputclass="row row-level-1-2" id="38eef52dc472j" class="row-level-1-2 row row row-level-1-2"><td id="f845d2654ac48" rowspan="1" colspan="1"><p id="8b3c7d4fe3thd">leaveCode</p></td><td id="e1998795e1sfv" rowspan="1" colspan="1"><p id="a7a41158993ah">String</p></td><td id="a1b5f4aa7efzb" rowspan="1" colspan="1"><p id="9fd5062d4f9m7">假期规则唯一标识。</p></td></tr><tr outputclass="row row-level-1-3" id="1802564345ff9" class="row-level-1-3 row row row-level-1-3"><td id="65fd5a25absxs" rowspan="1" colspan="1"><p id="621f7fab4diz3">leaveViewUnit</p></td><td id="5913f19fe4os4" rowspan="1" colspan="1"><p id="e5ce542c1bldc">String</p></td><td id="64865fc29cfvi" rowspan="1" colspan="1"><p id="8299c6db582tq">请假单位。</p><ul id="f30afe3735hme"><li id="0ff617b64f4c4"><p id="17c4a0bde2vhe"><b>day</b>：天</p></li><li id="65eb3c6f79tl5"><p id="aee140e5518cx"><b>halfDay</b>：半天</p></li><li id="18c11f1ec14dq"><p id="9c69733d14lkk"><b>hour</b>：小时</p></li></ul></td></tr><tr outputclass="row row-level-1-4" id="2fb1f504bf646" class="row-level-1-4 row row row-level-1-4"><td id="78a00030709l5" rowspan="1" colspan="1"><p id="d026c7ee1d4qz">bizType</p></td><td id="aa6990f8a87oz" rowspan="1" colspan="1"><p id="96d8fb7519yo4">String</p></td><td id="2162974cd7qa5" rowspan="1" colspan="1"><p id="5041d84b2b56y">假期类型。</p><ul id="fde707e1d1d92"><li id="a46525e2c3g0t"><p id="1683a2b385v1i"><b>general_leave</b>：普通假期</p></li><li id="886680c652zuz"><p id="f40364bd4etko"><b>lieu_leave</b>：加班转调休</p></li></ul></td></tr><tr outputclass="row row-level-1-5" id="cec90618a39ua" class="row-level-1-5 row row row-level-1-5"><td id="96568475dd2jf" rowspan="1" colspan="1"><p id="fc678a460b7j7">naturalDayLeave</p></td><td id="0d97862550b4v" rowspan="1" colspan="1"><p id="44cb160d67b3s">Boolean</p></td><td id="3647a56ec2lmp" rowspan="1" colspan="1"><p id="661575f13al94">是否按照自然日统计请假时长。</p><ul id="a1a26490693zv"><li id="e76c7d9199rbe"><p id="a076d1e64bwzc"><b>true</b>：是</p></li><li id="0cb8094ab7vf6"><p id="124032850atvu"><b>false</b>：否</p></li></ul><div type="note" id="94742e5cffwv8" class="note note-note"><div class="note-icon-wrapper"><i class="icon-note note note"></i></div><div class="noteContentSpan"><p data-tag="p" id="c223c80dbb0k8" class="p"></p><p id="ec51bef4cdakr">当为false的时候，用户发起请假时候会根据用户在请假时间段内的排班情况来计算请假时长。</p><p id="19c1d70cdcm9o"></p></div></div></td></tr><tr outputclass="row row-level-1-6" id="3ea8f3d11bjxc" class="row row-level-1-6 row-level-1-6 row"><td id="b62474329dr78" rowspan="1" colspan="1"><p id="6d661e40f7qqa">hoursInPerDay</p></td><td id="19dd1cdc378j5" rowspan="1" colspan="1"><p id="c6ab0aeff9w07">Long</p></td><td id="0fdf6b777a8uv" rowspan="1" colspan="1"><p id="1f32aad81csxl">每天折算的工作时长，为参数值的百分之一。</p><p id="b025f4f826g1u">例如，某企业每天的工作时长设置为10小时，则该参数值为10*100=1000。</p></td></tr><tr outputclass="row row-level-1-7 has-child" id="8dca572fa2gj6" class="has-child row-level-1-7 row row-level-1-7 has-child row"><td id="e5f66d8b6991q" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><span class="icms-tree-table-trigger" type="checkbox"></span><p id="f6eab411cdjze">visibilityRules</p></td><td id="f80b32c668xxs" rowspan="1" colspan="1"><p id="febf6f60498n0">Array</p></td><td id="851c7495c59ev" rowspan="1" colspan="1"><p id="ac4e07a6f3phz">适用范围规则列表，不传默认为全公司。</p></td></tr><tr outputclass="row row-level-1-7-1" id="96dcd3cf1eutt" class="row row-level-1-7-1 row-level-1-7-1 row"><td id="5f7c70ff24gag" rowspan="1" colspan="1"><p id="952a22363a13t">visible</p></td><td id="b0a6da40f6dpw" rowspan="1" colspan="1"><p id="63ab2f74e3ps1">Array of String</p></td><td id="d783f2d6a1xm5" rowspan="1" colspan="1"><p id="79611ce2bewwi">适用范围内数据列表。</p><ul id="01705bd6f4ggc"><li id="47d1685e11w6x"><p id="cda54a2765zvf">当type=staff时，传员工userId列表。</p></li><li id="f86fcaf92ci2o"><p id="b014d440f2ltu">当type=dept时，传部门id列表。</p></li><li id="ee8279ebf0l6d"><p id="75d8bbd093b4x">当type=label时，传角色id列表。</p></li></ul></td></tr><tr outputclass="row row-level-1-7-2" id="b96d495d1frqb" class="row row-level-1-7-2 row row-level-1-7-2"><td id="9339b65809l8z" rowspan="1" colspan="1"><p id="ca86021f1cwff">type</p></td><td id="29446c36e2jmn" rowspan="1" colspan="1"><p id="290b8b109dgg6">String</p></td><td id="b5c3b2ac58bv7" rowspan="1" colspan="1"><p id="d82dc72203vgf">适用范围规则类型。</p><ul id="080a5e14765cc"><li id="394a1d7eadoff"><p id="3e8ac699fbptg"><b>dept</b>：部门</p></li><li id="be2bda6407czj"><p id="a82615a402rt2"><b>staff</b>：员工</p></li><li id="cec05854f0vr2"><p id="93e704bc56pdh"><b>label</b>：角色</p></li></ul></td></tr><tr outputclass="row row-level-1-8 has-child" id="fc9715ee0e5t5" class="has-child row row-level-1-8 row row-level-1-8 has-child"><td id="8f339454227xv" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><span class="icms-tree-table-trigger" type="checkbox"></span><p id="bc58f7aa2fk14">submitTimeRule</p></td><td id="aaba29bd04s6w" rowspan="1" colspan="1"><p id="ca66531d1e9jm">Object</p></td><td id="10aefd35b6q9y" rowspan="1" colspan="1"><p id="acb5e8f612bpy">限时提交规则。</p></td></tr><tr outputclass="row row-level-1-8-1" id="8a3e5e77c5mf9" class="row row-level-1-8-1 row row-level-1-8-1"><td id="88be8fb3a137r" rowspan="1" colspan="1"><p id="54b10cc651sys">timeValue</p></td><td id="574d2bedde04x" rowspan="1" colspan="1"><p id="64e5d005e0uoh">Long</p></td><td id="2608d0c233pl4" rowspan="1" colspan="1"><p id="90caec51c0lwg">限制值。</p><ul id="e0f2cb24ee6mg"><li id="a1160713f3r1m"><p id="e44d8ce3a1h23">当timeUnit为day时，有效值范围是0至30天。</p></li><li id="03486350e0f48"><p id="9e505b9648cof">当timeUnit为hour时，有效值范围是0至24小时。</p></li></ul></td></tr><tr outputclass="row row-level-1-8-2" id="30e26ba0ddtrn" class="row row-level-1-8-2 row row-level-1-8-2"><td id="8db5baf6a2d4z" rowspan="1" colspan="1"><p id="408ec69805h8f">timeUnit</p></td><td id="9fd318b7569pp" rowspan="1" colspan="1"><p id="1ae5333c8bwhs">String</p></td><td id="ed35a0d299soi" rowspan="1" colspan="1"><p id="5eb680093d067">时间单位。</p><ul id="5905d90822zh5"><li id="e1a401ab3cttr"><p id="dca880db5fl55"><b>day</b>：天</p></li><li id="6389ea8dc79x5"><p id="1c7bcbe81a5a3"><b>hour</b>：小时</p></li></ul></td></tr><tr outputclass="row row-level-1-8-3" id="e733ba6441okm" class="row row-level-1-8-3 row row-level-1-8-3"><td id="6f04977b4cyaw" rowspan="1" colspan="1"><p id="636c0dcb2bpon">timeType</p></td><td id="de305a4c4amnr" rowspan="1" colspan="1"><p id="ee0aef07043ew">String</p></td><td id="d93318037anqx" rowspan="1" colspan="1"><p id="07d925b5e3186">限制类型。</p><ul id="ba4a46d196bvh"><li id="f795aa90b591e"><p id="97ff6cb839agq"><b>before</b>：提前</p></li><li id="3e890a20d7hhq"><p id="e58f4958bdax2"><b>after</b>：补交</p></li></ul></td></tr><tr outputclass="row row-level-1-8-4" id="718535ce73nzp" class="row row-level-1-8-4 row row-level-1-8-4"><td id="1c5eb273696hg" rowspan="1" colspan="1"><p id="40d2ba0be3xdd">enableTimeLimit</p></td><td id="924a24d428qh2" rowspan="1" colspan="1"><p id="a4973879393kx">Boolean</p></td><td id="ec83846a21ynr" rowspan="1" colspan="1"><p id="abbbf473ac5yf">是否开启限时提交功能。</p><ul id="ac45568a77mae"><li id="bc53c25cf5xl4"><p id="41de2d8d11lez"><b>true</b>：开启</p></li><li id="cbeac75692925"><p id="046bb42bbfj7u"><b>false</b>：不开启</p></li></ul></td></tr><tr outputclass="row row-level-1-9 has-child" id="4fcb3e8313s0i" class="has-child row row-level-1-9 has-child row row-level-1-9"><td id="bd4c236481oir" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><span class="icms-tree-table-trigger" type="checkbox"></span><p id="15be2b9cd9p8l">leaveCertificate</p></td><td id="9272a893d4h0w" rowspan="1" colspan="1"><p id="6f13eb383258r">Object</p></td><td id="446800bf9bbw7" rowspan="1" colspan="1"><p id="eec924a98196b">请假证明。</p></td></tr><tr outputclass="row row-level-1-9-1" id="1cf34eda5acxx" class="row row-level-1-9-1 row row-level-1-9-1"><td id="b1042aa79627z" rowspan="1" colspan="1"><p id="1265046845iaq">unit</p></td><td id="a8f3e6436ch97" rowspan="1" colspan="1"><p id="c9f4b347fbvts">String</p></td><td id="5d0aa51200oif" rowspan="1" colspan="1"><p id="8108b1c1e1ndx">请假证明时长单位。</p><ul id="584a5d69c0rh2"><li id="fafb55b580pn0"><p id="c9456804069p9"><b>hour</b>：小时</p></li><li id="24c75c11b0z2v"><p id="89fc3b9ccat28"><b>day</b>：天</p></li></ul></td></tr><tr outputclass="row row-level-1-9-2" id="53289ed1604xf" class="row row-level-1-9-2 row row-level-1-9-2"><td id="c7567fba92y39" rowspan="1" colspan="1"><p id="2d6951187145e">duration</p></td><td id="2eb73a3262wgy" rowspan="1" colspan="1"><p id="1a0f247e8b6k1">double</p></td><td id="5ae229c4e16m0" rowspan="1" colspan="1"><p id="7aef888a07cga">超过多长时间需提供请假证明。</p></td></tr><tr outputclass="row row-level-1-9-3" id="0b30fd389177x" class="row row-level-1-9-3 row row-level-1-9-3"><td id="db5b003d7ba3v" rowspan="1" colspan="1"><p id="48df8191e4oh8">enable</p></td><td id="59a9b541d4y75" rowspan="1" colspan="1"><p id="d7e8b3c5eeg2k">Boolean</p></td><td id="83e605d8a4huf" rowspan="1" colspan="1"><p id="b1d471e0a4utp">是否开启请假证明。</p><ul id="552b0ea1bey77"><li id="64ab518845vro"><p id="608c0ead8eojn"><b>true</b>：开启</p></li><li id="3d48bf5e2ffd8"><p id="bacedd273a7l6"><b>false</b>：不开启</p></li></ul></td></tr><tr outputclass="row row-level-1-9-4" id="a4261acef30jn" class="row-level-1-9-4 row row row-level-1-9-4"><td id="d741298e0e6yh" rowspan="1" colspan="1"><p id="4eac7dff83w5i">promptInformation</p></td><td id="c1e4da15c9pps" rowspan="1" colspan="1"><p id="48c8a3c2884jh">String</p></td><td id="36cd3ed723eyj" rowspan="1" colspan="1"><p id="b960db1f9b2tv">请假提示文案。</p></td></tr></tbody></table></section><section id="section-response-body-example" class="section"><h3 id="h3-response-body-example" data-tag="h3" class="h3">响应体示例</h3><pre id="058db315fbx2b" outputclass="language-json" code-type="xCode" data-tag="codeblock" class="pre codeblock language-json"><code>HTTP/1.1 200 OK
+Content-Type:application/json
+
+{
+  "result" : {
+    "leaveName" : "年假",
+    "leaveCode" : "037477ae-1009-4632-b8e9-e919ae5e7973",
+    "leaveViewUnit" : "day",
+    "bizType" : "general_leave",
+    "naturalDayLeave" : true,
+    "hoursInPerDay" : 1000,
+    "visibilityRules" : [ {
+      "visible" : [ "user01" ],
+      "type" : "staff"
+    } ],
+    "submitTimeRule" : {
+      "timeValue" : 1,
+      "timeUnit" : "day",
+      "timeType" : "before",
+      "enableTimeLimit" : false
+    },
+    "leaveCertificate" : {
+      "unit" : "hour",
+      "duration" : 1,
+      "enable" : false,
+      "promptInformation" : "请假文案"
+    }
+  }
+}</code></pre></section><section id="section-error-code-1" class="section"><h3 id="h3-error-code-1" data-tag="h3" class="h3">错误码</h3><p data-tag="p" id="p-error-code-global-guide" class="p">若调用该接口报错，可根据错误信息在<a id="a-error-code-global-guide" href="https://open.dingtalk.com/document/development/server-api-error-codes-1">全局错误码</a>文档中查找解决方案。</p><table id="8e55cbf311ulw" tablewidth="709" tablecolswidth="142 177 177 213" autofit="false" class="table">
+  <colgroup colwidth="0.8*" style="width:20.03%"></colgroup>
+  <colgroup colwidth="1*" style="width:24.96%"></colgroup>
+  <colgroup colwidth="1*" style="width:24.96%"></colgroup>
+  <colgroup colwidth="1.2*" style="width:30.04%"></colgroup>
+  <tbody class="tbody">
+   <tr id="e3055d35b0kg8">
+    <td id="97cb1bb1b46np" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="5d5bae44ecs15">HttpCode</p></td>
+    <td id="96b88f859ezyk" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="59a1ff81741gi">错误码</p></td>
+    <td id="5c0131f0815h9" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="d2e46442cess0">错误信息</p></td>
+    <td id="2001ac6a10t4f" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="ee150ab0ddo5q">说明</p></td>
+   </tr>
+   <tr id="7cce90b249o7u">
+    <td id="222396db8azir" rowspan="1" colspan="1"><p id="8222a98663l9j">400</p></td>
+    <td id="c8909d1f07mhy" rowspan="1" colspan="1"><p id="4bde7159d4i8b">lieuLeaveValidityIncorrect</p></td>
+    <td id="1889a5cfd7fw5" rowspan="1" colspan="1"><p id="ad6a35ce473z9">调休假有效期不正确</p></td>
+    <td id="09dedd1aedgda" rowspan="1" colspan="1"><p id="8078409a6ewio">调休假有效期不正确</p></td>
+   </tr>
+   <tr id="ed068ca33fr70">
+    <td id="b9c142236cvq4" rowspan="1" colspan="1"><p id="024f0f83f8lb8">400</p></td>
+    <td id="71be570812bu1" rowspan="1" colspan="1"><p id="6776c4810daxm">lieuLeaveOnlyOne</p></td>
+    <td id="bf6921b128o0b" rowspan="1" colspan="1"><p id="7de2f71b18562">加班调休全局只能有一个</p></td>
+    <td id="d45b9111f6ga2" rowspan="1" colspan="1"><p id="e7c45d92b1a3p">加班调休全局只能有一个</p></td>
+   </tr>
+   <tr id="00c8355f6ahra">
+    <td id="f0e126bf319uu" rowspan="1" colspan="1"><p id="9e20c78d8b2b1">400</p></td>
+    <td id="8aaee4598ayfa" rowspan="1" colspan="1"><p id="e32eceb6a492u">bizTypeIncorrect</p></td>
+    <td id="a09652624f0pz" rowspan="1" colspan="1"><p id="06acced6b88vj">假期业务类型不正确</p></td>
+    <td id="c8b0928e33gs8" rowspan="1" colspan="1"><p id="1e45475cc43kr">假期业务类型不正确</p></td>
+   </tr>
+   <tr id="659631d1e4xau">
+    <td id="3b5b4129d4kps" rowspan="1" colspan="1"><p id="ec56f8f6f2frd">400</p></td>
+    <td id="60315fccaa2ch" rowspan="1" colspan="1"><p id="830ff254a529e">unitIncorrect</p></td>
+    <td id="66b53497d5mzw" rowspan="1" colspan="1"><p id="4a1e0f45f2z8q">假期单位不正确</p></td>
+    <td id="d0fcbc24509ns" rowspan="1" colspan="1"><p id="76b979e53608k">假期单位不正确</p></td>
+   </tr>
+   <tr id="4e5a0727fe00x">
+    <td id="d016a31fc3400" rowspan="1" colspan="1"><p id="fa0e6a087cf1v">400</p></td>
+    <td id="38dd7c189b4i6" rowspan="1" colspan="1"><p id="e59513e60e0k5">nameTooLong</p></td>
+    <td id="1029b5bf96df3" rowspan="1" colspan="1"><p id="58f57e6ec6x0r">假期名称过长</p></td>
+    <td id="a15924134fvsz" rowspan="1" colspan="1"><p id="52c118febfkbl">假期名称过长</p></td>
+   </tr>
+   <tr id="7f8616f8045bz">
+    <td id="18a90becd8tga" rowspan="1" colspan="1"><p id="189c692a79rfi">400</p></td>
+    <td id="d0441b9285r6n" rowspan="1" colspan="1"><p id="99d8d4ec93rk8">nameAlreadyExists</p></td>
+    <td id="d35456a2812bd" rowspan="1" colspan="1"><p id="e4c54922a01ie">已存在相同假期名称</p></td>
+    <td id="2fad4e2ac5vbh" rowspan="1" colspan="1"><p id="be3d56b94d3xl">已存在相同假期名称</p></td>
+   </tr>
+   <tr id="25c6cfcc766gt">
+    <td id="2f6ba3cbecxmm" rowspan="1" colspan="1"><p id="eb339e10f26ms">400</p></td>
+    <td id="9766afa96bbu4" rowspan="1" colspan="1"><p id="1ec911e2e4mm0">leaveOrgIsUsed</p></td>
+    <td id="f197e73f66nmn" rowspan="1" colspan="1"><p id="14bb00e6458ba">只允许企业接入使用</p></td>
+    <td id="54939274d5os8" rowspan="1" colspan="1"><p id="5dfd54aff4dgu">只允许企业接入使用</p></td>
+   </tr>
+   <tr id="da2627bc298e1">
+    <td id="c11145a2fdkpx" rowspan="1" colspan="1"><p id="eb595d5cbajfj">400</p></td>
+    <td id="bfe78bb5aff2w" rowspan="1" colspan="1"><p id="0a1b5ec9730gm">notPermission</p></td>
+    <td id="d64ebf5bb5a6p" rowspan="1" colspan="1"><p id="8aaa315834ops">无访问权限</p></td>
+    <td id="7899f38475ln3" rowspan="1" colspan="1"><p id="45402ab22awgo">无访问权限</p></td>
+   </tr>
+   <tr id="cee4b5420de3w">
+    <td id="0baab471e4pna" rowspan="1" colspan="1"><p id="8b9a16c74ehpi">400</p></td>
+    <td id="6bd09c8656efc" rowspan="1" colspan="1"><p id="e61c00de3a5q5">notManage</p></td>
+    <td id="f4d164ce7484m" rowspan="1" colspan="1"><p id="97b88386ceagp">部门的管理员不存在</p></td>
+    <td id="26b5f974303z0" rowspan="1" colspan="1"><p id="f7af749515ydg">部门的管理员不存在</p></td>
+   </tr>
+   <tr id="df1808c93bo4x">
+    <td id="ec91a393a1h4f" rowspan="1" colspan="1"><p id="8925a459a2l2a">400</p></td>
+    <td id="d5a6a6786fsuu" rowspan="1" colspan="1"><p id="a90bd904afnph">notFound</p></td>
+    <td id="23d52adcd8xk7" rowspan="1" colspan="1"><p id="6f09a4eb54mmo">未找到该假期类型</p></td>
+    <td id="033dceb1db66j" rowspan="1" colspan="1"><p id="2c472b0afdbpw">未找到该假期类型</p></td>
+   </tr>
+   <tr id="ee00732254eow">
+    <td id="e813f68f9e3ys" rowspan="1" colspan="1"><p id="7fdd292ad092e">400</p></td>
+    <td id="0831654428m3b" rowspan="1" colspan="1"><p id="8fa07f00a8yv4">tryAgainLater</p></td>
+    <td id="67c99e0745hkh" rowspan="1" colspan="1"><p id="ca1ef098fcy39">更新失败，请稍后重试</p></td>
+    <td id="419d164390atq" rowspan="1" colspan="1"><p id="c8784b7460bj4">更新失败，请稍后重试</p></td>
+   </tr>
+   <tr id="4d003771c9tz0">
+    <td id="80d37a2a2bdic" rowspan="1" colspan="1"><p id="db106cd082cwh">400</p></td>
+    <td id="2c9af250ab2xd" rowspan="1" colspan="1"><p id="f8220fc3ef8sj">updateSpeedfast</p></td>
+    <td id="78e4c514232kr" rowspan="1" colspan="1"><p id="9bdf74adbfnpj">亲，该操作速度过快，请5分钟后再试</p></td>
+    <td id="fcc9c0c9507bs" rowspan="1" colspan="1"><p id="05b583f904l7y">亲，该操作速度过快，请5分钟后再试</p></td>
+   </tr>
+   <tr id="a55b6ecd69qkq">
+    <td id="b3f6d5f0b9etg" rowspan="1" colspan="1"><p id="60bab539cco0x">400</p></td>
+    <td id="113963c4c019x" rowspan="1" colspan="1"><p id="d95599d12518k">systemError</p></td>
+    <td id="d5ae77bac0zep" rowspan="1" colspan="1"><p id="391e084e84pad">系统错误</p></td>
+    <td id="9f9d56d2958tm" rowspan="1" colspan="1"><p id="5d066c0160mtx">系统错误</p></td>
+   </tr>
+   <tr id="4e1f5bebbda79">
+    <td id="1a7f24ce0a0n5" rowspan="1" colspan="1"><p id="929edf27f2wfz">400</p></td>
+    <td id="b86d96da6dd8i" rowspan="1" colspan="1"><p id="76dc27f9b7j5q">invalidParam</p></td>
+    <td id="c3582b49cfhmr" rowspan="1" colspan="1"><p id="e064006dfbz4p">参数错误</p></td>
+    <td id="fe75f9ce5a1hg" rowspan="1" colspan="1"><p id="de3db8ec77lwg">参数错误</p></td>
+   </tr>
+  </tbody>
+ </table></section></section></div></main>
+</body></html>

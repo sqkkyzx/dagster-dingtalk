@@ -1,0 +1,394 @@
+<!DOCTYPE html><html><head><meta charset="utf8" / /><meta name="searchtitle" content="" / /><meta name="keywords" content="" / /><meta name="author" content="" / /><title>查询管理员是否有应用管理权限</title><meta name="gmtModify" content="2025-09-11 21:01:56" / /><meta name="gmtModify" content="2026-06-01 16:10:32" / /></head><body data-tag="topic" id="doc-api-dingtalk-GetMicroAppUserAccess" class="topic"><main id="daeee07206rnz" data-init-id="doc-api-dingtalk_GetMicroAppUserAccess"><h1 data-tag="title" id="h1-eh6-394-oln" class="title">查询管理员是否有应用管理权限</h1><p data-tag="shortdesc" id="c5f2c29a41wdg" class="shortdesc">调用本接口，用于查询企业管理员是否有应用的管理权限。</p><div data-tag="conbody" outputclass="icms-api-reference" class="icms-api-reference conbody"><section id="section-prerequisites-1" class="section icms-module" data-tag="section" data-source="latest-mounted-icms-html"><h2 id="h2-prerequisites-1" data-tag="h2" class="h2">接口调用说明</h2><p>例如，产品服务商上架了第三方企业应用，名称为三方ISV小程序。某个测试企业开通了三方ISV小程序，小明是测试企业的管理员。产品服务商调用本接口，可查询小明是否拥有三方ISV小程序应用的管理权限。如图： <img src="https://img.alicdn.com/imgextra/i2/O1CN01hIxCzR1OjsgzEugxy_!!6000000001742-2-tps-2788-1328.png" alt="" class="image break" / /></p></section><section id="section-request-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-request-1" data-tag="h2" class="h2">请求</h2><section id="section-request-basic-info" class="section"><h3 id="heading-request-basic-info" data-tag="h3" class="h3">基本信息</h3><table tablewidth="648" tablecolswidth="216 432" autofit="false" class="table"><colgroup colwidth="1*" style="width:33.33%"></colgroup><colgroup colwidth="2*" style="width:66.67%"></colgroup><tbody class="tbody"><tr><td rowspan="1" style="background-color:#e5e5e5" colspan="1"><p>字段</p></td><td rowspan="1" style="background-color:#e5e5e5" colspan="1"><p>值</p></td></tr><tr><td rowspan="1" colspan="1"><p>HTTP URL</p></td><td rowspan="1" colspan="1"><p>https://api.dingtalk.com/v1.0/microApp/apps/{agentId}/users/{userId}/adminAccess</p></td></tr><tr><td rowspan="1" colspan="1"><p>HTTP Method</p></td><td rowspan="1" colspan="1"><p>GET</p></td></tr><tr><td rowspan="1" colspan="1"><p>支持的应用类型</p></td><td rowspan="1" colspan="1"><p><span data-tag="ph" id="ph-request-basic-app-type-apptype-0" class="ph ph-app-type" data-ph-raw-text="appType-第三方企业应用">appType-第三方企业应用</span></p></td></tr><tr><td rowspan="1" colspan="1"><p>权限要求</p></td><td rowspan="1" colspan="1"><p><span data-tag="ph" id="ph-request-basic-permission-permission-qyapi-get-member-0" class="ph-permission ph" data-ph-raw-text="permission-qyapi_get_member-成员信息读权限" data-permission-id="permission-qyapi_get_member" data-permission-code="qyapi_get_member" data-permission-detail-api="/document/api/permission/detail" data-permission-query-param="code">permission-qyapi_get_member-成员信息读权限</span></p></td></tr></tbody></table></section><section id="section-request-header-parameter" class="section"><h3 data-tag="h3" id="h2-ala-ozf-u2l" class="h3 title">请求头</h3><table id="7de653ec53tn0" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="336755047ar65"><td id="dce64c11e3r1i" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="0e0f8a9434h7l">名称</p></td><td id="5ec6d2953bkvl" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="e809d611b2x2o">类型</p></td><td id="f8c125f822b7s" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="10571499b7lco">是否必填</p></td><td id="8bcbc96b43tvu" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="ddf8443909qt1">描述</p></td></tr><tr id="ffef6aca63yd4"><td id="9270ff2bd6kz2" rowspan="1" colspan="1"><p id="b0763c9e7bl6l">x-acs-dingtalk-access-token</p></td><td id="e36a42626duo1" rowspan="1" colspan="1"><p id="52adcf9a79c50">String</p></td><td id="c69dd406ffqle" rowspan="1" colspan="1"><p id="9397f84d3306h">是</p></td><td id="8c451e1b53v3i" rowspan="1" colspan="1"><p id="22728b182dqyh">调用该接口的访问凭证，通过调用<a id="4a855b2181geo" href="https://open.dingtalk.com/document/development/obtain-the-access-token-of-the-authorized-enterprise-1#" class="xref">获取第三方应用授权企业的accessToken</a>接口获取。</p></td></tr></tbody></table></section><section id="section-request-path-parameter" class="section"><h3 data-tag="h3" id="h2-g8x-vsj-5ur" class="h3 title">路径参数</h3><table id="51f9476954ujg" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="815a41c9796qo"><td id="fe0dd9d168p08" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="9ee742e69biho">名称</p></td><td id="ce4222f02cqgc" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="98531fddcaaf4">类型</p></td><td id="562d0adf2d3hg" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="bfa72b350fodt">是否必填</p></td><td id="05d00c16dfn3m" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="864cfc4590z1z">描述</p></td></tr><tr id="8426d643fbm66"><td id="fb1bcfb4987ux" rowspan="1" colspan="1"><p id="59c53581deamy">agentId</p></td><td id="8b5a2df2c3a3y" rowspan="1" colspan="1"><p id="d7d1940d69uoy">Long</p></td><td id="b701b66f550xy" rowspan="1" colspan="1"><p id="3636caacc5jhu">是</p></td><td id="57208a2fa4utv" rowspan="1" colspan="1"><p id="af004f9eb2u33">授权企业安装三方应用时的agentId，可调用<a id="b55ba4337bysf" href="https://open.dingtalk.com/document/development/obtains-the-authorization-information-after-the-enterprise-activates-the-application-1#" class="xref">获取企业开通应用后的授权信息</a>接口获取agentId参数值。</p></td></tr><tr id="f96d0d92fcpu4"><td id="ca4568f82c3ub" rowspan="1" colspan="1"><p id="a6b58c01b541j">userId</p></td><td id="97ba386f358ot" rowspan="1" colspan="1"><p id="c3e5ae608875n">String</p></td><td id="f314fd6293q10" rowspan="1" colspan="1"><p id="61146b3e55gu3">是</p></td><td id="0e93734d371lg" rowspan="1" colspan="1"><p id="a15526a9168bd">授权企业管理员userId，可调用<a id="d1b0517069gmz" href="https://open.dingtalk.com/document/development/query-the-administrator-list#" class="xref">获取管理员列表</a>接口获取userid参数值。</p></td></tr></tbody></table></section><section id="section-request-body-example" class="section"><h3 id="h3-request-body-example" data-tag="h3" class="h3">请求示例</h3><div id="figure-udn-vyd-avv" outputclass="tabbed-codeblock" data-tag="fig" class="tabbed-codeblock-box"><div class="tab-box"></div><input type="radio" name="check-figure-udn-vyd-avv" id="figure-udn-vyd-avv-HTTP-tab" checked="checked" /><label for="figure-udn-vyd-avv-HTTP-tab">HTTP</label><div class="codeblock-item"><pre id="codeblock-vm7-8bw-9cs" outputclass="language-HTTP" code-type="xCode" data-tag="codeblock" class="pre codeblock language-HTTP"><code>GET /v1.0/microApp/apps/111/users/manager1123/adminAccess HTTP/1.1
+Host:api.dingtalk.com
+x-acs-dingtalk-access-token:xxx
+Content-Type:application/json</code></pre></div><input type="radio" name="check-figure-udn-vyd-avv" id="figure-udn-vyd-avv-java-tab" /><label for="figure-udn-vyd-avv-java-tab">Java</label><div class="codeblock-item"><pre id="codeblock-y9j-jiz-mgf" outputclass="language-java" code-type="xCode" data-tag="codeblock" class="pre codeblock language-java"><code>// This file is auto-generated, don't edit it. Thanks.
+package com.aliyun.sample;
+
+import com.aliyun.tea.*;
+import com.aliyun.teautil.*;
+import com.aliyun.teautil.models.*;
+import com.aliyun.dingtalkmicro_app_1_0.*;
+import com.aliyun.dingtalkmicro_app_1_0.models.*;
+import com.aliyun.teaopenapi.*;
+import com.aliyun.teaopenapi.models.*;
+
+public class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Client
+     * @throws Exception
+     */
+    public static com.aliyun.dingtalkmicro_app_1_0.Client createClient() throws Exception {
+        Config config = new Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        return new com.aliyun.dingtalkmicro_app_1_0.Client(config);
+    }
+
+    public static void main(String[] args_) throws Exception {
+        java.util.List&lt;String&gt; args = java.util.Arrays.asList(args_);
+        com.aliyun.dingtalkmicro_app_1_0.Client client = Sample.createClient();
+        GetMicroAppUserAccessHeaders getMicroAppUserAccessHeaders = new GetMicroAppUserAccessHeaders();
+        getMicroAppUserAccessHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        try {
+            client.getMicroAppUserAccessWithOptions("111", "manager1123", getMicroAppUserAccessHeaders, new RuntimeOptions());
+        } catch (TeaException err) {
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        } catch (Exception _err) {
+            TeaException err = new TeaException(_err.getMessage(), _err);
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        }        
+    }
+}</code></pre></div><input type="radio" name="check-figure-udn-vyd-avv" id="figure-udn-vyd-avv-python-tab" /><label for="figure-udn-vyd-avv-python-tab">Python</label><div class="codeblock-item"><pre id="codeblock-qfx-n6q-c3e" outputclass="language-python" code-type="xCode" data-tag="codeblock" class="pre codeblock language-python"><code># -*- coding: utf-8 -*-
+# This file is auto-generated, don't edit it. Thanks.
+import sys
+
+from typing import List
+
+from alibabacloud_dingtalk.microApp_1_0.client import Client as dingtalkmicroApp_1_0Client
+from alibabacloud_tea_openapi import models as open_api_models
+from alibabacloud_dingtalk.microApp_1_0 import models as dingtalkmicro_app__1__0_models
+from alibabacloud_tea_util import models as util_models
+from alibabacloud_tea_util.client import Client as UtilClient
+
+
+class Sample:
+    def __init__(self):
+        pass
+
+    @staticmethod
+    def create_client() -&gt; dingtalkmicroApp_1_0Client:
+        """
+        使用 Token 初始化账号Client
+        @return: Client
+        @throws Exception
+        """
+        config = open_api_models.Config()
+        config.protocol = 'https'
+        config.region_id = 'central'
+        return dingtalkmicroApp_1_0Client(config)
+
+    @staticmethod
+    def main(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        get_micro_app_user_access_headers = dingtalkmicro_app__1__0_models.GetMicroAppUserAccessHeaders()
+        get_micro_app_user_access_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        try:
+            client.get_micro_app_user_access_with_options('111', 'manager1123', get_micro_app_user_access_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+    @staticmethod
+    async def main_async(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        get_micro_app_user_access_headers = dingtalkmicro_app__1__0_models.GetMicroAppUserAccessHeaders()
+        get_micro_app_user_access_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        try:
+            await client.get_micro_app_user_access_with_options_async('111', 'manager1123', get_micro_app_user_access_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+
+if __name__ == '__main__':
+    Sample.main(sys.argv[1:])</code></pre></div><input type="radio" name="check-figure-udn-vyd-avv" id="figure-udn-vyd-avv-php-tab" /><label for="figure-udn-vyd-avv-php-tab">PHP</label><div class="codeblock-item"><pre id="codeblock-9nb-bhv-uau" outputclass="language-php" code-type="xCode" data-tag="codeblock" class="pre codeblock language-php"><code>&lt;?php
+
+// This file is auto-generated, don't edit it. Thanks.
+namespace AlibabaCloud\SDK\Sample;
+
+use AlibabaCloud\SDK\Dingtalk\Vmicro_app_1_0\Dingtalk;
+use \Exception;
+use AlibabaCloud\Tea\Exception\TeaError;
+use AlibabaCloud\Tea\Utils\Utils;
+
+use Darabonba\OpenApi\Models\Config;
+use AlibabaCloud\SDK\Dingtalk\Vmicro_app_1_0\Models\GetMicroAppUserAccessHeaders;
+use AlibabaCloud\Tea\Utils\Utils\RuntimeOptions;
+
+class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Dingtalk Client
+     */
+    public static function createClient(){
+        $config = new Config([]);
+        $config-&gt;protocol = "https";
+        $config-&gt;regionId = "central";
+        return new Dingtalk($config);
+    }
+
+    /**
+     * @param string[] $args
+     * @return void
+     */
+    public static function main($args){
+        $client = self::createClient();
+        $getMicroAppUserAccessHeaders = new GetMicroAppUserAccessHeaders([]);
+        $getMicroAppUserAccessHeaders-&gt;xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        try {
+            $client-&gt;getMicroAppUserAccessWithOptions("111", "manager1123", $getMicroAppUserAccessHeaders, new RuntimeOptions([]));
+        }
+        catch (Exception $err) {
+            if (!($err instanceof TeaError)) {
+                $err = new TeaError([], $err-&gt;getMessage(), $err-&gt;getCode(), $err);
+            }
+            if (!Utils::empty_($err-&gt;code) &amp;&amp; !Utils::empty_($err-&gt;message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+        }
+    }
+}
+$path = __DIR__ . \DIRECTORY_SEPARATOR . '..' . \DIRECTORY_SEPARATOR . 'vendor' . \DIRECTORY_SEPARATOR . 'autoload.php';
+if (file_exists($path)) {
+    require_once $path;
+}
+Sample::main(array_slice($argv, 1));</code></pre></div><input type="radio" name="check-figure-udn-vyd-avv" id="figure-udn-vyd-avv-go-tab" /><label for="figure-udn-vyd-avv-go-tab">Go</label><div class="codeblock-item"><pre id="codeblock-cdn-t9b-u5u" outputclass="language-go" code-type="xCode" data-tag="codeblock" class="pre codeblock language-go"><code>// This file is auto-generated, don't edit it. Thanks.
+package main
+
+import (
+  "os"
+  util  "github.com/alibabacloud-go/tea-utils/service"
+  dingtalkmicroapp_1_0  "github.com/alibabacloud-go/dingtalk/microApp_1_0"
+  openapi  "github.com/alibabacloud-go/darabonba-openapi/client"
+  "github.com/alibabacloud-go/tea/tea"
+)
+
+
+/**
+ * 使用 Token 初始化账号Client
+ * @return Client
+ * @throws Exception
+ */
+func CreateClient () (_result *dingtalkmicroapp_1_0.Client, _err error) {
+  config := &amp;openapi.Config{}
+  config.Protocol = tea.String("https")
+  config.RegionId = tea.String("central")
+  _result = &amp;dingtalkmicroapp_1_0.Client{}
+  _result, _err = dingtalkmicroapp_1_0.NewClient(config)
+  return _result, _err
+}
+
+func _main (args []*string) (_err error) {
+  client, _err := CreateClient()
+  if _err != nil {
+    return _err
+  }
+
+  getMicroAppUserAccessHeaders := &amp;dingtalkmicroapp_1_0.GetMicroAppUserAccessHeaders{}
+  getMicroAppUserAccessHeaders.XAcsDingtalkAccessToken = tea.String("&lt;your access token&gt;")
+  tryErr := func()(_e error) {
+    defer func() {
+      if r := tea.Recover(recover()); r != nil {
+        _e = r
+      }
+    }()
+    _, _err = client.GetMicroAppUserAccessWithOptions(tea.String("111"), tea.String("manager1123"), getMicroAppUserAccessHeaders, &amp;util.RuntimeOptions{})
+    if _err != nil {
+      return _err
+    }
+
+    return nil
+  }()
+
+  if tryErr != nil {
+    var err = &amp;tea.SDKError{}
+    if _t, ok := tryErr.(*tea.SDKError); ok {
+      err = _t
+    } else {
+      err.Message = tea.String(tryErr.Error())
+    }
+    if !tea.BoolValue(util.Empty(err.Code)) &amp;&amp; !tea.BoolValue(util.Empty(err.Message)) {
+      // err 中含有 code 和 message 属性，可帮助开发定位问题
+    }
+
+  }
+  return _err
+}
+
+
+func main() {
+  err := _main(tea.StringSlice(os.Args[1:]))
+  if err != nil {
+    panic(err)
+  }
+}</code></pre></div><input type="radio" name="check-figure-udn-vyd-avv" id="figure-udn-vyd-avv-nodejs-tab" /><label for="figure-udn-vyd-avv-nodejs-tab">Node.js</label><div class="codeblock-item"><pre id="codeblock-mgp-jyc-aqh" outputclass="language-nodejs" code-type="xCode" data-tag="codeblock" class="pre codeblock language-nodejs"><code>// This file is auto-generated, don't edit it
+import Util, * as $Util from '@alicloud/tea-util';
+import dingtalkmicroApp_1_0, * as $dingtalkmicroApp_1_0 from '@alicloud/dingtalk/microApp_1_0';
+import OpenApi, * as $OpenApi from '@alicloud/openapi-client';
+import * as $tea from '@alicloud/tea-typescript';
+
+
+export default class Client {
+
+  /**
+   * 使用 Token 初始化账号Client
+   * @return Client
+   * @throws Exception
+   */
+  static createClient(): dingtalkmicroApp_1_0 {
+    let config = new $OpenApi.Config({ });
+    config.protocol = "https";
+    config.regionId = "central";
+    return new dingtalkmicroApp_1_0(config);
+  }
+
+  static async main(args: string[]): Promise&lt;void&gt; {
+    let client = Client.createClient();
+    let getMicroAppUserAccessHeaders = new $dingtalkmicroApp_1_0.GetMicroAppUserAccessHeaders({ });
+    getMicroAppUserAccessHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+    try {
+      await client.getMicroAppUserAccessWithOptions("111", "manager1123", getMicroAppUserAccessHeaders, new $Util.RuntimeOptions({ }));
+    } catch (err) {
+      if (!Util.empty(err.code) &amp;&amp; !Util.empty(err.message)) {
+        // err 中含有 code 和 message 属性，可帮助开发定位问题
+      }
+
+    }    
+  }
+
+}
+
+Client.main(process.argv.slice(2));</code></pre></div><input type="radio" name="check-figure-udn-vyd-avv" id="figure-udn-vyd-avv-csharp-tab" /><label for="figure-udn-vyd-avv-csharp-tab">C#</label><div class="codeblock-item"><pre id="codeblock-1xj-vdt-js0" outputclass="language-csharp" code-type="xCode" data-tag="codeblock" class="pre codeblock language-csharp"><code>// This file is auto-generated, don't edit it. Thanks.
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
+
+using Tea;
+using Tea.Utils;
+
+
+namespace AlibabaCloud.SDK.Sample
+{
+    public class Sample 
+    {
+
+        /**
+         * 使用 Token 初始化账号Client
+         * @return Client
+         * @throws Exception
+         */
+        public static AlibabaCloud.SDK.Dingtalkmicro_app_1_0.Client CreateClient()
+        {
+            AlibabaCloud.OpenApiClient.Models.Config config = new AlibabaCloud.OpenApiClient.Models.Config();
+            config.Protocol = "https";
+            config.RegionId = "central";
+            return new AlibabaCloud.SDK.Dingtalkmicro_app_1_0.Client(config);
+        }
+
+        public static void Main(string[] args)
+        {
+            AlibabaCloud.SDK.Dingtalkmicro_app_1_0.Client client = CreateClient();
+            AlibabaCloud.SDK.Dingtalkmicro_app_1_0.Models.GetMicroAppUserAccessHeaders getMicroAppUserAccessHeaders = new AlibabaCloud.SDK.Dingtalkmicro_app_1_0.Models.GetMicroAppUserAccessHeaders();
+            getMicroAppUserAccessHeaders.XAcsDingtalkAccessToken = "&lt;your access token&gt;";
+            try
+            {
+                client.GetMicroAppUserAccessWithOptions("111", "manager1123", getMicroAppUserAccessHeaders, new AlibabaCloud.TeaUtil.Models.RuntimeOptions());
+            }
+            catch (TeaException err)
+            {
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+            catch (Exception _err)
+            {
+                TeaException err = new TeaException(new Dictionary&lt;string, object&gt;
+                {
+                    { "message", _err.Message }
+                });
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+        }
+
+
+    }
+}</code></pre></div><input type="radio" name="check-figure-udn-vyd-avv" id="figure-udn-vyd-avv-cpp-tab" /><label for="figure-udn-vyd-avv-cpp-tab">C++</label><div class="codeblock-item"><pre id="codeblock-dbu-lty-8sz" outputclass="language-cpp" code-type="xCode" data-tag="codeblock" class="pre codeblock language-cpp"><code>// This file is auto-generated, don't edit it. Thanks.
+
+#include &lt;alibabacloud/dingtalkmicro_app__1__0.hpp&gt;
+#include &lt;alibabacloud/open_api.hpp&gt;
+#include &lt;darabonba/core.hpp&gt;
+#include &lt;darabonba/util.hpp&gt;
+#include &lt;iostream&gt;
+
+using namespace std;
+
+Alibabacloud_Dingtalkmicro_app_1_0::Client createClient() {
+  shared_ptr&lt;Alibabacloud_OpenApi::Config&gt; config = make_shared&lt;Alibabacloud_OpenApi::Config&gt;();
+  config-&gt;protocol = make_shared&lt;string&gt;("https");
+  config-&gt;regionId = make_shared&lt;string&gt;("central");
+  return Alibabacloud_Dingtalkmicro_app_1_0::Client(config);
+}
+
+int main(int argc, char *args[]) {
+  args++;
+  shared_ptr&lt;Alibabacloud_Dingtalkmicro_app_1_0::Client&gt; client = make_shared&lt;Alibabacloud_Dingtalkmicro_app_1_0::Client&gt;(createClient());
+  shared_ptr&lt;Alibabacloud_Dingtalkmicro_app_1_0::GetMicroAppUserAccessHeaders&gt; getMicroAppUserAccessHeaders = make_shared&lt;Alibabacloud_Dingtalkmicro_app_1_0::GetMicroAppUserAccessHeaders&gt;();
+  getMicroAppUserAccessHeaders-&gt;xAcsDingtalkAccessToken = make_shared&lt;string&gt;("&lt;your access token&gt;");
+  try {
+    client-&gt;getMicroAppUserAccessWithOptions(make_shared&lt;string&gt;("111"), make_shared&lt;string&gt;("manager1123"), getMicroAppUserAccessHeaders, make_shared&lt;Darabonba_Util::RuntimeOptions&gt;(Darabonba_Util::RuntimeOptions()));
+  }
+  catch (std::exception &amp;err) {
+    if (!Darabonba_Util::Client::empty(err.code) &amp;&amp; !Darabonba_Util::Client::empty(err.message)) {
+      // err 中含有 code 和 message 属性，可帮助开发定位问题
+    }
+  }
+}</code></pre></div></div></section></section><section id="section-response-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-response-1" data-tag="h2" class="h2">响应</h2><section id="section-response-parameter" class="section"><h3 data-tag="h3" id="h2-v9h-vgg-osk" class="h3 title">响应体</h3><table id="438626bb94m4p" tablewidth="710" tablecolswidth="213 142 355" autofit="false" class="table"><colgroup colwidth="0.9*" style="width:30.00%"></colgroup><colgroup colwidth="0.6*" style="width:20.00%"></colgroup><colgroup colwidth="1.5*" style="width:50.00%"></colgroup><tbody class="tbody"><tr id="19fc97515639x"><td id="6d7d4fdf7ewpc" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="8808f34ce4wmj">名称</p></td><td id="c4657f63fdm6u" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="b398743ad20mb">类型</p></td><td id="4646e8d54662j" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="68eac531b5c18">描述</p></td></tr><tr outputclass="row row-level-1" id="f5396583846x2" class="row row-level-1 row-level-1 row"><td id="9ea8432c35ndh" rowspan="1" colspan="1"><p id="1ae90ea05d93v">result</p></td><td id="993e7bc60erki" rowspan="1" colspan="1"><p id="5929110403baa">Boolean</p></td><td id="c101e9b305ar2" rowspan="1" colspan="1"><p id="89a471b525zqy">结果。</p><ul id="cfd5b9a9435d2"><li id="e504edc64ctvh"><p id="790ef0ea9ela9">true：有管理权限。</p></li><li id="7cc797c29b3p3"><p id="d92a79e7aefnb">false：无管理权限。</p></li></ul></td></tr></tbody></table></section><section id="section-response-body-example" class="section"><h3 id="h3-response-body-example" data-tag="h3" class="h3">响应体示例</h3><pre id="7960792658zfs" outputclass="language-json" code-type="xCode" data-tag="codeblock" class="pre codeblock language-json"><code>HTTP/1.1 200 OK
+Content-Type:application/json
+
+{
+  "result" : true
+}</code></pre></section><section id="section-error-code-1" class="section"><h3 id="h3-error-code-1" data-tag="h3" class="h3">错误码</h3><p data-tag="p" id="p-error-code-global-guide" class="p">若调用该接口报错，可根据错误信息在<a id="a-error-code-global-guide" href="https://open.dingtalk.com/document/development/server-api-error-codes-1">全局错误码</a>文档中查找解决方案。</p><table id="b3ecde243cdr0" tablewidth="709" tablecolswidth="142 177 177 213" autofit="false" class="table">
+  <colgroup colwidth="0.8*" style="width:20.03%"></colgroup>
+  <colgroup colwidth="1*" style="width:24.96%"></colgroup>
+  <colgroup colwidth="1*" style="width:24.96%"></colgroup>
+  <colgroup colwidth="1.2*" style="width:30.04%"></colgroup>
+  <tbody class="tbody">
+   <tr id="3064b0a38bbus">
+    <td id="b55daf8cealpq" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="077ba5a236he4">HttpCode</p></td>
+    <td id="d71f0ea30cfj5" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="6c5a1afce2eov">错误码</p></td>
+    <td id="4d47dbb982cj9" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="9130c7d62evnp">错误信息</p></td>
+    <td id="7d5ce9d82cxrq" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="42a3f280ec4j1">说明</p></td>
+   </tr>
+   <tr id="b764e0e5a71tf">
+    <td id="5d5729cfaaz5z" rowspan="1" colspan="1"><p id="e23d312935w17">400</p></td>
+    <td id="1102794a70no1" rowspan="1" colspan="1"><p id="d44438ce41fqz">invalidUserId</p></td>
+    <td id="3a31b2c84b1y1" rowspan="1" colspan="1"><p id="6dec8feb7dr2e">无效的userId</p></td>
+    <td id="490c9bbafd9te" rowspan="1" colspan="1"><p id="36481cfe8en51">无效的userId</p></td>
+   </tr>
+   <tr id="03ce54c33dcze">
+    <td id="cc8835c0b6jzq" rowspan="1" colspan="1"><p id="f288a83604inn">400</p></td>
+    <td id="580e55ec00ze3" rowspan="1" colspan="1"><p id="a784fce463k6k">invalidAgentId</p></td>
+    <td id="aae728d339xkq" rowspan="1" colspan="1"><p id="6957a699ebugj">无效的agentId</p></td>
+    <td id="fa05782cf3pon" rowspan="1" colspan="1"><p id="f6af5213d0nqo">不合法的agentId</p></td>
+   </tr>
+   <tr id="ee599c0cfc9j5">
+    <td id="df094cadc05fa" rowspan="1" colspan="1"><p id="0f46a7b0038yj">500</p></td>
+    <td id="1ec34cf0f0944" rowspan="1" colspan="1"><p id="bdb9466740rd7">systemError</p></td>
+    <td id="2857827b00654" rowspan="1" colspan="1"><p id="4fff261313s7o">系统繁忙</p></td>
+    <td id="c33f5b5c5bmzs" rowspan="1" colspan="1"><p id="8a35c97010ibg">系统繁忙</p></td>
+   </tr>
+  </tbody>
+ </table></section></section></div></main>
+</body></html>

@@ -1,0 +1,447 @@
+<!DOCTYPE html><html><head><meta charset="utf8" / /><meta name="searchtitle" content="" / /><meta name="keywords" content="" / /><meta name="author" content="" / /><title>查询离职记录列表</title><meta name="gmtModify" content="2025-09-11 21:01:37" / /><meta name="gmtModify" content="2026-06-01 15:20:41" / /></head><body data-tag="topic" id="doc-api-dingtalk-ListEmpLeaveRecords" class="topic"><main id="120b961dfb7pb"><h1 data-tag="title" id="h1-gcp-pex-mcw" class="title">查询离职记录列表</h1><p data-tag="shortdesc" id="7435d457ef65f" class="shortdesc">调用本接口查询企业离职记录列表，包含离职员工的离职日期、手机号码和退出企业方式等信息。</p><div data-tag="conbody" outputclass="icms-api-reference" class="icms-api-reference conbody"><section id="section-prerequisites-1" class="section icms-module" data-tag="section" data-source="latest-mounted-icms-html"><h2 id="h2-prerequisites-1" data-tag="h2" class="h2">接口调用说明</h2><p>例如，在企业智能人事应用中，2022年06月01日至2022年06月07日的离职记录如下图所示，员工小钉2的离职日期是2022年06月07日，钉钉测试的离职日期是2022年06月07日。</p><p>调用本接口查询2022年06月01日至2022年06月07日的离职记录，可获取员工小钉2和钉钉测试的离开组织的时间、手机号码和退出企业方式等信息。 </p></section><section id="section-request-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-request-1" data-tag="h2" class="h2">请求</h2><section id="section-request-basic-info" class="section"><h3 id="heading-request-basic-info" data-tag="h3" class="h3">基本信息</h3><table tablewidth="648" tablecolswidth="216 432" autofit="false" class="table"><colgroup colwidth="1*" style="width:33.33%"></colgroup><colgroup colwidth="2*" style="width:66.67%"></colgroup><tbody class="tbody"><tr><td rowspan="1" style="background-color:#e5e5e5" colspan="1"><p>字段</p></td><td rowspan="1" style="background-color:#e5e5e5" colspan="1"><p>值</p></td></tr><tr><td rowspan="1" colspan="1"><p>HTTP URL</p></td><td rowspan="1" colspan="1"><p>https://api.dingtalk.com/v1.0/contact/empLeaveRecords</p></td></tr><tr><td rowspan="1" colspan="1"><p>HTTP Method</p></td><td rowspan="1" colspan="1"><p>GET</p></td></tr><tr><td rowspan="1" colspan="1"><p>支持的应用类型</p></td><td rowspan="1" colspan="1"><p><span data-tag="ph" id="ph-request-basic-app-type-apptype-0" class="ph ph-app-type" data-ph-raw-text="appType-企业内部应用">appType-企业内部应用</span></p></td></tr><tr><td rowspan="1" colspan="1"><p>权限要求</p></td><td rowspan="1" colspan="1"><p><span data-tag="ph" id="ph-request-basic-permission-permission-contact-common-read-0" class="ph-permission ph" data-ph-raw-text="permission-Contact.Common.Read-通讯录基本数据读权限" data-permission-id="permission-Contact.Common.Read" data-permission-code="Contact.Common.Read" data-permission-detail-api="/document/api/permission/detail" data-permission-query-param="code">permission-Contact.Common.Read-通讯录基本数据读权限</span></p></td></tr></tbody></table></section><section id="section-request-header-parameter" class="section"><h3 data-tag="h3" id="h2-vuc-9wr-v1o" class="h3 title">请求头</h3><table id="78110346c3i2g" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="679d0e107dse9"><td id="38be7e3c2frqt" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="296f9d0fc3i17">名称</p></td><td id="c8325a456clg6" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="225fa739bc54f">类型</p></td><td id="e09f657c2026x" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="1db5fa10e0s1w">是否必填</p></td><td id="5f812a2849tba" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="1a3f710c9dpdu">描述</p></td></tr><tr id="743151f2479je"><td id="cdabb55bd8il4" rowspan="1" colspan="1"><p id="23849d7c9bd3y">x-acs-dingtalk-access-token</p></td><td id="e4cc43d586j8z" rowspan="1" colspan="1"><p id="eccb0a9edftb1">String</p></td><td id="21f7d2ce0e7ph" rowspan="1" colspan="1"><p id="ab4c9422163vz">是</p></td><td id="8dd6cc8cfap35" rowspan="1" colspan="1"><p id="41961b85327n0">调用该接口的访问凭证，通过调用<a id="80320265f2466" href="https://open.dingtalk.com/document/development/obtain-the-access-token-of-an-internal-app#" class="xref">获取企业内部应用的accessToken</a>接口获取。</p></td></tr></tbody></table></section><section id="section-request-query-parameter" class="section"><h3 data-tag="h3" id="h2-fcn-vjh-bug" class="h3 title">查询参数</h3><table id="e029e7ae82zkb" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="aa217c8330nb2"><td id="f03810b310tia" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="722197b9646ec">名称</p></td><td id="052f92506bwzn" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="c7535fdedc2d8">类型</p></td><td id="33c94f387dqk9" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="783b5b1ea26ag">是否必填</p></td><td id="0c17ee9b362wk" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="4bd145fd8914d">描述</p></td></tr><tr id="41f426ed6e184"><td id="690cc3af35e6h" rowspan="1" colspan="1"><p id="9921553057yjf">startTime</p></td><td id="c66d30c55dz2t" rowspan="1" colspan="1"><p id="905cc2ba0f3ju">String</p></td><td id="64c7020b75at2" rowspan="1" colspan="1"><p id="50e9ab25323y6">是</p></td><td id="35ee3d9713mzu" rowspan="1" colspan="1"><p id="3946f952a2oi8">开始时间。</p><p id="61cda9edee0o6">格式：<code data-tag="code" code-type="xCode" id="e948f04b83lco" class="code">YYYY-MM-DDTHH:mm:ssZ</code>（ISO 8601/RFC 3339）。</p></td></tr><tr id="dbc3184340w97"><td id="1106b53f67dqm" rowspan="1" colspan="1"><p id="894d0874efase">endTime</p></td><td id="936ddbd47d312" rowspan="1" colspan="1"><p id="20fc089616cew">String</p></td><td id="de9692bbe5ons" rowspan="1" colspan="1"><p id="71fc961f00rzw">否</p></td><td id="8928183499iku" rowspan="1" colspan="1"><p id="b9f45545b26su">结束时间。</p><p id="5bfecb1f1dn38">格式：<code data-tag="code" code-type="xCode" id="5cd5ec5441wwx" class="code">YYYY-MM-DDTHH:mm:ssZ</code>（ISO 8601/RFC 3339）。</p><div type="note" id="a5e2097774roq" class="note note-note"><div class="note-icon-wrapper"><i class="icon-note note note"></i></div><div class="noteContentSpan"><p data-tag="p" id="3c9da65066rmc" class="p"></p><ul id="3dfb2c760fqoc"><li id="a68a2298f8yy0"><p id="ce25dbae42ca0">如果该参数不传，开始时间距离当前时间不能超过365天。</p></li><li id="8739a81cddjw2"><p id="c54706869byjz">如果该参数传参，开始时间和结束时间跨度不能超过365天。</p></li></ul><p id="e9b5c606cazdf"></p></div></div></td></tr><tr id="89c7e1f9ee2dt"><td id="c13012c2ee9vn" rowspan="1" colspan="1"><p id="c7d7b52250msg">nextToken</p></td><td id="3743f1f5bd5kq" rowspan="1" colspan="1"><p id="b79ec28c67tht">String</p></td><td id="5b42d8b70a153" rowspan="1" colspan="1"><p id="74f75276377dr">否</p></td><td id="44380560be474" rowspan="1" colspan="1"><p id="5138f44ff5r7g">分页游标。</p><ul id="14ad8ea74745t"><li id="0c3a55a3ff0uw"><p id="cb5ae21d374pi">首次查询，该参数传0。</p></li><li id="d9939b91c9fy0"><p id="d52647456agcy">非首次查询，该参数传上次调用本接口返回的nextToken。</p></li></ul></td></tr><tr id="3e9ceedef5ts6"><td id="a4cb8bd6f03z3" rowspan="1" colspan="1"><p id="ca98d0eb1cx7j">maxResults</p></td><td id="b89db2f73bkse" rowspan="1" colspan="1"><p id="59b355e2edab3">Integer</p></td><td id="41daaa988a92m" rowspan="1" colspan="1"><p id="4cf9ffe395t0w">是</p></td><td id="0dcb7a1647pxs" rowspan="1" colspan="1"><p id="9169551952sak">每页最大条目数，最大值50。</p></td></tr></tbody></table></section><section id="section-request-body-example" class="section"><h3 id="h3-request-body-example" data-tag="h3" class="h3">请求示例</h3><div id="figure-ir6-0q1-vc3" outputclass="tabbed-codeblock" data-tag="fig" class="tabbed-codeblock-box"><div class="tab-box"></div><input type="radio" name="check-figure-ir6-0q1-vc3" id="figure-ir6-0q1-vc3-HTTP-tab" checked="checked" /><label for="figure-ir6-0q1-vc3-HTTP-tab">HTTP</label><div class="codeblock-item"><pre id="codeblock-nqz-vgc-ryo" outputclass="language-HTTP" code-type="xCode" data-tag="codeblock" class="pre codeblock language-HTTP"><code>GET /v1.0/contact/empLeaveRecords?startTime=2020-07-10T00:00:00Z&amp;endTime=2020-08-10T00:00:00Z&amp;nextToken=0&amp;maxResults=10 HTTP/1.1
+Host:api.dingtalk.com
+x-acs-dingtalk-access-token:afe814xxx
+Content-Type:application/json</code></pre></div><input type="radio" name="check-figure-ir6-0q1-vc3" id="figure-ir6-0q1-vc3-java-tab" /><label for="figure-ir6-0q1-vc3-java-tab">Java</label><div class="codeblock-item"><pre id="codeblock-ogp-cmb-rdq" outputclass="language-java" code-type="xCode" data-tag="codeblock" class="pre codeblock language-java"><code>// This file is auto-generated, don't edit it. Thanks.
+package com.aliyun.sample;
+
+import com.aliyun.tea.*;
+import com.aliyun.teautil.*;
+import com.aliyun.teautil.models.*;
+import com.aliyun.dingtalkcontact_1_0.*;
+import com.aliyun.dingtalkcontact_1_0.models.*;
+import com.aliyun.teaopenapi.*;
+import com.aliyun.teaopenapi.models.*;
+
+public class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Client
+     * @throws Exception
+     */
+    public static com.aliyun.dingtalkcontact_1_0.Client createClient() throws Exception {
+        Config config = new Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        return new com.aliyun.dingtalkcontact_1_0.Client(config);
+    }
+
+    public static void main(String[] args_) throws Exception {
+        java.util.List&lt;String&gt; args = java.util.Arrays.asList(args_);
+        com.aliyun.dingtalkcontact_1_0.Client client = Sample.createClient();
+        ListEmpLeaveRecordsHeaders listEmpLeaveRecordsHeaders = new ListEmpLeaveRecordsHeaders();
+        listEmpLeaveRecordsHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        ListEmpLeaveRecordsRequest listEmpLeaveRecordsRequest = new ListEmpLeaveRecordsRequest()
+                .setStartTime("2020-07-10T00:00:00Z")
+                .setEndTime("2020-08-10T00:00:00Z")
+                .setNextToken("0")
+                .setMaxResults(10);
+        try {
+            client.listEmpLeaveRecordsWithOptions(listEmpLeaveRecordsRequest, listEmpLeaveRecordsHeaders, new RuntimeOptions());
+        } catch (TeaException err) {
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        } catch (Exception _err) {
+            TeaException err = new TeaException(_err.getMessage(), _err);
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        }        
+    }
+}</code></pre></div><input type="radio" name="check-figure-ir6-0q1-vc3" id="figure-ir6-0q1-vc3-python-tab" /><label for="figure-ir6-0q1-vc3-python-tab">Python</label><div class="codeblock-item"><pre id="codeblock-hes-5eo-nr5" outputclass="language-python" code-type="xCode" data-tag="codeblock" class="pre codeblock language-python"><code># -*- coding: utf-8 -*-
+# This file is auto-generated, don't edit it. Thanks.
+import sys
+
+from typing import List
+
+from alibabacloud_dingtalk.contact_1_0.client import Client as dingtalkcontact_1_0Client
+from alibabacloud_tea_openapi import models as open_api_models
+from alibabacloud_dingtalk.contact_1_0 import models as dingtalkcontact__1__0_models
+from alibabacloud_tea_util import models as util_models
+from alibabacloud_tea_util.client import Client as UtilClient
+
+
+class Sample:
+    def __init__(self):
+        pass
+
+    @staticmethod
+    def create_client() -&gt; dingtalkcontact_1_0Client:
+        """
+        使用 Token 初始化账号Client
+        @return: Client
+        @throws Exception
+        """
+        config = open_api_models.Config()
+        config.protocol = 'https'
+        config.region_id = 'central'
+        return dingtalkcontact_1_0Client(config)
+
+    @staticmethod
+    def main(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        list_emp_leave_records_headers = dingtalkcontact__1__0_models.ListEmpLeaveRecordsHeaders()
+        list_emp_leave_records_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        list_emp_leave_records_request = dingtalkcontact__1__0_models.ListEmpLeaveRecordsRequest(
+            start_time='2020-07-10T00:00:00Z',
+            end_time='2020-08-10T00:00:00Z',
+            next_token='0',
+            max_results=10
+        )
+        try:
+            client.list_emp_leave_records_with_options(list_emp_leave_records_request, list_emp_leave_records_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+    @staticmethod
+    async def main_async(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        list_emp_leave_records_headers = dingtalkcontact__1__0_models.ListEmpLeaveRecordsHeaders()
+        list_emp_leave_records_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        list_emp_leave_records_request = dingtalkcontact__1__0_models.ListEmpLeaveRecordsRequest(
+            start_time='2020-07-10T00:00:00Z',
+            end_time='2020-08-10T00:00:00Z',
+            next_token='0',
+            max_results=10
+        )
+        try:
+            await client.list_emp_leave_records_with_options_async(list_emp_leave_records_request, list_emp_leave_records_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+
+if __name__ == '__main__':
+    Sample.main(sys.argv[1:])</code></pre></div><input type="radio" name="check-figure-ir6-0q1-vc3" id="figure-ir6-0q1-vc3-php-tab" /><label for="figure-ir6-0q1-vc3-php-tab">PHP</label><div class="codeblock-item"><pre id="codeblock-sfw-zzp-5zl" outputclass="language-php" code-type="xCode" data-tag="codeblock" class="pre codeblock language-php"><code>&lt;?php
+
+// This file is auto-generated, don't edit it. Thanks.
+namespace AlibabaCloud\SDK\Sample;
+
+use AlibabaCloud\SDK\Dingtalk\Vcontact_1_0\Dingtalk;
+use \Exception;
+use AlibabaCloud\Tea\Exception\TeaError;
+use AlibabaCloud\Tea\Utils\Utils;
+
+use Darabonba\OpenApi\Models\Config;
+use AlibabaCloud\SDK\Dingtalk\Vcontact_1_0\Models\ListEmpLeaveRecordsHeaders;
+use AlibabaCloud\SDK\Dingtalk\Vcontact_1_0\Models\ListEmpLeaveRecordsRequest;
+use AlibabaCloud\Tea\Utils\Utils\RuntimeOptions;
+
+class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Dingtalk Client
+     */
+    public static function createClient(){
+        $config = new Config([]);
+        $config-&gt;protocol = "https";
+        $config-&gt;regionId = "central";
+        return new Dingtalk($config);
+    }
+
+    /**
+     * @param string[] $args
+     * @return void
+     */
+    public static function main($args){
+        $client = self::createClient();
+        $listEmpLeaveRecordsHeaders = new ListEmpLeaveRecordsHeaders([]);
+        $listEmpLeaveRecordsHeaders-&gt;xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        $listEmpLeaveRecordsRequest = new ListEmpLeaveRecordsRequest([
+            "startTime" =&gt; "2020-07-10T00:00:00Z",
+            "endTime" =&gt; "2020-08-10T00:00:00Z",
+            "nextToken" =&gt; "0",
+            "maxResults" =&gt; 10
+        ]);
+        try {
+            $client-&gt;listEmpLeaveRecordsWithOptions($listEmpLeaveRecordsRequest, $listEmpLeaveRecordsHeaders, new RuntimeOptions([]));
+        }
+        catch (Exception $err) {
+            if (!($err instanceof TeaError)) {
+                $err = new TeaError([], $err-&gt;getMessage(), $err-&gt;getCode(), $err);
+            }
+            if (!Utils::empty_($err-&gt;code) &amp;&amp; !Utils::empty_($err-&gt;message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+        }
+    }
+}
+$path = __DIR__ . \DIRECTORY_SEPARATOR . '..' . \DIRECTORY_SEPARATOR . 'vendor' . \DIRECTORY_SEPARATOR . 'autoload.php';
+if (file_exists($path)) {
+    require_once $path;
+}
+Sample::main(array_slice($argv, 1));</code></pre></div><input type="radio" name="check-figure-ir6-0q1-vc3" id="figure-ir6-0q1-vc3-go-tab" /><label for="figure-ir6-0q1-vc3-go-tab">Go</label><div class="codeblock-item"><pre id="codeblock-mu5-09b-xmr" outputclass="language-go" code-type="xCode" data-tag="codeblock" class="pre codeblock language-go"><code>// This file is auto-generated, don't edit it. Thanks.
+package main
+
+import (
+  "os"
+  util  "github.com/alibabacloud-go/tea-utils/service"
+  dingtalkcontact_1_0  "github.com/alibabacloud-go/dingtalk/contact_1_0"
+  openapi  "github.com/alibabacloud-go/darabonba-openapi/client"
+  "github.com/alibabacloud-go/tea/tea"
+)
+
+
+/**
+ * 使用 Token 初始化账号Client
+ * @return Client
+ * @throws Exception
+ */
+func CreateClient () (_result *dingtalkcontact_1_0.Client, _err error) {
+  config := &amp;openapi.Config{}
+  config.Protocol = tea.String("https")
+  config.RegionId = tea.String("central")
+  _result = &amp;dingtalkcontact_1_0.Client{}
+  _result, _err = dingtalkcontact_1_0.NewClient(config)
+  return _result, _err
+}
+
+func _main (args []*string) (_err error) {
+  client, _err := CreateClient()
+  if _err != nil {
+    return _err
+  }
+
+  listEmpLeaveRecordsHeaders := &amp;dingtalkcontact_1_0.ListEmpLeaveRecordsHeaders{}
+  listEmpLeaveRecordsHeaders.XAcsDingtalkAccessToken = tea.String("&lt;your access token&gt;")
+  listEmpLeaveRecordsRequest := &amp;dingtalkcontact_1_0.ListEmpLeaveRecordsRequest{
+    StartTime: tea.String("2020-07-10T00:00:00Z"),
+    EndTime: tea.String("2020-08-10T00:00:00Z"),
+    NextToken: tea.String("0"),
+    MaxResults: tea.Int32(10),
+  }
+  tryErr := func()(_e error) {
+    defer func() {
+      if r := tea.Recover(recover()); r != nil {
+        _e = r
+      }
+    }()
+    _, _err = client.ListEmpLeaveRecordsWithOptions(listEmpLeaveRecordsRequest, listEmpLeaveRecordsHeaders, &amp;util.RuntimeOptions{})
+    if _err != nil {
+      return _err
+    }
+
+    return nil
+  }()
+
+  if tryErr != nil {
+    var err = &amp;tea.SDKError{}
+    if _t, ok := tryErr.(*tea.SDKError); ok {
+      err = _t
+    } else {
+      err.Message = tea.String(tryErr.Error())
+    }
+    if !tea.BoolValue(util.Empty(err.Code)) &amp;&amp; !tea.BoolValue(util.Empty(err.Message)) {
+      // err 中含有 code 和 message 属性，可帮助开发定位问题
+    }
+
+  }
+  return _err
+}
+
+
+func main() {
+  err := _main(tea.StringSlice(os.Args[1:]))
+  if err != nil {
+    panic(err)
+  }
+}</code></pre></div><input type="radio" name="check-figure-ir6-0q1-vc3" id="figure-ir6-0q1-vc3-nodejs-tab" /><label for="figure-ir6-0q1-vc3-nodejs-tab">Node.js</label><div class="codeblock-item"><pre id="codeblock-dom-fxb-vv8" outputclass="language-nodejs" code-type="xCode" data-tag="codeblock" class="pre codeblock language-nodejs"><code>// This file is auto-generated, don't edit it
+import Util, * as $Util from '@alicloud/tea-util';
+import dingtalkcontact_1_0, * as $dingtalkcontact_1_0 from '@alicloud/dingtalk/contact_1_0';
+import OpenApi, * as $OpenApi from '@alicloud/openapi-client';
+import * as $tea from '@alicloud/tea-typescript';
+
+
+export default class Client {
+
+  /**
+   * 使用 Token 初始化账号Client
+   * @return Client
+   * @throws Exception
+   */
+  static createClient(): dingtalkcontact_1_0 {
+    let config = new $OpenApi.Config({ });
+    config.protocol = "https";
+    config.regionId = "central";
+    return new dingtalkcontact_1_0(config);
+  }
+
+  static async main(args: string[]): Promise&lt;void&gt; {
+    let client = Client.createClient();
+    let listEmpLeaveRecordsHeaders = new $dingtalkcontact_1_0.ListEmpLeaveRecordsHeaders({ });
+    listEmpLeaveRecordsHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+    let listEmpLeaveRecordsRequest = new $dingtalkcontact_1_0.ListEmpLeaveRecordsRequest({
+      startTime: "2020-07-10T00:00:00Z",
+      endTime: "2020-08-10T00:00:00Z",
+      nextToken: "0",
+      maxResults: 10,
+    });
+    try {
+      await client.listEmpLeaveRecordsWithOptions(listEmpLeaveRecordsRequest, listEmpLeaveRecordsHeaders, new $Util.RuntimeOptions({ }));
+    } catch (err) {
+      if (!Util.empty(err.code) &amp;&amp; !Util.empty(err.message)) {
+        // err 中含有 code 和 message 属性，可帮助开发定位问题
+      }
+
+    }    
+  }
+
+}
+
+Client.main(process.argv.slice(2));</code></pre></div><input type="radio" name="check-figure-ir6-0q1-vc3" id="figure-ir6-0q1-vc3-csharp-tab" /><label for="figure-ir6-0q1-vc3-csharp-tab">C#</label><div class="codeblock-item"><pre id="codeblock-yty-hed-5wd" outputclass="language-csharp" code-type="xCode" data-tag="codeblock" class="pre codeblock language-csharp"><code>// This file is auto-generated, don't edit it. Thanks.
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
+
+using Tea;
+using Tea.Utils;
+
+
+namespace AlibabaCloud.SDK.Sample
+{
+    public class Sample 
+    {
+
+        /**
+         * 使用 Token 初始化账号Client
+         * @return Client
+         * @throws Exception
+         */
+        public static AlibabaCloud.SDK.Dingtalkcontact_1_0.Client CreateClient()
+        {
+            AlibabaCloud.OpenApiClient.Models.Config config = new AlibabaCloud.OpenApiClient.Models.Config();
+            config.Protocol = "https";
+            config.RegionId = "central";
+            return new AlibabaCloud.SDK.Dingtalkcontact_1_0.Client(config);
+        }
+
+        public static void Main(string[] args)
+        {
+            AlibabaCloud.SDK.Dingtalkcontact_1_0.Client client = CreateClient();
+            AlibabaCloud.SDK.Dingtalkcontact_1_0.Models.ListEmpLeaveRecordsHeaders listEmpLeaveRecordsHeaders = new AlibabaCloud.SDK.Dingtalkcontact_1_0.Models.ListEmpLeaveRecordsHeaders();
+            listEmpLeaveRecordsHeaders.XAcsDingtalkAccessToken = "&lt;your access token&gt;";
+            AlibabaCloud.SDK.Dingtalkcontact_1_0.Models.ListEmpLeaveRecordsRequest listEmpLeaveRecordsRequest = new AlibabaCloud.SDK.Dingtalkcontact_1_0.Models.ListEmpLeaveRecordsRequest
+            {
+                StartTime = "2020-07-10T00:00:00Z",
+                EndTime = "2020-08-10T00:00:00Z",
+                NextToken = "0",
+                MaxResults = 10,
+            };
+            try
+            {
+                client.ListEmpLeaveRecordsWithOptions(listEmpLeaveRecordsRequest, listEmpLeaveRecordsHeaders, new AlibabaCloud.TeaUtil.Models.RuntimeOptions());
+            }
+            catch (TeaException err)
+            {
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+            catch (Exception _err)
+            {
+                TeaException err = new TeaException(new Dictionary&lt;string, object&gt;
+                {
+                    { "message", _err.Message }
+                });
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+        }
+
+
+    }
+}</code></pre></div><input type="radio" name="check-figure-ir6-0q1-vc3" id="figure-ir6-0q1-vc3-cpp-tab" /><label for="figure-ir6-0q1-vc3-cpp-tab">C++</label><div class="codeblock-item"><pre id="codeblock-plg-dsc-9ja" outputclass="language-cpp" code-type="xCode" data-tag="codeblock" class="pre codeblock language-cpp"><code>// This file is auto-generated, don't edit it. Thanks.
+
+#include &lt;alibabacloud/dingtalkcontact__1__0.hpp&gt;
+#include &lt;alibabacloud/open_api.hpp&gt;
+#include &lt;boost/any.hpp&gt;
+#include &lt;darabonba/core.hpp&gt;
+#include &lt;darabonba/util.hpp&gt;
+#include &lt;iostream&gt;
+#include &lt;map&gt;
+
+using namespace std;
+
+Alibabacloud_Dingtalkcontact_1_0::Client createClient() {
+  shared_ptr&lt;Alibabacloud_OpenApi::Config&gt; config = make_shared&lt;Alibabacloud_OpenApi::Config&gt;();
+  config-&gt;protocol = make_shared&lt;string&gt;("https");
+  config-&gt;regionId = make_shared&lt;string&gt;("central");
+  return Alibabacloud_Dingtalkcontact_1_0::Client(config);
+}
+
+int main(int argc, char *args[]) {
+  args++;
+  shared_ptr&lt;Alibabacloud_Dingtalkcontact_1_0::Client&gt; client = make_shared&lt;Alibabacloud_Dingtalkcontact_1_0::Client&gt;(createClient());
+  shared_ptr&lt;Alibabacloud_Dingtalkcontact_1_0::ListEmpLeaveRecordsHeaders&gt; listEmpLeaveRecordsHeaders = make_shared&lt;Alibabacloud_Dingtalkcontact_1_0::ListEmpLeaveRecordsHeaders&gt;();
+  listEmpLeaveRecordsHeaders-&gt;xAcsDingtalkAccessToken = make_shared&lt;string&gt;("&lt;your access token&gt;");
+  shared_ptr&lt;Alibabacloud_Dingtalkcontact_1_0::ListEmpLeaveRecordsRequest&gt; listEmpLeaveRecordsRequest = make_shared&lt;Alibabacloud_Dingtalkcontact_1_0::ListEmpLeaveRecordsRequest&gt;(map&lt;string, boost::any&gt;({
+    {"startTime", boost::any(string("2020-07-10T00:00:00Z"))},
+    {"endTime", boost::any(string("2020-08-10T00:00:00Z"))},
+    {"nextToken", boost::any(string("0"))},
+    {"maxResults", boost::any(10)}
+  }));
+  try {
+    client-&gt;listEmpLeaveRecordsWithOptions(listEmpLeaveRecordsRequest, listEmpLeaveRecordsHeaders, make_shared&lt;Darabonba_Util::RuntimeOptions&gt;(Darabonba_Util::RuntimeOptions()));
+  }
+  catch (std::exception &amp;err) {
+    if (!Darabonba_Util::Client::empty(err.code) &amp;&amp; !Darabonba_Util::Client::empty(err.message)) {
+      // err 中含有 code 和 message 属性，可帮助开发定位问题
+    }
+  }
+}</code></pre></div></div></section></section><section id="section-response-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-response-1" data-tag="h2" class="h2">响应</h2><section id="section-response-parameter" class="section"><h3 data-tag="h3" id="h2-bzu-gpk-co9" class="h3 title">响应体</h3><table id="827cfbe99divc" tablewidth="710" tablecolswidth="213 142 355" autofit="false" class="table"><colgroup colwidth="0.9*" style="width:30.00%"></colgroup><colgroup colwidth="0.6*" style="width:20.00%"></colgroup><colgroup colwidth="1.5*" style="width:50.00%"></colgroup><tbody class="tbody"><tr id="7bca585149it2"><td id="c8f11db4ed1v3" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="a11b39debee9r">名称</p></td><td id="8e317225dcw96" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="86bf64d98aib9">类型</p></td><td id="f1a2fdfb5dq43" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="cb0f32a73fsx2">描述</p></td></tr><tr outputclass="row row-level-1" id="6a8dd44455q9f" class="row row-level-1 row-level-1 row"><td id="4f442ff6d7rvj" rowspan="1" colspan="1"><p id="c7c00af1b0ejf">nextToken</p></td><td id="837e36862e8t9" rowspan="1" colspan="1"><p id="27a83d9565kuk">String</p></td><td id="6886c948belve" rowspan="1" colspan="1"><p id="f2d2cf13c1s2l">下一次请求的分页token。</p></td></tr><tr outputclass="row row-level-2 has-child" id="3753f18eafd88" class="has-child row-level-2 row row-level-2 has-child row"><td id="eb6f67f54e6wt" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><span class="icms-tree-table-trigger" type="checkbox"></span><p id="7cacc290fe2au">records</p></td><td id="ee1c2c83136ol" rowspan="1" colspan="1"><p id="87924f0a0a7pb">Array</p></td><td id="8abc88d6c5ioi" rowspan="1" colspan="1"><p id="67ccf53f8255y">离职记录列表。</p></td></tr><tr outputclass="row row-level-2-1" id="0df0658c545uq" class="row-level-2-1 row row row-level-2-1"><td id="584b7371502co" rowspan="1" colspan="1"><p id="c53fac0b10sn9">userId</p></td><td id="f1e0995140urx" rowspan="1" colspan="1"><p id="53b97e1b5b0ef">String</p></td><td id="c620df672d8jm" rowspan="1" colspan="1"><p id="26b04bd4f3w4z">员工的userId。</p></td></tr><tr outputclass="row row-level-2-2" id="5820f89b77fei" class="row-level-2-2 row row row-level-2-2"><td id="b353c39cd9zul" rowspan="1" colspan="1"><p id="9bbe4b3ea3xdl">name</p></td><td id="fd51cd03d1tx4" rowspan="1" colspan="1"><p id="5c03403fa9txm">String</p></td><td id="913a8e1d40km5" rowspan="1" colspan="1"><p id="1d8f87dae44ns">员工名字。</p></td></tr><tr outputclass="row row-level-2-3" id="91a467c52d24u" class="row-level-2-3 row row row-level-2-3"><td id="105b17d59bcqi" rowspan="1" colspan="1"><p id="1b2e8450bca16">stateCode</p></td><td id="de5a846a33fxr" rowspan="1" colspan="1"><p id="e96f3d3b23ygz">String</p></td><td id="06bfde9a6244n" rowspan="1" colspan="1"><p id="db2ac9e55cmvh">国际电话区号。</p></td></tr><tr outputclass="row row-level-2-4" id="1d20b370704nt" class="row-level-2-4 row row row-level-2-4"><td id="751ff47fed13o" rowspan="1" colspan="1"><p id="3d1438b52ff8c">mobile</p></td><td id="310df1cc43zy2" rowspan="1" colspan="1"><p id="718fdc79a3u8t">String</p></td><td id="cfda2196f85c7" rowspan="1" colspan="1"><p id="df31f4f3794px">手机号码。</p></td></tr><tr outputclass="row row-level-2-5" id="7314c5b6a0nq8" class="row row-level-2-5 row-level-2-5 row"><td id="d4319efb9f3t3" rowspan="1" colspan="1"><p id="f039df6343l1p">leaveTime</p></td><td id="df3ed82fe3hgq" rowspan="1" colspan="1"><p id="d0663b0bac1j3">String</p></td><td id="1869eb7233rdc" rowspan="1" colspan="1"><p id="299b81e9afcue">离开组织的时间。</p><p id="0265dde3762mm">格式：<code data-tag="code" code-type="xCode" id="fa662d2b4cvna" class="code">YYYY-MM-DDTHH:mm:ssZ</code>（ISO 8601/RFC 3339）。</p></td></tr><tr outputclass="row row-level-2-6" id="7af5a76481pro" class="row row-level-2-6 row-level-2-6 row"><td id="e55b3b0d78kou" rowspan="1" colspan="1"><p id="fe83790734g2v">leaveReason</p></td><td id="7d13588b84s1n" rowspan="1" colspan="1"><p id="f932bd2e47yow">String</p></td><td id="ff92fd7278xud" rowspan="1" colspan="1"><p id="d07eae2f2c9bz">退出企业方式，取值：</p><ul id="6bc872b8100mw"><li id="08bf0b941e0j4"><p id="2a363c93ff16d"><b>oapi</b>：调用接口删除</p></li><li id="718b5eb510tzd"><p id="baed9467aex52"><b>cancel</b>：注销</p></li><li id="06a9965336sjp"><p id="e83970bbcb9b6"><b>leave</b>：主动离职</p></li><li id="4220613b8bwa6"><p id="d9c4d115e8nfr"><b>unknown</b>：未知原因</p></li><li id="9d05c17b151wy"><p id="2d3e0c0800pmf"><b>delete</b>：管理员删除</p></li></ul></td></tr></tbody></table></section><section id="section-response-body-example" class="section"><h3 id="h3-response-body-example" data-tag="h3" class="h3">响应体示例</h3><pre id="b2be546addp2q" outputclass="language-json" code-type="xCode" data-tag="codeblock" class="pre codeblock language-json"><code>HTTP/1.1 200 OK
+Content-Type:application/json
+
+{
+  "nextToken" : "DCCD7A656FFA6F07",
+  "records" : [ {
+    "userId" : "10000",
+    "name" : "张三",
+    "stateCode" : "86",
+    "mobile" : "185xxxx7676",
+    "leaveTime" : "2021-01-06T11:47:37Z",
+    "leaveReason" : "oapi"
+  } ]
+}</code></pre></section><section id="section-error-code-1" class="section"><h3 id="h3-error-code-1" data-tag="h3" class="h3">错误码</h3><p data-tag="p" id="p-error-code-global-guide" class="p">若调用该接口报错，可根据错误信息在<a id="a-error-code-global-guide" href="https://open.dingtalk.com/document/development/server-api-error-codes-1">全局错误码</a>文档中查找解决方案。</p><table id="3d0ce8d2a7x9e" tablewidth="709" tablecolswidth="142 177 177 213" autofit="false" class="table">
+  <colgroup colwidth="0.8*" style="width:20.03%"></colgroup>
+  <colgroup colwidth="1*" style="width:24.96%"></colgroup>
+  <colgroup colwidth="1*" style="width:24.96%"></colgroup>
+  <colgroup colwidth="1.2*" style="width:30.04%"></colgroup>
+  <tbody class="tbody">
+   <tr id="3840b0e79e0of">
+    <td id="3cc46714b7pp0" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="554aef53eak83">HttpCode</p></td>
+    <td id="fd1db6f474i0d" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="b65869047fn34">错误码</p></td>
+    <td id="a7fed1f9b7lqe" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="77b4f5055ahhq">错误信息</p></td>
+    <td id="11b9c2d9b2i1t" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="f1b5c419655qo">说明</p></td>
+   </tr>
+   <tr id="210380ce75eew">
+    <td id="04334ad6c0oet" rowspan="1" colspan="1"><p id="2f4b254a9033y">400</p></td>
+    <td id="15d96f6f091p9" rowspan="1" colspan="1"><p id="c525f90785e0c">invalidParameter.param.invalid</p></td>
+    <td id="229e5dfbc1jea" rowspan="1" colspan="1"><p id="4756ceb0a44sj">入参错误：%s</p></td>
+    <td id="8192a5de81fvs" rowspan="1" colspan="1"><p id="cfc57fee18ikf">入参错误</p></td>
+   </tr>
+   <tr id="ce3674c73eu2c">
+    <td id="0d2a0b4d5dzuk" rowspan="1" colspan="1"><p id="22d04f3970wp6">500</p></td>
+    <td id="8aa2273722n3v" rowspan="1" colspan="1"><p id="aab3e2612bbyv">system.error</p></td>
+    <td id="011f2d523ea3q" rowspan="1" colspan="1"><p id="93db7df5e8ieu">系统错误</p></td>
+    <td id="d5d6f4f845i2b" rowspan="1" colspan="1"><p id="4048b3e0ffj76">系统错误</p></td>
+   </tr>
+  </tbody>
+ </table></section></section></div></main>
+</body></html>

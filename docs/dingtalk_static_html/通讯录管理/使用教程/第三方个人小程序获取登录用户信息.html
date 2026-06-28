@@ -1,0 +1,84 @@
+<!DOCTYPE html><html><head><meta charset="utf8" / /><meta name="searchtitle" content="" / /><meta name="keywords" content="" / /><meta name="author" content="" / /><title>第三方个人小程序获取登录用户信息</title><meta name="gmtModify" content="2025-09-10 19:27:06" / /></head><body data-tag="concept" id="concept-2245308" class="concept"><main id="main-2245308"><h1 id="f305d1e022oeh" data-tag="title" class="title">第三方个人小程序获取登录用户信息</h1><p id="f305f8f022srp" data-tag="shortdesc" class="shortdesc">本文档介绍第三方个人小程序获取登录用户信息的流程。</p><div data-tag="conbody" class="conbody"><p id="a8d8c04023riv"></p><section id="3fc6c26023ukh" class="section"><h2 id="41f254f023tvp"><b>接入流程简介</b></h2><p id="f64701a223ibu">本文档展示了，创建一个第三方个人应用，使用通讯录提供的API，实现获取当前登录用户个人信息操作流程：</p><p id="f64701a123p5v">步骤一：登录<a href="https://open-dev.dingtalk.com/#/" data-link-href-cangjie="https://open-dev.dingtalk.com/#/" target="_blank" rel="noopener noreferrer" id="dd432dff77rc1">开发者后台</a>，单击<b>应用开发 &gt; 第三方个人应用</b>后，<b>创建应用</b>。</p><p id="f646da9a23tdj">步骤二：单击<b>基础信息 &gt; 应用信息</b>，获取应用AppKey和AppSecret。</p><p id="f646da9823p6u">步骤三：<a data-tag="xref" id="c55b9fb841qd1" href="/document/development/add-api-permission#" class="xref">添加接口调用权限</a>。确定需申请的权限，申请对应的权限。</p><p id="f646da96231bu">步骤四：使用授权套件获取authCode。</p><p id="a4fe06d0230gz">步骤五：获取个人用户身份访问凭证<a data-tag="xref" id="e3b933aeedkfx" href="/document/development/obtain-user-token#" class="xref">获取用户token</a>。调用接口时，通过accessToken鉴权调用者身份。</p><p id="f646da94232st">步骤六：调用服务端API-<a data-tag="xref" id="664ef004fft74" href="/document/development/dingtalk-retrieve-user-information#" class="xref">获取用户通讯录个人信息</a>接口。</p></section><section id="4524a92023x5e" class="section"><h2 id="49441c7023frn"><b>步骤一：创建应用</b></h2><div id="5942808023e99" type="note" class="note note-note"><div class="note-icon-wrapper"><i class="icon-note note note"></i></div><div class="noteContentSpan"><strong>说明 </strong><p id="5bd671d0230ic">如果已有第三方个人应用，可直接使用已有应用，可忽略此步骤。</p></div></div><ol id="49441c7123wfb"><li id="49441c7223yvx"><p id="49441c7323vc3">登录<a href="https://open-dev.dingtalk.com/#/" data-link-href-cangjie="https://open-dev.dingtalk.com/#/" target="_blank" rel="noopener noreferrer" id="76ef6c6bc3bqz">开发者后台</a>。</p></li><li id="49441c74231gr"><p id="49441c7523uwg">单击<b>应用开发 &gt; 第三方个人应用</b>后，点击<b>创建应用</b>。</p><p id="49441c7623k8y"><img placement="break" alt="iShot2022-08-23 17" src="https://help-static-aliyun-doc.aliyuncs.com/assets/img/zh-CN/6394521661/p480243.png" id="49441c7723u0q" class="image break" / /></p></li><li id="49441c7823ed9"><p id="49441c79234qs">填写创建第三方个人应用信息。</p><ul id="49441c7a23txo"><li id="49441c7b23m8f"><p id="49441c7c23zaj"><b>应用类型</b>：默认只有小程序。</p></li><li id="49441c7d23f2i"><p id="49441c7e23w4a"><b>应用名称</b>：填写应用名称。</p></li><li id="49441c7f23vjy"><p id="49441c802356g"><b>应用描述</b>：填写应用描述。</p></li><li id="49441c8123gzy"><p id="49441c8223ccx"><b>应用图标</b>：上传应用图标，也可以使用钉钉默认图标。<img placement="break" alt="iShot2022-08-23 17" src="https://help-static-aliyun-doc.aliyuncs.com/assets/img/zh-CN/7394521661/p480252.png" id="49441c8323eql" class="image break" / /></p></li></ul></li></ol><p id="49441c8523ngl"></p></section><section id="c32373b023ko7" class="section"><h2 id="c955c170239ie"><b>步骤二：获取AppId和AppSecret</b></h2><p id="e5032ca023c2l">获取第三方个人应用的AppId和AppSecret信息。<img id="ebeedf5123icf" src="https://help-static-aliyun-doc.aliyuncs.com/assets/img/zh-CN/9547521661/p480322.png" alt="iShot2022-08-23 20" placement="break" class="image break" / /></p></section><p id="e02f848223syx"></p><section id="f8fa1b1023pzs" class="section"><h2 id="fe1ef0702362i"><b>步骤三：添加接口或字段权限</b></h2><ol id="fe1ef0712350d"><li id="fe1ef07223nm3"><p id="fe1ef07323dme"><b>确认需要申请哪些权限</b></p><p id="fe1ef07423nqd">应用需要获取哪些信息，申请的权限不同。请参考权<a data-tag="xref" id="cf2efd5478cw2" href="/document/development/function-description#50679ce2b8jpj" class="xref">个人权限scope列表</a>确认需要开通哪些权限。</p><div id="fe1ef07523z0b" type="note" class="note note-note"><div class="note-icon-wrapper"><i class="icon-note note note"></i></div><div class="noteContentSpan"><strong>说明 </strong><p id="fe1ef0762383n">如果需要获取用户个人手机号，则需要申请开通<a data-tag="xref" id="4827ace249iva" href="/document/development/dingtalk-retrieve-user-information#" class="xref">获取用户通讯录个人信息</a>接口权限和字段权限。</p></div></div></li><li id="fe1ef07723mxd"><p id="fe1ef07823cz1"><b>申请接口或字段权限</b></p><ul id="fe1ef079235e8"><li id="fe1ef07a23eh7"><p id="fe1ef07b2335k">登录<a href="https://open-dev.dingtalk.com/#/" data-link-href-cangjie="https://open-dev.dingtalk.com/#/" target="_blank" rel="noopener noreferrer" id="2e9573699c723">开发者后台</a>，选择进入对应的应用。</p></li><li id="fe1ef07c23g59"><p id="fe1ef07d236f0">在应用的<b>权限管理</b>页面，输入对应权限关键字进行搜索，然后选择对应的权限单击<b>申请权限</b>。</p><p id="fe1ef07e23tkw">例如，需要获取用户个人手机号信息，搜索<b>个人信息</b>，选择<b>个人权限</b>，并单击<b>申请权限</b>。添加<b>通讯录个人信息读权限</b>和<b>个人手机号信息</b>权限。<img placement="break" alt="iShot2022-08-23 20" src="https://help-static-aliyun-doc.aliyuncs.com/assets/img/zh-CN/9547521661/p480310.png" id="fe1ef07f232jx" class="image break" / /></p></li></ul></li></ol></section><p id="d4699a0123vzf"></p><section id="42e4d5d023k1v" class="section"><h2 id="4dd0b40023k23"><b>步骤四：使用授权套件获取authCode</b></h2><div id="4dd0b40123kak" type="note" class="note note-note"><div class="note-icon-wrapper"><i class="icon-note note note"></i></div><div class="noteContentSpan"><strong>说明 </strong><p id="4dd0b40223ace">钉钉统一授权套件SDK要求，钉钉版本需要在<b>6.0.10及以上</b>。低版本需提示用户升级客户端，你可以通过以下方式判断钉钉版本。</p><pre outputclass="language-javascript" data-tag="codeblock" id="4dd0b40323gs8" code-type="xCode" class="pre codeblock language-javascript"><code>import { getENV, } from 'dingtalk-jsapi/lib/env';
+import { compareVersion, } from 'dingtalk-jsapi/lib/sdk/sdkLib';
+
+const { platform, version, appType, } = getENV();
+/**
+ * 判断当前app版本是否支持使用SDK
+ * @return {boolean}
+ */
+function isAuthSDKSupport() {
+  return compareVersion(version, '6.0.5');
+}</code></pre></div></div><ol id="4dd0b40423lys"><li id="4dd0b40523miz"><p id="4dd0b40623j9t">安装授权套件SDK。</p><p id="4dd0b40723xsy">执行以下命令，下载安装SDK。</p><pre outputclass="language-shell" data-tag="codeblock" id="4dd0b40823acj" code-type="xCode" class="pre codeblock language-shell"><code>npm install dingtalk-design-libs --save</code></pre></li><li id="4dd0b40923duu"><p id="4dd0b40a23phm">在<code data-tag="code" id="57fa1ebd012ns" class="code">app.onShow</code>方法添加<b>onAuthAppBack</b>调用。</p><pre outputclass="language-javascript" data-tag="codeblock" id="4dd0b40b23mm9" code-type="xCode" class="pre codeblock language-javascript"><code>onShow(options) {
+    onAuthAppBack(options, (data) =&gt; {
+        // 这里可以对返回数据做二次处理，之后需要把数据返回到page.onShow
+        dd.alert({
+            title: 'app is onAppShow have data ：' + JSON.stringify(data),
+        });
+        return data;
+    });
+},</code></pre></li><li id="4dd0b40c23ncz"><p id="4dd0b40d232a8">在小程序需要授权的页面，使用授权SDK。</p><p id="4dd0b40e23evr">例如<code data-tag="code" id="2fd1eb70a64kp" class="code">page/index/index.js</code>，通过<b>openAuthMiniApp</b>唤起授权套件。</p><pre outputclass="language-javascript" data-tag="codeblock" id="4dd0b40f23z15" code-type="xCode" class="pre codeblock language-javascript"><code>import { openAuthMiniApp, disposeAuthData} from 'dingtalk-design-libs/biz/openAuthMiniApp';</code></pre><pre outputclass="language-javascript" data-tag="codeblock" id="4dd0b41023qzu" code-type="xCode" class="pre codeblock language-javascript"><code>onTap() {
+    return openAuthMiniApp({
+        path: 'pages/home/home',  //不要改,这里是小程序dingwlanwvdmrtjjwdmd下的一个页面地址
+        panelHeight: 'percent50',
+        extraData:{
+            clientId:'dingwlanwxxx', // 应用ID，即第一步中第三方个人应用的AppId。
+            rpcScope:'Contact.User.Read',
+            fieldScope:'Contact.User.mobile',
+            type:0,
+            ext: JSON.stringify({}),
+            from:''
+        }
+    });
+},</code></pre></li><li id="4dd0b41123di8"><p id="4dd0b41223ukr">使用<b>page.onShow</b>方法调用<b>disposeAuthData</b>处理授权后的结果。</p><pre outputclass="language-javascript" data-tag="codeblock" id="4dd0b41323tar" code-type="xCode" class="pre codeblock language-javascript"><code>onShow(e) {
+    disposeAuthData((options)=&gt;{
+        dd.alert({
+            title:'disposeAuthData',
+            content:JSON.stringify(options) //这里获取authCode。
+        })
+    })
+},</code></pre></li><li id="4dd0b41423vk8"><p id="4dd0b41523oek">调用效果。</p><p id="4dd0b41623po8"><img placement="break" alt="iShot2022-08-23 20" src="https://help-static-aliyun-doc.aliyuncs.com/assets/img/zh-CN/9547521661/p480311.png" id="4dd0b41723dv3" class="image break" / /></p><p id="4dd0b4182386l">单击允许后，<b>page.onShow</b>方法内调用的<b>disposeAuthData</b>方法内可获取authCode值<b>。</b></p></li></ol></section><section id="97fda7e023oxr" class="section"><h2 id="9fbc3af023s8e"><b>步骤五：获取个人用户身份访问凭证</b></h2><p id="9fbc3af123c3a">参考<a data-tag="xref" id="f556b034eeb35" href="/document/development/obtain-user-token#" class="xref">获取用户token</a>接口文档。</p><pre id="9fbc3af2238gr" data-tag="codeblock" outputclass="language-java" code-type="xCode" class="pre codeblock language-java"><code>public void getToken() throws Exception {
+        com.aliyun.dingtalkoauth2_1_0.Client client = AuthTest.createClient1();
+        GetUserTokenRequest getUserTokenRequest = new GetUserTokenRequest()
+                .setClientId("dingzxxxx")  //第一步获取的三方个人小程序的AppId。
+                .setClientSecret("XyJONrxxxxx") //第一步获取的三方个人小程序的AppSecret。
+                .setCode("18ec1db4xxxxx") //第三步获取的authCode。
+                .setGrantType("authorization_code");
+        try {
+            GetUserTokenResponse userToken = client.getUserToken(getUserTokenRequest);
+            System.out.println(JSON.toJSONString(userToken));
+        } catch (TeaException err) {
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+                System.out.println(JSON.toJSONString(err));
+            }
+        } catch (Exception _err) {
+            TeaException err = new TeaException(_err.getMessage(), _err);
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+                System.out.println(JSON.toJSONString(err));
+            }
+        }
+    }</code></pre></section><p id="a2ee19f0237j0"></p><section id="a4715e902399t" class="section"><h2 id="a6f28b3023j63"><b>步骤六：</b>调用服务端相关API</h2><p id="6cffd67023v2b">调用服务端API-<a data-tag="xref" id="ea0f655806vnj" href="/document/development/dingtalk-retrieve-user-information#" class="xref">获取用户通讯录个人信息</a>接口。</p><div id="a6f28b3323bap" type="note" class="note note-note"><div class="note-icon-wrapper"><i class="icon-note note note"></i></div><div class="noteContentSpan"><strong>说明 </strong><p id="a6f28b3423mns">unionId参数固定传<code data-tag="code" id="76d1ea14b4nog" class="code">me</code>。</p></div></div><pre outputclass="language-java" data-tag="codeblock" id="a6f28b3523gqg" code-type="xCode" class="pre codeblock language-java"><code>public void getUserInfo() throws Exception {
+        com.aliyun.dingtalkcontact_1_0.Client client = AuthTest.createClient();
+        GetUserHeaders getUserHeaders = new GetUserHeaders();
+        getUserHeaders.xAcsDingtalkAccessToken = "17e756xxxxx"; //第四步获取的个人用户身份访问凭证。
+        try {
+            GetUserResponse me = client.getUserWithOptions("me", getUserHeaders, new RuntimeOptions());
+            System.out.println(JSON.toJSON(me));
+        } catch (TeaException err) {
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+                System.out.println(JSON.toJSONString(err));
+            }
+
+        } catch (Exception _err) {
+            TeaException err = new TeaException(_err.getMessage(), _err);
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+                System.out.println(JSON.toJSONString(err));
+
+            }
+
+        }
+
+    }</code></pre></section></div></main></body></html>

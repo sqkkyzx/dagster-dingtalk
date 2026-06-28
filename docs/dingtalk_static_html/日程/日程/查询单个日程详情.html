@@ -1,0 +1,509 @@
+<!DOCTYPE html><html><head><meta charset="utf8" / /><meta name="gmtModify" content="2025-09-11 21:02:29" / /><meta name="searchtitle" content="" / /><meta name="keywords" content="" / /><meta name="author" content="" / /><title>查询单个日程详情</title><meta name="gmtModify" content="2026-06-02 09:25:00" / /></head><body data-tag="topic" id="doc-api-dingtalk-GetEvent" class="topic"><main id="8382b5c041kdl"><h1 data-tag="title" id="h1-1yp-imm-ot1" class="title">查询单个日程详情</h1><p data-tag="shortdesc" id="843b576741hcn" class="shortdesc">调用本接口，根据日程id查询单个日程详情。</p><div data-tag="conbody" outputclass="icms-api-reference" class="icms-api-reference conbody"><section id="section-request-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-request-1" data-tag="h2" class="h2">请求</h2><section id="section-request-basic-info" class="section"><h3 id="heading-request-basic-info" data-tag="h3" class="h3">基本信息</h3><table id="11068d1754wu0" tablewidth="648" tablecolswidth="216 432" autofit="false" class="table"><colgroup colwidth="0.67*" style="width:33.33%"></colgroup><colgroup colwidth="1.33*" style="width:66.67%"></colgroup><tbody class="tbody"><tr id="8528b37cf1xe5"><td id="cb936d02cc6d1" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="f4249ebe23wbi">字段</p></td><td id="edbac895f0ls0" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="9bb22a499ebrr">值</p></td></tr><tr id="3e9e6b81e0ib4"><td id="efae210fbb2q0" rowspan="1" colspan="1"><p id="ac41010018gbs">HTTP URL</p></td><td id="d93d6cc8a22gz" rowspan="1" colspan="1"><p id="8fa021fe0443i">https://api.dingtalk.com/v1.0/calendar/users/{userId}/calendars/{calendarId}/events/{eventId}</p></td></tr><tr id="7977ff0c71lfy"><td id="ba8be9da31yg0" rowspan="1" colspan="1"><p id="874f5d0e7dgcf">HTTP Method</p></td><td id="6dc2868830tlu" rowspan="1" colspan="1"><p id="3908754753zer">GET</p></td></tr><tr id="9e32be360etix"><td id="e9c4532657kvk" rowspan="1" colspan="1"><p id="763883cecd0nc">支持的应用类型</p></td><td id="7112126bf5zjl" rowspan="1" colspan="1"><p id="d43641ae93hhn"><span data-tag="ph" id="ph-request-basic-app-type-apptype-0" class="ph ph-app-type" data-ph-raw-text="appType-企业内部应用">appType-企业内部应用</span>　<span data-tag="ph" id="ph-request-basic-app-type-apptype-1" class="ph ph-app-type" data-ph-raw-text="appType-第三方企业应用">appType-第三方企业应用</span>　<span data-tag="ph" id="ph-request-basic-app-type-apptype-2" class="ph ph-app-type" data-ph-raw-text="appType-第三方个人应用">appType-第三方个人应用</span></p></td></tr><tr id="e769ac8356wg7"><td id="75c950d0f1vx6" rowspan="1" colspan="1"><p id="0e0a7bf63a1hm">权限要求</p></td><td id="9e14e1a675zqr" rowspan="1" colspan="1"><p id="88ad62f609qkt"><span data-tag="ph" id="ph-request-basic-permission-permission-calendar-event-read-0" class="ph-permission ph" data-ph-raw-text="permission-Calendar.Event.Read-日历应用中日程读权限" data-permission-id="permission-Calendar.Event.Read" data-permission-code="Calendar.Event.Read" data-permission-detail-api="/document/api/permission/detail" data-permission-query-param="code">permission-Calendar.Event.Read-日历应用中日程读权限</span></p></td></tr></tbody></table></section><section id="section-request-header-parameter" class="section"><h3 data-tag="h3" id="h2-xry-vid-yhl" class="h3 title">请求头</h3><table id="843bcc9d41nw8" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="843bcc9e41oxy"><td id="843bf3a0419yq" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="843bf3a141prz">名称</p></td><td id="843bf3a241fpl" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="843bf3a341i7u">类型</p></td><td id="843bf3a441di8" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="843bf3a5416p3">是否必填</p></td><td id="843bf3a641zvk" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="843bf3a741iwh">描述</p></td></tr><tr id="843bf3a8412fk"><td id="843bf3a941zjf" rowspan="1" colspan="1"><p id="843bf3aa41ba7">x-acs-dingtalk-access-token</p></td><td id="843bf3ab41uur" rowspan="1" colspan="1"><p id="843bf3ac413wq">String</p></td><td id="843bf3ad41f39" rowspan="1" colspan="1"><p id="843bf3ae41mzs">是</p></td><td id="843bf3af41271" rowspan="1" colspan="1"><p id="ce43bd296a4ib">调用该接口的访问凭证，通过以下获取：</p><ul id="734aae8d64yop"><li id="fe201287f0fht"><p id="54f74f3261xm3">企业内部应用，调用<a href="https://open.dingtalk.com/document/development/obtain-the-access-token-of-an-internal-app#" id="2b2792bdffp8c" class="xref">获取企业内部应用的accessToken</a>接口获取。</p></li><li id="d25c443fd3t38"><p id="69725d38b4avv">第三方企业应用，调用<a href="https://open.dingtalk.com/document/development/obtain-the-access-token-of-the-authorized-enterprise-1#" id="efaab856dbx0z" class="xref">获取第三方应用授权企业的accessToken</a>接口获取。</p></li><li id="94c122981ef0t"><p id="d94773db740j1">第三方个人应用，调用<a href="https://open.dingtalk.com/document/development/obtain-user-token#" id="47602bc8b5x6o" class="xref">获取用户token</a>接口获取。</p></li></ul></td></tr></tbody></table></section><section id="section-request-path-parameter" class="section"><h3 data-tag="h3" id="h2-urs-tcr-ueh" class="h3 title">路径参数</h3><table id="843c1ab941s72" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="843c1aba41ic9"><td id="843c1abb41nik" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="843c1abc41uy0">名称</p></td><td id="843c1abd41asg" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="843c41c041lrh">类型</p></td><td id="843c41c141nhx" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="843c41c241kt2">是否必填</p></td><td id="843c41c341w32" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="843c41c441ocv">描述</p></td></tr><tr id="843c41c541r7e"><td id="843c41c641ad2" rowspan="1" colspan="1"><p id="843c41c741edq">userId</p></td><td id="843c41c841zhx" rowspan="1" colspan="1"><p id="843c41c941mxc">String</p></td><td id="843c41ca41rsl" rowspan="1" colspan="1"><p id="843c41cb41wpc">是</p></td><td id="843c41cc41wuu" rowspan="1" colspan="1"><p id="843c41cd41y50">日程所属用户的unionId。</p><ul id="843c41ce41ilc"><li id="6d56586c40bp6"><p id="f9172ee471vo6">企业内部应用和第三方企业应用，调用<a href="https://open.dingtalk.com/document/development/query-user-details#" id="ff04c240ff6it" class="xref">查询用户详情</a>接口获取unionid参数值。</p></li><li id="a542ad5624lvz"><p id="b74b0228178e7">第三方个人应用，调用<a href="https://open.dingtalk.com/document/development/dingtalk-retrieve-user-information#" id="4fc74ddd27e8s" class="xref">获取用户通讯录个人信息</a>接口获取unionId参数值。</p></li></ul></td></tr><tr id="843c68d3411t5"><td id="843c68d441xrd" rowspan="1" colspan="1"><p id="843c68d541bz3">calendarId</p></td><td id="843c68d641fh0" rowspan="1" colspan="1"><p id="843cb6f041g9u">String</p></td><td id="843cb6f141jz3" rowspan="1" colspan="1"><p id="843cb6f2419xj">是</p></td><td id="843cb6f341p61" rowspan="1" colspan="1"><p id="843cb6f441a69">日程所属的日历Id，统一为primary，表示用户的主日历。</p></td></tr><tr id="843cde00414vc"><td id="843cde0141bkg" rowspan="1" colspan="1"><p id="843cde0241ned">eventId</p></td><td id="843cde03416kv" rowspan="1" colspan="1"><p id="843cde0441isr">String</p></td><td id="843cde05411d1" rowspan="1" colspan="1"><p id="843cde06413h6">是</p></td><td id="843cde074102s" rowspan="1" colspan="1"><p id="843cde08411xr">日程ID，可调用<a href="https://open.dingtalk.com/document/development/query-an-event-list#" id="fe2acc436cvms" class="xref">查询日程列表</a>接口获取id参数值。</p></td></tr></tbody></table></section><section id="section-request-query-parameter" class="section"><h3 data-tag="h3" id="h2-w1p-2l0-knu" class="h3 title">查询参数</h3><table id="843d051341k9u" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="843d051441lp7"><td id="843d051541fav" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="843d051641b8k">名称</p></td><td id="843d051741xtv" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="843d051841in2">类型</p></td><td id="843d051941tj1" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="843d051a41wg5">是否必填</p></td><td id="843d051b41h5e" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="843d051c41aq4">描述</p></td></tr><tr id="843d051d41pdg"><td id="843d051e416vp" rowspan="1" colspan="1"><p id="843d051f41onb">maxAttendees</p></td><td id="843d052041s18" rowspan="1" colspan="1"><p id="843d05214114x">Long</p></td><td id="843d052241rs7" rowspan="1" colspan="1"><p id="843d052341aat">否</p></td><td id="843d052441y7c" rowspan="1" colspan="1"><p id="843d052541vad">最大参与人数，默认值100，最大值500。</p></td></tr></tbody></table></section><section id="section-request-body-example" class="section"><h3 id="h3-request-body-example" data-tag="h3" class="h3">请求示例</h3><div outputclass="tabbed-codeblock" data-tag="fig" id="figure-jcs-t4k-fof" class="tabbed-codeblock-box"><div class="tab-box"></div><input type="radio" name="check-figure-jcs-t4k-fof" id="figure-jcs-t4k-fof-HTTP-tab" checked="checked" /><label for="figure-jcs-t4k-fof-HTTP-tab">HTTP</label><div class="codeblock-item"><pre id="codeblock-du5-auy-ndv" outputclass="language-HTTP" code-type="xCode" data-tag="codeblock" class="pre codeblock language-HTTP"><code>GET /v1.0/calendar/users/iiiP35sJaxxxxRKgiEiF/calendars/primary/events/cnNTbW1YbUxxxxvdlQrQT09?maxAttendees=100 HTTP/1.1
+Host:api.dingtalk.com
+x-acs-dingtalk-access-token:dd43888xxx
+Content-Type:application/json</code></pre></div><input type="radio" name="check-figure-jcs-t4k-fof" id="figure-jcs-t4k-fof-java-tab" /><label for="figure-jcs-t4k-fof-java-tab">Java</label><div class="codeblock-item"><pre id="codeblock-vmr-ki9-awd" outputclass="language-java" code-type="xCode" data-tag="codeblock" class="pre codeblock language-java"><code>// This file is auto-generated, don't edit it. Thanks.
+package com.aliyun.sample;
+
+import com.aliyun.tea.*;
+
+public class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Client
+     * @throws Exception
+     */
+    public static com.aliyun.dingtalkcalendar_1_0.Client createClient() throws Exception {
+        com.aliyun.teaopenapi.models.Config config = new com.aliyun.teaopenapi.models.Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        return new com.aliyun.dingtalkcalendar_1_0.Client(config);
+    }
+
+    public static void main(String[] args_) throws Exception {
+        java.util.List&lt;String&gt; args = java.util.Arrays.asList(args_);
+        com.aliyun.dingtalkcalendar_1_0.Client client = Sample.createClient();
+        com.aliyun.dingtalkcalendar_1_0.models.GetEventHeaders getEventHeaders = new com.aliyun.dingtalkcalendar_1_0.models.GetEventHeaders();
+        getEventHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        com.aliyun.dingtalkcalendar_1_0.models.GetEventRequest getEventRequest = new com.aliyun.dingtalkcalendar_1_0.models.GetEventRequest()
+                .setMaxAttendees(100L);
+        try {
+            client.getEventWithOptions("iiiP35sJaxxxxRKgiEiF", "primary", "cnNTbW1YbUxxxxvdlQrQT09", getEventRequest, getEventHeaders, new com.aliyun.teautil.models.RuntimeOptions());
+        } catch (TeaException err) {
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        } catch (Exception _err) {
+            TeaException err = new TeaException(_err.getMessage(), _err);
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        }        
+    }
+}</code></pre></div><input type="radio" name="check-figure-jcs-t4k-fof" id="figure-jcs-t4k-fof-python-tab" /><label for="figure-jcs-t4k-fof-python-tab">Python</label><div class="codeblock-item"><pre id="codeblock-fot-nnx-fj9" outputclass="language-python" code-type="xCode" data-tag="codeblock" class="pre codeblock language-python"><code># -*- coding: utf-8 -*-
+# This file is auto-generated, don't edit it. Thanks.
+import sys
+
+from typing import List
+
+from alibabacloud_dingtalk.calendar_1_0.client import Client as dingtalkcalendar_1_0Client
+from alibabacloud_tea_openapi import models as open_api_models
+from alibabacloud_dingtalk.calendar_1_0 import models as dingtalkcalendar__1__0_models
+from alibabacloud_tea_util import models as util_models
+from alibabacloud_tea_util.client import Client as UtilClient
+
+
+class Sample:
+    def __init__(self):
+        pass
+
+    @staticmethod
+    def create_client() -&gt; dingtalkcalendar_1_0Client:
+        """
+        使用 Token 初始化账号Client
+        @return: Client
+        @throws Exception
+        """
+        config = open_api_models.Config()
+        config.protocol = 'https'
+        config.region_id = 'central'
+        return dingtalkcalendar_1_0Client(config)
+
+    @staticmethod
+    def main(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        get_event_headers = dingtalkcalendar__1__0_models.GetEventHeaders()
+        get_event_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        get_event_request = dingtalkcalendar__1__0_models.GetEventRequest(
+            max_attendees=100
+        )
+        try:
+            client.get_event_with_options('iiiP35sJaxxxxRKgiEiF', 'primary', 'cnNTbW1YbUxxxxvdlQrQT09', get_event_request, get_event_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+    @staticmethod
+    async def main_async(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        get_event_headers = dingtalkcalendar__1__0_models.GetEventHeaders()
+        get_event_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        get_event_request = dingtalkcalendar__1__0_models.GetEventRequest(
+            max_attendees=100
+        )
+        try:
+            await client.get_event_with_options_async('iiiP35sJaxxxxRKgiEiF', 'primary', 'cnNTbW1YbUxxxxvdlQrQT09', get_event_request, get_event_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+
+if __name__ == '__main__':
+    Sample.main(sys.argv[1:])</code></pre></div><input type="radio" name="check-figure-jcs-t4k-fof" id="figure-jcs-t4k-fof-php-tab" /><label for="figure-jcs-t4k-fof-php-tab">PHP</label><div class="codeblock-item"><pre id="codeblock-9yw-s0l-uiq" outputclass="language-php" code-type="xCode" data-tag="codeblock" class="pre codeblock language-php"><code>&lt;?php
+
+// This file is auto-generated, don't edit it. Thanks.
+namespace AlibabaCloud\SDK\Sample;
+
+use AlibabaCloud\SDK\Dingtalk\Vcalendar_1_0\Dingtalk;
+use \Exception;
+use AlibabaCloud\Tea\Exception\TeaError;
+use AlibabaCloud\Tea\Utils\Utils;
+
+use Darabonba\OpenApi\Models\Config;
+use AlibabaCloud\SDK\Dingtalk\Vcalendar_1_0\Models\GetEventHeaders;
+use AlibabaCloud\SDK\Dingtalk\Vcalendar_1_0\Models\GetEventRequest;
+use AlibabaCloud\Tea\Utils\Utils\RuntimeOptions;
+
+class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Dingtalk Client
+     */
+    public static function createClient(){
+        $config = new Config([]);
+        $config-&gt;protocol = "https";
+        $config-&gt;regionId = "central";
+        return new Dingtalk($config);
+    }
+
+    /**
+     * @param string[] $args
+     * @return void
+     */
+    public static function main($args){
+        $client = self::createClient();
+        $getEventHeaders = new GetEventHeaders([]);
+        $getEventHeaders-&gt;xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        $getEventRequest = new GetEventRequest([
+            "maxAttendees" =&gt; 100
+        ]);
+        try {
+            $client-&gt;getEventWithOptions("iiiP35sJaxxxxRKgiEiF", "primary", "cnNTbW1YbUxxxxvdlQrQT09", $getEventRequest, $getEventHeaders, new RuntimeOptions([]));
+        }
+        catch (Exception $err) {
+            if (!($err instanceof TeaError)) {
+                $err = new TeaError([], $err-&gt;getMessage(), $err-&gt;getCode(), $err);
+            }
+            if (!Utils::empty_($err-&gt;code) &amp;&amp; !Utils::empty_($err-&gt;message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+        }
+    }
+}
+$path = __DIR__ . \DIRECTORY_SEPARATOR . '..' . \DIRECTORY_SEPARATOR . 'vendor' . \DIRECTORY_SEPARATOR . 'autoload.php';
+if (file_exists($path)) {
+    require_once $path;
+}
+Sample::main(array_slice($argv, 1));</code></pre></div><input type="radio" name="check-figure-jcs-t4k-fof" id="figure-jcs-t4k-fof-go-tab" /><label for="figure-jcs-t4k-fof-go-tab">Go</label><div class="codeblock-item"><pre id="codeblock-fae-lic-tcs" outputclass="language-go" code-type="xCode" data-tag="codeblock" class="pre codeblock language-go"><code>// This file is auto-generated, don't edit it. Thanks.
+package main
+
+import (
+  "os"
+  util  "github.com/alibabacloud-go/tea-utils/v2/service"
+  dingtalkcalendar_1_0  "github.com/alibabacloud-go/dingtalk/calendar_1_0"
+  openapi  "github.com/alibabacloud-go/darabonba-openapi/v2/client"
+  "github.com/alibabacloud-go/tea/tea"
+)
+
+
+/**
+ * 使用 Token 初始化账号Client
+ * @return Client
+ * @throws Exception
+ */
+func CreateClient () (_result *dingtalkcalendar_1_0.Client, _err error) {
+  config := &amp;openapi.Config{}
+  config.Protocol = tea.String("https")
+  config.RegionId = tea.String("central")
+  _result = &amp;dingtalkcalendar_1_0.Client{}
+  _result, _err = dingtalkcalendar_1_0.NewClient(config)
+  return _result, _err
+}
+
+func _main (args []*string) (_err error) {
+  client, _err := CreateClient()
+  if _err != nil {
+    return _err
+  }
+
+  getEventHeaders := &amp;dingtalkcalendar_1_0.GetEventHeaders{}
+  getEventHeaders.XAcsDingtalkAccessToken = tea.String("&lt;your access token&gt;")
+  getEventRequest := &amp;dingtalkcalendar_1_0.GetEventRequest{
+    MaxAttendees: tea.Int64(100),
+  }
+  tryErr := func()(_e error) {
+    defer func() {
+      if r := tea.Recover(recover()); r != nil {
+        _e = r
+      }
+    }()
+    _, _err = client.GetEventWithOptions(tea.String("iiiP35sJaxxxxRKgiEiF"), tea.String("primary"), tea.String("cnNTbW1YbUxxxxvdlQrQT09"), getEventRequest, getEventHeaders, &amp;util.RuntimeOptions{})
+    if _err != nil {
+      return _err
+    }
+
+    return nil
+  }()
+
+  if tryErr != nil {
+    var err = &amp;tea.SDKError{}
+    if _t, ok := tryErr.(*tea.SDKError); ok {
+      err = _t
+    } else {
+      err.Message = tea.String(tryErr.Error())
+    }
+    if !tea.BoolValue(util.Empty(err.Code)) &amp;&amp; !tea.BoolValue(util.Empty(err.Message)) {
+      // err 中含有 code 和 message 属性，可帮助开发定位问题
+    }
+
+  }
+  return _err
+}
+
+
+func main() {
+  err := _main(tea.StringSlice(os.Args[1:]))
+  if err != nil {
+    panic(err)
+  }
+}</code></pre></div><input type="radio" name="check-figure-jcs-t4k-fof" id="figure-jcs-t4k-fof-nodejs-tab" /><label for="figure-jcs-t4k-fof-nodejs-tab">Node.js</label><div class="codeblock-item"><pre id="codeblock-m00-sij-lvb" outputclass="language-nodejs" code-type="xCode" data-tag="codeblock" class="pre codeblock language-nodejs"><code>// This file is auto-generated, don't edit it
+import Util, * as $Util from '@alicloud/tea-util';
+import dingtalkcalendar_1_0, * as $dingtalkcalendar_1_0 from '@alicloud/dingtalk/calendar_1_0';
+import OpenApi, * as $OpenApi from '@alicloud/openapi-client';
+import * as $tea from '@alicloud/tea-typescript';
+
+
+export default class Client {
+
+  /**
+   * 使用 Token 初始化账号Client
+   * @return Client
+   * @throws Exception
+   */
+  static createClient(): dingtalkcalendar_1_0 {
+    let config = new $OpenApi.Config({ });
+    config.protocol = "https";
+    config.regionId = "central";
+    return new dingtalkcalendar_1_0(config);
+  }
+
+  static async main(args: string[]): Promise&lt;void&gt; {
+    let client = Client.createClient();
+    let getEventHeaders = new $dingtalkcalendar_1_0.GetEventHeaders({ });
+    getEventHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+    let getEventRequest = new $dingtalkcalendar_1_0.GetEventRequest({
+      maxAttendees: 100,
+    });
+    try {
+      await client.getEventWithOptions("iiiP35sJaxxxxRKgiEiF", "primary", "cnNTbW1YbUxxxxvdlQrQT09", getEventRequest, getEventHeaders, new $Util.RuntimeOptions({ }));
+    } catch (err) {
+      if (!Util.empty(err.code) &amp;&amp; !Util.empty(err.message)) {
+        // err 中含有 code 和 message 属性，可帮助开发定位问题
+      }
+
+    }    
+  }
+
+}
+
+Client.main(process.argv.slice(2));</code></pre></div><input type="radio" name="check-figure-jcs-t4k-fof" id="figure-jcs-t4k-fof-csharp-tab" /><label for="figure-jcs-t4k-fof-csharp-tab">C#</label><div class="codeblock-item"><pre id="codeblock-nmi-jhp-phq" outputclass="language-csharp" code-type="xCode" data-tag="codeblock" class="pre codeblock language-csharp"><code>// This file is auto-generated, don't edit it. Thanks.
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
+
+using Tea;
+using Tea.Utils;
+
+
+namespace AlibabaCloud.SDK.Sample
+{
+    public class Sample 
+    {
+
+        /**
+         * 使用 Token 初始化账号Client
+         * @return Client
+         * @throws Exception
+         */
+        public static AlibabaCloud.SDK.Dingtalkcalendar_1_0.Client CreateClient()
+        {
+            AlibabaCloud.OpenApiClient.Models.Config config = new AlibabaCloud.OpenApiClient.Models.Config();
+            config.Protocol = "https";
+            config.RegionId = "central";
+            return new AlibabaCloud.SDK.Dingtalkcalendar_1_0.Client(config);
+        }
+
+        public static void Main(string[] args)
+        {
+            AlibabaCloud.SDK.Dingtalkcalendar_1_0.Client client = CreateClient();
+            AlibabaCloud.SDK.Dingtalkcalendar_1_0.Models.GetEventHeaders getEventHeaders = new AlibabaCloud.SDK.Dingtalkcalendar_1_0.Models.GetEventHeaders();
+            getEventHeaders.XAcsDingtalkAccessToken = "&lt;your access token&gt;";
+            AlibabaCloud.SDK.Dingtalkcalendar_1_0.Models.GetEventRequest getEventRequest = new AlibabaCloud.SDK.Dingtalkcalendar_1_0.Models.GetEventRequest
+            {
+                MaxAttendees = 100,
+            };
+            try
+            {
+                client.GetEventWithOptions("iiiP35sJaxxxxRKgiEiF", "primary", "cnNTbW1YbUxxxxvdlQrQT09", getEventRequest, getEventHeaders, new AlibabaCloud.TeaUtil.Models.RuntimeOptions());
+            }
+            catch (TeaException err)
+            {
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+            catch (Exception _err)
+            {
+                TeaException err = new TeaException(new Dictionary&lt;string, object&gt;
+                {
+                    { "message", _err.Message }
+                });
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+        }
+
+
+    }
+}</code></pre></div><input type="radio" name="check-figure-jcs-t4k-fof" id="figure-jcs-t4k-fof-python2-tab" /><label for="figure-jcs-t4k-fof-python2-tab">python2</label><div class="codeblock-item"><pre id="codeblock-kuz-jmv-tbo" outputclass="language-python2" code-type="xCode" data-tag="codeblock" class="pre codeblock language-python2"><code># -*- coding: utf-8 -*-
+# This file is auto-generated, don't edit it. Thanks.
+from __future__ import unicode_literals
+
+import sys
+
+from alibabacloud_dingtalkcalendar_1_0.client import Client as dingtalkcalendar_1_0Client
+from alibabacloud_tea_openapi import models as open_api_models
+from alibabacloud_dingtalkcalendar_1_0 import models as dingtalkcalendar__1__0_models
+from alibabacloud_tea_util import models as util_models
+from alibabacloud_tea_util.client import Client as UtilClient
+
+
+class Sample(object):
+    def __init__(self):
+        pass
+
+    @staticmethod
+    def create_client():
+        """
+        使用 Token 初始化账号Client
+
+        @return: Client
+        @throws Exception
+        """
+        config = open_api_models.Config()
+        config.protocol = 'https'
+        config.region_id = 'central'
+        return dingtalkcalendar_1_0Client(config)
+
+    @staticmethod
+    def main(args):
+        client = Sample.create_client()
+        get_event_headers = dingtalkcalendar__1__0_models.GetEventHeaders()
+        get_event_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        get_event_request = dingtalkcalendar__1__0_models.GetEventRequest(
+            max_attendees=100
+        )
+        try:
+            client.get_event_with_options('iiiP35sJaxxxxRKgiEiF', 'primary', 'cnNTbW1YbUxxxxvdlQrQT09', get_event_request, get_event_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+
+if __name__ == '__main__':
+    Sample.main(sys.argv[1:])</code></pre></div><input type="radio" name="check-figure-jcs-t4k-fof" id="figure-jcs-t4k-fof-swift-tab" /><label for="figure-jcs-t4k-fof-swift-tab">Swift</label><div class="codeblock-item"><pre id="codeblock-sfz-ces-qup" outputclass="language-swift" code-type="xCode" data-tag="codeblock" class="pre codeblock language-swift"><code>#!/usr/bin/env xcrun swift
+
+import Cocoa
+import Foundation
+import Tea
+import TeaUtils
+import AlibabacloudDingtalkcalendar10
+import AlibabacloudOpenApi
+
+open class Client {
+    public static func createClient() throws -&gt; AlibabacloudDingtalkcalendar10.Client {
+        var config: AlibabacloudOpenApi.Config = AlibabacloudOpenApi.Config([:])
+        config.protocol_ = "https"
+        config.regionId = "central"
+        return AlibabacloudDingtalkcalendar10.Client(config)
+    }
+
+    @available(macOS 10.15, iOS 13, tvOS 13, watchOS 6, *)
+    public static func main(_ args: [String]?) async throws -&gt; Void {
+        var client: AlibabacloudDingtalkcalendar10.Client = try Client.createClient()
+        var getEventHeaders: AlibabacloudDingtalkcalendar10.GetEventHeaders = AlibabacloudDingtalkcalendar10.GetEventHeaders([:])
+        getEventHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;"
+        var getEventRequest: AlibabacloudDingtalkcalendar10.GetEventRequest = AlibabacloudDingtalkcalendar10.GetEventRequest([
+            "maxAttendees": 100
+        ])
+        do {
+            try await client.getEventWithOptions("iiiP35sJaxxxxRKgiEiF", "primary", "cnNTbW1YbUxxxxvdlQrQT09", getEventRequest as! AlibabacloudDingtalkcalendar10.GetEventRequest, getEventHeaders as! AlibabacloudDingtalkcalendar10.GetEventHeaders, TeaUtils.RuntimeOptions([:]))
+        }
+        catch {
+            if error is Tea.TeaError {
+                var err = error as! Tea.TeaError
+                if (!TeaUtils.Client.empty(err.code) &amp;&amp; !TeaUtils.Client.empty(err.message)) {
+                }
+            } else {
+                throw error
+            }
+        }
+    }
+}
+
+Client.main(CommandLine.arguments)</code></pre></div></div></section></section><section id="section-response-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-response-1" data-tag="h2" class="h2">响应</h2><section id="section-response-parameter" class="section"><h3 data-tag="h3" id="h2-kjy-72p-qmy" class="h3 title">响应体</h3><table id="843d2c2041r4u" tablewidth="710" tablecolswidth="213 142 355" autofit="false" class="table"><colgroup colwidth="0.9*" style="width:30.00%"></colgroup><colgroup colwidth="0.6*" style="width:20.00%"></colgroup><colgroup colwidth="1.5*" style="width:50.00%"></colgroup><tbody class="tbody"><tr id="843d2c2141smx"><td id="843d2c2241nkx" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="843d2c2341g17">名称</p></td><td id="843d2c2441s0t" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="843d2c2541z4k">类型</p></td><td id="843d2c2641yun" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="843d2c2741g8d">描述</p></td></tr><tr outputclass="row row-level-1" id="843d2c2841t1m" class="row row-level-1"><td id="843d2c294117z" rowspan="1" colspan="1"><p id="843d2c2a41i20">id</p></td><td id="843d2c2b41i07" rowspan="1" colspan="1"><p id="843d2c2c41lm1">String</p></td><td id="843d2c2d41uyn" rowspan="1" colspan="1"><p id="843d2c2e41zbc">日程id。</p></td></tr><tr outputclass="row row-level-2" id="843d2c2f414n0" class="row row-level-2"><td id="843d2c30410qs" rowspan="1" colspan="1"><p id="843d2c31414ng">summary</p></td><td id="843d2c3241q6p" rowspan="1" colspan="1"><p id="843d2c3341c9p">String</p></td><td id="843d2c3441r7a" rowspan="1" colspan="1"><p id="843d2c3541lgr">日程标题。</p></td></tr><tr outputclass="row row-level-3" id="843d2c3641l7x" class="row row-level-3"><td id="843d2c3741uga" rowspan="1" colspan="1"><p id="843d2c3841tci">description</p></td><td id="843d2c3941xuo" rowspan="1" colspan="1"><p id="843d533041e4m">String</p></td><td id="843d533141yj3" rowspan="1" colspan="1"><p id="843d5332416dt">日程描述。</p></td></tr><tr outputclass="row row-level-4" id="843d5333413sd" class="row row-level-4"><td id="843d533441plf" rowspan="1" colspan="1"><p id="843d53354178u">status</p></td><td id="843d5336413r7" rowspan="1" colspan="1"><p id="843d533741lrx">String</p></td><td id="843d5338410hz" rowspan="1" colspan="1"><p id="843d533941llc">日程状态。</p><ul id="843d533a41y9j"><li id="843d533b41mia"><p id="843d533c41srk"><b>confirmed</b>：正常</p></li><li id="843d533d41b15"><p id="843d533e41lhc"><b>cancelled</b>：已取消</p></li></ul></td></tr><tr outputclass="row row-level-5 has-child" id="843d533f411rd" class="row row-level-5 has-child"><td id="843d534041kim" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="843d534141pbj">start</p></td><td id="843d534241gfx" rowspan="1" colspan="1"><p id="843d534341x13">Object</p></td><td id="843d534441yor" rowspan="1" colspan="1"><p id="843d534541aqz">日程开始时间。</p></td></tr><tr outputclass="row row-level-5-1" id="843d534641gi1" class="row row-level-5-1"><td id="843d5347410qt" rowspan="1" colspan="1"><p id="843d53484176y">date</p></td><td id="843d7a4041x0c" rowspan="1" colspan="1"><p id="843d7a4141fic">String</p></td><td id="843d7a4241tfh" rowspan="1" colspan="1"><p id="843d7a4341snt">日程开始日期，格式：yyyy-MM-dd。</p><p class="note-icon-wrapper" id="36860aafabu3t"></p><section data-tag="p" id="843d7a4541fek" class="p section"><ul id="843d7a464141a"><li id="843d7a4741r9x"><p id="843d7a4841xm8">全天日程必须有值</p></li><li id="843d7a4941879"><p id="843d7a4a41url">非全天日程必须留空</p></li></ul></section></td></tr><tr outputclass="row row-level-5-2" id="843d7a4b417mp" class="row row-level-5-2"><td id="843d7a4c41utk" rowspan="1" colspan="1"><p id="843d7a4d41l6h">dateTime</p></td><td id="843d7a4e416nv" rowspan="1" colspan="1"><p id="843d7a4f41hqe">String</p></td><td id="843d7a5041br0" rowspan="1" colspan="1"><p id="843d7a51411j7">日程开始时间，格式为ISO-8601的date-time格式。</p><p class="note-icon-wrapper" id="fcb39b66aegvv"></p><section data-tag="p" id="843d7a534123s" class="p section"><ul id="843d7a5441ooc"><li id="843d7a5541t4n"><p id="843d7a5641dlu">全天日程必须留空</p></li><li id="843d7a5741maa"><p id="843d7a58414gb">非全天日程必须有值</p></li></ul></section></td></tr><tr outputclass="row row-level-5-3" id="843d7a594174q" class="row row-level-5-3"><td id="843d7a5a41615" rowspan="1" colspan="1"><p id="843da15041vh6">timeZone</p></td><td id="843da15141kwg" rowspan="1" colspan="1"><p id="843da15241yom">String</p></td><td id="843da15341b7h" rowspan="1" colspan="1"><p id="843da15441l7m">日程开始时间所属时区，TZ database name格式。</p><p class="note-icon-wrapper" id="743efbfd85cj3"></p><section data-tag="p" id="843da15641yjo" class="p section"><ul id="843da15741qw7"><li id="843da15841i9l"><p id="843da15941vhx">全天日程必须留空</p></li><li id="843da15a4141j"><p id="843da15b412r1">非全天日程必须有值</p></li></ul></section></td></tr><tr outputclass="row row-level-6 has-child" id="843da15c41x1x" class="row row-level-6 has-child"><td id="843da15d41m4z" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="843da15e4170e">originStart</p></td><td id="843da15f41pxu" rowspan="1" colspan="1"><p id="843da16041ipn">Object</p></td><td id="843da16141k4i" rowspan="1" colspan="1"><p id="843da16241mk1">表示循环序列中最初创建时的开始时间。</p><p class="note-icon-wrapper" id="5e6006196bj14"></p><section data-tag="p" id="843da164411tb" class="p section"><p id="843da165418xn">对于普通单个日程，不返回此属性。</p></section></td></tr><tr outputclass="row row-level-6-1" id="843da16641zor" class="row row-level-6-1"><td id="843da167416uh" rowspan="1" colspan="1"><p id="843da16841qg5">dateTime</p></td><td id="843da16941qzx" rowspan="1" colspan="1"><p id="843da16a41h3e">String</p></td><td id="843da16b41sap" rowspan="1" colspan="1"><p id="843da16c41ksg">其日期和时间信息以 ISO 8601 格式表示，并且始终采用 UTC。 例如：<code data-tag="code" id="a151fc22a414z" class="code">2023 年 1 月 1 日午夜 UTC 为 2023-01-01T00:00:00Z</code>。</p></td></tr><tr outputclass="row row-level-7 has-child" id="843dc86041suw" class="row row-level-7 has-child"><td id="843dc86141y9u" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="843dc862413ai">end</p></td><td id="843dc86341cri" rowspan="1" colspan="1"><p id="843dc86441dvy">Object</p></td><td id="843dc86541nvp" rowspan="1" colspan="1"><p id="843dc86641r3s">日程结束时间。</p></td></tr><tr outputclass="row row-level-7-1" id="843dc86741d1m" class="row row-level-7-1"><td id="843dc86841450" rowspan="1" colspan="1"><p id="843dc86941ydw">date</p></td><td id="843dc86a41mbg" rowspan="1" colspan="1"><p id="843dc86b41are">String</p></td><td id="843dc86c41f18" rowspan="1" colspan="1"><p id="843dc86d41oi1">日程结束日期，格式：yyyy-MM-dd。</p><p class="note-icon-wrapper" id="1845a18688gni"></p><section data-tag="p" id="843dc86f41iyr" class="p section"><ul id="843dc87041qsg"><li id="843dc87141dzv"><p id="843dc87241euz">全天日程必须有值</p></li><li id="843dc87341odr"><p id="843dc874416jl">非全天日程必须留空</p></li></ul></section></td></tr><tr outputclass="row row-level-7-2" id="843dc875413f3" class="row row-level-7-2"><td id="843dc87641ipc" rowspan="1" colspan="1"><p id="843dc87741s2y">dateTime</p></td><td id="843dc87841e5g" rowspan="1" colspan="1"><p id="843dc879410ln">String</p></td><td id="843def7041r5q" rowspan="1" colspan="1"><p id="843def7141wxh">日程结束时间，格式为ISO-8601的date-time格式。</p><p class="note-icon-wrapper" id="89fbe27ef41om"></p><section data-tag="p" id="843def7341y2p" class="p section"><ul id="843def7441m4z"><li id="843def7541sb1"><p id="843def7641c0w">全天日程必须留空</p></li><li id="843def7741yu4"><p id="843def78416ay">非全天日程必须有值</p></li></ul></section></td></tr><tr outputclass="row row-level-7-3" id="843def7941u9f" class="row row-level-7-3"><td id="843def7a41w6y" rowspan="1" colspan="1"><p id="843def7b41yqx">timeZone</p></td><td id="843def7c41uli" rowspan="1" colspan="1"><p id="843def7d41hz0">String</p></td><td id="843def7e418pp" rowspan="1" colspan="1"><p id="843def7f412cb">日程结束时间所属时区，必须和开始时间所属时区相同，TZ database name格式。</p><p class="note-icon-wrapper" id="5ac662e20ckew"></p><section data-tag="p" id="843def8141h22" class="p section"><ul id="843def82414iw"><li id="843def83410wt"><p id="843def8441tv4">全天日程必须留空</p></li><li id="843def8541vv6"><p id="843def864122h">非全天日程必须有值</p></li></ul></section></td></tr><tr outputclass="row row-level-8" id="843def8741gar" class="row row-level-8"><td id="843def8841p6v" rowspan="1" colspan="1"><p id="843def89410xa">isAllDay</p></td><td id="843def8a413nw" rowspan="1" colspan="1"><p id="843def8b41sg1">Boolean</p></td><td id="843e16804194m" rowspan="1" colspan="1"><p id="843e168141e7w">是否为全天日程。</p><ul id="843e168241rms"><li id="843e168341dua"><p id="843e168441gvw"><b>true</b>：是</p></li><li id="843e168541v67"><p id="843e168641zt8"><b>false</b>：不是</p></li></ul></td></tr><tr outputclass="row row-level-9 has-child" id="843e16874120b" class="row row-level-9 has-child"><td id="843e168841ogr" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="843e168941x2r">recurrence</p></td><td id="843e168a417et" rowspan="1" colspan="1"><p id="843e168b41liu">Object</p></td><td id="843e168c41bxw" rowspan="1" colspan="1"><p id="843e168d41scj">日程循环规则。</p></td></tr><tr outputclass="row row-level-9-1 has-child" id="843e168e41i8z" class="row row-level-9-1 has-child"><td id="843e168f4113k" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="843e169041zxu">pattern</p></td><td id="843e16914173c" rowspan="1" colspan="1"><p id="843e169241a0l">Object</p></td><td id="843e169341gkd" rowspan="1" colspan="1"><p id="843e1694412ai">重复模式。</p></td></tr><tr outputclass="row row-level-9-1-1" id="843e169541g7b" class="row row-level-9-1-1"><td id="843e169641hkc" rowspan="1" colspan="1"><p id="843e169741n71">type</p></td><td id="843e16984106d" rowspan="1" colspan="1"><p id="843e169941yt8">String</p></td><td id="843e169a41hgx" rowspan="1" colspan="1"><p id="843e169b41q2i">循环规则类型。</p><ul id="843e3d9041y4h"><li id="843e3d9141x0k"><p id="843e3d9241rda"><b>daily</b>：每<code data-tag="code" id="e1a050477eraa" class="code">interval</code>天重复</p></li><li id="843e3d9341zqw"><p id="843e3d94410ij"><b>weekly</b>：每<code data-tag="code" id="c98a5cc43fdzy" class="code">interval</code>周的第<code data-tag="code" id="976b2e363a1yr" class="code">daysOfWeek</code>天重复</p></li><li id="843e3d9541iyb"><p id="843e3d96416g4"><b>absoluteMonthly</b>：每<code data-tag="code" id="44fdd1bccfajs" class="code">interval</code>月的第<code data-tag="code" id="39f9d8bb92b00" class="code">dayOfMonth</code>天重复</p></li><li id="843e3d9741zhy"><p id="843e3d9841ss7"><b>relativeMonthly</b>：每<code data-tag="code" id="40cbf2fee89wi" class="code">interval</code>月的第<code data-tag="code" id="1de01ab03as21" class="code">index</code>周的第<code data-tag="code" id="7dd59596dbdf8" class="code">daysOfWeek</code>天重复</p></li><li id="843e3d9941b4y"><p id="843e3d9a41qyc"><b>absoluteYearly</b>：每<code data-tag="code" id="50beafcabae0m" class="code">interval</code>年重复</p></li></ul></td></tr><tr outputclass="row row-level-9-1-2" id="843e3d9b41xab" class="row row-level-9-1-2"><td id="843e3d9c41xd7" rowspan="1" colspan="1"><p id="843e3d9d416bw">dayOfMonth</p></td><td id="843e3d9e4157z" rowspan="1" colspan="1"><p id="843e3d9f41ilo">Integer</p></td><td id="843e3da041jeq" rowspan="1" colspan="1"><p id="843e3da141yok">当<code data-tag="code" id="e27d28010el4z" class="code">type=absoluteMonthly</code>时，用于指定是每个月的第几天。</p></td></tr><tr outputclass="row row-level-9-1-3" id="843e3da241yha" class="row row-level-9-1-3"><td id="843e3da3413hh" rowspan="1" colspan="1"><p id="843e3da44123j">daysOfWeek</p></td><td id="843e3da541vip" rowspan="1" colspan="1"><p id="843e64a04102h">String</p></td><td id="843e64a141in9" rowspan="1" colspan="1"><p id="843e64a241jkr">英文小写单词指定星期几，如果有多个值逗号分割。</p></td></tr><tr outputclass="row row-level-9-1-4" id="843e64a341vt7" class="row row-level-9-1-4"><td id="843e64a441bvd" rowspan="1" colspan="1"><p id="843e64a541p5m">index</p></td><td id="843e64a641a1m" rowspan="1" colspan="1"><p id="843e64a741uhm">String</p></td><td id="843e64a841fws" rowspan="1" colspan="1"><p id="843e64a941av1">当<code data-tag="code" id="980b23b833dak" class="code">type=relativeMonthly</code>时，用于指定每月第几周。</p><ul id="843e64aa41kve"><li id="843e64ab41dat"><p id="843e64ac419ds"><b>first</b></p></li><li id="843e64ad41oud"><p id="843e64ae41rr5"><b>second</b></p></li><li id="843e64af41tvx"><p id="843e64b041bux"><b>third</b></p></li><li id="843e64b141mqz"><p id="843e64b241c6f"><b>fourth</b></p></li><li id="843e64b341qxf"><p id="843e64b441gws"><b>last</b></p></li></ul><p id="843e64b541485">其中<code data-tag="code" id="c32a6a89d4wj5" class="code">last</code>表示当月的最后一周。</p></td></tr><tr outputclass="row row-level-9-1-5" id="843e64b641jwb" class="row row-level-9-1-5"><td id="843e64b741mso" rowspan="1" colspan="1"><p id="843e64b841yy5">interval</p></td><td id="843e64b941vr2" rowspan="1" colspan="1"><p id="843e64ba410e2">Integer</p></td><td id="843e8bb041ggw" rowspan="1" colspan="1"><p id="843e8bb141pce">循环间隔，根据type不同单位不同。例如当<code data-tag="code" id="dca9a0df9cu54" class="code">type=daily</code>时表示间隔N天，<code data-tag="code" id="71ed39dcbbakl" class="code">type=absoluteYearly</code>则表示间隔N年。</p></td></tr><tr outputclass="row row-level-9-1-6" id="843e8bb241l3n" class="row row-level-9-1-6"><td id="843e8bb3412wt" rowspan="1" colspan="1"><p id="843e8bb4414f1">firstDayOfWeek</p></td><td id="843e8bb541vlw" rowspan="1" colspan="1"><p id="843e8bb641d8h">String</p></td><td id="843e8bb74147q" rowspan="1" colspan="1"><p id="843e8bb8416kn">一周起始日，可取值包括：sunday、monday、tuesday、wednesday、thursday、friday、saturday。 默认值为“sunday”。</p></td></tr><tr outputclass="row row-level-9-2 has-child" id="843e8bb941uzy" class="row row-level-9-2 has-child"><td id="843e8bba410iw" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="843e8bbb414lw">range</p></td><td id="843e8bbc41ymh" rowspan="1" colspan="1"><p id="843e8bbd41vto">Object</p></td><td id="843e8bbe41pvn" rowspan="1" colspan="1"><p id="843e8bbf41b3k">循环范围。</p></td></tr><tr outputclass="row row-level-9-2-1" id="843e8bc041nnz" class="row row-level-9-2-1"><td id="843e8bc141reo" rowspan="1" colspan="1"><p id="843e8bc241znt">type</p></td><td id="843e8bc34191t" rowspan="1" colspan="1"><p id="843e8bc441hrr">String</p></td><td id="843e8bc541ay3" rowspan="1" colspan="1"><p id="843e8bc641uyi">循环范围类型。</p><ul id="843e8bc741uzj"><li id="843e8bc841vxw"><p id="843e8bc941zgo"><b>noEnd</b>：永不结束</p></li><li id="843e8bca414ng"><p id="843e8bcb41g2c"><b>endDate</b>：循环至指定日期结束</p></li><li id="843eb2c041nzq"><p id="843eb2c141azk"><b>numbered</b>：循环指定次数后结束</p></li></ul></td></tr><tr outputclass="row row-level-9-2-2" id="843eb2c24138v" class="row row-level-9-2-2"><td id="843eb2c341tev" rowspan="1" colspan="1"><p id="843eb2c441gzl">endDate</p></td><td id="843eb2c541hux" rowspan="1" colspan="1"><p id="843eb2c6417rv">String</p></td><td id="843eb2c741r5p" rowspan="1" colspan="1"><p id="843eb2c8416yx">循环结束时间。</p></td></tr><tr outputclass="row row-level-9-2-3" id="843eb2c941cqd" class="row row-level-9-2-3"><td id="843eb2ca416cw" rowspan="1" colspan="1"><p id="843eb2cb41un6">numberOfOccurrences</p></td><td id="843eb2cc41vp1" rowspan="1" colspan="1"><p id="843eb2cd41nma">Integer</p></td><td id="843eb2ce41ygg" rowspan="1" colspan="1"><p id="843eb2cf41zob">循环次数。</p></td></tr><tr outputclass="row row-level-10 has-child" id="843eb2d04153z" class="row row-level-10 has-child"><td id="843eb2d1410n7" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="843eb2d241s3b">attendees</p></td><td id="843eb2d341cit" rowspan="1" colspan="1"><p id="843eb2d441wf6">Array</p></td><td id="843eb2d541cfi" rowspan="1" colspan="1"><p id="843eb2d64131f">参与人列表。</p></td></tr><tr outputclass="row row-level-10-1" id="843eb2d741gux" class="row row-level-10-1"><td id="843eb2d8411o3" rowspan="1" colspan="1"><p id="843eb2d941249">id</p></td><td id="843eb2da41kv2" rowspan="1" colspan="1"><p id="843eb2db417lm">String</p></td><td id="843eb2dc41k02" rowspan="1" colspan="1"><p id="843eb2dd411rn">用户的unionId。</p></td></tr><tr outputclass="row row-level-10-2" id="843eb2de41ece" class="row row-level-10-2"><td id="843ed9d041axn" rowspan="1" colspan="1"><p id="843ed9d141qa9">displayName</p></td><td id="843ed9d241yce" rowspan="1" colspan="1"><p id="843ed9d341vkp">String</p></td><td id="843ed9d441aaf" rowspan="1" colspan="1"><p id="843ed9d5417x2">用户名。</p></td></tr><tr outputclass="row row-level-10-3" id="843ed9d641jyg" class="row row-level-10-3"><td id="843ed9d741wkk" rowspan="1" colspan="1"><p id="843ed9d841wlp">responseStatus</p></td><td id="843ed9d941lis" rowspan="1" colspan="1"><p id="843ed9da41ycu">String</p></td><td id="843ed9db41uw3" rowspan="1" colspan="1"><p id="843ed9dc41qbk">回复状态。</p></td></tr><tr outputclass="row row-level-10-4" id="843ed9dd41ncb" class="row row-level-10-4"><td id="843ed9de41gg7" rowspan="1" colspan="1"><p id="843ed9df416b1">self</p></td><td id="843ed9e041ov1" rowspan="1" colspan="1"><p id="843ed9e141ogt">Boolean</p></td><td id="843ed9e241rkb" rowspan="1" colspan="1"><p id="843ed9e3410dd">是否是当前登录用户。</p><ul id="843ed9e441f64"><li id="843ed9e541j42"><p id="843ed9e641eup"><b>true</b>：是</p></li><li id="843ed9e7416mz"><p id="843ed9e841b09"><b>false</b>：不是</p></li></ul></td></tr><tr outputclass="row row-level-10-5" id="843ed9e94120h" class="row row-level-10-5"><td id="843ed9ea41b0t" rowspan="1" colspan="1"><p id="843ed9eb417iq">isOptional</p></td><td id="843ed9ec41ky3" rowspan="1" colspan="1"><p id="843ed9ed41ug1">Boolean</p></td><td id="843ed9ee41gfg" rowspan="1" colspan="1"><p id="843f00e041o8t">是否为可选参与人。</p><ul id="843f00e141ghn"><li id="843f00e241vjb"><p id="843f00e341bxq"><b>true</b>：是</p></li><li id="843f00e441tnl"><p id="843f00e541tun"><b>false</b>：不是</p></li></ul></td></tr><tr outputclass="row row-level-11 has-child" id="843f00e641c7a" class="row row-level-11 has-child"><td id="843f00e741yyh" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="843f00e841dcg">organizer</p></td><td id="843f00e941fms" rowspan="1" colspan="1"><p id="843f00ea41n8t">Object</p></td><td id="843f00eb41vyo" rowspan="1" colspan="1"><p id="843f00ec4103v">组织者。</p></td></tr><tr outputclass="row row-level-11-1" id="843f00ed419mg" class="row row-level-11-1"><td id="843f00ee41l5z" rowspan="1" colspan="1"><p id="843f00ef41bv5">id</p></td><td id="843f00f0413bw" rowspan="1" colspan="1"><p id="843f00f141nbr">String</p></td><td id="843f00f241fms" rowspan="1" colspan="1"><p id="843f00f3411zf">组织者unionId。</p></td></tr><tr outputclass="row row-level-11-2" id="843f00f441j6z" class="row row-level-11-2"><td id="843f00f541m6y" rowspan="1" colspan="1"><p id="843f00f641jqk">displayName</p></td><td id="843f00f741yoc" rowspan="1" colspan="1"><p id="843f00f841zd1">String</p></td><td id="843f00f941e3h" rowspan="1" colspan="1"><p id="843f00fa41di3">用户名。</p></td></tr><tr outputclass="row row-level-11-3" id="843f00fb41ann" class="row row-level-11-3"><td id="843f00fc4102u" rowspan="1" colspan="1"><p id="843f00fd416k8">responseStatus</p></td><td id="843f00fe41jvw" rowspan="1" colspan="1"><p id="843f00ff41h5m">String</p></td><td id="843f27f0415gl" rowspan="1" colspan="1"><p id="843f27f14103k">回复状态。</p></td></tr><tr outputclass="row row-level-11-4" id="843f27f241elk" class="row row-level-11-4"><td id="843f27f341dly" rowspan="1" colspan="1"><p id="843f27f441aue">self</p></td><td id="843f27f541pl7" rowspan="1" colspan="1"><p id="843f27f641wg7">Boolean</p></td><td id="843f27f741zi1" rowspan="1" colspan="1"><p id="843f27f841kdx">是否是当前登录用户。</p><ul id="843f27f9410va"><li id="843f27fa41oub"><p id="843f27fb41glx"><b>true</b>：是</p></li><li id="843f27fc415xm"><p id="843f27fd41wjy"><b>false</b>：不是</p></li></ul></td></tr><tr outputclass="row row-level-12 has-child" id="843f27fe416zm" class="row row-level-12 has-child"><td id="843f27ff416o1" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="843f280041tiv">location</p></td><td id="843f280141611" rowspan="1" colspan="1"><p id="843f280241yly">Object</p></td><td id="843f2803411za" rowspan="1" colspan="1"><p id="843f280441qi0">日程地点相关信息。</p></td></tr><tr outputclass="row row-level-12-1" id="843f2805412mm" class="row row-level-12-1"><td id="843f2806418ls" rowspan="1" colspan="1"><p id="843f280741wo7">displayName</p></td><td id="843f2808417ej" rowspan="1" colspan="1"><p id="843f28094171p">String</p></td><td id="843f280a41vcp" rowspan="1" colspan="1"><p id="843f280b41vr6">日程地点名称。</p></td></tr><tr outputclass="row row-level-13" id="843f4f0541vs5" class="row row-level-13"><td id="843f4f0641bsp" rowspan="1" colspan="1"><p id="843f4f07412mp">seriesMasterId</p></td><td id="843f4f0841kkw" rowspan="1" colspan="1"><p id="843f4f09415u5">String</p></td><td id="843f4f0a41i0i" rowspan="1" colspan="1"><p id="843f4f0b41kx3">重复日程的主日程id，非重复日程为空。</p></td></tr><tr outputclass="row row-level-14" id="843f4f0c41gjr" class="row row-level-14"><td id="843f4f0d4169o" rowspan="1" colspan="1"><p id="843f4f0e41r4c">createTime</p></td><td id="843f4f0f41w3o" rowspan="1" colspan="1"><p id="843f4f10418fv">String</p></td><td id="843f4f1141n2r" rowspan="1" colspan="1"><p id="843f4f12413mj">创建时间。</p></td></tr><tr outputclass="row row-level-15" id="843f4f13417fb" class="row row-level-15"><td id="843f4f14414nh" rowspan="1" colspan="1"><p id="843f4f1541huj">updateTime</p></td><td id="843f4f1641fhg" rowspan="1" colspan="1"><p id="843f4f1741vd2">String</p></td><td id="843f761041ig5" rowspan="1" colspan="1"><p id="843f76114144s">更新时间。</p></td></tr><tr outputclass="row row-level-16 has-child" id="843f761241lfr" class="row row-level-16 has-child"><td id="843f761341gmt" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="843f76144133g">reminders</p></td><td id="843fc43041enz" rowspan="1" colspan="1"><p id="843fc43141gsi">Array</p></td><td id="843fc43241vs5" rowspan="1" colspan="1"><p id="843fc43341rgq">日程提醒</p></td></tr><tr outputclass="row row-level-16-1" id="843fc43441eft" class="row row-level-16-1"><td id="843fc43541a6c" rowspan="1" colspan="1"><p id="843fc4364138l">method</p></td><td id="843fc43741ezi" rowspan="1" colspan="1"><p id="843fc43841was">String</p></td><td id="843fc439411ri" rowspan="1" colspan="1"><p id="843fc43a41v6q">提醒方式。</p></td></tr><tr outputclass="row row-level-16-2" id="843fc43b41uaa" class="row row-level-16-2"><td id="843fc43c41jql" rowspan="1" colspan="1"><p id="843fc43d41u2i">minutes</p></td><td id="843fc43e41alv" rowspan="1" colspan="1"><p id="843fc43f417p3">String</p></td><td id="843fc44041if3" rowspan="1" colspan="1"><p id="843fc441412j4">在日程开始前N分钟发出提醒。</p></td></tr><tr outputclass="row row-level-17 has-child" id="843fc442415av" class="row row-level-17 has-child"><td id="843fc44341f5a" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="843fc44441rkn">onlineMeetingInfo</p></td><td id="843fc44541x7p" rowspan="1" colspan="1"><p id="843fc44641m06">Object</p></td><td id="843fc44741vi5" rowspan="1" colspan="1"><p id="843fc448413gq">线上会议。</p></td></tr><tr outputclass="row row-level-17-1" id="843fc44941flb" class="row row-level-17-1"><td id="843fc44a41z8y" rowspan="1" colspan="1"><p id="843feb4041cyu">type</p></td><td id="843feb41418k6" rowspan="1" colspan="1"><p id="843feb42417wf">String</p></td><td id="843feb4341fg2" rowspan="1" colspan="1"><p id="843feb4441z6r">线上会议类型，目前支持：</p><ul id="843feb4541lnb"><li id="843feb4641rs2"><p id="843feb4741x9y"><b>dingtalk</b>：钉钉视频会议</p></li></ul></td></tr><tr outputclass="row row-level-17-2" id="843feb48410vt" class="row row-level-17-2"><td id="843feb4941l6w" rowspan="1" colspan="1"><p id="843feb4a41jzv">conferenceId</p></td><td id="843feb4b41j4f" rowspan="1" colspan="1"><p id="843feb4c4162u">String</p></td><td id="843feb4d41irs" rowspan="1" colspan="1"><p id="843feb4e41c6a">会议ID。</p></td></tr><tr outputclass="row row-level-17-3" id="843feb4f41tpm" class="row row-level-17-3"><td id="843feb50413e1" rowspan="1" colspan="1"><p id="843feb5141xxg">url</p></td><td id="843feb5241mqk" rowspan="1" colspan="1"><p id="843feb5341eo0">String</p></td><td id="843feb54418cx" rowspan="1" colspan="1"><p id="843feb5541t2g">参会的url地址。</p></td></tr><tr outputclass="row row-level-17-4" id="843feb5641qxt" class="row row-level-17-4"><td id="843feb5741sbk" rowspan="1" colspan="1"><p id="843feb584122s">extraInfo</p></td><td id="843feb5941w6r" rowspan="1" colspan="1"><p id="843feb5a410zc">Map</p></td><td id="843feb5b41qlc" rowspan="1" colspan="1"><p id="843feb5c4188d">其他扩展信息。</p></td></tr><tr outputclass="row row-level-18 has-child" id="843feb5d41um6" class="row row-level-18 has-child"><td id="843feb5e416t5" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="843feb5f41juv">extendedProperties</p></td><td id="8440125041k3e" rowspan="1" colspan="1"><p id="84401251415b7">Object</p></td><td id="8440125241voi" rowspan="1" colspan="1"><p id="8440125341odz">日程拓展属性。</p></td></tr><tr outputclass="row row-level-18-1 has-child" id="8440125441p9o" class="row row-level-18-1 has-child"><td id="8440125541uyl" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="84401256413in">sharedProperties</p></td><td id="84401257410a0" rowspan="1" colspan="1"><p id="8440125841kdf">Object</p></td><td id="8440125941g30" rowspan="1" colspan="1"><p id="8440125a41kt3">共享属性。</p></td></tr><tr outputclass="row row-level-18-1-1" id="8440125b41zad" class="row row-level-18-1-1"><td id="8440125c41jzs" rowspan="1" colspan="1"><p id="8440125d41vhh">sourceOpenCid</p></td><td id="8440125e41x91" rowspan="1" colspan="1"><p id="8440125f41mgl">String</p></td><td id="84401260418cs" rowspan="1" colspan="1"><p id="844012614164s">当日程是由某个群内发起的时候，该字段表示日程发起的来源群。</p></td></tr><tr outputclass="row row-level-18-1-2" id="8440126241yab" class="row row-level-18-1-2"><td id="8440126341vso" rowspan="1" colspan="1"><p id="8440126441xzd">belongCorpId</p></td><td id="84401265415no" rowspan="1" colspan="1"><p id="8440126641i33">String</p></td><td id="8440126741ff6" rowspan="1" colspan="1"><p id="844012684189m">日程归属的企业corpId。</p></td></tr><tr outputclass="row row-level-19 has-child" id="84401269413xx" class="row row-level-19 has-child"><td id="8440126a411qj" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="8440126b411nl">meetingRooms</p></td><td id="8440126c41wzg" rowspan="1" colspan="1"><p id="8440126d412jy">Array</p></td><td id="8440126e41qnv" rowspan="1" colspan="1"><p id="8440126f413dr">会议室。</p></td></tr><tr outputclass="row row-level-19-1" id="8440127041760" class="row row-level-19-1"><td id="8440396041h2o" rowspan="1" colspan="1"><p id="8440396141ba2">roomId</p></td><td id="8440396241lz5" rowspan="1" colspan="1"><p id="8440396341sc4">String</p></td><td id="8440396441kmk" rowspan="1" colspan="1"><p id="8440396541awp">会议室roomId。</p></td></tr><tr outputclass="row row-level-19-2" id="8440396641pa1" class="row row-level-19-2"><td id="8440396741npt" rowspan="1" colspan="1"><p id="8440396841g6m">responseStatus</p></td><td id="8440396941gc1" rowspan="1" colspan="1"><p id="8440396a41ihg">String</p></td><td id="8440396b41q9f" rowspan="1" colspan="1"><p id="8440396c41mmb">会议室响应状态。</p><ul id="8440396d41377"><li id="8440396e41itv"><p id="8440396f41ol9"><b>accepted</b> : 接受</p></li><li id="8440397041q52"><p id="8440397141vfn"><b>tentative</b>: 审批中</p></li><li id="84403972418i1"><p id="8440397341l05"><b>declined</b> : 审批未通过</p></li></ul></td></tr><tr outputclass="row row-level-19-3" id="8440397441dwf" class="row row-level-19-3"><td id="8440397541mo1" rowspan="1" colspan="1"><p id="84403976415ls">displayName</p></td><td id="8440397741ebd" rowspan="1" colspan="1"><p id="84403978414br">String</p></td><td id="8440397941ipx" rowspan="1" colspan="1"><p id="8440397a418ym">会议室名称。</p></td></tr><tr outputclass="row row-level-20 has-child" id="8440397b414y2" class="row row-level-20 has-child"><td id="8440397c41qdz" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="8440397d41v0v">categories</p></td><td id="8440397e41385" rowspan="1" colspan="1"><p id="8440397f416xr">Array</p></td><td id="8440607041obw" rowspan="1" colspan="1"><p id="8440607141j3z">日程类型。</p></td></tr><tr outputclass="row row-level-20-1" id="8440607241yqh" class="row row-level-20-1"><td id="84406073417o7" rowspan="1" colspan="1"><p id="8440607441hhd">displayName</p></td><td id="8440607541joj" rowspan="1" colspan="1"><p id="8440607641huu">String</p></td><td id="8440607741z2k" rowspan="1" colspan="1"><p id="8440607841o6g">日程类型名称。</p></td></tr><tr outputclass="row row-level-21 has-child" id="8440607941cq3" class="row row-level-21 has-child"><td id="8440607a41wef" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="8440607b41akh">richTextDescription</p></td><td id="8440607c41r7t" rowspan="1" colspan="1"><p id="8440607d41yst">Object</p></td><td id="8440607e41ijk" rowspan="1" colspan="1"><p id="8440607f41g94">富文本描述。</p></td></tr><tr outputclass="row row-level-21-1" id="84406080414fn" class="row row-level-21-1"><td id="84406081413ws" rowspan="1" colspan="1"><p id="84406082419hd">text</p></td><td id="8440608341ris" rowspan="1" colspan="1"><p id="84406084416aw">String</p></td><td id="84406085418ox" rowspan="1" colspan="1"><p id="8440608641p3q">富文本描述内容。</p></td></tr></tbody></table></section><section id="section-response-body-example" class="section"><h3 id="h3-response-body-example" data-tag="h3" class="h3">响应体示例</h3><pre id="8382dcd041cko" outputclass="language-json" code-type="xCode" data-tag="codeblock" class="pre codeblock language-json"><code>HTTP/1.1 200 OK
+Content-Type:application/json
+
+{
+  "id" : "iiiP35sJxxxxPRKgiEiF",
+  "summary" : "test event",
+  "description" : "something about this event",
+  "status" : "confirmed",
+  "start" : {
+    "date" : "2020-01-01",
+    "dateTime" : "2020-01-01T10:15:30+08:00",
+    "timeZone" : "Asia/Shanghai"
+  },
+  "originStart" : {
+    "dateTime" : "2023-01-01T00:00:00Z"
+  },
+  "end" : {
+    "date" : "2020-01-01",
+    "dateTime" : "2020-01-01T10:15:30+08:00",
+    "timeZone" : "Asia/Shanghai"
+  },
+  "isAllDay" : false,
+  "recurrence" : {
+    "pattern" : {
+      "type" : "daily",
+      "dayOfMonth" : 14,
+      "daysOfWeek" : "monday",
+      "index" : "first",
+      "interval" : 1
+    },
+    "range" : {
+      "type" : "noEnd",
+      "endDate" : "2020-01-01T10:15:30+08:00",
+      "numberOfOccurrences" : 5
+    }
+  },
+  "attendees" : [ {
+    "id" : "iiiP35sJxxxxPRKgiEiF",
+    "displayName" : "jack",
+    "responseStatus" : "accepted",
+    "self" : false,
+    "isOptional" : false
+  } ],
+  "organizer" : {
+    "id" : "iiiP35sJxxxxPRKgiEiF",
+    "displayName" : "tony",
+    "responseStatus" : "accepted",
+    "self" : false
+  },
+  "location" : {
+    "displayName" : "room 1-2-3",
+    "meetingRooms" : [ "会议室" ]
+  },
+  "seriesMasterId" : "cnNTbW1YbxxxxvdlQrQT09",
+  "createTime" : "2020-01-01T10:15:30+08:00",
+  "updateTime" : "2020-01-01T10:15:30+08:00",
+  "reminders" : [ {
+    "method" : "dingtalk",
+    "minutes" : "15"
+  } ],
+  "onlineMeetingInfo" : {
+    "type" : "dingtalk",
+    "conferenceId" : "5c4df21d-xxxx-a6db402b9f3a",
+    "url" : "dingtalk://dingtalkclient/page/videoxxxxalendar?confId=5c4df21d-xxxx9f3f&amp;calendarId=127xxxx124"
+  },
+  "extendedProperties" : {
+    "sharedProperties" : {
+      "sourceOpenCid" : "zxcvasdfvb123====",
+      "belongCorpId" : "dingd*****1231231"
+    }
+  },
+  "meetingRooms" : [ {
+    "roomId" : "c10315a8b4e740a317813ab6fxxxxxx",
+    "responseStatus" : "accepted",
+    "displayName" : "1号会议室"
+  } ],
+  "categories" : [ {
+    "displayName" : "单周会"
+  } ]
+}</code></pre></section><section id="section-error-code-1" class="section"><h3 id="h3-error-code-1" data-tag="h3" class="h3">错误码</h3><p data-tag="p" id="p-error-code-global-guide" class="p">若调用该接口报错，可根据错误信息在<a href="https://open.dingtalk.com/document/development/server-api-error-codes-1" id="a-error-code-global-guide">全局错误码</a>文档中查找解决方案。</p><table id="84406089413gs" tablewidth="709" tablecolswidth="142 177 177 213" autofit="false" class="table"><colgroup colwidth="0.8*" style="width:20.03%"></colgroup><colgroup colwidth="1*" style="width:24.96%"></colgroup><colgroup colwidth="1*" style="width:24.96%"></colgroup><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><tbody class="tbody"><tr id="8440608a41oi2"><td id="8440608b419wp" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="8440608c41kt8">HttpCode</p></td><td id="8440608d41r27" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="8440878041ffg">错误码</p></td><td id="8440878141fzc" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="8440878241dne">错误信息</p></td><td id="844087834113o" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="8440878441c27">说明</p></td></tr><tr id="84408785418yl"><td id="8440878641dvk" rowspan="1" colspan="1"><p id="8440878741fm3">400</p></td><td id="8440878841h92" rowspan="1" colspan="1"><p id="84408789411vq">invalidParameter</p></td><td id="8440878a41346" rowspan="1" colspan="1"><p id="8440878b413vb">forwardErrorMessage</p></td><td id="8440878c41ejn" rowspan="1" colspan="1"><p id="8440878d41f9m">参数异常</p></td></tr><tr id="8440878e410ud"><td id="8440878f41ufz" rowspan="1" colspan="1"><p id="8440879041z92">404</p></td><td id="84408791412tp" rowspan="1" colspan="1"><p id="84408792416zy">instanceNotExist</p></td><td id="8440879341z4n" rowspan="1" colspan="1"><p id="8440879441ui8">instance not exist</p></td><td id="8440879541isd" rowspan="1" colspan="1"><p id="8440879641xxh">循环日程实例不存在</p></td></tr><tr id="8440879741rk7"><td id="8440879841oc6" rowspan="1" colspan="1"><p id="8440879941o59">404</p></td><td id="8440879a41qwd" rowspan="1" colspan="1"><p id="8440879b41v49">itemNotFound</p></td><td id="8440879c41bqp" rowspan="1" colspan="1"><p id="8440879d41t4f">forwardErrorMessage</p></td><td id="8440879e41mhn" rowspan="1" colspan="1"><p id="8440879f41e3h">无法找到指定日程</p></td></tr></tbody></table></section></section></div></main></body></html>

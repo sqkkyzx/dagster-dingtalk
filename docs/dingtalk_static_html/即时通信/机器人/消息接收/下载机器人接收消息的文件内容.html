@@ -1,0 +1,360 @@
+<!DOCTYPE html><html><head><meta charset="utf8" / /><meta name="gmtModify" content="2025-09-12 17:18:42" / /><meta name="searchtitle" content="" / /><meta name="keywords" content="" / /><meta name="author" content="" / /><title>下载机器人接收消息的文件内容</title><meta name="gmtModify" content="2026-06-05 13:41:57" / /></head><body data-tag="topic" id="doc-api-dingtalk-RobotMessageFileDownload" class="topic"><main id="c2a08258d0cfw"><h1 data-tag="title" id="h1-4ik-92q-aac" class="title">下载机器人接收消息的文件内容</h1><p data-tag="shortdesc" id="4ed00599ecxpr" class="shortdesc">获取机器人消息中文件下载链接</p><div data-tag="conbody" outputclass="icms-api-reference" class="icms-api-reference conbody"><section id="b6d7fd10dborv" class="section"><h2 id="e9b48af7fa6bm"><b>接口调用说明</b></h2><ol id="46ed3665ec9k0"><li id="54fd23a5f5ps4"><p id="9c537b9e636at">当用户向机器人发送图片消息、语音消息、视频消息、文件消息、富文本消息时，通过机器人回调给开发者的信息中获取临时下载码<code data-tag="code" id="0d60ecbd93lm6" class="code">downloadCode</code>。</p></li><li id="f78679babd3dx"><p id="05368693288t6">通过临时下载码<code data-tag="code" id="f407b294c7lwd" class="code">downloadCode</code>，调用本接口获取消息中的图片、语音、文件、视频等文件的临时下载链接。</p></li><li id="4e1c41b24eoje"><p id="e0b474c6a5xh8">访问临时下载链接，获取文件内容。</p></li></ol><div type="note" id="c0d687d754fkn" class="note note-note"><div class="note-icon-wrapper"><i class="icon-note note note"></i></div><div class="noteContentSpan"><strong>说明 </strong><ul id="9dd39436c3w83"><li id="f7ead0baeew65"><p id="99f88f8bcal0x">群聊会话中：群成员@机器人，机器人不支持接收语音、文件、视频类型。</p></li><li id="556705983cle9"><p id="9c87e992dbd96">人与人的会话中：机器人不支持接收语音、文件、视频类型。</p></li><li id="65e0cfd3edakp"><p id="ae200cbfac37u">人与机器人的会话中：机器人支持接收语音、文件、视频类型。</p></li></ul></div></div></section><section id="section-request-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-request-1" data-tag="h2" class="h2">请求</h2><section id="section-request-basic-info" class="section"><h3 id="heading-request-basic-info" data-tag="h3" class="h3">基本信息</h3><table id="c315000bd52ma" tablewidth="648" tablecolswidth="216 432" autofit="false" class="table"><colgroup colwidth="0.67*" style="width:33.33%"></colgroup><colgroup colwidth="1.33*" style="width:66.67%"></colgroup><tbody class="tbody"><tr id="478917d2783qx"><td id="7db948dd6cthj" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="a3227d9e99opn">字段</p></td><td id="98c227f8aegje" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="1836ef57631wu">值</p></td></tr><tr id="c77214d8ecedf"><td id="b6821f9503we7" rowspan="1" colspan="1"><p id="2ab7c169e4l2s">HTTP URL</p></td><td id="b66fab5edbl8m" rowspan="1" colspan="1"><p id="990544a26axi5">https://api.dingtalk.com/v1.0/robot/messageFiles/download</p></td></tr><tr id="8014c52814b7n"><td id="8254c407e3dfe" rowspan="1" colspan="1"><p id="d0034356a6pha">HTTP Method</p></td><td id="ba95380247go0" rowspan="1" colspan="1"><p id="26b1243f244sg">POST</p></td></tr><tr id="1f272ef79ejw6"><td id="f5b691a0fchjz" rowspan="1" colspan="1"><p id="93174d15bfd69">支持的应用类型</p></td><td id="43337a1355wzd" rowspan="1" colspan="1"><p id="8355f54149bt3"><span data-tag="ph" id="ph-request-basic-app-type-apptype-0" class="ph ph-app-type" data-ph-raw-text="appType-企业内部应用">appType-企业内部应用</span>　<span data-tag="ph" id="ph-request-basic-app-type-apptype-1" class="ph ph-app-type" data-ph-raw-text="appType-第三方企业应用">appType-第三方企业应用</span></p></td></tr><tr id="5845037c78uz2"><td id="745105e4081ab" rowspan="1" colspan="1"><p id="4d9ec1f45d3rq">权限要求</p></td><td id="add576e33bvfu" rowspan="1" colspan="1"><p id="d8218e47729no"><span data-tag="ph" id="ph-request-basic-permission-permission-qyapi-robot-sendmsg-0" class="ph-permission ph" data-ph-raw-text="permission-qyapi_robot_sendmsg-企业内机器人发送消息权限" data-permission-id="permission-qyapi_robot_sendmsg" data-permission-code="qyapi_robot_sendmsg" data-permission-detail-api="/document/api/permission/detail" data-permission-query-param="code">permission-qyapi_robot_sendmsg-企业内机器人发送消息权限</span></p></td></tr></tbody></table></section><section id="section-request-header-parameter" class="section"><h3 data-tag="h3" id="h2-w5i-xcg-df5" class="h3 title">请求头</h3><table id="82b05d4e9fj7p" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="b11aafc533pwe"><td id="9b4ec8dab3jjy" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="0f53e7902bejh">名称</p></td><td id="03181488441s0" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="df4ac6d6eeamy">类型</p></td><td id="cc5df77d440q0" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="861467d293rw5">是否必填</p></td><td id="fca2c38e5c9rb" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="997c344448gr1">描述</p></td></tr><tr id="79417baa4014n"><td id="a7451b26e5jgq" rowspan="1" colspan="1"><p id="92ee53de06ewt">x-acs-dingtalk-access-token</p></td><td id="c6aeacee3fd12" rowspan="1" colspan="1"><p id="5009686dae5tk">String</p></td><td id="178e7d872b39z" rowspan="1" colspan="1"><p id="dfd0aa1be5qp5">是</p></td><td id="308e5d61b4af9" rowspan="1" colspan="1"><p id="6b7f3c7e1ea18">调用该接口的访问凭证，通过以下获取：</p><ul id="8fba8ccbectnj"><li id="dace943c20vbe"><p id="ca09404059yfy">企业内部应用，调用<a href="https://open.dingtalk.com/document/development/obtain-the-access-token-of-an-internal-app#" id="98ed03aeb6gdw" class="xref">获取企业内部应用的accessToken</a>接口获取。</p></li><li id="4198465b2bgql"><p id="65bfc18266teh">第三方企业应用，调用<a href="https://open.dingtalk.com/document/development/obtain-the-access-token-of-the-authorized-enterprise-1#" id="e56769dd1bcde" class="xref">获取第三方应用授权企业的accessToken</a>接口获取。</p></li></ul></td></tr></tbody></table></section><section id="section-request-body-parameter" class="section"><h3 data-tag="h3" id="h2-wmu-mdj-z4f" class="h3 title">请求体</h3><table id="015d192ea6uba" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="5d24c0cce9a9f"><td id="6fdebe6c8buel" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="25af6411d3htt">名称</p></td><td id="5f88eeb20c1rk" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="d17a5a814707p">类型</p></td><td id="4a2d0829a4d3a" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="e6c19f8c4e0sq">是否必填</p></td><td id="c36fb9321bd5s" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="26f450c20aa9c">描述</p></td></tr><tr outputclass="row row-level-1" id="dd84a4e6c50e9" class="row row-level-1"><td id="0f8f3ef20e19s" rowspan="1" colspan="1"><p id="c739ed6bb2lwe">downloadCode</p></td><td id="cc2248f7a5ryf" rowspan="1" colspan="1"><p id="ab6db5d0708op">String</p></td><td id="4c0d303248koh" rowspan="1" colspan="1"><p id="6dfba6c9d0fq3">是</p></td><td id="453406cbd8yjc" rowspan="1" colspan="1"><p id="eff9de75a7r48">用户向机器人发送文件消息后，机器人回调给开发者消息中的下载码。详情参考<a href="https://open.dingtalk.com/document/dingstart/receive-message#" id="320fdb43aaprs" class="xref">机器人接收消息</a>。</p></td></tr><tr outputclass="row row-level-2" id="de4d7f2b24mfv" class="row row-level-2"><td id="0656ac6ecc2ak" rowspan="1" colspan="1"><p id="3baefd1fd8gfu">robotCode</p></td><td id="c3a91d0c44v2q" rowspan="1" colspan="1"><p id="2ac79bd0c6ful">String</p></td><td id="2f13044a5c0hz" rowspan="1" colspan="1"><p id="9697bee626978">是</p></td><td id="c0b260aab19qp" rowspan="1" colspan="1"><p id="2393a0569a8bc">机器人的编码，详情参考<a href="https://open.dingtalk.com/document/development/robot-overview#" id="f164f7417e90a" class="xref">机器人 ID</a>。</p></td></tr></tbody></table></section><section id="section-request-body-example" class="section"><h3 id="h3-request-body-example" data-tag="h3" class="h3">请求示例</h3><div outputclass="tabbed-codeblock" data-tag="fig" id="figure-vzy-o8a-rwk" class="tabbed-codeblock-box"><div class="tab-box"></div><input type="radio" name="check-figure-vzy-o8a-rwk" id="figure-vzy-o8a-rwk-HTTP-tab" checked="checked" /><label for="figure-vzy-o8a-rwk-HTTP-tab">HTTP</label><div class="codeblock-item"><pre id="codeblock-nrz-gsa-zkz" outputclass="language-HTTP" code-type="xCode" data-tag="codeblock" class="pre codeblock language-HTTP"><code>POST /v1.0/robot/messageFiles/download HTTP/1.1
+Host:api.dingtalk.com
+x-acs-dingtalk-access-token:qkops*****cviojsdjn
+Content-Type:application/json
+
+{
+  "downloadCode" : "mIofN*********gn38tqVwL+zoRgzXipAMzmV5uhVKUlBdjKugAIvsm+TrvaPI0JYCMjvFMAlXvMWnMJsi2nZ9a0+N2c9CoV90hiB/B+fEThASPz+jmIa4J6x4WTsmmU3E/AopGsSGugE+hkHBcu52o76Yd2SCpPNUqenvdySSqjowEt1+Ddz55/9Qj8Y8ZhTryqsb7tYwzLFB+F3lsWCotXBOQvEgy3e/bEQtOyV6YrP3KG6YNSb3Q==",
+  "robotCode" : "ding******yn0pjqd"
+}</code></pre></div><input type="radio" name="check-figure-vzy-o8a-rwk" id="figure-vzy-o8a-rwk-java-tab" /><label for="figure-vzy-o8a-rwk-java-tab">Java</label><div class="codeblock-item"><pre id="codeblock-usa-yfd-dfz" outputclass="language-java" code-type="xCode" data-tag="codeblock" class="pre codeblock language-java"><code>// This file is auto-generated, don't edit it. Thanks.
+package com.aliyun.sample;
+
+import com.aliyun.tea.*;
+
+public class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Client
+     * @throws Exception
+     */
+    public static com.aliyun.dingtalkrobot_1_0.Client createClient() throws Exception {
+        com.aliyun.teaopenapi.models.Config config = new com.aliyun.teaopenapi.models.Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        return new com.aliyun.dingtalkrobot_1_0.Client(config);
+    }
+
+    public static void main(String[] args_) throws Exception {
+        java.util.List&lt;String&gt; args = java.util.Arrays.asList(args_);
+        com.aliyun.dingtalkrobot_1_0.Client client = Sample.createClient();
+        com.aliyun.dingtalkrobot_1_0.models.RobotMessageFileDownloadHeaders robotMessageFileDownloadHeaders = new com.aliyun.dingtalkrobot_1_0.models.RobotMessageFileDownloadHeaders();
+        robotMessageFileDownloadHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        com.aliyun.dingtalkrobot_1_0.models.RobotMessageFileDownloadRequest robotMessageFileDownloadRequest = new com.aliyun.dingtalkrobot_1_0.models.RobotMessageFileDownloadRequest()
+                .setDownloadCode("mIofN*********gn38tqVwL+zoRgzXipAMzmV5uhVKUlBdjKugAIvsm+TrvaPI0JYCMjvFMAlXvMWnMJsi2nZ9a0+N2c9CoV90hiB/B+fEThASPz+jmIa4J6x4WTsmmU3E/AopGsSGugE+hkHBcu52o76Yd2SCpPNUqenvdySSqjowEt1+Ddz55/9Qj8Y8ZhTryqsb7tYwzLFB+F3lsWCotXBOQvEgy3e/bEQtOyV6YrP3KG6YNSb3Q==")
+                .setRobotCode("ding******yn0pjqd");
+        try {
+            client.robotMessageFileDownloadWithOptions(robotMessageFileDownloadRequest, robotMessageFileDownloadHeaders, new com.aliyun.teautil.models.RuntimeOptions());
+        } catch (TeaException err) {
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        } catch (Exception _err) {
+            TeaException err = new TeaException(_err.getMessage(), _err);
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        }        
+    }
+}</code></pre></div><input type="radio" name="check-figure-vzy-o8a-rwk" id="figure-vzy-o8a-rwk-python-tab" /><label for="figure-vzy-o8a-rwk-python-tab">Python</label><div class="codeblock-item"><pre id="codeblock-zc1-n4a-0o4" outputclass="language-python" code-type="xCode" data-tag="codeblock" class="pre codeblock language-python"><code># -*- coding: utf-8 -*-
+# This file is auto-generated, don't edit it. Thanks.
+import sys
+
+from typing import List
+
+from alibabacloud_dingtalk.robot_1_0.client import Client as dingtalkrobot_1_0Client
+from alibabacloud_tea_openapi import models as open_api_models
+from alibabacloud_dingtalk.robot_1_0 import models as dingtalkrobot__1__0_models
+from alibabacloud_tea_util import models as util_models
+from alibabacloud_tea_util.client import Client as UtilClient
+
+
+class Sample:
+    def __init__(self):
+        pass
+
+    @staticmethod
+    def create_client() -&gt; dingtalkrobot_1_0Client:
+        """
+        使用 Token 初始化账号Client
+        @return: Client
+        @throws Exception
+        """
+        config = open_api_models.Config()
+        config.protocol = 'https'
+        config.region_id = 'central'
+        return dingtalkrobot_1_0Client(config)
+
+    @staticmethod
+    def main(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        robot_message_file_download_headers = dingtalkrobot__1__0_models.RobotMessageFileDownloadHeaders()
+        robot_message_file_download_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        robot_message_file_download_request = dingtalkrobot__1__0_models.RobotMessageFileDownloadRequest(
+            download_code='mIofN*********gn38tqVwL+zoRgzXipAMzmV5uhVKUlBdjKugAIvsm+TrvaPI0JYCMjvFMAlXvMWnMJsi2nZ9a0+N2c9CoV90hiB/B+fEThASPz+jmIa4J6x4WTsmmU3E/AopGsSGugE+hkHBcu52o76Yd2SCpPNUqenvdySSqjowEt1+Ddz55/9Qj8Y8ZhTryqsb7tYwzLFB+F3lsWCotXBOQvEgy3e/bEQtOyV6YrP3KG6YNSb3Q==',
+            robot_code='ding******yn0pjqd'
+        )
+        try:
+            client.robot_message_file_download_with_options(robot_message_file_download_request, robot_message_file_download_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+    @staticmethod
+    async def main_async(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        robot_message_file_download_headers = dingtalkrobot__1__0_models.RobotMessageFileDownloadHeaders()
+        robot_message_file_download_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        robot_message_file_download_request = dingtalkrobot__1__0_models.RobotMessageFileDownloadRequest(
+            download_code='mIofN*********gn38tqVwL+zoRgzXipAMzmV5uhVKUlBdjKugAIvsm+TrvaPI0JYCMjvFMAlXvMWnMJsi2nZ9a0+N2c9CoV90hiB/B+fEThASPz+jmIa4J6x4WTsmmU3E/AopGsSGugE+hkHBcu52o76Yd2SCpPNUqenvdySSqjowEt1+Ddz55/9Qj8Y8ZhTryqsb7tYwzLFB+F3lsWCotXBOQvEgy3e/bEQtOyV6YrP3KG6YNSb3Q==',
+            robot_code='ding******yn0pjqd'
+        )
+        try:
+            await client.robot_message_file_download_with_options_async(robot_message_file_download_request, robot_message_file_download_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+
+if __name__ == '__main__':
+    Sample.main(sys.argv[1:])</code></pre></div><input type="radio" name="check-figure-vzy-o8a-rwk" id="figure-vzy-o8a-rwk-php-tab" /><label for="figure-vzy-o8a-rwk-php-tab">PHP</label><div class="codeblock-item"><pre id="codeblock-dtv-wmt-iwa" outputclass="language-php" code-type="xCode" data-tag="codeblock" class="pre codeblock language-php"><code>&lt;?php
+
+// This file is auto-generated, don't edit it. Thanks.
+namespace AlibabaCloud\SDK\Sample;
+
+use AlibabaCloud\SDK\Dingtalk\Vrobot_1_0\Dingtalk;
+use \Exception;
+use AlibabaCloud\Tea\Exception\TeaError;
+use AlibabaCloud\Tea\Utils\Utils;
+
+use Darabonba\OpenApi\Models\Config;
+use AlibabaCloud\SDK\Dingtalk\Vrobot_1_0\Models\RobotMessageFileDownloadHeaders;
+use AlibabaCloud\SDK\Dingtalk\Vrobot_1_0\Models\RobotMessageFileDownloadRequest;
+use AlibabaCloud\Tea\Utils\Utils\RuntimeOptions;
+
+class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Dingtalk Client
+     */
+    public static function createClient(){
+        $config = new Config([]);
+        $config-&gt;protocol = "https";
+        $config-&gt;regionId = "central";
+        return new Dingtalk($config);
+    }
+
+    /**
+     * @param string[] $args
+     * @return void
+     */
+    public static function main($args){
+        $client = self::createClient();
+        $robotMessageFileDownloadHeaders = new RobotMessageFileDownloadHeaders([]);
+        $robotMessageFileDownloadHeaders-&gt;xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        $robotMessageFileDownloadRequest = new RobotMessageFileDownloadRequest([
+            "downloadCode" =&gt; "mIofN*********gn38tqVwL+zoRgzXipAMzmV5uhVKUlBdjKugAIvsm+TrvaPI0JYCMjvFMAlXvMWnMJsi2nZ9a0+N2c9CoV90hiB/B+fEThASPz+jmIa4J6x4WTsmmU3E/AopGsSGugE+hkHBcu52o76Yd2SCpPNUqenvdySSqjowEt1+Ddz55/9Qj8Y8ZhTryqsb7tYwzLFB+F3lsWCotXBOQvEgy3e/bEQtOyV6YrP3KG6YNSb3Q==",
+            "robotCode" =&gt; "ding******yn0pjqd"
+        ]);
+        try {
+            $client-&gt;robotMessageFileDownloadWithOptions($robotMessageFileDownloadRequest, $robotMessageFileDownloadHeaders, new RuntimeOptions([]));
+        }
+        catch (Exception $err) {
+            if (!($err instanceof TeaError)) {
+                $err = new TeaError([], $err-&gt;getMessage(), $err-&gt;getCode(), $err);
+            }
+            if (!Utils::empty_($err-&gt;code) &amp;&amp; !Utils::empty_($err-&gt;message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+        }
+    }
+}
+$path = __DIR__ . \DIRECTORY_SEPARATOR . '..' . \DIRECTORY_SEPARATOR . 'vendor' . \DIRECTORY_SEPARATOR . 'autoload.php';
+if (file_exists($path)) {
+    require_once $path;
+}
+Sample::main(array_slice($argv, 1));</code></pre></div><input type="radio" name="check-figure-vzy-o8a-rwk" id="figure-vzy-o8a-rwk-go-tab" /><label for="figure-vzy-o8a-rwk-go-tab">Go</label><div class="codeblock-item"><pre id="codeblock-cah-e8d-m1a" outputclass="language-go" code-type="xCode" data-tag="codeblock" class="pre codeblock language-go"><code>// This file is auto-generated, don't edit it. Thanks.
+package main
+
+import (
+  "os"
+  util  "github.com/alibabacloud-go/tea-utils/v2/service"
+  dingtalkrobot_1_0  "github.com/alibabacloud-go/dingtalk/robot_1_0"
+  openapi  "github.com/alibabacloud-go/darabonba-openapi/v2/client"
+  "github.com/alibabacloud-go/tea/tea"
+)
+
+
+/**
+ * 使用 Token 初始化账号Client
+ * @return Client
+ * @throws Exception
+ */
+func CreateClient () (_result *dingtalkrobot_1_0.Client, _err error) {
+  config := &amp;openapi.Config{}
+  config.Protocol = tea.String("https")
+  config.RegionId = tea.String("central")
+  _result = &amp;dingtalkrobot_1_0.Client{}
+  _result, _err = dingtalkrobot_1_0.NewClient(config)
+  return _result, _err
+}
+
+func _main (args []*string) (_err error) {
+  client, _err := CreateClient()
+  if _err != nil {
+    return _err
+  }
+
+  robotMessageFileDownloadHeaders := &amp;dingtalkrobot_1_0.RobotMessageFileDownloadHeaders{}
+  robotMessageFileDownloadHeaders.XAcsDingtalkAccessToken = tea.String("&lt;your access token&gt;")
+  robotMessageFileDownloadRequest := &amp;dingtalkrobot_1_0.RobotMessageFileDownloadRequest{
+    DownloadCode: tea.String("mIofN*********gn38tqVwL+zoRgzXipAMzmV5uhVKUlBdjKugAIvsm+TrvaPI0JYCMjvFMAlXvMWnMJsi2nZ9a0+N2c9CoV90hiB/B+fEThASPz+jmIa4J6x4WTsmmU3E/AopGsSGugE+hkHBcu52o76Yd2SCpPNUqenvdySSqjowEt1+Ddz55/9Qj8Y8ZhTryqsb7tYwzLFB+F3lsWCotXBOQvEgy3e/bEQtOyV6YrP3KG6YNSb3Q=="),
+    RobotCode: tea.String("ding******yn0pjqd"),
+  }
+  tryErr := func()(_e error) {
+    defer func() {
+      if r := tea.Recover(recover()); r != nil {
+        _e = r
+      }
+    }()
+    _, _err = client.RobotMessageFileDownloadWithOptions(robotMessageFileDownloadRequest, robotMessageFileDownloadHeaders, &amp;util.RuntimeOptions{})
+    if _err != nil {
+      return _err
+    }
+
+    return nil
+  }()
+
+  if tryErr != nil {
+    var err = &amp;tea.SDKError{}
+    if _t, ok := tryErr.(*tea.SDKError); ok {
+      err = _t
+    } else {
+      err.Message = tea.String(tryErr.Error())
+    }
+    if !tea.BoolValue(util.Empty(err.Code)) &amp;&amp; !tea.BoolValue(util.Empty(err.Message)) {
+      // err 中含有 code 和 message 属性，可帮助开发定位问题
+    }
+
+  }
+  return _err
+}
+
+
+func main() {
+  err := _main(tea.StringSlice(os.Args[1:]))
+  if err != nil {
+    panic(err)
+  }
+}</code></pre></div><input type="radio" name="check-figure-vzy-o8a-rwk" id="figure-vzy-o8a-rwk-nodejs-tab" /><label for="figure-vzy-o8a-rwk-nodejs-tab">Node.js</label><div class="codeblock-item"><pre id="codeblock-swh-wgp-1sy" outputclass="language-nodejs" code-type="xCode" data-tag="codeblock" class="pre codeblock language-nodejs"><code>// This file is auto-generated, don't edit it
+import Util, * as $Util from '@alicloud/tea-util';
+import dingtalkrobot_1_0, * as $dingtalkrobot_1_0 from '@alicloud/dingtalk/robot_1_0';
+import OpenApi, * as $OpenApi from '@alicloud/openapi-client';
+import * as $tea from '@alicloud/tea-typescript';
+
+
+export default class Client {
+
+  /**
+   * 使用 Token 初始化账号Client
+   * @return Client
+   * @throws Exception
+   */
+  static createClient(): dingtalkrobot_1_0 {
+    let config = new $OpenApi.Config({ });
+    config.protocol = "https";
+    config.regionId = "central";
+    return new dingtalkrobot_1_0(config);
+  }
+
+  static async main(args: string[]): Promise&lt;void&gt; {
+    let client = Client.createClient();
+    let robotMessageFileDownloadHeaders = new $dingtalkrobot_1_0.RobotMessageFileDownloadHeaders({ });
+    robotMessageFileDownloadHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+    let robotMessageFileDownloadRequest = new $dingtalkrobot_1_0.RobotMessageFileDownloadRequest({
+      downloadCode: "mIofN*********gn38tqVwL+zoRgzXipAMzmV5uhVKUlBdjKugAIvsm+TrvaPI0JYCMjvFMAlXvMWnMJsi2nZ9a0+N2c9CoV90hiB/B+fEThASPz+jmIa4J6x4WTsmmU3E/AopGsSGugE+hkHBcu52o76Yd2SCpPNUqenvdySSqjowEt1+Ddz55/9Qj8Y8ZhTryqsb7tYwzLFB+F3lsWCotXBOQvEgy3e/bEQtOyV6YrP3KG6YNSb3Q==",
+      robotCode: "ding******yn0pjqd",
+    });
+    try {
+      await client.robotMessageFileDownloadWithOptions(robotMessageFileDownloadRequest, robotMessageFileDownloadHeaders, new $Util.RuntimeOptions({ }));
+    } catch (err) {
+      if (!Util.empty(err.code) &amp;&amp; !Util.empty(err.message)) {
+        // err 中含有 code 和 message 属性，可帮助开发定位问题
+      }
+
+    }    
+  }
+
+}
+
+Client.main(process.argv.slice(2));</code></pre></div><input type="radio" name="check-figure-vzy-o8a-rwk" id="figure-vzy-o8a-rwk-csharp-tab" /><label for="figure-vzy-o8a-rwk-csharp-tab">C#</label><div class="codeblock-item"><pre id="codeblock-3su-vbn-heu" outputclass="language-csharp" code-type="xCode" data-tag="codeblock" class="pre codeblock language-csharp"><code>// This file is auto-generated, don't edit it. Thanks.
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
+
+using Tea;
+using Tea.Utils;
+
+
+namespace AlibabaCloud.SDK.Sample
+{
+    public class Sample 
+    {
+
+        /**
+         * 使用 Token 初始化账号Client
+         * @return Client
+         * @throws Exception
+         */
+        public static AlibabaCloud.SDK.Dingtalkrobot_1_0.Client CreateClient()
+        {
+            AlibabaCloud.OpenApiClient.Models.Config config = new AlibabaCloud.OpenApiClient.Models.Config();
+            config.Protocol = "https";
+            config.RegionId = "central";
+            return new AlibabaCloud.SDK.Dingtalkrobot_1_0.Client(config);
+        }
+
+        public static void Main(string[] args)
+        {
+            AlibabaCloud.SDK.Dingtalkrobot_1_0.Client client = CreateClient();
+            AlibabaCloud.SDK.Dingtalkrobot_1_0.Models.RobotMessageFileDownloadHeaders robotMessageFileDownloadHeaders = new AlibabaCloud.SDK.Dingtalkrobot_1_0.Models.RobotMessageFileDownloadHeaders();
+            robotMessageFileDownloadHeaders.XAcsDingtalkAccessToken = "&lt;your access token&gt;";
+            AlibabaCloud.SDK.Dingtalkrobot_1_0.Models.RobotMessageFileDownloadRequest robotMessageFileDownloadRequest = new AlibabaCloud.SDK.Dingtalkrobot_1_0.Models.RobotMessageFileDownloadRequest
+            {
+                DownloadCode = "mIofN*********gn38tqVwL+zoRgzXipAMzmV5uhVKUlBdjKugAIvsm+TrvaPI0JYCMjvFMAlXvMWnMJsi2nZ9a0+N2c9CoV90hiB/B+fEThASPz+jmIa4J6x4WTsmmU3E/AopGsSGugE+hkHBcu52o76Yd2SCpPNUqenvdySSqjowEt1+Ddz55/9Qj8Y8ZhTryqsb7tYwzLFB+F3lsWCotXBOQvEgy3e/bEQtOyV6YrP3KG6YNSb3Q==",
+                RobotCode = "ding******yn0pjqd",
+            };
+            try
+            {
+                client.RobotMessageFileDownloadWithOptions(robotMessageFileDownloadRequest, robotMessageFileDownloadHeaders, new AlibabaCloud.TeaUtil.Models.RuntimeOptions());
+            }
+            catch (TeaException err)
+            {
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+            catch (Exception _err)
+            {
+                TeaException err = new TeaException(new Dictionary&lt;string, object&gt;
+                {
+                    { "message", _err.Message }
+                });
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+        }
+
+
+    }
+}</code></pre></div></div></section></section><section id="section-response-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-response-1" data-tag="h2" class="h2">响应</h2><section id="section-response-parameter" class="section"><h3 data-tag="h3" id="h2-ieo-vkv-zfn" class="h3 title">响应体</h3><table id="5bbe9bd2ccbz6" tablewidth="710" tablecolswidth="213 142 355" autofit="false" class="table"><colgroup colwidth="0.9*" style="width:30.00%"></colgroup><colgroup colwidth="0.6*" style="width:20.00%"></colgroup><colgroup colwidth="1.5*" style="width:50.00%"></colgroup><tbody class="tbody"><tr id="4d608513cfxf1"><td id="fe8c088029r2u" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="9ef09c2346p5o">名称</p></td><td id="7f7472223c15u" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="2d8a779933mjq">类型</p></td><td id="8df49dd9f0wgp" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="0bdfb0c6e0myu">描述</p></td></tr><tr outputclass="row row-level-1" id="a444071074wpa" class="row row-level-1"><td id="82d8adcf84dum" rowspan="1" colspan="1"><p id="29da6b86854bx">downloadUrl</p></td><td id="5ff770af8ejf3" rowspan="1" colspan="1"><p id="cb48fc003axoq">String</p></td><td id="235d6dfd86ki8" rowspan="1" colspan="1"><p id="aeeacc13dfywa">文件的临时下载链接。</p><p class="note-icon-wrapper" id="13846008c68w0"></p><section data-tag="p" id="02027663ccl4g" class="p section"><p id="a6a8f61402wvo">访问临时下载链接，获取下载文件，在文件被下载到本地后，需开发者替换本地下载的文件扩展名。例如替换视频文件：</p><ul id="63cb8683echmo"><li id="8ef040f1d01yz"><p id="d3c8f200887hg">替换前：<code data-tag="code" id="182b1ff08a7th" class="code">iAEI******IVAiYgXNCKMGzSsRB85j_Z7zCM0CYA.file</code>。</p></li><li id="3ee415a11ewss"><p id="9408164945jgh">替换后：<code data-tag="code" id="d0d923a195ylu" class="code">iAEI******IVAiYgXNCKMGzSsRB85j_Z7zCM0CYA.mp4</code>。</p></li></ul></section></td></tr></tbody></table></section><section id="section-response-body-example" class="section"><h3 id="h3-response-body-example" data-tag="h3" class="h3">响应体示例</h3><pre id="d1f07cd6d1yl1" outputclass="language-json" code-type="xCode" data-tag="codeblock" class="pre codeblock language-json"><code>HTTP/1.1 200 OK
+Content-Type:application/json
+
+{
+  "downloadUrl" : "http://wukong-**********gEv&amp;Signature=5BNf2tBJcpKpkQw4wakBBM6ZJ0E%3D&amp;Expires=1671377946"
+}</code></pre></section><section id="section-error-code-1" class="section"><h3 id="h3-error-code-1" data-tag="h3" class="h3">错误码</h3><p data-tag="p" id="p-error-code-global-guide" class="p">若调用该接口报错，可根据错误信息在<a href="https://open.dingtalk.com/document/development/server-api-error-codes-1" id="a-error-code-global-guide">全局错误码</a>文档中查找解决方案。</p><table id="1e8f8363025ah" tablewidth="709" tablecolswidth="142 177 177 213" autofit="false" class="table"><colgroup colwidth="0.8*" style="width:20.03%"></colgroup><colgroup colwidth="1*" style="width:24.96%"></colgroup><colgroup colwidth="1*" style="width:24.96%"></colgroup><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><tbody class="tbody"><tr id="d23e98ccba6un"><td id="736e081b7c77b" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="7e83207097ij9">HttpCode</p></td><td id="623120598fi7o" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="3200b8d24abnf">错误码</p></td><td id="22dbb0a746nth" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="6026ef0253wn5">错误信息</p></td><td id="1329a855d85uj" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="a2628da5180yo">说明</p></td></tr><tr id="d10efe9bf4oek"><td id="be32df9a8eldg" rowspan="1" colspan="1"><p id="e681d97f13e9y">400</p></td><td id="af2e492ee8pfn" rowspan="1" colspan="1"><p id="c62f533ccfdxw">invalidParameter.robotCode.empty</p></td><td id="21e95bcb1bcv4" rowspan="1" colspan="1"><p id="4d0cc763cf433">机器人robotCode为空</p></td><td id="e46821fec77sl" rowspan="1" colspan="1"><p id="01c549252fww0">机器人robotCode无效，请检查机器人是否在群内</p></td></tr><tr id="21a952a481ici"><td id="ec001c8f0cr5b" rowspan="1" colspan="1"><p id="5f29653abbe2l">400</p></td><td id="8276e4f5ec21a" rowspan="1" colspan="1"><p id="a37ea322f4klq">invalidParameter.robotCode.auth</p></td><td id="560949c96e3ez" rowspan="1" colspan="1"><p id="bd2f39aeb9slo">此downloadCode和机器人robotCode不匹配，请使用接收此条消息机器人robotCode和对应的downloadCode</p></td><td id="2bea6db53dgcw" rowspan="1" colspan="1"><p id="b7e5d51ba6ek1">此downloadCode和机器人robotCode不匹配，请使用接收此条消息机器人robotCode和对应的downloadCode</p></td></tr><tr id="524c0261d10rx"><td id="83f7f92c48cgf" rowspan="1" colspan="1"><p id="47cdd9fd2ec35">400</p></td><td id="fd81da1fb8il7" rowspan="1" colspan="1"><p id="1c7287d42aisc">invalidParameter.robotCode.empty</p></td><td id="72e42a4e73hb4" rowspan="1" colspan="1"><p id="424126dde2ooj">机器人downloadCode为空</p></td><td id="7e6f994c35mje" rowspan="1" colspan="1"><p id="6d488082d8f91">机器人downloadCode为空</p></td></tr><tr id="cdc721aa93yi2"><td id="c09e00bbc7b48" rowspan="1" colspan="1"><p id="6472f49738g1q">400</p></td><td id="cd143d47f7d11" rowspan="1" colspan="1"><p id="e780c50d847q7">invalidParameter.robotCode.auth</p></td><td id="5805bd6a5c6qt" rowspan="1" colspan="1"><p id="f2a79a1c1c37d">该接口仅支持企业自建应用或三方应用授权调用</p></td><td id="d340f2f8587u0" rowspan="1" colspan="1"><p id="978ee17c6f4lg">该接口仅支持企业自建应用或三方应用授权调用</p></td></tr><tr id="10a8faeda46se"><td id="592caeb6d902c" rowspan="1" colspan="1"><p id="1468919327jy3">400</p></td><td id="49ad6233955y2" rowspan="1" colspan="1"><p id="e26d55d296hyh">invalidParameter.robotCode.downloadCode</p></td><td id="df107722a6zea" rowspan="1" colspan="1"><p id="12fcde80b1q6b">下载码有误或者已经过期</p></td><td id="75f5f87f2c97i" rowspan="1" colspan="1"><p id="33f0d0d883pgh">下载码有误或者已经过期</p></td></tr><tr id="27b6e1a984hkc"><td id="15d86c5b114v2" rowspan="1" colspan="1"><p id="7fcbb13b732ab">400</p></td><td id="75e608ba5equi" rowspan="1" colspan="1"><p id="ed5120cba0ymk">invalidParameter.robotCode.auth</p></td><td id="fe652bb70erth" rowspan="1" colspan="1"><p id="ec3f0fe7a5zrv">调用该接口的企业和此downloadCode对应机器人企业所属不同</p></td><td id="49712e58fb4xn" rowspan="1" colspan="1"><p id="0cbbd07359e0p">调用该接口的企业和此downloadCode对应机器人企业所属不同</p></td></tr></tbody></table></section></section></div></main></body></html>

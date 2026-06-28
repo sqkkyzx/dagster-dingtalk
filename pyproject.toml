@@ -1,6 +1,6 @@
 [project]
 name = "dagster-dingtalk"
-version = "0.29.11.1"
+version = "0.29.11.2"
 description = "A dagster plugin for the DingTalk"
 readme = "README.md"
 authors = [
@@ -10,6 +10,7 @@ requires-python = ">=3.13"
 dependencies = [
     "httpx",
     "dagster>=1.13",
+    "dingtalk-oapi-zhcn==0.29.11.2",
     "hatchling>=1.27.0",
     "pydantic>=2",
 ]
@@ -17,3 +18,16 @@ dependencies = [
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
+
+[tool.uv.sources]
+dingtalk-oapi-zhcn = { path = "packages/dingtalk-oapi-zhcn", editable = true }
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/dagster_dingtalk"]
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "/README.md",
+    "/pyproject.toml",
+    "/src/dagster_dingtalk",
+]

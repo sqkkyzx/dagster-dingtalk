@@ -1,0 +1,389 @@
+<!DOCTYPE html><html><head><meta charset="utf8" / /><meta name="searchtitle" content="" / /><meta name="keywords" content="" / /><meta name="author" content="" / /><title>分页获取加班规则列表</title><meta name="gmtModify" content="2025-09-11 21:02:13" / /><meta name="gmtModify" content="2026-06-01 16:47:19" / /></head><body data-tag="topic" id="doc-api-dingtalk-GetSimpleOvertimeSetting" class="topic"><main id="cbf3172123p2v" data-init-id="doc-api-dingtalk_GetSimpleOvertimeSetting"><h1 data-tag="title" id="h1-wuq-vvf-lvh" class="title">分页获取加班规则列表</h1><p data-tag="shortdesc" id="2465fd757380b" class="shortdesc">调用本接口，分页获取考勤打卡中设置的加班规则列表，包括规则名称和规则ID。</p><div data-tag="conbody" outputclass="icms-api-reference" class="icms-api-reference conbody"><section id="section-prerequisites-1" class="section icms-module" data-tag="section" data-source="latest-mounted-icms-html"><h2 id="h2-prerequisites-1" data-tag="h2" class="h2">接口调用说明</h2><p>例如，企业的考勤规则管理内有三个加班规则，分别为<b>审批后的打卡时间计算加班</b>、<b>以审批时间计算加班</b>和<b>以打卡时间计算加班</b>，如下图所示。</p><p>调用本接口，可获取三个加班规则的规则名称和规则ID。 <img src="https://help-static-aliyun-doc.aliyuncs.com/assets/img/zh-CN/2885238471/p961081.png" alt="image" placement="break" class="image break" / /></p></section><section id="section-request-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-request-1" data-tag="h2" class="h2">请求</h2><section id="section-request-basic-info" class="section"><h3 id="heading-request-basic-info" data-tag="h3" class="h3">基本信息</h3><table tablewidth="648" tablecolswidth="216 432" autofit="false" class="table"><colgroup colwidth="1*" style="width:33.33%"></colgroup><colgroup colwidth="2*" style="width:66.67%"></colgroup><tbody class="tbody"><tr><td rowspan="1" style="background-color:#e5e5e5" colspan="1"><p>字段</p></td><td rowspan="1" style="background-color:#e5e5e5" colspan="1"><p>值</p></td></tr><tr><td rowspan="1" colspan="1"><p>HTTP URL</p></td><td rowspan="1" colspan="1"><p>https://api.dingtalk.com/v1.0/attendance/overtimeSettings</p></td></tr><tr><td rowspan="1" colspan="1"><p>HTTP Method</p></td><td rowspan="1" colspan="1"><p>GET</p></td></tr><tr><td rowspan="1" colspan="1"><p>支持的应用类型</p></td><td rowspan="1" colspan="1"><p><span data-tag="ph" id="ph-request-basic-app-type-apptype-0" class="ph ph-app-type" data-ph-raw-text="appType-企业内部应用">appType-企业内部应用</span>　<span data-tag="ph" id="ph-request-basic-app-type-apptype-1" class="ph ph-app-type" data-ph-raw-text="appType-第三方企业应用">appType-第三方企业应用</span></p></td></tr><tr><td rowspan="1" colspan="1"><p>权限要求</p></td><td rowspan="1" colspan="1"><p><span data-tag="ph" id="ph-request-basic-permission-permission-qyapi-attendance-group-read-0" class="ph-permission ph" data-ph-raw-text="permission-qyapi_attendance_group_read-考勤组查询权限" data-permission-id="permission-qyapi_attendance_group_read" data-permission-code="qyapi_attendance_group_read" data-permission-detail-api="/document/api/permission/detail" data-permission-query-param="code">permission-qyapi_attendance_group_read-考勤组查询权限</span></p></td></tr></tbody></table></section><section id="section-request-header-parameter" class="section"><h3 data-tag="h3" id="h2-4e2-gvw-okh" class="h3 title">请求头</h3><table id="3888b767b7775" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="cb86ed4b9ay1y"><td id="1305b8b5c1ffl" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="6c7094244fnyx">名称</p></td><td id="8d64c6d35deum" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="ff5e91399746u">类型</p></td><td id="57a18d52e3aie" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="b5252c0619vow">是否必填</p></td><td id="1ae4f574cenf9" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="163f7974deuvh">描述</p></td></tr><tr id="0aaf52a209zfl"><td id="02fa0e8724we6" rowspan="1" colspan="1"><p id="7e93a7748bitg">x-acs-dingtalk-access-token</p></td><td id="f66d24ceaeu8y" rowspan="1" colspan="1"><p id="6e235ece0bkav">String</p></td><td id="fa4c6729afpax" rowspan="1" colspan="1"><p id="68d5e390ccf70">是</p></td><td id="12759d68239ri" rowspan="1" colspan="1"><p id="6b7f3c7e1ea18">调用该接口的访问凭证，通过以下获取：</p><ul id="8fba8ccbectnj"><li id="dace943c20vbe"><p id="ca09404059yfy">企业内部应用，调用<a id="3b1746395dp6l" href="https://open.dingtalk.com/document/development/obtain-the-access-token-of-an-internal-app#" class="xref">获取企业内部应用的accessToken</a>接口获取。</p></li><li id="4198465b2bgql"><p id="65bfc18266teh">第三方企业应用，调用<a id="b1d07e935fo8a" href="https://open.dingtalk.com/document/development/obtain-the-access-token-of-the-authorized-enterprise-1#" class="xref">获取第三方应用授权企业的accessToken</a>接口获取。</p></li></ul></td></tr></tbody></table></section><section id="section-request-query-parameter" class="section"><h3 data-tag="h3" id="h2-rxi-smr-qvu" class="h3 title">查询参数</h3><table id="76e1dff75c5g7" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="73297ec1925yd"><td id="4c468b4f010r6" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="aaa3b381b1wa9">名称</p></td><td id="30d1106291v07" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="62e47605d724r">类型</p></td><td id="83ebc28383sse" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="188dc007e96th">是否必填</p></td><td id="c1d3fe25455gw" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="016110c7a6r25">描述</p></td></tr><tr id="a36ef53eff9ce"><td id="e5cd90aa440t9" rowspan="1" colspan="1"><p id="6dd38b18dd39m">pageNumber</p></td><td id="f7f6590a9bssb" rowspan="1" colspan="1"><p id="66129a82462lm">Long</p></td><td id="c80d5abce2jgh" rowspan="1" colspan="1"><p id="41a820c181hf4">是</p></td><td id="351c81940finr" rowspan="1" colspan="1"><p id="55caa82285crh">分页起始页。</p><div type="note" id="e97037a525stp" class="note note-note"><div class="note-icon-wrapper"><i class="icon-note note note"></i></div><div class="noteContentSpan"><p id="e857d601ef2en">该参数值从1开始。</p></div></div></td></tr><tr id="8f445f71c5qlu"><td id="f50f47977azjk" rowspan="1" colspan="1"><p id="7559796f05sph">pageSize</p></td><td id="fa861008a4xub" rowspan="1" colspan="1"><p id="32b5602ab5q2v">Long</p></td><td id="dedd29a03ejkq" rowspan="1" colspan="1"><p id="71614dd8d953w">是</p></td><td id="8635ee2906pnv" rowspan="1" colspan="1"><p id="0a99fa7166ixb">分页大小。</p><div type="note" id="d7936d59bbgou" class="note note-note"><div class="note-icon-wrapper"><i class="icon-note note note"></i></div><div class="noteContentSpan"><p id="068d700834oh5">该参数最大不能超过50。</p></div></div></td></tr></tbody></table></section><section id="section-request-body-example" class="section"><h3 id="h3-request-body-example" data-tag="h3" class="h3">请求示例</h3><div id="figure-zmj-ayu-fwc" outputclass="tabbed-codeblock" data-tag="fig" class="tabbed-codeblock-box"><div class="tab-box"></div><input type="radio" name="check-figure-zmj-ayu-fwc" id="figure-zmj-ayu-fwc-HTTP-tab" checked="checked" /><label for="figure-zmj-ayu-fwc-HTTP-tab">HTTP</label><div class="codeblock-item"><pre id="codeblock-xu7-for-fdg" outputclass="language-HTTP" code-type="xCode" data-tag="codeblock" class="pre codeblock language-HTTP"><code>GET /v1.0/attendance/overtimeSettings?pageNumber=1&amp;pageSize=10 HTTP/1.1
+Host:api.dingtalk.com
+x-acs-dingtalk-access-token:xxxxx
+Content-Type:application/json</code></pre></div><input type="radio" name="check-figure-zmj-ayu-fwc" id="figure-zmj-ayu-fwc-java-tab" /><label for="figure-zmj-ayu-fwc-java-tab">Java</label><div class="codeblock-item"><pre id="codeblock-a7u-wcs-uma" outputclass="language-java" code-type="xCode" data-tag="codeblock" class="pre codeblock language-java"><code>// This file is auto-generated, don't edit it. Thanks.
+package com.aliyun.sample;
+
+import com.aliyun.tea.*;
+
+public class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Client
+     * @throws Exception
+     */
+    public static com.aliyun.dingtalkattendance_1_0.Client createClient() throws Exception {
+        com.aliyun.teaopenapi.models.Config config = new com.aliyun.teaopenapi.models.Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        return new com.aliyun.dingtalkattendance_1_0.Client(config);
+    }
+
+    public static void main(String[] args_) throws Exception {
+        java.util.List&lt;String&gt; args = java.util.Arrays.asList(args_);
+        com.aliyun.dingtalkattendance_1_0.Client client = Sample.createClient();
+        com.aliyun.dingtalkattendance_1_0.models.GetSimpleOvertimeSettingHeaders getSimpleOvertimeSettingHeaders = new com.aliyun.dingtalkattendance_1_0.models.GetSimpleOvertimeSettingHeaders();
+        getSimpleOvertimeSettingHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        com.aliyun.dingtalkattendance_1_0.models.GetSimpleOvertimeSettingRequest getSimpleOvertimeSettingRequest = new com.aliyun.dingtalkattendance_1_0.models.GetSimpleOvertimeSettingRequest()
+                .setPageNumber(1L)
+                .setPageSize(10L);
+        try {
+            client.getSimpleOvertimeSettingWithOptions(getSimpleOvertimeSettingRequest, getSimpleOvertimeSettingHeaders, new com.aliyun.teautil.models.RuntimeOptions());
+        } catch (TeaException err) {
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        } catch (Exception _err) {
+            TeaException err = new TeaException(_err.getMessage(), _err);
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        }        
+    }
+}</code></pre></div><input type="radio" name="check-figure-zmj-ayu-fwc" id="figure-zmj-ayu-fwc-python-tab" /><label for="figure-zmj-ayu-fwc-python-tab">Python</label><div class="codeblock-item"><pre id="codeblock-tn6-wn6-swd" outputclass="language-python" code-type="xCode" data-tag="codeblock" class="pre codeblock language-python"><code># -*- coding: utf-8 -*-
+# This file is auto-generated, don't edit it. Thanks.
+import sys
+
+from typing import List
+
+from alibabacloud_dingtalk.attendance_1_0.client import Client as dingtalkattendance_1_0Client
+from alibabacloud_tea_openapi import models as open_api_models
+from alibabacloud_dingtalk.attendance_1_0 import models as dingtalkattendance__1__0_models
+from alibabacloud_tea_util import models as util_models
+from alibabacloud_tea_util.client import Client as UtilClient
+
+
+class Sample:
+    def __init__(self):
+        pass
+
+    @staticmethod
+    def create_client() -&gt; dingtalkattendance_1_0Client:
+        """
+        使用 Token 初始化账号Client
+        @return: Client
+        @throws Exception
+        """
+        config = open_api_models.Config()
+        config.protocol = 'https'
+        config.region_id = 'central'
+        return dingtalkattendance_1_0Client(config)
+
+    @staticmethod
+    def main(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        get_simple_overtime_setting_headers = dingtalkattendance__1__0_models.GetSimpleOvertimeSettingHeaders()
+        get_simple_overtime_setting_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        get_simple_overtime_setting_request = dingtalkattendance__1__0_models.GetSimpleOvertimeSettingRequest(
+            page_number=1,
+            page_size=10
+        )
+        try:
+            client.get_simple_overtime_setting_with_options(get_simple_overtime_setting_request, get_simple_overtime_setting_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+    @staticmethod
+    async def main_async(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        get_simple_overtime_setting_headers = dingtalkattendance__1__0_models.GetSimpleOvertimeSettingHeaders()
+        get_simple_overtime_setting_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        get_simple_overtime_setting_request = dingtalkattendance__1__0_models.GetSimpleOvertimeSettingRequest(
+            page_number=1,
+            page_size=10
+        )
+        try:
+            await client.get_simple_overtime_setting_with_options_async(get_simple_overtime_setting_request, get_simple_overtime_setting_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+
+if __name__ == '__main__':
+    Sample.main(sys.argv[1:])</code></pre></div><input type="radio" name="check-figure-zmj-ayu-fwc" id="figure-zmj-ayu-fwc-php-tab" /><label for="figure-zmj-ayu-fwc-php-tab">PHP</label><div class="codeblock-item"><pre id="codeblock-qb9-bys-ct1" outputclass="language-php" code-type="xCode" data-tag="codeblock" class="pre codeblock language-php"><code>&lt;?php
+
+// This file is auto-generated, don't edit it. Thanks.
+namespace AlibabaCloud\SDK\Sample;
+
+use AlibabaCloud\SDK\Dingtalk\Vattendance_1_0\Dingtalk;
+use \Exception;
+use AlibabaCloud\Tea\Exception\TeaError;
+use AlibabaCloud\Tea\Utils\Utils;
+
+use Darabonba\OpenApi\Models\Config;
+use AlibabaCloud\SDK\Dingtalk\Vattendance_1_0\Models\GetSimpleOvertimeSettingHeaders;
+use AlibabaCloud\SDK\Dingtalk\Vattendance_1_0\Models\GetSimpleOvertimeSettingRequest;
+use AlibabaCloud\Tea\Utils\Utils\RuntimeOptions;
+
+class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Dingtalk Client
+     */
+    public static function createClient(){
+        $config = new Config([]);
+        $config-&gt;protocol = "https";
+        $config-&gt;regionId = "central";
+        return new Dingtalk($config);
+    }
+
+    /**
+     * @param string[] $args
+     * @return void
+     */
+    public static function main($args){
+        $client = self::createClient();
+        $getSimpleOvertimeSettingHeaders = new GetSimpleOvertimeSettingHeaders([]);
+        $getSimpleOvertimeSettingHeaders-&gt;xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        $getSimpleOvertimeSettingRequest = new GetSimpleOvertimeSettingRequest([
+            "pageNumber" =&gt; 1,
+            "pageSize" =&gt; 10
+        ]);
+        try {
+            $client-&gt;getSimpleOvertimeSettingWithOptions($getSimpleOvertimeSettingRequest, $getSimpleOvertimeSettingHeaders, new RuntimeOptions([]));
+        }
+        catch (Exception $err) {
+            if (!($err instanceof TeaError)) {
+                $err = new TeaError([], $err-&gt;getMessage(), $err-&gt;getCode(), $err);
+            }
+            if (!Utils::empty_($err-&gt;code) &amp;&amp; !Utils::empty_($err-&gt;message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+        }
+    }
+}
+$path = __DIR__ . \DIRECTORY_SEPARATOR . '..' . \DIRECTORY_SEPARATOR . 'vendor' . \DIRECTORY_SEPARATOR . 'autoload.php';
+if (file_exists($path)) {
+    require_once $path;
+}
+Sample::main(array_slice($argv, 1));</code></pre></div><input type="radio" name="check-figure-zmj-ayu-fwc" id="figure-zmj-ayu-fwc-go-tab" /><label for="figure-zmj-ayu-fwc-go-tab">Go</label><div class="codeblock-item"><pre id="codeblock-aqs-jic-mfh" outputclass="language-go" code-type="xCode" data-tag="codeblock" class="pre codeblock language-go"><code>// This file is auto-generated, don't edit it. Thanks.
+package main
+
+import (
+  "os"
+  util  "github.com/alibabacloud-go/tea-utils/v2/service"
+  dingtalkattendance_1_0  "github.com/alibabacloud-go/dingtalk/attendance_1_0"
+  openapi  "github.com/alibabacloud-go/darabonba-openapi/v2/client"
+  "github.com/alibabacloud-go/tea/tea"
+)
+
+
+/**
+ * 使用 Token 初始化账号Client
+ * @return Client
+ * @throws Exception
+ */
+func CreateClient () (_result *dingtalkattendance_1_0.Client, _err error) {
+  config := &amp;openapi.Config{}
+  config.Protocol = tea.String("https")
+  config.RegionId = tea.String("central")
+  _result = &amp;dingtalkattendance_1_0.Client{}
+  _result, _err = dingtalkattendance_1_0.NewClient(config)
+  return _result, _err
+}
+
+func _main (args []*string) (_err error) {
+  client, _err := CreateClient()
+  if _err != nil {
+    return _err
+  }
+
+  getSimpleOvertimeSettingHeaders := &amp;dingtalkattendance_1_0.GetSimpleOvertimeSettingHeaders{}
+  getSimpleOvertimeSettingHeaders.XAcsDingtalkAccessToken = tea.String("&lt;your access token&gt;")
+  getSimpleOvertimeSettingRequest := &amp;dingtalkattendance_1_0.GetSimpleOvertimeSettingRequest{
+    PageNumber: tea.Int64(1),
+    PageSize: tea.Int64(10),
+  }
+  tryErr := func()(_e error) {
+    defer func() {
+      if r := tea.Recover(recover()); r != nil {
+        _e = r
+      }
+    }()
+    _, _err = client.GetSimpleOvertimeSettingWithOptions(getSimpleOvertimeSettingRequest, getSimpleOvertimeSettingHeaders, &amp;util.RuntimeOptions{})
+    if _err != nil {
+      return _err
+    }
+
+    return nil
+  }()
+
+  if tryErr != nil {
+    var err = &amp;tea.SDKError{}
+    if _t, ok := tryErr.(*tea.SDKError); ok {
+      err = _t
+    } else {
+      err.Message = tea.String(tryErr.Error())
+    }
+    if !tea.BoolValue(util.Empty(err.Code)) &amp;&amp; !tea.BoolValue(util.Empty(err.Message)) {
+      // err 中含有 code 和 message 属性，可帮助开发定位问题
+    }
+
+  }
+  return _err
+}
+
+
+func main() {
+  err := _main(tea.StringSlice(os.Args[1:]))
+  if err != nil {
+    panic(err)
+  }
+}</code></pre></div><input type="radio" name="check-figure-zmj-ayu-fwc" id="figure-zmj-ayu-fwc-nodejs-tab" /><label for="figure-zmj-ayu-fwc-nodejs-tab">Node.js</label><div class="codeblock-item"><pre id="codeblock-crj-xj7-axw" outputclass="language-nodejs" code-type="xCode" data-tag="codeblock" class="pre codeblock language-nodejs"><code>// This file is auto-generated, don't edit it
+import Util, * as $Util from '@alicloud/tea-util';
+import dingtalkattendance_1_0, * as $dingtalkattendance_1_0 from '@alicloud/dingtalk/attendance_1_0';
+import OpenApi, * as $OpenApi from '@alicloud/openapi-client';
+import * as $tea from '@alicloud/tea-typescript';
+
+
+export default class Client {
+
+  /**
+   * 使用 Token 初始化账号Client
+   * @return Client
+   * @throws Exception
+   */
+  static createClient(): dingtalkattendance_1_0 {
+    let config = new $OpenApi.Config({ });
+    config.protocol = "https";
+    config.regionId = "central";
+    return new dingtalkattendance_1_0(config);
+  }
+
+  static async main(args: string[]): Promise&lt;void&gt; {
+    let client = Client.createClient();
+    let getSimpleOvertimeSettingHeaders = new $dingtalkattendance_1_0.GetSimpleOvertimeSettingHeaders({ });
+    getSimpleOvertimeSettingHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+    let getSimpleOvertimeSettingRequest = new $dingtalkattendance_1_0.GetSimpleOvertimeSettingRequest({
+      pageNumber: 1,
+      pageSize: 10,
+    });
+    try {
+      await client.getSimpleOvertimeSettingWithOptions(getSimpleOvertimeSettingRequest, getSimpleOvertimeSettingHeaders, new $Util.RuntimeOptions({ }));
+    } catch (err) {
+      if (!Util.empty(err.code) &amp;&amp; !Util.empty(err.message)) {
+        // err 中含有 code 和 message 属性，可帮助开发定位问题
+      }
+
+    }    
+  }
+
+}
+
+Client.main(process.argv.slice(2));</code></pre></div><input type="radio" name="check-figure-zmj-ayu-fwc" id="figure-zmj-ayu-fwc-csharp-tab" /><label for="figure-zmj-ayu-fwc-csharp-tab">C#</label><div class="codeblock-item"><pre id="codeblock-tlt-krm-rfl" outputclass="language-csharp" code-type="xCode" data-tag="codeblock" class="pre codeblock language-csharp"><code>// This file is auto-generated, don't edit it. Thanks.
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
+
+using Tea;
+using Tea.Utils;
+
+
+namespace AlibabaCloud.SDK.Sample
+{
+    public class Sample 
+    {
+
+        /**
+         * 使用 Token 初始化账号Client
+         * @return Client
+         * @throws Exception
+         */
+        public static AlibabaCloud.SDK.Dingtalkattendance_1_0.Client CreateClient()
+        {
+            AlibabaCloud.OpenApiClient.Models.Config config = new AlibabaCloud.OpenApiClient.Models.Config();
+            config.Protocol = "https";
+            config.RegionId = "central";
+            return new AlibabaCloud.SDK.Dingtalkattendance_1_0.Client(config);
+        }
+
+        public static void Main(string[] args)
+        {
+            AlibabaCloud.SDK.Dingtalkattendance_1_0.Client client = CreateClient();
+            AlibabaCloud.SDK.Dingtalkattendance_1_0.Models.GetSimpleOvertimeSettingHeaders getSimpleOvertimeSettingHeaders = new AlibabaCloud.SDK.Dingtalkattendance_1_0.Models.GetSimpleOvertimeSettingHeaders();
+            getSimpleOvertimeSettingHeaders.XAcsDingtalkAccessToken = "&lt;your access token&gt;";
+            AlibabaCloud.SDK.Dingtalkattendance_1_0.Models.GetSimpleOvertimeSettingRequest getSimpleOvertimeSettingRequest = new AlibabaCloud.SDK.Dingtalkattendance_1_0.Models.GetSimpleOvertimeSettingRequest
+            {
+                PageNumber = 1,
+                PageSize = 10,
+            };
+            try
+            {
+                client.GetSimpleOvertimeSettingWithOptions(getSimpleOvertimeSettingRequest, getSimpleOvertimeSettingHeaders, new AlibabaCloud.TeaUtil.Models.RuntimeOptions());
+            }
+            catch (TeaException err)
+            {
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+            catch (Exception _err)
+            {
+                TeaException err = new TeaException(new Dictionary&lt;string, object&gt;
+                {
+                    { "message", _err.Message }
+                });
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+        }
+
+
+    }
+}</code></pre></div></div></section></section><section id="section-response-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-response-1" data-tag="h2" class="h2">响应</h2><section id="section-response-parameter" class="section"><h3 data-tag="h3" id="h2-rb0-9lz-n6q" class="h3 title">响应体</h3><table id="96acf2ac37d3l" tablewidth="710" tablecolswidth="213 142 355" autofit="false" class="table"><colgroup colwidth="0.9*" style="width:30.00%"></colgroup><colgroup colwidth="0.6*" style="width:20.00%"></colgroup><colgroup colwidth="1.5*" style="width:50.00%"></colgroup><tbody class="tbody"><tr id="7cc9483369dbi"><td id="51478175ecbg1" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="61161fcd64t30">名称</p></td><td id="a6fa60114a7xp" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="dc42dcf63elxp">类型</p></td><td id="eea159167cd0y" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="e89271b635f7k">描述</p></td></tr><tr outputclass="row row-level-1 has-child" id="8fa0057849u7q" class="has-child row row-level-1 has-child row-level-1 row"><td id="463c43bfbf5r9" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><span class="icms-tree-table-trigger" type="checkbox"></span><p id="94f1039718lkg">result</p></td><td id="704a729cb37j3" rowspan="1" colspan="1"><p id="40ed989557x95">Object</p></td><td id="8e24a4645fz49" rowspan="1" colspan="1"><p id="c14938a64f8ze">获取的结果。</p></td></tr><tr outputclass="row row-level-1-1" id="41cecccc083l6" class="row-level-1-1 row row row-level-1-1"><td id="77ce074786jmf" rowspan="1" colspan="1"><p id="e67b09a0b3jc1">pageNumber</p></td><td id="2a2feb6ec4y4x" rowspan="1" colspan="1"><p id="dd34106f443wj">Long</p></td><td id="cc4dd4ee9200t" rowspan="1" colspan="1"><p id="a8096d618c9zz">当前页码。</p></td></tr><tr outputclass="row row-level-1-2" id="f6ed8e7da4pum" class="row-level-1-2 row row row-level-1-2"><td id="42a0c6cc66yrr" rowspan="1" colspan="1"><p id="f05ee95885tox">totalPage</p></td><td id="782599ab46ib0" rowspan="1" colspan="1"><p id="80b685441bis1">Long</p></td><td id="de47e4655dg7e" rowspan="1" colspan="1"><p id="5c63dc10f3ili">总页数。</p></td></tr><tr outputclass="row row-level-1-3 has-child" id="ae19b7cdaer2u" class="has-child row-level-1-3 row row-level-1-3 has-child row"><td id="b2d2956acf8it" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><span class="icms-tree-table-trigger" type="checkbox"></span><p id="25830dd89elo4">items</p></td><td id="0ae4bc582en4p" rowspan="1" colspan="1"><p id="980e02af2col1">Array</p></td><td id="6f13bbceafu6m" rowspan="1" colspan="1"><p id="1e54375f042og">加班规则列表。</p></td></tr><tr outputclass="row row-level-1-3-1" id="ac7bce0fc3ciz" class="row-level-1-3-1 row row-level-1-3-1 row"><td id="33de4b38edt3l" rowspan="1" colspan="1"><p id="02aef2f89608e">id</p></td><td id="79df9777aeble" rowspan="1" colspan="1"><p id="5d8b137fc0c1e">Long</p></td><td id="3185816db5woo" rowspan="1" colspan="1"><p id="5c3451f79f7z1">加班规则ID。</p></td></tr><tr outputclass="row row-level-1-3-2" id="1b723f326dqsn" class="row row-level-1-3-2 row row-level-1-3-2"><td id="432962626erj6" rowspan="1" colspan="1"><p id="cd126f48c5uqj">name</p></td><td id="00ccf9ddd1tkr" rowspan="1" colspan="1"><p id="9ca98c45a6r94">String</p></td><td id="9b3d08ca186ku" rowspan="1" colspan="1"><p id="250f9f5abdhxy">加班规则名称。</p></td></tr><tr outputclass="row row-level-1-3-3" id="8be29bd29afxh" class="row row-level-1-3-3 row-level-1-3-3 row"><td id="b7a0ca94186it" rowspan="1" colspan="1"><p id="30a4d141436n3">settingId</p></td><td id="d395078ca2o4e" rowspan="1" colspan="1"><p id="47b8b85fdalgu">Long</p></td><td id="bbcb16495f5ht" rowspan="1" colspan="1"><p id="a69a3238ddsew">加班规则settingId。</p></td></tr></tbody></table></section><section id="section-response-body-example" class="section"><h3 id="h3-response-body-example" data-tag="h3" class="h3">响应体示例</h3><pre id="bddec4e5dfjbx" outputclass="language-json" code-type="xCode" data-tag="codeblock" class="pre codeblock language-json"><code>HTTP/1.1 200 OK
+Content-Type:application/json
+
+{
+  "result" : {
+    "pageNumber" : 1,
+    "totalPage" : 10,
+    "items" : [ {
+      "id" : 221375127,
+      "name" : "以审批时间计算加班",
+      "settingId" : 221375127
+    } ]
+  }
+}</code></pre></section><section id="section-error-code-1" class="section"><h3 id="h3-error-code-1" data-tag="h3" class="h3">错误码</h3><p data-tag="p" id="p-error-code-global-guide" class="p">若调用该接口报错，可根据错误信息在<a id="a-error-code-global-guide" href="https://open.dingtalk.com/document/development/server-api-error-codes-1">全局错误码</a>文档中查找解决方案。</p><table id="8ecff209d0lt8" tablewidth="709" tablecolswidth="142 177 177 213" autofit="false" class="table">
+  <colgroup colwidth="0.8*" style="width:20.03%"></colgroup>
+  <colgroup colwidth="1*" style="width:24.96%"></colgroup>
+  <colgroup colwidth="1*" style="width:24.96%"></colgroup>
+  <colgroup colwidth="1.2*" style="width:30.04%"></colgroup>
+  <tbody class="tbody">
+   <tr id="c1a040fa44clz">
+    <td id="70757a163f6x4" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="909479b915jwr">HttpCode</p></td>
+    <td id="f95071c85766d" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="30cbddf285eh6">错误码</p></td>
+    <td id="040cb3d8fcqp2" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="5b6e4a1f0c0ph">错误信息</p></td>
+    <td id="66916dc88639c" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="cab2ae61e9y6i">说明</p></td>
+   </tr>
+   <tr id="93014e2e982lc">
+    <td id="00be05197dg1f" rowspan="1" colspan="1"><p id="14a98ba0864xh">400</p></td>
+    <td id="252bd5b9afuiz" rowspan="1" colspan="1"><p id="2489cd0f139wp">system.error</p></td>
+    <td id="4915f9161cmo9" rowspan="1" colspan="1"><p id="072196f56c63z">系统异常</p></td>
+    <td id="a4e91584fc7g5" rowspan="1" colspan="1"><p id="2131e4c6109kf">系统异常</p></td>
+   </tr>
+   <tr id="bfdeadd3262pq">
+    <td id="de249501c0d1h" rowspan="1" colspan="1"><p id="9211e74db2msn">400</p></td>
+    <td id="708afe746dyhq" rowspan="1" colspan="1"><p id="cec97e8d42087">paging.parameter.error</p></td>
+    <td id="f60a919ac1kq8" rowspan="1" colspan="1"><p id="82923464fdls4">分页参数错误</p></td>
+    <td id="16f96f6ad1jma" rowspan="1" colspan="1"><p id="4375a94c07qah">分页参数错误</p></td>
+   </tr>
+  </tbody>
+ </table></section></section></div></main>
+</body></html>

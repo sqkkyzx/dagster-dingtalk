@@ -1,0 +1,204 @@
+<!DOCTYPE html><html><head><meta charset="utf8" / /><meta name="searchtitle" content="" / /><meta name="keywords" content="" / /><meta name="author" content="" / /><title>邀请其他组织企业账号加入</title><meta name="gmtModify" content="2026-05-27 13:09:04" / /></head><body id="topic-2209507" data-tag="topic" class="topic"><main id="c41ea5e06a4wm"><h1 id="title-2s7-4jn-jib" data-tag="title" class="title">邀请其他组织企业账号加入</h1><p id="shortdesc-6u5-8gs-016" data-tag="shortdesc" class="shortdesc">调用本接口加入其他组织企业账号进入本组织。</p><div id="conbody-feq-z1f-isv" data-tag="conbody" class="conbody"><section id="section-5t1-ftb-xi0" class="section"><h2 id="title-yql-3ea-98n" data-tag="title" class="title">接口调用说明</h2><p id="p-ida-8zf-2cm">加入其他组织企业账号进入本组织，仅支持购买开通的组织使用。</p><p id="7e45d594913p2">调用本接口加入其他组织企业账号进入本组织，需要注意如下事项：</p><ol id="837c559ba7cao" start="1"><li id="19de052158za1"><p id="b9ec81c759xh0">本接口不支持加入其他企业的非企业账号。</p></li><li id="a29de69a49nj8"><p id="b168cdc249wdl">需要其他企业调用接口【<a data-tag="xref" id="f91a63eb5ecpb" href="/document/development/authorize-a-dedicated-account-to-join-multiple-organizations#" class="xref">授权企业账号可加入多组织</a>】授权其他企业的企业账号加入本组织。 授权完成后，表示其他企业允许本企业将其他企业的企业账号加入到本企业。</p></li><li id="919fcd34be19t"><p id="fed3743205bfv">本接口调用成功后，其他企业的企业账号直接进入本组织，不需要其他企业的企业账号确认同意（完成第二项授权后，表示其他企业已同意，不需要账号维度的再次同意）。</p></li></ol></section><section id="550f6ce80fgrh" class="section"><h2 id="6796c9c1c8jrr"><b>请求</b></h2><table id="0b4130b6d8vvx" tablewidth="100" tablecolswidth="19.14 80.86" autofit="true" class="table"><colgroup colwidth="0.38*" style="width:19.14%"></colgroup><colgroup colwidth="1.62*" style="width:80.86%"></colgroup><tbody class="tbody"><tr id="9d257bc02cy63" style="height:42px"><td id="2e54db7925mek" rowspan="1" style="vertical-align:middle" colspan="2"><p id="ca25b2bbb6wb5"><b>基本信息</b></p></td></tr><tr id="1eb0c777233i0"><td id="c94c33a75adh9" rowspan="1" style="vertical-align:middle" colspan="1"><p id="5154b46615sfq">HTTP URL</p></td><td id="4ca98c556eenf" rowspan="1" style="vertical-align:middle" colspan="1"><p id="b4236a78f6eor">https://oapi.dingtalk.com/topapi/v2/user/create</p></td></tr><tr id="583e275232f5a"><td id="c499777faajh3" rowspan="1" style="vertical-align:middle" colspan="1"><p id="e6527b7a07e34">HTTP Method</p></td><td id="d04c0627fcykp" rowspan="1" style="vertical-align:middle" colspan="1"><p id="5128a819b0c2x">POST</p></td></tr><tr id="ac7cde70cfqei"><td id="1f514e377fl5m" rowspan="1" style="vertical-align:middle" colspan="1"><p id="00928d1357eur">支持的应用类型</p></td><td id="09872ea0db9d1" rowspan="1" style="vertical-align:middle" colspan="1"><p id="b4fdafb3bdlp1"><span data-tag="ph" id="16e8b55e11x36" class="ph">appType-企业内部应用</span></p></td></tr><tr id="e3d1b91ff9r7v"><td id="eed3c78f30hjj" rowspan="1" style="vertical-align:middle" colspan="1"><p id="7ca8b9ed27agh">权限要求</p></td><td id="93223588072wx" rowspan="1" style="vertical-align:middle" colspan="1"><p id="51314949cfi7z"><span data-tag="ph" id="607ee47d782a4" class="ph"><span style="color:rgb(42, 47, 69)">permission-</span><span style="color:rgb(55, 65, 81);background-color:rgb(243, 244, 246)">qyapi_manage_addresslist</span><span style="color:rgb(23, 26, 29)">-</span><span style="color:rgb(31, 41, 55)">通讯录数据管理权限</span></span></p></td></tr></tbody></table><section id="fa1fa1adc553y" class="section"><h3 data-tag="title" id="h2-fbm-oeq-5qj" class="title"><b>查询参数</b></h3><table id="table-mdz-0ne-fth" tablewidth="837" tablecolswidth="177 106 71 106 377" autofit="false" class="table"><colgroup colwidth="1.06*" style="width:21.15%"></colgroup><colgroup colwidth="0.63*" style="width:12.66%"></colgroup><colgroup colwidth="0.43*" style="width:8.48%"></colgroup><colgroup colwidth="0.63*" style="width:12.66%"></colgroup><colgroup colwidth="2.26*" style="width:45.04%"></colgroup><tbody class="tbody"><tr id="tr-tw9-1fo-57s"><td id="td-p6s-2zw-ddq" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="p-oji-lsz-6ps">名称</p></td><td id="td-i8z-kp1-4no" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="p-4i8-ghe-d1n">类型</p></td><td id="td-wzw-2ew-1uk" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="p-1qk-o2o-l6m">是否必填</p></td><td id="td-7cy-2vp-fyu" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="p-v17-7j7-evn">示例值</p></td><td id="td-kho-h3o-7y8" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="p-beo-vq6-k7t">描述</p></td></tr><tr id="tr-gfy-bp7-uay"><td id="td-xmj-aph-iz8" rowspan="1" colspan="1"><p id="p-z7f-sv6-fmf">access_token</p></td><td id="td-1hx-x6h-coe" rowspan="1" colspan="1"><p id="p-q9v-089-i55">String</p></td><td id="td-k0z-ifn-w10" rowspan="1" colspan="1"><p id="p-oc5-4b1-twu">是</p></td><td id="td-nr2-8bq-d25" rowspan="1" colspan="1"><p id="p-8c7-ca6-l3p">BE3xxxx</p></td><td id="td-jrc-vea-1e6" rowspan="1" colspan="1"><p id="ff1c3a417aryi">调用该接口的应用凭证，通过<a data-tag="xref" id="aa60c81944bgv" href="/document/development/obtain-orgapp-token#" class="xref">获取企业内部应用的access_token</a>接口获取。</p></td></tr></tbody></table></section><section id="0e07c2e2383zd" class="section"><h3 id="h2-3hv-zyp-yle" data-tag="title" class="title"><b>请求体</b></h3><table id="table-sae-nxo-uhw" tablewidth="835" tablecolswidth="177 106 71 106 375" autofit="false" class="table"><colgroup colwidth="1.06*" style="width:21.20%"></colgroup><colgroup colwidth="0.63*" style="width:12.69%"></colgroup><colgroup colwidth="0.43*" style="width:8.50%"></colgroup><colgroup colwidth="0.63*" style="width:12.69%"></colgroup><colgroup colwidth="2.25*" style="width:44.91%"></colgroup><tbody class="tbody"><tr id="tr-pir-neh-78i"><td id="td-5ex-04o-3rf" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="p-pt0-v2e-x6c">名称</p></td><td id="td-oi2-40d-fph" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="p-s35-tq0-08q">类型</p></td><td id="td-fzm-1l0-l1k" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="p-76x-a2p-9mc">是否必填</p></td><td id="td-rb2-qyx-eqm" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="p-jwb-zs6-5mc">示例值</p></td><td id="td-0li-tet-1g7" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="p-aaa-ny8-plb">描述</p></td></tr><tr id="tr-zyf-v18-5u9" outputclass="row row-level-2" class="row row-level-2"><td id="td-h0n-abl-or8" rowspan="1" colspan="1"><p id="p-9wo-dut-nba">userid</p></td><td id="td-2co-gys-gdg" rowspan="1" colspan="1"><p id="p-p90-zxk-kun">String</p></td><td id="td-jk0-lbm-c3i" rowspan="1" colspan="1"><p id="p-dcu-74o-8pq">否</p></td><td id="td-4z0-rfk-cb5" rowspan="1" colspan="1"><p id="p-1km-vrp-gi0">zhangsan</p></td><td id="td-xff-xa9-snk" rowspan="1" colspan="1"><p id="p-jzo-wr1-17f">员工唯一标识ID（不可修改），长度为1~64个字符。</p><div id="note-6v2-ihb-k3n" type="note" class="note note-note"><div class="note-icon-wrapper"><i class="icon-note note note"></i></div><div class="noteContentSpan"><strong>说明 </strong><ul id="ul-x8j-53p-jzx"><li id="li-3v1-81m-z3z"><p id="p-z7g-c1b-j8x">企业内必须唯一。</p></li><li id="li-noe-lp0-6jn"><p id="p-zmu-6mm-vzu">如果不传，将自动生成一个userid。</p></li></ul></div></div></td></tr><tr id="tr-mbq-q5m-mpn" outputclass="row row-level-3" class="row row-level-3"><td id="td-x2c-zes-b57" rowspan="1" colspan="1"><p id="p-0fm-mop-nte">outer_exclusive_corpid</p></td><td id="td-mbh-7kz-xvx" rowspan="1" colspan="1"><p id="p-5fx-wrm-tp0">String</p></td><td id="td-34q-fpg-rsq" rowspan="1" colspan="1"><p id="p-nzy-7q9-lk8">是</p></td><td id="td-7t7-edu-66s" rowspan="1" colspan="1"><p id="p-fcf-bxz-nt1">ding12345</p></td><td id="td-pwf-vty-5nx" rowspan="1" colspan="1"><p id="p-dh5-v9o-20y">需要添加的企业账号所属的corpId。</p></td></tr><tr id="tr-dcm-o26-b8d" outputclass="row row-level-3" class="row row-level-3"><td id="td-57v-vp6-5tb" rowspan="1" colspan="1"><p id="p-3jm-e7f-0gy">outer_exclusive_userid</p></td><td id="td-k1n-swa-90e" rowspan="1" colspan="1"><p id="p-ls7-din-hot">String</p></td><td id="td-mg0-dho-0ty" rowspan="1" colspan="1"><p id="p-v1r-y80-7tt">是</p></td><td id="td-apj-2sn-c8h" rowspan="1" colspan="1"><p id="p-37w-2q1-1zq">user01</p></td><td id="td-ba4-52b-3ah" rowspan="1" colspan="1"><p id="p-cbr-5v6-4b0">需要添加的企业账号所属的userId。</p></td></tr><tr id="tr-qf3-evv-7c3" outputclass="row row-level-3" class="row row-level-3"><td id="td-4v0-zgd-973" rowspan="1" colspan="1"><p id="p-dm6-25z-jp8">name</p></td><td id="td-d5q-q8c-djt" rowspan="1" colspan="1"><p id="p-r2n-3rp-km1">String</p></td><td id="td-ubk-cf4-94o" rowspan="1" colspan="1"><p id="p-86j-5dd-2af">是</p></td><td id="td-05d-h4p-gdr" rowspan="1" colspan="1"><p id="p-p26-izo-bjh">张三</p></td><td id="td-hp1-fbz-kzz" rowspan="1" colspan="1"><p id="p-yjb-abv-5kh">员工名称，长度最大80个字符。</p></td></tr><tr id="tr-k76-4fr-fqx" outputclass="row row-level-4" class="row row-level-4"><td id="td-aip-kvb-xv8" rowspan="1" colspan="1"><p id="p-b8a-tb7-7hb">dept_id_list</p></td><td id="td-64t-jud-auv" rowspan="1" colspan="1"><p id="p-brz-gpn-h78">String</p></td><td id="td-2pt-qvj-aph" rowspan="1" colspan="1"><p id="p-wna-bqv-amf">是</p></td><td id="td-edf-6p0-hd7" rowspan="1" colspan="1"><p id="p-5tx-gqc-px2">"2,3,4"</p></td><td id="td-4h8-cfz-r0s" rowspan="1" colspan="1"><p id="p-e5p-054-ipi">所属部门ID列表，多个部门ID使用<code data-tag="code" code-type="xCode" id="f9220812738m5" class="code">英文,</code>隔开，每次调用最多传100个部门ID。</p></td></tr><tr id="tr-2fi-bqw-61k" outputclass="row row-level-6" class="row row-level-6"><td id="td-mu1-sad-pp1" rowspan="1" colspan="1"><p id="p-gu6-ufm-tyw">telephone</p></td><td id="td-cln-up9-dbf" rowspan="1" colspan="1"><p id="p-wdr-bf5-vbp">String</p></td><td id="td-mph-22q-0e8" rowspan="1" colspan="1"><p id="p-b2q-3g0-exi">否</p></td><td id="td-qfd-4ud-kax" rowspan="1" colspan="1"><p id="p-zfa-mtc-biu">010-86123456-2345</p></td><td id="td-s87-fla-909" rowspan="1" colspan="1"><p id="p-kzc-1r9-cq1">分机号，长度最大50个字符。</p><div id="note-xw2-7wd-yzv" type="note" class="note note-note"><div class="note-icon-wrapper"><i class="icon-note note note"></i></div><div class="noteContentSpan"><strong>说明 </strong><p id="p-s2x-m66-c68">分机号是唯一的，企业内不能重复。</p></div></div></td></tr><tr id="tr-3p8-krs-sqi" outputclass="row row-level-7" class="row row-level-7"><td id="td-no9-lq8-uk4" rowspan="1" colspan="1"><p id="p-cvk-yax-tu0">job_number</p></td><td id="td-wlv-sj9-wtm" rowspan="1" colspan="1"><p id="p-jgr-f2k-gd8">String</p></td><td id="td-17h-i69-f95" rowspan="1" colspan="1"><p id="p-zg5-grb-n7l">否</p></td><td id="td-0rl-vvk-q3y" rowspan="1" colspan="1"><p id="p-oar-ie6-sq2">4</p></td><td id="td-i80-t8p-uyg" rowspan="1" colspan="1"><p id="p-us8-mdn-ce6">员工工号，长度最大为50个字符。</p></td></tr><tr id="tr-8j2-cgv-2l6" outputclass="row row-level-8" class="row row-level-8"><td id="td-b1d-gpz-qw7" rowspan="1" colspan="1"><p id="p-z14-q9f-ha1">title</p></td><td id="td-qtx-xmx-hrj" rowspan="1" colspan="1"><p id="p-xfh-o12-24n">String</p></td><td id="td-dkt-5l4-ddo" rowspan="1" colspan="1"><p id="p-ilh-tkm-f84">否</p></td><td id="td-a26-tmk-qey" rowspan="1" colspan="1"><p id="p-2ry-5hw-u5c">技术总监</p></td><td id="td-i87-nxb-ipq" rowspan="1" colspan="1"><p id="p-vay-0xy-yxc">职位，长度最大为200个字符。</p></td></tr><tr id="tr-i10-xoq-lwe" outputclass="row row-level-9" class="row row-level-9"><td id="td-yw3-l37-o6i" rowspan="1" colspan="1"><p id="p-y7k-1m3-uy6">email</p><p id="p-dnu-x7m-ekz"></p></td><td id="td-qn4-jzl-kas" rowspan="1" colspan="1"><p id="p-ke2-fb1-xjl">String</p></td><td id="td-64r-l5a-jig" rowspan="1" colspan="1"><p id="p-hql-714-ruo">否</p></td><td id="td-mik-8dp-3v2" rowspan="1" colspan="1"><p id="p-014-qpg-164">test@xxx.com</p></td><td id="td-sq3-099-kxa" rowspan="1" colspan="1"><p id="p-zc9-8sl-cys">员工个人邮箱，长度最大50个字符。</p><div id="note-shh-zv1-1iv" type="note" class="note note-note"><div class="note-icon-wrapper"><i class="icon-note note note"></i></div><div class="noteContentSpan"><strong>说明 </strong><p id="p-l90-uvt-sxy">员工邮箱是唯一的，企业内不能重复。</p></div></div></td></tr><tr id="tr-4hw-wuh-0pf" outputclass="row row-level-10" class="row row-level-10"><td id="td-3np-ff6-qz0" rowspan="1" colspan="1"><p id="p-wbj-u3r-vnd">org_email</p></td><td id="td-yqx-xu0-213" rowspan="1" colspan="1"><p id="p-vhz-dgf-fct">String</p></td><td id="td-1mf-mkl-lc2" rowspan="1" colspan="1"><p id="p-s8v-smu-fg2">否</p></td><td id="td-ei6-qcx-ipw" rowspan="1" colspan="1"><p id="p-47b-y66-dxb">test@xxx.com</p></td><td id="td-s7n-94g-0i3" rowspan="1" colspan="1"><p id="p-lg9-yme-xfw">员工的企业邮箱，长度最大100个字符。</p><div id="note-e4m-iub-5ty" type="note" class="note note-note"><div class="note-icon-wrapper"><i class="icon-note note note"></i></div><div class="noteContentSpan"><strong>说明 </strong><p id="p-1cm-j9l-ziq">需满足以下条件，此字段才生效：员工已开通企业邮箱。</p></div></div></td></tr><tr id="tr-43o-zia-ksv" outputclass="row row-level-11" class="row row-level-11"><td id="td-an4-z2h-zjd" rowspan="1" colspan="1"><p id="p-9te-yda-j8x">org_email_type</p></td><td id="td-1ty-29k-jpi" rowspan="1" colspan="1"><p id="p-2ot-721-yj9">String</p></td><td id="td-dx6-m8h-ngs" rowspan="1" colspan="1"><p id="p-aaa-rrc-b3m">否</p></td><td id="td-4ui-mys-eii" rowspan="1" colspan="1"><p id="p-eg5-6pk-fkj">profession</p></td><td id="td-mwi-7pq-ef4" rowspan="1" colspan="1"><p id="p-tsa-v7l-j6w">员工的企业邮箱类型：</p><ul id="ul-0mh-rw0-04z"><li id="li-uw5-44l-vd7"><p id="p-tmb-k14-azj"><b>profession: </b>标准版。</p></li><li id="li-lkv-qgq-jjt"><p id="p-8j8-1b4-9t2"><b>base：</b>基础版。</p></li></ul></td></tr><tr id="tr-mqf-zmc-ba8" outputclass="row row-level-11" class="row row-level-11"><td id="td-gc0-ery-1zf" rowspan="1" colspan="1"><p id="p-cv3-o7s-vxt">work_place</p></td><td id="td-x5i-dq9-e85" rowspan="1" colspan="1"><p id="p-q6e-7iy-kxr">String</p></td><td id="td-dag-je2-dnq" rowspan="1" colspan="1"><p id="p-8l0-net-hz5">否</p></td><td id="td-kbm-ggz-ky6" rowspan="1" colspan="1"><p id="p-lrm-4q5-eax">未来park</p></td><td id="td-nmy-n3h-x6w" rowspan="1" colspan="1"><p id="p-upl-my8-xbn">办公地点，长度最大100个字符。</p></td></tr><tr id="tr-6hu-l6n-67r" outputclass="row row-level-12" class="row row-level-12"><td id="td-w7o-w6v-5db" rowspan="1" colspan="1"><p id="p-ztn-6iz-f3h">remark</p></td><td id="td-2h9-mu5-txd" rowspan="1" colspan="1"><p id="p-uqq-d5y-hza">String</p></td><td id="td-21b-dsr-loq" rowspan="1" colspan="1"><p id="p-9h5-s7p-aeu">否</p></td><td id="td-pcw-5s8-3hr" rowspan="1" colspan="1"><p id="p-cxb-1ud-f2y">备注信息</p></td><td id="td-bec-j7z-8vo" rowspan="1" colspan="1"><p id="p-h92-eu9-wi3">备注，长度最大2000个字符。</p></td></tr><tr id="tr-86n-q2p-lc0" outputclass="row row-level-14 has-child" class="row row-level-14 has-child"><td id="td-7qs-oud-1yl" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="p-4ov-lze-ga3">dept_order_list</p></td><td id="td-0rb-xn4-2fn" rowspan="1" colspan="1"><p id="p-56l-57u-ibl">Object[]</p></td><td id="td-s2r-hm3-2gm" rowspan="1" colspan="1"><p id="p-c4k-re7-sv0">否</p></td><td id="td-uqx-0d8-gij" rowspan="1" colspan="1"><p id="p-j24-swp-zeq"></p></td><td id="td-mx4-d1n-9ph" rowspan="1" colspan="1"><p id="p-y4t-z1q-7d2">员工在对应的部门中的排序。</p></td></tr><tr id="tr-uad-5r1-jx1" outputclass="row row-level-14-1" class="row row-level-14-1"><td id="td-p9a-u49-33l" rowspan="1" colspan="1"><p id="p-66d-vdd-48q">dept_id</p></td><td id="td-pnu-ajg-oht" rowspan="1" colspan="1"><p id="p-dze-0zu-ynh">Number</p></td><td id="td-osc-oyy-8z3" rowspan="1" colspan="1"><p id="p-tww-ljm-5ly">否</p></td><td id="td-3p7-o5a-xjq" rowspan="1" colspan="1"><p id="p-67n-6s0-uq9">2</p></td><td id="td-cne-gda-v12" rowspan="1" colspan="1"><p id="p-8m8-vyw-cg7">部门ID。</p></td></tr><tr id="tr-z93-w3i-z1o" outputclass="row row-level-14-2" class="row row-level-14-2"><td id="td-01s-qku-22j" rowspan="1" colspan="1"><p id="p-y3y-4g3-if2">order</p></td><td id="td-ab7-yz5-jrt" rowspan="1" colspan="1"><p id="p-ajc-nqh-mjr">Number</p></td><td id="td-px9-osa-04n" rowspan="1" colspan="1"><p id="p-iep-q9e-97s">否</p></td><td id="td-piz-4r6-zal" rowspan="1" colspan="1"><p id="p-5yp-s9x-s3g">1</p></td><td id="td-4hb-rc8-2qn" rowspan="1" colspan="1"><p id="p-g7z-gy0-jkd">员工在部门中的排序，数值越大，排序越靠前。</p></td></tr><tr id="tr-t6n-54l-6wv" outputclass="row row-level-15 has-child" class="row row-level-15 has-child"><td id="td-tjq-b9p-agp" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="p-6os-1zr-1da">dept_title_list</p></td><td id="td-yvb-9xf-19p" rowspan="1" colspan="1"><p id="p-l3p-ads-unc">Object[]</p></td><td id="td-pwc-kx1-ys7" rowspan="1" colspan="1"><p id="p-nnz-pq9-ft9">否</p></td><td id="td-q3r-wnh-cne" rowspan="1" colspan="1"><p id="p-fmw-0j3-xqx"></p></td><td id="td-ymd-zmo-jd4" rowspan="1" colspan="1"><p id="p-rs3-ms7-0h5">员工在对应的部门中的职位。</p></td></tr><tr id="tr-s14-2ta-oup" outputclass="row row-level-15-1" class="row row-level-15-1"><td id="td-n2s-uk1-42c" rowspan="1" colspan="1"><p id="p-ejd-ryg-6ue">dept_id</p></td><td id="td-su9-fh1-pqt" rowspan="1" colspan="1"><p id="p-p43-k0z-ero">Number</p></td><td id="td-kid-yyq-tg9" rowspan="1" colspan="1"><p id="p-1b0-nvm-cp4">否</p></td><td id="td-dkz-pyj-fxa" rowspan="1" colspan="1"><p id="p-bnq-638-uez">2</p></td><td id="td-u7z-3b5-c82" rowspan="1" colspan="1"><p id="p-q7z-6eu-3fa">部门ID。</p></td></tr><tr id="tr-ogs-evv-dgq" outputclass="row row-level-15-2" class="row row-level-15-2"><td id="td-s4r-vr7-nyi" rowspan="1" colspan="1"><p id="p-yp8-6ur-n77">title</p></td><td id="td-yy9-q4z-03m" rowspan="1" colspan="1"><p id="p-lmt-211-zn9">String</p></td><td id="td-9bc-h66-jmh" rowspan="1" colspan="1"><p id="p-6ur-4zq-2oi">否</p></td><td id="td-ve3-dhb-vbc" rowspan="1" colspan="1"><p id="p-iq9-2uk-7fb">资深产品经理</p></td><td id="td-uak-sn8-84v" rowspan="1" colspan="1"><p id="p-zna-msi-v8v">员工在部门中的职位。</p></td></tr><tr id="tr-4oo-hjm-tix" outputclass="row row-level-16" class="row row-level-16"><td id="td-h6w-7vs-1pz" rowspan="1" colspan="1"><p id="p-dqa-1t7-stv">extension</p></td><td id="td-uw9-tvw-xlq" rowspan="1" colspan="1"><p id="p-2ke-5cm-vbh">String</p></td><td id="td-xrt-uf4-fhz" rowspan="1" colspan="1"><p id="p-k9s-q0k-yr8">否</p></td><td id="td-nxw-znh-uie" rowspan="1" colspan="1"><p id="p-zeq-dt9-exh">{"爱好":"旅游","年龄":"24"}</p></td><td id="td-l7d-znh-ea2" rowspan="1" colspan="1"><p id="p-uwh-pqz-mr4">扩展属性，可以设置多种属性，最大长度2000个字符。</p><div id="note-kpu-7of-b2v" type="note" class="note note-note"><div class="note-icon-wrapper"><i class="icon-note note note"></i></div><div class="noteContentSpan"><strong>说明 </strong><ul id="ul-t12-976-btu"><li id="li-f6p-su1-d91"><p id="p-yno-4zb-r70">手机上最多只能显示10个扩展属性。</p></li><li id="li-ke4-o2z-d96"><p id="p-6fz-tcc-r4x">在使用该参数前，需要先在<a href="https://oa.dingtalk.com/index_new.htm#/setting/contactInfo" data-link-href-cangjie="https://oa.dingtalk.com/index_new.htm#/setting/contactInfo" target="_blank" rel="noopener noreferrer" data-tag="xref" id="a-lf6-a54-blo" class="xref">钉钉管理后台</a>增加该属性，然后再调用接口进行赋值，例如，在<b>通讯录</b> &gt; <b>内部通讯录设置</b> &gt; <b>通讯录信息</b>页面，单击<b>添加自定义字段</b>按钮。如下图所示，新增字段名称为“爱好”，字段类型为“文本”的自定义字段。<img id="img-nn7-d2r-gyg" placement="break" src="https://help-static-aliyun-doc.aliyuncs.com/assets/img/zh-CN/7050271561/p433752.png" alt="爱好" class="image break" / /></p></li><li id="li-pf9-zfi-o2v"><p id="p-fch-qr3-ajy">该字段的值支持链接类型填写，同时链接支持变量通配符自动替换，目前支持通配符有：userid，corpid。例如： {"爱好":"[爱好](http://www.dingtalk.com?userid=#userid#&amp;corpid=#corpid#)"}</p></li></ul></div></div></td></tr><tr id="tr-zpo-kfa-dxj" outputclass="row row-level-17" class="row row-level-17"><td id="td-mqt-yt2-etu" rowspan="1" colspan="1"><p id="p-dmc-ukh-pap">senior_mode</p></td><td id="td-tou-jy5-b8b" rowspan="1" colspan="1"><p id="p-so9-vud-wqv">Boolean</p></td><td id="td-igp-nxz-wne" rowspan="1" colspan="1"><p id="p-wmj-zss-21k">否</p></td><td id="td-fhu-wwh-gfj" rowspan="1" colspan="1"><p id="p-nrq-4pm-9ry">false</p></td><td id="td-htr-03u-ler" rowspan="1" colspan="1"><p id="p-7xh-b2d-wbv">是否开启高管模式，默认值false。</p><ul id="ul-64m-ilb-gm7"><li id="li-vpj-mdo-geq"><p id="p-m1s-0bg-n6f"><b>true</b>：开启。</p><div id="note-doc-o52-43c" type="note" class="note note-note"><div class="note-icon-wrapper"><i class="icon-note note note"></i></div><div class="noteContentSpan"><strong>说明 </strong><ul id="ul-8ec-pqc-jfx"><li id="li-87r-j84-jc5"><p id="p-vlj-387-7ud">开启后，手机号码对所有员工隐藏。</p></li><li id="li-dk7-tjn-1ll"><p id="p-dxz-34c-df3">普通员工无法对其发DING、发起钉钉商务电话。</p></li><li id="li-xff-8d6-yaf"><p id="p-okz-53r-ncq">高管之间可以发DING、发起钉钉商务电话。</p></li></ul></div></div></li><li id="li-on6-5nn-9pl"><p id="p-klw-rxu-38w"><b>false</b>：不开启。</p></li></ul></td></tr><tr id="tr-euz-eax-wpa" outputclass="row row-level-18" class="row row-level-18"><td id="td-for-dei-z8f" rowspan="1" colspan="1"><p id="p-tk0-cxl-6a4">hired_date</p></td><td id="td-5k0-fih-27g" rowspan="1" colspan="1"><p id="p-367-pbr-o40">Number</p></td><td id="td-f0n-fsv-ttd" rowspan="1" colspan="1"><p id="p-xyv-2fu-x94">否</p></td><td id="td-zfg-ei5-xid" rowspan="1" colspan="1"><p id="p-ghs-m2y-lh8">1597573616828</p></td><td id="td-bg6-k0z-ae4" rowspan="1" colspan="1"><p id="p-yat-344-i7g">入职时间，Unix时间戳，单位毫秒。</p></td></tr><tr id="tr-bwh-x02-lwr" outputclass="row row-level-19" class="row row-level-19"><td id="td-gmw-fvg-aou" rowspan="1" colspan="1"><p id="p-pjv-7bd-gfl">manager_userid</p></td><td id="td-5pf-lg7-bq5" rowspan="1" colspan="1"><p id="p-os8-cve-7gr">String</p></td><td id="td-lrx-zr3-kg1" rowspan="1" colspan="1"><p id="p-8sp-059-cn7">否</p></td><td id="td-0z1-ek8-zke" rowspan="1" colspan="1"><p id="p-nuu-c7i-jsc">001</p></td><td id="td-vcz-ixh-04z" rowspan="1" colspan="1"><p id="p-r18-yj2-idn">直属主管的userId。</p></td></tr></tbody></table></section><section id="a69e67d38fzok" class="section"><h3 id="b04e884e4dqhu"><b>请求示例</b></h3><div outputclass="tabbed-codeblock" data-tag="fig" id="figure-o0w-gy8-e8c" class="tabbed-codeblock-box"><div class="tab-box"></div><input type="radio" name="check-figure-o0w-gy8-e8c" id="figure-o0w-gy8-e8c-curl-tab" checked="checked" /><label for="figure-o0w-gy8-e8c-curl-tab">curl</label><div class="codeblock-item"><pre code-type="xCode" id="7b67e1f3f7w7w" index="0" curindex="0" data-tag="codeblock" outputclass="language-curl" class="pre codeblock language-curl"><code>curl -X POST "https://oapi.dingtalk.com/topapi/v2/user/create" \
+  -H 'Content-Type: application/x-www-form-urlencoded;charset=utf-8' \
+  -d 'access_token=YOUR_ACCESS_TOKEN' \
+  -d 'outer_exclusive_corpid=ding12345' \
+  -d 'outer_exclusive_userid=user01' \
+  -d 'name=张三' \
+  -d 'dept_id_list=2,3,4' \
+  -d 'userid=zhangsan' \
+  -d 'telephone=010-86123456-2345' \
+  -d 'job_number=4' \
+  -d 'title=技术总监' \
+  -d 'email=test@xxx.com' \
+  -d 'work_place=未来park' \
+  -d 'remark=备注信息'</code></pre></div><input type="radio" name="check-figure-o0w-gy8-e8c" id="figure-o0w-gy8-e8c-java-tab" /><label for="figure-o0w-gy8-e8c-java-tab">Java</label><div class="codeblock-item"><pre outputclass="language-java" id="codeblock-ddp-uwf-gsu" data-tag="codeblock" code-type="xCode" class="pre codeblock language-java"><code>DingTalkClient client = new DefaultDingTalkClient("https://oapi.dingtalk.com/topapi/v2/user/create");
+OapiV2UserCreateRequest req = new OapiV2UserCreateRequest();
+req.setUserid("zhangsan");
+req.setName("张三");
+req.setMobile("18513027676");
+req.setHideMobile(false);
+req.setTelephone("010-86123456-2345");
+req.setJobNumber("4");
+req.setTitle("技术总监");
+req.setEmail("test@xxx.com");
+req.setOrgEmail("test@xxx.com");
+req.setWorkPlace("未来park");
+req.setRemark("备注备注");
+req.setDeptIdList("2,3,4");
+List&lt;DeptOrder&gt; list2 = new ArrayList&lt;DeptOrder&gt;();
+DeptOrder obj3 = new DeptOrder();
+list2.add(obj3);
+req.setDeptOrderList(list2);
+List&lt;DeptTitle&gt; list5 = new ArrayList&lt;DeptTitle&gt;();
+DeptTitle obj6 = new DeptTitle();
+list5.add(obj6);
+req.setDeptTitleList(list5);
+req.setSeniorMode(false);
+req.setHiredDate(1597573616828L);
+req.setLoginEmail("test@xxx.com");
+req.setExclusiveAccount(false);
+req.setExclusiveAccountType("dingtalk");
+req.setLoginId("login_id3");
+req.setInitPassword("init_password220");
+List&lt;DeptPosition&gt; list8 = new ArrayList&lt;DeptPosition&gt;();
+DeptPosition obj9 = new DeptPosition();
+list8.add(obj9);
+req.setDeptPositionList(list8);
+req.setOrgEmailType("profession");
+req.setManagerUserid("001");
+req.setExclusiveMobile("+86-13412341234");
+req.setExclusiveMobileVerifyStatus("verified/notVerified");
+req.setOuterExclusiveCorpid("corpid");
+req.setOuterExclusiveUserid("userid");
+req.setAvatarMediaId("@lALPDfmVUw19YdrNA-jNA-g");
+req.setNickname("昵称");
+req.setExtAttrsUpdateMode(0L);
+List&lt;EmpExtAttr&gt; list11 = new ArrayList&lt;EmpExtAttr&gt;();
+EmpExtAttr obj12 = new EmpExtAttr();
+list11.add(obj12);
+req.setExtAttrs(list11);
+req.setGender("F/M/none");
+req.setLimited(false);
+req.setHasSubordinate(false);
+req.setDeptName("部门1-部门11-部门111");
+req.setFlowerName("花名");
+req.setSendPasswordToUser(false);
+req.setCheckUserProtect(true);
+OapiV2UserCreateResponse rsp = client.execute(req, "");
+System.out.println(rsp.getBody());</code></pre></div><input type="radio" name="check-figure-o0w-gy8-e8c" id="figure-o0w-gy8-e8c-python-tab" /><label for="figure-o0w-gy8-e8c-python-tab">Python</label><div class="codeblock-item"><pre outputclass="language-python" id="codeblock-ohc-jxa-cwi" data-tag="codeblock" code-type="xCode" class="pre codeblock language-python"><code># -*- coding: utf-8 -*-
+import dingtalk.api
+
+req=dingtalk.api.OapiV2UserCreateRequest("https://oapi.dingtalk.com/topapi/v2/user/create")
+
+req.userid="zhangsan"
+req.name="张三"
+req.mobile="18513027676"
+req.hide_mobile=false
+req.telephone="010-86123456-2345"
+req.job_number="4"
+req.title="技术总监"
+req.email="test@xxx.com"
+req.org_email="test@xxx.com"
+req.work_place="未来park"
+req.remark="备注备注"
+req.dept_id_list="2,3,4"
+req.dept_order_list="[2,1]"
+req.dept_title_list="[2,"资深产品经理"]"
+req.senior_mode=false
+req.hired_date=1597573616828
+req.login_email="test@xxx.com"
+req.exclusive_account=false
+req.exclusive_account_type="dingtalk"
+req.login_id="login_id3"
+req.init_password="init_password220"
+req.dept_position_list="[true,"未来park","资深产品经理",2,"100"]"
+req.org_email_type="profession"
+req.manager_userid="001"
+req.exclusive_mobile="+86-13412341234"
+req.exclusive_mobile_verify_status="verified/notVerified"
+req.outer_exclusive_corpid="corpid"
+req.outer_exclusive_userid="userid"
+req.avatarMediaId="@lALPDfmVUw19YdrNA-jNA-g"
+req.nickname="昵称"
+req.ext_attrs_update_mode=0
+req.ext_attrs="["emp:xxx",{"images":["https://img.alicdn.com/imgextra/i2/O1CN01IVwD5w1mqnRxmUBng_!!6000000005006-2-tps-64-64.png"],"text":"点击前往钉钉官网","url":"www.dingtalk.com"}]"
+req.gender="F/M/none"
+req.limited=false
+req.has_subordinate=false
+req.dept_name="部门1-部门11-部门111"
+req.flower_name="花名"
+req.send_password_to_user=false
+req.check_user_protect=true
+try:
+	resp= req.getResponse(access_token)
+	print(resp)
+except Exception,e:
+	print(e)
+</code></pre></div><input type="radio" name="check-figure-o0w-gy8-e8c" id="figure-o0w-gy8-e8c-php-tab" /><label for="figure-o0w-gy8-e8c-php-tab">PHP</label><div class="codeblock-item"><pre outputclass="language-php" id="codeblock-rq8-xp0-1q2" data-tag="codeblock" code-type="xCode" class="pre codeblock language-php"><code>include "TopSdk.php";
+date_default_timezone_set('Asia/Shanghai');
+
+$c = new DingTalkClient(DingTalkConstant::$CALL_TYPE_OAPI, DingTalkConstant::$METHOD_POST , DingTalkConstant::$FORMAT_JSON);
+$req = new OapiV2UserCreateRequest;
+$req-&gt;setUserid("zhangsan");
+$req-&gt;setName("张三");
+$req-&gt;setMobile("18513027676");
+$req-&gt;setHideMobile("false");
+$req-&gt;setTelephone("010-86123456-2345");
+$req-&gt;setJobNumber("4");
+$req-&gt;setTitle("技术总监");
+$req-&gt;setEmail("test@xxx.com");
+$req-&gt;setOrgEmail("test@xxx.com");
+$req-&gt;setWorkPlace("未来park");
+$req-&gt;setRemark("备注备注");
+$req-&gt;setDeptIdList("2,3,4");
+$dept_order_list = new DeptOrder;
+$req-&gt;setDeptOrderList(array($dept_order_list));
+$dept_title_list = new DeptTitle;
+$req-&gt;setDeptTitleList(array($dept_title_list));
+$req-&gt;setSeniorMode("false");
+$req-&gt;setHiredDate("1597573616828");
+$req-&gt;setLoginEmail("test@xxx.com");
+$req-&gt;setExclusiveAccount("false");
+$req-&gt;setExclusiveAccountType("dingtalk");
+$req-&gt;setLoginId("login_id3");
+$req-&gt;setInitPassword("init_password220");
+$dept_position_list = new DeptPosition;
+$req-&gt;setDeptPositionList(array($dept_position_list));
+$req-&gt;setOrgEmailType("profession");
+$req-&gt;setManagerUserid("001");
+$req-&gt;setExclusiveMobile("+86-13412341234");
+$req-&gt;setExclusiveMobileVerifyStatus("verified/notVerified");
+$req-&gt;setOuterExclusiveCorpid("corpid");
+$req-&gt;setOuterExclusiveUserid("userid");
+$req-&gt;setAvatarMediaId("@lALPDfmVUw19YdrNA-jNA-g");
+$req-&gt;setNickname("昵称");
+$req-&gt;setExtAttrsUpdateMode("0");
+$ext_attrs = new EmpExtAttr;
+$req-&gt;setExtAttrs(array($ext_attrs));
+$req-&gt;setGender("F/M/none");
+$req-&gt;setLimited("false");
+$req-&gt;setHasSubordinate("false");
+$req-&gt;setDeptName("部门1-部门11-部门111");
+$req-&gt;setFlowerName("花名");
+$req-&gt;setSendPasswordToUser("false");
+$req-&gt;setCheckUserProtect("true");
+$resp = $c-&gt;execute($req, $access_token, "https://oapi.dingtalk.com/topapi/v2/user/create");</code></pre></div><input type="radio" name="check-figure-o0w-gy8-e8c" id="figure-o0w-gy8-e8c-csharp-tab" /><label for="figure-o0w-gy8-e8c-csharp-tab">C#</label><div class="codeblock-item"><pre outputclass="language-csharp" id="codeblock-f2s-ft6-1ra" data-tag="codeblock" code-type="xCode" class="pre codeblock language-csharp"><code>IDingTalkClient client = new DefaultDingTalkClient("https://oapi.dingtalk.com/topapi/v2/user/create");
+OapiV2UserCreateRequest req = new OapiV2UserCreateRequest();
+req.OuterExclusiveCorpid = "ding12345"; 
+req.OuterExclusiveUserid = "user01";  
+req.Name = "张三"; 
+req.DeptIdList = "2,3,4"; 
+req.Userid = "zhangsan"; 
+req.Telephone = "010-86123456-2345";
+req.JobNumber = "4"; 
+req.Title = "技术总监";  
+req.Email = "test@xxx.com";  
+req.OrgEmail = "test@xxx.com"; 
+req.OrgEmailType = "profession";
+req.WorkPlace = "未来park"; 
+req.Remark = "备注信息"; 
+List&lt;OapiV2UserCreateRequest.DeptOrderDomain&gt; deptOrderList = new List&lt;OapiV2UserCreateRequest.DeptOrderDomain&gt;();
+OapiV2UserCreateRequest.DeptOrderDomain orderObj = new OapiV2UserCreateRequest.DeptOrderDomain();
+orderObj.DeptId = 2L;
+orderObj.Order = 1L;
+deptOrderList.Add(orderObj);
+req.DeptOrderList_ = deptOrderList;
+List&lt;OapiV2UserCreateRequest.DeptTitleDomain&gt; deptTitleList = new List&lt;OapiV2UserCreateRequest.DeptTitleDomain&gt;();
+OapiV2UserCreateRequest.DeptTitleDomain titleObj = new OapiV2UserCreateRequest.DeptTitleDomain();
+titleObj.DeptId = 2L;
+titleObj.Title = "资深产品经理";
+deptTitleList.Add(titleObj);
+req.DeptTitleList_ = deptTitleList;
+req.Extension = "{\"爱好\":\"旅游\",\"年龄\":\"24\"}"; 
+req.SeniorMode = false;  
+req.HiredDate = 1597573616828L;    
+req.ManagerUserid = "001";             
+OapiV2UserCreateResponse rsp = client.Execute(req, access_token);
+Console.WriteLine(rsp.Body);</code></pre></div></div></section></section><section id="fdf13eb71d2lx" class="section"><h2 id="a966ff266fkes"><b>响应</b></h2><section id="59a6b8e80bn2z" class="section"><h3 data-tag="title" id="h2-ett-vgu-4bw" class="title"><b>响应体</b></h3><table id="table-t9a-9l8-jpp" tablewidth="710" tablecolswidth="213 142 142 213" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.00%"></colgroup><colgroup colwidth="0.8*" style="width:20.00%"></colgroup><colgroup colwidth="0.8*" style="width:20.00%"></colgroup><colgroup colwidth="1.2*" style="width:30.00%"></colgroup><tbody class="tbody"><tr id="tr-lvz-kud-xsd"><td id="td-gq6-vkz-ju0" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="p-5s7-e7w-ung">名称</p></td><td id="td-xdj-wo4-oiv" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="p-064-925-p7d">类型</p></td><td id="td-qi0-pd4-76s" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="p-883-3ja-9ey">示例值</p></td><td id="td-kjm-6kl-byf" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="p-sse-key-giq">描述</p></td></tr><tr id="tr-yhl-ji4-du6" outputclass="row row-level-1" class="row row-level-1"><td id="td-3ef-8my-coo" rowspan="1" colspan="1"><p id="p-9li-mi0-nnn">errcode</p></td><td id="td-qnk-jsh-p8d" rowspan="1" colspan="1"><p id="p-phh-q4s-lin">Number</p></td><td id="td-01i-trx-8yc" rowspan="1" colspan="1"><p id="p-bja-0bd-uru">0</p></td><td id="td-7jh-ygy-jtp" rowspan="1" colspan="1"><p id="p-w1g-gvh-7ct">错误码。0代表成功。</p></td></tr><tr id="tr-cuw-9wq-0b2" outputclass="row row-level-2" class="row row-level-2"><td id="td-dft-yol-vli" rowspan="1" colspan="1"><p id="p-h1r-c1g-kvq">errmsg</p></td><td id="td-nsi-5cs-mr5" rowspan="1" colspan="1"><p id="p-ggv-w1f-a9g">String</p></td><td id="td-j8t-xb9-ksq" rowspan="1" colspan="1"><p id="p-pa8-p3w-b10">ok</p></td><td id="td-nz2-vry-503" rowspan="1" colspan="1"><p id="p-bxf-080-ub5">错误信息。</p></td></tr><tr id="tr-sad-b49-m7q" outputclass="row row-level-3 has-child" class="row row-level-3 has-child"><td id="td-hwk-pkj-nni" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="p-zug-mcu-zg7">result</p></td><td id="td-w8c-4ou-bed" rowspan="1" colspan="1"><p id="p-adj-5zx-2v7">Object</p></td><td id="td-pw6-78a-dal" rowspan="1" colspan="1"><p id="p-ht4-ppm-7zz"></p></td><td id="td-ycd-krh-kcc" rowspan="1" colspan="1"><p id="p-xvl-4lx-acb">返回结果。</p></td></tr><tr id="tr-zbh-nhg-o8g" outputclass="row row-level-3-1" class="row row-level-3-1"><td id="td-xxl-jvz-77x" rowspan="1" colspan="1"><p id="p-2bu-5bd-hpy">userid</p></td><td id="td-a64-hv0-vg3" rowspan="1" colspan="1"><p id="p-3ms-dtq-fz3">String</p></td><td id="td-4v3-vmx-a3e" rowspan="1" colspan="1"><p id="p-1qd-8fi-exb">zhangsan</p></td><td id="td-93z-197-oux" rowspan="1" colspan="1"><p id="p-foh-x3g-r0a">员工userId。</p></td></tr><tr id="tr-kdg-vzb-wcl" outputclass="row row-level-3-2" class="row row-level-3-2"><td id="td-exx-pd5-057" rowspan="1" colspan="1"><p id="p-ysp-2rk-u0q">unionId</p></td><td id="td-zg5-98a-4u1" rowspan="1" colspan="1"><p id="p-h53-68j-70r">String</p></td><td id="td-cwh-vla-qsv" rowspan="1" colspan="1"><p id="p-sby-h6y-b9h">xxxx</p></td><td id="td-ck3-mi9-mj8" rowspan="1" colspan="1"><p id="p-z0n-lvy-xn8">员工unionId。</p></td></tr></tbody></table></section><section id="2aba04b3f9fjx" class="section"><h3 id="b103002230qgi"><b>响应体示例</b></h3><pre data-tag="codeblock" outputclass="language-json" code-type="xCode" id="4948a597b2qwe" class="pre codeblock language-json"><code>{
+  "errcode":"0",
+  "result":{
+    "unionId":"xxxx",
+    "userid":"zhangsan"
+  },
+  "errmsg":"ok"
+}</code></pre></section><section id="6f33986156y3x" class="section"><h3 data-tag="title" id="h2-5ln-ges-y3u" class="title"><b>错误码</b></h3><p id="ea9ae0ae25yvy">若调用该接口报错，可根据错误信息在<a data-tag="xref" id="3713aef124lfy" href="/document/development/server-api-error-codes-1#" class="xref">全局错误码</a>文档中查找解决方案。</p></section></section></div></main></body></html>

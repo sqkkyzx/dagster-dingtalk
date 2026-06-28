@@ -1,0 +1,111 @@
+<!DOCTYPE html><html><head><meta charset="utf8" / /><title>通过指定Range下载部分内容</title><meta name="gmtModify" content="2025-09-10 19:36:07" / /></head><body data-tag="concept" id="concept-2276225" class="concept"><main id="main-2276225"><h1 id="040ba7f075077" data-tag="title" class="title">通过指定Range下载部分内容</h1><p id="040bcf0075b1a" data-tag="shortdesc" class="shortdesc"><span style="color:rgb(51, 51, 51)">本文主要介绍如何</span>通过指定Range下载部分内容<span style="color:rgb(51, 51, 51)">。</span></p><div data-tag="conbody" class="conbody"><section id="b19a1c9075nag" class="section"><h2 id="n49mj" data-spm-anchor-id="a2c4g.11186623.0.i1.6d2e6c6d4Kbxt7"><b>什么是指定HTTP Range下载内容</b></h2><p id="ae72977275vph"><span style="color:rgb(51, 51, 51)">下载OSS中的大文件（超过100M）时，如果传输过程中受到网络环境影响，则会传输失败。这时，可以通过HTTP Range请求获取大文件的部分内容，示例如下。</span></p><pre outputclass="language-plaintext" data-tag="codeblock" id="ae72706975qhd" class="pre codeblock language-plaintext"><code>Get /ObjectName HTTP/1.1
+Host:xxxx.oss-cn-hangzhou.aliyuncs.com
+Date:Tue, 17 Nov 2015 17:27:45 GMT
+Authorization:SignatureValue
+Range:bytes=[$ByteRange]</code></pre><div type="note" id="c4f432f175m19" class="note note-note"><div class="note-icon-wrapper"><i class="icon-note note note"></i></div><div class="noteContentSpan"><strong>说明 </strong><p id="d237bcc075okg">[$ByteRange]指请求资源的范围，单位为“Byte（字节）”。示例如下。</p><ul id="d237bcc1753zq"><li id="d237bcc275eja"><p id="d237bcc375llv"><code data-tag="code" class="code">Range: bytes=0-499</code>表示第0~499字节范围的内容。</p></li><li id="d237bcc475twd"><p id="d237bcc575o39"><code data-tag="code" class="code">Range: bytes=500-999</code>表示第500~999字节范围的内容。</p></li><li id="d237bcc6758zl"><p id="d237bcc775jhy"><code data-tag="code" class="code">Range: bytes=-500</code>表示最后500字节的内容。</p></li><li id="d237bcc8758gz"><p id="d237bcc975h04"><code data-tag="code" class="code">Range: bytes=500-</code>表示从第500字节开始到文件结束部分的内容。</p></li><li id="d237bcca75j8u"><p id="d237bccb75dbk"><code data-tag="code" class="code">Range: bytes=0-</code>表示第一个字节到最后一个字节，即完整的文件内容。</p></li><li id="d237bccc75h1w"><p id="d237bccd75q8e">OSS不支持多Range参数，即不支持指定多个范围。如果指定多个范围，OSS只返回第一个Range的数据，例如：<code data-tag="code" class="code">Range:bytes=0-499,500-999</code>，OSS只返回0-499字节范围的内容。</p></li><li id="d237bcce75xia"><p id="d237bccf75bpt">[$ByteRange]有效区间在0至<code data-tag="code" class="code">content-length - 1</code>的范围内。</p></li></ul></div></div><p id="ae72224475gfc"><span style="color:rgb(51, 51, 51)">如果HTTP Range请求合法，响应返回值为</span><span style="color:rgb(51, 51, 51)"><code data-tag="code" class="code">206</code></span><span style="color:rgb(51, 51, 51)">并在响应头中包含</span><span style="color:rgb(51, 51, 51)"><code data-tag="code" class="code">Content-Range</code></span><span style="color:rgb(51, 51, 51)">。如果HTTP Range请求不合法，或者指定范围不在有效区间，会导致Range不生效，响应返回值为</span><span style="color:rgb(51, 51, 51)"><code data-tag="code" class="code">200</code></span><span style="color:rgb(51, 51, 51)">，并传送整个Object内容。如下为HTTP Range请求不合法的示例及错误说明。</span></p><div type="note" id="4feab141759gf" class="note note-note"><div class="note-icon-wrapper"><i class="icon-note note note"></i></div><div class="noteContentSpan"><strong>说明 </strong><p id="4c99b18075gat">此处假设Object资源大小为1000字节，Range有效区间为0~999。</p></div></div><ul id="ae71fb3275bfe"><li id="ae71fb3475kjn"><p id="ae71fb33755al"><code data-tag="code" class="code">Range: byte=0-499</code>：格式错误，byte应为bytes。</p></li><li id="ae71fb3675gmu"><p id="ae71fb35759z8"><code data-tag="code" class="code">Range: bytes=0-1000</code>：末字节1000超出有效区间。</p></li><li id="ae71fb38751sy"><p id="ae71fb3775bf2"><code data-tag="code" class="code">Range: bytes=1000-2000</code>：指定范围超出有效区间。</p></li><li id="ae71fb3a75850"><p id="ae71fb3975v7y"><code data-tag="code" class="code">Range: bytes=1000-</code>：首字节超出有效区间。</p></li><li id="ae72224075fhf"><p id="ae71fb3b755k0"><code data-tag="code" class="code">Range: bytes=-2000</code>：指定范围超出有效区间。</p></li></ul><section id="22b5141075w0b" class="section"><h3 id="1b54a6917582a"><span style="color:rgb(55, 61, 65)"><b>兼容行为</b></span></h3><p id="1b54a6927536v"><span style="color:rgb(51, 51, 51)">使用HTTP Range时，增加请求头</span><span style="color:rgb(51, 51, 51)"><code data-tag="code" class="code">x-oss-range-behavior:standard</code></span><span style="color:rgb(51, 51, 51)">，可以改变指定范围不在有效区间时OSS的行为。行为改变的示例如下：</span></p><div type="note" id="1b54a69375sfm" class="note note-note"><div class="note-icon-wrapper"><i class="icon-note note note"></i></div><div class="noteContentSpan"><strong>说明 </strong><p id="1b54a69475u7v">此处假设Object资源大小为1000字节，Range有效区间为0-999。如通过HTTP Range请求获取大文件的部分内容时，因选取了无效的范围，导致OSS返回InvalidRange错误码，详细错误信息如下：<code data-tag="code" class="code">The requested range cannot be satisfied</code></p></div></div><ul id="1b54a695753hk"><li id="1b54a6967587u"><p id="1b54a69775voy"><code data-tag="code" class="code">Range: bytes=500-2000</code>：末字节超出有效区间，返回500-999字节范围内容。</p></li><li id="1b54a69875clb"><p id="1b54a69975vsv"><code data-tag="code" class="code">Range: bytes=1000-2000</code>：首字节超出有效区间，返回错误<code data-tag="code" class="code">416 (InvalidRange)</code>。</p></li><li id="1b54a69a755zy"><p id="1b54a69b75u6j"><code data-tag="code" class="code">Range: bytes=1000-</code>：首字节超出有效区间，返回错误<code data-tag="code" class="code">416 (InvalidRange)</code>。</p></li><li id="1b54a69c75jkf"><p id="1b54a69d75m4r"><code data-tag="code" class="code">Range: bytes=-2000</code>：指定范围超出有效区间，返回0-999字节，即完整的文件内容。</p></li></ul></section></section><section id="a81d5ec07534u" class="section"><h2 id="EcPTn"><span style="color:rgb(55, 61, 65)"><b>示例</b></span></h2><p id="ae718606754o5"><span style="color:rgb(51, 51, 51)">针对上述内容，本文提供如下HTTP Range请求示例。</span></p><div type="note" id="92bdee61754p8" class="note note-note"><div class="note-icon-wrapper"><i class="icon-note note note"></i></div><div class="noteContentSpan"><strong>说明 </strong><p id="913b460075b6b">此处假设Object资源大小为1000字节，Range有效区间为0-999。</p></div></div><section id="ded405e075kfq" class="section"><h3 id="nEHXh"><span style="color:rgb(55, 61, 65)"><b>正常请求示例</b></span></h3><ul id="ae715ef0756jr"><li id="ae715ef475nre"><p id="ae715ef175lio">请求Object资源0-499字节范围内的内容。</p><pre outputclass="language-plaintext" data-tag="codeblock" id="ae715ef375et1" class="pre codeblock language-plaintext"><code>GET /ObjectName
+Range: bytes=0-499
+Host: bucket.oss-cn-hangzhou.aliyuncs.com
+Date: Fri, 18 Oct 2019 02:51:30 GMT
+Authorization: Sigature
+
+206 (Partial Content)
+content-length: 500
+content-range: bytes 0-499/1000
+connection: keep-alive
+etag: "CACF99600561A31D494569C979E6FB81"
+x-oss-request-id: 5DA928B227D52731327DE078
+date: Fri, 18 Oct 2019 02:51:30 GMT
+[500 bytes of object data]</code></pre></li><li id="ae715ef875vnx"><p id="ae715ef575wtu">请求Object资源第500字节到文件结尾的内容。</p><pre outputclass="language-plaintext" data-tag="codeblock" id="ae715ef775auu" class="pre codeblock language-plaintext"><code>GET /ObjectName
+Range: bytes=500-
+Host: bucket.oss-cn-hangzhou.aliyuncs.com
+Date: Fri, 18 Oct 2019 03:24:39 GMT
+Authorization: Signature
+
+206 (Partial Content)
+content-length: 500
+content-range: bytes 500-999/1000
+etag: "CACF99600561A31D494569C979E6FB81"
+x-oss-request-id: 5DA9307750EBE33332E3720A
+date: Fri, 18 Oct 2019 03:24:39 GMT
+[500 bytes of object data]</code></pre></li><li id="ae71860375293"><p id="ae71860075kqi">请求Object资源最后500字节的内容。</p><pre outputclass="language-plaintext" data-tag="codeblock" id="ae71860275vd6" class="pre codeblock language-plaintext"><code>GET /ObjectName
+Range: bytes=-500
+Host: bucket.oss-cn-hangzhou.aliyuncs.com
+Date: Fri, 18 Oct 2019 03:23:22 GMT
+Authorization: Signature
+
+206 (Partial Content)
+content-length: 500
+content-range: bytes 500-999/1000
+etag: "CACF99600561A31D494569C979E6FB81"
+x-oss-request-id: 5DA9302A6646AC37397F7039
+date: Fri, 18 Oct 2019 03:23:22 GMT
+[500 bytes of object data]</code></pre></li></ul></section><section id="e7be20a075ozi" class="section"><h3 id="GpBbp"><span style="color:rgb(55, 61, 65)"><b>超出范围的请求示例</b></span></h3><ul id="ae7137e0759sg"><li id="ae7137e4752pp"><p id="ae7137e175wxo">末字节1000超出有效区间，导致Range不生效，响应返回值为<code data-tag="code" class="code">200</code>，并传送整个Object内容。</p><pre outputclass="language-plaintext" data-tag="codeblock" id="ae7137e375vwt" class="pre codeblock language-plaintext"><code>GET /ObjectName
+Range: bytes=0-1000
+Host: bucket.oss-cn-hangzhou.aliyuncs.com
+Date: Fri, 18 Oct 2019 03:00:02 GMT
+Authorization: Signature
+
+200 (OK)
+content-length: 1000
+etag: "CACF99600561A31D494569C979E6FB81"
+x-oss-request-id: 5DA92AB204321E36347F3E7D
+date: Fri, 18 Oct 2019 03:00:02 GMT
+[1000 bytes of object data]</code></pre></li><li id="ae7137e87506b"><p id="ae7137e575y7l">指定范围超出有效区间，导致Range不生效，响应返回值为<code data-tag="code" class="code">200</code>，并传送整个Object内容。</p><pre outputclass="language-plaintext" data-tag="codeblock" id="ae7137e775v1y" class="pre codeblock language-plaintext"><code>GET /ObjectName
+Range: bytes=1000-2000
+Host: bucket.oss-cn-hangzhou.aliyuncs.com
+Date: Fri, 18 Oct 2019 02:56:24 GMT
+Authorization: Sigature
+
+200 (OK)
+content-length: 1000
+etag: "CACF99600561A31D494569C979E6FB81"
+x-oss-request-id: 5DA929D9CCCC823835CBE134
+date: Fri, 18 Oct 2019 02:56:25 GMT
+[1000 bytes of object data]</code></pre></li></ul></section><section id="0143c9d075kq2" class="section"><h3 id="e96986b0751ih"><span style="color:rgb(55, 61, 65)"><b>兼容行为请求示例</b></span></h3><ul id="ae70c2b075ix1"><li id="ae70e9c375or1"><p id="ae70c2b175fr3">增加<code data-tag="code" class="code">x-oss-range-behavior:standard</code>请求头，末字节超出有效区间，返回500-999字节范围的内容。</p><pre outputclass="language-plaintext" data-tag="codeblock" id="ae70e9c275c7v" class="pre codeblock language-plaintext"><code>GET /ObjectName
+x-oss-range-behavior: standard
+Range: bytes=500-2000
+Host: bucket.oss-cn-hangzhou.aliyuncs.com
+Date: Fri, 18 Oct 2019 07:02:23 GMT
+Authorization: Signature
+
+206 (Partial Content)
+content-length: 500
+content-range: bytes 500-999/1000
+etag: "CACF99600561A31D494569C979E6FB81"
+x-oss-request-id: 5DA9637FB3B1C73234CC59EB
+date: Fri, 18 Oct 2019 07:02:23 GMT
+[500 bytes of object data]</code></pre></li><li id="ae7110d1757o8"><p id="ae70e9c475m03">增加<code data-tag="code" class="code">x-oss-range-behavior:standard</code>请求头，首字节超出有效区间，返回<code data-tag="code" class="code">416</code>错误。</p><pre outputclass="language-plaintext" data-tag="codeblock" id="ae7110d0752ye" class="pre codeblock language-plaintext"><code>GET /ObjectName
+x-oss-range-behavior: standard
+Range: bytes=1000-2000
+Host: bucket.oss-cn-hangzhou.aliyuncs.com
+Date: Fri, 18 Oct 2019 07:04:23 GMT
+Authorization: Signature
+
+416 (Requested Range Not Satisfiable)
+content-length: 345
+x-oss-request-id: 5DA963F7CEBFAA3931BF91F5
+date: Fri, 18 Oct 2019 07:04:23 GMT
+content-type: application/xml
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;Error&gt;
+  &lt;Code&gt;InvalidRange&lt;/Code&gt;
+  &lt;Message&gt;The requested range cannot be satisfied&lt;/Message&gt;
+  &lt;RequestId&gt;5DA963F7CEBFAA3931BF91F5&lt;/RequestId&gt;
+  &lt;HostId&gt;bucket.oss-cn-hangzhou.aliyuncs.com&lt;/HostId&gt;
+  &lt;ActualObjectSize&gt;1000&lt;/ActualObjectSize&gt;
+  &lt;RangeRequested&gt;bytes=1000-2000&lt;/RangeRequested&gt;
+&lt;/Error&gt;</code></pre></li><li id="ae7110d675gaz"><p id="ae7110d275nov">增加<code data-tag="code" class="code">x-oss-range-behavior:standard</code>请求头，指定范围超出有效区间，返回0-999字节，即完整的文件内容。</p><pre outputclass="language-plaintext" data-tag="codeblock" id="ae7110d575zxy" class="pre codeblock language-plaintext"><code>GET /ObjectName
+x-oss-range-behavior: standard
+Range: bytes=-2000
+Host: bucket.oss-cn-hangzhou.aliyuncs.com
+Date: Fri, 18 Oct 2019 07:06:39 GMT
+Authorization: Signature
+
+206 (Partial Content)
+content-length: 1000
+content-range: bytes 0-999/1000
+etag: "CACF99600561A31D494569C979E6FB81"
+x-oss-request-id: 5DA9647FC4334F3534AF9A83
+date: Fri, 18 Oct 2019 07:06:39 GMT
+[1000 bytes of object data]</code></pre></li></ul></section></section></div></main>
+</body></html>

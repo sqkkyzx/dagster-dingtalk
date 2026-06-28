@@ -1,0 +1,361 @@
+<!DOCTYPE html><html><head><meta charset="utf8" / /><meta name="gmtModify" content="2025-09-12 17:18:29" / /><meta name="searchtitle" content="" / /><meta name="keywords" content="" / /><meta name="author" content="" / /><title>获取群会话的OpenConversationId</title><meta name="gmtModify" content="2026-06-05 13:56:06" / /></head><body data-tag="topic" id="doc-api-dingtalk-ChatIdToOpenConversationId" class="topic"><main id="17e31a92678rs" data-init-id="doc-api-dingtalk_ChatIdToOpenConversationId"><h1 data-tag="title" id="h1-gsv-won-fob" class="title">获取群会话的OpenConversationId</h1><p data-tag="shortdesc" id="595160e6d9leg" class="shortdesc">调用本接口，通过chatId查询OpenConversationId，适用于在创建群会话时未保存 OpenConversationId，后续业务需要使用该 ID 的场景。</p><div data-tag="conbody" outputclass="icms-api-reference" class="icms-api-reference conbody"><section id="section-prerequisites-1" class="section icms-module" data-tag="section" data-source="latest-mounted-icms-html"><h2 id="h2-prerequisites-1" data-tag="h2" class="h2">接口调用说明</h2><p id="eab7a281eb8fu">如果在调用<a href="https://open.dingtalk.com/document/development/create-group-session#" class="xref" id="d5f63f9b2fspd">创建群</a>接口时没有保存OpenConversationId，可以通过调用本接口通过chatId获取OpenConversationId。</p></section><section id="section-request-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-request-1" data-tag="h2" class="h2">请求</h2><section id="section-request-basic-info" class="section"><h3 id="heading-request-basic-info" data-tag="h3" class="h3">基本信息</h3><table id="4ccabfed119v2" tablewidth="648" tablecolswidth="216 432" autofit="false" class="table"><colgroup colwidth="0.67*" style="width:33.33%"></colgroup><colgroup colwidth="1.33*" style="width:66.67%"></colgroup><tbody class="tbody"><tr id="3354bc2bf7vq9"><td id="d3b801c9f1jpb" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="f5042bd73c9tm">字段</p></td><td id="4683068e69tdf" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="6d640686658fw">值</p></td></tr><tr id="f96c9f432flgj"><td id="c18d495d927fp" rowspan="1" colspan="1"><p id="05875a4af5oua">HTTP URL</p></td><td id="2b8166495aqiw" rowspan="1" colspan="1"><p id="857d000debzc9">https://api.dingtalk.com/v1.0/im/chat/{chatId}/convertToOpenConversationId</p></td></tr><tr id="eef05218464kv"><td id="3e10503039pgf" rowspan="1" colspan="1"><p id="f0818f15d1pzb">HTTP Method</p></td><td id="9326759fc1ucj" rowspan="1" colspan="1"><p id="cf13bf9f48enj">POST</p></td></tr><tr id="1b05e67096avq"><td id="881e10aa7f5mu" rowspan="1" colspan="1"><p id="b4e48ccf46134">支持的应用类型</p></td><td id="2381e8ce0atde" rowspan="1" colspan="1"><p id="b0e7ac5024rsb"><span data-tag="ph" id="ph-request-basic-app-type-apptype-0" class="ph ph-app-type" data-ph-raw-text="appType-企业内部应用">appType-企业内部应用</span></p></td></tr><tr id="4e1e0d3d19vmq"><td id="2d77f1e3f23j5" rowspan="1" colspan="1"><p id="3cad3473f4jd1">权限要求</p></td><td id="1acd10d5dbfs0" rowspan="1" colspan="1"><p id="316eca6455puq"><span data-tag="ph" id="ph-request-basic-permission-permission-qyapi-chat-read-0" class="ph-permission ph" data-ph-raw-text="permission-qyapi_chat_read-钉钉群基础信息读权限" data-permission-id="permission-qyapi_chat_read" data-permission-code="qyapi_chat_read" data-permission-detail-api="/document/api/permission/detail" data-permission-query-param="code">permission-qyapi_chat_read-钉钉群基础信息读权限</span></p></td></tr></tbody></table></section><section id="section-request-header-parameter" class="section"><h3 data-tag="h3" id="h2-fzo-0jv-2ov" class="h3 title">请求头</h3><table id="f108762072cxp" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="de2669ee43o4j"><td id="eabeaa5ab18w5" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="011903186c4tm">名称</p></td><td id="c35457de9d3eb" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="74857217d2zfv">类型</p></td><td id="a0db06e0d06z1" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="d6288f4115p4x">是否必填</p></td><td id="99cc28ce8cp0l" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="466f6b38865z2">描述</p></td></tr><tr id="2c5910aa32cb5"><td id="740143e15fck1" rowspan="1" colspan="1"><p id="c95c4dd9a47dd">x-acs-dingtalk-access-token</p></td><td id="92109c78c5jez" rowspan="1" colspan="1"><p id="16039db55cqcx">String</p></td><td id="6394da5865eim" rowspan="1" colspan="1"><p id="bac0e810176c3">是</p></td><td id="a90945db82hnp" rowspan="1" colspan="1"><p id="6e13cd46c4dg0">调用该接口的访问凭证，通过调用<a href="https://open.dingtalk.com/document/development/obtain-the-access-token-of-an-internal-app#" id="c04c58af4877g" class="xref">获取企业内部应用的accessToken</a>接口获取。</p></td></tr></tbody></table></section><section id="section-request-path-parameter" class="section"><h3 data-tag="h3" id="h2-5yb-jk2-crf" class="h3 title">路径参数</h3><table id="5a56fc328au73" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="b311765e04qze"><td id="ca600eb6e8hjv" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="90c596293eodj">名称</p></td><td id="63541043c63li" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="72a045e7bctuk">类型</p></td><td id="7577d21dcc17y" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="b45f20ae18r8i">是否必填</p></td><td id="21e1fd664eu4d" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="7dd300a1603sh">描述</p></td></tr><tr id="47438437c1ny8"><td id="8c501265bbdey" rowspan="1" colspan="1"><p id="78f98165a2rkt">chatId</p></td><td id="838690fcd2zth" rowspan="1" colspan="1"><p id="1887e66cacsb2">String</p></td><td id="3ebb0938965se" rowspan="1" colspan="1"><p id="cccb2fc010dg1">是</p></td><td id="5273dff550fml" rowspan="1" colspan="1"><p id="4a3a4bb46ar5d">群会话chatId，可通过<a href="https://open.dingtalk.com/document/development/create-group-session#" id="7039217086xrf" class="xref">创建群</a>接口获取chatId参数值。</p></td></tr></tbody></table></section><section id="section-request-body-example" class="section"><h3 id="h3-request-body-example" data-tag="h3" class="h3">请求示例</h3><div outputclass="tabbed-codeblock" data-tag="fig" id="figure-pzx-x13-3cv" class="tabbed-codeblock-box"><div class="tab-box"></div><input type="radio" name="check-figure-pzx-x13-3cv" id="figure-pzx-x13-3cv-HTTP-tab" checked="checked" /><label for="figure-pzx-x13-3cv-HTTP-tab">HTTP</label><div class="codeblock-item"><pre id="codeblock-zyh-szc-xiq" outputclass="language-HTTP" code-type="xCode" data-tag="codeblock" class="pre codeblock language-HTTP"><code>POST /v1.0/im/chat/chatfaabe59a460527f5fb72fbbdfe3f061e/convertToOpenConversationId HTTP/1.1
+Host:api.dingtalk.com
+Content-Type:application/json</code></pre></div><input type="radio" name="check-figure-pzx-x13-3cv" id="figure-pzx-x13-3cv-java-tab" /><label for="figure-pzx-x13-3cv-java-tab">Java</label><div class="codeblock-item"><pre id="codeblock-pqc-0ji-prw" outputclass="language-java" code-type="xCode" data-tag="codeblock" class="pre codeblock language-java"><code>// This file is auto-generated, don't edit it. Thanks.
+package com.aliyun.sample;
+
+import com.aliyun.tea.*;
+import com.aliyun.teautil.*;
+import com.aliyun.teautil.models.*;
+import com.aliyun.dingtalkim_1_0.*;
+import com.aliyun.dingtalkim_1_0.models.*;
+import com.aliyun.teaopenapi.*;
+import com.aliyun.teaopenapi.models.*;
+
+public class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Client
+     * @throws Exception
+     */
+    public static com.aliyun.dingtalkim_1_0.Client createClient() throws Exception {
+        Config config = new Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        return new com.aliyun.dingtalkim_1_0.Client(config);
+    }
+
+    public static void main(String[] args_) throws Exception {
+        java.util.List&lt;String&gt; args = java.util.Arrays.asList(args_);
+        com.aliyun.dingtalkim_1_0.Client client = Sample.createClient();
+        ChatIdToOpenConversationIdHeaders chatIdToOpenConversationIdHeaders = new ChatIdToOpenConversationIdHeaders();
+        chatIdToOpenConversationIdHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        try {
+            client.chatIdToOpenConversationIdWithOptions("chatfaabe59a460527f5fb72fbbdfe3f061e", chatIdToOpenConversationIdHeaders, new RuntimeOptions());
+        } catch (TeaException err) {
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        } catch (Exception _err) {
+            TeaException err = new TeaException(_err.getMessage(), _err);
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        }        
+    }
+}</code></pre></div><input type="radio" name="check-figure-pzx-x13-3cv" id="figure-pzx-x13-3cv-python-tab" /><label for="figure-pzx-x13-3cv-python-tab">Python</label><div class="codeblock-item"><pre id="codeblock-5qf-bq1-ro5" outputclass="language-python" code-type="xCode" data-tag="codeblock" class="pre codeblock language-python"><code># -*- coding: utf-8 -*-
+# This file is auto-generated, don't edit it. Thanks.
+import sys
+
+from typing import List
+
+from alibabacloud_dingtalk.im_1_0.client import Client as dingtalkim_1_0Client
+from alibabacloud_tea_openapi import models as open_api_models
+from alibabacloud_dingtalk.im_1_0 import models as dingtalkim__1__0_models
+from alibabacloud_tea_util import models as util_models
+from alibabacloud_tea_util.client import Client as UtilClient
+
+
+class Sample:
+    def __init__(self):
+        pass
+
+    @staticmethod
+    def create_client() -&gt; dingtalkim_1_0Client:
+        """
+        使用 Token 初始化账号Client
+        @return: Client
+        @throws Exception
+        """
+        config = open_api_models.Config()
+        config.protocol = 'https'
+        config.region_id = 'central'
+        return dingtalkim_1_0Client(config)
+
+    @staticmethod
+    def main(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        chat_id_to_open_conversation_id_headers = dingtalkim__1__0_models.ChatIdToOpenConversationIdHeaders()
+        chat_id_to_open_conversation_id_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        try:
+            client.chat_id_to_open_conversation_id_with_options('chatfaabe59a460527f5fb72fbbdfe3f061e', chat_id_to_open_conversation_id_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+    @staticmethod
+    async def main_async(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        chat_id_to_open_conversation_id_headers = dingtalkim__1__0_models.ChatIdToOpenConversationIdHeaders()
+        chat_id_to_open_conversation_id_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        try:
+            await client.chat_id_to_open_conversation_id_with_options_async('chatfaabe59a460527f5fb72fbbdfe3f061e', chat_id_to_open_conversation_id_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+
+if __name__ == '__main__':
+    Sample.main(sys.argv[1:])</code></pre></div><input type="radio" name="check-figure-pzx-x13-3cv" id="figure-pzx-x13-3cv-php-tab" /><label for="figure-pzx-x13-3cv-php-tab">PHP</label><div class="codeblock-item"><pre id="codeblock-gx9-xwg-ene" outputclass="language-php" code-type="xCode" data-tag="codeblock" class="pre codeblock language-php"><code>&lt;?php
+
+// This file is auto-generated, don't edit it. Thanks.
+namespace AlibabaCloud\SDK\Sample;
+
+use AlibabaCloud\SDK\Dingtalk\Vim_1_0\Dingtalk;
+use \Exception;
+use AlibabaCloud\Tea\Exception\TeaError;
+use AlibabaCloud\Tea\Utils\Utils;
+
+use Darabonba\OpenApi\Models\Config;
+use AlibabaCloud\SDK\Dingtalk\Vim_1_0\Models\ChatIdToOpenConversationIdHeaders;
+use AlibabaCloud\Tea\Utils\Utils\RuntimeOptions;
+
+class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Dingtalk Client
+     */
+    public static function createClient(){
+        $config = new Config([]);
+        $config-&gt;protocol = "https";
+        $config-&gt;regionId = "central";
+        return new Dingtalk($config);
+    }
+
+    /**
+     * @param string[] $args
+     * @return void
+     */
+    public static function main($args){
+        $client = self::createClient();
+        $chatIdToOpenConversationIdHeaders = new ChatIdToOpenConversationIdHeaders([]);
+        $chatIdToOpenConversationIdHeaders-&gt;xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        try {
+            $client-&gt;chatIdToOpenConversationIdWithOptions("chatfaabe59a460527f5fb72fbbdfe3f061e", $chatIdToOpenConversationIdHeaders, new RuntimeOptions([]));
+        }
+        catch (Exception $err) {
+            if (!($err instanceof TeaError)) {
+                $err = new TeaError([], $err-&gt;getMessage(), $err-&gt;getCode(), $err);
+            }
+            if (!Utils::empty_($err-&gt;code) &amp;&amp; !Utils::empty_($err-&gt;message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+        }
+    }
+}
+$path = __DIR__ . \DIRECTORY_SEPARATOR . '..' . \DIRECTORY_SEPARATOR . 'vendor' . \DIRECTORY_SEPARATOR . 'autoload.php';
+if (file_exists($path)) {
+    require_once $path;
+}
+Sample::main(array_slice($argv, 1));</code></pre></div><input type="radio" name="check-figure-pzx-x13-3cv" id="figure-pzx-x13-3cv-go-tab" /><label for="figure-pzx-x13-3cv-go-tab">Go</label><div class="codeblock-item"><pre id="codeblock-ons-w1y-y9h" outputclass="language-go" code-type="xCode" data-tag="codeblock" class="pre codeblock language-go"><code>// This file is auto-generated, don't edit it. Thanks.
+package main
+
+import (
+  "os"
+  util  "github.com/alibabacloud-go/tea-utils/service"
+  dingtalkim_1_0  "github.com/alibabacloud-go/dingtalk/im_1_0"
+  openapi  "github.com/alibabacloud-go/darabonba-openapi/client"
+  "github.com/alibabacloud-go/tea/tea"
+)
+
+
+/**
+ * 使用 Token 初始化账号Client
+ * @return Client
+ * @throws Exception
+ */
+func CreateClient () (_result *dingtalkim_1_0.Client, _err error) {
+  config := &amp;openapi.Config{}
+  config.Protocol = tea.String("https")
+  config.RegionId = tea.String("central")
+  _result = &amp;dingtalkim_1_0.Client{}
+  _result, _err = dingtalkim_1_0.NewClient(config)
+  return _result, _err
+}
+
+func _main (args []*string) (_err error) {
+  client, _err := CreateClient()
+  if _err != nil {
+    return _err
+  }
+
+  chatIdToOpenConversationIdHeaders := &amp;dingtalkim_1_0.ChatIdToOpenConversationIdHeaders{}
+  chatIdToOpenConversationIdHeaders.XAcsDingtalkAccessToken = tea.String("&lt;your access token&gt;")
+  tryErr := func()(_e error) {
+    defer func() {
+      if r := tea.Recover(recover()); r != nil {
+        _e = r
+      }
+    }()
+    _, _err = client.ChatIdToOpenConversationIdWithOptions(tea.String("chatfaabe59a460527f5fb72fbbdfe3f061e"), chatIdToOpenConversationIdHeaders, &amp;util.RuntimeOptions{})
+    if _err != nil {
+      return _err
+    }
+
+    return nil
+  }()
+
+  if tryErr != nil {
+    var err = &amp;tea.SDKError{}
+    if _t, ok := tryErr.(*tea.SDKError); ok {
+      err = _t
+    } else {
+      err.Message = tea.String(tryErr.Error())
+    }
+    if !tea.BoolValue(util.Empty(err.Code)) &amp;&amp; !tea.BoolValue(util.Empty(err.Message)) {
+      // err 中含有 code 和 message 属性，可帮助开发定位问题
+    }
+
+  }
+  return _err
+}
+
+
+func main() {
+  err := _main(tea.StringSlice(os.Args[1:]))
+  if err != nil {
+    panic(err)
+  }
+}</code></pre></div><input type="radio" name="check-figure-pzx-x13-3cv" id="figure-pzx-x13-3cv-nodejs-tab" /><label for="figure-pzx-x13-3cv-nodejs-tab">Node.js</label><div class="codeblock-item"><pre id="codeblock-v0i-rvy-ivd" outputclass="language-nodejs" code-type="xCode" data-tag="codeblock" class="pre codeblock language-nodejs"><code>// This file is auto-generated, don't edit it
+import Util, * as $Util from '@alicloud/tea-util';
+import dingtalkim_1_0, * as $dingtalkim_1_0 from '@alicloud/dingtalk/im_1_0';
+import OpenApi, * as $OpenApi from '@alicloud/openapi-client';
+import * as $tea from '@alicloud/tea-typescript';
+
+
+export default class Client {
+
+  /**
+   * 使用 Token 初始化账号Client
+   * @return Client
+   * @throws Exception
+   */
+  static createClient(): dingtalkim_1_0 {
+    let config = new $OpenApi.Config({ });
+    config.protocol = "https";
+    config.regionId = "central";
+    return new dingtalkim_1_0(config);
+  }
+
+  static async main(args: string[]): Promise&lt;void&gt; {
+    let client = Client.createClient();
+    let chatIdToOpenConversationIdHeaders = new $dingtalkim_1_0.ChatIdToOpenConversationIdHeaders({ });
+    chatIdToOpenConversationIdHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+    try {
+      await client.chatIdToOpenConversationIdWithOptions("chatfaabe59a460527f5fb72fbbdfe3f061e", chatIdToOpenConversationIdHeaders, new $Util.RuntimeOptions({ }));
+    } catch (err) {
+      if (!Util.empty(err.code) &amp;&amp; !Util.empty(err.message)) {
+        // err 中含有 code 和 message 属性，可帮助开发定位问题
+      }
+
+    }    
+  }
+
+}
+
+Client.main(process.argv.slice(2));</code></pre></div><input type="radio" name="check-figure-pzx-x13-3cv" id="figure-pzx-x13-3cv-csharp-tab" /><label for="figure-pzx-x13-3cv-csharp-tab">C#</label><div class="codeblock-item"><pre id="codeblock-vfq-vyj-wap" outputclass="language-csharp" code-type="xCode" data-tag="codeblock" class="pre codeblock language-csharp"><code>// This file is auto-generated, don't edit it. Thanks.
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
+
+using Tea;
+using Tea.Utils;
+
+
+namespace AlibabaCloud.SDK.Sample
+{
+    public class Sample 
+    {
+
+        /**
+         * 使用 Token 初始化账号Client
+         * @return Client
+         * @throws Exception
+         */
+        public static AlibabaCloud.SDK.Dingtalkim_1_0.Client CreateClient()
+        {
+            AlibabaCloud.OpenApiClient.Models.Config config = new AlibabaCloud.OpenApiClient.Models.Config();
+            config.Protocol = "https";
+            config.RegionId = "central";
+            return new AlibabaCloud.SDK.Dingtalkim_1_0.Client(config);
+        }
+
+        public static void Main(string[] args)
+        {
+            AlibabaCloud.SDK.Dingtalkim_1_0.Client client = CreateClient();
+            AlibabaCloud.SDK.Dingtalkim_1_0.Models.ChatIdToOpenConversationIdHeaders chatIdToOpenConversationIdHeaders = new AlibabaCloud.SDK.Dingtalkim_1_0.Models.ChatIdToOpenConversationIdHeaders();
+            chatIdToOpenConversationIdHeaders.XAcsDingtalkAccessToken = "&lt;your access token&gt;";
+            try
+            {
+                client.ChatIdToOpenConversationIdWithOptions("chatfaabe59a460527f5fb72fbbdfe3f061e", chatIdToOpenConversationIdHeaders, new AlibabaCloud.TeaUtil.Models.RuntimeOptions());
+            }
+            catch (TeaException err)
+            {
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+            catch (Exception _err)
+            {
+                TeaException err = new TeaException(new Dictionary&lt;string, object&gt;
+                {
+                    { "message", _err.Message }
+                });
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+        }
+
+
+    }
+}</code></pre></div><input type="radio" name="check-figure-pzx-x13-3cv" id="figure-pzx-x13-3cv-cpp-tab" /><label for="figure-pzx-x13-3cv-cpp-tab">C++</label><div class="codeblock-item"><pre id="codeblock-upj-ljn-hcz" outputclass="language-cpp" code-type="xCode" data-tag="codeblock" class="pre codeblock language-cpp"><code>// This file is auto-generated, don't edit it. Thanks.
+
+#include &lt;alibabacloud/dingtalkim__1__0.hpp&gt;
+#include &lt;alibabacloud/open_api.hpp&gt;
+#include &lt;darabonba/core.hpp&gt;
+#include &lt;darabonba/util.hpp&gt;
+#include &lt;iostream&gt;
+
+using namespace std;
+
+Alibabacloud_Dingtalkim_1_0::Client createClient() {
+  shared_ptr&lt;Alibabacloud_OpenApi::Config&gt; config = make_shared&lt;Alibabacloud_OpenApi::Config&gt;();
+  config-&gt;protocol = make_shared&lt;string&gt;("https");
+  config-&gt;regionId = make_shared&lt;string&gt;("central");
+  return Alibabacloud_Dingtalkim_1_0::Client(config);
+}
+
+int main(int argc, char *args[]) {
+  args++;
+  shared_ptr&lt;Alibabacloud_Dingtalkim_1_0::Client&gt; client = make_shared&lt;Alibabacloud_Dingtalkim_1_0::Client&gt;(createClient());
+  shared_ptr&lt;Alibabacloud_Dingtalkim_1_0::ChatIdToOpenConversationIdHeaders&gt; chatIdToOpenConversationIdHeaders = make_shared&lt;Alibabacloud_Dingtalkim_1_0::ChatIdToOpenConversationIdHeaders&gt;();
+  chatIdToOpenConversationIdHeaders-&gt;xAcsDingtalkAccessToken = make_shared&lt;string&gt;("&lt;your access token&gt;");
+  try {
+    client-&gt;chatIdToOpenConversationIdWithOptions(make_shared&lt;string&gt;("chatfaabe59a460527f5fb72fbbdfe3f061e"), chatIdToOpenConversationIdHeaders, make_shared&lt;Darabonba_Util::RuntimeOptions&gt;(Darabonba_Util::RuntimeOptions()));
+  }
+  catch (std::exception &amp;err) {
+    if (!Darabonba_Util::Client::empty(err.code) &amp;&amp; !Darabonba_Util::Client::empty(err.message)) {
+      // err 中含有 code 和 message 属性，可帮助开发定位问题
+    }
+  }
+}</code></pre></div></div></section></section><section id="section-response-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-response-1" data-tag="h2" class="h2">响应</h2><section id="section-response-parameter" class="section"><h3 data-tag="h3" id="h2-icw-e0o-2ex" class="h3 title">响应体</h3><table id="fd3d439f56vxf" tablewidth="710" tablecolswidth="213 142 355" autofit="false" class="table"><colgroup colwidth="0.9*" style="width:30.00%"></colgroup><colgroup colwidth="0.6*" style="width:20.00%"></colgroup><colgroup colwidth="1.5*" style="width:50.00%"></colgroup><tbody class="tbody"><tr id="1b7298f6d3kke"><td id="9196a2faberi6" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="26dda79a70i75">名称</p></td><td id="0e40e2487118e" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="98ca186b2c4b1">类型</p></td><td id="87e9b4bd2c2sp" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="f64bd8a5882t9">描述</p></td></tr><tr outputclass="row row-level-1" id="708f9c20e63fk" class="row row-level-1"><td id="52828cde416md" rowspan="1" colspan="1"><p id="9847a1f3e313l">openConversationId</p></td><td id="f02ef03937ydd" rowspan="1" colspan="1"><p id="7ef575c17fgdo">String</p></td><td id="4ddd80ab56pi5" rowspan="1" colspan="1"><p id="65262a2e38awi">群会话openConversationId。</p></td></tr></tbody></table></section><section id="section-response-body-example" class="section"><h3 id="h3-response-body-example" data-tag="h3" class="h3">响应体示例</h3><pre id="6be06aeab4s5m" outputclass="language-json" code-type="xCode" data-tag="codeblock" class="pre codeblock language-json"><code>HTTP/1.1 200 OK
+Content-Type:application/json
+
+{
+  "openConversationId" : "cidl1B8RVUFmkO50OC9uEbySQ=="
+}</code></pre></section><section id="section-error-code-1" class="section"><h3 id="h3-error-code-1" data-tag="h3" class="h3">错误码</h3><p data-tag="p" id="p-error-code-global-guide" class="p">若调用该接口报错，可根据错误信息在<a href="https://open.dingtalk.com/document/development/server-api-error-codes-1" id="a-error-code-global-guide">全局错误码</a>文档中查找解决方案。</p><table id="4bfc855d72bf0" tablewidth="709" tablecolswidth="142 177 177 213" autofit="false" class="table"><colgroup colwidth="0.8*" style="width:20.03%"></colgroup><colgroup colwidth="1*" style="width:24.96%"></colgroup><colgroup colwidth="1*" style="width:24.96%"></colgroup><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><tbody class="tbody"><tr id="e1bd03ee81mkv"><td id="dd1c3d5b65ik9" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="3fa43153d6ujs">HttpCode</p></td><td id="ea048397f521q" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="c32365063cvld">错误码</p></td><td id="ce88d032f74gz" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="69064f5e6ffi2">错误信息</p></td><td id="a74ce867ef98c" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="e56e319fa9w2w">说明</p></td></tr><tr id="ab484cf203a2h"><td id="4667dc6dcf598" rowspan="1" colspan="1"><p id="0e46c4394aumz">400</p></td><td id="74185b834622d" rowspan="1" colspan="1"><p id="c0482284ae0sb">invalideChatId</p></td><td id="18836988079cy" rowspan="1" colspan="1"><p id="9cb377f149qtr">不合法的chatId</p></td><td id="b276ed18b9mek" rowspan="1" colspan="1"><p id="10dac534e6ep2">不合法的chatId</p></td></tr></tbody></table></section></section></div></main></body></html>

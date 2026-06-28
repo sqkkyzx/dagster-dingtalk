@@ -1,0 +1,397 @@
+<!DOCTYPE html><html><head><meta charset="utf8" / /><meta name="gmtModify" content="2025-09-23 19:19:31" / /><meta name="searchtitle" content="" / /><meta name="keywords" content="" / /><meta name="author" content="" / /><title>匹配文本中的词条</title><meta name="gmtModify" content="2026-06-04 19:10:45" / /></head><body data-tag="topic" id="doc-api-dingtalk-WikiWordsParse" class="topic"><main id="c92ca31046eu9" data-init-id="doc-api-dingtalk_WikiWordsParse"><h1 data-tag="title" id="h1-kt0-cj1-ruf" class="title">匹配文本中的词条</h1><p data-tag="shortdesc" id="b4152d3085gnr" class="shortdesc">企业有多个词条，每个词条有词条全称和别名。用于将文本与企业词条进行匹配，获取与词条全称或别名相同的文本内容。</p><div data-tag="conbody" outputclass="icms-api-reference" class="icms-api-reference conbody"><section id="e540f13bb42np" class="section"><h2 id="cf2a9666c9w2y"><b>接口调用说明</b></h2><ul id="d8a9d912bantx"><li id="9358f1f3374mi"><p id="2000001873039">如果未设置可见范围，调用本接口，词条不会被匹配，至少勾选以下任一群类型。</p></li><li id="d4f16db884h02"><p id="583d6710ddimn">匹配到词条后的文本展示效果，开发者可以自定义，例如高亮、下划线等效果。</p></li><li id="bd0399a8796kv"><p id="6a7197b2a1kts">结合查询词条详情接口，可以实现点击文本展示词条内容。</p></li></ul></section><section id="section-request-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-request-1" data-tag="h2" class="h2">请求</h2><section id="section-request-basic-info" class="section"><h3 id="heading-request-basic-info" data-tag="h3" class="h3">基本信息</h3><table id="9fa63fedc5v0v" tablewidth="648" tablecolswidth="216 432" autofit="false" class="table"><colgroup colwidth="0.67*" style="width:33.33%"></colgroup><colgroup colwidth="1.33*" style="width:66.67%"></colgroup><tbody class="tbody"><tr id="2ea35e9ddd9el"><td id="32c831103ccuy" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="ab64c5deaa1d5">字段</p></td><td id="23da591aeeqi3" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="e05b1866ac01p">值</p></td></tr><tr id="16cec212b2jdi"><td id="a6cdd8534e1xb" rowspan="1" colspan="1"><p id="8ef8e233f6hf6">HTTP URL</p></td><td id="7e12aef5c184u" rowspan="1" colspan="1"><p id="8940b68ed0plx">https://api.dingtalk.com/v1.0/wiki/words/parse</p></td></tr><tr id="a4f82d7839afd"><td id="33ae83ade93xx" rowspan="1" colspan="1"><p id="fbc03c454fax4">HTTP Method</p></td><td id="cdcd1ae678118" rowspan="1" colspan="1"><p id="6508872eb3a6t">POST</p></td></tr><tr id="3e36963719cil"><td id="8441f219baypt" rowspan="1" colspan="1"><p id="33f778a04dftc">支持的应用类型</p></td><td id="d877508a05v7h" rowspan="1" colspan="1"><p id="668c2da256w9p"><span data-tag="ph" id="ph-request-basic-app-type-apptype-0" class="ph ph-app-type" data-ph-raw-text="appType-企业内部应用">appType-企业内部应用</span>　<span data-tag="ph" id="ph-request-basic-app-type-apptype-1" class="ph ph-app-type" data-ph-raw-text="appType-第三方企业应用">appType-第三方企业应用</span></p></td></tr><tr id="846425099avq7"><td id="b86fea8155aw7" rowspan="1" colspan="1"><p id="489b561cd4ss3">权限要求</p></td><td id="c2c9449b28fn6" rowspan="1" colspan="1"><p id="aa763d883bnr3"><span data-tag="ph" id="ph-request-basic-permission-permission-wiki-words-read-0" class="ph-permission ph" data-ph-raw-text="permission-Wiki.Words.Read-企业百科词条读权限" data-permission-id="permission-Wiki.Words.Read" data-permission-code="Wiki.Words.Read" data-permission-detail-api="/document/api/permission/detail" data-permission-query-param="code">permission-Wiki.Words.Read-企业百科词条读权限</span></p></td></tr></tbody></table></section><section id="section-request-header-parameter" class="section"><h3 data-tag="h3" id="h2-pk1-dum-551" class="h3 title">请求头</h3><table id="d85bec0091zjs" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="89a55273917il"><td id="a90648a21f18j" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="e074e8e5c7dcq">名称</p></td><td id="5e8d2cb357l84" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="576032f347kyh">类型</p></td><td id="d84c18d657zxx" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="db5d9a49f8996">是否必填</p></td><td id="4472af627351r" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="e6a1a82c0d7v3">描述</p></td></tr><tr id="ea0df3238b5kb"><td id="6c56ca1120way" rowspan="1" colspan="1"><p id="88d73443c0k0v">x-acs-dingtalk-access-token</p></td><td id="b3495b0bc45z0" rowspan="1" colspan="1"><p id="f4700376c7eui">String</p></td><td id="b57c6f8e57ot6" rowspan="1" colspan="1"><p id="801ee9996bd45">是</p></td><td id="df5d3c0346xav" rowspan="1" colspan="1"><p id="cb451d5d94ksw">调用该接口的访问凭证，通过以下获取：</p><ul id="eadf486dbb0mc"><li id="303bbae0d1m8r"><p id="f76dbea566kz0">企业内部应用，调用<a href="https://open.dingtalk.com/document/development/obtain-the-access-token-of-an-internal-app#" id="7654e06a39l93" class="xref">获取企业内部应用的accessToken</a>接口获取。</p></li><li id="4fc9d804730lo"><p id="26f7203c6ckmh">第三方企业应用，调用<a href="https://open.dingtalk.com/document/development/obtain-the-access-token-of-the-authorized-enterprise-1#" id="d4ccdb72430hz" class="xref">获取第三方应用授权企业的accessToken</a>接口获取。</p></li></ul></td></tr></tbody></table></section><section id="section-request-body-parameter" class="section"><h3 data-tag="h3" id="h2-h7e-ddf-is3" class="h3 title">请求体</h3><table id="7f3f66a4d81u8" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="d0715e33d6x61"><td id="4de2eeab0466m" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="7d3f02fbb9akq">名称</p></td><td id="ff7f58519f8x2" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="4ef59bd87f0uk">类型</p></td><td id="0a1cccfd8aytt" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="db44e5a67ei3i">是否必填</p></td><td id="8c18f168a1ky5" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="926141dea8q81">描述</p></td></tr><tr outputclass="row row-level-1" id="029d5fe4c6mxu" class="row row-level-1"><td id="0288b8664anl2" rowspan="1" colspan="1"><p id="01cf88b335w1z">content</p></td><td id="af45db3b73gqm" rowspan="1" colspan="1"><p id="6c9390f3976sq">String</p></td><td id="52a1c635936c2" rowspan="1" colspan="1"><p id="941fae02c4eeo">是</p></td><td id="37e600e2f8nk8" rowspan="1" colspan="1"><p id="5b3e0f00d4udc">待匹配词条的文本，最大长度4096个字符。</p></td></tr></tbody></table></section><section id="section-request-body-example" class="section"><h3 id="h3-request-body-example" data-tag="h3" class="h3">请求示例</h3><div outputclass="tabbed-codeblock" data-tag="fig" id="figure-xkw-2rc-qpc" class="tabbed-codeblock-box"><div class="tab-box"></div><input type="radio" name="check-figure-xkw-2rc-qpc" id="figure-xkw-2rc-qpc-HTTP-tab" checked="checked" /><label for="figure-xkw-2rc-qpc-HTTP-tab">HTTP</label><div class="codeblock-item"><pre id="codeblock-l2p-7hq-3hb" outputclass="language-HTTP" code-type="xCode" data-tag="codeblock" class="pre codeblock language-HTTP"><code>POST /v1.0/wiki/words/parse HTTP/1.1
+Host:api.dingtalk.com
+Content-Type:application/json
+
+{
+  "content" : "钉钉，让工作学习更简单。"
+}</code></pre></div><input type="radio" name="check-figure-xkw-2rc-qpc" id="figure-xkw-2rc-qpc-java-tab" /><label for="figure-xkw-2rc-qpc-java-tab">Java</label><div class="codeblock-item"><pre id="codeblock-enm-twl-mbc" outputclass="language-java" code-type="xCode" data-tag="codeblock" class="pre codeblock language-java"><code>// This file is auto-generated, don't edit it. Thanks.
+package com.aliyun.sample;
+
+import com.aliyun.tea.*;
+import com.aliyun.teautil.*;
+import com.aliyun.teautil.models.*;
+import com.aliyun.dingtalkwiki_1_0.*;
+import com.aliyun.dingtalkwiki_1_0.models.*;
+import com.aliyun.teaopenapi.*;
+import com.aliyun.teaopenapi.models.*;
+
+public class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Client
+     * @throws Exception
+     */
+    public static com.aliyun.dingtalkwiki_1_0.Client createClient() throws Exception {
+        Config config = new Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        return new com.aliyun.dingtalkwiki_1_0.Client(config);
+    }
+
+    public static void main(String[] args_) throws Exception {
+        java.util.List&lt;String&gt; args = java.util.Arrays.asList(args_);
+        com.aliyun.dingtalkwiki_1_0.Client client = Sample.createClient();
+        WikiWordsParseHeaders wikiWordsParseHeaders = new WikiWordsParseHeaders();
+        wikiWordsParseHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        WikiWordsParseRequest wikiWordsParseRequest = new WikiWordsParseRequest()
+                .setContent("钉钉，让工作学习更简单。");
+        try {
+            client.wikiWordsParseWithOptions(wikiWordsParseRequest, wikiWordsParseHeaders, new RuntimeOptions());
+        } catch (TeaException err) {
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        } catch (Exception _err) {
+            TeaException err = new TeaException(_err.getMessage(), _err);
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        }        
+    }
+}</code></pre></div><input type="radio" name="check-figure-xkw-2rc-qpc" id="figure-xkw-2rc-qpc-python-tab" /><label for="figure-xkw-2rc-qpc-python-tab">Python</label><div class="codeblock-item"><pre id="codeblock-ls5-frc-qul" outputclass="language-python" code-type="xCode" data-tag="codeblock" class="pre codeblock language-python"><code># -*- coding: utf-8 -*-
+# This file is auto-generated, don't edit it. Thanks.
+import sys
+
+from typing import List
+
+from alibabacloud_dingtalk.wiki_1_0.client import Client as dingtalkwiki_1_0Client
+from alibabacloud_tea_openapi import models as open_api_models
+from alibabacloud_dingtalk.wiki_1_0 import models as dingtalkwiki__1__0_models
+from alibabacloud_tea_util import models as util_models
+from alibabacloud_tea_util.client import Client as UtilClient
+
+
+class Sample:
+    def __init__(self):
+        pass
+
+    @staticmethod
+    def create_client() -&gt; dingtalkwiki_1_0Client:
+        """
+        使用 Token 初始化账号Client
+        @return: Client
+        @throws Exception
+        """
+        config = open_api_models.Config()
+        config.protocol = 'https'
+        config.region_id = 'central'
+        return dingtalkwiki_1_0Client(config)
+
+    @staticmethod
+    def main(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        wiki_words_parse_headers = dingtalkwiki__1__0_models.WikiWordsParseHeaders()
+        wiki_words_parse_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        wiki_words_parse_request = dingtalkwiki__1__0_models.WikiWordsParseRequest(
+            content='钉钉，让工作学习更简单。'
+        )
+        try:
+            client.wiki_words_parse_with_options(wiki_words_parse_request, wiki_words_parse_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+    @staticmethod
+    async def main_async(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        wiki_words_parse_headers = dingtalkwiki__1__0_models.WikiWordsParseHeaders()
+        wiki_words_parse_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        wiki_words_parse_request = dingtalkwiki__1__0_models.WikiWordsParseRequest(
+            content='钉钉，让工作学习更简单。'
+        )
+        try:
+            await client.wiki_words_parse_with_options_async(wiki_words_parse_request, wiki_words_parse_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+
+if __name__ == '__main__':
+    Sample.main(sys.argv[1:])</code></pre></div><input type="radio" name="check-figure-xkw-2rc-qpc" id="figure-xkw-2rc-qpc-php-tab" /><label for="figure-xkw-2rc-qpc-php-tab">PHP</label><div class="codeblock-item"><pre id="codeblock-czv-nni-ae9" outputclass="language-php" code-type="xCode" data-tag="codeblock" class="pre codeblock language-php"><code>&lt;?php
+
+// This file is auto-generated, don't edit it. Thanks.
+namespace AlibabaCloud\SDK\Sample;
+
+use AlibabaCloud\SDK\Dingtalk\Vwiki_1_0\Dingtalk;
+use \Exception;
+use AlibabaCloud\Tea\Exception\TeaError;
+use AlibabaCloud\Tea\Utils\Utils;
+
+use Darabonba\OpenApi\Models\Config;
+use AlibabaCloud\SDK\Dingtalk\Vwiki_1_0\Models\WikiWordsParseHeaders;
+use AlibabaCloud\SDK\Dingtalk\Vwiki_1_0\Models\WikiWordsParseRequest;
+use AlibabaCloud\Tea\Utils\Utils\RuntimeOptions;
+
+class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Dingtalk Client
+     */
+    public static function createClient(){
+        $config = new Config([]);
+        $config-&gt;protocol = "https";
+        $config-&gt;regionId = "central";
+        return new Dingtalk($config);
+    }
+
+    /**
+     * @param string[] $args
+     * @return void
+     */
+    public static function main($args){
+        $client = self::createClient();
+        $wikiWordsParseHeaders = new WikiWordsParseHeaders([]);
+        $wikiWordsParseHeaders-&gt;xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        $wikiWordsParseRequest = new WikiWordsParseRequest([
+            "content" =&gt; "钉钉，让工作学习更简单。"
+        ]);
+        try {
+            $client-&gt;wikiWordsParseWithOptions($wikiWordsParseRequest, $wikiWordsParseHeaders, new RuntimeOptions([]));
+        }
+        catch (Exception $err) {
+            if (!($err instanceof TeaError)) {
+                $err = new TeaError([], $err-&gt;getMessage(), $err-&gt;getCode(), $err);
+            }
+            if (!Utils::empty_($err-&gt;code) &amp;&amp; !Utils::empty_($err-&gt;message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+        }
+    }
+}
+$path = __DIR__ . \DIRECTORY_SEPARATOR . '..' . \DIRECTORY_SEPARATOR . 'vendor' . \DIRECTORY_SEPARATOR . 'autoload.php';
+if (file_exists($path)) {
+    require_once $path;
+}
+Sample::main(array_slice($argv, 1));</code></pre></div><input type="radio" name="check-figure-xkw-2rc-qpc" id="figure-xkw-2rc-qpc-go-tab" /><label for="figure-xkw-2rc-qpc-go-tab">Go</label><div class="codeblock-item"><pre id="codeblock-9xe-spm-zns" outputclass="language-go" code-type="xCode" data-tag="codeblock" class="pre codeblock language-go"><code>// This file is auto-generated, don't edit it. Thanks.
+package main
+
+import (
+  "os"
+  util  "github.com/alibabacloud-go/tea-utils/service"
+  dingtalkwiki_1_0  "github.com/alibabacloud-go/dingtalk/wiki_1_0"
+  openapi  "github.com/alibabacloud-go/darabonba-openapi/client"
+  "github.com/alibabacloud-go/tea/tea"
+)
+
+
+/**
+ * 使用 Token 初始化账号Client
+ * @return Client
+ * @throws Exception
+ */
+func CreateClient () (_result *dingtalkwiki_1_0.Client, _err error) {
+  config := &amp;openapi.Config{}
+  config.Protocol = tea.String("https")
+  config.RegionId = tea.String("central")
+  _result = &amp;dingtalkwiki_1_0.Client{}
+  _result, _err = dingtalkwiki_1_0.NewClient(config)
+  return _result, _err
+}
+
+func _main (args []*string) (_err error) {
+  client, _err := CreateClient()
+  if _err != nil {
+    return _err
+  }
+
+  wikiWordsParseHeaders := &amp;dingtalkwiki_1_0.WikiWordsParseHeaders{}
+  wikiWordsParseHeaders.XAcsDingtalkAccessToken = tea.String("&lt;your access token&gt;")
+  wikiWordsParseRequest := &amp;dingtalkwiki_1_0.WikiWordsParseRequest{
+    Content: tea.String("钉钉，让工作学习更简单。"),
+  }
+  tryErr := func()(_e error) {
+    defer func() {
+      if r := tea.Recover(recover()); r != nil {
+        _e = r
+      }
+    }()
+    _, _err = client.WikiWordsParseWithOptions(wikiWordsParseRequest, wikiWordsParseHeaders, &amp;util.RuntimeOptions{})
+    if _err != nil {
+      return _err
+    }
+
+    return nil
+  }()
+
+  if tryErr != nil {
+    var err = &amp;tea.SDKError{}
+    if _t, ok := tryErr.(*tea.SDKError); ok {
+      err = _t
+    } else {
+      err.Message = tea.String(tryErr.Error())
+    }
+    if !tea.BoolValue(util.Empty(err.Code)) &amp;&amp; !tea.BoolValue(util.Empty(err.Message)) {
+      // err 中含有 code 和 message 属性，可帮助开发定位问题
+    }
+
+  }
+  return _err
+}
+
+
+func main() {
+  err := _main(tea.StringSlice(os.Args[1:]))
+  if err != nil {
+    panic(err)
+  }
+}</code></pre></div><input type="radio" name="check-figure-xkw-2rc-qpc" id="figure-xkw-2rc-qpc-nodejs-tab" /><label for="figure-xkw-2rc-qpc-nodejs-tab">Node.js</label><div class="codeblock-item"><pre id="codeblock-e41-bev-a3k" outputclass="language-nodejs" code-type="xCode" data-tag="codeblock" class="pre codeblock language-nodejs"><code>// This file is auto-generated, don't edit it
+import Util, * as $Util from '@alicloud/tea-util';
+import dingtalkwiki_1_0, * as $dingtalkwiki_1_0 from '@alicloud/dingtalk/wiki_1_0';
+import OpenApi, * as $OpenApi from '@alicloud/openapi-client';
+import * as $tea from '@alicloud/tea-typescript';
+
+
+export default class Client {
+
+  /**
+   * 使用 Token 初始化账号Client
+   * @return Client
+   * @throws Exception
+   */
+  static createClient(): dingtalkwiki_1_0 {
+    let config = new $OpenApi.Config({ });
+    config.protocol = "https";
+    config.regionId = "central";
+    return new dingtalkwiki_1_0(config);
+  }
+
+  static async main(args: string[]): Promise&lt;void&gt; {
+    let client = Client.createClient();
+    let wikiWordsParseHeaders = new $dingtalkwiki_1_0.WikiWordsParseHeaders({ });
+    wikiWordsParseHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+    let wikiWordsParseRequest = new $dingtalkwiki_1_0.WikiWordsParseRequest({
+      content: "钉钉，让工作学习更简单。",
+    });
+    try {
+      await client.wikiWordsParseWithOptions(wikiWordsParseRequest, wikiWordsParseHeaders, new $Util.RuntimeOptions({ }));
+    } catch (err) {
+      if (!Util.empty(err.code) &amp;&amp; !Util.empty(err.message)) {
+        // err 中含有 code 和 message 属性，可帮助开发定位问题
+      }
+
+    }    
+  }
+
+}
+
+Client.main(process.argv.slice(2));</code></pre></div><input type="radio" name="check-figure-xkw-2rc-qpc" id="figure-xkw-2rc-qpc-csharp-tab" /><label for="figure-xkw-2rc-qpc-csharp-tab">C#</label><div class="codeblock-item"><pre id="codeblock-2zw-nw9-hho" outputclass="language-csharp" code-type="xCode" data-tag="codeblock" class="pre codeblock language-csharp"><code>// This file is auto-generated, don't edit it. Thanks.
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
+
+using Tea;
+using Tea.Utils;
+
+
+namespace AlibabaCloud.SDK.Sample
+{
+    public class Sample 
+    {
+
+        /**
+         * 使用 Token 初始化账号Client
+         * @return Client
+         * @throws Exception
+         */
+        public static AlibabaCloud.SDK.Dingtalkwiki_1_0.Client CreateClient()
+        {
+            AlibabaCloud.OpenApiClient.Models.Config config = new AlibabaCloud.OpenApiClient.Models.Config();
+            config.Protocol = "https";
+            config.RegionId = "central";
+            return new AlibabaCloud.SDK.Dingtalkwiki_1_0.Client(config);
+        }
+
+        public static void Main(string[] args)
+        {
+            AlibabaCloud.SDK.Dingtalkwiki_1_0.Client client = CreateClient();
+            AlibabaCloud.SDK.Dingtalkwiki_1_0.Models.WikiWordsParseHeaders wikiWordsParseHeaders = new AlibabaCloud.SDK.Dingtalkwiki_1_0.Models.WikiWordsParseHeaders();
+            wikiWordsParseHeaders.XAcsDingtalkAccessToken = "&lt;your access token&gt;";
+            AlibabaCloud.SDK.Dingtalkwiki_1_0.Models.WikiWordsParseRequest wikiWordsParseRequest = new AlibabaCloud.SDK.Dingtalkwiki_1_0.Models.WikiWordsParseRequest
+            {
+                Content = "钉钉，让工作学习更简单。",
+            };
+            try
+            {
+                client.WikiWordsParseWithOptions(wikiWordsParseRequest, wikiWordsParseHeaders, new AlibabaCloud.TeaUtil.Models.RuntimeOptions());
+            }
+            catch (TeaException err)
+            {
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+            catch (Exception _err)
+            {
+                TeaException err = new TeaException(new Dictionary&lt;string, object&gt;
+                {
+                    { "message", _err.Message }
+                });
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+        }
+
+
+    }
+}</code></pre></div><input type="radio" name="check-figure-xkw-2rc-qpc" id="figure-xkw-2rc-qpc-cpp-tab" /><label for="figure-xkw-2rc-qpc-cpp-tab">C++</label><div class="codeblock-item"><pre id="codeblock-fui-435-aoc" outputclass="language-cpp" code-type="xCode" data-tag="codeblock" class="pre codeblock language-cpp"><code>// This file is auto-generated, don't edit it. Thanks.
+
+#include &lt;alibabacloud/dingtalkwiki__1__0.hpp&gt;
+#include &lt;alibabacloud/open_api.hpp&gt;
+#include &lt;boost/any.hpp&gt;
+#include &lt;darabonba/core.hpp&gt;
+#include &lt;darabonba/util.hpp&gt;
+#include &lt;iostream&gt;
+#include &lt;map&gt;
+
+using namespace std;
+
+Alibabacloud_Dingtalkwiki_1_0::Client createClient() {
+  shared_ptr&lt;Alibabacloud_OpenApi::Config&gt; config = make_shared&lt;Alibabacloud_OpenApi::Config&gt;();
+  config-&gt;protocol = make_shared&lt;string&gt;("https");
+  config-&gt;regionId = make_shared&lt;string&gt;("central");
+  return Alibabacloud_Dingtalkwiki_1_0::Client(config);
+}
+
+int main(int argc, char *args[]) {
+  args++;
+  shared_ptr&lt;Alibabacloud_Dingtalkwiki_1_0::Client&gt; client = make_shared&lt;Alibabacloud_Dingtalkwiki_1_0::Client&gt;(createClient());
+  shared_ptr&lt;Alibabacloud_Dingtalkwiki_1_0::WikiWordsParseHeaders&gt; wikiWordsParseHeaders = make_shared&lt;Alibabacloud_Dingtalkwiki_1_0::WikiWordsParseHeaders&gt;();
+  wikiWordsParseHeaders-&gt;xAcsDingtalkAccessToken = make_shared&lt;string&gt;("&lt;your access token&gt;");
+  shared_ptr&lt;Alibabacloud_Dingtalkwiki_1_0::WikiWordsParseRequest&gt; wikiWordsParseRequest = make_shared&lt;Alibabacloud_Dingtalkwiki_1_0::WikiWordsParseRequest&gt;(map&lt;string, boost::any&gt;({
+    {"content", boost::any(string("钉钉，让工作学习更简单。"))}
+  }));
+  try {
+    client-&gt;wikiWordsParseWithOptions(wikiWordsParseRequest, wikiWordsParseHeaders, make_shared&lt;Darabonba_Util::RuntimeOptions&gt;(Darabonba_Util::RuntimeOptions()));
+  }
+  catch (std::exception &amp;err) {
+    if (!Darabonba_Util::Client::empty(err.code) &amp;&amp; !Darabonba_Util::Client::empty(err.message)) {
+      // err 中含有 code 和 message 属性，可帮助开发定位问题
+    }
+  }
+}</code></pre></div></div></section></section><section id="section-response-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-response-1" data-tag="h2" class="h2">响应</h2><section id="section-response-parameter" class="section"><h3 data-tag="h3" id="h2-9z0-nry-8sp" class="h3 title">响应体</h3><table id="869bb8e6c8a8d" tablewidth="710" tablecolswidth="213 142 355" autofit="false" class="table"><colgroup colwidth="0.9*" style="width:30.00%"></colgroup><colgroup colwidth="0.6*" style="width:20.00%"></colgroup><colgroup colwidth="1.5*" style="width:50.00%"></colgroup><tbody class="tbody"><tr id="3e6b4040f66p7"><td id="7642923263vha" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="fb07eab0418f6">名称</p></td><td id="db665766d4u57" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="c862d9ce14yoz">类型</p></td><td id="a03946613d8hu" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="2f942963734i4">描述</p></td></tr><tr outputclass="row row-level-1" id="594560395e97o" class="row row-level-1"><td id="4ffacd1d8d1sl" rowspan="1" colspan="1"><p id="8f8f188db78x3">success</p></td><td id="92371774472dl" rowspan="1" colspan="1"><p id="efc2d6540733c">Boolean</p></td><td id="0062804340y7z" rowspan="1" colspan="1"><p id="afefb10d3cznm">请求是否成功。</p><ul id="08308c741bysb"><li id="166ada757chks"><p id="4bfe09f6b8r1g">true：成功。</p></li><li id="a2cf64c1982ul"><p id="637afa70727ld">false：失败。</p></li></ul></td></tr><tr outputclass="row row-level-2" id="29997d1ee0mha" class="row row-level-2"><td id="162c9f7d7d9el" rowspan="1" colspan="1"><p id="7578352a9f4zc">errMsg</p></td><td id="0fbf4467cbatw" rowspan="1" colspan="1"><p id="406c15f68cuv1">String</p></td><td id="29c8aeceddodd" rowspan="1" colspan="1"><p id="a2fc6c647fh6c">错误信息。</p></td></tr><tr outputclass="row row-level-3 has-child" id="cd74a3c25clfy" class="row row-level-3 has-child"><td id="94ef1aa7d52im" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="1c8693a2eavod">data</p></td><td id="eeaf32bd165m3" rowspan="1" colspan="1"><p id="eb670a3a94qz9">Array</p></td><td id="66503a70f7dic" rowspan="1" colspan="1"><p id="48e226288bxtb">请求返回的数据对象。</p></td></tr><tr outputclass="row row-level-3-1" id="ff0258137eryt" class="row row-level-3-1"><td id="34e02672dfzz8" rowspan="1" colspan="1"><p id="21f85b64ff6h6">startIndex</p></td><td id="2888eea57fzt8" rowspan="1" colspan="1"><p id="9e2f70c9824op">Long</p></td><td id="dd545ab645rai" rowspan="1" colspan="1"><p id="21728510e2n37">匹配到的字符串在文本内的起始索引（包括），索引从0开始。</p></td></tr><tr outputclass="row row-level-3-2" id="5bfcf9ea20ffg" class="row row-level-3-2"><td id="6f9a0ba350a7v" rowspan="1" colspan="1"><p id="3421898325vab">endIndex</p></td><td id="a76b22b75a8py" rowspan="1" colspan="1"><p id="56d549ee908al">Long</p></td><td id="1c733f4d26crv" rowspan="1" colspan="1"><p id="622cd80c4ctmc">匹配到的字符串在文本内的结束索引（不包括）。</p></td></tr><tr outputclass="row row-level-3-3" id="f403cf7f3exi2" class="row row-level-3-3"><td id="d10ca45842bk2" rowspan="1" colspan="1"><p id="9e38688797ufy">wordName</p></td><td id="a8a2c820c5uww" rowspan="1" colspan="1"><p id="cfc7c695161ay">String</p></td><td id="51c9168591ev8" rowspan="1" colspan="1"><p id="a1b587df22nvg">匹配到的字符串信息，有以下两种情况。</p><ul id="2cb2111b947zf"><li id="cbac1273de076"><p id="13dbf94b77eln">匹配词条的全名。</p></li><li id="36d6f7356c991"><p id="ca0f42b1939ka">匹配词条的别名。</p></li></ul></td></tr></tbody></table></section><section id="section-response-body-example" class="section"><h3 id="h3-response-body-example" data-tag="h3" class="h3">响应体示例</h3><pre id="ef95c7e41dje2" outputclass="language-json" code-type="xCode" data-tag="codeblock" class="pre codeblock language-json"><code>HTTP/1.1 200 OK
+Content-Type:application/json
+
+{
+  "success" : true,
+  "data" : [ {
+    "startIndex" : 0,
+    "endIndex" : 2,
+    "wordName" : "钉钉"
+  } ]
+}</code></pre></section><section id="section-error-code-1" class="section"><h3 id="h3-error-code-1" data-tag="h3" class="h3">错误码</h3><p data-tag="p" id="p-error-code-global-guide" class="p">若调用该接口报错，可根据错误信息在<a href="https://open.dingtalk.com/document/development/server-api-error-codes-1" id="a-error-code-global-guide">全局错误码</a>文档中查找解决方案。</p><table id="138a34c780rhu" tablewidth="709" tablecolswidth="142 177 177 213" autofit="false" class="table"><colgroup colwidth="0.8*" style="width:20.03%"></colgroup><colgroup colwidth="1*" style="width:24.96%"></colgroup><colgroup colwidth="1*" style="width:24.96%"></colgroup><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><tbody class="tbody"><tr id="9c46f5ab64rxd"><td id="9ee3bfb7f2nh6" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="21ce8b3766jjo">HttpCode</p></td><td id="ccffb3ed58vnu" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="eaf5ccaf62e53">错误码</p></td><td id="7b07879db49kl" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="62bd7b6d70wfz">错误信息</p></td><td id="404a46a6f8t84" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="b62c00aa36d58">说明</p></td></tr><tr id="99053c0c22l8b"><td id="21f5724823w90" rowspan="1" colspan="1"><p id="69738438424wi">400</p></td><td id="f2556b2e021tb" rowspan="1" colspan="1"><p id="0c9ffe55d8goh">systemError</p></td><td id="3e51d71888sas" rowspan="1" colspan="1"><p id="e91422acfa7n8">系统错误</p></td><td id="ea5331a37flqq" rowspan="1" colspan="1"><p id="fecc7030a6b29">系统错误</p></td></tr><tr id="c21140d551fhs"><td id="ed851048e8y5n" rowspan="1" colspan="1"><p id="d31d2a896er75">400</p></td><td id="0034a9791dwqc" rowspan="1" colspan="1"><p id="20f5365ce385t">requestError</p></td><td id="03136b31edcd2" rowspan="1" colspan="1"><p id="9e06046addfzg">待处理的信息不能为空</p></td><td id="3e890ec48c2ij" rowspan="1" colspan="1"><p id="554407fbe2h4c">待处理的信息不能为空</p></td></tr></tbody></table></section></section></div></main></body></html>

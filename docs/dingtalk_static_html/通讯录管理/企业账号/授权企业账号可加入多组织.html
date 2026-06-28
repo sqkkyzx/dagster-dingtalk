@@ -1,0 +1,412 @@
+<!DOCTYPE html><html><head><meta charset="utf8" / /><meta name="gmtModify" content="2025-09-11 21:01:49" / /><meta name="searchtitle" content="" / /><meta name="keywords" content="" / /><meta name="author" content="" / /><title>授权企业账号可加入多组织</title><meta name="gmtModify" content="2026-06-08 11:20:17" / /></head><body data-tag="topic" id="doc-api-dingtalk-MultiOrgPermissionGrant" class="topic"><main id="0ec29f14f3bue" data-init-id="doc-api-dingtalk_MultiOrgPermissionGrant"><h1 data-tag="title" id="h1-rds-viv-lpy" class="title">授权企业账号可加入多组织</h1><p data-tag="shortdesc" id="0a11bf8f0c1ad" class="shortdesc">调用本接口，授权企业账号可以加入多个组织，只有被授权后企业账号才能加入外部组织。</p><div data-tag="conbody" outputclass="icms-api-reference" class="icms-api-reference conbody"><section id="section-prerequisites-1" class="section icms-module" data-tag="section" data-source="latest-mounted-icms-html"><h2 id="h2-prerequisites-1" data-tag="h2" class="h2">接口调用说明</h2><p id="534c47e8e0kp1">授权成功后，只支持接口操作添加进入企业。</p></section><section id="section-request-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-request-1" data-tag="h2" class="h2">请求</h2><section id="section-request-basic-info" class="section"><h3 id="heading-request-basic-info" data-tag="h3" class="h3">基本信息</h3><table id="ab08b759cd6w9" tablewidth="648" tablecolswidth="216 432" autofit="false" class="table"><colgroup colwidth="0.67*" style="width:33.33%"></colgroup><colgroup colwidth="1.33*" style="width:66.67%"></colgroup><tbody class="tbody"><tr id="3c3c3c83b7ypz"><td id="dbd3319c6bn7w" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="e31b66105c3l3">字段</p></td><td id="785b357bd790s" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="f1c148ca0e742">值</p></td></tr><tr id="8c40682ed6riy"><td id="7a4456b3c1wnp" rowspan="1" colspan="1"><p id="656412716doh2">HTTP URL</p></td><td id="b046259cf1vv3" rowspan="1" colspan="1"><p id="54042539ab3tn">https://api.dingtalk.com/v1.0/contact/orgAccounts/multiOrgPermissions/auth</p></td></tr><tr id="b93e4ab64br4t"><td id="47814be701f3l" rowspan="1" colspan="1"><p id="2b7f1799cbxgp">HTTP Method</p></td><td id="b18688acd5zza" rowspan="1" colspan="1"><p id="9f95349dc4x18">POST</p></td></tr><tr id="85fde20dc24p2"><td id="4c4c786b2csex" rowspan="1" colspan="1"><p id="6de826e884bi1">支持的应用类型</p></td><td id="b8d5452450fmz" rowspan="1" colspan="1"><p id="7b9c8628bfmnq"><span data-tag="ph" id="ph-request-basic-app-type-apptype-0" class="ph ph-app-type" data-ph-raw-text="appType-企业内部应用">appType-企业内部应用</span>　</p></td></tr><tr id="3a0cfa0cdeqni"><td id="97d768ac5b734" rowspan="1" colspan="1"><p id="5e22f0070dwo2">权限要求</p></td><td id="9c1edfa730fg5" rowspan="1" colspan="1"><p id="11168486589eo"><span data-tag="ph" id="ph-request-basic-permission-permission-contact-orgaccountsecurity-readwrite-0" class="ph-permission ph" data-ph-raw-text="permission-Contact.OrgAccountSecurity.ReadWrite-通讯录企业账号安全数据读写权限" data-permission-id="permission-Contact.OrgAccountSecurity.ReadWrite" data-permission-code="Contact.OrgAccountSecurity.ReadWrite" data-permission-detail-api="/document/api/permission/detail" data-permission-query-param="code">permission-Contact.OrgAccountSecurity.ReadWrite-通讯录企业账号安全数据读写权限</span></p></td></tr></tbody></table></section><section id="section-request-header-parameter" class="section"><h3 data-tag="h3" id="h2-lw4-jlo-nry" class="h3 title">请求头</h3><table id="f0b03b3eb2ere" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="dd396178439qx"><td id="7fc109ed02jv8" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="05b6f04667ms9">名称</p></td><td id="bed5cec42focb" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="dca2643f96jd6">类型</p></td><td id="341e995c68ej2" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="fe815831bbv26">是否必填</p></td><td id="591b20b65c3er" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="5c2a7e82efwd8">描述</p></td></tr><tr id="aa03267403npu"><td id="2c7059c8acx4f" rowspan="1" colspan="1"><p id="c5d53382133zi">x-acs-dingtalk-access-token</p></td><td id="a4a4b5470dbpm" rowspan="1" colspan="1"><p id="af543164a4i7r">String</p></td><td id="871f645a02dq3" rowspan="1" colspan="1"><p id="03b7a70821glm">是</p></td><td id="5d73837d34iyn" rowspan="1" colspan="1"><p id="be0c1bea5elv8">调用该接口的访问凭证，通过调用<a href="https://open.dingtalk.com/document/development/obtain-the-access-token-of-an-internal-app#" id="a6fdf51bebzpw" class="xref">获取企业内部应用的accessToken</a>接口获取。</p></td></tr></tbody></table></section><section id="section-request-body-parameter" class="section"><h3 data-tag="h3" id="h2-smt-9ur-xae" class="h3 title">请求体</h3><table id="22e1baa5b0lhp" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="df57cf0b045a9"><td id="4b0555120c5tl" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="d85f3a589en68">名称</p></td><td id="402dcccfbdwrz" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="a555e548591wg">类型</p></td><td id="61d047c9219ht" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="ef96f70c13z9l">是否必填</p></td><td id="ca85b4573ee23" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="9e7729584eetv">描述</p></td></tr><tr outputclass="row row-level-1" id="c7f0d3f2441hr" class="row row-level-1"><td id="be978c464dg2o" rowspan="1" colspan="1"><p id="0088fa0df0999">joinCorpId</p></td><td id="4101a7ecdetpk" rowspan="1" colspan="1"><p id="caf7b2048dznb">String</p></td><td id="95cb610b30blv" rowspan="1" colspan="1"><p id="24556185da48g">是</p></td><td id="2c20f6fdefha7" rowspan="1" colspan="1"><p id="e7bc4bb9fc5ec">被授权的组织CorpId。</p></td></tr><tr outputclass="row row-level-2" id="53c78d0fe5mjc" class="row row-level-2"><td id="1e39a1fc339t7" rowspan="1" colspan="1"><p id="5f17bf0402u4m">grantDeptIdList</p></td><td id="b1f7a07d833b2" rowspan="1" colspan="1"><p id="86150d279666u">Array of Long</p></td><td id="955dcfb01da6s" rowspan="1" colspan="1"><p id="94f6488771eyl">否</p></td><td id="57460855140ta" rowspan="1" colspan="1"><p id="5d1b9d4b945ve">授权的部门列表。</p><ul id="7818faa9c3h3v"><li id="9f598aa9c06rq"><p id="73ecedee03v88">如果该参数不传，授权整个企业。</p></li><li id="e2ba74cf72hsa"><p id="cab636d0f8a8j">如果该参数传值，授权参数值对应的部门。</p></li></ul></td></tr></tbody></table></section><section id="section-request-body-example" class="section"><h3 id="h3-request-body-example" data-tag="h3" class="h3">请求示例</h3><div outputclass="tabbed-codeblock" data-tag="fig" id="figure-45r-q4i-f1t" class="tabbed-codeblock-box"><div class="tab-box"></div><input type="radio" name="check-figure-45r-q4i-f1t" id="figure-45r-q4i-f1t-HTTP-tab" checked="checked" /><label for="figure-45r-q4i-f1t-HTTP-tab">HTTP</label><div class="codeblock-item"><pre id="codeblock-ygj-bwy-o8u" outputclass="language-HTTP" code-type="xCode" data-tag="codeblock" class="pre codeblock language-HTTP"><code>POST /v1.0/contact/orgAccounts/multiOrgPermissions/auth HTTP/1.1
+Host:api.dingtalk.com
+x-acs-dingtalk-access-token:0d702e22d08d39bbb0d3e2d9c9aa1220
+Content-Type:application/json
+
+{
+  "joinCorpId" : "dingxxxxx",
+  "grantDeptIdList" : [ 123 ]
+}</code></pre></div><input type="radio" name="check-figure-45r-q4i-f1t" id="figure-45r-q4i-f1t-java-tab" /><label for="figure-45r-q4i-f1t-java-tab">Java</label><div class="codeblock-item"><pre id="codeblock-rpx-58g-dbj" outputclass="language-java" code-type="xCode" data-tag="codeblock" class="pre codeblock language-java"><code>// This file is auto-generated, don't edit it. Thanks.
+package com.aliyun.sample;
+
+import com.aliyun.tea.*;
+import com.aliyun.teautil.*;
+import com.aliyun.teautil.models.*;
+import com.aliyun.dingtalkcontact_1_0.*;
+import com.aliyun.dingtalkcontact_1_0.models.*;
+import com.aliyun.teaopenapi.*;
+import com.aliyun.teaopenapi.models.*;
+
+public class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Client
+     * @throws Exception
+     */
+    public static com.aliyun.dingtalkcontact_1_0.Client createClient() throws Exception {
+        Config config = new Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        return new com.aliyun.dingtalkcontact_1_0.Client(config);
+    }
+
+    public static void main(String[] args_) throws Exception {
+        java.util.List&lt;String&gt; args = java.util.Arrays.asList(args_);
+        com.aliyun.dingtalkcontact_1_0.Client client = Sample.createClient();
+        MultiOrgPermissionGrantHeaders multiOrgPermissionGrantHeaders = new MultiOrgPermissionGrantHeaders();
+        multiOrgPermissionGrantHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        MultiOrgPermissionGrantRequest multiOrgPermissionGrantRequest = new MultiOrgPermissionGrantRequest()
+                .setJoinCorpId("dingxxxxx")
+                .setGrantDeptIdList(java.util.Arrays.asList(
+                    123L
+                ));
+        try {
+            client.multiOrgPermissionGrantWithOptions(multiOrgPermissionGrantRequest, multiOrgPermissionGrantHeaders, new RuntimeOptions());
+        } catch (TeaException err) {
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        } catch (Exception _err) {
+            TeaException err = new TeaException(_err.getMessage(), _err);
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        }        
+    }
+}</code></pre></div><input type="radio" name="check-figure-45r-q4i-f1t" id="figure-45r-q4i-f1t-python-tab" /><label for="figure-45r-q4i-f1t-python-tab">Python</label><div class="codeblock-item"><pre id="codeblock-fyb-36c-0gj" outputclass="language-python" code-type="xCode" data-tag="codeblock" class="pre codeblock language-python"><code># -*- coding: utf-8 -*-
+# This file is auto-generated, don't edit it. Thanks.
+import sys
+
+from typing import List
+
+from alibabacloud_dingtalk.contact_1_0.client import Client as dingtalkcontact_1_0Client
+from alibabacloud_tea_openapi import models as open_api_models
+from alibabacloud_dingtalk.contact_1_0 import models as dingtalkcontact__1__0_models
+from alibabacloud_tea_util import models as util_models
+from alibabacloud_tea_util.client import Client as UtilClient
+
+
+class Sample:
+    def __init__(self):
+        pass
+
+    @staticmethod
+    def create_client() -&gt; dingtalkcontact_1_0Client:
+        """
+        使用 Token 初始化账号Client
+        @return: Client
+        @throws Exception
+        """
+        config = open_api_models.Config()
+        config.protocol = 'https'
+        config.region_id = 'central'
+        return dingtalkcontact_1_0Client(config)
+
+    @staticmethod
+    def main(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        multi_org_permission_grant_headers = dingtalkcontact__1__0_models.MultiOrgPermissionGrantHeaders()
+        multi_org_permission_grant_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        multi_org_permission_grant_request = dingtalkcontact__1__0_models.MultiOrgPermissionGrantRequest(
+            join_corp_id='dingxxxxx',
+            grant_dept_id_list=[
+                123
+            ]
+        )
+        try:
+            client.multi_org_permission_grant_with_options(multi_org_permission_grant_request, multi_org_permission_grant_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+    @staticmethod
+    async def main_async(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        multi_org_permission_grant_headers = dingtalkcontact__1__0_models.MultiOrgPermissionGrantHeaders()
+        multi_org_permission_grant_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        multi_org_permission_grant_request = dingtalkcontact__1__0_models.MultiOrgPermissionGrantRequest(
+            join_corp_id='dingxxxxx',
+            grant_dept_id_list=[
+                123
+            ]
+        )
+        try:
+            await client.multi_org_permission_grant_with_options_async(multi_org_permission_grant_request, multi_org_permission_grant_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+
+if __name__ == '__main__':
+    Sample.main(sys.argv[1:])</code></pre></div><input type="radio" name="check-figure-45r-q4i-f1t" id="figure-45r-q4i-f1t-php-tab" /><label for="figure-45r-q4i-f1t-php-tab">PHP</label><div class="codeblock-item"><pre id="codeblock-blx-hqr-8ho" outputclass="language-php" code-type="xCode" data-tag="codeblock" class="pre codeblock language-php"><code>&lt;?php
+
+// This file is auto-generated, don't edit it. Thanks.
+namespace AlibabaCloud\SDK\Sample;
+
+use AlibabaCloud\SDK\Dingtalk\Vcontact_1_0\Dingtalk;
+use \Exception;
+use AlibabaCloud\Tea\Exception\TeaError;
+use AlibabaCloud\Tea\Utils\Utils;
+
+use Darabonba\OpenApi\Models\Config;
+use AlibabaCloud\SDK\Dingtalk\Vcontact_1_0\Models\MultiOrgPermissionGrantHeaders;
+use AlibabaCloud\SDK\Dingtalk\Vcontact_1_0\Models\MultiOrgPermissionGrantRequest;
+use AlibabaCloud\Tea\Utils\Utils\RuntimeOptions;
+
+class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Dingtalk Client
+     */
+    public static function createClient(){
+        $config = new Config([]);
+        $config-&gt;protocol = "https";
+        $config-&gt;regionId = "central";
+        return new Dingtalk($config);
+    }
+
+    /**
+     * @param string[] $args
+     * @return void
+     */
+    public static function main($args){
+        $client = self::createClient();
+        $multiOrgPermissionGrantHeaders = new MultiOrgPermissionGrantHeaders([]);
+        $multiOrgPermissionGrantHeaders-&gt;xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        $multiOrgPermissionGrantRequest = new MultiOrgPermissionGrantRequest([
+            "joinCorpId" =&gt; "dingxxxxx",
+            "grantDeptIdList" =&gt; [
+                123
+            ]
+        ]);
+        try {
+            $client-&gt;multiOrgPermissionGrantWithOptions($multiOrgPermissionGrantRequest, $multiOrgPermissionGrantHeaders, new RuntimeOptions([]));
+        }
+        catch (Exception $err) {
+            if (!($err instanceof TeaError)) {
+                $err = new TeaError([], $err-&gt;getMessage(), $err-&gt;getCode(), $err);
+            }
+            if (!Utils::empty_($err-&gt;code) &amp;&amp; !Utils::empty_($err-&gt;message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+        }
+    }
+}
+$path = __DIR__ . \DIRECTORY_SEPARATOR . '..' . \DIRECTORY_SEPARATOR . 'vendor' . \DIRECTORY_SEPARATOR . 'autoload.php';
+if (file_exists($path)) {
+    require_once $path;
+}
+Sample::main(array_slice($argv, 1));</code></pre></div><input type="radio" name="check-figure-45r-q4i-f1t" id="figure-45r-q4i-f1t-go-tab" /><label for="figure-45r-q4i-f1t-go-tab">Go</label><div class="codeblock-item"><pre id="codeblock-jzi-xgz-oxj" outputclass="language-go" code-type="xCode" data-tag="codeblock" class="pre codeblock language-go"><code>// This file is auto-generated, don't edit it. Thanks.
+package main
+
+import (
+  "os"
+  util  "github.com/alibabacloud-go/tea-utils/service"
+  dingtalkcontact_1_0  "github.com/alibabacloud-go/dingtalk/contact_1_0"
+  openapi  "github.com/alibabacloud-go/darabonba-openapi/client"
+  "github.com/alibabacloud-go/tea/tea"
+)
+
+
+/**
+ * 使用 Token 初始化账号Client
+ * @return Client
+ * @throws Exception
+ */
+func CreateClient () (_result *dingtalkcontact_1_0.Client, _err error) {
+  config := &amp;openapi.Config{}
+  config.Protocol = tea.String("https")
+  config.RegionId = tea.String("central")
+  _result = &amp;dingtalkcontact_1_0.Client{}
+  _result, _err = dingtalkcontact_1_0.NewClient(config)
+  return _result, _err
+}
+
+func _main (args []*string) (_err error) {
+  client, _err := CreateClient()
+  if _err != nil {
+    return _err
+  }
+
+  multiOrgPermissionGrantHeaders := &amp;dingtalkcontact_1_0.MultiOrgPermissionGrantHeaders{}
+  multiOrgPermissionGrantHeaders.XAcsDingtalkAccessToken = tea.String("&lt;your access token&gt;")
+  multiOrgPermissionGrantRequest := &amp;dingtalkcontact_1_0.MultiOrgPermissionGrantRequest{
+    JoinCorpId: tea.String("dingxxxxx"),
+    GrantDeptIdList: []*int64{tea.Int(123)},
+  }
+  tryErr := func()(_e error) {
+    defer func() {
+      if r := tea.Recover(recover()); r != nil {
+        _e = r
+      }
+    }()
+    _, _err = client.MultiOrgPermissionGrantWithOptions(multiOrgPermissionGrantRequest, multiOrgPermissionGrantHeaders, &amp;util.RuntimeOptions{})
+    if _err != nil {
+      return _err
+    }
+
+    return nil
+  }()
+
+  if tryErr != nil {
+    var err = &amp;tea.SDKError{}
+    if _t, ok := tryErr.(*tea.SDKError); ok {
+      err = _t
+    } else {
+      err.Message = tea.String(tryErr.Error())
+    }
+    if !tea.BoolValue(util.Empty(err.Code)) &amp;&amp; !tea.BoolValue(util.Empty(err.Message)) {
+      // err 中含有 code 和 message 属性，可帮助开发定位问题
+    }
+
+  }
+  return _err
+}
+
+
+func main() {
+  err := _main(tea.StringSlice(os.Args[1:]))
+  if err != nil {
+    panic(err)
+  }
+}</code></pre></div><input type="radio" name="check-figure-45r-q4i-f1t" id="figure-45r-q4i-f1t-nodejs-tab" /><label for="figure-45r-q4i-f1t-nodejs-tab">Node.js</label><div class="codeblock-item"><pre id="codeblock-df8-wfi-ynd" outputclass="language-nodejs" code-type="xCode" data-tag="codeblock" class="pre codeblock language-nodejs"><code>// This file is auto-generated, don't edit it
+import Util, * as $Util from '@alicloud/tea-util';
+import dingtalkcontact_1_0, * as $dingtalkcontact_1_0 from '@alicloud/dingtalk/contact_1_0';
+import OpenApi, * as $OpenApi from '@alicloud/openapi-client';
+import * as $tea from '@alicloud/tea-typescript';
+
+
+export default class Client {
+
+  /**
+   * 使用 Token 初始化账号Client
+   * @return Client
+   * @throws Exception
+   */
+  static createClient(): dingtalkcontact_1_0 {
+    let config = new $OpenApi.Config({ });
+    config.protocol = "https";
+    config.regionId = "central";
+    return new dingtalkcontact_1_0(config);
+  }
+
+  static async main(args: string[]): Promise&lt;void&gt; {
+    let client = Client.createClient();
+    let multiOrgPermissionGrantHeaders = new $dingtalkcontact_1_0.MultiOrgPermissionGrantHeaders({ });
+    multiOrgPermissionGrantHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+    let multiOrgPermissionGrantRequest = new $dingtalkcontact_1_0.MultiOrgPermissionGrantRequest({
+      joinCorpId: "dingxxxxx",
+      grantDeptIdList: [
+        123
+      ],
+    });
+    try {
+      await client.multiOrgPermissionGrantWithOptions(multiOrgPermissionGrantRequest, multiOrgPermissionGrantHeaders, new $Util.RuntimeOptions({ }));
+    } catch (err) {
+      if (!Util.empty(err.code) &amp;&amp; !Util.empty(err.message)) {
+        // err 中含有 code 和 message 属性，可帮助开发定位问题
+      }
+
+    }    
+  }
+
+}
+
+Client.main(process.argv.slice(2));</code></pre></div><input type="radio" name="check-figure-45r-q4i-f1t" id="figure-45r-q4i-f1t-csharp-tab" /><label for="figure-45r-q4i-f1t-csharp-tab">C#</label><div class="codeblock-item"><pre id="codeblock-gfh-tcx-eek" outputclass="language-csharp" code-type="xCode" data-tag="codeblock" class="pre codeblock language-csharp"><code>// This file is auto-generated, don't edit it. Thanks.
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
+
+using Tea;
+using Tea.Utils;
+
+
+namespace AlibabaCloud.SDK.Sample
+{
+    public class Sample 
+    {
+
+        /**
+         * 使用 Token 初始化账号Client
+         * @return Client
+         * @throws Exception
+         */
+        public static AlibabaCloud.SDK.Dingtalkcontact_1_0.Client CreateClient()
+        {
+            AlibabaCloud.OpenApiClient.Models.Config config = new AlibabaCloud.OpenApiClient.Models.Config();
+            config.Protocol = "https";
+            config.RegionId = "central";
+            return new AlibabaCloud.SDK.Dingtalkcontact_1_0.Client(config);
+        }
+
+        public static void Main(string[] args)
+        {
+            AlibabaCloud.SDK.Dingtalkcontact_1_0.Client client = CreateClient();
+            AlibabaCloud.SDK.Dingtalkcontact_1_0.Models.MultiOrgPermissionGrantHeaders multiOrgPermissionGrantHeaders = new AlibabaCloud.SDK.Dingtalkcontact_1_0.Models.MultiOrgPermissionGrantHeaders();
+            multiOrgPermissionGrantHeaders.XAcsDingtalkAccessToken = "&lt;your access token&gt;";
+            AlibabaCloud.SDK.Dingtalkcontact_1_0.Models.MultiOrgPermissionGrantRequest multiOrgPermissionGrantRequest = new AlibabaCloud.SDK.Dingtalkcontact_1_0.Models.MultiOrgPermissionGrantRequest
+            {
+                JoinCorpId = "dingxxxxx",
+                GrantDeptIdList = new List&lt;long?&gt;
+                {
+                    123
+                },
+            };
+            try
+            {
+                client.MultiOrgPermissionGrantWithOptions(multiOrgPermissionGrantRequest, multiOrgPermissionGrantHeaders, new AlibabaCloud.TeaUtil.Models.RuntimeOptions());
+            }
+            catch (TeaException err)
+            {
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+            catch (Exception _err)
+            {
+                TeaException err = new TeaException(new Dictionary&lt;string, object&gt;
+                {
+                    { "message", _err.Message }
+                });
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+        }
+
+
+    }
+}</code></pre></div><input type="radio" name="check-figure-45r-q4i-f1t" id="figure-45r-q4i-f1t-cpp-tab" /><label for="figure-45r-q4i-f1t-cpp-tab">C++</label><div class="codeblock-item"><pre id="codeblock-bpz-rtt-qxi" outputclass="language-cpp" code-type="xCode" data-tag="codeblock" class="pre codeblock language-cpp"><code>// This file is auto-generated, don't edit it. Thanks.
+
+#include &lt;alibabacloud/dingtalkcontact__1__0.hpp&gt;
+#include &lt;alibabacloud/open_api.hpp&gt;
+#include &lt;boost/any.hpp&gt;
+#include &lt;darabonba/core.hpp&gt;
+#include &lt;darabonba/util.hpp&gt;
+#include &lt;iostream&gt;
+#include &lt;map&gt;
+
+using namespace std;
+
+Alibabacloud_Dingtalkcontact_1_0::Client createClient() {
+  shared_ptr&lt;Alibabacloud_OpenApi::Config&gt; config = make_shared&lt;Alibabacloud_OpenApi::Config&gt;();
+  config-&gt;protocol = make_shared&lt;string&gt;("https");
+  config-&gt;regionId = make_shared&lt;string&gt;("central");
+  return Alibabacloud_Dingtalkcontact_1_0::Client(config);
+}
+
+int main(int argc, char *args[]) {
+  args++;
+  shared_ptr&lt;Alibabacloud_Dingtalkcontact_1_0::Client&gt; client = make_shared&lt;Alibabacloud_Dingtalkcontact_1_0::Client&gt;(createClient());
+  shared_ptr&lt;Alibabacloud_Dingtalkcontact_1_0::MultiOrgPermissionGrantHeaders&gt; multiOrgPermissionGrantHeaders = make_shared&lt;Alibabacloud_Dingtalkcontact_1_0::MultiOrgPermissionGrantHeaders&gt;();
+  multiOrgPermissionGrantHeaders-&gt;xAcsDingtalkAccessToken = make_shared&lt;string&gt;("&lt;your access token&gt;");
+  shared_ptr&lt;Alibabacloud_Dingtalkcontact_1_0::MultiOrgPermissionGrantRequest&gt; multiOrgPermissionGrantRequest = make_shared&lt;Alibabacloud_Dingtalkcontact_1_0::MultiOrgPermissionGrantRequest&gt;(map&lt;string, boost::any&gt;({
+    {"joinCorpId", boost::any(string("dingxxxxx"))},
+    {"grantDeptIdList", boost::any(vector&lt;long&gt;({
+      123
+    }))}
+  }));
+  try {
+    client-&gt;multiOrgPermissionGrantWithOptions(multiOrgPermissionGrantRequest, multiOrgPermissionGrantHeaders, make_shared&lt;Darabonba_Util::RuntimeOptions&gt;(Darabonba_Util::RuntimeOptions()));
+  }
+  catch (std::exception &amp;err) {
+    if (!Darabonba_Util::Client::empty(err.code) &amp;&amp; !Darabonba_Util::Client::empty(err.message)) {
+      // err 中含有 code 和 message 属性，可帮助开发定位问题
+    }
+  }
+}</code></pre></div></div></section></section><section id="section-response-1" class="section icms-module" data-tag="section" data-source="apiMeta"><h2 id="h2-response-1" data-tag="h2" class="h2">响应</h2><section id="section-response-body-example" class="section"><h3 id="h3-response-body-example" data-tag="h3" class="h3">响应体示例</h3><pre id="29ddce575434g" outputclass="language-json" code-type="xCode" data-tag="codeblock" class="pre codeblock language-json"><code>HTTP/1.1 200 OK</code></pre></section><section id="section-error-code-1" class="section"><h3 id="h3-error-code-1" data-tag="h3" class="h3">错误码</h3><p data-tag="p" id="p-error-code-global-guide" class="p">若调用该接口报错，可根据错误信息在<a href="https://open.dingtalk.com/document/development/server-api-error-codes-1" id="a-error-code-global-guide">全局错误码</a>文档中查找解决方案。</p><table id="f3b756793bttq" tablewidth="709" tablecolswidth="142 177 177 213" autofit="false" class="table"><colgroup colwidth="0.8*" style="width:20.03%"></colgroup><colgroup colwidth="1*" style="width:24.96%"></colgroup><colgroup colwidth="1*" style="width:24.96%"></colgroup><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><tbody class="tbody"><tr id="b8fd86bea75zx"><td id="9511951b7e11s" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="ac2b1269ebs3f">HttpCode</p></td><td id="628db7675cw26" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="a97929efb85d0">错误码</p></td><td id="f9615c5853mnl" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="bbabb488a17kb">错误信息</p></td><td id="31f1b85cdarme" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="2f3804669f37t">说明</p></td></tr><tr id="1e77376f4f0km"><td id="5b464c469cj5m" rowspan="1" colspan="1"><p id="085cdb07f5phg">400</p></td><td id="01b9fff87avpd" rowspan="1" colspan="1"><p id="d02ed1f1fdrec">invalid.param</p></td><td id="6ebed5628ece7" rowspan="1" colspan="1"><p id="695785197ae7i">无效参数</p></td><td id="c1cb02f414oac" rowspan="1" colspan="1"><p id="90662359dctvi">无效参数</p></td></tr><tr id="2b5ff34558rwj"><td id="32b108e4c5dlo" rowspan="1" colspan="1"><p id="dddfad2e41b5a">500</p></td><td id="e58242de1cs3k" rowspan="1" colspan="1"><p id="c13ca6de12qf0">system.busy</p></td><td id="d6acec4810v22" rowspan="1" colspan="1"><p id="d59a91c198ere">系统繁忙</p></td><td id="bb5033dd525i8" rowspan="1" colspan="1"><p id="7f3e619f3a48n">系统繁忙</p></td></tr></tbody></table></section></section></div></main></body></html>

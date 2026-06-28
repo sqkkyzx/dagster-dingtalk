@@ -1,6 +1,8 @@
 # 钉钉与 Dagster 集成
 
-该 Dagster 集成是为了更便捷的调用钉钉（DingTalk）的API，集成提供了两个 Dagster Resource。
+该 Dagster 集成是为了更便捷地在 Dagster 中调用钉钉（DingTalk）API，集成提供了两个 Dagster Resource。
+
+底层钉钉服务端 OpenAPI 客户端已经拆分为独立包 `dingtalk-oapi-zhcn`。如果不需要 Dagster 集成，可以直接安装并使用该包。
 
 ## 安装
 要安装库，请在 Dagster 环境中使用 pip 。
@@ -9,6 +11,12 @@
 
 ```bash
 pip install dagster-dingtalk -U
+```
+
+仅使用钉钉 OpenAPI 客户端：
+
+```bash
+pip install dingtalk-oapi-zhcn -U
 ```
 
 ## 资源
@@ -102,7 +110,7 @@ from dagster_dingtalk import DingTalkAppClient
 dingtalk: DingTalkAppClient
 ```
 
-**请注意：`DingTalkAppClient` 未使用钉钉官方 SDK 实现，并采用了 ASCII 字符来命名实例方法。** 
+**请注意：`DingTalkAppClient` 由 `dingtalk-oapi-zhcn` 包提供，未使用钉钉官方 SDK 实现，并采用中文层级和中文方法名封装钉钉开放平台文档。**
 
 > 这是为了与
 > [钉钉服务端 API 文档](https://open.dingtalk.com/document/orgapp/api-overview) 里的中文 API 

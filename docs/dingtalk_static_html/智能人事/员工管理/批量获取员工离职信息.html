@@ -1,0 +1,420 @@
+<!DOCTYPE html><html><head><meta charset="utf8" / /><meta name="gmtModify" content="2025-09-12 17:18:57" / /><meta name="searchtitle" content="" / /><meta name="keywords" content="" / /><meta name="author" content="" / /><title>批量获取员工离职信息</title><meta name="gmtModify" content="2026-06-04 19:10:27" / /></head><body data-tag="topic" id="doc-api-dingtalk-QueryHrmEmployeeDismissionInfo" class="topic"><main id="5b56f644d7vho" data-init-id="doc-api-dingtalk_QueryHrmEmployeeDismissionInfo"><h1 data-tag="title" id="h1-tqi-mgu-bdy" class="title">批量获取员工离职信息</h1><p data-tag="shortdesc" id="d1dbf07cd8z75" class="shortdesc">根据用户userId，批量查询员工的离职信息，如离职人员的部门ID、离职主动原因和被动原因等。</p><div data-tag="conbody" outputclass="icms-api-reference" class="icms-api-reference conbody"><section id="section-request-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-request-1" data-tag="h2" class="h2">请求</h2><section id="section-request-basic-info" class="section"><h3 id="heading-request-basic-info" data-tag="h3" class="h3">基本信息</h3><table id="0bcefb430ajtt" tablewidth="648" tablecolswidth="216 432" autofit="false" class="table"><colgroup colwidth="0.67*" style="width:33.33%"></colgroup><colgroup colwidth="1.33*" style="width:66.67%"></colgroup><tbody class="tbody"><tr id="a7a8cb9dbciav"><td id="6f3b520c6fd94" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="1f050d62e5xoy">字段</p></td><td id="3a39f190d67wq" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="943a1464a36gr">值</p></td></tr><tr id="51e9097e27l9q"><td id="bfa44d1bcdnn2" rowspan="1" colspan="1"><p id="223d2ee640may">HTTP URL</p></td><td id="28faf0fa99t2i" rowspan="1" colspan="1"><p id="e722a00cbbvy6">https://api.dingtalk.com/v1.0/hrm/employees/dimissionInfos</p></td></tr><tr id="268eda70b1445"><td id="d07a67e729yh8" rowspan="1" colspan="1"><p id="5460ea7b6bmwz">HTTP Method</p></td><td id="074de134e9a8m" rowspan="1" colspan="1"><p id="27f2a5d54egry">GET</p></td></tr><tr id="990f7b9da57jy"><td id="0eb74990a52rp" rowspan="1" colspan="1"><p id="e0ebc49c103zy">支持的应用类型</p></td><td id="ff6212b72e0ot" rowspan="1" colspan="1"><p id="f4636614ea109"><span data-tag="ph" id="ph-request-basic-app-type-apptype-0" class="ph ph-app-type" data-ph-raw-text="appType-企业内部应用">appType-企业内部应用</span>　<span data-tag="ph" id="ph-request-basic-app-type-apptype-1" class="ph ph-app-type" data-ph-raw-text="appType-第三方企业应用">appType-第三方企业应用</span></p></td></tr><tr id="d2c7ff4eeexev"><td id="420b9c3987kmq" rowspan="1" colspan="1"><p id="beb519f362fjx">权限要求</p></td><td id="c87bef97861r5" rowspan="1" colspan="1"><p id="413b70b7c0lbz"><span data-tag="ph" id="ph-request-basic-permission-permission-qyapi-hrm-read-user-0" class="ph-permission ph" data-ph-raw-text="permission-qyapi_hrm_read_user-智能人事个人信息读权限" data-permission-id="permission-qyapi_hrm_read_user" data-permission-code="qyapi_hrm_read_user" data-permission-detail-api="/document/api/permission/detail" data-permission-query-param="code">permission-qyapi_hrm_read_user-智能人事个人信息读权限</span></p></td></tr></tbody></table></section><section id="section-request-header-parameter" class="section"><h3 data-tag="h3" id="h2-zuy-yjs-5da" class="h3 title">请求头</h3><table id="fe38e3ac6cppt" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="e412e66d5bmmx"><td id="f10141c167b14" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="ab164d8695mx0">名称</p></td><td id="b7b462b4c4axo" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="03dcb8ff903k9">类型</p></td><td id="0e8fa1e251opv" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="c3b95a35d70lg">是否必填</p></td><td id="bfe26f7e28768" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="310f8837e2grq">描述</p></td></tr><tr id="ed7070fa0dfvz"><td id="f9d4876d14ufy" rowspan="1" colspan="1"><p id="64c88ee86btqw">x-acs-dingtalk-access-token</p></td><td id="64b3585c4a3bd" rowspan="1" colspan="1"><p id="94d866e075x38">String</p></td><td id="86e3befcf6ifr" rowspan="1" colspan="1"><p id="2c6b079ae7lwl">是</p></td><td id="96be67ff3c52q" rowspan="1" colspan="1"><p id="6b7f3c7e1ea18">调用该接口的访问凭证，通过以下获取：</p><ul id="8fba8ccbectnj"><li id="dace943c20vbe"><p id="ca09404059yfy">企业内部应用，调用<a href="https://open.dingtalk.com/document/development/obtain-the-access-token-of-an-internal-app#" id="14662e8ae77dk" class="xref">获取企业内部应用的accessToken</a>接口获取。</p></li><li id="4198465b2bgql"><p id="65bfc18266teh">第三方企业应用，调用<a href="https://open.dingtalk.com/document/development/obtain-the-access-token-of-the-authorized-enterprise-1#" id="f20432372809g" class="xref">获取第三方应用授权企业的accessToken</a>接口获取。</p></li></ul></td></tr></tbody></table></section><section id="section-request-query-parameter" class="section"><h3 data-tag="h3" id="h2-n6f-vzj-iys" class="h3 title">查询参数</h3><table id="76f0e53af6302" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="549a7c3e4fe7o"><td id="b446e921a95fw" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="101160968cbp3">名称</p></td><td id="dc95892219jso" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="2328f9520f718">类型</p></td><td id="2e550547d9721" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="3bbaa2f5bawu3">是否必填</p></td><td id="dc6bed0e48n2y" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="dbc81837fbofi">描述</p></td></tr><tr id="6538795828wso"><td id="3d1f8286dfh0h" rowspan="1" colspan="1"><p id="74f72ab3a3ckc">userIdList</p></td><td id="ab28dc6e39x4g" rowspan="1" colspan="1"><p id="1627c445db77f">Array of String</p></td><td id="1e379069cbgre" rowspan="1" colspan="1"><p id="4d48a01817hpt">是</p></td><td id="9db46a9e3etdj" rowspan="1" colspan="1"><p id="b1f2c76d0ehcl">员工userId列表，最大长度50。</p></td></tr></tbody></table></section><section id="section-request-body-example" class="section"><h3 id="h3-request-body-example" data-tag="h3" class="h3">请求示例</h3><div outputclass="tabbed-codeblock" data-tag="fig" id="figure-xsc-klq-v5f" class="tabbed-codeblock-box"><div class="tab-box"></div><input type="radio" name="check-figure-xsc-klq-v5f" id="figure-xsc-klq-v5f-HTTP-tab" checked="checked" /><label for="figure-xsc-klq-v5f-HTTP-tab">HTTP</label><div class="codeblock-item"><pre id="codeblock-mrx-xbf-uma" outputclass="language-HTTP" code-type="xCode" data-tag="codeblock" class="pre codeblock language-HTTP"><code>GET /v1.0/hrm/employees/dimissionInfos?userIdList=["\"123\""] HTTP/1.1
+Host:api.dingtalk.com
+x-acs-dingtalk-access-token:"3b1e371d2cb136f684367e05097d2"
+Content-Type:application/json</code></pre></div><input type="radio" name="check-figure-xsc-klq-v5f" id="figure-xsc-klq-v5f-java-tab" /><label for="figure-xsc-klq-v5f-java-tab">Java</label><div class="codeblock-item"><pre id="codeblock-izb-kyz-otn" outputclass="language-java" code-type="xCode" data-tag="codeblock" class="pre codeblock language-java"><code>// This file is auto-generated, don't edit it. Thanks.
+package com.aliyun.sample;
+
+import com.aliyun.tea.*;
+import com.aliyun.teautil.*;
+import com.aliyun.teautil.models.*;
+import com.aliyun.dingtalkhrm_1_0.*;
+import com.aliyun.dingtalkhrm_1_0.models.*;
+import com.aliyun.teaopenapi.*;
+import com.aliyun.teaopenapi.models.*;
+
+public class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Client
+     * @throws Exception
+     */
+    public static com.aliyun.dingtalkhrm_1_0.Client createClient() throws Exception {
+        Config config = new Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        return new com.aliyun.dingtalkhrm_1_0.Client(config);
+    }
+
+    public static void main(String[] args_) throws Exception {
+        java.util.List&lt;String&gt; args = java.util.Arrays.asList(args_);
+        com.aliyun.dingtalkhrm_1_0.Client client = Sample.createClient();
+        QueryHrmEmployeeDismissionInfoHeaders queryHrmEmployeeDismissionInfoHeaders = new QueryHrmEmployeeDismissionInfoHeaders();
+        queryHrmEmployeeDismissionInfoHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        QueryHrmEmployeeDismissionInfoRequest queryHrmEmployeeDismissionInfoRequest = new QueryHrmEmployeeDismissionInfoRequest()
+                .setUserIdList(java.util.Arrays.asList(
+                    null
+                ));
+        try {
+            client.queryHrmEmployeeDismissionInfoWithOptions(queryHrmEmployeeDismissionInfoRequest, queryHrmEmployeeDismissionInfoHeaders, new RuntimeOptions());
+        } catch (TeaException err) {
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        } catch (Exception _err) {
+            TeaException err = new TeaException(_err.getMessage(), _err);
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        }        
+    }
+}</code></pre></div><input type="radio" name="check-figure-xsc-klq-v5f" id="figure-xsc-klq-v5f-python-tab" /><label for="figure-xsc-klq-v5f-python-tab">Python</label><div class="codeblock-item"><pre id="codeblock-jgn-nus-spo" outputclass="language-python" code-type="xCode" data-tag="codeblock" class="pre codeblock language-python"><code># -*- coding: utf-8 -*-
+# This file is auto-generated, don't edit it. Thanks.
+import sys
+
+from typing import List
+
+from alibabacloud_dingtalk.hrm_1_0.client import Client as dingtalkhrm_1_0Client
+from alibabacloud_tea_openapi import models as open_api_models
+from alibabacloud_dingtalk.hrm_1_0 import models as dingtalkhrm__1__0_models
+from alibabacloud_tea_util import models as util_models
+from alibabacloud_tea_util.client import Client as UtilClient
+
+
+class Sample:
+    def __init__(self):
+        pass
+
+    @staticmethod
+    def create_client() -&gt; dingtalkhrm_1_0Client:
+        """
+        使用 Token 初始化账号Client
+        @return: Client
+        @throws Exception
+        """
+        config = open_api_models.Config()
+        config.protocol = 'https'
+        config.region_id = 'central'
+        return dingtalkhrm_1_0Client(config)
+
+    @staticmethod
+    def main(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        query_hrm_employee_dismission_info_headers = dingtalkhrm__1__0_models.QueryHrmEmployeeDismissionInfoHeaders()
+        query_hrm_employee_dismission_info_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        query_hrm_employee_dismission_info_request = dingtalkhrm__1__0_models.QueryHrmEmployeeDismissionInfoRequest(
+            user_id_list=[
+                None
+            ]
+        )
+        try:
+            client.query_hrm_employee_dismission_info_with_options(query_hrm_employee_dismission_info_request, query_hrm_employee_dismission_info_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+    @staticmethod
+    async def main_async(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        query_hrm_employee_dismission_info_headers = dingtalkhrm__1__0_models.QueryHrmEmployeeDismissionInfoHeaders()
+        query_hrm_employee_dismission_info_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        query_hrm_employee_dismission_info_request = dingtalkhrm__1__0_models.QueryHrmEmployeeDismissionInfoRequest(
+            user_id_list=[
+                None
+            ]
+        )
+        try:
+            await client.query_hrm_employee_dismission_info_with_options_async(query_hrm_employee_dismission_info_request, query_hrm_employee_dismission_info_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+
+if __name__ == '__main__':
+    Sample.main(sys.argv[1:])</code></pre></div><input type="radio" name="check-figure-xsc-klq-v5f" id="figure-xsc-klq-v5f-php-tab" /><label for="figure-xsc-klq-v5f-php-tab">PHP</label><div class="codeblock-item"><pre id="codeblock-czu-qka-ija" outputclass="language-php" code-type="xCode" data-tag="codeblock" class="pre codeblock language-php"><code>&lt;?php
+
+// This file is auto-generated, don't edit it. Thanks.
+namespace AlibabaCloud\SDK\Sample;
+
+use AlibabaCloud\SDK\Dingtalk\Vhrm_1_0\Dingtalk;
+use \Exception;
+use AlibabaCloud\Tea\Exception\TeaError;
+use AlibabaCloud\Tea\Utils\Utils;
+
+use Darabonba\OpenApi\Models\Config;
+use AlibabaCloud\SDK\Dingtalk\Vhrm_1_0\Models\QueryHrmEmployeeDismissionInfoHeaders;
+use AlibabaCloud\SDK\Dingtalk\Vhrm_1_0\Models\QueryHrmEmployeeDismissionInfoRequest;
+use AlibabaCloud\Tea\Utils\Utils\RuntimeOptions;
+
+class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Dingtalk Client
+     */
+    public static function createClient(){
+        $config = new Config([]);
+        $config-&gt;protocol = "https";
+        $config-&gt;regionId = "central";
+        return new Dingtalk($config);
+    }
+
+    /**
+     * @param string[] $args
+     * @return void
+     */
+    public static function main($args){
+        $client = self::createClient();
+        $queryHrmEmployeeDismissionInfoHeaders = new QueryHrmEmployeeDismissionInfoHeaders([]);
+        $queryHrmEmployeeDismissionInfoHeaders-&gt;xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        $queryHrmEmployeeDismissionInfoRequest = new QueryHrmEmployeeDismissionInfoRequest([
+            "userIdList" =&gt; [
+                null
+            ]
+        ]);
+        try {
+            $client-&gt;queryHrmEmployeeDismissionInfoWithOptions($queryHrmEmployeeDismissionInfoRequest, $queryHrmEmployeeDismissionInfoHeaders, new RuntimeOptions([]));
+        }
+        catch (Exception $err) {
+            if (!($err instanceof TeaError)) {
+                $err = new TeaError([], $err-&gt;getMessage(), $err-&gt;getCode(), $err);
+            }
+            if (!Utils::empty_($err-&gt;code) &amp;&amp; !Utils::empty_($err-&gt;message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+        }
+    }
+}
+$path = __DIR__ . \DIRECTORY_SEPARATOR . '..' . \DIRECTORY_SEPARATOR . 'vendor' . \DIRECTORY_SEPARATOR . 'autoload.php';
+if (file_exists($path)) {
+    require_once $path;
+}
+Sample::main(array_slice($argv, 1));</code></pre></div><input type="radio" name="check-figure-xsc-klq-v5f" id="figure-xsc-klq-v5f-go-tab" /><label for="figure-xsc-klq-v5f-go-tab">Go</label><div class="codeblock-item"><pre id="codeblock-anj-g71-eks" outputclass="language-go" code-type="xCode" data-tag="codeblock" class="pre codeblock language-go"><code>// This file is auto-generated, don't edit it. Thanks.
+package main
+
+import (
+  "os"
+  util  "github.com/alibabacloud-go/tea-utils/service"
+  dingtalkhrm_1_0  "github.com/alibabacloud-go/dingtalk/hrm_1_0"
+  openapi  "github.com/alibabacloud-go/darabonba-openapi/client"
+  "github.com/alibabacloud-go/tea/tea"
+)
+
+
+/**
+ * 使用 Token 初始化账号Client
+ * @return Client
+ * @throws Exception
+ */
+func CreateClient () (_result *dingtalkhrm_1_0.Client, _err error) {
+  config := &amp;openapi.Config{}
+  config.Protocol = tea.String("https")
+  config.RegionId = tea.String("central")
+  _result = &amp;dingtalkhrm_1_0.Client{}
+  _result, _err = dingtalkhrm_1_0.NewClient(config)
+  return _result, _err
+}
+
+func _main (args []*string) (_err error) {
+  client, _err := CreateClient()
+  if _err != nil {
+    return _err
+  }
+
+  queryHrmEmployeeDismissionInfoHeaders := &amp;dingtalkhrm_1_0.QueryHrmEmployeeDismissionInfoHeaders{}
+  queryHrmEmployeeDismissionInfoHeaders.XAcsDingtalkAccessToken = tea.String("&lt;your access token&gt;")
+  queryHrmEmployeeDismissionInfoRequest := &amp;dingtalkhrm_1_0.QueryHrmEmployeeDismissionInfoRequest{
+    UserIdList: []*string{nil},
+  }
+  tryErr := func()(_e error) {
+    defer func() {
+      if r := tea.Recover(recover()); r != nil {
+        _e = r
+      }
+    }()
+    _, _err = client.QueryHrmEmployeeDismissionInfoWithOptions(queryHrmEmployeeDismissionInfoRequest, queryHrmEmployeeDismissionInfoHeaders, &amp;util.RuntimeOptions{})
+    if _err != nil {
+      return _err
+    }
+
+    return nil
+  }()
+
+  if tryErr != nil {
+    var err = &amp;tea.SDKError{}
+    if _t, ok := tryErr.(*tea.SDKError); ok {
+      err = _t
+    } else {
+      err.Message = tea.String(tryErr.Error())
+    }
+    if !tea.BoolValue(util.Empty(err.Code)) &amp;&amp; !tea.BoolValue(util.Empty(err.Message)) {
+      // err 中含有 code 和 message 属性，可帮助开发定位问题
+    }
+
+  }
+  return _err
+}
+
+
+func main() {
+  err := _main(tea.StringSlice(os.Args[1:]))
+  if err != nil {
+    panic(err)
+  }
+}</code></pre></div><input type="radio" name="check-figure-xsc-klq-v5f" id="figure-xsc-klq-v5f-nodejs-tab" /><label for="figure-xsc-klq-v5f-nodejs-tab">Node.js</label><div class="codeblock-item"><pre id="codeblock-6yk-zvs-svb" outputclass="language-nodejs" code-type="xCode" data-tag="codeblock" class="pre codeblock language-nodejs"><code>// This file is auto-generated, don't edit it
+import Util, * as $Util from '@alicloud/tea-util';
+import dingtalkhrm_1_0, * as $dingtalkhrm_1_0 from '@alicloud/dingtalk/hrm_1_0';
+import OpenApi, * as $OpenApi from '@alicloud/openapi-client';
+import * as $tea from '@alicloud/tea-typescript';
+
+
+export default class Client {
+
+  /**
+   * 使用 Token 初始化账号Client
+   * @return Client
+   * @throws Exception
+   */
+  static createClient(): dingtalkhrm_1_0 {
+    let config = new $OpenApi.Config({ });
+    config.protocol = "https";
+    config.regionId = "central";
+    return new dingtalkhrm_1_0(config);
+  }
+
+  static async main(args: string[]): Promise&lt;void&gt; {
+    let client = Client.createClient();
+    let queryHrmEmployeeDismissionInfoHeaders = new $dingtalkhrm_1_0.QueryHrmEmployeeDismissionInfoHeaders({ });
+    queryHrmEmployeeDismissionInfoHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+    let queryHrmEmployeeDismissionInfoRequest = new $dingtalkhrm_1_0.QueryHrmEmployeeDismissionInfoRequest({
+      userIdList: [
+        null
+      ],
+    });
+    try {
+      await client.queryHrmEmployeeDismissionInfoWithOptions(queryHrmEmployeeDismissionInfoRequest, queryHrmEmployeeDismissionInfoHeaders, new $Util.RuntimeOptions({ }));
+    } catch (err) {
+      if (!Util.empty(err.code) &amp;&amp; !Util.empty(err.message)) {
+        // err 中含有 code 和 message 属性，可帮助开发定位问题
+      }
+
+    }    
+  }
+
+}
+
+Client.main(process.argv.slice(2));</code></pre></div><input type="radio" name="check-figure-xsc-klq-v5f" id="figure-xsc-klq-v5f-csharp-tab" /><label for="figure-xsc-klq-v5f-csharp-tab">C#</label><div class="codeblock-item"><pre id="codeblock-jcv-ars-q4i" outputclass="language-csharp" code-type="xCode" data-tag="codeblock" class="pre codeblock language-csharp"><code>// This file is auto-generated, don't edit it. Thanks.
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
+
+using Tea;
+using Tea.Utils;
+
+
+namespace AlibabaCloud.SDK.Sample
+{
+    public class Sample 
+    {
+
+        /**
+         * 使用 Token 初始化账号Client
+         * @return Client
+         * @throws Exception
+         */
+        public static AlibabaCloud.SDK.Dingtalkhrm_1_0.Client CreateClient()
+        {
+            AlibabaCloud.OpenApiClient.Models.Config config = new AlibabaCloud.OpenApiClient.Models.Config();
+            config.Protocol = "https";
+            config.RegionId = "central";
+            return new AlibabaCloud.SDK.Dingtalkhrm_1_0.Client(config);
+        }
+
+        public static void Main(string[] args)
+        {
+            AlibabaCloud.SDK.Dingtalkhrm_1_0.Client client = CreateClient();
+            AlibabaCloud.SDK.Dingtalkhrm_1_0.Models.QueryHrmEmployeeDismissionInfoHeaders queryHrmEmployeeDismissionInfoHeaders = new AlibabaCloud.SDK.Dingtalkhrm_1_0.Models.QueryHrmEmployeeDismissionInfoHeaders();
+            queryHrmEmployeeDismissionInfoHeaders.XAcsDingtalkAccessToken = "&lt;your access token&gt;";
+            AlibabaCloud.SDK.Dingtalkhrm_1_0.Models.QueryHrmEmployeeDismissionInfoRequest queryHrmEmployeeDismissionInfoRequest = new AlibabaCloud.SDK.Dingtalkhrm_1_0.Models.QueryHrmEmployeeDismissionInfoRequest
+            {
+                UserIdList = new List&lt;null&gt;
+                {
+                    null
+                },
+            };
+            try
+            {
+                client.QueryHrmEmployeeDismissionInfoWithOptions(queryHrmEmployeeDismissionInfoRequest, queryHrmEmployeeDismissionInfoHeaders, new AlibabaCloud.TeaUtil.Models.RuntimeOptions());
+            }
+            catch (TeaException err)
+            {
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+            catch (Exception _err)
+            {
+                TeaException err = new TeaException(new Dictionary&lt;string, object&gt;
+                {
+                    { "message", _err.Message }
+                });
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+        }
+
+
+    }
+}</code></pre></div><input type="radio" name="check-figure-xsc-klq-v5f" id="figure-xsc-klq-v5f-cpp-tab" /><label for="figure-xsc-klq-v5f-cpp-tab">C++</label><div class="codeblock-item"><pre id="codeblock-ip4-lj8-ebf" outputclass="language-cpp" code-type="xCode" data-tag="codeblock" class="pre codeblock language-cpp"><code>// This file is auto-generated, don't edit it. Thanks.
+
+#include &lt;alibabacloud/dingtalkhrm__1__0.hpp&gt;
+#include &lt;alibabacloud/open_api.hpp&gt;
+#include &lt;boost/any.hpp&gt;
+#include &lt;darabonba/core.hpp&gt;
+#include &lt;darabonba/util.hpp&gt;
+#include &lt;iostream&gt;
+#include &lt;map&gt;
+#include &lt;vector&gt;
+
+using namespace std;
+
+Alibabacloud_Dingtalkhrm_1_0::Client createClient() {
+  shared_ptr&lt;Alibabacloud_OpenApi::Config&gt; config = make_shared&lt;Alibabacloud_OpenApi::Config&gt;();
+  config-&gt;protocol = make_shared&lt;string&gt;("https");
+  config-&gt;regionId = make_shared&lt;string&gt;("central");
+  return Alibabacloud_Dingtalkhrm_1_0::Client(config);
+}
+
+int main(int argc, char *args[]) {
+  args++;
+  shared_ptr&lt;Alibabacloud_Dingtalkhrm_1_0::Client&gt; client = make_shared&lt;Alibabacloud_Dingtalkhrm_1_0::Client&gt;(createClient());
+  shared_ptr&lt;Alibabacloud_Dingtalkhrm_1_0::QueryHrmEmployeeDismissionInfoHeaders&gt; queryHrmEmployeeDismissionInfoHeaders = make_shared&lt;Alibabacloud_Dingtalkhrm_1_0::QueryHrmEmployeeDismissionInfoHeaders&gt;();
+  queryHrmEmployeeDismissionInfoHeaders-&gt;xAcsDingtalkAccessToken = make_shared&lt;string&gt;("&lt;your access token&gt;");
+  shared_ptr&lt;Alibabacloud_Dingtalkhrm_1_0::QueryHrmEmployeeDismissionInfoRequest&gt; queryHrmEmployeeDismissionInfoRequest = make_shared&lt;Alibabacloud_Dingtalkhrm_1_0::QueryHrmEmployeeDismissionInfoRequest&gt;(map&lt;string, boost::any&gt;({
+    {"userIdList", boost::any(vector&lt;nullptr&gt;({
+      nullptr
+    }))}
+  }));
+  try {
+    client-&gt;queryHrmEmployeeDismissionInfoWithOptions(queryHrmEmployeeDismissionInfoRequest, queryHrmEmployeeDismissionInfoHeaders, make_shared&lt;Darabonba_Util::RuntimeOptions&gt;(Darabonba_Util::RuntimeOptions()));
+  }
+  catch (std::exception &amp;err) {
+    if (!Darabonba_Util::Client::empty(err.code) &amp;&amp; !Darabonba_Util::Client::empty(err.message)) {
+      // err 中含有 code 和 message 属性，可帮助开发定位问题
+    }
+  }
+}</code></pre></div></div></section></section><section id="section-response-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-response-1" data-tag="h2" class="h2">响应</h2><section id="section-response-parameter" class="section"><h3 data-tag="h3" id="h2-ch4-io7-9ey" class="h3 title">响应体</h3><table id="97e2e1f2af4mw" tablewidth="710" tablecolswidth="213 142 355" autofit="false" class="table"><colgroup colwidth="0.9*" style="width:30.00%"></colgroup><colgroup colwidth="0.6*" style="width:20.00%"></colgroup><colgroup colwidth="1.5*" style="width:50.00%"></colgroup><tbody class="tbody"><tr id="d9ae887ad81fy"><td id="e393427720ut5" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="fbaf503c902gd">名称</p></td><td id="41813c09211yh" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="0872b01fa73nl">类型</p></td><td id="cc6849b40c0ui" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="a52258998497o">描述</p></td></tr><tr outputclass="row row-level-1 has-child" id="9b889a8467jx6" class="row row-level-1 has-child"><td id="55f22cff7ew0b" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="44409bfb83uef">result</p></td><td id="7ce9ff901frsg" rowspan="1" colspan="1"><p id="49f94d335atmg">Array</p></td><td id="0236c7d0f3hdz" rowspan="1" colspan="1"><p id="ed25dd15dd9xk">返回结果。</p></td></tr><tr outputclass="row row-level-1-1" id="9c6d18033efd6" class="row row-level-1-1"><td id="29798a534atgz" rowspan="1" colspan="1"><p id="1b389ff017gpp">userId</p></td><td id="6085c6e8b2ipq" rowspan="1" colspan="1"><p id="e0f5a3486boam">String</p></td><td id="6d92c6938f7sq" rowspan="1" colspan="1"><p id="7e55fbbb33u8t">员工userId。</p></td></tr><tr outputclass="row row-level-1-2" id="0d71522fa0mb2" class="row row-level-1-2"><td id="0e97bf9fcewsz" rowspan="1" colspan="1"><p id="273dc9141181f">lastWorkDay</p></td><td id="8c9870f6bf326" rowspan="1" colspan="1"><p id="b0f422fa13jdt">Long</p></td><td id="2c7c5e04bcwr7" rowspan="1" colspan="1"><p id="726d9de493fns">最后工作日。</p></td></tr><tr outputclass="row row-level-1-3 has-child" id="b0e0544b15it5" class="row row-level-1-3 has-child"><td id="ee70ff0587zza" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="931b828fe79gr">deptList</p></td><td id="01031f888b146" rowspan="1" colspan="1"><p id="18a3c5b345w7v">Array</p></td><td id="63bd1c4f098ia" rowspan="1" colspan="1"><p id="3791055f214yh">离职部门列表。</p></td></tr><tr outputclass="row row-level-1-3-1" id="61c7ab9a67rp5" class="row row-level-1-3-1"><td id="1bc9e52c0ca15" rowspan="1" colspan="1"><p id="5f80ddaa3dv5k">dept_path</p></td><td id="ec124ca12a5tf" rowspan="1" colspan="1"><p id="4f89173cc6va9">String</p></td><td id="92bd8067a2cmu" rowspan="1" colspan="1"><p id="aa91c417d9m3j">部门路径。</p></td></tr><tr outputclass="row row-level-1-3-2" id="8abfc206a19ij" class="row row-level-1-3-2"><td id="2e2b176dddp71" rowspan="1" colspan="1"><p id="a4973fc84cljc">dept_id</p></td><td id="ac5e6716e3ao7" rowspan="1" colspan="1"><p id="d167f4754ee6f">Long</p></td><td id="09f1689423tyn" rowspan="1" colspan="1"><p id="eb7c122307rzn">部门ID。</p></td></tr><tr outputclass="row row-level-1-4" id="fd740caebcr27" class="row row-level-1-4"><td id="3e00c0ac4c7kx" rowspan="1" colspan="1"><p id="16b718d8732vl">reasonMemo</p></td><td id="fe7cb59e50mgp" rowspan="1" colspan="1"><p id="2fab5f8d06vb0">String</p></td><td id="b937015363xqe" rowspan="1" colspan="1"><p id="3e75cae11dhbb">离职原因备注。</p></td></tr><tr outputclass="row row-level-1-5" id="6ba2da61253p8" class="row row-level-1-5"><td id="61525a6a09wec" rowspan="1" colspan="1"><p id="4c48278c089cs">preStatus</p></td><td id="c9d442cbacrdk" rowspan="1" colspan="1"><p id="68dcecffce5z0">Integer</p></td><td id="bfd7539899dqw" rowspan="1" colspan="1"><p id="3b6bf108f8k46">离职前工作状态：</p><ul id="fd85016ba5vm9"><li id="a5ddaa08e36fi"><p id="888202c3f7nvx">1：待入职；</p></li><li id="e9fce16825so6"><p id="a7960c1be5qya">2：试用期；</p></li><li id="143acb1b25soj"><p id="50f3ca56d9cai">3：正式。</p></li></ul></td></tr><tr outputclass="row row-level-1-6" id="886418b8b70ze" class="row row-level-1-6"><td id="5e8da0297aftf" rowspan="1" colspan="1"><p id="90cb798217fd0">handoverUserId</p></td><td id="238f2b4767le1" rowspan="1" colspan="1"><p id="4e64e8078dz3k">String</p></td><td id="e041ac5b1ban5" rowspan="1" colspan="1"><p id="7e57e00a332ao">离职交接人的userId。</p></td></tr><tr outputclass="row row-level-1-7" id="a6c324f56817o" class="row row-level-1-7"><td id="e8cfbcee27wpv" rowspan="1" colspan="1"><p id="6bb38ac1e1pmf">status</p></td><td id="444498c2a0v2w" rowspan="1" colspan="1"><p id="37755f6870b7e">Integer</p></td><td id="ae2046ce2b9pw" rowspan="1" colspan="1"><p id="1071f8cfdd2k3">离职状态：</p><ul id="0d24afc34fiso"><li id="9227c4db72cjt"><p id="ff02b790b91cp">1：待离职。</p></li><li id="2afb9c046bz3q"><p id="f8a9ae6fb4079">2：已离职。</p></li><li id="f393a85da0p10"><p id="2b54684db1pya">3：非待离职或非已离职。</p></li><li id="1195c816bb3i7"><p id="469386f9f5s6j">4：已提交离职审批单，审批单暂未通过。</p></li></ul></td></tr><tr outputclass="row row-level-1-8" id="3ef3530f13no1" class="row row-level-1-8"><td id="5f69fecb9dria" rowspan="1" colspan="1"><p id="a0c530cb686c4">mainDeptName</p></td><td id="1572d1a62ap3u" rowspan="1" colspan="1"><p id="f69b7bc679p65">String</p></td><td id="c76deec1ebkhl" rowspan="1" colspan="1"><p id="077e785b8bajr">离职前主部门名称。</p></td></tr><tr outputclass="row row-level-1-9" id="795d0a9f31tci" class="row row-level-1-9"><td id="81ee18f6ddrzd" rowspan="1" colspan="1"><p id="998348592ezws">mainDeptId</p></td><td id="e458ac8513b36" rowspan="1" colspan="1"><p id="b4c4d59777cn5">Long</p></td><td id="c05efccc501ge" rowspan="1" colspan="1"><p id="45f5ac8d63q7h">离职前主部门ID。</p></td></tr><tr outputclass="row row-level-1-10" id="6564415f4c66l" class="row row-level-1-10"><td id="b3c1e8da17j9a" rowspan="1" colspan="1"><p id="078e7e8a60i0t">voluntaryReason</p></td><td id="8a10928779i69" rowspan="1" colspan="1"><p id="9495fccdd27ym">Array of String</p></td><td id="9a4de2e3a9e2m" rowspan="1" colspan="1"><p id="9ca2a47c6eia5">主动原因。</p></td></tr><tr outputclass="row row-level-1-11" id="a3516fe4e7sae" class="row row-level-1-11"><td id="e41e15ba8b2eu" rowspan="1" colspan="1"><p id="66c30de54f645">passiveReason</p></td><td id="42fa668298u1j" rowspan="1" colspan="1"><p id="623241bb8cvnr">Array of String</p></td><td id="74e98482af1gx" rowspan="1" colspan="1"><p id="ad9b29966506z">被动原因。</p></td></tr></tbody></table></section><section id="section-response-body-example" class="section"><h3 id="h3-response-body-example" data-tag="h3" class="h3">响应体示例</h3><pre id="70869493163ah" outputclass="language-json" code-type="xCode" data-tag="codeblock" class="pre codeblock language-json"><code>HTTP/1.1 200 OK
+Content-Type:application/json
+
+{
+  "result" : [ {
+    "userId" : "123",
+    "lastWorkDay" : 1534569419008,
+    "deptList" : [ {
+      "dept_path" : "门诊部-门诊外科",
+      "dept_id" : 1234
+    } ],
+    "reasonMemo" : "世界太大想去看看",
+    "preStatus" : 1,
+    "handoverUserId" : "123456",
+    "status" : 1,
+    "mainDeptName" : "门诊外科",
+    "mainDeptId" : 1234,
+    "voluntaryReason" : [ "个人原因" ],
+    "passiveReason" : [ "无法胜任工作" ]
+  } ]
+}</code></pre></section><section id="section-error-code-1" class="section"><h3 id="h3-error-code-1" data-tag="h3" class="h3">错误码</h3><p data-tag="p" id="p-error-code-global-guide" class="p">若调用该接口报错，可根据错误信息在<a href="https://open.dingtalk.com/document/development/server-api-error-codes-1" id="a-error-code-global-guide">全局错误码</a>文档中查找解决方案。</p><table id="538c3cfb8abr4" tablewidth="709" tablecolswidth="142 177 177 213" autofit="false" class="table"><colgroup colwidth="0.8*" style="width:20.03%"></colgroup><colgroup colwidth="1*" style="width:24.96%"></colgroup><colgroup colwidth="1*" style="width:24.96%"></colgroup><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><tbody class="tbody"><tr id="748c5072adun8"><td id="840c0be987hyy" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="59e7c39aef6u2">HttpCode</p></td><td id="d70534ff6262v" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="bc754b5046mrh">错误码</p></td><td id="47e8d6b3c55bf" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="76d1d4571bx7p">错误信息</p></td><td id="d3e19f98f6jq2" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="2f15f34024gyt">说明</p></td></tr><tr id="bad0a80e7eyk4"><td id="db58c5bf4ak84" rowspan="1" colspan="1"><p id="3fbccf64420im">400</p></td><td id="f94bd04a2590e" rowspan="1" colspan="1"><p id="2d80e924f5ao1">invalidParameter</p></td><td id="3ee1ab15d9r80" rowspan="1" colspan="1"><p id="a56dbe7f0cbb3">员工 id列表大小不在[1,50]范围</p></td><td id="9ba1b2759dyky" rowspan="1" colspan="1"><p id="fe4845a01dphb">员工 id列表大小不在[1,50]范围</p></td></tr><tr id="646fbf035awmj"><td id="55b16dbe01zx8" rowspan="1" colspan="1"><p id="7519c1540brao">400</p></td><td id="b760ffd508pxa" rowspan="1" colspan="1"><p id="ed219c33c1l11">corpNotOpenHrm</p></td><td id="f03d8eb7980i0" rowspan="1" colspan="1"><p id="b0067884ddwfx">企业未开通通智能人事</p></td><td id="67ee279f61rmg" rowspan="1" colspan="1"><p id="143fea91397da">企业未开通通智能人事</p></td></tr><tr id="06dbb84cd89lm"><td id="1af894c2ddost" rowspan="1" colspan="1"><p id="50b8ac6ec7cwh">500</p></td><td id="d3ff6652f0tyi" rowspan="1" colspan="1"><p id="66bd04ea86t6w">systemError</p></td><td id="dfaff0698cq3w" rowspan="1" colspan="1"><p id="be6ed9b7a35r8">系统异常</p></td><td id="6ed0063874pnf" rowspan="1" colspan="1"><p id="5eb1cd3247h82">系统异常</p></td></tr></tbody></table></section></section></div></main></body></html>

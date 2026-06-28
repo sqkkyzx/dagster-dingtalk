@@ -1,0 +1,111 @@
+<!DOCTYPE html><html><head><meta charset="utf8" / /><meta name="searchtitle" content="" / /><meta name="keywords" content="" / /><meta name="author" content="" / /><title>群模板机器人发送群聊消息</title><meta name="gmtModify" content="2026-05-15 13:07:49" / /></head><body data-tag="topic" id="topic-2324433" class="topic"><main id="main-2324433"><h1 data-tag="title" id="4a19b8e0dd5or" class="title">群模板机器人发送群聊消息</h1><p id="4a19b8e2dd09p" data-tag="shortdesc" class="shortdesc">如果你需要通过群模板机器人发送群聊消息，可以参考本文档操作步骤。</p><div data-tag="body" class="body"><section id="12d25fc860a8h" class="section"><h2 uuid="lrq7z7hga8sp14katdn" id="eadbb4064fr9r"><b>明确需求</b></h2><p uuid="lrrn8tzl61q2gh8ihi8" id="7fb134044dr4x">在正式开发之前，你可以提前了解，本文档将帮助你使用群模板机器人通过<a data-tag="xref" id="a5f051bc13umg" href="/document/development/group-template-robot-message#" class="xref">发送群助手消息</a>接口发送群聊消息。为了帮助你快速上手，你可以尝试运行“快速体验”提供的示例 demo。这将帮助你对群模板机器人的使用有一个直观的体验。</p></section><section id="3fc398948e3o6" class="section"><h2 uuid="lrri6515a4i3oqth4ra" id="83e9872918apd"><b>前提条件</b></h2><ol id="ea0827ecd4hwp" start="1"><li id="7c0179196bacc"><p id="beacb7f63dief">完成<a data-tag="xref" id="b650632e3771w" href="/document/dingstart/creation-and-installation-of-swarm-template-robots#" class="xref">创建群模板机器人</a>流程。</p></li><li id="1892c7c56ajsh"><p id="c05915d2c98dp">完成 OpenAPI 接口的<a data-tag="xref" id="0e8a5ce66e25l" href="/document/development/add-api-permission#" class="xref">调用权限申请</a>，需申请<code data-tag="code" id="0bd1ed8c283us" class="code">钉钉群消息管理权限</code>。</p></li><li id="3d12322a3dh94"><p id="74e9e80315ckk">开发环境准备：</p><ul id="e3013ef5f26gc"><li id="bc0873beef2ca"><p id="5e6ac7b945o0d">Java：已安装 JDK 1.8 及以上</p></li><li id="8e2aff5d9cjhx"><p id="67fe756a38nfa">Java：已安装 Maven 3 </p></li></ul></li></ol></section><section id="1df30e24f9n1b" class="section"><h2 id="5a922928d5bnv"><b>快速体验</b></h2><ol id="e69007044fbsu" start="1"><li id="6477183cccxbi"><p id="89af730271tbd">你可以下载 <a id="78eac2c94ddr1" href="https://help-static-aliyun-doc.aliyuncs.com/file-manage-files/zh-CN/20240221/oqqnlh/group-template-robot-group-message-quick-start.zip" data-tag="file" class="file">group-template-robot-group-message-quick-start</a> 示例 demo。</p></li><li id="549c37aae0z5n"><p id="c6a8e828f8av9">替换 groupTemplateRobotGroupMessage 的 main 方法参数：</p><table id="299287cb0397i" tablewidth="775" tablecolswidth="388 387" autofit="true" class="table"><colgroup colwidth="1*" style="width:50.06%"></colgroup><colgroup colwidth="1*" style="width:49.94%"></colgroup><tbody class="tbody"><tr id="f0152b343ca02"><td id="6ff42f71c8j5a" rowspan="1" style="vertical-align:top" colspan="1"><p uuid="lsb494las91pk0w59g" id="fe08614793aog">配置项</p></td><td id="8091cc92e8w3z" rowspan="1" style="vertical-align:top" colspan="1"><p uuid="lsb494la32kic7grxg3" id="7c5f37fe5423x">说明</p></td></tr><tr id="5f03a9040fr7f"><td id="63a60e7d2732j" rowspan="1" style="vertical-align:top" colspan="1"><p uuid="lsb494la2yig9iw0ogz" id="4350b0f05csfd">GROUP_TEMPLATE_ID</p></td><td id="40a4e0b4a4f76" rowspan="1" style="vertical-align:top" colspan="1"><p uuid="lsb494laymt17feqrc" id="d9274c3d5f24i">登录<a href="" uuid="lsb494la1xu86qktyik" id="cc0daa93419jr">开发者后台</a>，单击<b>开放能力 </b>&gt;<b> 场景群 </b>&gt; <b>群模板，</b>复制 ID。</p><p uuid="lsb494la7plbfnt2sbs" id="27d36fe916hrb"><img src="https://help-static-aliyun-doc.aliyuncs.com/assets/img/zh-CN/9834868071/p768603.png" id="m9gtab" width="277" height="155.8125" alt="image.png" placement="break" class="image break" / /></p></td></tr><tr id="949e7b6dd1hj8"><td id="bbfbb4b8f1dlw" rowspan="1" colspan="1"><p uuid="lsb494laoajappia9np" id="d65efb0ec7hkz">ROBOT_CODE</p></td><td id="06d53b33fe6ft" rowspan="1" colspan="1"><p id="b3646a39eegwc">登录<a href="" uuid="lsb494lak2yfew8lsj" id="e275236a756nt">开发者后台</a>，单击<b>开放能力 </b>&gt;<b> 场景群 </b>&gt; <b>群模板 </b>&gt;<b> 目标群模板</b>。复制机器人 ID。</p><p uuid="lsb494laxlq2xo7x4xe" id="65d0ec0c2beit"><img src="https://help-static-aliyun-doc.aliyuncs.com/assets/img/zh-CN/9834868071/p768605.png" id="e1h0sk" width="277" height="155.8125" alt="image.png" placement="break" class="image break" / /></p><blockquote uuid="lsb494lazv1cd1c8hx" id="ce4c095fd2k9v">如果群模板没有关联机器人，参考<a data-tag="xref" id="81a4e83971fot" href="/document/dingstart/associate-group-template-robot-to-group-template#" class="xref">关联群模板机器人到群模板</a>。</blockquote></td></tr><tr id="51030b978f6xr"><td id="affab5e91b6ex" rowspan="1" colspan="1"><p uuid="lsb494laze3p2vknle" id="6e9963fbed0ew">OWNER_USER_ID</p></td><td id="b6f4036ec7tm3" rowspan="1" style="vertical-align:top" colspan="1"><p uuid="lsb494la118sjqyc407q" id="c76bfb9709tj2">用户的 userId 信息，详情参考<a data-tag="xref" id="8d59b318b4g9y" href="/document/dingstart/basic-concepts-beta#section-aa9-zk1-os6" class="xref">用户 UserId</a>。</p></td></tr><tr id="bf2bb1ae22jwn"><td id="5e8d4f1121dai" rowspan="1" colspan="1"><p uuid="lsb494layfeozoccvf" id="cf485e3dfcm1e">CLIENT_ID</p></td><td id="949f7119e1qoi" rowspan="1" style="vertical-align:top" colspan="1"><p uuid="lsb494lakr29jocf0j9" id="eb03d08b2bx2z">应用的 Client ID，详情参考<a data-tag="xref" id="aeaee903aa17n" href="/document/dingstart/basic-concepts-beta#section-pje-9wf-l7c" class="xref">Client ID</a>。</p></td></tr><tr id="21d17ebb9f3b3"><td id="db4f520037110" rowspan="1" colspan="1"><p uuid="lsb494laxogpgv32iim" id="4c16e597d2erz">CLIENT_SECRET</p></td><td id="fff3d5d5784un" rowspan="1" style="vertical-align:top" colspan="1"><p uuid="lsb494lark4hvapdc1l" id="0653c11a88wiz">应用的 Client Secret，详情参考<a data-tag="xref" id="daa7cec5321xf" href="/document/dingstart/basic-concepts-beta#section-pje-9wf-l7c" class="xref">Client Secret</a>。</p></td></tr></tbody></table></li><li id="12cc33a7f9267"><p id="181dd5d612t7v">启动 main 方法，就可以在群内收到机器人发送的消息了。</p></li></ol></section><section id="68c9407a98j5e" class="section"><h2 id="edb131d77ccz5"><b>操作步骤</b></h2><ol id="ba86bfffedk47"><li id="7e3f66f4afeiy"><p id="507b8cac0ftbi">添加依赖项到工程的<code data-tag="code" uuid="lrq47p4ys00y1z3c3z" id="8afb88cc39hkh" class="code">pom.xml</code>文件。</p><pre id="iw81il" data-tag="codeblock" outputclass="language-xml" code-type="xCode" class="pre codeblock language-xml"><code>&lt;dependencies&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;com.aliyun&lt;/groupId&gt;
+            &lt;artifactId&gt;alibaba-dingtalk-service-sdk&lt;/artifactId&gt;
+            &lt;version&gt;2.0.0&lt;/version&gt;
+        &lt;/dependency&gt;
+
+        &lt;dependency&gt;
+            &lt;groupId&gt;com.aliyun&lt;/groupId&gt;
+            &lt;artifactId&gt;dingtalk&lt;/artifactId&gt;
+            &lt;version&gt;2.0.76&lt;/version&gt;
+        &lt;/dependency&gt;
+
+        &lt;dependency&gt;
+            &lt;groupId&gt;com.alibaba&lt;/groupId&gt;
+            &lt;artifactId&gt;fastjson&lt;/artifactId&gt;
+            &lt;version&gt;1.2.68&lt;/version&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;</code></pre></li><li id="83c101990chxl"><p id="24b577a9cb1qw">创建 main 方法，并启动。</p><pre id="gr4qcw" data-tag="codeblock" outputclass="language-java" code-type="xCode" class="pre codeblock language-java"><code>import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.aliyun.dingtalkoauth2_1_0.Client;
+import com.aliyun.dingtalkoauth2_1_0.models.GetAccessTokenRequest;
+import com.aliyun.dingtalkoauth2_1_0.models.GetAccessTokenResponse;
+import com.aliyun.teaopenapi.models.Config;
+import com.dingtalk.api.DefaultDingTalkClient;
+import com.dingtalk.api.DingTalkClient;
+import com.dingtalk.api.request.OapiImChatScencegroupMessageSendV2Request;
+import com.dingtalk.api.request.OapiImChatScenegroupCreateRequest;
+import com.dingtalk.api.response.OapiImChatScencegroupMessageSendV2Response;
+import com.dingtalk.api.response.OapiImChatScenegroupCreateResponse;
+import com.taobao.api.ApiException;
+
+
+public class groupTemplateRobotGroupMessage {
+
+    //群模板 id
+    public static final String GROUP_TEMPLATE_ID = "&lt;your group template id &gt;";
+
+    //群模板机器人 id
+    public static final String ROBOT_CODE = "&lt;your group robot id&gt;";
+
+    //群主userId
+    public static final String OWNER_USER_ID= "&lt;owner userId&gt;";
+
+
+    //应用 client id
+    public static final String CLIENT_ID= "&lt;your app client id&gt;";
+
+    //应用 client secret
+    public static final String CLIENT_SECRET= "&lt; your app client secret&gt;";
+
+
+    /**
+     * 发送群模板机器人消息
+     * @param args
+     */
+    public static void main(String[] args) {
+        DingTalkClient client = new DefaultDingTalkClient("https://oapi.dingtalk.com/topapi/im/chat/scencegroup/message/send_v2");
+        OapiImChatScencegroupMessageSendV2Request req = new OapiImChatScencegroupMessageSendV2Request();
+        req.setTargetOpenConversationId(CreateGroup());
+        req.setMsgTemplateId("inner_app_template_markdown");
+        JSONObject jsonObject = new JSONObject().fluentPut("title","测试").fluentPut("markdown_content", "# 测试内容 \n &gt; 测试");
+        req.setMsgParamMap(JSON.toJSONString(jsonObject));
+        req.setRobotCode(ROBOT_CODE);
+        OapiImChatScencegroupMessageSendV2Response rsp = null;
+        try {
+            rsp = client.execute(req, accessToken());
+            System.out.println(rsp.getBody());
+        } catch (ApiException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+    /**
+     * 获取群 OpenConversationId
+     * @return
+     */
+    public static String CreateGroup() {
+        DingTalkClient client = new DefaultDingTalkClient("https://oapi.dingtalk.com/topapi/im/chat/scenegroup/create");
+        OapiImChatScenegroupCreateRequest req = new OapiImChatScenegroupCreateRequest();
+        req.setTitle("群模板机器人测试群");
+        req.setTemplateId(GROUP_TEMPLATE_ID);
+        req.setOwnerUserId(OWNER_USER_ID);
+        OapiImChatScenegroupCreateResponse rsp = null;
+        try {
+            rsp = client.execute(req, accessToken());
+            return rsp.getResult().getOpenConversationId();
+        } catch (ApiException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    public static String accessToken(){
+        GetAccessTokenRequest getAccessTokenRequest = new GetAccessTokenRequest();
+        getAccessTokenRequest.setAppKey(CLIENT_ID);
+        getAccessTokenRequest.setAppSecret(CLIENT_SECRET);
+        Config config = new Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        try {
+            Client client = new Client(config);
+            GetAccessTokenResponse accessToken = client.getAccessToken(getAccessTokenRequest);
+            return accessToken.getBody().getAccessToken();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+}
+</code></pre><p id="553a03ab9d3kt">此时，将自动创建一个群聊会话，并且你可以在群内看到群模板机器人发送的消息了。<img src="https://help-static-aliyun-doc.aliyuncs.com/assets/img/zh-CN/9834868071/p768611.png" alt="image.png" placement="break" id="ed6fe349130m3" class="image break" / /></p></li></ol></section><section id="6e389c8e9ehni" class="section"><h2 id="f061a45baapmj"><b>相关文档</b></h2><ul id="d24aeba1d232j"><li id="1d4f44ccdfswk"><p id="13cbc514b9xp4"><a data-tag="xref" id="af1cbdd75f05m" href="/document/development/group-template-robot-message#" class="xref">发送群助手消息</a></p></li></ul></section></div></main></body></html>

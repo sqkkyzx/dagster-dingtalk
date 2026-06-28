@@ -1,0 +1,817 @@
+<!DOCTYPE html><html><head><meta charset="utf8" / /><meta name="gmtModify" content="2026-04-24 14:10:48" / /><meta name="searchtitle" content="" / /><meta name="keywords" content="" / /><meta name="author" content="" / /><title>投放卡片</title><meta name="gmtModify" content="2026-06-04 19:12:21" / /></head><body data-tag="topic" id="doc-api-dingtalk-DeliverCard" class="topic"><main id="35accbc1f71vd" data-init-id="doc-api-dingtalk_DeliverCard"><h1 data-tag="title" id="h1-sex-6rm-u3c" class="title">投放卡片</h1><p data-tag="shortdesc" id="f6245e28f6wv0" class="shortdesc">调用本接口实现多个指定场域的卡片投放。</p><div data-tag="conbody" outputclass="icms-api-reference" class="icms-api-reference conbody"><section id="5a40d9520crdi" class="section"><h2 id="3d55b42be621z"><b>接口调用说明</b></h2><p id="31ec77561bvxx">在将卡片投放到不同的场域时，使用<code data-tag="inlineCode" id="0a5f7db7b0y96" class="inlineCode">outTrackId</code>唯一标识一张卡片，通过<code data-tag="inlineCode" id="7435c4b1a4k14" class="inlineCode">openSpaceId</code>标识需要被投放的场域及其场域Id，通过<code data-tag="inlineCode" id="1c9c8eae6e66m" class="inlineCode">openDeliverModels</code>传入不同场域下的投放属性。</p><div type="note" id="5ad79a032a61n" class="note note-note"><div class="note-icon-wrapper"><i class="icon-note note note"></i></div><div class="noteContentSpan"><strong>说明 </strong><ul id="a52d550464tvp"><li id="7b56fef1aehgd"><p id="b73b6c5846sfc">目前支持将卡片投放至以下场域：IM群聊、IM单聊酷应用、IM机器人单聊、吊顶、协作、文档。</p></li><li id="f13e29c4764qc"><p id="48be5cd7e92hc">若需要被投放的卡片实例不支持该场域，需要先调用appendSpace接口增加该场域（将卡片投放至文档不需要）。</p></li></ul></div></div></section><section id="section-request-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-request-1" data-tag="h2" class="h2">请求</h2><section id="section-request-basic-info" class="section"><h3 id="heading-request-basic-info" data-tag="h3" class="h3">基本信息</h3><table id="39c7d4105dkng" tablewidth="648" tablecolswidth="216 432" autofit="false" class="table"><colgroup colwidth="0.67*" style="width:33.33%"></colgroup><colgroup colwidth="1.33*" style="width:66.67%"></colgroup><tbody class="tbody"><tr id="5be36122c188f"><td id="ef73826264psy" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="dea6794003g2v">字段</p></td><td id="b55b02d4af8pn" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="074027b3f93gw">值</p></td></tr><tr id="f5b9fd5d354qq"><td id="1918e81de3fjk" rowspan="1" colspan="1"><p id="4de14040153lk">HTTP URL</p></td><td id="41faf53ee9roe" rowspan="1" colspan="1"><p id="c2bff5bc32w1d">https://api.dingtalk.com/v1.0/card/instances/deliver</p></td></tr><tr id="1f8189e4b008r"><td id="3c13ecf2e6pff" rowspan="1" colspan="1"><p id="529b73d2a0zmd">HTTP Method</p></td><td id="7c336c945bww4" rowspan="1" colspan="1"><p id="2e7dd225a2ftb">POST</p></td></tr><tr id="374e9af188i7p"><td id="7e31935344pc3" rowspan="1" colspan="1"><p id="a92bf60fd52ni">支持的应用类型</p></td><td id="0b0e76b7f8abc" rowspan="1" colspan="1"><p id="22ebe6aeacne7"><span data-tag="ph" id="ph-request-basic-app-type-apptype-0" class="ph ph-app-type" data-ph-raw-text="appType-企业内部应用">appType-企业内部应用</span>　<span data-tag="ph" id="ph-request-basic-app-type-apptype-1" class="ph ph-app-type" data-ph-raw-text="appType-第三方企业应用">appType-第三方企业应用</span></p></td></tr><tr id="57df3fb33dmxo"><td id="79705c40c1blg" rowspan="1" colspan="1"><p id="30cff0e9a4tel">权限要求</p></td><td id="a45d02d091zmr" rowspan="1" colspan="1"><p id="fc9049b888c92"><span data-tag="ph" id="ph-request-basic-permission-permission-card-instance-write-0" class="ph-permission ph" data-ph-raw-text="permission-Card.Instance.Write-互动卡片实例写权限" data-permission-id="permission-Card.Instance.Write" data-permission-code="Card.Instance.Write" data-permission-detail-api="/document/api/permission/detail" data-permission-query-param="code">permission-Card.Instance.Write-互动卡片实例写权限</span></p></td></tr></tbody></table></section><section id="section-request-header-parameter" class="section"><h3 data-tag="h3" id="h2-de9-x8q-uhl" class="h3 title">请求头</h3><table id="b3f0182b34p85" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="e839be2803icl"><td id="5e3f4d476aepz" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="6ff7bef784xcb">名称</p></td><td id="fbf156310c2zh" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="6a079734cbg5a">类型</p></td><td id="a8ab213d03bcz" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="97d4655294iqz">是否必填</p></td><td id="e280080ebdemi" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="e4abef9dd6wxx">描述</p></td></tr><tr id="cc9446239aq86"><td id="abb80ff3cbk0m" rowspan="1" colspan="1"><p id="2ca24189bd52u">x-acs-dingtalk-access-token</p></td><td id="7e7939966cglu" rowspan="1" colspan="1"><p id="bef39d3b2ews0">String</p></td><td id="309fba95fbjx8" rowspan="1" colspan="1"><p id="b6ab132b36nbu">是</p></td><td id="eb18d80ddc9gb" rowspan="1" colspan="1"><p id="cb451d5d94ksw">调用该接口的访问凭证，通过以下获取：</p><ul id="eadf486dbb0mc"><li id="303bbae0d1m8r"><p id="f76dbea566kz0">企业内部应用，调用<a href="https://open.dingtalk.com/document/development/obtain-the-access-token-of-an-internal-app#" id="87b82df22dlr8" class="xref">获取企业内部应用的accessToken</a>接口获取。</p></li><li id="4fc9d804730lo"><p id="26f7203c6ckmh">第三方企业应用，调用<a href="https://open.dingtalk.com/document/development/obtain-the-access-token-of-the-authorized-enterprise-1#" id="50fb6e28969ek" class="xref">获取第三方应用授权企业的accessToken</a>接口获取。</p></li></ul></td></tr></tbody></table></section><section id="section-request-body-parameter" class="section"><h3 data-tag="h3" id="h2-8qv-r90-lvl" class="h3 title">请求体</h3><table id="bd0a6b7db0dc7" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="df1deb75b2f9i"><td id="9c8dbf6651k25" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="34fc1a164clom">名称</p></td><td id="732911bec2kzu" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="8defdd0bb9hsx">类型</p></td><td id="50066dbced9zv" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="2b4e5618425f4">是否必填</p></td><td id="6ddc50b222iod" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="b8124562a8188">描述</p></td></tr><tr outputclass="row row-level-1" id="a1cdc5f550ipm" class="row row-level-1"><td id="31850b78e7fqc" rowspan="1" colspan="1"><p id="0f5d2a093abng">outTrackId</p></td><td id="65a5cd1baas3p" rowspan="1" colspan="1"><p id="80982babfd814">String</p></td><td id="7241a31588lyb" rowspan="1" colspan="1"><p id="9348315af15by">是</p></td><td id="444ffbbc58iw4" rowspan="1" colspan="1"><p id="141c151d8ddqt">外部卡片实例Id。</p><p class="note-icon-wrapper" id="2691304ac7rd1"></p><ul id="288e22664f6n3"><li id="3984817aa36kz"><p id="9377ddcf85pjf">由开发者自己生成并作为入参传递给钉钉的，钉钉只在对应使用到outTrackId的场景，帮助开发者对TrackId进行记录。</p></li><li id="67d6a1335035f"><p id="ac6facd395t6i">一个 outTrackId 唯一标识一张卡片。</p></li></ul></td></tr><tr outputclass="row row-level-2" id="9b151edf94nzi" class="row row-level-2"><td id="75b2b69b9dx2g" rowspan="1" colspan="1"><p id="34f0019d7diog">openSpaceId</p></td><td id="2127dbfa322sj" rowspan="1" colspan="1"><p id="b37dae2297kro">String</p></td><td id="f0ef77d0dai0t" rowspan="1" colspan="1"><p id="02cb64d7a1xeg">是</p></td><td id="96b04ff86eb82" rowspan="1" colspan="1"><p id="03411c6949yvq">表示场域及其场域id，其格式为<code data-tag="inlineCode" id="470466608ezvy" class="inlineCode">dtv1.card//spaceType1.spaceId1;spaceType2.spaceId2_1;spaceType2.spaceId2_2;spaceType3.spaceId3</code>。</p></td></tr><tr outputclass="row row-level-3 has-child" id="77b6cd9bfdbc6" class="row row-level-3 has-child"><td id="f44a1565fey1g" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="f26847412fbh3">imSingleOpenDeliverModel</p></td><td id="bc83dc11573k1" rowspan="1" colspan="1"><p id="48244ecefaikx">Object</p></td><td id="33edaa483a10h" rowspan="1" colspan="1"><p id="4ccd02f0a8pv7">否</p></td><td id="858860ce08bm9" rowspan="1" colspan="1"><p id="8eeaa0d6cbk0z">单聊场域投放参数。</p></td></tr><tr outputclass="row row-level-3-1" id="b501abc7ff7wh" class="row row-level-3-1"><td id="c00633b7e553b" rowspan="1" colspan="1"><p id="d35ef5f599k1i">atUserIds</p></td><td id="651ad0f59ddzz" rowspan="1" colspan="1"><p id="825413bc87zz7">Map&lt;String, String&gt;</p></td><td id="e2ff35076bhd1" rowspan="1" colspan="1"><p id="5c6604cd1ezmx">否</p></td><td id="4fcd2e38bf21f" rowspan="1" colspan="1"><p id="da217a81eaqf8">消息@人。格式：{"key":"value"}。</p><ul id="ec195d54e2n96"><li id="86bdf87dd7u72"><p id="371104caf32l9">key：用户的userId</p></li><li id="ceb692a572zby"><p id="a67d69cc07syv">value：用户名。</p></li></ul><p class="note-icon-wrapper" id="8d782409b0fur"></p><p id="f5aeb7cfa1p0f">如果key、value都为"@ALL"则判断@所有人。</p><p id="e19f0da37cunh">示例：</p><pre outputclass="language-json" data-tag="codeblock" code-type="xCode" id="16544c32458d4" class="pre codeblock language-json"><code>"atUserIds" : {
+    "123456" : "小明"
+}
+</code></pre></td></tr><tr outputclass="row row-level-3-2" id="1ebf1f7eaf1a0" class="row row-level-3-2"><td id="28d11cab0cz4u" rowspan="1" colspan="1"><p id="f2261d93c202n">extension</p></td><td id="c650c914e8v1u" rowspan="1" colspan="1"><p id="a3aafc36a2io0">Map&lt;String, String&gt;</p></td><td id="3df2c2a6f39wc" rowspan="1" colspan="1"><p id="62166f074005s">否</p></td><td id="dec83a0738s99" rowspan="1" colspan="1"><p id="c493f6e66ced6">扩展字段，示例如下：</p><pre outputclass="language-json" data-tag="codeblock" code-type="xCode" id="9d15ea3af560i" class="pre codeblock language-json"><code>{"key":"value"}
+</code></pre></td></tr><tr outputclass="row row-level-4 has-child" id="0c1b75f24a4mw" class="row row-level-4 has-child"><td id="9d74c99849u58" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="18bdb2c67e7j3">imRobotOpenDeliverModel</p></td><td id="fcc55e0fe1mww" rowspan="1" colspan="1"><p id="a65b93612eert">Object</p></td><td id="7323659c513qd" rowspan="1" colspan="1"><p id="ad3eb584b8ct9">否</p></td><td id="6f7ae241b11lj" rowspan="1" colspan="1"><p id="b7e1f136cd3gf">IM机器人单聊投放参数。</p><p class="note-icon-wrapper" id="f7e9a44ccc263"></p><p id="584cf265e9awq">机器人与人的单聊，直接用支持机器人单聊的应用来发送。</p></td></tr><tr outputclass="row row-level-4-1" id="cd7e630ef3ujk" class="row row-level-4-1"><td id="43eaacf4727r7" rowspan="1" colspan="1"><p id="7f87cbc12aqj9">spaceType</p></td><td id="1a732b649cbtg" rowspan="1" colspan="1"><p id="21064f2ebahx7">String</p></td><td id="74b4dc7ef6zho" rowspan="1" colspan="1"><p id="fd4c37f296wvo">否</p></td><td id="9beec2742ajmx" rowspan="1" colspan="1"><p id="d7ddcbadd4e0l">IM机器人单聊若未设置其他投放属性，需设置spaeType为<code data-tag="inlineCode" id="95c35e8cb8pi7" class="inlineCode">IM_ROBOT</code>。</p></td></tr><tr outputclass="row row-level-4-2" id="28a11c1e62gb5" class="row row-level-4-2"><td id="1bb306b85bzib" rowspan="1" colspan="1"><p id="033ab2dbb4mjv">extension</p></td><td id="6c8084d8c0e89" rowspan="1" colspan="1"><p id="dd272725e8xbp">Map&lt;String, String&gt;</p></td><td id="d530eb0de6p7k" rowspan="1" colspan="1"><p id="c99dcccd6452b">否</p></td><td id="01c60085a3zde" rowspan="1" colspan="1"><p id="9cee6caeefevq">扩展字段，示例如下：</p><pre outputclass="language-json" data-tag="codeblock" code-type="xCode" id="bb6f36b061s1x" class="pre codeblock language-json"><code>{"key":"value"}
+</code></pre></td></tr><tr outputclass="row row-level-4-3" id="c210b35c82e2x" class="row row-level-4-3"><td id="c61757b7bbp8q" rowspan="1" colspan="1"><p id="d7fc0f3578rod">robotCode</p></td><td id="6d2c831371b38" rowspan="1" colspan="1"><p id="7d3cabb8b411w">String</p></td><td id="61891ef8bevco" rowspan="1" colspan="1"><p id="33788d6dadu8i">否</p></td><td id="ee787f9516kbd" rowspan="1" colspan="1"><p id="d0e35c5161cxq">机器人编码。</p></td></tr><tr outputclass="row row-level-5 has-child" id="82760d14a93ib" class="row row-level-5 has-child"><td id="e4b505cc508r8" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="5143be18a12iw">imGroupOpenDeliverModel</p></td><td id="9095b95beacb6" rowspan="1" colspan="1"><p id="44aa37007c7jp">Object</p></td><td id="70f716a9c0txu" rowspan="1" colspan="1"><p id="01d47692d4nfj">否</p></td><td id="712b587111ypv" rowspan="1" colspan="1"><p id="aec1e46f79w2n">群聊投放参数。</p></td></tr><tr outputclass="row row-level-5-1" id="e600542739pbl" class="row row-level-5-1"><td id="a25af9d791ul4" rowspan="1" colspan="1"><p id="7310491101xsp">robotCode</p></td><td id="2d6e3cae8ajah" rowspan="1" colspan="1"><p id="f112d7c8a3nex">String</p></td><td id="409428e822hat" rowspan="1" colspan="1"><p id="77e6ef858fyr5">否</p></td><td id="070ad5f2e49gg" rowspan="1" colspan="1"><p id="cdc1b7802byuu">用于发送卡片的机器人编码。</p><ul id="1c10d695eewrf"><li id="4eebccf27b0en"><p id="ef7444c0908yq">场景群机器人发送群聊使用群机器人robotCode</p></li><li id="a857d8769efmt"><p id="08fb3a69359b9">非场景群的企业内部开发的机器人发送群聊，使用机器人的AppKey</p></li><li id="51ed9ab090qr3"><p id="33b61c1c0ave4">第三方企业机器人，使用机器人的robotCode</p></li></ul><p class="note-icon-wrapper" id="cc42b3262ez5l"></p><p id="15d33add5enn2">若使用<code data-tag="inlineCode" id="e25afb0b8bh7c" class="inlineCode">imGroupOpenDeliverModel</code>对象，则该字段必填。</p></td></tr><tr outputclass="row row-level-5-2" id="7b60759cbfjjo" class="row row-level-5-2"><td id="fc8d96daf7263" rowspan="1" colspan="1"><p id="6c5efe1d1eyky">atUserIds</p></td><td id="3725cb7071zu3" rowspan="1" colspan="1"><p id="3127c972a14xu">Map&lt;String, String&gt;</p></td><td id="078780632e3el" rowspan="1" colspan="1"><p id="ed31816dfavn5">否</p></td><td id="0f6f744cf9xc1" rowspan="1" colspan="1"><p id="626d9c0155x55">消息@人。格式：{"key":"value"}。</p><ul id="78c69c90afziz"><li id="93e0d2d9be43v"><p id="c899ff67d8l1u">key：用户的userId</p></li><li id="b76854c90a3l4"><p id="c2f21eb01f3ei">value：用户名。</p></li></ul><p class="note-icon-wrapper" id="73dc8bb362g1l"></p><p id="4f2b1e9fe7z1g">如果key、value都为"@ALL"则判断@所有人。</p><p id="fce62f0889itl">示例：</p><pre outputclass="language-json" data-tag="codeblock" code-type="xCode" id="ea3154a4059c1" class="pre codeblock language-json"><code>"atUserIds" : {
+    "123456" : "小明"
+}
+</code></pre></td></tr><tr outputclass="row row-level-5-3" id="fe5dd358c5jxg" class="row row-level-5-3"><td id="e7869c89635uz" rowspan="1" colspan="1"><p id="49c3cf3310hwr">recipients</p></td><td id="a0f673fe713gb" rowspan="1" colspan="1"><p id="de89982ad4rq2">Array of String</p></td><td id="fc7ec1aab1owp" rowspan="1" colspan="1"><p id="7844a16446apq">否</p></td><td id="669d991903qb1" rowspan="1" colspan="1"><p id="f0c7b14ee3fpw">指定接收者的userId。</p></td></tr><tr outputclass="row row-level-5-4" id="9227088ed43ld" class="row row-level-5-4"><td id="c71e4f0644dhr" rowspan="1" colspan="1"><p id="dbe3030180zeg">extension</p></td><td id="d34ce5adf081e" rowspan="1" colspan="1"><p id="7fe9580e29dii">Map&lt;String, String&gt;</p></td><td id="86476a9caa0gc" rowspan="1" colspan="1"><p id="79e6f109ad80a">否</p></td><td id="0bfe4630d2aba" rowspan="1" colspan="1"><p id="0a79691146c33">扩展字段，示例如下：</p><pre outputclass="language-json" data-tag="codeblock" code-type="xCode" id="185307600dxm1" class="pre codeblock language-json"><code>{"key":"value"}
+</code></pre></td></tr><tr outputclass="row row-level-6 has-child" id="f1705293117jk" class="row row-level-6 has-child"><td id="058b5ab90elh9" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="734fb26d1dk8s">topOpenDeliverModel</p></td><td id="84ec6ead622ud" rowspan="1" colspan="1"><p id="25bb0407aauds">Object</p></td><td id="626d367db98uq" rowspan="1" colspan="1"><p id="10389f5ee4zwc">否</p></td><td id="3ac3226e5ajkm" rowspan="1" colspan="1"><p id="2c808c9e7fx7h">吊顶投放参数。</p></td></tr><tr outputclass="row row-level-6-1" id="fabdee50b5uvu" class="row row-level-6-1"><td id="345df85c49mc6" rowspan="1" colspan="1"><p id="98bce739040b3">expiredTimeMillis</p></td><td id="0acf71b152hmo" rowspan="1" colspan="1"><p id="bb5fefe03fnm9">Long</p></td><td id="d514bd603dl0s" rowspan="1" colspan="1"><p id="07b0f95679ihz">否</p></td><td id="6394dad1dbd1c" rowspan="1" colspan="1"><p id="f26fc2f4ccf0t">过期时间戳。</p><p class="note-icon-wrapper" id="8803a3f36a8l3"></p><p id="f556a31693kh6">若使用<code data-tag="inlineCode" id="a6d21f0eb6w2q" class="inlineCode">topOpenDeliverModel</code>对象，则该字段必填。</p></td></tr><tr outputclass="row row-level-6-2" id="3a3e6e517fxep" class="row row-level-6-2"><td id="a244053991fha" rowspan="1" colspan="1"><p id="517aee484a8a4">userIds</p></td><td id="24c8300c5fg9d" rowspan="1" colspan="1"><p id="498d38a98e87s">Array of String</p></td><td id="c9ebb431c7ked" rowspan="1" colspan="1"><p id="c4731045efm0l">否</p></td><td id="af93b4ddbbg72" rowspan="1" colspan="1"><p id="d20c1fc9dc8wz">可以查看该吊顶卡片的userId。</p></td></tr><tr outputclass="row row-level-6-3" id="55c74dc591sdg" class="row row-level-6-3"><td id="e4d5bcd45f4t7" rowspan="1" colspan="1"><p id="2a78cb1c62u13">platforms</p></td><td id="922cfa8bd7mg8" rowspan="1" colspan="1"><p id="6b98cebfecplu">Array of String</p></td><td id="834827370a6k1" rowspan="1" colspan="1"><p id="21c565accdtrp">否</p></td><td id="540bd88b1fagd" rowspan="1" colspan="1"><p id="c114d37218b31">可以查看该吊顶卡片的设备，包含<code data-tag="inlineCode" id="37eca3b6fcjbv" class="inlineCode">android｜ios｜win｜mac</code>，示例：</p><pre outputclass="nohighlight" data-tag="codeblock" code-type="xCode" id="81355e5a07el2" class="pre codeblock nohighlight"><code>"platforms" : [
+    "android"，
+    "ios"
+]
+
+</code></pre><p class="note-icon-wrapper" id="650a8ec89cflg"></p><p id="988e7070d3187">若为空，则所有设备可见</p></td></tr><tr outputclass="row row-level-7 has-child" id="c84108841cna8" class="row row-level-7 has-child"><td id="b0435a614d7re" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="3dd3763449l7w">coFeedOpenDeliverModel</p></td><td id="26daab4177abf" rowspan="1" colspan="1"><p id="9ae03a6f3fjzh">Object</p></td><td id="bf308a4d60xtj" rowspan="1" colspan="1"><p id="c8a1b4693568f">否</p></td><td id="482621117daz1" rowspan="1" colspan="1"><p id="ee0998672394f">协作投放参数（废弃）</p></td></tr><tr outputclass="row row-level-7-1" id="f0a23d9aa41zk" class="row row-level-7-1"><td id="57613bb73frdq" rowspan="1" colspan="1"><p id="92fb1f02b0re1">bizTag</p></td><td id="bbaf43ec17k3u" rowspan="1" colspan="1"><p id="496b54de14ihm">String</p></td><td id="ff89911be0ald" rowspan="1" colspan="1"><p id="c098f215a5rac">否</p></td><td id="6be7cb71f9kuz" rowspan="1" colspan="1"><p id="09dbef1e48mmn">业务标识。</p><p class="note-icon-wrapper" id="c3a517a4b12u4"></p><ul id="6da690b0149hs"><li id="c28685079bni0"><p id="d4b2094a6220c">若使用<code data-tag="inlineCode" id="579db491f9zx7" class="inlineCode">coFeedOpenDeliverModel</code>对象，则该字段必填。</p></li><li id="b0ce9bca3eex9"><p id="f0aa2f7f1a3bo">需要先申请在协作中投放该bizTag，申请通过后才能使用。</p></li></ul></td></tr><tr outputclass="row row-level-7-2" id="49001e2a523up" class="row row-level-7-2"><td id="4dc7b7784bgvn" rowspan="1" colspan="1"><p id="88419c9e09nlf">gmtTimeLine</p></td><td id="dffe3e15d8dbx" rowspan="1" colspan="1"><p id="1947e85084kos">Long</p></td><td id="60d8ca4287kuq" rowspan="1" colspan="1"><p id="6807a04da5fnj">否</p></td><td id="a17cdd72741d7" rowspan="1" colspan="1"><p id="217a6b5272brq">协作场域下的排序时间。</p><p class="note-icon-wrapper" id="27cf163ce9ea5"></p><p id="50def9a30btol">若使用<code data-tag="inlineCode" id="0c3d704c2b3wi" class="inlineCode">coFeedOpenDeliverModel</code>对象，则该字段必填。</p></td></tr><tr outputclass="row row-level-8 has-child" id="70f340fdf2msx" class="row row-level-8 has-child"><td id="0557802d7cjob" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="4f2ed0bbf6lx5">docOpenDeliverModel</p></td><td id="90f962529bdhd" rowspan="1" colspan="1"><p id="00674bb687bky">Object</p></td><td id="1d478f188fn5d" rowspan="1" colspan="1"><p id="e16b738267p83">否</p></td><td id="d6077586bfdey" rowspan="1" colspan="1"><p id="a011e6331272g">文档投放参数（废弃）</p></td></tr><tr outputclass="row row-level-8-1" id="3589dba3569mt" class="row row-level-8-1"><td id="d245858d6blbs" rowspan="1" colspan="1"><p id="262c724ae1997">userId</p></td><td id="cea66c5115wv0" rowspan="1" colspan="1"><p id="5987ecc8696dn">String</p></td><td id="a4959123a50h3" rowspan="1" colspan="1"><p id="4d51f8d70dmpq">否</p></td><td id="9d0ba4b476v8s" rowspan="1" colspan="1"><p id="241984d56eevw">员工userId信息。</p><p class="note-icon-wrapper" id="95c798f923eat"></p><p id="f7d1422fcf1ld">若使用<code data-tag="inlineCode" id="e82a1081e3ma3" class="inlineCode">docOpenDeliverModel</code>对象，则该字段必填。</p></td></tr><tr outputclass="row row-level-9" id="fed3a3b32d4rd" class="row row-level-9"><td id="94e2b99951z18" rowspan="1" colspan="1"><p id="3ef7b12c11ixs">userIdType</p></td><td id="b06e4d572bgc3" rowspan="1" colspan="1"><p id="6d134f78a0ugi">Integer</p></td><td id="2206f69c8dag6" rowspan="1" colspan="1"><p id="c0e878a3c233w">否</p></td><td id="b3739ccd49dr5" rowspan="1" colspan="1"><p id="5bd31d1094hdu">用户id类型：</p><ul id="8bb5f5f84b16q"><li id="cee53f7eb4aea"><p id="ed6385ac0a46o"><b>1</b>（默认）：userId模式</p></li><li id="7500202107x8m"><p id="ee4a89fe48h7g"><b>2</b>：unionId模式</p></li></ul><p class="note-icon-wrapper" id="5f3e4d0d68h4p"></p><p id="f58a1dbf39li1"><code data-tag="inlineCode" id="c3b3115b13zpe" class="inlineCode">userIdType</code> 字段的填写请参考：<a href="https://open.dingtalk.com/document/development/faq-card#8cad7f90a8mzg" id="b7e316b1fcdh2" class="xref">userIdType 字段的填写说明</a>。</p></td></tr></tbody></table></section><section id="section-request-body-example" class="section"><h3 id="h3-request-body-example" data-tag="h3" class="h3">请求示例</h3><div outputclass="tabbed-codeblock" data-tag="fig" id="figure-rh7-ted-gsn" class="tabbed-codeblock-box"><div class="tab-box"></div><input type="radio" name="check-figure-rh7-ted-gsn" id="figure-rh7-ted-gsn-HTTP-tab" checked="checked" /><label for="figure-rh7-ted-gsn-HTTP-tab">HTTP</label><div class="codeblock-item"><pre id="codeblock-5fc-buy-gvn" outputclass="language-HTTP" code-type="xCode" data-tag="codeblock" class="pre codeblock language-HTTP"><code>POST /v1.0/card/instances/deliver HTTP/1.1
+Host:api.dingtalk.com
+x-acs-dingtalk-access-token:token-xxx
+Content-Type:application/json
+
+{
+  "outTrackId" : "example_out_track_id",
+  "openSpaceId" : "dtv1.card//im_group.cidp4Gh*******VCQ==;im_robot.manager****67;co_feed.manager****67;one_box.cidp4Gh*******VCQ==",
+  "imSingleOpenDeliverModel" : {
+    "atUserIds" : {
+      "key" : "example_user_name"
+    },
+    "extension" : {
+      "key" : "example_ext_value"
+    }
+  },
+  "imRobotOpenDeliverModel" : {
+    "spaceType" : "IM_ROBOT",
+    "extension" : {
+      "key" : "example_ext_value"
+    },
+    "robotCode" : "example_robot_code"
+  },
+  "imGroupOpenDeliverModel" : {
+    "robotCode" : "example_robot_code",
+    "atUserIds" : {
+      "key" : "example_user_name"
+    },
+    "recipients" : [ "example_user_id" ],
+    "extension" : {
+      "key" : "example_ext_value"
+    }
+  },
+  "topOpenDeliverModel" : {
+    "expiredTimeMillis" : 1665473229000,
+    "userIds" : [ "example_user_id" ],
+    "platforms" : [ "android" ]
+  },
+  "coFeedOpenDeliverModel" : {
+    "bizTag" : "example_biz_tag",
+    "gmtTimeLine" : 1665473229000
+  },
+  "docOpenDeliverModel" : {
+    "userId" : "example_user_id"
+  },
+  "userIdType" : 1
+}</code></pre></div><input type="radio" name="check-figure-rh7-ted-gsn" id="figure-rh7-ted-gsn-java-tab" /><label for="figure-rh7-ted-gsn-java-tab">Java</label><div class="codeblock-item"><pre id="codeblock-shx-faw-a8c" outputclass="language-java" code-type="xCode" data-tag="codeblock" class="pre codeblock language-java"><code>// This file is auto-generated, don't edit it. Thanks.
+package com.aliyun.sample;
+
+import com.aliyun.tea.*;
+
+public class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Client
+     * @throws Exception
+     */
+    public static com.aliyun.dingtalkcard_1_0.Client createClient() throws Exception {
+        com.aliyun.teaopenapi.models.Config config = new com.aliyun.teaopenapi.models.Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        return new com.aliyun.dingtalkcard_1_0.Client(config);
+    }
+
+    public static void main(String[] args_) throws Exception {
+        java.util.List&lt;String&gt; args = java.util.Arrays.asList(args_);
+        com.aliyun.dingtalkcard_1_0.Client client = Sample.createClient();
+        com.aliyun.dingtalkcard_1_0.models.DeliverCardHeaders deliverCardHeaders = new com.aliyun.dingtalkcard_1_0.models.DeliverCardHeaders();
+        deliverCardHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        com.aliyun.dingtalkcard_1_0.models.DeliverCardRequest.DeliverCardRequestDocOpenDeliverModel docOpenDeliverModel = new com.aliyun.dingtalkcard_1_0.models.DeliverCardRequest.DeliverCardRequestDocOpenDeliverModel()
+                .setUserId("example_user_id");
+        com.aliyun.dingtalkcard_1_0.models.DeliverCardRequest.DeliverCardRequestCoFeedOpenDeliverModel coFeedOpenDeliverModel = new com.aliyun.dingtalkcard_1_0.models.DeliverCardRequest.DeliverCardRequestCoFeedOpenDeliverModel()
+                .setBizTag("example_biz_tag")
+                .setGmtTimeLine(1665473229000L);
+        com.aliyun.dingtalkcard_1_0.models.DeliverCardRequest.DeliverCardRequestTopOpenDeliverModel topOpenDeliverModel = new com.aliyun.dingtalkcard_1_0.models.DeliverCardRequest.DeliverCardRequestTopOpenDeliverModel()
+                .setExpiredTimeMillis(1665473229000L)
+                .setUserIds(java.util.Arrays.asList(
+                    "example_user_id"
+                ))
+                .setPlatforms(java.util.Arrays.asList(
+                    "android"
+                ));
+        java.util.Map&lt;String, String&gt; imGroupOpenDeliverModelExtension = TeaConverter.buildMap(
+            new TeaPair("key", "example_ext_value")
+        );
+        java.util.Map&lt;String, String&gt; imGroupOpenDeliverModelAtUserIds = TeaConverter.buildMap(
+            new TeaPair("key", "example_user_name")
+        );
+        com.aliyun.dingtalkcard_1_0.models.DeliverCardRequest.DeliverCardRequestImGroupOpenDeliverModel imGroupOpenDeliverModel = new com.aliyun.dingtalkcard_1_0.models.DeliverCardRequest.DeliverCardRequestImGroupOpenDeliverModel()
+                .setRobotCode("example_robot_code")
+                .setAtUserIds(imGroupOpenDeliverModelAtUserIds)
+                .setRecipients(java.util.Arrays.asList(
+                    "example_user_id"
+                ))
+                .setExtension(imGroupOpenDeliverModelExtension);
+        java.util.Map&lt;String, String&gt; imRobotOpenDeliverModelExtension = TeaConverter.buildMap(
+            new TeaPair("key", "example_ext_value")
+        );
+        com.aliyun.dingtalkcard_1_0.models.DeliverCardRequest.DeliverCardRequestImRobotOpenDeliverModel imRobotOpenDeliverModel = new com.aliyun.dingtalkcard_1_0.models.DeliverCardRequest.DeliverCardRequestImRobotOpenDeliverModel()
+                .setSpaceType("IM_ROBOT")
+                .setExtension(imRobotOpenDeliverModelExtension)
+                .setRobotCode("example_robot_code");
+        java.util.Map&lt;String, String&gt; imSingleOpenDeliverModelExtension = TeaConverter.buildMap(
+            new TeaPair("key", "example_ext_value")
+        );
+        java.util.Map&lt;String, String&gt; imSingleOpenDeliverModelAtUserIds = TeaConverter.buildMap(
+            new TeaPair("key", "example_user_name")
+        );
+        com.aliyun.dingtalkcard_1_0.models.DeliverCardRequest.DeliverCardRequestImSingleOpenDeliverModel imSingleOpenDeliverModel = new com.aliyun.dingtalkcard_1_0.models.DeliverCardRequest.DeliverCardRequestImSingleOpenDeliverModel()
+                .setAtUserIds(imSingleOpenDeliverModelAtUserIds)
+                .setExtension(imSingleOpenDeliverModelExtension);
+        com.aliyun.dingtalkcard_1_0.models.DeliverCardRequest deliverCardRequest = new com.aliyun.dingtalkcard_1_0.models.DeliverCardRequest()
+                .setOutTrackId("example_out_track_id")
+                .setOpenSpaceId("dtv1.card//im_group.cidp4Gh*******VCQ==;im_robot.manager****67;co_feed.manager****67;one_box.cidp4Gh*******VCQ==")
+                .setImSingleOpenDeliverModel(imSingleOpenDeliverModel)
+                .setImRobotOpenDeliverModel(imRobotOpenDeliverModel)
+                .setImGroupOpenDeliverModel(imGroupOpenDeliverModel)
+                .setTopOpenDeliverModel(topOpenDeliverModel)
+                .setCoFeedOpenDeliverModel(coFeedOpenDeliverModel)
+                .setDocOpenDeliverModel(docOpenDeliverModel)
+                .setUserIdType(1);
+        try {
+            client.deliverCardWithOptions(deliverCardRequest, deliverCardHeaders, new com.aliyun.teautil.models.RuntimeOptions());
+        } catch (TeaException err) {
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        } catch (Exception _err) {
+            TeaException err = new TeaException(_err.getMessage(), _err);
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        }        
+    }
+}</code></pre></div><input type="radio" name="check-figure-rh7-ted-gsn" id="figure-rh7-ted-gsn-python-tab" /><label for="figure-rh7-ted-gsn-python-tab">Python</label><div class="codeblock-item"><pre id="codeblock-6ga-j2q-3ab" outputclass="language-python" code-type="xCode" data-tag="codeblock" class="pre codeblock language-python"><code># -*- coding: utf-8 -*-
+# This file is auto-generated, don't edit it. Thanks.
+import os
+import sys
+
+from typing import List
+
+from alibabacloud_dingtalk.card_1_0.client import Client as dingtalkcard_1_0Client
+from alibabacloud_tea_openapi import models as open_api_models
+from alibabacloud_dingtalk.card_1_0 import models as dingtalkcard__1__0_models
+from alibabacloud_tea_util import models as util_models
+from alibabacloud_tea_util.client import Client as UtilClient
+
+
+class Sample:
+    def __init__(self):
+        pass
+
+    @staticmethod
+    def create_client() -&gt; dingtalkcard_1_0Client:
+        """
+        使用 Token 初始化账号Client
+        @return: Client
+        @throws Exception
+        """
+        config = open_api_models.Config()
+        config.protocol = 'https'
+        config.region_id = 'central'
+        return dingtalkcard_1_0Client(config)
+
+    @staticmethod
+    def main(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        deliver_card_headers = dingtalkcard__1__0_models.DeliverCardHeaders()
+        deliver_card_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        doc_open_deliver_model = dingtalkcard__1__0_models.DeliverCardRequestDocOpenDeliverModel(
+            user_id='example_user_id'
+        )
+        co_feed_open_deliver_model = dingtalkcard__1__0_models.DeliverCardRequestCoFeedOpenDeliverModel(
+            biz_tag='example_biz_tag',
+            gmt_time_line=1665473229000
+        )
+        top_open_deliver_model = dingtalkcard__1__0_models.DeliverCardRequestTopOpenDeliverModel(
+            expired_time_millis=1665473229000,
+            user_ids=[
+                'example_user_id'
+            ],
+            platforms=[
+                'android'
+            ]
+        )
+        im_group_open_deliver_model_extension = {
+            'key': 'example_ext_value'
+        }
+        im_group_open_deliver_model_at_user_ids = {
+            'key': 'example_user_name'
+        }
+        im_group_open_deliver_model = dingtalkcard__1__0_models.DeliverCardRequestImGroupOpenDeliverModel(
+            robot_code='example_robot_code',
+            at_user_ids=im_group_open_deliver_model_at_user_ids,
+            recipients=[
+                'example_user_id'
+            ],
+            extension=im_group_open_deliver_model_extension
+        )
+        im_robot_open_deliver_model_extension = {
+            'key': 'example_ext_value'
+        }
+        im_robot_open_deliver_model = dingtalkcard__1__0_models.DeliverCardRequestImRobotOpenDeliverModel(
+            space_type='IM_ROBOT',
+            extension=im_robot_open_deliver_model_extension,
+            robot_code='example_robot_code'
+        )
+        im_single_open_deliver_model_extension = {
+            'key': 'example_ext_value'
+        }
+        im_single_open_deliver_model_at_user_ids = {
+            'key': 'example_user_name'
+        }
+        im_single_open_deliver_model = dingtalkcard__1__0_models.DeliverCardRequestImSingleOpenDeliverModel(
+            at_user_ids=im_single_open_deliver_model_at_user_ids,
+            extension=im_single_open_deliver_model_extension
+        )
+        deliver_card_request = dingtalkcard__1__0_models.DeliverCardRequest(
+            out_track_id='example_out_track_id',
+            open_space_id='dtv1.card//im_group.cidp4Gh*******VCQ==;im_robot.manager****67;co_feed.manager****67;one_box.cidp4Gh*******VCQ==',
+            im_single_open_deliver_model=im_single_open_deliver_model,
+            im_robot_open_deliver_model=im_robot_open_deliver_model,
+            im_group_open_deliver_model=im_group_open_deliver_model,
+            top_open_deliver_model=top_open_deliver_model,
+            co_feed_open_deliver_model=co_feed_open_deliver_model,
+            doc_open_deliver_model=doc_open_deliver_model,
+            user_id_type=1
+        )
+        try:
+            client.deliver_card_with_options(deliver_card_request, deliver_card_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+    @staticmethod
+    async def main_async(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        deliver_card_headers = dingtalkcard__1__0_models.DeliverCardHeaders()
+        deliver_card_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        doc_open_deliver_model = dingtalkcard__1__0_models.DeliverCardRequestDocOpenDeliverModel(
+            user_id='example_user_id'
+        )
+        co_feed_open_deliver_model = dingtalkcard__1__0_models.DeliverCardRequestCoFeedOpenDeliverModel(
+            biz_tag='example_biz_tag',
+            gmt_time_line=1665473229000
+        )
+        top_open_deliver_model = dingtalkcard__1__0_models.DeliverCardRequestTopOpenDeliverModel(
+            expired_time_millis=1665473229000,
+            user_ids=[
+                'example_user_id'
+            ],
+            platforms=[
+                'android'
+            ]
+        )
+        im_group_open_deliver_model_extension = {
+            'key': 'example_ext_value'
+        }
+        im_group_open_deliver_model_at_user_ids = {
+            'key': 'example_user_name'
+        }
+        im_group_open_deliver_model = dingtalkcard__1__0_models.DeliverCardRequestImGroupOpenDeliverModel(
+            robot_code='example_robot_code',
+            at_user_ids=im_group_open_deliver_model_at_user_ids,
+            recipients=[
+                'example_user_id'
+            ],
+            extension=im_group_open_deliver_model_extension
+        )
+        im_robot_open_deliver_model_extension = {
+            'key': 'example_ext_value'
+        }
+        im_robot_open_deliver_model = dingtalkcard__1__0_models.DeliverCardRequestImRobotOpenDeliverModel(
+            space_type='IM_ROBOT',
+            extension=im_robot_open_deliver_model_extension,
+            robot_code='example_robot_code'
+        )
+        im_single_open_deliver_model_extension = {
+            'key': 'example_ext_value'
+        }
+        im_single_open_deliver_model_at_user_ids = {
+            'key': 'example_user_name'
+        }
+        im_single_open_deliver_model = dingtalkcard__1__0_models.DeliverCardRequestImSingleOpenDeliverModel(
+            at_user_ids=im_single_open_deliver_model_at_user_ids,
+            extension=im_single_open_deliver_model_extension
+        )
+        deliver_card_request = dingtalkcard__1__0_models.DeliverCardRequest(
+            out_track_id='example_out_track_id',
+            open_space_id='dtv1.card//im_group.cidp4Gh*******VCQ==;im_robot.manager****67;co_feed.manager****67;one_box.cidp4Gh*******VCQ==',
+            im_single_open_deliver_model=im_single_open_deliver_model,
+            im_robot_open_deliver_model=im_robot_open_deliver_model,
+            im_group_open_deliver_model=im_group_open_deliver_model,
+            top_open_deliver_model=top_open_deliver_model,
+            co_feed_open_deliver_model=co_feed_open_deliver_model,
+            doc_open_deliver_model=doc_open_deliver_model,
+            user_id_type=1
+        )
+        try:
+            await client.deliver_card_with_options_async(deliver_card_request, deliver_card_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+
+if __name__ == '__main__':
+    Sample.main(sys.argv[1:])</code></pre></div><input type="radio" name="check-figure-rh7-ted-gsn" id="figure-rh7-ted-gsn-php-tab" /><label for="figure-rh7-ted-gsn-php-tab">PHP</label><div class="codeblock-item"><pre id="codeblock-f0i-d5x-oul" outputclass="language-php" code-type="xCode" data-tag="codeblock" class="pre codeblock language-php"><code>&lt;?php
+
+// This file is auto-generated, don't edit it. Thanks.
+namespace AlibabaCloud\SDK\Sample;
+
+use AlibabaCloud\SDK\Dingtalk\Vcard_1_0\Dingtalk;
+use \Exception;
+use AlibabaCloud\Tea\Exception\TeaError;
+use AlibabaCloud\Tea\Utils\Utils;
+
+use Darabonba\OpenApi\Models\Config;
+use AlibabaCloud\SDK\Dingtalk\Vcard_1_0\Models\DeliverCardHeaders;
+use AlibabaCloud\SDK\Dingtalk\Vcard_1_0\Models\DeliverCardRequest\docOpenDeliverModel;
+use AlibabaCloud\SDK\Dingtalk\Vcard_1_0\Models\DeliverCardRequest\coFeedOpenDeliverModel;
+use AlibabaCloud\SDK\Dingtalk\Vcard_1_0\Models\DeliverCardRequest\topOpenDeliverModel;
+use AlibabaCloud\SDK\Dingtalk\Vcard_1_0\Models\DeliverCardRequest\imGroupOpenDeliverModel;
+use AlibabaCloud\SDK\Dingtalk\Vcard_1_0\Models\DeliverCardRequest\imRobotOpenDeliverModel;
+use AlibabaCloud\SDK\Dingtalk\Vcard_1_0\Models\DeliverCardRequest\imSingleOpenDeliverModel;
+use AlibabaCloud\SDK\Dingtalk\Vcard_1_0\Models\DeliverCardRequest;
+use AlibabaCloud\Tea\Utils\Utils\RuntimeOptions;
+
+class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Dingtalk Client
+     */
+    public static function createClient(){
+        $config = new Config([]);
+        $config-&gt;protocol = "https";
+        $config-&gt;regionId = "central";
+        return new Dingtalk($config);
+    }
+
+    /**
+     * @param string[] $args
+     * @return void
+     */
+    public static function main($args){
+        $client = self::createClient();
+        $deliverCardHeaders = new DeliverCardHeaders([]);
+        $deliverCardHeaders-&gt;xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        $docOpenDeliverModel = new docOpenDeliverModel([
+            "userId" =&gt; "example_user_id"
+        ]);
+        $coFeedOpenDeliverModel = new coFeedOpenDeliverModel([
+            "bizTag" =&gt; "example_biz_tag",
+            "gmtTimeLine" =&gt; 1665473229000
+        ]);
+        $topOpenDeliverModel = new topOpenDeliverModel([
+            "expiredTimeMillis" =&gt; 1665473229000,
+            "userIds" =&gt; [
+                "example_user_id"
+            ],
+            "platforms" =&gt; [
+                "android"
+            ]
+        ]);
+        $imGroupOpenDeliverModelExtension = [
+            "key" =&gt; "example_ext_value"
+        ];
+        $imGroupOpenDeliverModelAtUserIds = [
+            "key" =&gt; "example_user_name"
+        ];
+        $imGroupOpenDeliverModel = new imGroupOpenDeliverModel([
+            "robotCode" =&gt; "example_robot_code",
+            "atUserIds" =&gt; $imGroupOpenDeliverModelAtUserIds,
+            "recipients" =&gt; [
+                "example_user_id"
+            ],
+            "extension" =&gt; $imGroupOpenDeliverModelExtension
+        ]);
+        $imRobotOpenDeliverModelExtension = [
+            "key" =&gt; "example_ext_value"
+        ];
+        $imRobotOpenDeliverModel = new imRobotOpenDeliverModel([
+            "spaceType" =&gt; "IM_ROBOT",
+            "extension" =&gt; $imRobotOpenDeliverModelExtension,
+            "robotCode" =&gt; "example_robot_code"
+        ]);
+        $imSingleOpenDeliverModelExtension = [
+            "key" =&gt; "example_ext_value"
+        ];
+        $imSingleOpenDeliverModelAtUserIds = [
+            "key" =&gt; "example_user_name"
+        ];
+        $imSingleOpenDeliverModel = new imSingleOpenDeliverModel([
+            "atUserIds" =&gt; $imSingleOpenDeliverModelAtUserIds,
+            "extension" =&gt; $imSingleOpenDeliverModelExtension
+        ]);
+        $deliverCardRequest = new DeliverCardRequest([
+            "outTrackId" =&gt; "example_out_track_id",
+            "openSpaceId" =&gt; "dtv1.card//im_group.cidp4Gh*******VCQ==;im_robot.manager****67;co_feed.manager****67;one_box.cidp4Gh*******VCQ==",
+            "imSingleOpenDeliverModel" =&gt; $imSingleOpenDeliverModel,
+            "imRobotOpenDeliverModel" =&gt; $imRobotOpenDeliverModel,
+            "imGroupOpenDeliverModel" =&gt; $imGroupOpenDeliverModel,
+            "topOpenDeliverModel" =&gt; $topOpenDeliverModel,
+            "coFeedOpenDeliverModel" =&gt; $coFeedOpenDeliverModel,
+            "docOpenDeliverModel" =&gt; $docOpenDeliverModel,
+            "userIdType" =&gt; 1
+        ]);
+        try {
+            $client-&gt;deliverCardWithOptions($deliverCardRequest, $deliverCardHeaders, new RuntimeOptions([]));
+        }
+        catch (Exception $err) {
+            if (!($err instanceof TeaError)) {
+                $err = new TeaError([], $err-&gt;getMessage(), $err-&gt;getCode(), $err);
+            }
+            if (!Utils::empty_($err-&gt;code) &amp;&amp; !Utils::empty_($err-&gt;message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+        }
+    }
+}
+$path = __DIR__ . \DIRECTORY_SEPARATOR . '..' . \DIRECTORY_SEPARATOR . 'vendor' . \DIRECTORY_SEPARATOR . 'autoload.php';
+if (file_exists($path)) {
+    require_once $path;
+}
+Sample::main(array_slice($argv, 1));</code></pre></div><input type="radio" name="check-figure-rh7-ted-gsn" id="figure-rh7-ted-gsn-go-tab" /><label for="figure-rh7-ted-gsn-go-tab">Go</label><div class="codeblock-item"><pre id="codeblock-hfd-tlk-pfg" outputclass="language-go" code-type="xCode" data-tag="codeblock" class="pre codeblock language-go"><code>// This file is auto-generated, don't edit it. Thanks.
+package main
+
+import (
+  "encoding/json"
+  "strings"
+  "fmt"
+  "os"
+  util  "github.com/alibabacloud-go/tea-utils/v2/service"
+  dingtalkcard_1_0  "github.com/alibabacloud-go/dingtalk/card_1_0"
+  openapi  "github.com/alibabacloud-go/darabonba-openapi/v2/client"
+  "github.com/alibabacloud-go/tea/tea"
+)
+
+
+/**
+ * 使用 Token 初始化账号Client
+ * @return Client
+ * @throws Exception
+ */
+func CreateClient () (_result *dingtalkcard_1_0.Client, _err error) {
+  config := &amp;openapi.Config{}
+  config.Protocol = tea.String("https")
+  config.RegionId = tea.String("central")
+  _result = &amp;dingtalkcard_1_0.Client{}
+  _result, _err = dingtalkcard_1_0.NewClient(config)
+  return _result, _err
+}
+
+func _main (args []*string) (_err error) {
+  client, _err := CreateClient()
+  if _err != nil {
+    return _err
+  }
+
+  deliverCardHeaders := &amp;dingtalkcard_1_0.DeliverCardHeaders{}
+  deliverCardHeaders.XAcsDingtalkAccessToken = tea.String("&lt;your access token&gt;")
+  docOpenDeliverModel := &amp;dingtalkcard_1_0.DeliverCardRequestDocOpenDeliverModel{
+    UserId: tea.String("example_user_id"),
+  }
+  coFeedOpenDeliverModel := &amp;dingtalkcard_1_0.DeliverCardRequestCoFeedOpenDeliverModel{
+    BizTag: tea.String("example_biz_tag"),
+    GmtTimeLine: tea.Int64(1665473229000),
+  }
+  topOpenDeliverModel := &amp;dingtalkcard_1_0.DeliverCardRequestTopOpenDeliverModel{
+    ExpiredTimeMillis: tea.Int64(1665473229000),
+    UserIds: []*string{tea.String("example_user_id")},
+    Platforms: []*string{tea.String("android")},
+  }
+  imGroupOpenDeliverModelExtension := map[string]*string{
+    "key": tea.String("example_ext_value"),
+  }
+  imGroupOpenDeliverModelAtUserIds := map[string]*string{
+    "key": tea.String("example_user_name"),
+  }
+  imGroupOpenDeliverModel := &amp;dingtalkcard_1_0.DeliverCardRequestImGroupOpenDeliverModel{
+    RobotCode: tea.String("example_robot_code"),
+    AtUserIds: imGroupOpenDeliverModelAtUserIds,
+    Recipients: []*string{tea.String("example_user_id")},
+    Extension: imGroupOpenDeliverModelExtension,
+  }
+  imRobotOpenDeliverModelExtension := map[string]*string{
+    "key": tea.String("example_ext_value"),
+  }
+  imRobotOpenDeliverModel := &amp;dingtalkcard_1_0.DeliverCardRequestImRobotOpenDeliverModel{
+    SpaceType: tea.String("IM_ROBOT"),
+    Extension: imRobotOpenDeliverModelExtension,
+    RobotCode: tea.String("example_robot_code"),
+  }
+  imSingleOpenDeliverModelExtension := map[string]*string{
+    "key": tea.String("example_ext_value"),
+  }
+  imSingleOpenDeliverModelAtUserIds := map[string]*string{
+    "key": tea.String("example_user_name"),
+  }
+  imSingleOpenDeliverModel := &amp;dingtalkcard_1_0.DeliverCardRequestImSingleOpenDeliverModel{
+    AtUserIds: imSingleOpenDeliverModelAtUserIds,
+    Extension: imSingleOpenDeliverModelExtension,
+  }
+  deliverCardRequest := &amp;dingtalkcard_1_0.DeliverCardRequest{
+    OutTrackId: tea.String("example_out_track_id"),
+    OpenSpaceId: tea.String("dtv1.card//im_group.cidp4Gh*******VCQ==;im_robot.manager****67;co_feed.manager****67;one_box.cidp4Gh*******VCQ=="),
+    ImSingleOpenDeliverModel: imSingleOpenDeliverModel,
+    ImRobotOpenDeliverModel: imRobotOpenDeliverModel,
+    ImGroupOpenDeliverModel: imGroupOpenDeliverModel,
+    TopOpenDeliverModel: topOpenDeliverModel,
+    CoFeedOpenDeliverModel: coFeedOpenDeliverModel,
+    DocOpenDeliverModel: docOpenDeliverModel,
+    UserIdType: tea.Int32(1),
+  }
+  tryErr := func()(_e error) {
+    defer func() {
+      if r := tea.Recover(recover()); r != nil {
+        _e = r
+      }
+    }()
+    _, _err = client.DeliverCardWithOptions(deliverCardRequest, deliverCardHeaders, &amp;util.RuntimeOptions{})
+    if _err != nil {
+      return _err
+    }
+
+    return nil
+  }()
+
+  if tryErr != nil {
+    var err = &amp;tea.SDKError{}
+    if _t, ok := tryErr.(*tea.SDKError); ok {
+      err = _t
+    } else {
+      err.Message = tea.String(tryErr.Error())
+    }
+    if !tea.BoolValue(util.Empty(err.Code)) &amp;&amp; !tea.BoolValue(util.Empty(err.Message)) {
+      // err 中含有 code 和 message 属性，可帮助开发定位问题
+    }
+
+  }
+  return _err
+}
+
+
+func main() {
+  err := _main(tea.StringSlice(os.Args[1:]))
+  if err != nil {
+    panic(err)
+  }
+}</code></pre></div><input type="radio" name="check-figure-rh7-ted-gsn" id="figure-rh7-ted-gsn-nodejs-tab" /><label for="figure-rh7-ted-gsn-nodejs-tab">Node.js</label><div class="codeblock-item"><pre id="codeblock-oyj-u5u-i2w" outputclass="language-nodejs" code-type="xCode" data-tag="codeblock" class="pre codeblock language-nodejs"><code>'use strict';
+// This file is auto-generated, don't edit it
+const Util = require('@alicloud/tea-util');
+const dingtalkcard_1_0 = require('@alicloud/dingtalk/card_1_0');
+const OpenApi = require('@alicloud/openapi-client');
+const Tea = require('@alicloud/tea-typescript');
+
+class Client {
+
+  /**
+   * 使用 Token 初始化账号Client
+   * @return Client
+   * @throws Exception
+   */
+  static createClient() {
+    let config = new OpenApi.Config({ });
+    config.protocol = 'https';
+    config.regionId = 'central';
+    return new dingtalkcard_1_0.default(config);
+  }
+
+  static async main(args) {
+    let client = Client.createClient();
+    let deliverCardHeaders = new dingtalkcard_1_0.DeliverCardHeaders({ });
+    deliverCardHeaders.xAcsDingtalkAccessToken = '&lt;your access token&gt;';
+    let docOpenDeliverModel = new dingtalkcard_1_0.DeliverCardRequestDocOpenDeliverModel({
+      userId: 'example_user_id',
+    });
+    let coFeedOpenDeliverModel = new dingtalkcard_1_0.DeliverCardRequestCoFeedOpenDeliverModel({
+      bizTag: 'example_biz_tag',
+      gmtTimeLine: 1665473229000,
+    });
+    let topOpenDeliverModel = new dingtalkcard_1_0.DeliverCardRequestTopOpenDeliverModel({
+      expiredTimeMillis: 1665473229000,
+      userIds: [
+        'example_user_id'
+      ],
+      platforms: [
+        'android'
+      ],
+    });
+    let imGroupOpenDeliverModelExtension = {
+      key: 'example_ext_value',
+    };
+    let imGroupOpenDeliverModelAtUserIds = {
+      key: 'example_user_name',
+    };
+    let imGroupOpenDeliverModel = new dingtalkcard_1_0.DeliverCardRequestImGroupOpenDeliverModel({
+      robotCode: 'example_robot_code',
+      atUserIds: imGroupOpenDeliverModelAtUserIds,
+      recipients: [
+        'example_user_id'
+      ],
+      extension: imGroupOpenDeliverModelExtension,
+    });
+    let imRobotOpenDeliverModelExtension = {
+      key: 'example_ext_value',
+    };
+    let imRobotOpenDeliverModel = new dingtalkcard_1_0.DeliverCardRequestImRobotOpenDeliverModel({
+      spaceType: 'IM_ROBOT',
+      extension: imRobotOpenDeliverModelExtension,
+      robotCode: 'example_robot_code',
+    });
+    let imSingleOpenDeliverModelExtension = {
+      key: 'example_ext_value',
+    };
+    let imSingleOpenDeliverModelAtUserIds = {
+      key: 'example_user_name',
+    };
+    let imSingleOpenDeliverModel = new dingtalkcard_1_0.DeliverCardRequestImSingleOpenDeliverModel({
+      atUserIds: imSingleOpenDeliverModelAtUserIds,
+      extension: imSingleOpenDeliverModelExtension,
+    });
+    let deliverCardRequest = new dingtalkcard_1_0.DeliverCardRequest({
+      outTrackId: 'example_out_track_id',
+      openSpaceId: 'dtv1.card//im_group.cidp4Gh*******VCQ==;im_robot.manager****67;co_feed.manager****67;one_box.cidp4Gh*******VCQ==',
+      imSingleOpenDeliverModel: imSingleOpenDeliverModel,
+      imRobotOpenDeliverModel: imRobotOpenDeliverModel,
+      imGroupOpenDeliverModel: imGroupOpenDeliverModel,
+      topOpenDeliverModel: topOpenDeliverModel,
+      coFeedOpenDeliverModel: coFeedOpenDeliverModel,
+      docOpenDeliverModel: docOpenDeliverModel,
+      userIdType: 1,
+    });
+    try {
+      await client.deliverCardWithOptions(deliverCardRequest, deliverCardHeaders, new Util.RuntimeOptions({ }));
+    } catch (err) {
+      if (!Util.default.empty(err.code) &amp;&amp; !Util.default.empty(err.message)) {
+        // err 中含有 code 和 message 属性，可帮助开发定位问题
+      }
+
+    }    
+  }
+
+}
+
+exports.Client = Client;
+Client.main(process.argv.slice(2));</code></pre></div><input type="radio" name="check-figure-rh7-ted-gsn" id="figure-rh7-ted-gsn-csharp-tab" /><label for="figure-rh7-ted-gsn-csharp-tab">C#</label><div class="codeblock-item"><pre id="codeblock-fed-jfa-kur" outputclass="language-csharp" code-type="xCode" data-tag="codeblock" class="pre codeblock language-csharp"><code>// This file is auto-generated, don't edit it. Thanks.
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
+
+using Tea;
+using Tea.Utils;
+
+
+namespace AlibabaCloud.SDK.Sample
+{
+    public class Sample 
+    {
+
+        /**
+         * 使用 Token 初始化账号Client
+         * @return Client
+         * @throws Exception
+         */
+        public static AlibabaCloud.SDK.Dingtalkcard_1_0.Client CreateClient()
+        {
+            AlibabaCloud.OpenApiClient.Models.Config config = new AlibabaCloud.OpenApiClient.Models.Config();
+            config.Protocol = "https";
+            config.RegionId = "central";
+            return new AlibabaCloud.SDK.Dingtalkcard_1_0.Client(config);
+        }
+
+        public static void Main(string[] args)
+        {
+            AlibabaCloud.SDK.Dingtalkcard_1_0.Client client = CreateClient();
+            AlibabaCloud.SDK.Dingtalkcard_1_0.Models.DeliverCardHeaders deliverCardHeaders = new AlibabaCloud.SDK.Dingtalkcard_1_0.Models.DeliverCardHeaders();
+            deliverCardHeaders.XAcsDingtalkAccessToken = "&lt;your access token&gt;";
+            AlibabaCloud.SDK.Dingtalkcard_1_0.Models.DeliverCardRequest.DeliverCardRequestDocOpenDeliverModel docOpenDeliverModel = new AlibabaCloud.SDK.Dingtalkcard_1_0.Models.DeliverCardRequest.DeliverCardRequestDocOpenDeliverModel
+            {
+                UserId = "example_user_id",
+            };
+            AlibabaCloud.SDK.Dingtalkcard_1_0.Models.DeliverCardRequest.DeliverCardRequestCoFeedOpenDeliverModel coFeedOpenDeliverModel = new AlibabaCloud.SDK.Dingtalkcard_1_0.Models.DeliverCardRequest.DeliverCardRequestCoFeedOpenDeliverModel
+            {
+                BizTag = "example_biz_tag",
+                GmtTimeLine = 1665473229000,
+            };
+            AlibabaCloud.SDK.Dingtalkcard_1_0.Models.DeliverCardRequest.DeliverCardRequestTopOpenDeliverModel topOpenDeliverModel = new AlibabaCloud.SDK.Dingtalkcard_1_0.Models.DeliverCardRequest.DeliverCardRequestTopOpenDeliverModel
+            {
+                ExpiredTimeMillis = 1665473229000,
+                UserIds = new List&lt;string&gt;
+                {
+                    "example_user_id"
+                },
+                Platforms = new List&lt;string&gt;
+                {
+                    "android"
+                },
+            };
+            Dictionary&lt;string, string&gt; imGroupOpenDeliverModelExtension = new Dictionary&lt;string, string&gt;
+            {
+                {"key", "example_ext_value"},
+            };
+            Dictionary&lt;string, string&gt; imGroupOpenDeliverModelAtUserIds = new Dictionary&lt;string, string&gt;
+            {
+                {"key", "example_user_name"},
+            };
+            AlibabaCloud.SDK.Dingtalkcard_1_0.Models.DeliverCardRequest.DeliverCardRequestImGroupOpenDeliverModel imGroupOpenDeliverModel = new AlibabaCloud.SDK.Dingtalkcard_1_0.Models.DeliverCardRequest.DeliverCardRequestImGroupOpenDeliverModel
+            {
+                RobotCode = "example_robot_code",
+                AtUserIds = imGroupOpenDeliverModelAtUserIds,
+                Recipients = new List&lt;string&gt;
+                {
+                    "example_user_id"
+                },
+                Extension = imGroupOpenDeliverModelExtension,
+            };
+            Dictionary&lt;string, string&gt; imRobotOpenDeliverModelExtension = new Dictionary&lt;string, string&gt;
+            {
+                {"key", "example_ext_value"},
+            };
+            AlibabaCloud.SDK.Dingtalkcard_1_0.Models.DeliverCardRequest.DeliverCardRequestImRobotOpenDeliverModel imRobotOpenDeliverModel = new AlibabaCloud.SDK.Dingtalkcard_1_0.Models.DeliverCardRequest.DeliverCardRequestImRobotOpenDeliverModel
+            {
+                SpaceType = "IM_ROBOT",
+                Extension = imRobotOpenDeliverModelExtension,
+                RobotCode = "example_robot_code",
+            };
+            Dictionary&lt;string, string&gt; imSingleOpenDeliverModelExtension = new Dictionary&lt;string, string&gt;
+            {
+                {"key", "example_ext_value"},
+            };
+            Dictionary&lt;string, string&gt; imSingleOpenDeliverModelAtUserIds = new Dictionary&lt;string, string&gt;
+            {
+                {"key", "example_user_name"},
+            };
+            AlibabaCloud.SDK.Dingtalkcard_1_0.Models.DeliverCardRequest.DeliverCardRequestImSingleOpenDeliverModel imSingleOpenDeliverModel = new AlibabaCloud.SDK.Dingtalkcard_1_0.Models.DeliverCardRequest.DeliverCardRequestImSingleOpenDeliverModel
+            {
+                AtUserIds = imSingleOpenDeliverModelAtUserIds,
+                Extension = imSingleOpenDeliverModelExtension,
+            };
+            AlibabaCloud.SDK.Dingtalkcard_1_0.Models.DeliverCardRequest deliverCardRequest = new AlibabaCloud.SDK.Dingtalkcard_1_0.Models.DeliverCardRequest
+            {
+                OutTrackId = "example_out_track_id",
+                OpenSpaceId = "dtv1.card//im_group.cidp4Gh*******VCQ==;im_robot.manager****67;co_feed.manager****67;one_box.cidp4Gh*******VCQ==",
+                ImSingleOpenDeliverModel = imSingleOpenDeliverModel,
+                ImRobotOpenDeliverModel = imRobotOpenDeliverModel,
+                ImGroupOpenDeliverModel = imGroupOpenDeliverModel,
+                TopOpenDeliverModel = topOpenDeliverModel,
+                CoFeedOpenDeliverModel = coFeedOpenDeliverModel,
+                DocOpenDeliverModel = docOpenDeliverModel,
+                UserIdType = 1,
+            };
+            try
+            {
+                client.DeliverCardWithOptions(deliverCardRequest, deliverCardHeaders, new AlibabaCloud.TeaUtil.Models.RuntimeOptions());
+            }
+            catch (TeaException err)
+            {
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+            catch (Exception _err)
+            {
+                TeaException err = new TeaException(new Dictionary&lt;string, object&gt;
+                {
+                    { "message", _err.Message }
+                });
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+        }
+
+
+    }
+}</code></pre></div></div></section></section><section id="section-response-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-response-1" data-tag="h2" class="h2">响应</h2><section id="section-response-parameter" class="section"><h3 data-tag="h3" id="h2-bv1-tpr-tpt" class="h3 title">响应体</h3><table id="e31fcd03b6wju" tablewidth="710" tablecolswidth="213 142 355" autofit="false" class="table"><colgroup colwidth="0.9*" style="width:30.00%"></colgroup><colgroup colwidth="0.6*" style="width:20.00%"></colgroup><colgroup colwidth="1.5*" style="width:50.00%"></colgroup><tbody class="tbody"><tr id="a7f9ba6266zue"><td id="a111d00844jlw" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="de17f6bd15k9e">名称</p></td><td id="cb816180fa1h9" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="17817281f0n9a">类型</p></td><td id="6f17407871b32" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="4d672a54ccxlf">描述</p></td></tr><tr outputclass="row row-level-1" id="0b4a89853ctv3" class="row row-level-1"><td id="f60f848c38hud" rowspan="1" colspan="1"><p id="653b47a903398">success</p></td><td id="e30a422f3f9xb" rowspan="1" colspan="1"><p id="a9aab87668p1k">Boolean</p></td><td id="b3fee00482v9d" rowspan="1" colspan="1"><p id="d42a7a1e02i26">调用结果。</p></td></tr><tr outputclass="row row-level-2 has-child" id="31b42dc8dcjgr" class="row row-level-2 has-child"><td id="c1b0727219hv8" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="e060b17f1cuon">result</p></td><td id="7070292df4qr1" rowspan="1" colspan="1"><p id="462dd4604flzz">Array</p></td><td id="697b7ba10f1ig" rowspan="1" colspan="1"><p id="a800cf79ed4he">投放结果列表。</p></td></tr><tr outputclass="row row-level-2-1" id="4a30418d54oum" class="row row-level-2-1"><td id="75bc7178b8dp7" rowspan="1" colspan="1"><p id="9dacd4abderne">spaceType</p></td><td id="a5ff9336171xn" rowspan="1" colspan="1"><p id="81102ac0a12ia">String</p></td><td id="82e299b781g5p" rowspan="1" colspan="1"><p id="b89f5356e15un">场域类型 ：</p><ul id="3930acb49a9v8"><li id="993c8ded47bmj"><p id="d3e99614dea0o"><b>IM</b>: IM</p></li><li id="008b3998dcv7k"><p id="36e173767f41t"><b>IM_GROUP</b>: IM群聊</p></li><li id="4da93fa5b6mwq"><p id="78cecf8ab4hy4"><b>IM_ROBOT</b>: IM机器人单聊</p></li><li id="f5c69c5b54ipr"><p id="29a74052dfj6x"><b>ONE_BOX</b>: 群吊顶</p></li><li id="634c6269aavef"><p id="d232c3cec27w4"><b>COOPERATION_FEED</b>: 协作</p></li></ul></td></tr><tr outputclass="row row-level-2-2" id="476ef89b5cy1v" class="row row-level-2-2"><td id="9b1df7ed7d9r5" rowspan="1" colspan="1"><p id="30258a05e08vl">spaceId</p></td><td id="0237fdb3a63go" rowspan="1" colspan="1"><p id="17865b9fe61cg">String</p></td><td id="bc132adad76vb" rowspan="1" colspan="1"><p id="6807178313o6g">场域Id。</p></td></tr><tr outputclass="row row-level-2-3" id="698792588fe2t" class="row row-level-2-3"><td id="2c819c783d98y" rowspan="1" colspan="1"><p id="e8bec72d29deq">success</p></td><td id="8a3adbbde8vgy" rowspan="1" colspan="1"><p id="2df42e328d8e0">Boolean</p></td><td id="50dfb6a548j2f" rowspan="1" colspan="1"><p id="fc6efa199eg1w">投放成功。</p></td></tr><tr outputclass="row row-level-2-4" id="ee7663d4b8keh" class="row row-level-2-4"><td id="78e340567a9oo" rowspan="1" colspan="1"><p id="8d15c5be6886o">carrierId</p></td><td id="58bb2bcf73yb3" rowspan="1" colspan="1"><p id="05d5698e2fhof">String</p></td><td id="8fc40d88bb2rj" rowspan="1" colspan="1"><p id="d271b3610a1pk">投放结果id。</p><p class="note-icon-wrapper" id="15b5e229edgug"></p><p id="0ba1aeea66ukz">IM场域返processQueryKey，用于业务后续查看消息已读列表，其他场域暂不返回。</p></td></tr><tr outputclass="row row-level-2-5" id="6e303a0f62rgc" class="row row-level-2-5"><td id="ed764742acqil" rowspan="1" colspan="1"><p id="630a95bd53nvf">errorMsg</p></td><td id="da5d2a9c42pmh" rowspan="1" colspan="1"><p id="19ae298b631ef">String</p></td><td id="bb4d147cebc0l" rowspan="1" colspan="1"><p id="f3d52c39558c3">场域投放错误信息。</p></td></tr></tbody></table></section><section id="section-response-body-example" class="section"><h3 id="h3-response-body-example" data-tag="h3" class="h3">响应体示例</h3><pre id="9a2a1b9817xzm" outputclass="language-json" code-type="xCode" data-tag="codeblock" class="pre codeblock language-json"><code>HTTP/1.1 200 OK
+Content-Type:application/json
+
+{
+  "success" : true,
+  "result" : [ {
+    "spaceType" : "IM_GROUP",
+    "spaceId" : "cid1234abcd",
+    "success" : true,
+    "carrierId" : "4v+AzUEDuC0dKuO*********J0w8=",
+    "errorMsg" : "system error"
+  } ]
+}</code></pre></section><section id="section-error-code-1" class="section"><h3 id="h3-error-code-1" data-tag="h3" class="h3">错误码</h3><p data-tag="p" id="p-error-code-global-guide" class="p">若调用该接口报错，可根据错误信息在<a href="https://open.dingtalk.com/document/development/server-api-error-codes-1" id="a-error-code-global-guide">全局错误码</a>文档中查找解决方案。</p><table id="9592aac3bebkx" tablewidth="709" tablecolswidth="142 177 177 213" autofit="false" class="table"><colgroup colwidth="0.8*" style="width:20.03%"></colgroup><colgroup colwidth="1*" style="width:24.96%"></colgroup><colgroup colwidth="1*" style="width:24.96%"></colgroup><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><tbody class="tbody"><tr id="e6fddddeefy4a"><td id="cbc77b22b3u00" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="29f0eeb131ab2">HttpCode</p></td><td id="f7295ccfb1zog" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="5321730d890dq">错误码</p></td><td id="503ddf4ac27j4" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="323f381bfeuyt">错误信息</p></td><td id="b133617e14zxr" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="17387088d3fub">说明</p></td></tr><tr id="49b0a47b3bg5d"><td id="a4281ac902axf" rowspan="1" colspan="1"><p id="d28517043d8pa">400</p></td><td id="0977d5df192uc" rowspan="1" colspan="1"><p id="54d8ddb8f1l8e">param.empty</p></td><td id="b2912d347fib3" rowspan="1" colspan="1"><p id="35cdbb696etkn">param.empty</p></td><td id="a3cee5820edza" rowspan="1" colspan="1"><p id="c56d959b3dfoc">入参为空</p></td></tr><tr id="43a8a27d27lmj"><td id="1c1e9be6a9hct" rowspan="1" colspan="1"><p id="97bcc251754s2">400</p></td><td id="f6478c2f95m1k" rowspan="1" colspan="1"><p id="019702a533gu9">param.outTrackIdEmpty</p></td><td id="67305b5c80egx" rowspan="1" colspan="1"><p id="c11401f640j1o">param.outTrackIdEmpty</p></td><td id="779dbb994ezcs" rowspan="1" colspan="1"><p id="58f4d2f852i4j">业务标识outTrackId为空</p></td></tr><tr id="c2c3d598eerp0"><td id="742f42216cdt6" rowspan="1" colspan="1"><p id="855e3b1f6ayvi">400</p></td><td id="98f3df20e5pyx" rowspan="1" colspan="1"><p id="a8cc83eb35c4k">param.openSpaceIdEmpty</p></td><td id="dccc1189defi3" rowspan="1" colspan="1"><p id="e6e5e54d17mnr">param.openSpaceIdEmpty</p></td><td id="bda79a6fbccy1" rowspan="1" colspan="1"><p id="cb6ec09813ad2">投放openSpaceId为空</p></td></tr><tr id="adaf93dd5eezp"><td id="1f7dec0924m8e" rowspan="1" colspan="1"><p id="77edec6cff6b2">400</p></td><td id="a1fcd38c02lf5" rowspan="1" colspan="1"><p id="d1cf88d3f9thm">param.openDeliverModelEmpty</p></td><td id="429c8dc325u1s" rowspan="1" colspan="1"><p id="9de1abf302thq">param.openDeliverModelEmpty</p></td><td id="76c5a22be5zpu" rowspan="1" colspan="1"><p id="8ac44cdaa0qyn">场域投放模型为空</p></td></tr><tr id="9751ed1daanm7"><td id="c903183eb2ub7" rowspan="1" colspan="1"><p id="c5e905055cm3g">400</p></td><td id="34bd201f1fqkv" rowspan="1" colspan="1"><p id="fabb99ae6egzv">param.spaceDeliverModelEmpty</p></td><td id="4d1c51cc98ynb" rowspan="1" colspan="1"><p id="3f9103c2895ro">param.spaceDeliverModelError</p></td><td id="6bbed70852oom" rowspan="1" colspan="1"><p id="773bd4d2a7fyn">场域投放模型格式错误</p></td></tr><tr id="a8491b81de3s3"><td id="bd3ecb9d54nea" rowspan="1" colspan="1"><p id="e8b33ba447m4s">400</p></td><td id="02fae8bb26qdm" rowspan="1" colspan="1"><p id="fbf66b7337y1v">param.openSpaceIdInvalid</p></td><td id="1db9661d8cokn" rowspan="1" colspan="1"><p id="c5993b2bd53wi">param.openSpaceIdInvalid</p></td><td id="955d62fcedpm3" rowspan="1" colspan="1"><p id="bee5357379iv7">openSpaceId不符合规范</p></td></tr><tr id="b443f9aa59lcl"><td id="52c0841d7dlpa" rowspan="1" colspan="1"><p id="c8bcb6f97892n">400</p></td><td id="245c055c696er" rowspan="1" colspan="1"><p id="61350fbd8dcg3">param.cardNotExist</p></td><td id="daa25a27a3u16" rowspan="1" colspan="1"><p id="0ccffc23ef8l9">param.cardNotExist</p></td><td id="d9d4a470b2icl" rowspan="1" colspan="1"><p id="97ebd4c10az79">卡片不存在</p></td></tr><tr id="e09f2d4b8fo7s"><td id="03c645128fof8" rowspan="1" colspan="1"><p id="abd94a2ac1hlu">500</p></td><td id="254fae67f1nwv" rowspan="1" colspan="1"><p id="e904efebeagwj">system.busy</p></td><td id="a942f6c8dd51b" rowspan="1" colspan="1"><p id="f8f0305424uny">system.busy</p></td><td id="b16c884e28lfd" rowspan="1" colspan="1"><p id="ed6812a5a76k3">系统繁忙</p></td></tr><tr id="cbc20ae345e1h"><td id="a608791f27v5v" rowspan="1" colspan="1"><p id="02b8b865a8z2c">500</p></td><td id="2f9832fcb1bgd" rowspan="1" colspan="1"><p id="8bb4b510f88qj">system.busy</p></td><td id="4444e57ef9m3c" rowspan="1" colspan="1"><p id="3afcd0beecrs4">system.busy </p></td><td id="48dabf3cb89xr" rowspan="1" colspan="1"><p id="ff3c662e0d6y5">系统繁忙</p></td></tr></tbody></table></section></section></div></main></body></html>

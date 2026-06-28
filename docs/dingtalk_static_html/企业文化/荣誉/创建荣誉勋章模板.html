@@ -1,0 +1,395 @@
+<!DOCTYPE html><html><head><meta charset="utf8" / /><meta name="gmtModify" content="2025-09-23 19:19:21" / /><meta name="searchtitle" content="" / /><meta name="keywords" content="" / /><meta name="author" content="" / /><title>创建荣誉勋章模板</title><meta name="gmtModify" content="2026-06-04 19:10:41" / /></head><body data-tag="topic" id="doc-api-dingtalk-CreateOrgHonor" class="topic"><main id="f7d5877f4ebdv"><h1 data-tag="title" id="h1-sov-q6j-nxw" class="title">创建荣誉勋章模板</h1><p data-tag="shortdesc" id="c4bc7bcda08vt" class="shortdesc">调用本接口，根据创建荣誉勋章模板人Id、荣誉勋章名称等信息，创建企业荣誉勋章模板。</p><div data-tag="conbody" outputclass="icms-api-reference" class="icms-api-reference conbody"><section id="82555970c63oz" class="section"><h2 id="66824496488z2"><b>接口调用说明</b></h2><div type="note" id="f77a291740may" class="note note-note"><div class="note-icon-wrapper"><i class="icon-note note note"></i></div><div class="noteContentSpan"><strong>说明 </strong><ul id="ee32f5ba7aoar"><li id="9fc2289198y1x"><p id="d6b07b500eong">创建企业荣誉勋章模板，会流入钉钉后台进行审核，一般5个工作日内审核完毕。</p></li><li id="b1eac13a17blz"><p id="9f98819d47qty">企业每周的审核次数有限制（标准版每周10次/专业版每周20次），超过后接口会报错。如有特殊原因希望提高审核次数上限，请联系我们申请并讲明原因。</p></li><li id="0b82acef6d91s"><p id="01d41989f6nzf">针对同一家组织，不允许并发调用本接口创建。如需批量创建，请串行逐个执行。</p></li></ul></div></div><section id="03bcdacc20bc1" class="section"><h3 id="22ef58be02v9c">设计规范</h3><p id="967c2064042im">为了保障勋章能够顺利上架，避免安全、法务、涉敏、涉政等问题，荣誉名称和图形设计需要注意内容规范，详情参见<a href="https://alidocs.dingtalk.com/i/p/nb9XJor4WgY8myAp/docs/lo1YvX0prG98k244KR79JPw7xzbmLdEZ" id="66815df6cd4qi">荣誉设计规范</a>。</p></section><section id="2322eae560o1q" class="section"><h3 id="cbb6460b9agj9">规范条款</h3><ol id="a72cfd4bcf62i"><li id="29fa7c39b1npo"><p id="604bffaa6eslb">您承诺遵守《钉钉荣誉规范条款》，保证所上传的内容不违反国家法律法规，不侵犯任何第三方的合法权益，不存在违背社会公序良俗的情况。</p></li><li id="06206b45d2fqi"><p id="89adea09107d7">您同意，钉钉有权对您上传的内容进行审核、作出判断，对违反本规则的内容进行处理（包括停止发布、删除等），按钉钉相关规则对您的使用钉钉进行限制。</p></li><li id="1784c0a0a820f"><p id="019e4d2975q6f">您同意，钉钉有权基于正常运营的需要对本服务进行变更（包括升级、停止运营等），或以钉钉提供的其他服务进行替代。</p></li><li id="76afe97237dh8"><p id="b2dc8edc21tsy">钉钉有权根据正常运营的需要对本规则进行修订，如您不接受修订后的内容，请停止使用本服务，您使用的行为将视为您同意遵守本规则。</p></li><li id="bacdf0e23eupv"><p id="ef1ce76177f30">上传素材中不得包含涉黄、涉政等违规的内容（包含但不仅限于图片、文字）。</p></li></ol></section></section><section id="section-request-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-request-1" data-tag="h2" class="h2">请求</h2><section id="section-request-basic-info" class="section"><h3 id="heading-request-basic-info" data-tag="h3" class="h3">基本信息</h3><table id="cf9f60ee34x5e" tablewidth="648" tablecolswidth="216 432" autofit="false" class="table"><colgroup colwidth="0.67*" style="width:33.33%"></colgroup><colgroup colwidth="1.33*" style="width:66.67%"></colgroup><tbody class="tbody"><tr id="687753b14ftq3"><td id="2c5ae25ca2pvj" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="9b50d4f919yml">字段</p></td><td id="cfeb5679abzqn" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="f3dd20f150qoh">值</p></td></tr><tr id="72d28d89b9jjw"><td id="de8287120670u" rowspan="1" colspan="1"><p id="f4be04959b6zy">HTTP URL</p></td><td id="98eca3f469v01" rowspan="1" colspan="1"><p id="17c1ff50d0mkq">https://api.dingtalk.com/v1.0/orgCulture/honors/templates</p></td></tr><tr id="748e7dbf1fo2w"><td id="71630ba734h75" rowspan="1" colspan="1"><p id="eec5e43df6iuc">HTTP Method</p></td><td id="6de4ee99797kt" rowspan="1" colspan="1"><p id="044045edba8v2">POST</p></td></tr><tr id="830ee138e1r9u"><td id="732e245008ow4" rowspan="1" colspan="1"><p id="d7cc102e8algp">支持的应用类型</p></td><td id="8c82665ee2i74" rowspan="1" colspan="1"><p id="0ee3df436bozw"><span data-tag="ph" id="ph-request-basic-app-type-apptype-0" class="ph ph-app-type" data-ph-raw-text="appType-企业内部应用">appType-企业内部应用</span>　<span data-tag="ph" id="ph-request-basic-app-type-apptype-1" class="ph ph-app-type" data-ph-raw-text="appType-第三方企业应用">appType-第三方企业应用</span></p></td></tr><tr id="d77b8d66cexjd"><td id="718898c74dmh9" rowspan="1" colspan="1"><p id="9d5267eedeyyq">权限要求</p></td><td id="4d47203fadweh" rowspan="1" colspan="1"><p id="f45a7ed756vpa"><span data-tag="ph" id="ph-request-basic-permission-permission-orgculture-honor-write-0" class="ph-permission ph" data-ph-raw-text="permission-OrgCulture.Honor.Write-组织文化荣誉信息写权限" data-permission-id="permission-OrgCulture.Honor.Write" data-permission-code="OrgCulture.Honor.Write" data-permission-detail-api="/document/api/permission/detail" data-permission-query-param="code">permission-OrgCulture.Honor.Write-组织文化荣誉信息写权限</span></p></td></tr></tbody></table></section><section id="section-request-header-parameter" class="section"><h3 data-tag="h3" id="h2-9vd-dsd-bop" class="h3 title">请求头</h3><table id="e4aa20e299enq" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="888a64f4c53tv"><td id="3e605c7baddhz" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="804e4edca4ip1">名称</p></td><td id="e6a3d62cf4cb5" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="ffb0ec6a1fqff">类型</p></td><td id="b514803a78617" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="ade307f6edlif">是否必填</p></td><td id="29739fb810qfl" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="575a53073a0b1">描述</p></td></tr><tr id="e6c9dc245cypl"><td id="542a547eb8cxh" rowspan="1" colspan="1"><p id="9bd3e799dae4t">x-acs-dingtalk-access-token</p></td><td id="73340bc127vrd" rowspan="1" colspan="1"><p id="9ceabd677ff5a">String</p></td><td id="44334367b8la6" rowspan="1" colspan="1"><p id="8eded08d645kr">是</p></td><td id="aac9528559ro0" rowspan="1" colspan="1"><p id="cb451d5d94ksw">调用该接口的访问凭证，通过以下获取：</p><ul id="eadf486dbb0mc"><li id="303bbae0d1m8r"><p id="f76dbea566kz0">企业内部应用，调用<a href="https://open.dingtalk.com/document/development/obtain-the-access-token-of-an-internal-app#" id="0eb0286acdixo" class="xref">获取企业内部应用的accessToken</a>接口获取。</p></li><li id="4fc9d804730lo"><p id="26f7203c6ckmh">第三方企业应用，调用<a href="https://open.dingtalk.com/document/development/obtain-the-access-token-of-the-authorized-enterprise-1#" id="50fcc7a2364pj" class="xref">获取第三方应用授权企业的accessToken</a>接口获取。</p></li></ul></td></tr></tbody></table></section><section id="section-request-body-parameter" class="section"><h3 data-tag="h3" id="h2-hsi-dcs-ejn" class="h3 title">请求体</h3><table id="a98bad0ecb9kk" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="8d2611f59ec1s"><td id="480d872846z87" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="9e096776d9l7g">名称</p></td><td id="95d43942e7fst" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="52674692d64bm">类型</p></td><td id="8bbb0ed63eeuk" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="ea3ac9ef48xe7">是否必填</p></td><td id="3b19b66d0aah7" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="11cb157811ioa">描述</p></td></tr><tr outputclass="row row-level-1" id="01578b0e3652b" class="row row-level-1"><td id="8464d03d4616q" rowspan="1" colspan="1"><p id="85f8778f2a2x7">userId</p></td><td id="ba42920aeedub" rowspan="1" colspan="1"><p id="62a9f1b5e53z3">String</p></td><td id="bac4e9ab00hv6" rowspan="1" colspan="1"><p id="5e1f6a54f9mb1">是</p></td><td id="b526526c40n6n" rowspan="1" colspan="1"><p id="99c022e3a1abr">创建荣誉勋章模板的管理员所在组织的userId信息。</p><p class="note-icon-wrapper" id="1b78395b24mqa"></p><p id="4ccdd82a29vx4">需要主管理员角色或者子管理员角色。</p></td></tr><tr outputclass="row row-level-2" id="ec1f2db1370hk" class="row row-level-2"><td id="e75c0d4f36ywd" rowspan="1" colspan="1"><p id="fda1b012036v8">medalName</p></td><td id="ede70cc5c38bu" rowspan="1" colspan="1"><p id="d7ee956416sgc">String</p></td><td id="4f014c8c5326j" rowspan="1" colspan="1"><p id="7b1075771bilc">是</p></td><td id="3a73081ddbi3a" rowspan="1" colspan="1"><p id="fe752b5e9fevc">荣誉勋章名称。</p><p class="note-icon-wrapper" id="754b2e6021dlt"></p><ul id="a57d9d1686v0t"><li id="4884da63f6qd7"><p id="bd0f4bc79fkdp">最大长度10字符 。</p></li><li id="5cb45aeb26qqc"><p id="2135118e03pnu">不支持表情图标等。</p></li></ul></td></tr><tr outputclass="row row-level-3" id="5b624ac67ac0h" class="row row-level-3"><td id="645ae7549a6ja" rowspan="1" colspan="1"><p id="980de6585cmf0">medalDesc</p></td><td id="86f7b80bbap91" rowspan="1" colspan="1"><p id="8220d4a916k66">String</p></td><td id="7be2dc4836ldf" rowspan="1" colspan="1"><p id="d48a7417bej0w">是</p></td><td id="d411a235cegaw" rowspan="1" colspan="1"><p id="4f23968564sft">荣誉勋章描述。</p><p class="note-icon-wrapper" id="299f1a6c7a0rf"></p><ul id="6e9e57a1315ub"><li id="fa5ef497edom0"><p id="4041d7777frvd">最大长度30字符 。</p></li><li id="542ecb21bc1tj"><p id="18ea06cf5fyga">不支持表情图标等。</p></li></ul></td></tr><tr outputclass="row row-level-4" id="e028f24fb71no" class="row row-level-4"><td id="c600c1fc55s0j" rowspan="1" colspan="1"><p id="0e5465fec16jc">medalMediaId</p></td><td id="8f9061097a9ov" rowspan="1" colspan="1"><p id="e21a4a60b80gl">String</p></td><td id="ed3c00f31b6zb" rowspan="1" colspan="1"><p id="c5fcc42566iwp">是</p></td><td id="ea5322305348f" rowspan="1" colspan="1"><p id="b3e6809f00guc">荣誉勋章图片，可调用<a href="https://open.dingtalk.com/document/development/upload-media-files#" id="77bfde1b3106a" class="xref">上传媒体文件</a>接口获取出参<code data-tag="code" code-type="xCode" id="ba7a215df5uhd" class="code">media_id</code>参数字段。</p><p class="note-icon-wrapper" id="28327237cdlyd"></p><ul id="f7cc76f5232ta"><li id="5d72ebf0b4vq1"><p id="f299da4960ajc">图片尺寸 900*900，不超过1M，支持PNG 。</p></li><li id="e8c0f184618e5"><p id="3a3175a22enke">图片请使用钉钉媒体资源标识符media_id。</p></li></ul></td></tr><tr outputclass="row row-level-5" id="44a7516557inp" class="row row-level-5"><td id="a17bed51d7vjt" rowspan="1" colspan="1"><p id="abed27273b7np">avatarFrameMediaId</p></td><td id="29a1323fe9fgf" rowspan="1" colspan="1"><p id="72abe60e5f34w">String</p></td><td id="0213ee1a38vdj" rowspan="1" colspan="1"><p id="ca06150f092uz">是</p></td><td id="a21673d0c1yyc" rowspan="1" colspan="1"><p id="3fd5821c3bmdm">头像挂件，可调用<a href="https://open.dingtalk.com/document/development/upload-media-files#" id="449b991203yad" class="xref">上传媒体文件</a>接口获取出参<code data-tag="code" code-type="xCode" id="aa6f1ab8c2mmn" class="code">media_id</code>参数字段。</p><p class="note-icon-wrapper" id="a9ab3c67d885y"></p><ul id="357418be60jgw"><li id="a9558b988cay1"><p id="4cdecdfa2et95">图片尺寸 240*240，不超过1M，支持PNG。</p></li><li id="15812c426diky"><p id="050170527eqsz">图片请使用钉钉媒体资源标识符media_id。</p></li></ul></td></tr><tr outputclass="row row-level-6" id="afe6cb4b4e19v" class="row row-level-6"><td id="fb77852ba7gcj" rowspan="1" colspan="1"><p id="59888e47e9isn">defaultBgColor</p></td><td id="87ae5e6a78xy3" rowspan="1" colspan="1"><p id="1712fc2cbb06b">String</p></td><td id="65887b0584qf0" rowspan="1" colspan="1"><p id="8e73dbcf47kai">是</p></td><td id="0ec3c81b38tyn" rowspan="1" colspan="1"><p id="d72e823b5e4yo">背景颜色:</p><ul id="34de3a0443ekf"><li id="ae3c12b52c2iy"><p id="30105415f8f3l">#FFFBB4</p></li><li id="3a8d9172a4vw5"><p id="75daae8932d2n">#FFE7BC</p></li><li id="19e90cd5c00ph"><p id="99d9249d80rfz">#FFDAF4</p></li><li id="82afe39553cnv"><p id="f7e414248832s">#DAF6A8</p></li><li id="ef71772e6cp8p"><p id="e969284d391es">#E4D7FF</p></li><li id="d8439c51abt5u"><p id="2fc5a7dfebduk">#BFDFFF</p></li><li id="25312ff560vmy"><p id="cdbcbfe6d71so">#B9F2D6</p></li></ul><p id="a2a70c06a93lq"><img src="https://help-static-aliyun-doc.aliyuncs.com/file-manage-files/zh-CN/20230201/ncfw/颜色分类.png" alt="" class="image break" / /></p><p class="note-icon-wrapper" id="1571b59358x5p"></p><p id="cbaf4633a7aio">仅以上颜色可选。</p></td></tr></tbody></table></section><section id="section-request-body-example" class="section"><h3 id="h3-request-body-example" data-tag="h3" class="h3">请求示例</h3><div outputclass="tabbed-codeblock" data-tag="fig" id="figure-dhw-rdb-mdp" class="tabbed-codeblock-box"><div class="tab-box"></div><input type="radio" name="check-figure-dhw-rdb-mdp" id="figure-dhw-rdb-mdp-HTTP-tab" checked="checked" /><label for="figure-dhw-rdb-mdp-HTTP-tab">HTTP</label><div class="codeblock-item"><pre id="codeblock-ogj-dc1-h2j" outputclass="language-HTTP" code-type="xCode" data-tag="codeblock" class="pre codeblock language-HTTP"><code>POST /v1.0/orgCulture/honors/templates HTTP/1.1
+Host:api.dingtalk.com
+x-acs-dingtalk-access-token:6df1****23d618ab1d72f29e39b37
+Content-Type:application/json
+
+{
+  "userId" : "manager7675",
+  "medalName" : "客户第一",
+  "medalDesc" : "客户服务用心，奖励荣誉",
+  "medalMediaId" : "@xxxxxxx",
+  "avatarFrameMediaId" : "$xxxxxxx",
+  "defaultBgColor" : "#FFFBB4"
+}</code></pre></div><input type="radio" name="check-figure-dhw-rdb-mdp" id="figure-dhw-rdb-mdp-java-tab" /><label for="figure-dhw-rdb-mdp-java-tab">Java</label><div class="codeblock-item"><pre id="codeblock-hpy-thh-yae" outputclass="language-java" code-type="xCode" data-tag="codeblock" class="pre codeblock language-java"><code>// This file is auto-generated, don't edit it. Thanks.
+package com.aliyun.sample;
+
+import com.aliyun.tea.*;
+
+public class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Client
+     * @throws Exception
+     */
+    public static com.aliyun.dingtalkorg_culture_1_0.Client createClient() throws Exception {
+        com.aliyun.teaopenapi.models.Config config = new com.aliyun.teaopenapi.models.Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        return new com.aliyun.dingtalkorg_culture_1_0.Client(config);
+    }
+
+    public static void main(String[] args_) throws Exception {
+        java.util.List&lt;String&gt; args = java.util.Arrays.asList(args_);
+        com.aliyun.dingtalkorg_culture_1_0.Client client = Sample.createClient();
+        com.aliyun.dingtalkorg_culture_1_0.models.CreateOrgHonorHeaders createOrgHonorHeaders = new com.aliyun.dingtalkorg_culture_1_0.models.CreateOrgHonorHeaders();
+        createOrgHonorHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        com.aliyun.dingtalkorg_culture_1_0.models.CreateOrgHonorRequest createOrgHonorRequest = new com.aliyun.dingtalkorg_culture_1_0.models.CreateOrgHonorRequest()
+                .setUserId("manager7675")
+                .setMedalName("客户第一")
+                .setMedalDesc("客户服务用心，奖励荣誉")
+                .setMedalMediaId("@xxxxxxx")
+                .setAvatarFrameMediaId("$xxxxxxx")
+                .setDefaultBgColor("#FFFBB4");
+        try {
+            client.createOrgHonorWithOptions(createOrgHonorRequest, createOrgHonorHeaders, new com.aliyun.teautil.models.RuntimeOptions());
+        } catch (TeaException err) {
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        } catch (Exception _err) {
+            TeaException err = new TeaException(_err.getMessage(), _err);
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        }        
+    }
+}</code></pre></div><input type="radio" name="check-figure-dhw-rdb-mdp" id="figure-dhw-rdb-mdp-python-tab" /><label for="figure-dhw-rdb-mdp-python-tab">Python</label><div class="codeblock-item"><pre id="codeblock-jvn-ja3-9ry" outputclass="language-python" code-type="xCode" data-tag="codeblock" class="pre codeblock language-python"><code># -*- coding: utf-8 -*-
+# This file is auto-generated, don't edit it. Thanks.
+import sys
+
+from typing import List
+
+from alibabacloud_dingtalk.orgCulture_1_0.client import Client as dingtalkorgCulture_1_0Client
+from alibabacloud_tea_openapi import models as open_api_models
+from alibabacloud_dingtalk.orgCulture_1_0 import models as dingtalkorg_culture__1__0_models
+from alibabacloud_tea_util import models as util_models
+from alibabacloud_tea_util.client import Client as UtilClient
+
+
+class Sample:
+    def __init__(self):
+        pass
+
+    @staticmethod
+    def create_client() -&gt; dingtalkorgCulture_1_0Client:
+        """
+        使用 Token 初始化账号Client
+        @return: Client
+        @throws Exception
+        """
+        config = open_api_models.Config()
+        config.protocol = 'https'
+        config.region_id = 'central'
+        return dingtalkorgCulture_1_0Client(config)
+
+    @staticmethod
+    def main(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        create_org_honor_headers = dingtalkorg_culture__1__0_models.CreateOrgHonorHeaders()
+        create_org_honor_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        create_org_honor_request = dingtalkorg_culture__1__0_models.CreateOrgHonorRequest(
+            user_id='manager7675',
+            medal_name='客户第一',
+            medal_desc='客户服务用心，奖励荣誉',
+            medal_media_id='@xxxxxxx',
+            avatar_frame_media_id='$xxxxxxx',
+            default_bg_color='#FFFBB4'
+        )
+        try:
+            client.create_org_honor_with_options(create_org_honor_request, create_org_honor_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+    @staticmethod
+    async def main_async(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        create_org_honor_headers = dingtalkorg_culture__1__0_models.CreateOrgHonorHeaders()
+        create_org_honor_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        create_org_honor_request = dingtalkorg_culture__1__0_models.CreateOrgHonorRequest(
+            user_id='manager7675',
+            medal_name='客户第一',
+            medal_desc='客户服务用心，奖励荣誉',
+            medal_media_id='@xxxxxxx',
+            avatar_frame_media_id='$xxxxxxx',
+            default_bg_color='#FFFBB4'
+        )
+        try:
+            await client.create_org_honor_with_options_async(create_org_honor_request, create_org_honor_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+
+if __name__ == '__main__':
+    Sample.main(sys.argv[1:])</code></pre></div><input type="radio" name="check-figure-dhw-rdb-mdp" id="figure-dhw-rdb-mdp-php-tab" /><label for="figure-dhw-rdb-mdp-php-tab">PHP</label><div class="codeblock-item"><pre id="codeblock-var-4ie-x7j" outputclass="language-php" code-type="xCode" data-tag="codeblock" class="pre codeblock language-php"><code>&lt;?php
+
+// This file is auto-generated, don't edit it. Thanks.
+namespace AlibabaCloud\SDK\Sample;
+
+use AlibabaCloud\SDK\Dingtalk\Vorg_culture_1_0\Dingtalk;
+use \Exception;
+use AlibabaCloud\Tea\Exception\TeaError;
+use AlibabaCloud\Tea\Utils\Utils;
+
+use Darabonba\OpenApi\Models\Config;
+use AlibabaCloud\SDK\Dingtalk\Vorg_culture_1_0\Models\CreateOrgHonorHeaders;
+use AlibabaCloud\SDK\Dingtalk\Vorg_culture_1_0\Models\CreateOrgHonorRequest;
+use AlibabaCloud\Tea\Utils\Utils\RuntimeOptions;
+
+class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Dingtalk Client
+     */
+    public static function createClient(){
+        $config = new Config([]);
+        $config-&gt;protocol = "https";
+        $config-&gt;regionId = "central";
+        return new Dingtalk($config);
+    }
+
+    /**
+     * @param string[] $args
+     * @return void
+     */
+    public static function main($args){
+        $client = self::createClient();
+        $createOrgHonorHeaders = new CreateOrgHonorHeaders([]);
+        $createOrgHonorHeaders-&gt;xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        $createOrgHonorRequest = new CreateOrgHonorRequest([
+            "userId" =&gt; "manager7675",
+            "medalName" =&gt; "客户第一",
+            "medalDesc" =&gt; "客户服务用心，奖励荣誉",
+            "medalMediaId" =&gt; "@xxxxxxx",
+            "avatarFrameMediaId" =&gt; "\$xxxxxxx",
+            "defaultBgColor" =&gt; "#FFFBB4"
+        ]);
+        try {
+            $client-&gt;createOrgHonorWithOptions($createOrgHonorRequest, $createOrgHonorHeaders, new RuntimeOptions([]));
+        }
+        catch (Exception $err) {
+            if (!($err instanceof TeaError)) {
+                $err = new TeaError([], $err-&gt;getMessage(), $err-&gt;getCode(), $err);
+            }
+            if (!Utils::empty_($err-&gt;code) &amp;&amp; !Utils::empty_($err-&gt;message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+        }
+    }
+}
+$path = __DIR__ . \DIRECTORY_SEPARATOR . '..' . \DIRECTORY_SEPARATOR . 'vendor' . \DIRECTORY_SEPARATOR . 'autoload.php';
+if (file_exists($path)) {
+    require_once $path;
+}
+Sample::main(array_slice($argv, 1));</code></pre></div><input type="radio" name="check-figure-dhw-rdb-mdp" id="figure-dhw-rdb-mdp-go-tab" /><label for="figure-dhw-rdb-mdp-go-tab">Go</label><div class="codeblock-item"><pre id="codeblock-qvj-mfw-cgo" outputclass="language-go" code-type="xCode" data-tag="codeblock" class="pre codeblock language-go"><code>// This file is auto-generated, don't edit it. Thanks.
+package main
+
+import (
+  "os"
+  util  "github.com/alibabacloud-go/tea-utils/v2/service"
+  dingtalkorgculture_1_0  "github.com/alibabacloud-go/dingtalk/orgCulture_1_0"
+  openapi  "github.com/alibabacloud-go/darabonba-openapi/v2/client"
+  "github.com/alibabacloud-go/tea/tea"
+)
+
+
+/**
+ * 使用 Token 初始化账号Client
+ * @return Client
+ * @throws Exception
+ */
+func CreateClient () (_result *dingtalkorgculture_1_0.Client, _err error) {
+  config := &amp;openapi.Config{}
+  config.Protocol = tea.String("https")
+  config.RegionId = tea.String("central")
+  _result = &amp;dingtalkorgculture_1_0.Client{}
+  _result, _err = dingtalkorgculture_1_0.NewClient(config)
+  return _result, _err
+}
+
+func _main (args []*string) (_err error) {
+  client, _err := CreateClient()
+  if _err != nil {
+    return _err
+  }
+
+  createOrgHonorHeaders := &amp;dingtalkorgculture_1_0.CreateOrgHonorHeaders{}
+  createOrgHonorHeaders.XAcsDingtalkAccessToken = tea.String("&lt;your access token&gt;")
+  createOrgHonorRequest := &amp;dingtalkorgculture_1_0.CreateOrgHonorRequest{
+    UserId: tea.String("manager7675"),
+    MedalName: tea.String("客户第一"),
+    MedalDesc: tea.String("客户服务用心，奖励荣誉"),
+    MedalMediaId: tea.String("@xxxxxxx"),
+    AvatarFrameMediaId: tea.String("$xxxxxxx"),
+    DefaultBgColor: tea.String("#FFFBB4"),
+  }
+  tryErr := func()(_e error) {
+    defer func() {
+      if r := tea.Recover(recover()); r != nil {
+        _e = r
+      }
+    }()
+    _, _err = client.CreateOrgHonorWithOptions(createOrgHonorRequest, createOrgHonorHeaders, &amp;util.RuntimeOptions{})
+    if _err != nil {
+      return _err
+    }
+
+    return nil
+  }()
+
+  if tryErr != nil {
+    var err = &amp;tea.SDKError{}
+    if _t, ok := tryErr.(*tea.SDKError); ok {
+      err = _t
+    } else {
+      err.Message = tea.String(tryErr.Error())
+    }
+    if !tea.BoolValue(util.Empty(err.Code)) &amp;&amp; !tea.BoolValue(util.Empty(err.Message)) {
+      // err 中含有 code 和 message 属性，可帮助开发定位问题
+    }
+
+  }
+  return _err
+}
+
+
+func main() {
+  err := _main(tea.StringSlice(os.Args[1:]))
+  if err != nil {
+    panic(err)
+  }
+}</code></pre></div><input type="radio" name="check-figure-dhw-rdb-mdp" id="figure-dhw-rdb-mdp-nodejs-tab" /><label for="figure-dhw-rdb-mdp-nodejs-tab">Node.js</label><div class="codeblock-item"><pre id="codeblock-6in-p3a-zpu" outputclass="language-nodejs" code-type="xCode" data-tag="codeblock" class="pre codeblock language-nodejs"><code>// This file is auto-generated, don't edit it
+import Util, * as $Util from '@alicloud/tea-util';
+import dingtalkorgCulture_1_0, * as $dingtalkorgCulture_1_0 from '@alicloud/dingtalk/orgCulture_1_0';
+import OpenApi, * as $OpenApi from '@alicloud/openapi-client';
+import * as $tea from '@alicloud/tea-typescript';
+
+
+export default class Client {
+
+  /**
+   * 使用 Token 初始化账号Client
+   * @return Client
+   * @throws Exception
+   */
+  static createClient(): dingtalkorgCulture_1_0 {
+    let config = new $OpenApi.Config({ });
+    config.protocol = "https";
+    config.regionId = "central";
+    return new dingtalkorgCulture_1_0(config);
+  }
+
+  static async main(args: string[]): Promise&lt;void&gt; {
+    let client = Client.createClient();
+    let createOrgHonorHeaders = new $dingtalkorgCulture_1_0.CreateOrgHonorHeaders({ });
+    createOrgHonorHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+    let createOrgHonorRequest = new $dingtalkorgCulture_1_0.CreateOrgHonorRequest({
+      userId: "manager7675",
+      medalName: "客户第一",
+      medalDesc: "客户服务用心，奖励荣誉",
+      medalMediaId: "@xxxxxxx",
+      avatarFrameMediaId: "$xxxxxxx",
+      defaultBgColor: "#FFFBB4",
+    });
+    try {
+      await client.createOrgHonorWithOptions(createOrgHonorRequest, createOrgHonorHeaders, new $Util.RuntimeOptions({ }));
+    } catch (err) {
+      if (!Util.empty(err.code) &amp;&amp; !Util.empty(err.message)) {
+        // err 中含有 code 和 message 属性，可帮助开发定位问题
+      }
+
+    }    
+  }
+
+}
+
+Client.main(process.argv.slice(2));</code></pre></div><input type="radio" name="check-figure-dhw-rdb-mdp" id="figure-dhw-rdb-mdp-csharp-tab" /><label for="figure-dhw-rdb-mdp-csharp-tab">C#</label><div class="codeblock-item"><pre id="codeblock-yc4-b35-c7w" outputclass="language-csharp" code-type="xCode" data-tag="codeblock" class="pre codeblock language-csharp"><code>// This file is auto-generated, don't edit it. Thanks.
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
+
+using Tea;
+using Tea.Utils;
+
+
+namespace AlibabaCloud.SDK.Sample
+{
+    public class Sample 
+    {
+
+        /**
+         * 使用 Token 初始化账号Client
+         * @return Client
+         * @throws Exception
+         */
+        public static AlibabaCloud.SDK.Dingtalkorg_culture_1_0.Client CreateClient()
+        {
+            AlibabaCloud.OpenApiClient.Models.Config config = new AlibabaCloud.OpenApiClient.Models.Config();
+            config.Protocol = "https";
+            config.RegionId = "central";
+            return new AlibabaCloud.SDK.Dingtalkorg_culture_1_0.Client(config);
+        }
+
+        public static void Main(string[] args)
+        {
+            AlibabaCloud.SDK.Dingtalkorg_culture_1_0.Client client = CreateClient();
+            AlibabaCloud.SDK.Dingtalkorg_culture_1_0.Models.CreateOrgHonorHeaders createOrgHonorHeaders = new AlibabaCloud.SDK.Dingtalkorg_culture_1_0.Models.CreateOrgHonorHeaders();
+            createOrgHonorHeaders.XAcsDingtalkAccessToken = "&lt;your access token&gt;";
+            AlibabaCloud.SDK.Dingtalkorg_culture_1_0.Models.CreateOrgHonorRequest createOrgHonorRequest = new AlibabaCloud.SDK.Dingtalkorg_culture_1_0.Models.CreateOrgHonorRequest
+            {
+                UserId = "manager7675",
+                MedalName = "客户第一",
+                MedalDesc = "客户服务用心，奖励荣誉",
+                MedalMediaId = "@xxxxxxx",
+                AvatarFrameMediaId = "$xxxxxxx",
+                DefaultBgColor = "#FFFBB4",
+            };
+            try
+            {
+                client.CreateOrgHonorWithOptions(createOrgHonorRequest, createOrgHonorHeaders, new AlibabaCloud.TeaUtil.Models.RuntimeOptions());
+            }
+            catch (TeaException err)
+            {
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+            catch (Exception _err)
+            {
+                TeaException err = new TeaException(new Dictionary&lt;string, object&gt;
+                {
+                    { "message", _err.Message }
+                });
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+        }
+
+
+    }
+}</code></pre></div></div></section></section><section id="section-response-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-response-1" data-tag="h2" class="h2">响应</h2><section id="section-response-parameter" class="section"><h3 data-tag="h3" id="h2-kos-y7s-snn" class="h3 title">响应体</h3><table id="d193be8724tsd" tablewidth="710" tablecolswidth="213 142 355" autofit="false" class="table"><colgroup colwidth="0.9*" style="width:30.00%"></colgroup><colgroup colwidth="0.6*" style="width:20.00%"></colgroup><colgroup colwidth="1.5*" style="width:50.00%"></colgroup><tbody class="tbody"><tr id="cabb5d8a4fltf"><td id="0f323705e06s4" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="12d547102avte">名称</p></td><td id="84c5270e702ex" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="8e8dd36fb07yh">类型</p></td><td id="da4ee36656ow1" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="392e460b4co48">描述</p></td></tr><tr outputclass="row row-level-1" id="b5194ebed687t" class="row row-level-1"><td id="57c7a743c9kx8" rowspan="1" colspan="1"><p id="7fd4ac8fa528v">success</p></td><td id="4adb63496fs75" rowspan="1" colspan="1"><p id="85ca9c8733w80">Boolean</p></td><td id="f1c53ce469e8r" rowspan="1" colspan="1"><p id="1a791bd3406n3">接口调用是否成功。</p></td></tr><tr outputclass="row row-level-2 has-child" id="3a0d678a9ardn" class="row row-level-2 has-child"><td id="e0374cb7e44hh" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="79fac0e07czld">result</p></td><td id="5f4a0e318e6ef" rowspan="1" colspan="1"><p id="4e265e75d6xka">Object</p></td><td id="52ff61648118x" rowspan="1" colspan="1"><p id="c8034f8f51opj">荣誉勋章创建结果。</p></td></tr><tr outputclass="row row-level-2-1" id="679e57e86e3xg" class="row row-level-2-1"><td id="6fcdf9acb61lx" rowspan="1" colspan="1"><p id="a9f4ee4538isq">honorId</p></td><td id="65c0d067f1yde" rowspan="1" colspan="1"><p id="8f76398056ocq">String</p></td><td id="a7a75a9d52ij6" rowspan="1" colspan="1"><p id="5e3d23740eb4w">荣誉勋章模板Id。</p></td></tr></tbody></table></section><section id="section-response-body-example" class="section"><h3 id="h3-response-body-example" data-tag="h3" class="h3">响应体示例</h3><pre id="c1a1cfe05bssh" outputclass="language-json" code-type="xCode" data-tag="codeblock" class="pre codeblock language-json"><code>HTTP/1.1 200 OK
+Content-Type:application/json
+
+{
+  "success" : true,
+  "result" : {
+    "honorId" : "10000283"
+  }
+}</code></pre></section><section id="section-error-code-1" class="section"><h3 id="h3-error-code-1" data-tag="h3" class="h3">错误码</h3><p data-tag="p" id="p-error-code-global-guide" class="p">若调用该接口报错，可根据错误信息在<a href="https://open.dingtalk.com/document/development/server-api-error-codes-1" id="a-error-code-global-guide">全局错误码</a>文档中查找解决方案。</p><table id="2bf32188d9vgo" tablewidth="709" tablecolswidth="142 177 177 213" autofit="false" class="table"><colgroup colwidth="0.8*" style="width:20.03%"></colgroup><colgroup colwidth="1*" style="width:24.96%"></colgroup><colgroup colwidth="1*" style="width:24.96%"></colgroup><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><tbody class="tbody"><tr id="d37f75f440g7e"><td id="ea88c05653lb3" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="7b77ee64b5wmv">HttpCode</p></td><td id="454770b900oni" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="e12643a1a4xfq">错误码</p></td><td id="260894ee37m0f" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="b895d9ebe5gzh">错误信息</p></td><td id="78df83b959427" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="0935e21a14652">说明</p></td></tr><tr id="7a359d99efkt5"><td id="8f29106a67b5k" rowspan="1" colspan="1"><p id="c15946dfe49e2">500</p></td><td id="229a48a84cjve" rowspan="1" colspan="1"><p id="78f3cae095ut4">system.error</p></td><td id="5c3f4defb7o20" rowspan="1" colspan="1"><p id="894e58e0dexkk">系统繁忙，请稍后再试</p></td><td id="2a8b45fc349yq" rowspan="1" colspan="1"><p id="c8c79f2bce5w5">系统繁忙，请稍后再试</p></td></tr><tr id="dd3d2436c7nmy"><td id="bb62abfc64qbi" rowspan="1" colspan="1"><p id="171b8870f9onk">500</p></td><td id="9aefdea914o56" rowspan="1" colspan="1"><p id="522fa753a10cx">parameter.wrong</p></td><td id="caa6c64cd4ui7" rowspan="1" colspan="1"><p id="341e192bf8hrn">参数为空或不符合文档要求</p></td><td id="eb2db6510ecwh" rowspan="1" colspan="1"><p id="d795e2de75msr">参数为空或不符合文档要求</p></td></tr><tr id="ad8e75dbc8khx"><td id="d2bf98fb0dj35" rowspan="1" colspan="1"><p id="ef1fbde052umd">500</p></td><td id="549ca083ed9ni" rowspan="1" colspan="1"><p id="d7b11419b43a9">system.check.limit</p></td><td id="edcd4f5f129ie" rowspan="1" colspan="1"><p id="4a6687b789bbg">剩余审核次数不足</p></td><td id="152d3462b1uhe" rowspan="1" colspan="1"><p id="f14c29fac8a2l">剩余审核次数不足</p></td></tr><tr id="5fab2cd1df5g2"><td id="4b1244d4eficm" rowspan="1" colspan="1"><p id="695a985eb6woh">500</p></td><td id="ddb285560fuzl" rowspan="1" colspan="1"><p id="d594cd1b2c7yz">system.image.large</p></td><td id="40d91b6108ttr" rowspan="1" colspan="1"><p id="7f556f2194hgc">图片文件大小超过限制</p></td><td id="e9ca56de097q2" rowspan="1" colspan="1"><p id="ff7ead4cbehkl">图片文件大小超过限制</p></td></tr><tr id="670d146156lp6"><td id="0941d831f66fi" rowspan="1" colspan="1"><p id="95139448c1lwo">500</p></td><td id="942feeaa35cgu" rowspan="1" colspan="1"><p id="8eed9d79d9zx1">system.corp.noauth</p></td><td id="560bfe567159e" rowspan="1" colspan="1"><p id="f65e8fd5e8hv9">组织已认证且激活人数大于6人才可提交审核</p></td><td id="57da30153by2p" rowspan="1" colspan="1"><p id="4909ab9668kf3">组织已认证且激活人数大于6人才可提交审核</p></td></tr><tr id="01c5b74aa1t8c"><td id="139b7d6fcaymz" rowspan="1" colspan="1"><p id="61f7def351bef">500</p></td><td id="5ab2c47f56sbw" rowspan="1" colspan="1"><p id="299b085084o1g">system.userNotExist</p></td><td id="5d3c29c39at5p" rowspan="1" colspan="1"><p id="3895e96d5a3l7">用户不在组织内</p></td><td id="b726828877qya" rowspan="1" colspan="1"><p id="c7ae9217b68f8">用户不在组织内</p></td></tr><tr id="d4860c7b0b2hm"><td id="baa51eaf483dp" rowspan="1" colspan="1"><p id="4223351e166cc">500</p></td><td id="a261f3ce7cf1n" rowspan="1" colspan="1"><p id="4b18dc300349w">system.userNotAdmin</p></td><td id="4449e37c36krt" rowspan="1" colspan="1"><p id="e2526000daujm">用户无权限新建荣誉勋章</p></td><td id="b31466906c5cc" rowspan="1" colspan="1"><p id="ca8dbeb505ccf">用户无权限新建荣誉勋章</p></td></tr><tr id="01b395d831fal"><td id="81da1a4ba7alz" rowspan="1" colspan="1"><p id="bcd12cba31zpj">500</p></td><td id="b1d9ac7f5dpy9" rowspan="1" colspan="1"><p id="d672b2f95ctyt">parameter.text.unsafe</p></td><td id="d5c193b8beiiv" rowspan="1" colspan="1"><p id="bc0d0bb3c8s7u">文案含有敏感词</p></td><td id="e9efdd5e56ck7" rowspan="1" colspan="1"><p id="257d5a8facice">文案含有敏感词</p></td></tr><tr id="f1b2040fe7yws"><td id="97e351ee82b09" rowspan="1" colspan="1"><p id="1a58e21a14t74">500</p></td><td id="48e544cdcdvza" rowspan="1" colspan="1"><p id="dbcd33f041fgk">parameter.media.wrong</p></td><td id="2d031012403ld" rowspan="1" colspan="1"><p id="2b83658ef2vq2">图片等多媒体素材非钉钉media_id格式</p></td><td id="a69e6e5224lup" rowspan="1" colspan="1"><p id="093c26c7569w8">图片等多媒体素材非钉钉media_id格式，请检查图片尺寸是否满足文档要求</p></td></tr><tr id="6be5ba3656ya4"><td id="aec9ee58e5rdw" rowspan="1" colspan="1"><p id="8f57877acfxk1">500</p></td><td id="0945834be9lmx" rowspan="1" colspan="1"><p id="371ca2b0f89xp">parameter.text.large</p></td><td id="adb697d8a9ggl" rowspan="1" colspan="1"><p id="21b9eb8321fgv">荣誉勋章名称或描述长度不符合要求</p></td><td id="59edab71a2tlq" rowspan="1" colspan="1"><p id="4c497155fcgfs">荣誉勋章名称或描述长度不符合要求</p></td></tr><tr id="3bd61407fc64w"><td id="e9e14235ebtr5" rowspan="1" colspan="1"><p id="216d533735hwd">500</p></td><td id="45ce73dab78e9" rowspan="1" colspan="1"><p id="4e050218cb428">parametar.color.wrong</p></td><td id="750f54c2bdev1" rowspan="1" colspan="1"><p id="a0bc9e2b0dn6q">荣誉勋章背景色不符合要求</p></td><td id="338e2cb836c9k" rowspan="1" colspan="1"><p id="f1be1a5fd0w0u">荣誉勋章背景色不符合要求</p></td></tr><tr id="74795799a5qcf"><td id="8e0db33b1bbgc" rowspan="1" colspan="1"><p id="842f30a9e1t1j">500</p></td><td id="b71cd59b04n9d" rowspan="1" colspan="1"><p id="800fde9965ck4">system.freq.limit</p></td><td id="f0fdc75473khm" rowspan="1" colspan="1"><p id="3f610989d9uql">请求频繁，创建荣誉勋章不支持并发调用</p></td><td id="4b560f859ezy1" rowspan="1" colspan="1"><p id="528e1082a5ftl">请求频繁，创建荣誉勋章不支持并发调用</p></td></tr></tbody></table></section></section></div></main></body></html>

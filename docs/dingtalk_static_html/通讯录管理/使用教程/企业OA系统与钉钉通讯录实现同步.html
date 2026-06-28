@@ -1,0 +1,71 @@
+<!DOCTYPE html><html><head><meta charset="utf8" / /><meta name="searchtitle" content="" / /><meta name="keywords" content="" / /><meta name="author" content="" / /><title>企业OA系统与钉钉通讯录实现同步</title><meta name="gmtModify" content="2025-09-10 19:27:02" / /></head><body id="topic-2142785" data-tag="topic" class="topic"><main id="bad070304fma8"><h1 id="title-xn6-ech-2jd" data-tag="title" class="title">企业OA系统与钉钉通讯录实现同步</h1><p id="shortdesc-r2d-wyj-cc3" data-tag="shortdesc" class="shortdesc">本文档介绍说明如何实现企业自有OA系统通讯录与钉钉通讯录同步。</p><div id="conbody-wdx-60e-8om" data-tag="conbody" class="conbody"><section id="809b085417j37" class="section"><h2 id="a3d0e1f54ed9q"><b>前提条件</b></h2><p id="bae4fbc551mkn">完成<a data-tag="xref" id="ba39e9af13fnh" href="/document/dingstart/create-application#" class="xref">创建应用</a>的流程。</p></section><section id="ff74bc3453lkz" class="section"><h2 id="59c400f8dd5e4"><b>步骤一：获取应用凭证</b></h2><ol id="abdf6c345egw1" start="1"><li id="bbcfae36ebjin"><p id="7078207b36c9c">选择目标应用，进入应用详情页，单击<b>基础信息</b> &gt; <b>凭证与基础信息</b>。</p></li><li id="cc6a5f31c58gx"><p id="92fd3afe8ffy6">获取应用 Client ID 和 Client Secret。</p></li></ol></section><section id="e23001da33pf8" class="section"><h2 id="4f86c9c480lrn"><b>步骤二：添加接口权限</b></h2><p id="a91180c6aew1p">单击<b>开发配置</b> &gt; <b>权限管理</b>，在权限搜索框中输入<code data-tag="code" id="1b39a91b40v80" class="code">qyapi_manage_addresslist</code><span style="color:rgba(0, 0, 0, 0.85)">，并申请权限。</span></p></section><section id="section-poc-jq0-wvs" class="section"><h2 id="title-urz-w8y-bp4" data-tag="title" class="title">步骤三：获取应用访问凭证accessToken</h2><div id="note-u3w-357-x3f" type="notice" class="note note-notice"><div class="note-icon-wrapper"><i class="icon-note note notice"></i></div><div class="noteContentSpan"><strong>重要 </strong><ul id="cb8abb38129up"><li id="310a9bd884lwt"><p id="7378f9e04bbum">服务端API差异详情参见<a data-tag="xref" id="2579b5fd420tx" href="/document/development/how-to-call-apis#section-8lr-id4-rbz" class="xref">旧版服务端API、新版服务端API的区别</a>。</p></li><li id="li-oh9-2jb-kea"><p id="7378f9e14bp6v">服务端API接口SDK下载，详情参见<a data-tag="xref" id="f71613a5a9dz6" href="/document/development/download-the-server-side-sdk#" class="xref">服务端SDK下载</a>。</p></li></ul></div></div><p id="7378f9e44bhp2">根据步骤一中 的 Client ID 和 Client Secret，获取应用访问凭证<a data-tag="xref" id="7287955acam37" href="/document/development/obtain-orgapp-token#" class="xref">获取企业内部应用的access_token</a>。</p><pre data-tag="codeblock" id="codeblock-msm-f90-wqq" outputclass="language-javascript" code-type="xCode" class="pre codeblock language-javascript"><code>public void getAccessToken() throws ApiException {
+        DingTalkClient client = new DefaultDingTalkClient("https://oapi.dingtalk.com/gettoken");
+        OapiGettokenRequest req = new OapiGettokenRequest();
+        req.setAppkey("dingxxxxxxxxxhgn");
+        req.setAppsecret("9G_xxxxxxxxxxxxxxx1JDf0Qq3nexxxxxxxxGIO");
+        req.setHttpMethod("GET");
+        OapiGettokenResponse rsp = client.execute(req);
+        System.out.println(rsp.getBody());
+    }</code></pre></section><section id="section-a4t-plg-dqf" class="section"><h2 id="title-o6l-lu1-0d1" data-tag="title" class="title">步骤四：<span style="color:rgb(51, 51, 51)">通讯录同步相关流程</span></h2><ol id="faae89304fru4"><li id="faae89314f145"><p id="faae89324fzda" data-tag="title" class="title">钉钉通讯录信息同步到企业OA系统通讯录：</p><p id="faae89334f7vr">实现同步的关键在于钉钉通讯录内的信息有相关变动，要同时保证企业OA系统通讯录也有响应的操作。</p><ol id="faae89344f6os"><li id="faae89354ff6p"><p id="faae89364f7rj">先参考<a data-tag="xref" id="b4fbb78706gq9" href="/document/development/obtains-information-about-all-employees-of-an-enterprise#" class="xref">获取企业下所有员工信息</a>文档，把当前钉钉组织架构信息全部获取到企业OA系统通讯录内。</p></li><li id="faae89374f092"><p id="faae89384frap">使用钉钉提供的<a data-tag="xref" id="5b77135ecci1a" href="/document/development/event-subscription-overview#" class="xref">事件订阅</a>功能，并订阅通讯录事件，钉钉通讯录内的变动会对应推送相关的回调事件信息。通讯录事件推送信息格式参考<a data-tag="xref" id="d0d2f0ec79ehd" href="/document/development/org-event-overview#ab90dc1084bai" class="xref">通讯录</a>。<img id="1004269dc9j7j" src="https://help-static-aliyun-doc.aliyuncs.com/assets/img/zh-CN/8875958071/p769119.png" alt="image" placement="break" class="image break" / /></p></li><li id="faae89394f50e"><p id="faae893a4f3tm">企业OA系统，接收并处理钉钉推送的通讯录事件，同步更新企业OA系统的通讯录信息。</p></li></ol></li><li id="faae893b4f01a"><p id="faae893c4fwtb" data-tag="title" class="title">企业OA系统通讯录信息更新到钉钉通讯录：</p><p id="faae893d4f83z">当企业OA系统通讯录的信息发生变动，需要同步更新钉钉通讯录信息，确保通讯录信息一致。</p><ol id="faae893e4f80z"><li id="faae893f4f4cq"><p id="faae89404fda6">企业OA系统通讯录内创建了部门，调用<a data-tag="xref" id="921518ebafel0" href="/document/development/create-a-department-v2#" class="xref">创建部门</a>接口，根据企业自有OA系统内该部门层级和部门名称，在钉钉客户端内创建同样的部门层级和部门名称。</p><pre outputclass="language-java" data-tag="codeblock" id="1a4gag" code-type="xCode" class="pre codeblock language-java"><code> public void deptCreate() throws ApiException {
+        DingTalkClient client = new DefaultDingTalkClient("https://oapi.dingtalk.com/topapi/v2/department/create");
+        OapiV2DepartmentCreateRequest req = new OapiV2DepartmentCreateRequest();
+        req.setParentId(1L);
+        req.setOuterDept(true);
+        req.setHideDept(false);
+        req.setCreateDeptGroup(true);
+        req.setOrder(1L);
+        req.setName("1019部门测试");
+        req.setSourceIdentifier("1019部门测试");
+        req.setOuterPermitUsers("manager7675,01472825524039877041");
+        req.setOuterDeptOnlySelf(true);
+        OapiV2DepartmentCreateResponse rsp = client.execute(req, getAccessToken());
+        System.out.println(rsp.getBody());
+    }</code></pre><div id="2a4c2c104f8fd" type="note" class="note note-note"><div class="note-icon-wrapper"><i class="icon-note note note"></i></div><div class="noteContentSpan"><strong>说明 </strong><p id="22818b104ftm4">钉钉通讯录的部门ID是自动生成的，不支持设置。在进行通讯录更新时，建议以部门名称作为标识同步到钉钉，并同时保存对应的钉钉通讯录的部门ID值，便于后续操作使用。</p></div></div></li><li id="faae89414f6sj"><p id="faae89424f9nh">企业OA系统通讯录添加角色，根据企业OA系统内的角色信息。</p><ol id="faae89434flxj"><li id="faae89444fcjf"><p id="faae89454ft2x">调用服务端API-<a data-tag="xref" id="615afc31d9v7x" href="/document/development/add-a-role-group#" class="xref">创建角色组</a>接口，创建角色组信息。</p><pre outputclass="language-java" data-tag="codeblock" id="n7wohg" code-type="xCode" class="pre codeblock language-java"><code>public void addRoleGroup() throws ApiException {
+        DingTalkClient client = new DefaultDingTalkClient("https://oapi.dingtalk.com/role/add_role_group");
+        OapiRoleAddrolegroupRequest req = new OapiRoleAddrolegroupRequest();
+        req.setName("1019测试角色组");
+        OapiRoleAddrolegroupResponse rsp = client.execute(req, getAccessToken());
+        System.out.println(rsp.getBody());
+    }</code></pre></li><li id="faae89464fugh"><p id="faae89474fcnz">调用服务端API-<a data-tag="xref" id="30dc1e52af96x" href="/document/development/add-role#" class="xref">创建角色</a>接口，创建企业角色信息。</p><pre outputclass="language-java" data-tag="codeblock" id="82swhw" code-type="xCode" class="pre codeblock language-java"><code>  public void addRole() throws ApiException {
+        DingTalkClient client = new DefaultDingTalkClient("https://oapi.dingtalk.com/role/add_role");
+        OapiRoleAddRoleRequest req = new OapiRoleAddRoleRequest();
+        req.setRoleName("1019测试角色");
+        req.setGroupId(3168010875L);
+        OapiRoleAddRoleResponse rsp = client.execute(req, getAccessToken());
+        System.out.println(rsp.getBody());
+    }</code></pre></li></ol></li><li id="faae89484fdkj"><p id="faae89494f4nz">调用<a data-tag="xref" id="aa5cb8d85049q" href="/document/development/user-information-creation#" class="xref">创建用户</a>接口，把企业OA系统内各个部门内的员工创建添加到钉钉对应的部门内，本步骤添加用户的同时，可以同时添加该员工的角色信息。</p><pre outputclass="language-java" data-tag="codeblock" id="y8t0uh" code-type="xCode" class="pre codeblock language-java"><code>public void createUser() throws ApiException {
+        DingTalkClient client = new DefaultDingTalkClient("https://oapi.dingtalk.com/topapi/v2/user/create");
+        OapiV2UserCreateRequest req = new OapiV2UserCreateRequest();
+        req.setUserid("manger7666");
+        req.setName("1009测试用户");
+        req.setSeniorMode(false);
+        req.setMobile("152****3025");
+        req.setTitle("技术总监");
+        req.setEmail("test***@xx.com");
+        req.setOrgEmail("test***@xxx.com");
+        req.setOrgEmailType("profession");
+        ArrayList&lt;OapiV2UserCreateRequest.DeptTitle&gt; deptTitles = new ArrayList&lt;&gt;();
+        OapiV2UserCreateRequest.DeptTitle deptTitle = new OapiV2UserCreateRequest.DeptTitle();
+        deptTitle.setDeptId(724960197L);
+        deptTitle.setTitle("资深技术总监");
+        deptTitles.add(deptTitle);
+        req.setDeptTitleList(deptTitles);
+        req.setHideMobile(false);
+        req.setTelephone("010-8xxxxx6-2345");
+        req.setJobNumber("202210190001");
+        req.setHiredDate(1666143772000L);
+        req.setWorkPlace("阿里中心****");
+        req.setRemark("备注信息");
+        req.setDeptIdList("724960197");
+        List&lt;OapiV2UserCreateRequest.DeptOrder&gt; deptOrderList = new ArrayList&lt;OapiV2UserCreateRequest.DeptOrder&gt;();
+        OapiV2UserCreateRequest.DeptOrder deptOrder = new OapiV2UserCreateRequest.DeptOrder();
+        deptOrder.setDeptId(724960197L);
+        deptOrder.setOrder(1L);
+        deptOrderList.add(deptOrder);
+        req.setDeptOrderList(deptOrderList);
+        req.setExtension("{\"爱好\":\"[爱好](http://test.com?userid=#userid#&amp;corpid=#corpid#)\"}");
+        req.setManagerUserid("manager7675");
+        req.setLoginEmail("test****@xxx.com");
+        OapiV2UserCreateResponse rsp = client.execute(req, getAccessToken());
+        System.out.println(rsp.getBody());
+    }</code></pre></li></ol></li></ol></section></div></main></body></html>

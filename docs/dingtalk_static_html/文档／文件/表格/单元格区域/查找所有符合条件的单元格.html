@@ -1,0 +1,450 @@
+<!DOCTYPE html><html><head><meta charset="utf8" / /><meta name="gmtModify" content="2026-04-10 10:41:16" / /><meta name="searchtitle" content="" / /><meta name="keywords" content="" / /><meta name="author" content="" / /><title>查找所有符合条件的单元格</title><meta name="gmtModify" content="2026-06-04 19:09:15" / /></head><body data-tag="topic" id="doc-api-dingtalk-SheetFindAll" class="topic"><main id="f990f056f3e8c" data-init-id="doc-api-dingtalk-SheetFindAll"><h1 data-tag="title" id="h1-d9s-a7l-jnc" class="title">查找所有符合条件的单元格</h1><p data-tag="shortdesc" class="shortdesc" id="84ad268391i0b">调用本接口，可在钉钉表格的指定工作表中搜索所有包含目标文本的单元格，并返回匹配单元格的位置列表。适用于在大量数据中批量定位特定内容的场景，支持精确匹配、大小写敏感、正则表达式及公式内搜索等多种查找模式。</p><div data-tag="conbody" outputclass="icms-api-reference" class="icms-api-reference conbody"><section id="section-request-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-request-1" data-tag="h2" class="h2">请求</h2><section id="section-request-basic-info" class="section"><h3 id="heading-request-basic-info" data-tag="h3" class="h3">基本信息</h3><table id="9e2cfb7e4aw65" tablewidth="648" tablecolswidth="216 432" autofit="false" class="table"><colgroup colwidth="0.67*" style="width:33.33%"></colgroup><colgroup colwidth="1.33*" style="width:66.67%"></colgroup><tbody class="tbody"><tr id="55501da9f9u9w"><td id="793158e9415e3" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="293f950e53798">字段</p></td><td id="6392f63fc7n6c" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="ee52d8f5ebfut">值</p></td></tr><tr id="7bc1b227560yi"><td id="638206106fwww" rowspan="1" colspan="1"><p id="7a0d2e5376nlp">HTTP URL</p></td><td id="4ad60c2d857vc" rowspan="1" colspan="1"><p id="075509fab4v81">https://api.dingtalk.com/v1.0/doc/workbooks/{workbookId}/sheets/{sheetId}/findAll</p></td></tr><tr id="0f76f7e22bwzc"><td id="9470916940x0q" rowspan="1" colspan="1"><p id="6afa20a084cd9">HTTP Method</p></td><td id="0bd17888b8llb" rowspan="1" colspan="1"><p id="904be3355a3p2">POST</p></td></tr><tr id="39a194fb07i64"><td id="4f8c6d7145hji" rowspan="1" colspan="1"><p id="aafe9e06f31jt">支持的应用类型</p></td><td id="23e33225254h2" rowspan="1" colspan="1"><p id="10f2735a48ehp"><span data-tag="ph" id="ph-request-basic-app-type-apptype-0" class="ph ph-app-type" data-ph-raw-text="appType-企业内部应用">appType-企业内部应用</span></p></td></tr><tr id="2687332e17270"><td id="a17a30f254x9r" rowspan="1" colspan="1"><p id="e207bf7fa6g9w">权限要求</p></td><td id="5a5cd8429bwzt" rowspan="1" colspan="1"><p id="2da610fdfa033"><span data-tag="ph" id="ph-request-basic-permission-permission-document-workbook-read-0" class="ph-permission ph" data-ph-raw-text="permission-Document.Workbook.Read-钉钉表格读权限" data-permission-id="permission-Document.Workbook.Read" data-permission-code="Document.Workbook.Read" data-permission-detail-api="/document/api/permission/detail" data-permission-query-param="code">permission-Document.Workbook.Read-钉钉表格读权限</span></p></td></tr></tbody></table></section><section id="section-request-header-parameter" class="section"><h3 data-tag="h3" id="h2-xiu-uwg-ctq" class="h3 title">请求头</h3><table id="880cc9c41brhu" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="d5e38af587w4c"><td id="c7752dedberyw" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="99308b114avuu">名称</p></td><td id="c888dcc9a2tn5" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="e81f4c14c56yx">类型</p></td><td id="bdcca28b56mrs" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="da787c5eddozr">是否必填</p></td><td id="c359387a54f3w" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="dd72e834bb31d">描述</p></td></tr><tr id="5d70c59fa9umx"><td id="29348af2c6hax" rowspan="1" colspan="1"><p id="16adfeebb19da">x-acs-dingtalk-access-token</p></td><td id="de3bdbb10fcci" rowspan="1" colspan="1"><p id="df7f9788fbapx">String</p></td><td id="933649f076m4z" rowspan="1" colspan="1"><p id="cbeacfb75feeu">是</p></td><td id="02ac236422yxq" rowspan="1" colspan="1"><p id="40bc1107c40xd">调用该接口的访问凭证，可调用<a href="https://open.dingtalk.com/document/development/obtain-the-access-token-of-an-internal-app" id="6d0dea131d9ln">获取企业内部应用的accessToken</a>接口获取。</p></td></tr></tbody></table></section><section id="section-request-path-parameter" class="section"><h3 data-tag="h3" id="h2-flc-giw-6vs" class="h3 title">路径参数</h3><table id="3466acc40axbm" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="6abca184d0prk"><td id="cb5fbd21dac0x" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="e95f8b5bfdgq9">名称</p></td><td id="d80a8f8c1ai4p" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="71754d015ecr2">类型</p></td><td id="64f26b3a87v7o" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="e905c84d509do">是否必填</p></td><td id="a0aad3bf3dhma" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="baa1d40c7azk6">描述</p></td></tr><tr id="581f4a21ddpdq"><td id="cca3334719hzk" rowspan="1" colspan="1"><p id="8dbf25e5ceutj">workbookId</p></td><td id="6b6b4a091fsxj" rowspan="1" colspan="1"><p id="63486c5e612q2">String</p></td><td id="9bf009955641x" rowspan="1" colspan="1"><p id="6052c5e88apj5">是</p></td><td id="95807e6cdewxz" rowspan="1" colspan="1"><p id="ea7276405dkyy">表格文件&nbsp;ID ，<a href="https://open.dingtalk.com/document/development/knowledge-base-overview" id="535d4c4dbcy37">知识库 API</a> 返回的<code data-tag="inlineCode" id="4523c61430dyg" class="inlineCode">nodeId(dentryUuid)</code>即是表格<code data-tag="inlineCode" id="71d23aed9a6f0" class="inlineCode">workbookId</code>，可通过调用<a href="https://open.dingtalk.com/document/development/get-node" id="dfdefbbe6ck01">获取节点</a>和<a href="https://open.dingtalk.com/document/development/create-team-space-document" id="5a58ee2dedl51">创建知识库文档</a>接口获取。</p></td></tr><tr id="2c08b452ce6mw"><td id="2049a355d9ni3" rowspan="1" colspan="1"><p id="4f1b7541fc2dt">sheetId</p></td><td id="42d195d84dyzd" rowspan="1" colspan="1"><p id="b2f1bf9113199">String</p></td><td id="5adf9bd24dcyj" rowspan="1" colspan="1"><p id="b7d1cca1ef77q">是</p></td><td id="e6798a6defe7b" rowspan="1" colspan="1"><p id="0091c26e161a7">工作表ID或标题，可调用<a href="https://open.dingtalk.com/document/development/obtain-all-worksheets" id="252718109bkyk">获取所有工作表</a>接口获取id和工作表的标题。</p></td></tr></tbody></table></section><section id="section-request-query-parameter" class="section"><h3 data-tag="h3" id="h2-kqf-nrv-r08" class="h3 title">查询参数</h3><table id="6804bf6c54kof" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="cd0e3673b1jw2"><td id="07e992a4d6u2r" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="6fe71898ebd0l">名称</p></td><td id="518a5866d0f3x" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="bb733bc082gv4">类型</p></td><td id="db3c3c7f0f423" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="c01ee81f31x66">是否必填</p></td><td id="8a2265375aoo4" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="95151ea3758bu">描述</p></td></tr><tr id="416777cd64nfp"><td id="6b768e58a9bdh" rowspan="1" colspan="1"><p id="407f3430531or">operatorId</p></td><td id="889913b96bsh8" rowspan="1" colspan="1"><p id="146b36dca7ye6">String</p></td><td id="4200904683cj4" rowspan="1" colspan="1"><p id="76a5c2202aotg">是</p></td><td id="836e766f4fglb" rowspan="1" colspan="1"><p id="51f10ec322vzz">操作人的unionId，可调用<a href="https://open.dingtalk.com/document/development/query-user-details" id="62baa4d712kih">查询用户详情</a>接口获取。</p><p class="note-icon-wrapper" id="66af61f0937h7"></p><p data-tag="p" class="p" id="3e9eac6cfalx2"></p><p id="7a1db6e2e51ii">若操作人无权限，接口会报错 <code data-tag="inlineCode" id="83e39694a7tg0" class="inlineCode">The operator has no permission</code>。</p><p id="5760c6abcam5i"></p></td></tr><tr id="8cf599c937ynd"><td id="cbe5f5030beio" rowspan="1" colspan="1"><p id="06a4a62a31jq8">select</p></td><td id="663597f0b5tj3" rowspan="1" colspan="1"><p id="755da692e8j28">String</p></td><td id="f0761c0e65ks0" rowspan="1" colspan="1"><p id="59fac8e3620v4">否</p></td><td id="53007c93d8nt7" rowspan="1" colspan="1"><p id="c0ffbf8ecbpee">筛选要返回的字段，该参数不传则返回所有字段。</p><ul id="b93addd742fc1"><li id="ba91c54c24nfa"><p id="b34b3f2eddgxp">如select=a1Notation，该接口只返回a1Notation字段。</p></li><li id="536c9bf19epo6"><p id="ce751949224u0">返回多个字段时，使用逗号分隔，例如select=a1Notation,values，该接口只返回a1Notation和values字段。</p></li></ul><p class="note-icon-wrapper" id="a37f7a90c8z90"></p><p data-tag="p" class="p" id="1ae49205dfnn5"></p><p id="831b74dd70v3g">建议指定此参数以提高性能，并避免后续增加返回值时造成API超时。</p><p id="1fe267e6dc5ot"></p></td></tr></tbody></table></section><section id="section-request-body-parameter" class="section"><h3 data-tag="h3" id="h2-vgy-mhe-m2x" class="h3 title">请求体</h3><table id="99983ad87cr8h" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="dfe4d426723hb"><td id="15ba65e304ysx" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="8abe04b173rsa">名称</p></td><td id="75e6eb849d2ga" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="afd92b5d41r80">类型</p></td><td id="372cd4da769f9" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="ae2b2a5309w1p">是否必填</p></td><td id="4a2f9fefd0m86" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="a6ea4cd695tzi">描述</p></td></tr><tr outputclass="row row-level-5" id="d738c557dc5z9" class="row row-level-5"><td id="ceadffc31e5ag" rowspan="1" colspan="1"><p id="1f31c0015clh6">text</p></td><td id="5f16845a88awe" rowspan="1" colspan="1"><p id="b03ebaa251mv2">String</p></td><td id="05046dd93aoyx" rowspan="1" colspan="1"><p id="b312755abf747">是</p></td><td id="d7c95f559d288" rowspan="1" colspan="1"><p id="225884ba0fovs">要查找的文本。
+如果开启了 <b>useRegExp</b>，则为正则模式，示例："\\d+"</p></td></tr><tr outputclass="row row-level-6 has-child" id="e0252a5af8b4s" class="row row-level-6 has-child"><td id="df44bca4e89rt" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="0afa1d84c00ma">findOptions</p></td><td id="73be193560n3h" rowspan="1" colspan="1"><p id="50e0e60ee6qc6">Object</p></td><td id="4c6fa4a054j1r" rowspan="1" colspan="1"><p id="3e92e58ef04je">是</p></td><td id="4f30a80430d7q" rowspan="1" colspan="1"><p id="8976b0fda0dm0">查找选项。</p></td></tr><tr outputclass="row row-level-6-1" id="c5bdd9fd14p3q" class="row row-level-6-1"><td id="cd08ccd5f4gcu" rowspan="1" colspan="1"><p id="bedb6aa4deg7n">matchEntireCell</p></td><td id="fb47712456mey" rowspan="1" colspan="1"><p id="a6d7f897d1dd5">Boolean</p></td><td id="1f075aac3dycy" rowspan="1" colspan="1"><p id="ee5cf6b04beq6">否</p></td><td id="5171c3ea9djtk" rowspan="1" colspan="1"><p id="8f13d54468bzg">匹配整个单元格，可选值：</p><ul id="046456dd6epew"><li id="5c96767244q58"><p id="b3c058b8e5ak1"><b>true</b>：是</p></li><li id="00740568d59me"><p id="f6aedeb66ajax"><b>false</b>：否（默认值）</p></li></ul></td></tr><tr outputclass="row row-level-6-2" id="9a01a80db44da" class="row row-level-6-2"><td id="6ea0222b8ddxd" rowspan="1" colspan="1"><p id="fac7ff98803fq">matchCase</p></td><td id="b5beff54eam91" rowspan="1" colspan="1"><p id="556d45cfb8jj6">Boolean</p></td><td id="f74f8213f0gy8" rowspan="1" colspan="1"><p id="6f906632fdoh9">否</p></td><td id="cd024c20ae0tg" rowspan="1" colspan="1"><p id="be57e9de45e1x">匹配大小写，可选值：</p><ul id="bbd07eed95v0g"><li id="806492a8290ce"><p id="a18f42e42af49"><b>true</b>：是</p></li><li id="0014c80b07ik8"><p id="cabd18b06cpsz"><b>false</b>：否（默认值）</p></li></ul></td></tr><tr outputclass="row row-level-6-3" id="d4c5658c0430h" class="row row-level-6-3"><td id="bcc1f85089uoj" rowspan="1" colspan="1"><p id="bf13399c9fmfi">useRegExp</p></td><td id="6a8102b84eomj" rowspan="1" colspan="1"><p id="c3d1bb2a1cmpu">Boolean</p></td><td id="ff4bc73d4924o" rowspan="1" colspan="1"><p id="2a659579bf8om">否</p></td><td id="b2741be7dfg3s" rowspan="1" colspan="1"><p id="74f83278eas62">text 是否为正则表达式，可选值：</p><ul id="d9e0c2fae1g6l"><li id="f686c96c4c4oc"><p id="2396774a22o8f"><b>true</b>：是</p></li><li id="eb781f75f3q7u"><p id="11a444caeej76"><b>false</b>：否（默认值）</p></li></ul></td></tr><tr outputclass="row row-level-6-4" id="64562c1d867gl" class="row row-level-6-4"><td id="101c2e3ea37xt" rowspan="1" colspan="1"><p id="701d217608c68">matchFormulaText</p></td><td id="cd04987051hnf" rowspan="1" colspan="1"><p id="ad07205b0ab7k">Boolean</p></td><td id="5102c08161hge" rowspan="1" colspan="1"><p id="77bacf11adgb2">否</p></td><td id="15a6ed1825ohu" rowspan="1" colspan="1"><p id="352dcc92adspi">是否按照公式原始文本查找，可选值：</p><ul id="618b77bf8cosc"><li id="f847cf7003tok"><p id="74f0a824557cz"><b>true</b>：是</p></li><li id="cb624b0cf4asj"><p id="e62e6ebeb8e2f"><b>false</b>：否（默认值）</p></li></ul><p id="6ec34652c241a">例如，某单元格填充公式 "=A1+B1"，展示值为 4</p><ul id="107ac86cfdxva"><li id="8b94686f69nlt"><p id="f26b0a9d364nv">当查找文本为 "4"，matchFormulaText 为 true 时，不在结果内。</p></li><li id="9782c24d02fzj"><p id="36ff34c7818fn">当查找文本为 "=A1"，matchFormulaText 为 true 时，在结果内。</p></li></ul></td></tr><tr outputclass="row row-level-6-5" id="5ba93dbf4e4z2" class="row row-level-6-5"><td id="a9dfddc387ekt" rowspan="1" colspan="1"><p id="6ac6c3ef75nwd">scope</p></td><td id="8ffff745f5v8e" rowspan="1" colspan="1"><p id="daca3dfe253rf">String</p></td><td id="ed003b59d043o" rowspan="1" colspan="1"><p id="38c0df1e9bfjx">否</p></td><td id="e209fc2d545uj" rowspan="1" colspan="1"><p id="df936667388fa">搜索范围。格式为A1表示法指代的Range地址。</p></td></tr><tr outputclass="row row-level-6-6" id="0d454fb41ewyl" class="row row-level-6-6"><td id="91fa9b52f70uo" rowspan="1" colspan="1"><p id="17ae42c38abqq">includeHidden</p></td><td id="7d37a159adpm8" rowspan="1" colspan="1"><p id="26d11f8aa3kix">Boolean</p></td><td id="36b38c07e0w94" rowspan="1" colspan="1"><p id="341abb46bbcv3">否</p></td><td id="05a7379128s55" rowspan="1" colspan="1"><p id="5ae58bf06e1yj">是否包含隐藏的单元格，即隐藏行列、筛选、分组等功能导致的不可见单元格，但不包含无权限查看的单元格。可选值：</p><ul id="1a5766db68sus"><li id="20b2bb39f78ac"><p id="21e780d096f3y"><b>true</b>：是</p></li><li id="14a1ebab4eorg"><p id="7552647297ghg"><b>false</b>：否（默认值）</p></li></ul></td></tr><tr outputclass="row row-level-6-7" id="bce3130aa07ym" class="row row-level-6-7"><td id="19714c1064nsr" rowspan="1" colspan="1"><p id="c791233d8er4x">unionCells</p></td><td id="3310e6ff83okk" rowspan="1" colspan="1"><p id="0ab3695df7ke1">Boolean</p></td><td id="c5773282abz9g" rowspan="1" colspan="1"><p id="59c7979acbd6o">是</p></td><td id="224d32134fx9s" rowspan="1" colspan="1"><p id="9782894c03j6n">是否对找到的单元格地址做聚合。建议进行聚合，否则可能返回大量地址。可选值：</p><ul id="e9ee51aca83fm"><li id="6d5c3ca6d4vya"><p id="5a41c01780ipa"><b>true</b>：是</p></li><li id="f7a6a46a65c97"><p id="3100ebfcb1ybr"><b>false</b>：否（默认值）</p></li></ul></td></tr></tbody></table></section><section id="section-request-body-example" class="section"><h3 id="h3-request-body-example" data-tag="h3" class="h3">请求示例</h3><div outputclass="tabbed-codeblock" data-tag="fig" id="figure-xif-eso-41v" class="tabbed-codeblock-box"><div class="tab-box"></div><input type="radio" name="check-figure-xif-eso-41v" id="figure-xif-eso-41v-HTTP-tab" checked="checked" /><label for="figure-xif-eso-41v-HTTP-tab">HTTP</label><div class="codeblock-item"><pre id="codeblock-2vo-skh-kqf" outputclass="language-HTTP" data-tag="codeblock" code-type="xCode" class="pre codeblock language-HTTP"><code>POST /v1.0/doc/workbooks/e54Lq3xxx/sheets/Sheet1/findAll?operatorId=ppgAxxx&amp;select=a1Notation HTTP/1.1
+Host:api.dingtalk.com
+x-acs-dingtalk-access-token:f86e0bxxx
+Content-Type:application/json
+
+{
+  "text" : "DingTalk",
+  "findOptions" : {
+    "matchEntireCell" : true,
+    "matchCase" : true,
+    "useRegExp" : true,
+    "matchFormulaText" : true,
+    "scope" : "A:A",
+    "includeHidden" : false,
+    "unionCells" : true
+  }
+}</code></pre></div><input type="radio" name="check-figure-xif-eso-41v" id="figure-xif-eso-41v-java-tab" /><label for="figure-xif-eso-41v-java-tab">Java</label><div class="codeblock-item"><pre id="codeblock-o6k-thi-it0" outputclass="language-java" data-tag="codeblock" code-type="xCode" class="pre codeblock language-java"><code>// This file is auto-generated, don't edit it. Thanks.
+package com.aliyun.sample;
+
+import com.aliyun.tea.*;
+
+public class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Client
+     * @throws Exception
+     */
+    public static com.aliyun.dingtalkdoc_1_0.Client createClient() throws Exception {
+        com.aliyun.teaopenapi.models.Config config = new com.aliyun.teaopenapi.models.Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        return new com.aliyun.dingtalkdoc_1_0.Client(config);
+    }
+
+    public static void main(String[] args_) throws Exception {
+        java.util.List&lt;String&gt; args = java.util.Arrays.asList(args_);
+        com.aliyun.dingtalkdoc_1_0.Client client = Sample.createClient();
+        com.aliyun.dingtalkdoc_1_0.models.SheetFindAllHeaders sheetFindAllHeaders = new com.aliyun.dingtalkdoc_1_0.models.SheetFindAllHeaders();
+        sheetFindAllHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        com.aliyun.dingtalkdoc_1_0.models.SheetFindAllRequest.SheetFindAllRequestFindOptions findOptions = new com.aliyun.dingtalkdoc_1_0.models.SheetFindAllRequest.SheetFindAllRequestFindOptions()
+                .setMatchEntireCell(true)
+                .setMatchCase(true)
+                .setUseRegExp(true)
+                .setMatchFormulaText(true)
+                .setScope("A:A")
+                .setIncludeHidden(false)
+                .setUnionCells(true);
+        com.aliyun.dingtalkdoc_1_0.models.SheetFindAllRequest sheetFindAllRequest = new com.aliyun.dingtalkdoc_1_0.models.SheetFindAllRequest()
+                .setOperatorId("ppgAxxx")
+                .setSelect("a1Notation")
+                .setText("DingTalk")
+                .setFindOptions(findOptions);
+        try {
+            client.sheetFindAllWithOptions("e54Lq3xxx", "Sheet1", sheetFindAllRequest, sheetFindAllHeaders, new com.aliyun.teautil.models.RuntimeOptions());
+        } catch (TeaException err) {
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        } catch (Exception _err) {
+            TeaException err = new TeaException(_err.getMessage(), _err);
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        }        
+    }
+}</code></pre></div><input type="radio" name="check-figure-xif-eso-41v" id="figure-xif-eso-41v-python-tab" /><label for="figure-xif-eso-41v-python-tab">Python</label><div class="codeblock-item"><pre id="codeblock-hcn-plm-gux" outputclass="language-python" data-tag="codeblock" code-type="xCode" class="pre codeblock language-python"><code># -*- coding: utf-8 -*-
+# This file is auto-generated, don't edit it. Thanks.
+import sys
+
+from typing import List
+
+from alibabacloud_dingtalk.doc_1_0.client import Client as dingtalkdoc_1_0Client
+from alibabacloud_tea_openapi import models as open_api_models
+from alibabacloud_dingtalk.doc_1_0 import models as dingtalkdoc__1__0_models
+from alibabacloud_tea_util import models as util_models
+from alibabacloud_tea_util.client import Client as UtilClient
+
+
+class Sample:
+    def __init__(self):
+        pass
+
+    @staticmethod
+    def create_client() -&gt; dingtalkdoc_1_0Client:
+        """
+        使用 Token 初始化账号Client
+        @return: Client
+        @throws Exception
+        """
+        config = open_api_models.Config()
+        config.protocol = 'https'
+        config.region_id = 'central'
+        return dingtalkdoc_1_0Client(config)
+
+    @staticmethod
+    def main(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        sheet_find_all_headers = dingtalkdoc__1__0_models.SheetFindAllHeaders()
+        sheet_find_all_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        find_options = dingtalkdoc__1__0_models.SheetFindAllRequestFindOptions(
+            match_entire_cell=True,
+            match_case=True,
+            use_reg_exp=True,
+            match_formula_text=True,
+            scope='A:A',
+            include_hidden=False,
+            union_cells=True
+        )
+        sheet_find_all_request = dingtalkdoc__1__0_models.SheetFindAllRequest(
+            operator_id='ppgAxxx',
+            select='a1Notation',
+            text='DingTalk',
+            find_options=find_options
+        )
+        try:
+            client.sheet_find_all_with_options('e54Lq3xxx', 'Sheet1', sheet_find_all_request, sheet_find_all_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+    @staticmethod
+    async def main_async(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        sheet_find_all_headers = dingtalkdoc__1__0_models.SheetFindAllHeaders()
+        sheet_find_all_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        find_options = dingtalkdoc__1__0_models.SheetFindAllRequestFindOptions(
+            match_entire_cell=True,
+            match_case=True,
+            use_reg_exp=True,
+            match_formula_text=True,
+            scope='A:A',
+            include_hidden=False,
+            union_cells=True
+        )
+        sheet_find_all_request = dingtalkdoc__1__0_models.SheetFindAllRequest(
+            operator_id='ppgAxxx',
+            select='a1Notation',
+            text='DingTalk',
+            find_options=find_options
+        )
+        try:
+            await client.sheet_find_all_with_options_async('e54Lq3xxx', 'Sheet1', sheet_find_all_request, sheet_find_all_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+
+if __name__ == '__main__':
+    Sample.main(sys.argv[1:])</code></pre></div><input type="radio" name="check-figure-xif-eso-41v" id="figure-xif-eso-41v-php-tab" /><label for="figure-xif-eso-41v-php-tab">PHP</label><div class="codeblock-item"><pre id="codeblock-zgq-ui0-nyk" outputclass="language-php" data-tag="codeblock" code-type="xCode" class="pre codeblock language-php"><code>&lt;?php
+
+// This file is auto-generated, don't edit it. Thanks.
+namespace AlibabaCloud\SDK\Sample;
+
+use AlibabaCloud\SDK\Dingtalk\Vdoc_1_0\Dingtalk;
+use \Exception;
+use AlibabaCloud\Tea\Exception\TeaError;
+use AlibabaCloud\Tea\Utils\Utils;
+
+use Darabonba\OpenApi\Models\Config;
+use AlibabaCloud\SDK\Dingtalk\Vdoc_1_0\Models\SheetFindAllHeaders;
+use AlibabaCloud\SDK\Dingtalk\Vdoc_1_0\Models\SheetFindAllRequest\findOptions;
+use AlibabaCloud\SDK\Dingtalk\Vdoc_1_0\Models\SheetFindAllRequest;
+use AlibabaCloud\Tea\Utils\Utils\RuntimeOptions;
+
+class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Dingtalk Client
+     */
+    public static function createClient(){
+        $config = new Config([]);
+        $config-&gt;protocol = "https";
+        $config-&gt;regionId = "central";
+        return new Dingtalk($config);
+    }
+
+    /**
+     * @param string[] $args
+     * @return void
+     */
+    public static function main($args){
+        $client = self::createClient();
+        $sheetFindAllHeaders = new SheetFindAllHeaders([]);
+        $sheetFindAllHeaders-&gt;xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        $findOptions = new findOptions([
+            "matchEntireCell" =&gt; true,
+            "matchCase" =&gt; true,
+            "useRegExp" =&gt; true,
+            "matchFormulaText" =&gt; true,
+            "scope" =&gt; "A:A",
+            "includeHidden" =&gt; false,
+            "unionCells" =&gt; true
+        ]);
+        $sheetFindAllRequest = new SheetFindAllRequest([
+            "operatorId" =&gt; "ppgAxxx",
+            "select" =&gt; "a1Notation",
+            "text" =&gt; "DingTalk",
+            "findOptions" =&gt; $findOptions
+        ]);
+        try {
+            $client-&gt;sheetFindAllWithOptions("e54Lq3xxx", "Sheet1", $sheetFindAllRequest, $sheetFindAllHeaders, new RuntimeOptions([]));
+        }
+        catch (Exception $err) {
+            if (!($err instanceof TeaError)) {
+                $err = new TeaError([], $err-&gt;getMessage(), $err-&gt;getCode(), $err);
+            }
+            if (!Utils::empty_($err-&gt;code) &amp;&amp; !Utils::empty_($err-&gt;message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+        }
+    }
+}
+$path = __DIR__ . \DIRECTORY_SEPARATOR . '..' . \DIRECTORY_SEPARATOR . 'vendor' . \DIRECTORY_SEPARATOR . 'autoload.php';
+if (file_exists($path)) {
+    require_once $path;
+}
+Sample::main(array_slice($argv, 1));</code></pre></div><input type="radio" name="check-figure-xif-eso-41v" id="figure-xif-eso-41v-go-tab" /><label for="figure-xif-eso-41v-go-tab">Go</label><div class="codeblock-item"><pre id="codeblock-62i-n1v-uqq" outputclass="language-go" data-tag="codeblock" code-type="xCode" class="pre codeblock language-go"><code>// This file is auto-generated, don't edit it. Thanks.
+package main
+
+import (
+  "os"
+  util  "github.com/alibabacloud-go/tea-utils/v2/service"
+  dingtalkdoc_1_0  "github.com/alibabacloud-go/dingtalk/doc_1_0"
+  openapi  "github.com/alibabacloud-go/darabonba-openapi/v2/client"
+  "github.com/alibabacloud-go/tea/tea"
+)
+
+
+/**
+ * 使用 Token 初始化账号Client
+ * @return Client
+ * @throws Exception
+ */
+func CreateClient () (_result *dingtalkdoc_1_0.Client, _err error) {
+  config := &amp;openapi.Config{}
+  config.Protocol = tea.String("https")
+  config.RegionId = tea.String("central")
+  _result = &amp;dingtalkdoc_1_0.Client{}
+  _result, _err = dingtalkdoc_1_0.NewClient(config)
+  return _result, _err
+}
+
+func _main (args []*string) (_err error) {
+  client, _err := CreateClient()
+  if _err != nil {
+    return _err
+  }
+
+  sheetFindAllHeaders := &amp;dingtalkdoc_1_0.SheetFindAllHeaders{}
+  sheetFindAllHeaders.XAcsDingtalkAccessToken = tea.String("&lt;your access token&gt;")
+  findOptions := &amp;dingtalkdoc_1_0.SheetFindAllRequestFindOptions{
+    MatchEntireCell: tea.Bool(true),
+    MatchCase: tea.Bool(true),
+    UseRegExp: tea.Bool(true),
+    MatchFormulaText: tea.Bool(true),
+    Scope: tea.String("A:A"),
+    IncludeHidden: tea.Bool(false),
+    UnionCells: tea.Bool(true),
+  }
+  sheetFindAllRequest := &amp;dingtalkdoc_1_0.SheetFindAllRequest{
+    OperatorId: tea.String("ppgAxxx"),
+    Select: tea.String("a1Notation"),
+    Text: tea.String("DingTalk"),
+    FindOptions: findOptions,
+  }
+  tryErr := func()(_e error) {
+    defer func() {
+      if r := tea.Recover(recover()); r != nil {
+        _e = r
+      }
+    }()
+    _, _err = client.SheetFindAllWithOptions(tea.String("e54Lq3xxx"), tea.String("Sheet1"), sheetFindAllRequest, sheetFindAllHeaders, &amp;util.RuntimeOptions{})
+    if _err != nil {
+      return _err
+    }
+
+    return nil
+  }()
+
+  if tryErr != nil {
+    var err = &amp;tea.SDKError{}
+    if _t, ok := tryErr.(*tea.SDKError); ok {
+      err = _t
+    } else {
+      err.Message = tea.String(tryErr.Error())
+    }
+    if !tea.BoolValue(util.Empty(err.Code)) &amp;&amp; !tea.BoolValue(util.Empty(err.Message)) {
+      // err 中含有 code 和 message 属性，可帮助开发定位问题
+    }
+
+  }
+  return _err
+}
+
+
+func main() {
+  err := _main(tea.StringSlice(os.Args[1:]))
+  if err != nil {
+    panic(err)
+  }
+}</code></pre></div><input type="radio" name="check-figure-xif-eso-41v" id="figure-xif-eso-41v-nodejs-tab" /><label for="figure-xif-eso-41v-nodejs-tab">Node.js</label><div class="codeblock-item"><pre id="codeblock-g5k-xvb-pg2" outputclass="language-nodejs" data-tag="codeblock" code-type="xCode" class="pre codeblock language-nodejs"><code>// This file is auto-generated, don't edit it
+import Util, * as $Util from '@alicloud/tea-util';
+import dingtalkdoc_1_0, * as $dingtalkdoc_1_0 from '@alicloud/dingtalk/doc_1_0';
+import OpenApi, * as $OpenApi from '@alicloud/openapi-client';
+import * as $tea from '@alicloud/tea-typescript';
+
+
+export default class Client {
+
+  /**
+   * 使用 Token 初始化账号Client
+   * @return Client
+   * @throws Exception
+   */
+  static createClient(): dingtalkdoc_1_0 {
+    let config = new $OpenApi.Config({ });
+    config.protocol = "https";
+    config.regionId = "central";
+    return new dingtalkdoc_1_0(config);
+  }
+
+  static async main(args: string[]): Promise&lt;void&gt; {
+    let client = Client.createClient();
+    let sheetFindAllHeaders = new $dingtalkdoc_1_0.SheetFindAllHeaders({ });
+    sheetFindAllHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+    let findOptions = new $dingtalkdoc_1_0.SheetFindAllRequestFindOptions({
+      matchEntireCell: true,
+      matchCase: true,
+      useRegExp: true,
+      matchFormulaText: true,
+      scope: "A:A",
+      includeHidden: false,
+      unionCells: true,
+    });
+    let sheetFindAllRequest = new $dingtalkdoc_1_0.SheetFindAllRequest({
+      operatorId: "ppgAxxx",
+      select: "a1Notation",
+      text: "DingTalk",
+      findOptions: findOptions,
+    });
+    try {
+      await client.sheetFindAllWithOptions("e54Lq3xxx", "Sheet1", sheetFindAllRequest, sheetFindAllHeaders, new $Util.RuntimeOptions({ }));
+    } catch (err) {
+      if (!Util.empty(err.code) &amp;&amp; !Util.empty(err.message)) {
+        // err 中含有 code 和 message 属性，可帮助开发定位问题
+      }
+
+    }    
+  }
+
+}
+
+Client.main(process.argv.slice(2));</code></pre></div><input type="radio" name="check-figure-xif-eso-41v" id="figure-xif-eso-41v-csharp-tab" /><label for="figure-xif-eso-41v-csharp-tab">C#</label><div class="codeblock-item"><pre id="codeblock-nqm-vnn-sfi" outputclass="language-csharp" data-tag="codeblock" code-type="xCode" class="pre codeblock language-csharp"><code>// This file is auto-generated, don't edit it. Thanks.
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
+
+using Tea;
+using Tea.Utils;
+
+
+namespace AlibabaCloud.SDK.Sample
+{
+    public class Sample 
+    {
+
+        /**
+         * 使用 Token 初始化账号Client
+         * @return Client
+         * @throws Exception
+         */
+        public static AlibabaCloud.SDK.Dingtalkdoc_1_0.Client CreateClient()
+        {
+            AlibabaCloud.OpenApiClient.Models.Config config = new AlibabaCloud.OpenApiClient.Models.Config();
+            config.Protocol = "https";
+            config.RegionId = "central";
+            return new AlibabaCloud.SDK.Dingtalkdoc_1_0.Client(config);
+        }
+
+        public static void Main(string[] args)
+        {
+            AlibabaCloud.SDK.Dingtalkdoc_1_0.Client client = CreateClient();
+            AlibabaCloud.SDK.Dingtalkdoc_1_0.Models.SheetFindAllHeaders sheetFindAllHeaders = new AlibabaCloud.SDK.Dingtalkdoc_1_0.Models.SheetFindAllHeaders();
+            sheetFindAllHeaders.XAcsDingtalkAccessToken = "&lt;your access token&gt;";
+            AlibabaCloud.SDK.Dingtalkdoc_1_0.Models.SheetFindAllRequest.SheetFindAllRequestFindOptions findOptions = new AlibabaCloud.SDK.Dingtalkdoc_1_0.Models.SheetFindAllRequest.SheetFindAllRequestFindOptions
+            {
+                MatchEntireCell = true,
+                MatchCase = true,
+                UseRegExp = true,
+                MatchFormulaText = true,
+                Scope = "A:A",
+                IncludeHidden = false,
+                UnionCells = true,
+            };
+            AlibabaCloud.SDK.Dingtalkdoc_1_0.Models.SheetFindAllRequest sheetFindAllRequest = new AlibabaCloud.SDK.Dingtalkdoc_1_0.Models.SheetFindAllRequest
+            {
+                OperatorId = "ppgAxxx",
+                Select = "a1Notation",
+                Text = "DingTalk",
+                FindOptions = findOptions,
+            };
+            try
+            {
+                client.SheetFindAllWithOptions("e54Lq3xxx", "Sheet1", sheetFindAllRequest, sheetFindAllHeaders, new AlibabaCloud.TeaUtil.Models.RuntimeOptions());
+            }
+            catch (TeaException err)
+            {
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+            catch (Exception _err)
+            {
+                TeaException err = new TeaException(new Dictionary&lt;string, object&gt;
+                {
+                    { "message", _err.Message }
+                });
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+        }
+
+
+    }
+}</code></pre></div></div></section></section><section id="section-response-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-response-1" data-tag="h2" class="h2">响应</h2><section id="section-response-parameter" class="section"><h3 data-tag="h3" id="h2-j7t-kyi-wh0" class="h3 title">响应体</h3><table id="d5fd2a30b3qt4" tablewidth="710" tablecolswidth="213 142 355" autofit="false" class="table"><colgroup colwidth="0.9*" style="width:30.00%"></colgroup><colgroup colwidth="0.6*" style="width:20.00%"></colgroup><colgroup colwidth="1.5*" style="width:50.00%"></colgroup><tbody class="tbody"><tr id="f119ee4d19k41"><td id="29d2678f0bodw" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="d634a811fczlw">名称</p></td><td id="e98d0b777e81i" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="039369f3a9tx0">类型</p></td><td id="3f29460bca21v" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="845fdc34c14cb">描述</p></td></tr><tr outputclass="row row-level-1 has-child" id="75a22d96f5154" class="row row-level-1 has-child"><td id="677e429d17u4c" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="db9d18d5d9u6c">value</p></td><td id="9d839f737dppz" rowspan="1" colspan="1"><p id="190dc344f2vtr">Array</p></td><td id="6525247f8cqvz" rowspan="1" colspan="1"><p id="a53bd9c7a47du">如果没有查到内容，value 会是一个空数组。</p></td></tr><tr outputclass="row row-level-1-1" id="431c6291a8hu7" class="row row-level-1-1"><td id="4f21d8e8a6i4s" rowspan="1" colspan="1"><p id="fff446cd597sa">a1Notation</p></td><td id="5e10a61fa4y49" rowspan="1" colspan="1"><p id="72b76f85a01xl">String</p></td><td id="d841d3016e84a" rowspan="1" colspan="1"><p id="9fc6ed157caz2">找到的单元格的地址。</p><ul id="499d16c290snb"><li id="c3d26cc868bz0"><p id="5f4ee67e9d111">如果 <code data-tag="inlineCode" id="2081f4fb37cf5" class="inlineCode">unionCells</code> 设为 <code data-tag="inlineCode" id="f912c059b6eiz" class="inlineCode">true</code>，聚合后的地址可能为 <code data-tag="inlineCode" id="6b6ce7da4btgw" class="inlineCode">A1:B3</code></p></li><li id="521c463f0857i"><p id="e6f25e5769gpf">如果 <code data-tag="inlineCode" id="076eadbff7p6x" class="inlineCode">unionCells</code> 设为 <code data-tag="inlineCode" id="15d95f52dfi5n" class="inlineCode">false</code>，则为单个单元格的地址，例如 <code data-tag="inlineCode" id="bc719ebdd6na2" class="inlineCode">A1</code></p></li></ul></td></tr><tr outputclass="row row-level-1-2 has-child" id="815a638ac3cdc" class="row row-level-1-2 has-child"><td id="0f580299cb5g5" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="c98e36e616h86">values</p></td><td id="9af4879b94zyf" rowspan="1" colspan="1"><p id="0137d327d8btk">Array</p></td><td id="c8e4a9a1c8p5r" rowspan="1" colspan="1"><p id="78b2504a7az0p"></p></td></tr><tr outputclass="row row-level-1-2-1" id="d74969681eq6q" class="row row-level-1-2-1"><td id="c8932396c8trk" rowspan="1" colspan="1"><p id="6cba1c94efs8s"></p></td><td id="4baae68633fjo" rowspan="1" colspan="1"><p id="d0c09ef47axw0">Array of Any</p></td><td id="c78e2b43b9lal" rowspan="1" colspan="1"><p id="351959cfdc4t8">找到的单元格中的值（为展示文本）。</p></td></tr></tbody></table></section><section id="section-response-body-example" class="section"><h3 id="h3-response-body-example" data-tag="h3" class="h3">响应体示例</h3><pre outputclass="language-json" data-tag="codeblock" code-type="xCode" id="0028ee6e93gwt" class="pre codeblock language-json"><code>HTTP/1.1 200 OK
+Content-Type:application/json
+
+{
+  "value" : [ {
+    "a1Notation" : "A1:B3",
+    "values" : [ [ "1" ] ]
+  } ]
+}</code></pre></section><section id="section-error-code-1" class="section"><h3 id="h3-error-code-1" data-tag="h3" class="h3">错误码</h3><p data-tag="p" id="p-error-code-global-guide" class="p">若调用该接口报错，可根据错误信息在<a href="https://open.dingtalk.com/document/development/server-api-error-codes-1" id="a-error-code-global-guide">全局错误码</a>文档中查找解决方案。</p><table id="55e2333b70yiv" tablewidth="709" tablecolswidth="142 177 177 213" autofit="false" class="table"><colgroup colwidth="0.8*" style="width:20.03%"></colgroup><colgroup colwidth="1*" style="width:24.96%"></colgroup><colgroup colwidth="1*" style="width:24.96%"></colgroup><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><tbody class="tbody"><tr id="abb5fd8aaedff"><td id="97c299c0c95xu" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="742b4626b96xw">HttpCode</p></td><td id="9238fc94b45ts" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="e378dcab572j5">错误码</p></td><td id="c2787e0d0ccbi" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="4a8e39e944lqq">错误信息</p></td><td id="43f5488f5ango" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="3548ef4d9dksy">说明</p></td></tr><tr id="0df22ea621ppc"><td id="9cebbc0937a4u" rowspan="1" colspan="1"><p id="5f6497b3e4k3z">400</p></td><td id="52c943e331j7w" rowspan="1" colspan="1"><p id="ccbcb7ce61n02">invalidRequest.inputArgs.workbookIdIllegal</p></td><td id="806afd9a32moy" rowspan="1" colspan="1"><p id="ca24b32a13ruy">The workbookId is illegal.</p></td><td id="11bb5bdc41nnr" rowspan="1" colspan="1"><p id="3df1cacc38bfj">workbookId不合法。</p></td></tr><tr id="46e61d59c06le"><td id="fca379116dzbl" rowspan="1" colspan="1"><p id="ad331bcad56ux">400</p></td><td id="110a0083f1t3f" rowspan="1" colspan="1"><p id="fdfa705f47jtk">invalidRequest.inputArgs.operatorIdIllegal</p></td><td id="461c07dc1719f" rowspan="1" colspan="1"><p id="55ae3c2df7j87">The operatorId is illegal.</p></td><td id="7f87615595vbo" rowspan="1" colspan="1"><p id="5f6a53d3187bp">operatorId不合法。</p></td></tr><tr id="47d1733387dc6"><td id="fd26903cb6mcr" rowspan="1" colspan="1"><p id="a41f0a703bi98">400</p></td><td id="296b460393h8g" rowspan="1" colspan="1"><p id="bce79adc69yzq">invalidRequest.inputArgs.invalid</p></td><td id="1fb0ee5ab7pgu" rowspan="1" colspan="1"><p id="f9641f06edac9">%s</p></td><td id="18ebc063cfi82" rowspan="1" colspan="1"><p id="3b857c9cddv1j">请求参数不合法，请查看错误信息。</p></td></tr><tr id="3149eafcda7kq"><td id="b042873c8aesf" rowspan="1" colspan="1"><p id="b168bc0447psp">400</p></td><td id="f98f0299c7u2z" rowspan="1" colspan="1"><p id="d4ddc1573a17z">invalidRequest.resource.notWorkbook</p></td><td id="875e391f33w0z" rowspan="1" colspan="1"><p id="fb6b0160e7k9h">%s</p></td><td id="09cff4d2a4hxl" rowspan="1" colspan="1"><p id="0cdd2f27f49rj">不支持的文档类型，请检查workbookId。</p></td></tr><tr id="a2e9f3094f8r6"><td id="56ee32a338fsf" rowspan="1" colspan="1"><p id="d99322b12egv2">403</p></td><td id="1962bb3f379s1" rowspan="1" colspan="1"><p id="d269f5cca7xhq">forbidden.operationIllegal</p></td><td id="3af42affe819o" rowspan="1" colspan="1"><p id="a47cc16fe0p1k">%s</p></td><td id="333f0e2e5cym0" rowspan="1" colspan="1"><p id="a66e3f6581exx">请求操作不合法，请查看错误信息。</p></td></tr><tr id="da8eae3ecexz3"><td id="f9d388676f0v9" rowspan="1" colspan="1"><p id="766ffc6805c1b">403</p></td><td id="f05676d4c0ozd" rowspan="1" colspan="1"><p id="8379ee3a5684v">forbidden.accessDenied</p></td><td id="b8bf8551cf4yb" rowspan="1" colspan="1"><p id="152d034e54v4z">The operator has no permission.</p></td><td id="1d33461a63cdx" rowspan="1" colspan="1"><p id="b3fbb326a1rga">当前用户无此操作权限。</p></td></tr><tr id="129c6229f51rq"><td id="b76af39596751" rowspan="1" colspan="1"><p id="62d6696cbbxt6">403</p></td><td id="a2ef1ae0b0u1n" rowspan="1" colspan="1"><p id="1ff768c596x1q">forbidden.document.sizeOverLimit</p></td><td id="265e9f0e110g7" rowspan="1" colspan="1"><p id="fc641ad63defb">The document size is over limit and the server is unable to complete your request. Retry is unlikely to work unless the document size is decreased.</p></td><td id="ba96aaae94h4o" rowspan="1" colspan="1"><p id="63924af86ccui">表格内容过大，请尝试缩减表格内容。</p></td></tr><tr id="14f231ab5dz5y"><td id="84c43224b5itk" rowspan="1" colspan="1"><p id="7d626b6b5bjrf">403</p></td><td id="1005c442d5cbz" rowspan="1" colspan="1"><p id="413809a9a6jr5">forbidden.acrossOrg</p></td><td id="826710d6e1yeu" rowspan="1" colspan="1"><p id="ba953567341ui">%s</p></td><td id="efa77dabd4j6n" rowspan="1" colspan="1"><p id="654f9a16983rx">请求不合法，请检查要访问的文档是否归属于accessToken指定的组织。</p></td></tr><tr id="d7be1f4c78bww"><td id="b049ed91a772m" rowspan="1" colspan="1"><p id="e1cb8709f1fek">404</p></td><td id="04471a265fm3s" rowspan="1" colspan="1"><p id="a45fe0b469i2p">invalidRequest.resource.notFound</p></td><td id="15c5fb8d90n35" rowspan="1" colspan="1"><p id="bafdd2e045e97">%s</p></td><td id="289491e0692v6" rowspan="1" colspan="1"><p id="273d78a220ttt">请求失败，无法找到要访问的资源。</p></td></tr><tr id="0b35011d0541o"><td id="e89d63aeeb2z8" rowspan="1" colspan="1"><p id="0c594020c9hfe">500</p></td><td id="8eb8d0ba231dx" rowspan="1" colspan="1"><p id="c9daeeabf08wl">internalError</p></td><td id="60c4e99c73i5i" rowspan="1" colspan="1"><p id="308af0c204pgd">The server encountered an internal error and was unable to complete your request. Please try again later.</p></td><td id="eeced77a931cw" rowspan="1" colspan="1"><p id="03b2b243e70sn">服务内部错误，请稍后再试。</p></td></tr><tr id="441c7babc7nmy"><td id="ae762b9126age" rowspan="1" colspan="1"><p id="5e2c4a2f0ccnx">503</p></td><td id="c55732bdc2a8m" rowspan="1" colspan="1"><p id="e5421d42f50k7">serviceBusy</p></td><td id="1fa72ba35cvga" rowspan="1" colspan="1"><p id="88b1e1d8aaehd">The server is busy and unable to complete your request. Please try again later.</p></td><td id="9cb54e6e2dyyu" rowspan="1" colspan="1"><p id="0d108f5264b99">服务繁忙，请稍后重试。</p></td></tr></tbody></table></section></section></div></main></body></html>

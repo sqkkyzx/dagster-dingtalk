@@ -1,0 +1,392 @@
+<!DOCTYPE html><html><head><meta charset="utf8" / /><meta name="gmtModify" content="2025-09-12 17:18:52" / /><meta name="searchtitle" content="" / /><meta name="keywords" content="" / /><meta name="author" content="" / /><title>获取企业职级列表</title><meta name="gmtModify" content="2026-06-04 19:10:22" / /></head><body data-tag="topic" id="doc-api-dingtalk-QueryJobRanks" class="topic"><main id="f7fc2ac195ue8" data-init-id="doc-api-dingtalk_QueryJobRanks"><h1 data-tag="title" id="h1-6jw-vot-cuj" class="title">获取企业职级列表</h1><p data-tag="shortdesc" id="dae7a9fa1ep0h" class="shortdesc">调用本接口，分页查询企业的职级相关信息，包括职级ID、职级名称等信息。</p><div data-tag="conbody" outputclass="icms-api-reference" class="icms-api-reference conbody"><section id="435a23af0fap7" class="section"><h2 id="01bbb5b778uvu"><b>接口调用说明</b></h2><p id="742716cfb6d2e">调用本接口前，需要对智能人事产品进行升级。有以下两种升级方式，选择方式一或者方式二进行升级。</p><div type="note" id="7c7f54a625oa5" class="note note-note"><div class="note-icon-wrapper"><i class="icon-note note note"></i></div><div class="noteContentSpan"><strong>说明 </strong><p id="e999bb8da4v9a">选择方式二升级后，调用通讯录部分接口时会报错，详情请查看本文后续方式二说明。</p></div></div><p id="2000000747777"><b>方式一</b>: 智能人事内的<b>岗位职级</b>字段，升级为选项类型。</p><p id="db5b035d1bd52" data-init-id="2000000747777"><img src="https://img.alicdn.com/imgextra/i4/O1CN01dJ6E8t1MpiWCwrVtn_!!6000000001484-2-tps-2296-1478.png" alt="" uuid="mpxqb9444hmzaiettql" class="image break" / /></p><p id="020712eaf9pvd"><b>方式二</b>: 智能人事升级<b>职位管理</b>功能。</p><div type="note" id="be61ba1617wxk" class="note note-note"><div class="note-icon-wrapper"><i class="icon-note note note"></i></div><div class="noteContentSpan"><strong>说明 </strong><p id="7a5b2c9fe4ck8">智能人事升级职位管理功能后，需注意以下：</p><p id="c34eb553cflzg">调用通讯录<a href="https://open.dingtalk.com/document/orgapp/update-user-details" id="25a67c93c5tu4">更新用户信息V1</a>接口和<a href="https://open.dingtalk.com/document/orgapp/user-information-update" id="b16a6ead104ap">更新用户信息V2</a>接口更新员工部门或者员工职位时，接口会出现报错。如果需要更新员工部门或者员工职位，请参考使用<a href="https://open.dingtalk.com/document/orgapp/intelligent-personnel-staff-transfer" id="f41048045exm1">智能人事员工调岗</a>接口。</p></div></div><p id="5d5cca76a6kdu"><img src="https://img.alicdn.com/imgextra/i3/O1CN01Ic29JG1Jx63CWW0dV_!!6000000001094-2-tps-2288-1452.png" alt="" uuid="mpxqb944iwvu7d9opr" class="image break" / /></p></section><section id="section-request-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-request-1" data-tag="h2" class="h2">请求</h2><section id="section-request-basic-info" class="section"><h3 id="heading-request-basic-info" data-tag="h3" class="h3">基本信息</h3><table id="8cec7f5c786z8" tablewidth="648" tablecolswidth="216 432" autofit="false" class="table"><colgroup colwidth="0.67*" style="width:33.33%"></colgroup><colgroup colwidth="1.33*" style="width:66.67%"></colgroup><tbody class="tbody"><tr id="02e1732c09qe1"><td id="865219e80ad1g" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="da74ada22884l">字段</p></td><td id="872a80e6cf6p6" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="eada8f2f76jw5">值</p></td></tr><tr id="59e9473f11obc"><td id="83aa456697n4k" rowspan="1" colspan="1"><p id="28b825d692l00">HTTP URL</p></td><td id="93a1a0e06apkt" rowspan="1" colspan="1"><p id="acda8ec848gxp">https://api.dingtalk.com/v1.0/hrm/jobRanks</p></td></tr><tr id="8b92646041l0u"><td id="bac9df2f22ptj" rowspan="1" colspan="1"><p id="3d90ae6ac22d0">HTTP Method</p></td><td id="21d0865f16uy2" rowspan="1" colspan="1"><p id="f2f2f7b332x91">GET</p></td></tr><tr id="e36d3fb4a59sg"><td id="87a3f70efckpr" rowspan="1" colspan="1"><p id="2c3fb41a94fqk">支持的应用类型</p></td><td id="728a7079b92as" rowspan="1" colspan="1"><p id="9fbfbe220dapi"><span data-tag="ph" id="ph-request-basic-app-type-apptype-0" class="ph ph-app-type" data-ph-raw-text="appType-企业内部应用">appType-企业内部应用</span>　<span data-tag="ph" id="ph-request-basic-app-type-apptype-1" class="ph ph-app-type" data-ph-raw-text="appType-第三方企业应用">appType-第三方企业应用</span></p></td></tr><tr id="30951d27b1bpl"><td id="24928be6afie1" rowspan="1" colspan="1"><p id="5d1cd775749dj">权限要求</p></td><td id="eb2373bde0lh8" rowspan="1" colspan="1"><p id="da80c13ce2oyh"><span data-tag="ph" id="ph-request-basic-permission-permission-qyapi-hrm-read-user-0" class="ph-permission ph" data-ph-raw-text="permission-qyapi_hrm_read_user-智能人事个人信息读权限" data-permission-id="permission-qyapi_hrm_read_user" data-permission-code="qyapi_hrm_read_user" data-permission-detail-api="/document/api/permission/detail" data-permission-query-param="code">permission-qyapi_hrm_read_user-智能人事个人信息读权限</span></p></td></tr></tbody></table></section><section id="section-request-header-parameter" class="section"><h3 data-tag="h3" id="h2-ton-6v3-1xi" class="h3 title">请求头</h3><table id="ab1d49eb75fk9" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="a46f84b8d74y2"><td id="a20c31790fwyg" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="31cfb792ccnbh">名称</p></td><td id="6827f6ebd3dug" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="43663eae02bzt">类型</p></td><td id="478d4dc231i0u" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="a949c4b0ffc6k">是否必填</p></td><td id="4efa7a3613fgc" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="714ce227b8yxq">描述</p></td></tr><tr id="80d6d5345f6q9"><td id="d81330da7egcw" rowspan="1" colspan="1"><p id="7fb00f8478ngv">x-acs-dingtalk-access-token</p></td><td id="4bc6470c31s20" rowspan="1" colspan="1"><p id="c5e74f5b6e59n">String</p></td><td id="f093a741acw8h" rowspan="1" colspan="1"><p id="4686857dc3ifr">是</p></td><td id="9b81178946lok" rowspan="1" colspan="1"><p id="6b7f3c7e1ea18">调用该接口的访问凭证，通过以下获取：</p><ul id="8fba8ccbectnj"><li id="dace943c20vbe"><p id="ca09404059yfy">企业内部应用，调用<a href="https://open.dingtalk.com/document/development/obtain-the-access-token-of-an-internal-app#" id="8c31d18467xgd" class="xref">获取企业内部应用的accessToken</a>接口获取。</p></li><li id="4198465b2bgql"><p id="65bfc18266teh">第三方企业应用，调用<a href="https://open.dingtalk.com/document/development/obtain-the-access-token-of-the-authorized-enterprise-1#" id="99be07840acjn" class="xref">获取第三方应用授权企业的accessToken</a>接口获取。</p></li></ul></td></tr></tbody></table></section><section id="section-request-query-parameter" class="section"><h3 data-tag="h3" id="h2-zt8-t4g-iqn" class="h3 title">查询参数</h3><table id="eae2727c06nse" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="2e3872f667gxx"><td id="9175ddc96eme5" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="fa1d09140071e">名称</p></td><td id="abec8598f0wqp" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="b8bdebf962h13">类型</p></td><td id="9c7c78ea432nd" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="dcacb465c7k9n">是否必填</p></td><td id="1c1dc092e4c0c" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="a46abf5ad8d77">描述</p></td></tr><tr id="4af73a97657bm"><td id="4a49b050b3ojo" rowspan="1" colspan="1"><p id="e6399ad6ec0o7">rankCategoryId</p></td><td id="908cf9fae27zl" rowspan="1" colspan="1"><p id="2d9877a066pnv">String</p></td><td id="64170d2178s6n" rowspan="1" colspan="1"><p id="d32f7a67feel1">否</p></td><td id="505176d2241tu" rowspan="1" colspan="1"><p id="28cb1b54b4svt">职级序列ID。</p><ul id="c307f00df480t"><li id="d1279556d8joo"><p id="dc8bb55a5f6n8"><b>首次查询</b>：需先调用本接口获取rankCategoryId。</p></li><li id="bde4e8e5dcb70"><p id="e06d5fd81a18c"><b>非首次查询</b>：从首次查询中的信息中获取需要的rankCategoryId值。</p></li></ul><p class="note-icon-wrapper" id="7daa813c79enz"></p><p data-tag="p" id="d617824dedd4q" class="p"></p><p id="6e838b4cfcv8j">该参数为非必填参数。</p><p id="c79b1752e7dv0"></p></td></tr><tr id="ea35af181547m"><td id="6ca3001a6eo6i" rowspan="1" colspan="1"><p id="006af42b3fs95">rankCode</p></td><td id="e8409c99capez" rowspan="1" colspan="1"><p id="5777d005f10h8">String</p></td><td id="35a7791e2enxs" rowspan="1" colspan="1"><p id="69aabc0df8smv">否</p></td><td id="85d9d41d0fwi1" rowspan="1" colspan="1"><p id="2313ddb8b427g">职级编码。</p><ul id="469b0d8391eeq"><li id="9d3d15863f81g"><p id="36ab5d366068h"><b>首次查询</b>：需先调用本接口获取rankCode。</p></li><li id="b8efc1d8fc3zd"><p id="6abd5c387fo5u"><b>非首次查询</b>：从首次查询中的信息中获取需要的rankCode值。</p></li></ul><p class="note-icon-wrapper" id="5ec67deea0ga8"></p><p data-tag="p" id="e82edf3a1b4pj" class="p"></p><p id="9802995acc140">该参数为非必填参数。</p><p id="fabf21f0b191n"></p></td></tr><tr id="4c930e80043cm"><td id="f9631c39a0dxf" rowspan="1" colspan="1"><p id="850b9df0a3qli">rankName</p></td><td id="9bb1f45a41uqv" rowspan="1" colspan="1"><p id="c9f6ae31c00gu">String</p></td><td id="76ffc30ab07tf" rowspan="1" colspan="1"><p id="2731b90b76snd">否</p></td><td id="1d39ef7d08fvh" rowspan="1" colspan="1"><p id="65fbcf9507y5j">职级名称。</p><ul id="1db2553dddjh2"><li id="5202581b32r7o"><p id="224fd92dbcybp"><b>首次查询</b>：需先调用本接口获取rankName。</p></li><li id="8a41707ef469g"><p id="44443a1e45b51"><b>非首次查询</b>：从首次查询中的信息中获取需要的rankName值。</p></li></ul><p class="note-icon-wrapper" id="f1c3500f10oqb"></p><p data-tag="p" id="f21d54deb4i96" class="p"></p><p id="c39a734a04999">该参数为非必填参数。</p><p id="b1871d83f4bii"></p></td></tr><tr id="613d32a428bqp"><td id="63722a13f4vkf" rowspan="1" colspan="1"><p id="808a3b6197flo">nextToken</p></td><td id="6f5252b636n1y" rowspan="1" colspan="1"><p id="bd95caf43ebtb">Integer</p></td><td id="dc2bdabd1fohh" rowspan="1" colspan="1"><p id="64b75a3beetd3">是</p></td><td id="816f663de3i5p" rowspan="1" colspan="1"><p id="816ac7238bqwl">分页游标。</p><ul id="b25c179482t79"><li id="f12f4c49bb6b8"><p id="211703b8c9xgk">首次调用，该参数传0。</p></li><li id="2616891d9ag3j"><p id="6f08dc42ba0ae">非首次调用，该参数传上次调用本接口返回的nextToken。</p></li></ul></td></tr><tr id="21134770fc3pm"><td id="85b6e6c3feuu4" rowspan="1" colspan="1"><p id="74bad4646dl6w">maxResults</p></td><td id="6afdb7467e7dv" rowspan="1" colspan="1"><p id="e4ab7392bewin">Integer</p></td><td id="32f05053e73po" rowspan="1" colspan="1"><p id="37a1fb9eb5bt1">是</p></td><td id="2d3328c786szp" rowspan="1" colspan="1"><p id="c74fb48093s25">每页最大条目数，最大值200。</p></td></tr></tbody></table></section><section id="section-request-body-example" class="section"><h3 id="h3-request-body-example" data-tag="h3" class="h3">请求示例</h3><div outputclass="tabbed-codeblock" data-tag="fig" id="figure-qmr-w8y-lps" class="tabbed-codeblock-box"><div class="tab-box"></div><input type="radio" name="check-figure-qmr-w8y-lps" id="figure-qmr-w8y-lps-HTTP-tab" checked="checked" /><label for="figure-qmr-w8y-lps-HTTP-tab">HTTP</label><div class="codeblock-item"><pre id="codeblock-ha5-3yk-smj" outputclass="language-HTTP" code-type="xCode" data-tag="codeblock" class="pre codeblock language-HTTP"><code>GET /v1.0/hrm/jobRanks?rankCategoryId=168dbcf2292a45858297e116a0bd2113&amp;rankCode=测试职级&amp;rankName=测试职级&amp;nextToken=0&amp;maxResults=100 HTTP/1.1
+Host:api.dingtalk.com
+x-acs-dingtalk-access-token:168dbcf22
+Content-Type:application/json</code></pre></div><input type="radio" name="check-figure-qmr-w8y-lps" id="figure-qmr-w8y-lps-java-tab" /><label for="figure-qmr-w8y-lps-java-tab">Java</label><div class="codeblock-item"><pre id="codeblock-mpu-ous-npq" outputclass="language-java" code-type="xCode" data-tag="codeblock" class="pre codeblock language-java"><code>// This file is auto-generated, don't edit it. Thanks.
+package com.aliyun.sample;
+
+import com.aliyun.tea.*;
+import com.aliyun.teautil.*;
+import com.aliyun.teautil.models.*;
+import com.aliyun.dingtalkhrm_1_0.*;
+import com.aliyun.dingtalkhrm_1_0.models.*;
+import com.aliyun.teaopenapi.*;
+import com.aliyun.teaopenapi.models.*;
+
+public class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Client
+     * @throws Exception
+     */
+    public static com.aliyun.dingtalkhrm_1_0.Client createClient() throws Exception {
+        Config config = new Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        return new com.aliyun.dingtalkhrm_1_0.Client(config);
+    }
+
+    public static void main(String[] args_) throws Exception {
+        java.util.List&lt;String&gt; args = java.util.Arrays.asList(args_);
+        com.aliyun.dingtalkhrm_1_0.Client client = Sample.createClient();
+        QueryJobRanksHeaders queryJobRanksHeaders = new QueryJobRanksHeaders();
+        queryJobRanksHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        QueryJobRanksRequest queryJobRanksRequest = new QueryJobRanksRequest()
+                .setRankCategoryId("168dbcf2292a45858297e116a0bd2113")
+                .setRankCode("测试职级")
+                .setRankName("测试职级")
+                .setNextToken(0)
+                .setMaxResults(100);
+        try {
+            client.queryJobRanksWithOptions(queryJobRanksRequest, queryJobRanksHeaders, new RuntimeOptions());
+        } catch (TeaException err) {
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        } catch (Exception _err) {
+            TeaException err = new TeaException(_err.getMessage(), _err);
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        }        
+    }
+}</code></pre></div><input type="radio" name="check-figure-qmr-w8y-lps" id="figure-qmr-w8y-lps-python-tab" /><label for="figure-qmr-w8y-lps-python-tab">Python</label><div class="codeblock-item"><pre id="codeblock-qpt-nha-495" outputclass="language-python" code-type="xCode" data-tag="codeblock" class="pre codeblock language-python"><code># -*- coding: utf-8 -*-
+# This file is auto-generated, don't edit it. Thanks.
+import sys
+
+from typing import List
+
+from alibabacloud_dingtalk.hrm_1_0.client import Client as dingtalkhrm_1_0Client
+from alibabacloud_tea_openapi import models as open_api_models
+from alibabacloud_dingtalk.hrm_1_0 import models as dingtalkhrm__1__0_models
+from alibabacloud_tea_util import models as util_models
+from alibabacloud_tea_util.client import Client as UtilClient
+
+
+class Sample:
+    def __init__(self):
+        pass
+
+    @staticmethod
+    def create_client() -&gt; dingtalkhrm_1_0Client:
+        """
+        使用 Token 初始化账号Client
+        @return: Client
+        @throws Exception
+        """
+        config = open_api_models.Config()
+        config.protocol = 'https'
+        config.region_id = 'central'
+        return dingtalkhrm_1_0Client(config)
+
+    @staticmethod
+    def main(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        query_job_ranks_headers = dingtalkhrm__1__0_models.QueryJobRanksHeaders()
+        query_job_ranks_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        query_job_ranks_request = dingtalkhrm__1__0_models.QueryJobRanksRequest(
+            rank_category_id='168dbcf2292a45858297e116a0bd2113',
+            rank_code='测试职级',
+            rank_name='测试职级',
+            next_token=0,
+            max_results=100
+        )
+        try:
+            client.query_job_ranks_with_options(query_job_ranks_request, query_job_ranks_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+    @staticmethod
+    async def main_async(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        query_job_ranks_headers = dingtalkhrm__1__0_models.QueryJobRanksHeaders()
+        query_job_ranks_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        query_job_ranks_request = dingtalkhrm__1__0_models.QueryJobRanksRequest(
+            rank_category_id='168dbcf2292a45858297e116a0bd2113',
+            rank_code='测试职级',
+            rank_name='测试职级',
+            next_token=0,
+            max_results=100
+        )
+        try:
+            await client.query_job_ranks_with_options_async(query_job_ranks_request, query_job_ranks_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+
+if __name__ == '__main__':
+    Sample.main(sys.argv[1:])</code></pre></div><input type="radio" name="check-figure-qmr-w8y-lps" id="figure-qmr-w8y-lps-php-tab" /><label for="figure-qmr-w8y-lps-php-tab">PHP</label><div class="codeblock-item"><pre id="codeblock-yl7-umc-0gh" outputclass="language-php" code-type="xCode" data-tag="codeblock" class="pre codeblock language-php"><code>&lt;?php
+
+// This file is auto-generated, don't edit it. Thanks.
+namespace AlibabaCloud\SDK\Sample;
+
+use AlibabaCloud\SDK\Dingtalk\Vhrm_1_0\Dingtalk;
+use \Exception;
+use AlibabaCloud\Tea\Exception\TeaError;
+use AlibabaCloud\Tea\Utils\Utils;
+
+use Darabonba\OpenApi\Models\Config;
+use AlibabaCloud\SDK\Dingtalk\Vhrm_1_0\Models\QueryJobRanksHeaders;
+use AlibabaCloud\SDK\Dingtalk\Vhrm_1_0\Models\QueryJobRanksRequest;
+use AlibabaCloud\Tea\Utils\Utils\RuntimeOptions;
+
+class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Dingtalk Client
+     */
+    public static function createClient(){
+        $config = new Config([]);
+        $config-&gt;protocol = "https";
+        $config-&gt;regionId = "central";
+        return new Dingtalk($config);
+    }
+
+    /**
+     * @param string[] $args
+     * @return void
+     */
+    public static function main($args){
+        $client = self::createClient();
+        $queryJobRanksHeaders = new QueryJobRanksHeaders([]);
+        $queryJobRanksHeaders-&gt;xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        $queryJobRanksRequest = new QueryJobRanksRequest([
+            "rankCategoryId" =&gt; "168dbcf2292a45858297e116a0bd2113",
+            "rankCode" =&gt; "测试职级",
+            "rankName" =&gt; "测试职级",
+            "nextToken" =&gt; 0,
+            "maxResults" =&gt; 100
+        ]);
+        try {
+            $client-&gt;queryJobRanksWithOptions($queryJobRanksRequest, $queryJobRanksHeaders, new RuntimeOptions([]));
+        }
+        catch (Exception $err) {
+            if (!($err instanceof TeaError)) {
+                $err = new TeaError([], $err-&gt;getMessage(), $err-&gt;getCode(), $err);
+            }
+            if (!Utils::empty_($err-&gt;code) &amp;&amp; !Utils::empty_($err-&gt;message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+        }
+    }
+}
+$path = __DIR__ . \DIRECTORY_SEPARATOR . '..' . \DIRECTORY_SEPARATOR . 'vendor' . \DIRECTORY_SEPARATOR . 'autoload.php';
+if (file_exists($path)) {
+    require_once $path;
+}
+Sample::main(array_slice($argv, 1));</code></pre></div><input type="radio" name="check-figure-qmr-w8y-lps" id="figure-qmr-w8y-lps-go-tab" /><label for="figure-qmr-w8y-lps-go-tab">Go</label><div class="codeblock-item"><pre id="codeblock-rcr-noo-mgn" outputclass="language-go" code-type="xCode" data-tag="codeblock" class="pre codeblock language-go"><code>// This file is auto-generated, don't edit it. Thanks.
+package main
+
+import (
+  "os"
+  util  "github.com/alibabacloud-go/tea-utils/service"
+  dingtalkhrm_1_0  "github.com/alibabacloud-go/dingtalk/hrm_1_0"
+  openapi  "github.com/alibabacloud-go/darabonba-openapi/client"
+  "github.com/alibabacloud-go/tea/tea"
+)
+
+
+/**
+ * 使用 Token 初始化账号Client
+ * @return Client
+ * @throws Exception
+ */
+func CreateClient () (_result *dingtalkhrm_1_0.Client, _err error) {
+  config := &amp;openapi.Config{}
+  config.Protocol = tea.String("https")
+  config.RegionId = tea.String("central")
+  _result = &amp;dingtalkhrm_1_0.Client{}
+  _result, _err = dingtalkhrm_1_0.NewClient(config)
+  return _result, _err
+}
+
+func _main (args []*string) (_err error) {
+  client, _err := CreateClient()
+  if _err != nil {
+    return _err
+  }
+
+  queryJobRanksHeaders := &amp;dingtalkhrm_1_0.QueryJobRanksHeaders{}
+  queryJobRanksHeaders.XAcsDingtalkAccessToken = tea.String("&lt;your access token&gt;")
+  queryJobRanksRequest := &amp;dingtalkhrm_1_0.QueryJobRanksRequest{
+    RankCategoryId: tea.String("168dbcf2292a45858297e116a0bd2113"),
+    RankCode: tea.String("测试职级"),
+    RankName: tea.String("测试职级"),
+    NextToken: tea.Int32(0),
+    MaxResults: tea.Int32(100),
+  }
+  tryErr := func()(_e error) {
+    defer func() {
+      if r := tea.Recover(recover()); r != nil {
+        _e = r
+      }
+    }()
+    _, _err = client.QueryJobRanksWithOptions(queryJobRanksRequest, queryJobRanksHeaders, &amp;util.RuntimeOptions{})
+    if _err != nil {
+      return _err
+    }
+
+    return nil
+  }()
+
+  if tryErr != nil {
+    var err = &amp;tea.SDKError{}
+    if _t, ok := tryErr.(*tea.SDKError); ok {
+      err = _t
+    } else {
+      err.Message = tea.String(tryErr.Error())
+    }
+    if !tea.BoolValue(util.Empty(err.Code)) &amp;&amp; !tea.BoolValue(util.Empty(err.Message)) {
+      // err 中含有 code 和 message 属性，可帮助开发定位问题
+    }
+
+  }
+  return _err
+}
+
+
+func main() {
+  err := _main(tea.StringSlice(os.Args[1:]))
+  if err != nil {
+    panic(err)
+  }
+}</code></pre></div><input type="radio" name="check-figure-qmr-w8y-lps" id="figure-qmr-w8y-lps-nodejs-tab" /><label for="figure-qmr-w8y-lps-nodejs-tab">Node.js</label><div class="codeblock-item"><pre id="codeblock-d4r-r8e-16c" outputclass="language-nodejs" code-type="xCode" data-tag="codeblock" class="pre codeblock language-nodejs"><code>// This file is auto-generated, don't edit it
+import Util, * as $Util from '@alicloud/tea-util';
+import dingtalkhrm_1_0, * as $dingtalkhrm_1_0 from '@alicloud/dingtalk/hrm_1_0';
+import OpenApi, * as $OpenApi from '@alicloud/openapi-client';
+import * as $tea from '@alicloud/tea-typescript';
+
+
+export default class Client {
+
+  /**
+   * 使用 Token 初始化账号Client
+   * @return Client
+   * @throws Exception
+   */
+  static createClient(): dingtalkhrm_1_0 {
+    let config = new $OpenApi.Config({ });
+    config.protocol = "https";
+    config.regionId = "central";
+    return new dingtalkhrm_1_0(config);
+  }
+
+  static async main(args: string[]): Promise&lt;void&gt; {
+    let client = Client.createClient();
+    let queryJobRanksHeaders = new $dingtalkhrm_1_0.QueryJobRanksHeaders({ });
+    queryJobRanksHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+    let queryJobRanksRequest = new $dingtalkhrm_1_0.QueryJobRanksRequest({
+      rankCategoryId: "168dbcf2292a45858297e116a0bd2113",
+      rankCode: "测试职级",
+      rankName: "测试职级",
+      nextToken: 0,
+      maxResults: 100,
+    });
+    try {
+      await client.queryJobRanksWithOptions(queryJobRanksRequest, queryJobRanksHeaders, new $Util.RuntimeOptions({ }));
+    } catch (err) {
+      if (!Util.empty(err.code) &amp;&amp; !Util.empty(err.message)) {
+        // err 中含有 code 和 message 属性，可帮助开发定位问题
+      }
+
+    }    
+  }
+
+}
+
+Client.main(process.argv.slice(2));</code></pre></div><input type="radio" name="check-figure-qmr-w8y-lps" id="figure-qmr-w8y-lps-csharp-tab" /><label for="figure-qmr-w8y-lps-csharp-tab">C#</label><div class="codeblock-item"><pre id="codeblock-uvv-y6z-gew" outputclass="language-csharp" code-type="xCode" data-tag="codeblock" class="pre codeblock language-csharp"><code>// This file is auto-generated, don't edit it. Thanks.
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
+
+using Tea;
+using Tea.Utils;
+
+
+namespace AlibabaCloud.SDK.Sample
+{
+    public class Sample 
+    {
+
+        /**
+         * 使用 Token 初始化账号Client
+         * @return Client
+         * @throws Exception
+         */
+        public static AlibabaCloud.SDK.Dingtalkhrm_1_0.Client CreateClient()
+        {
+            AlibabaCloud.OpenApiClient.Models.Config config = new AlibabaCloud.OpenApiClient.Models.Config();
+            config.Protocol = "https";
+            config.RegionId = "central";
+            return new AlibabaCloud.SDK.Dingtalkhrm_1_0.Client(config);
+        }
+
+        public static void Main(string[] args)
+        {
+            AlibabaCloud.SDK.Dingtalkhrm_1_0.Client client = CreateClient();
+            AlibabaCloud.SDK.Dingtalkhrm_1_0.Models.QueryJobRanksHeaders queryJobRanksHeaders = new AlibabaCloud.SDK.Dingtalkhrm_1_0.Models.QueryJobRanksHeaders();
+            queryJobRanksHeaders.XAcsDingtalkAccessToken = "&lt;your access token&gt;";
+            AlibabaCloud.SDK.Dingtalkhrm_1_0.Models.QueryJobRanksRequest queryJobRanksRequest = new AlibabaCloud.SDK.Dingtalkhrm_1_0.Models.QueryJobRanksRequest
+            {
+                RankCategoryId = "168dbcf2292a45858297e116a0bd2113",
+                RankCode = "测试职级",
+                RankName = "测试职级",
+                NextToken = 0,
+                MaxResults = 100,
+            };
+            try
+            {
+                client.QueryJobRanksWithOptions(queryJobRanksRequest, queryJobRanksHeaders, new AlibabaCloud.TeaUtil.Models.RuntimeOptions());
+            }
+            catch (TeaException err)
+            {
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+            catch (Exception _err)
+            {
+                TeaException err = new TeaException(new Dictionary&lt;string, object&gt;
+                {
+                    { "message", _err.Message }
+                });
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+        }
+
+
+    }
+}</code></pre></div></div></section></section><section id="section-response-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-response-1" data-tag="h2" class="h2">响应</h2><section id="section-response-parameter" class="section"><h3 data-tag="h3" id="h2-rol-bfs-50b" class="h3 title">响应体</h3><table id="917d0d412bmon" tablewidth="710" tablecolswidth="213 142 355" autofit="false" class="table"><colgroup colwidth="0.9*" style="width:30.00%"></colgroup><colgroup colwidth="0.6*" style="width:20.00%"></colgroup><colgroup colwidth="1.5*" style="width:50.00%"></colgroup><tbody class="tbody"><tr id="0d92413f61efw"><td id="39690d644294t" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="16428dfc19ezz">名称</p></td><td id="f4659f2d1as4f" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="6bafcb4489a7e">类型</p></td><td id="785b2d8ba2cbv" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="b482cc2675fyq">描述</p></td></tr><tr outputclass="row row-level-1" id="d3114e2d92bqx" class="row row-level-1"><td id="446f0bbbb74ln" rowspan="1" colspan="1"><p id="297ef61ce8g1j">nextToken</p></td><td id="014cc955db2oi" rowspan="1" colspan="1"><p id="275fbbeee6tco">Long</p></td><td id="8b17344a51g7t" rowspan="1" colspan="1"><p id="0dd7a2459cf47">分页游标。</p><p class="note-icon-wrapper" id="cc9bf3135abls"></p><p data-tag="p" id="7c0306d872nzp" class="p"></p><p id="602a759913smn">如果该字段未返回，表示数据已经读取完毕。</p><p id="5d4165dea3dxg"></p></td></tr><tr outputclass="row row-level-2" id="42c96354f85ex" class="row row-level-2"><td id="e4d46c47c2l60" rowspan="1" colspan="1"><p id="a0a310edb2w9n">hasMore</p></td><td id="b816adde83vgm" rowspan="1" colspan="1"><p id="06c7f2451cfd8">Boolean</p></td><td id="6538dbdecdbf4" rowspan="1" colspan="1"><p id="d22d59daf5zvk">是否有更多数据。</p><ul id="784b616cb2x2x"><li id="5aecdcfd47w1o"><p id="20453f7ad6xks"><b>true</b>：是</p></li><li id="11deec62841n8"><p id="5737cffcd3ylm"><b>false</b>：否</p></li></ul></td></tr><tr outputclass="row row-level-3 has-child" id="611b67a64dys3" class="row row-level-3 has-child"><td id="1c5497808dagn" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="fc6550f844u2w">list</p></td><td id="da2a8e6bd3unw" rowspan="1" colspan="1"><p id="a33144f004bm7">Array</p></td><td id="4c0419d44bh5y" rowspan="1" colspan="1"><p id="349a1ad2d6s7d">职级信息列表。</p></td></tr><tr outputclass="row row-level-3-1" id="c08a4e2aeeyf5" class="row row-level-3-1"><td id="4c018c8b056pl" rowspan="1" colspan="1"><p id="6b83a99fafjnb">rankId</p></td><td id="edadd5c76fr8o" rowspan="1" colspan="1"><p id="8a6d1064eewkl">String</p></td><td id="8dd7ac5c4c3lp" rowspan="1" colspan="1"><p id="c41c90563fpkv">职级ID。</p></td></tr><tr outputclass="row row-level-3-2" id="1fa76b7c904m3" class="row row-level-3-2"><td id="c8258814e3ysl" rowspan="1" colspan="1"><p id="883f776b55qqe">rankCategoryId</p></td><td id="5f374cda3b26p" rowspan="1" colspan="1"><p id="cec0733defh91">String</p></td><td id="f895808a5bcl9" rowspan="1" colspan="1"><p id="7217114f2df7g">职级序列ID。</p><p class="note-icon-wrapper" id="981b258d55f5g"></p><p data-tag="p" id="22a362dc74gqc" class="p"></p><p id="b6f5064d9bchh">只有使用方式二-升级职位管理，调用接口才可以获取该字段。</p><p id="f43c47e120olv"></p></td></tr><tr outputclass="row row-level-3-3" id="8dcca12b3efb6" class="row row-level-3-3"><td id="728e52c456i5i" rowspan="1" colspan="1"><p id="261bb560c88aq">rankCode</p></td><td id="aa4eb61ba792c" rowspan="1" colspan="1"><p id="87ad5fb4cdw6h">String</p></td><td id="81cfdaff770qq" rowspan="1" colspan="1"><p id="03e3417278eat">职级编码。</p><p class="note-icon-wrapper" id="f736231a9f4a6"></p><p data-tag="p" id="9a14db8712twy" class="p"></p><p id="59c14c3293z5s">只有使用方式二-升级职位管理，调用接口才可以获取该字段。</p><p id="9afa98ce6e66l"></p></td></tr><tr outputclass="row row-level-3-4" id="8c1835892e1y9" class="row row-level-3-4"><td id="2096679e5aob3" rowspan="1" colspan="1"><p id="d51e0d1e69d1b">rankName</p></td><td id="cd36ef17c7gh6" rowspan="1" colspan="1"><p id="e622f1fba8e6p">String</p></td><td id="06641c73f99dq" rowspan="1" colspan="1"><p id="d65d7ba568vgt">职级名称。</p></td></tr><tr outputclass="row row-level-3-5" id="c4764e62d4zfk" class="row row-level-3-5"><td id="106fe1fd59fl0" rowspan="1" colspan="1"><p id="b723752cdbtsa">minJobGrade</p></td><td id="d8cd9927aah3f" rowspan="1" colspan="1"><p id="591bd31478lez">Integer</p></td><td id="646dd553fffe7" rowspan="1" colspan="1"><p id="4524632810aw7">最小等级。</p><p class="note-icon-wrapper" id="3b4c3215e0qey"></p><p data-tag="p" id="38f887712dt8j" class="p"></p><p id="639725774dbj9">只有使用方式二-升级职位管理，调用接口才可以获取该字段。</p><p id="7c4fcb95590k2"></p></td></tr><tr outputclass="row row-level-3-6" id="65aac5cd47ud5" class="row row-level-3-6"><td id="1f791c6e079dx" rowspan="1" colspan="1"><p id="c6d67023baq6b">maxJobGrade</p></td><td id="7a5d4ffe9ej4j" rowspan="1" colspan="1"><p id="f42d89764dfue">Integer</p></td><td id="7365cbab6dkaj" rowspan="1" colspan="1"><p id="f2b346f45afcp">最大等级。</p><p class="note-icon-wrapper" id="074cf41899fur"></p><p data-tag="p" id="f92819fef6lo6" class="p"></p><p id="6154cfb3637xi">只有使用方式二-升级职位管理，调用接口才可以获取该字段。</p><p id="176817f5fdkmw"></p></td></tr><tr outputclass="row row-level-3-7" id="326570cb84mns" class="row row-level-3-7"><td id="fccce239c2y0e" rowspan="1" colspan="1"><p id="c405d653cfcxd">rankDescription</p></td><td id="e8feddf3501wt" rowspan="1" colspan="1"><p id="df1ce247162iu">String</p></td><td id="910b563b15psu" rowspan="1" colspan="1"><p id="75db3ea73bfab">职级描述。</p><p class="note-icon-wrapper" id="0e7cb6aef9gkn"></p><p data-tag="p" id="31f16cb47c2v3" class="p"></p><p id="658d21d4ac850">只有使用方式二-升级职位管理，调用接口才可以获取该字段。</p><p id="0d58e425d03sy"></p></td></tr></tbody></table></section><section id="section-response-body-example" class="section"><h3 id="h3-response-body-example" data-tag="h3" class="h3">响应体示例</h3><pre id="ee0845d2c6vus" outputclass="language-json" code-type="xCode" data-tag="codeblock" class="pre codeblock language-json"><code>HTTP/1.1 200 OK
+Content-Type:application/json
+
+{
+  "nextToken" : 0,
+  "hasMore" : true,
+  "list" : [ {
+    "rankId" : "d27a2ba85c4943b9b4f7be6c21387f1c",
+    "rankCategoryId" : "168dbcf2292a45858297e116a0bd2113",
+    "rankCode" : "测试职级",
+    "rankName" : "测试职级",
+    "minJobGrade" : 1,
+    "maxJobGrade" : 30,
+    "rankDescription" : "职级描述"
+  } ]
+}</code></pre></section><section id="section-error-code-1" class="section"><h3 id="h3-error-code-1" data-tag="h3" class="h3">错误码</h3><p data-tag="p" id="p-error-code-global-guide" class="p">若调用该接口报错，可根据错误信息在<a href="https://open.dingtalk.com/document/development/server-api-error-codes-1" id="a-error-code-global-guide">全局错误码</a>文档中查找解决方案。</p><table id="c3db77238cz5l" tablewidth="709" tablecolswidth="142 177 177 213" autofit="false" class="table"><colgroup colwidth="0.8*" style="width:20.03%"></colgroup><colgroup colwidth="1*" style="width:24.96%"></colgroup><colgroup colwidth="1*" style="width:24.96%"></colgroup><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><tbody class="tbody"><tr id="12d86cbe01qno"><td id="e3cae04a6dd0q" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="c3fa4818e27y0">HttpCode</p></td><td id="c29f27574feqo" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="9b0118e909te5">错误码</p></td><td id="9e9c671692msr" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="cdbbe5ef129gb">错误信息</p></td><td id="009d14f9dbnch" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="61315105d0n8s">说明</p></td></tr><tr id="98dbe261e1g1d"><td id="9812f48dc9d13" rowspan="1" colspan="1"><p id="c8edb5c4f9see">400</p></td><td id="f8c029122brtf" rowspan="1" colspan="1"><p id="445d35dcc2cq9">invalidParameter</p></td><td id="f4ad8ce854zke" rowspan="1" colspan="1"><p id="18bb38478dzxc">参数错误</p></td><td id="1a8072dab5a9f" rowspan="1" colspan="1"><p id="0977ed85dabz9">参数错误</p></td></tr><tr id="ad0c8f074dar3"><td id="0d5ff48fc9d5k" rowspan="1" colspan="1"><p id="0380df93230ek">500</p></td><td id="6df543da01kfg" rowspan="1" colspan="1"><p id="cb28b8730azvv">systemError</p></td><td id="8af5e5afeez8y" rowspan="1" colspan="1"><p id="82fe2aed65g5r">系统异常</p></td><td id="dd7e0f9d8583g" rowspan="1" colspan="1"><p id="3513a08a1fgg0">系统异常</p></td></tr></tbody></table></section></section></div></main></body></html>

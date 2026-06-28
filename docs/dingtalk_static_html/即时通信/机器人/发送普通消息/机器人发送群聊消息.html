@@ -1,0 +1,385 @@
+<!DOCTYPE html><html><head><meta charset="utf8" / /><meta name="gmtModify" content="2025-10-21 13:59:19" / /><meta name="searchtitle" content="" / /><meta name="keywords" content="" / /><meta name="author" content="" / /><title>机器人发送群聊消息</title><meta name="gmtModify" content="2026-06-05 13:41:58" / /></head><body data-tag="topic" id="doc-api-dingtalk-OrgGroupSend" class="topic"><main id="fafd08f0b2vuh"><h1 data-tag="title" id="h1-7vi-jcx-lpj" class="title">机器人发送群聊消息</h1><p data-tag="shortdesc" id="fb1d3b20b27rl" class="shortdesc">本文档介绍了通过应用机器人发送群聊消息。</p><div data-tag="conbody" outputclass="icms-api-reference" class="icms-api-reference conbody"><section id="section-prerequisites-1" class="section icms-module" data-tag="section" data-source="latest-mounted-icms-html"><h2 id="h2-prerequisites-1" data-tag="h2" class="h2">接口调用说明</h2><p id="a6e68337f2qkg">本接口支持企业内部应用机器人，详情参考<a href="https://open.dingtalk.com/document/dingstart/configure-the-robot-application#" class="xref" id="5b213a5cc4xti">创建企业内部应用机器人</a>。</p></section><section id="section-request-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-request-1" data-tag="h2" class="h2">请求</h2><section id="section-request-basic-info" class="section"><h3 id="heading-request-basic-info" data-tag="h3" class="h3">基本信息</h3><table id="e2fe3af660ma1" tablewidth="648" tablecolswidth="216 432" autofit="false" class="table"><colgroup colwidth="0.67*" style="width:33.33%"></colgroup><colgroup colwidth="1.33*" style="width:66.67%"></colgroup><tbody class="tbody"><tr id="efdf19c2c70vl"><td id="554f1d070awie" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="4d5bc7796ecox">字段</p></td><td id="be0505b7f9psi" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="4747bd1d31ryz">值</p></td></tr><tr id="be8c27b3b5l07"><td id="954cf03c72osx" rowspan="1" colspan="1"><p id="558924c7a1cmk">HTTP URL</p></td><td id="d3bb772ebe3hz" rowspan="1" colspan="1"><p id="af89a99882hfd">https://api.dingtalk.com/v1.0/robot/groupMessages/send</p></td></tr><tr id="f49997ffefiud"><td id="bb7cc510f5jxq" rowspan="1" colspan="1"><p id="b4a8ba3925wya">HTTP Method</p></td><td id="5a4ef7c5aeskx" rowspan="1" colspan="1"><p id="2a96c14a09ufk">POST</p></td></tr><tr id="b98a06185dvvr"><td id="5dec7fa2edj0i" rowspan="1" colspan="1"><p id="1c89ea2bbekb8">支持的应用类型</p></td><td id="9d8de91625clf" rowspan="1" colspan="1"><p id="c7f72967dd7dr"><span data-tag="ph" id="ph-request-basic-app-type-apptype-0" class="ph ph-app-type" data-ph-raw-text="appType-企业内部应用">appType-企业内部应用</span>　<span data-tag="ph" id="ph-request-basic-app-type-apptype-1" class="ph ph-app-type" data-ph-raw-text="appType-第三方企业应用">appType-第三方企业应用</span></p></td></tr><tr id="69358a253a0qu"><td id="7d63d879a2r8l" rowspan="1" colspan="1"><p id="8458baf45f0rw">权限要求</p></td><td id="990cb28de89uj" rowspan="1" colspan="1"><p id="236de1021d0gt"><span data-tag="ph" id="ph-request-basic-permission-permission-qyapi-robot-sendmsg-0" class="ph-permission ph" data-ph-raw-text="permission-qyapi_robot_sendmsg-企业内机器人发送消息权限" data-permission-id="permission-qyapi_robot_sendmsg" data-permission-code="qyapi_robot_sendmsg" data-permission-detail-api="/document/api/permission/detail" data-permission-query-param="code">permission-qyapi_robot_sendmsg-企业内机器人发送消息权限</span></p></td></tr></tbody></table></section><section id="section-request-header-parameter" class="section"><h3 data-tag="h3" id="h2-agd-yvg-t3x" class="h3 title">请求头</h3><table id="fb1dd768b2zcf" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="fb1dd769b2vqu"><td id="fb1dd76ab25dc" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="fb1dd76bb2ez1">名称</p></td><td id="fb1dd76cb24mr" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="fb1dd76db2msj">类型</p></td><td id="fb1dd76eb2pp0" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="fb1dd76fb2fva">是否必填</p></td><td id="fb1dd770b252g" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="fb1dd771b2npd">描述</p></td></tr><tr id="fb1dd772b2anv"><td id="fb1dd773b2lrs" rowspan="1" colspan="1"><p id="fb1dd774b21ml">x-acs-dingtalk-access-token</p></td><td id="fb1dd775b2zcp" rowspan="1" colspan="1"><p id="fb1dd776b26xl">String</p></td><td id="fb1dfe70b2umm" rowspan="1" colspan="1"><p id="fb1dfe71b2pgc">是</p></td><td id="fb1dfe72b208t" rowspan="1" colspan="1"><p id="6b7f3c7e1ea18">调用该接口的访问凭证，通过以下获取：</p><ul id="8fba8ccbectnj"><li id="dace943c20vbe"><p id="ca09404059yfy">企业内部应用，调用<a href="https://open.dingtalk.com/document/development/obtain-the-access-token-of-an-internal-app#" id="7c7b2e81838zu" class="xref">获取企业内部应用的accessToken</a>接口获取。</p></li><li id="4198465b2bgql"><p id="65bfc18266teh">第三方企业应用，调用<a href="https://open.dingtalk.com/document/development/obtain-the-access-token-of-the-authorized-enterprise-1#" id="180ab39dabpga" class="xref">获取第三方应用授权企业的accessToken</a>接口获取。</p></li></ul></td></tr></tbody></table></section><section id="section-request-body-parameter" class="section"><h3 data-tag="h3" id="h2-hpw-boo-dxv" class="h3 title">请求体</h3><table id="fb1dfe7fb21al" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="fb1dfe80b2e7y"><td id="fb1dfe81b25v4" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="fb1e2580b2yta">名称</p></td><td id="fb1e2581b2ofm" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="fb1e2582b2zeo">类型</p></td><td id="fb1e2583b2ike" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="fb1e2584b2604">是否必填</p></td><td id="fb1e2585b2v77" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="fb1e2586b2cfm">描述</p></td></tr><tr outputclass="row row-level-1" id="fb1e2587b25fh" class="row row-level-1"><td id="fb1e2588b2838" rowspan="1" colspan="1"><p id="fb1e2589b2zdb">msgParam</p></td><td id="fb1e258ab2jtz" rowspan="1" colspan="1"><p id="fb1e258bb23xl">String</p></td><td id="fb1e258cb2uxa" rowspan="1" colspan="1"><p id="fb1e258db2pvl">是</p></td><td id="fb1e258eb2u4p" rowspan="1" colspan="1"><p id="fb1e258fb2jix">消息模板参数，详情参考<a href="https://open.dingtalk.com/document/orgapp/types-of-messages-sent-by-robots#" id="dc5d6c136d4u8" class="xref">企业机器人发送消息的消息类型</a>。长度限制 15000 字节以内。</p></td></tr><tr outputclass="row row-level-2" id="fb1e4c91b2hba" class="row row-level-2"><td id="fb1e4c92b2znz" rowspan="1" colspan="1"><p id="fb1e4c93b2ruu">msgKey</p></td><td id="fb1e4c94b2kc4" rowspan="1" colspan="1"><p id="fb1e4c95b2rs1">String</p></td><td id="fb1e4c96b29r4" rowspan="1" colspan="1"><p id="fb1e4c97b2gdn">是</p></td><td id="fb1e4c98b2abo" rowspan="1" colspan="1"><p id="fb1e4c99b25sk">消息模板key，详情参考<a href="https://open.dingtalk.com/document/dingstart/types-of-messages-sent-by-robots#" id="e30ebef627cud" class="xref">企业机器人发送消息的消息类型</a>。</p></td></tr><tr outputclass="row row-level-3" id="fb1ec1c1b2wgu" class="row row-level-3"><td id="fb1ec1c2b2kn3" rowspan="1" colspan="1"><p id="fb1ee8d0b2xh2">openConversationId</p></td><td id="fb1ee8d1b2vkb" rowspan="1" colspan="1"><p id="fb1ee8d2b26hk">String</p></td><td id="fb1ee8d3b2e81" rowspan="1" colspan="1"><p id="fb1ee8d4b2plv">是</p></td><td id="fb1ee8d5b2sjn" rowspan="1" colspan="1"><p id="fb1ee8d6b2mlv">会话ID：</p><ul id="843ed2c2deejs"><li id="843ed2c0deh43"><p id="9d6e8930den8a">如果是企业内部群</p><ul id="882ada00de0nk"><li id="87341df0de6yb"><p id="8733f6e0den38">新创建企业内部群，企业内部应用，可调用<a href="https://open.dingtalk.com/document/development/create-group-session#" id="de741d436b5m2" class="xref">创建企业内部群</a>接口获取。已存在的企业内部群，可调用<a href="https://open.dingtalk.com/document/development/jsapi-choose-chat#" id="c8625a7e042xy" class="xref">chooseChat</a>获取。</p></li></ul></li><li id="d7fecb90degow"><p id="d7fea480deefq">如果是场景群</p><ul id="dd0a2581dehrz"><li id="dca12a80de2bz"><p id="dca0dc60devwe">企业内部应用，可调用<a href="https://open.dingtalk.com/document/development/create-a-scene-group-v2#" id="db8d6d382fqht" class="xref">创建场景群</a>接口获取。已存在的场景群，可调用 <a href="https://open.dingtalk.com/document/orgapp/jsapi-choose-chat#" id="da2a1960d1gtx" class="xref">chooseChat</a> <span style="color:rgb(23, 26, 29)">选择会话 </span>JSAPI 获取。</p></li></ul></li></ul></td></tr><tr outputclass="row row-level-4" id="fb1f0fe5b2yu6" style="height:42px" class="row row-level-4"><td id="fb1f0fe6b20v7" rowspan="1" colspan="1"><p id="fb1f0fe7b23qs">robotCode</p></td><td id="fb1f0fe8b2e6f" rowspan="1" colspan="1"><p id="fb1f0fe9b2bl6">String</p></td><td id="fb1f0feab24de" rowspan="1" colspan="1"><p id="fb1f0febb2dld">是</p></td><td id="fb1f0fecb2yvp" rowspan="1" colspan="1"><p id="fb1f0fedb2i54">机器人的编码，详情参考<a href="https://open.dingtalk.com/document/development/development-robot-overview#" id="3d7a4c228asl5" class="xref">机器人 ID</a>。</p></td></tr><tr outputclass="row row-level-6" id="fb1f3700b25xy" class="row row-level-6"><td id="fb1f3701b2pv3" rowspan="1" colspan="1"><p id="fb1f3702b2v6q">coolAppCode</p></td><td id="fb1f3703b2z7p" rowspan="1" colspan="1"><p id="fb1f3704b2vj2">String</p></td><td id="fb1f5e00b2h17" rowspan="1" colspan="1"><p id="fb1f5e01b2x0p">否</p></td><td id="fb1f5e02b2xt3" rowspan="1" colspan="1"><p id="fb1f5e03b2kwd">群聊酷应用编码，详情参考<a href="https://open.dingtalk.com/document/dingstart/configuration-group-chat-quick-entry#" id="aebb36b74b6c4" class="xref">群聊酷应用</a>。
+<img src="https://help-static-aliyun-doc.aliyuncs.com/file-manage-files/zh-CN/20221206/tpjx/群聊酷应用编码.jpg" alt="" class="image break" / /></p><p class="note-icon-wrapper" id="5a20d04a6cui4"></p><section data-tag="p" id="fb1f5e05b2u0u" class="p section"><p id="fb1f5e06b2s4m">当使用群聊酷应用的方式安装机器人时，<b>必须</b>传入此参数。</p></section></td></tr></tbody></table></section><section id="section-request-body-example" class="section"><h3 id="h3-request-body-example" data-tag="h3" class="h3">请求示例</h3><div outputclass="tabbed-codeblock" data-tag="fig" id="figure-jwc-yxh-hly" class="tabbed-codeblock-box"><div class="tab-box"></div><input type="radio" name="check-figure-jwc-yxh-hly" id="figure-jwc-yxh-hly-HTTP-tab" checked="checked" /><label for="figure-jwc-yxh-hly-HTTP-tab">HTTP</label><div class="codeblock-item"><pre id="codeblock-dyy-p7z-jjg" outputclass="language-HTTP" code-type="xCode" data-tag="codeblock" class="pre codeblock language-HTTP"><code>POST /v1.0/robot/groupMessages/send HTTP/1.1
+Host:api.dingtalk.com
+x-acs-dingtalk-access-token:nvosnghskaknz8an3b82
+Content-Type:application/json
+
+{
+  "msgParam" : "{\"content\":\"钉钉，让进步发生\"}",
+  "msgKey" : "sampleText",
+  "openConversationId" : "cid6KeBBLoveMJOGXoYKF5x7EeiodoA==",
+  "robotCode" : "dingue4kfzdxbynxxxxxx",
+  "coolAppCode" : "COOLAPP-1-10182EEDD1AC0BA600D9000J"
+}</code></pre></div><input type="radio" name="check-figure-jwc-yxh-hly" id="figure-jwc-yxh-hly-java-tab" /><label for="figure-jwc-yxh-hly-java-tab">Java</label><div class="codeblock-item"><pre id="codeblock-hgi-m0n-2ln" outputclass="language-java" code-type="xCode" data-tag="codeblock" class="pre codeblock language-java"><code>// This file is auto-generated, don't edit it. Thanks.
+package com.aliyun.sample;
+
+import com.aliyun.tea.*;
+
+public class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Client
+     * @throws Exception
+     */
+    public static com.aliyun.dingtalkrobot_1_0.Client createClient() throws Exception {
+        com.aliyun.teaopenapi.models.Config config = new com.aliyun.teaopenapi.models.Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        return new com.aliyun.dingtalkrobot_1_0.Client(config);
+    }
+
+    public static void main(String[] args_) throws Exception {
+        java.util.List&lt;String&gt; args = java.util.Arrays.asList(args_);
+        com.aliyun.dingtalkrobot_1_0.Client client = Sample.createClient();
+        com.aliyun.dingtalkrobot_1_0.models.OrgGroupSendHeaders orgGroupSendHeaders = new com.aliyun.dingtalkrobot_1_0.models.OrgGroupSendHeaders();
+        orgGroupSendHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        com.aliyun.dingtalkrobot_1_0.models.OrgGroupSendRequest orgGroupSendRequest = new com.aliyun.dingtalkrobot_1_0.models.OrgGroupSendRequest()
+                .setMsgParam("{\"content\":\"钉钉，让进步发生\"}")
+                .setMsgKey("sampleText")
+                .setOpenConversationId("cid6KeBBLoveMJOGXoYKF5x7EeiodoA==")
+                .setRobotCode("dingue4kfzdxbynxxxxxx")
+                .setCoolAppCode("COOLAPP-1-10182EEDD1AC0BA600D9000J");
+        try {
+            client.orgGroupSendWithOptions(orgGroupSendRequest, orgGroupSendHeaders, new com.aliyun.teautil.models.RuntimeOptions());
+        } catch (TeaException err) {
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        } catch (Exception _err) {
+            TeaException err = new TeaException(_err.getMessage(), _err);
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        }        
+    }
+}</code></pre></div><input type="radio" name="check-figure-jwc-yxh-hly" id="figure-jwc-yxh-hly-python-tab" /><label for="figure-jwc-yxh-hly-python-tab">Python</label><div class="codeblock-item"><pre id="codeblock-ra5-soe-4cb" outputclass="language-python" code-type="xCode" data-tag="codeblock" class="pre codeblock language-python"><code># -*- coding: utf-8 -*-
+# This file is auto-generated, don't edit it. Thanks.
+import sys
+
+from typing import List
+
+from alibabacloud_dingtalk.robot_1_0.client import Client as dingtalkrobot_1_0Client
+from alibabacloud_tea_openapi import models as open_api_models
+from alibabacloud_dingtalk.robot_1_0 import models as dingtalkrobot__1__0_models
+from alibabacloud_tea_util import models as util_models
+from alibabacloud_tea_util.client import Client as UtilClient
+
+
+class Sample:
+    def __init__(self):
+        pass
+
+    @staticmethod
+    def create_client() -&gt; dingtalkrobot_1_0Client:
+        """
+        使用 Token 初始化账号Client
+        @return: Client
+        @throws Exception
+        """
+        config = open_api_models.Config()
+        config.protocol = 'https'
+        config.region_id = 'central'
+        return dingtalkrobot_1_0Client(config)
+
+    @staticmethod
+    def main(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        org_group_send_headers = dingtalkrobot__1__0_models.OrgGroupSendHeaders()
+        org_group_send_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        org_group_send_request = dingtalkrobot__1__0_models.OrgGroupSendRequest(
+            msg_param='{"content":"钉钉，让进步发生"}',
+            msg_key='sampleText',
+            open_conversation_id='cid6KeBBLoveMJOGXoYKF5x7EeiodoA==',
+            robot_code='dingue4kfzdxbynxxxxxx',
+            cool_app_code='COOLAPP-1-10182EEDD1AC0BA600D9000J'
+        )
+        try:
+            client.org_group_send_with_options(org_group_send_request, org_group_send_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+    @staticmethod
+    async def main_async(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        org_group_send_headers = dingtalkrobot__1__0_models.OrgGroupSendHeaders()
+        org_group_send_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        org_group_send_request = dingtalkrobot__1__0_models.OrgGroupSendRequest(
+            msg_param='{"content":"钉钉，让进步发生"}',
+            msg_key='sampleText',
+            open_conversation_id='cid6KeBBLoveMJOGXoYKF5x7EeiodoA==',
+            robot_code='dingue4kfzdxbynxxxxxx',
+            cool_app_code='COOLAPP-1-10182EEDD1AC0BA600D9000J'
+        )
+        try:
+            await client.org_group_send_with_options_async(org_group_send_request, org_group_send_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+
+if __name__ == '__main__':
+    Sample.main(sys.argv[1:])</code></pre></div><input type="radio" name="check-figure-jwc-yxh-hly" id="figure-jwc-yxh-hly-php-tab" /><label for="figure-jwc-yxh-hly-php-tab">PHP</label><div class="codeblock-item"><pre id="codeblock-0qg-gla-qrm" outputclass="language-php" code-type="xCode" data-tag="codeblock" class="pre codeblock language-php"><code>&lt;?php
+
+// This file is auto-generated, don't edit it. Thanks.
+namespace AlibabaCloud\SDK\Sample;
+
+use AlibabaCloud\SDK\Dingtalk\Vrobot_1_0\Dingtalk;
+use \Exception;
+use AlibabaCloud\Tea\Exception\TeaError;
+use AlibabaCloud\Tea\Utils\Utils;
+
+use Darabonba\OpenApi\Models\Config;
+use AlibabaCloud\SDK\Dingtalk\Vrobot_1_0\Models\OrgGroupSendHeaders;
+use AlibabaCloud\SDK\Dingtalk\Vrobot_1_0\Models\OrgGroupSendRequest;
+use AlibabaCloud\Tea\Utils\Utils\RuntimeOptions;
+
+class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Dingtalk Client
+     */
+    public static function createClient(){
+        $config = new Config([]);
+        $config-&gt;protocol = "https";
+        $config-&gt;regionId = "central";
+        return new Dingtalk($config);
+    }
+
+    /**
+     * @param string[] $args
+     * @return void
+     */
+    public static function main($args){
+        $client = self::createClient();
+        $orgGroupSendHeaders = new OrgGroupSendHeaders([]);
+        $orgGroupSendHeaders-&gt;xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        $orgGroupSendRequest = new OrgGroupSendRequest([
+            "msgParam" =&gt; "{\"content\":\"钉钉，让进步发生\"}",
+            "msgKey" =&gt; "sampleText",
+            "openConversationId" =&gt; "cid6KeBBLoveMJOGXoYKF5x7EeiodoA==",
+            "robotCode" =&gt; "dingue4kfzdxbynxxxxxx",
+            "coolAppCode" =&gt; "COOLAPP-1-10182EEDD1AC0BA600D9000J"
+        ]);
+        try {
+            $client-&gt;orgGroupSendWithOptions($orgGroupSendRequest, $orgGroupSendHeaders, new RuntimeOptions([]));
+        }
+        catch (Exception $err) {
+            if (!($err instanceof TeaError)) {
+                $err = new TeaError([], $err-&gt;getMessage(), $err-&gt;getCode(), $err);
+            }
+            if (!Utils::empty_($err-&gt;code) &amp;&amp; !Utils::empty_($err-&gt;message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+        }
+    }
+}
+$path = __DIR__ . \DIRECTORY_SEPARATOR . '..' . \DIRECTORY_SEPARATOR . 'vendor' . \DIRECTORY_SEPARATOR . 'autoload.php';
+if (file_exists($path)) {
+    require_once $path;
+}
+Sample::main(array_slice($argv, 1));</code></pre></div><input type="radio" name="check-figure-jwc-yxh-hly" id="figure-jwc-yxh-hly-go-tab" /><label for="figure-jwc-yxh-hly-go-tab">Go</label><div class="codeblock-item"><pre id="codeblock-4r7-cx2-zmx" outputclass="language-go" code-type="xCode" data-tag="codeblock" class="pre codeblock language-go"><code>// This file is auto-generated, don't edit it. Thanks.
+package main
+
+import (
+  "os"
+  util  "github.com/alibabacloud-go/tea-utils/v2/service"
+  dingtalkrobot_1_0  "github.com/alibabacloud-go/dingtalk/robot_1_0"
+  openapi  "github.com/alibabacloud-go/darabonba-openapi/v2/client"
+  "github.com/alibabacloud-go/tea/tea"
+)
+
+
+/**
+ * 使用 Token 初始化账号Client
+ * @return Client
+ * @throws Exception
+ */
+func CreateClient () (_result *dingtalkrobot_1_0.Client, _err error) {
+  config := &amp;openapi.Config{}
+  config.Protocol = tea.String("https")
+  config.RegionId = tea.String("central")
+  _result = &amp;dingtalkrobot_1_0.Client{}
+  _result, _err = dingtalkrobot_1_0.NewClient(config)
+  return _result, _err
+}
+
+func _main (args []*string) (_err error) {
+  client, _err := CreateClient()
+  if _err != nil {
+    return _err
+  }
+
+  orgGroupSendHeaders := &amp;dingtalkrobot_1_0.OrgGroupSendHeaders{}
+  orgGroupSendHeaders.XAcsDingtalkAccessToken = tea.String("&lt;your access token&gt;")
+  orgGroupSendRequest := &amp;dingtalkrobot_1_0.OrgGroupSendRequest{
+    MsgParam: tea.String("{\"content\":\"钉钉，让进步发生\"}"),
+    MsgKey: tea.String("sampleText"),
+    OpenConversationId: tea.String("cid6KeBBLoveMJOGXoYKF5x7EeiodoA=="),
+    RobotCode: tea.String("dingue4kfzdxbynxxxxxx"),
+    CoolAppCode: tea.String("COOLAPP-1-10182EEDD1AC0BA600D9000J"),
+  }
+  tryErr := func()(_e error) {
+    defer func() {
+      if r := tea.Recover(recover()); r != nil {
+        _e = r
+      }
+    }()
+    _, _err = client.OrgGroupSendWithOptions(orgGroupSendRequest, orgGroupSendHeaders, &amp;util.RuntimeOptions{})
+    if _err != nil {
+      return _err
+    }
+
+    return nil
+  }()
+
+  if tryErr != nil {
+    var err = &amp;tea.SDKError{}
+    if _t, ok := tryErr.(*tea.SDKError); ok {
+      err = _t
+    } else {
+      err.Message = tea.String(tryErr.Error())
+    }
+    if !tea.BoolValue(util.Empty(err.Code)) &amp;&amp; !tea.BoolValue(util.Empty(err.Message)) {
+      // err 中含有 code 和 message 属性，可帮助开发定位问题
+    }
+
+  }
+  return _err
+}
+
+
+func main() {
+  err := _main(tea.StringSlice(os.Args[1:]))
+  if err != nil {
+    panic(err)
+  }
+}</code></pre></div><input type="radio" name="check-figure-jwc-yxh-hly" id="figure-jwc-yxh-hly-nodejs-tab" /><label for="figure-jwc-yxh-hly-nodejs-tab">Node.js</label><div class="codeblock-item"><pre id="codeblock-fvz-w1k-ggb" outputclass="language-nodejs" code-type="xCode" data-tag="codeblock" class="pre codeblock language-nodejs"><code>// This file is auto-generated, don't edit it
+import Util, * as $Util from '@alicloud/tea-util';
+import dingtalkrobot_1_0, * as $dingtalkrobot_1_0 from '@alicloud/dingtalk/robot_1_0';
+import OpenApi, * as $OpenApi from '@alicloud/openapi-client';
+import * as $tea from '@alicloud/tea-typescript';
+
+
+export default class Client {
+
+  /**
+   * 使用 Token 初始化账号Client
+   * @return Client
+   * @throws Exception
+   */
+  static createClient(): dingtalkrobot_1_0 {
+    let config = new $OpenApi.Config({ });
+    config.protocol = "https";
+    config.regionId = "central";
+    return new dingtalkrobot_1_0(config);
+  }
+
+  static async main(args: string[]): Promise&lt;void&gt; {
+    let client = Client.createClient();
+    let orgGroupSendHeaders = new $dingtalkrobot_1_0.OrgGroupSendHeaders({ });
+    orgGroupSendHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+    let orgGroupSendRequest = new $dingtalkrobot_1_0.OrgGroupSendRequest({
+      msgParam: "{\"content\":\"钉钉，让进步发生\"}",
+      msgKey: "sampleText",
+      openConversationId: "cid6KeBBLoveMJOGXoYKF5x7EeiodoA==",
+      robotCode: "dingue4kfzdxbynxxxxxx",
+      coolAppCode: "COOLAPP-1-10182EEDD1AC0BA600D9000J",
+    });
+    try {
+      await client.orgGroupSendWithOptions(orgGroupSendRequest, orgGroupSendHeaders, new $Util.RuntimeOptions({ }));
+    } catch (err) {
+      if (!Util.empty(err.code) &amp;&amp; !Util.empty(err.message)) {
+        // err 中含有 code 和 message 属性，可帮助开发定位问题
+      }
+
+    }    
+  }
+
+}
+
+Client.main(process.argv.slice(2));</code></pre></div><input type="radio" name="check-figure-jwc-yxh-hly" id="figure-jwc-yxh-hly-csharp-tab" /><label for="figure-jwc-yxh-hly-csharp-tab">C#</label><div class="codeblock-item"><pre id="codeblock-kfy-zzf-yob" outputclass="language-csharp" code-type="xCode" data-tag="codeblock" class="pre codeblock language-csharp"><code>// This file is auto-generated, don't edit it. Thanks.
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
+
+using Tea;
+using Tea.Utils;
+
+
+namespace AlibabaCloud.SDK.Sample
+{
+    public class Sample 
+    {
+
+        /**
+         * 使用 Token 初始化账号Client
+         * @return Client
+         * @throws Exception
+         */
+        public static AlibabaCloud.SDK.Dingtalkrobot_1_0.Client CreateClient()
+        {
+            AlibabaCloud.OpenApiClient.Models.Config config = new AlibabaCloud.OpenApiClient.Models.Config();
+            config.Protocol = "https";
+            config.RegionId = "central";
+            return new AlibabaCloud.SDK.Dingtalkrobot_1_0.Client(config);
+        }
+
+        public static void Main(string[] args)
+        {
+            AlibabaCloud.SDK.Dingtalkrobot_1_0.Client client = CreateClient();
+            AlibabaCloud.SDK.Dingtalkrobot_1_0.Models.OrgGroupSendHeaders orgGroupSendHeaders = new AlibabaCloud.SDK.Dingtalkrobot_1_0.Models.OrgGroupSendHeaders();
+            orgGroupSendHeaders.XAcsDingtalkAccessToken = "&lt;your access token&gt;";
+            AlibabaCloud.SDK.Dingtalkrobot_1_0.Models.OrgGroupSendRequest orgGroupSendRequest = new AlibabaCloud.SDK.Dingtalkrobot_1_0.Models.OrgGroupSendRequest
+            {
+                MsgParam = "{\"content\":\"钉钉，让进步发生\"}",
+                MsgKey = "sampleText",
+                OpenConversationId = "cid6KeBBLoveMJOGXoYKF5x7EeiodoA==",
+                RobotCode = "dingue4kfzdxbynxxxxxx",
+                CoolAppCode = "COOLAPP-1-10182EEDD1AC0BA600D9000J",
+            };
+            try
+            {
+                client.OrgGroupSendWithOptions(orgGroupSendRequest, orgGroupSendHeaders, new AlibabaCloud.TeaUtil.Models.RuntimeOptions());
+            }
+            catch (TeaException err)
+            {
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+            catch (Exception _err)
+            {
+                TeaException err = new TeaException(new Dictionary&lt;string, object&gt;
+                {
+                    { "message", _err.Message }
+                });
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+        }
+
+
+    }
+}</code></pre></div></div></section></section><section id="section-response-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-response-1" data-tag="h2" class="h2">响应</h2><section id="section-response-parameter" class="section"><h3 data-tag="h3" id="h2-c3f-fvm-4ey" class="h3 title">响应体</h3><table id="fb1f5e07b2jz1" tablewidth="710" tablecolswidth="213 142 355" autofit="false" class="table"><colgroup colwidth="0.9*" style="width:30.00%"></colgroup><colgroup colwidth="0.6*" style="width:20.00%"></colgroup><colgroup colwidth="1.5*" style="width:50.00%"></colgroup><tbody class="tbody"><tr id="fb1f5e08b2ush"><td id="fb1f5e09b2vc9" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="fb1f5e0ab2566">名称</p></td><td id="fb1f5e0bb2fbx" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="fb1f5e0cb2so7">类型</p></td><td id="fb1f5e0db225q" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="fb1f5e0eb28yk">描述</p></td></tr><tr outputclass="row row-level-1" id="fb1f5e0fb22r9" class="row row-level-1"><td id="fb1f5e10b2vp0" rowspan="1" colspan="1"><p id="fb1f5e11b2xnj">processQueryKey</p></td><td id="fb1f5e12b2qhc" rowspan="1" colspan="1"><p id="fb1f5e13b207x">String</p></td><td id="fb1f5e14b2y73" rowspan="1" colspan="1"><p id="fb1f5e15b2ehb">加密消息id，根据此id可查询消息已读状态和撤回消息，调用<a href="https://open.dingtalk.com/document/development/query-the-read-list-of-robot-messages-in-person-to-person-conversations#" id="281b43557dszl" class="xref">查询人与人会话中机器人消息已读列表</a>和<a href="https://open.dingtalk.com/document/development/enterprise-chatbot-withdraws-internal-group-messages#" id="f42fb6f754tet" class="xref">企业机器人撤回内部群消息</a>接口。</p></td></tr></tbody></table></section><section id="section-response-body-example" class="section"><h3 id="h3-response-body-example" data-tag="h3" class="h3">响应体示例</h3><pre id="fafd08f2b21w2" outputclass="language-json" code-type="xCode" data-tag="codeblock" class="pre codeblock language-json"><code>HTTP/1.1 200 OK
+Content-Type:application/json
+
+{
+  "processQueryKey" : "jkasdfb8va9hndjksnvzkj"
+}</code></pre></section><section id="section-error-code-1" class="section"><h3 id="h3-error-code-1" data-tag="h3" class="h3">错误码</h3><p data-tag="p" id="p-error-code-global-guide" class="p">若调用该接口报错，可根据错误信息在<a href="https://open.dingtalk.com/document/development/server-api-error-codes-1" id="a-error-code-global-guide">全局错误码</a>文档中查找解决方案。</p><table id="fb1f8511b2ndh" tablewidth="709" tablecolswidth="142 177 177 213" autofit="false" class="table"><colgroup colwidth="0.8*" style="width:20.03%"></colgroup><colgroup colwidth="1*" style="width:24.96%"></colgroup><colgroup colwidth="1*" style="width:24.96%"></colgroup><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><tbody class="tbody"><tr id="fb1f8512b2y04"><td id="fb1f8513b2zdo" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="fb1f8514b2fi3">HttpCode</p></td><td id="fb1f8515b2iou" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="fb1f8516b2vpo">错误码</p></td><td id="fb1f8517b25sj" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="fb1f8518b2wxt">错误信息</p></td><td id="fb1f8519b2jtv" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="fb1f851ab2tfi">说明</p></td></tr><tr id="fb1f851bb22mi"><td id="fb1f851cb2bc5" rowspan="1" colspan="1"><p id="fb1f851db2vrh">400</p></td><td id="fb1fac20b209p" rowspan="1" colspan="1"><p id="fb1fac21b2u0p">invalidParameter.robotCode.empty</p></td><td id="fb1fac22b2uqg" rowspan="1" colspan="1"><p id="fb1fac23b2k9r">机器人robotCode为空</p></td><td id="fb1fac24b28h9" rowspan="1" colspan="1"><p id="fb1fac25b21v2">机器人robotCode无效，请检查机器人是否在群内</p></td></tr><tr id="fb1fac26b2fux"><td id="fb1fac27b2hxa" rowspan="1" colspan="1"><p id="fb1fac28b29aw">400</p></td><td id="fb1fac29b29ps" rowspan="1" colspan="1"><p id="fb1fac2ab2fjh">invalidParameter.robotCode.auth</p></td><td id="fb1fac2bb2zk2" rowspan="1" colspan="1"><p id="fb1fac2cb2nde">此应用appkey和机器人robotCode不匹配，请使用机器人应用的appkey</p></td><td id="fb1fac2db2yxw" rowspan="1" colspan="1"><p id="fb1fac2eb2cto">此应用appkey和机器人robotCode不匹配，请使用机器人应用的appkey</p></td></tr><tr id="fb1fac2fb2nxp"><td id="fb1fac30b2xmf" rowspan="1" colspan="1"><p id="fb1fac31b2z3d">400</p></td><td id="fb1fac32b26rs" rowspan="1" colspan="1"><p id="fb1fac33b265s">invalidParameter.robotCode.auth</p></td><td id="fb1fac34b2832" rowspan="1" colspan="1"><p id="fb1fac35b27nj">此应用suiteKey和机器人不匹配，请使用机器人绑定的ISV应用的suiteKey发送消息</p></td><td id="fb1fac36b22zk" rowspan="1" colspan="1"><p id="fb1fac37b2p2o">此应用suiteKey和机器人不匹配，请使用机器人绑定的ISV应用的suiteKey发送消息</p></td></tr><tr id="fb1fac38b286x"><td id="fb1fac39b2k44" rowspan="1" colspan="1"><p id="fb1fac3ab2ezq">400</p></td><td id="fb1fac3bb2ql1" rowspan="1" colspan="1"><p id="fb1fd330b2nzt">invalidParameter.robotCode.coolApp</p></td><td id="fb1fd331b25fm" rowspan="1" colspan="1"><p id="fb1fd332b2jrv">酷应用编码无效</p></td><td id="fb1fd333b21y3" rowspan="1" colspan="1"><p id="fb1fd334b2vnw">酷应用编码无效</p></td></tr><tr id="fb1fd335b253o"><td id="fb1fd336b2eo7" rowspan="1" colspan="1"><p id="fb1fd337b261f">400</p></td><td id="fb1fd338b23a0" rowspan="1" colspan="1"><p id="fb1fd339b2y11">invalidParameter.robotCode.coolApp</p></td><td id="fb1fd33ab20zw" rowspan="1" colspan="1"><p id="fb1fd33bb2bqe">酷应用编码和机器人不匹配，请使用此酷应用绑定的机器人发送消息</p></td><td id="fb1fd33cb2b7w" rowspan="1" colspan="1"><p id="fb1fd33db2z5j">酷应用编码和机器人不匹配，请使用此酷应用绑定的机器人发送消息</p></td></tr><tr id="fb1fd33eb2b3a"><td id="fb1fd33fb2jz2" rowspan="1" colspan="1"><p id="fb1fd340b2yxd">400</p></td><td id="fb1fd341b2ukt" rowspan="1" colspan="1"><p id="fb1fd342b2712">invalidParameter.robotCode.coolApp</p></td><td id="fb1fd343b2zar" rowspan="1" colspan="1"><p id="fb1fd344b2r78">绑定这个机器人的酷应用没有在群中被使用</p></td><td id="fb1fd345b2txl" rowspan="1" colspan="1"><p id="fb1fd346b2xws">绑定这个机器人的酷应用没有在群中被使用</p></td></tr><tr id="fb1fd347b2m6s"><td id="fb1fd348b2ucz" rowspan="1" colspan="1"><p id="fb1fd349b2ygd">400</p></td><td id="fb1fd34ab2smo" rowspan="1" colspan="1"><p id="fb1fd34bb2xne">invalidParameter.robotCode.auth</p></td><td id="fb1fd34cb2g4o" rowspan="1" colspan="1"><p id="fb1ffa40b25xy">只有酷应用身份才可使用这个机器人</p></td><td id="fb1ffa41b254a" rowspan="1" colspan="1"><p id="fb1ffa42b29nr">只有酷应用身份才可使用这个机器人</p></td></tr><tr id="fb1ffa43b22xe"><td id="fb1ffa44b27db" rowspan="1" colspan="1"><p id="fb1ffa45b2qyy">400</p></td><td id="fb1ffa46b2h8n" rowspan="1" colspan="1"><p id="fb1ffa47b24di">invalidParameter.userIds.empty</p></td><td id="fb1ffa48b2ai9" rowspan="1" colspan="1"><p id="fb1ffa49b2hvr">用户userId列表为空</p></td><td id="fb1ffa4ab22zr" rowspan="1" colspan="1"><p id="fb1ffa4bb26og">用户userId列表为空</p></td></tr><tr id="fb1ffa4cb2eao"><td id="fb1ffa4db2o01" rowspan="1" colspan="1"><p id="fb1ffa4eb2tjr">400</p></td><td id="fb1ffa4fb2a52" rowspan="1" colspan="1"><p id="fb1ffa50b2txt">invalidParameter.userIds.overMax</p></td><td id="fb1ffa51b26n5" rowspan="1" colspan="1"><p id="fb1ffa52b2nv1">用户userId列表超过最大限制</p></td><td id="fb1ffa53b2us3" rowspan="1" colspan="1"><p id="fb1ffa54b2ufj">用户userId列表超过最大限制</p></td></tr><tr id="fb1ffa55b2w1b"><td id="fb1ffa56b2ltb" rowspan="1" colspan="1"><p id="fb1ffa57b21jw">400</p></td><td id="fb1ffa58b2x0y" rowspan="1" colspan="1"><p id="fb1ffa59b2sz4">invalidParameter.msgKey.empty</p></td><td id="fb1ffa5ab2tk8" rowspan="1" colspan="1"><p id="fb1ffa5bb2hoy">缺少msgKey</p></td><td id="fb1ffa5cb2i0p" rowspan="1" colspan="1"><p id="fb1ffa5db20hb">缺少msgKey</p></td></tr><tr id="fb202150b2o14"><td id="fb202151b22jt" rowspan="1" colspan="1"><p id="fb202152b2zrp">400</p></td><td id="fb202153b20nn" rowspan="1" colspan="1"><p id="fb202154b2glw">invalidParameter.msgKey.invalid</p></td><td id="fb202155b20si" rowspan="1" colspan="1"><p id="fb202156b2n2k">msgKey无效</p></td><td id="fb202157b2tx1" rowspan="1" colspan="1"><p id="fb202158b2zuj">msgKey无效</p></td></tr><tr id="fb202159b26hl"><td id="fb20215ab29rc" rowspan="1" colspan="1"><p id="fb20215bb2opy">400</p></td><td id="fb20215cb2nmx" rowspan="1" colspan="1"><p id="fb20215db2abf">invalidParameter.msgParam.invalid</p></td><td id="fb20215eb2g7e" rowspan="1" colspan="1"><p id="fb20215fb20k1">msgParam必须是json格式</p></td><td id="fb202160b2x6g" rowspan="1" colspan="1"><p id="fb202161b2wt9">msgParam必须是json格式</p></td></tr><tr id="fb202162b2ixk"><td id="fb202163b246n" rowspan="1" colspan="1"><p id="fb202164b228w">400</p></td><td id="fb202165b2fej" rowspan="1" colspan="1"><p id="fb202166b2oqz">invalidParameter.param.invalid</p></td><td id="fb202167b2zed" rowspan="1" colspan="1"><p id="fb202168b2ufv">参数不合法</p></td><td id="fb202169b2hh0" rowspan="1" colspan="1"><p id="fb20216ab28ud">参数不合法</p></td></tr><tr id="fb20216bb2yao"><td id="fb20216cb2ff3" rowspan="1" colspan="1"><p id="fb20216db22l0">400</p></td><td id="fb204860b20mv" rowspan="1" colspan="1"><p id="fb204861b2skf">invalidParameter.msg.unsupport</p></td><td id="fb204862b2t2s" rowspan="1" colspan="1"><p id="fb204863b227q">不支持的消息类型</p></td><td id="fb204864b2ilt" rowspan="1" colspan="1"><p id="fb204865b2h8e">不支持的消息类型</p></td></tr><tr id="fb204866b2jch"><td id="fb204867b2uhj" rowspan="1" colspan="1"><p id="fb204868b20i4">400</p></td><td id="fb204869b2tdy" rowspan="1" colspan="1"><p id="fb20486ab2l84">invalidParameter.msgParam.tooLong</p></td><td id="fb20486bb2nhm" rowspan="1" colspan="1"><p id="fb20486cb2g2y">消息内容太长</p></td><td id="fb20486db24zs" rowspan="1" colspan="1"><p id="fb20486eb2png">消息内容太长</p></td></tr><tr id="fb20486fb2ag0"><td id="fb204870b226n" rowspan="1" colspan="1"><p id="fb204871b28yq">400</p></td><td id="fb204872b2vzc" rowspan="1" colspan="1"><p id="fb204873b2en5">invalidParameter.robotCode.notExsit</p></td><td id="fb204874b2b9o" rowspan="1" colspan="1"><p id="fb204875b2fmi">机器人不存在</p></td><td id="fb204876b2ont" rowspan="1" colspan="1"><p id="fb204877b2xa6">机器人不存在</p></td></tr><tr id="fb204878b2163"><td id="fb204879b2b7p" rowspan="1" colspan="1"><p id="fb20487ab2wta">400</p></td><td id="fb20487bb2qxe" rowspan="1" colspan="1"><p id="fb20487cb2cbg">unknown.send.result</p></td><td id="fb206f70b2uul" rowspan="1" colspan="1"><p id="fb206f71b2ew0">未知的发送结果</p></td><td id="fb206f72b2qx4" rowspan="1" colspan="1"><p id="fb206f73b26jh">未知的发送结果</p></td></tr><tr id="fb206f74b2aqk"><td id="fb206f75b2z6j" rowspan="1" colspan="1"><p id="fb206f76b287e">400</p></td><td id="fb206f77b29tv" rowspan="1" colspan="1"><p id="fb206f78b2oqd">invalidParameter.msgBody.invalid</p></td><td id="fb206f79b2at6" rowspan="1" colspan="1"><p id="fb206f7ab26x6">body必须是JSON</p></td><td id="fb206f7bb2wbc" rowspan="1" colspan="1"><p id="fb206f7cb2u7q">body必须是JSON</p></td></tr><tr id="fb206f7db2sme"><td id="fb206f7eb2vwg" rowspan="1" colspan="1"><p id="fb206f7fb2xbb">400</p></td><td id="fb206f80b258c" rowspan="1" colspan="1"><p id="fb206f81b2s67">invalidParameter.robotCode.missing</p></td><td id="fb206f82b2vfh" rowspan="1" colspan="1"><p id="fb206f83b2rh0">缺少robotCode</p></td><td id="fb206f84b2z3c" rowspan="1" colspan="1"><p id="fb206f85b2k8m">缺少robotCode</p></td></tr><tr id="fb206f86b2z34"><td id="fb206f87b22b7" rowspan="1" colspan="1"><p id="fb206f88b29od">400</p></td><td id="fb206f89b2454" rowspan="1" colspan="1"><p id="fb206f8ab2pff">invalidParameter.userId.empty</p></td><td id="fb206f8bb2ero" rowspan="1" colspan="1"><p id="fb209680b26pt">缺少staffId</p></td><td id="fb209681b236c" rowspan="1" colspan="1"><p id="fb209682b2qei">缺少staffId</p></td></tr><tr id="fb209683b22zv"><td id="fb209684b2ucl" rowspan="1" colspan="1"><p id="fb209685b2f2o">400</p></td><td id="fb209686b2ppl" rowspan="1" colspan="1"><p id="fb209687b2lsp">invalidParameter.token.invalid</p></td><td id="fb209688b26kj" rowspan="1" colspan="1"><p id="fb209689b2h3c">无授权的token</p></td><td id="fb20968ab2zre" rowspan="1" colspan="1"><p id="fb20968bb2dh7">无授权的token</p></td></tr><tr id="fb20968cb2edg"><td id="fb20968db2hkp" rowspan="1" colspan="1"><p id="fb20968eb2qwy">400</p></td><td id="fb20968fb2jd9" rowspan="1" colspan="1"><p id="fb209690b207q">invalidParameter.processQueryKey.missing</p></td><td id="fb209691b2d63" rowspan="1" colspan="1"><p id="fb209692b2c9w">缺少processQueryKey</p></td><td id="fb209693b2xwx" rowspan="1" colspan="1"><p id="fb209694b21qn">缺少processQueryKey</p></td></tr><tr id="fb209695b2t5v"><td id="fb209696b2hep" rowspan="1" colspan="1"><p id="fb209697b2hwq">400</p></td><td id="fb209698b2i6v" rowspan="1" colspan="1"><p id="fb209699b2wuw">invalidParameter.robotCode.invalid</p></td><td id="fb20969ab27ey" rowspan="1" colspan="1"><p id="fb20969bb2c85">无效的robotCode</p></td><td id="fb20969cb2oyo" rowspan="1" colspan="1"><p id="fb20969db26az">无效的robotCode</p></td></tr><tr id="fb20bd90b2fs9"><td id="fb20bd91b2myb" rowspan="1" colspan="1"><p id="fb20bd92b2zgk">400</p></td><td id="fb20bd93b2b0u" rowspan="1" colspan="1"><p id="fb20bd94b2o8f">invalid.processQueryKey</p></td><td id="fb20bd95b2djl" rowspan="1" colspan="1"><p id="fb20bd96b2w77">无效的processQueryKey</p></td><td id="fb20bd97b2175" rowspan="1" colspan="1"><p id="fb20bd98b2f8s">无效的processQueryKey</p></td></tr><tr id="fb20bd99b2h0f"><td id="fb20bd9ab2gdt" rowspan="1" colspan="1"><p id="fb20bd9bb2trk">400</p></td><td id="fb20bd9cb2m6v" rowspan="1" colspan="1"><p id="fb20bd9db2ed1">miss.openConversationId</p></td><td id="fb20bd9eb22dz" rowspan="1" colspan="1"><p id="fb20bd9fb2lnv">缺少openConversationId</p></td><td id="fb20bda0b2laj" rowspan="1" colspan="1"><p id="fb20bda1b29s9">缺少openConversationId</p></td></tr><tr id="fb20bda2b22y8"><td id="fb20bda3b2st3" rowspan="1" colspan="1"><p id="fb20bda4b246c">400</p></td><td id="fb20bda5b2be4" rowspan="1" colspan="1"><p id="fb20bda6b2v08">invalid.openConversationId</p></td><td id="fb20e4a0b2ocr" rowspan="1" colspan="1"><p id="fb20e4a1b26yp">无效的openConversationId</p></td><td id="fb20e4a2b2mg6" rowspan="1" colspan="1"><p id="fb20e4a3b25ww">无效的openConversationId</p></td></tr><tr id="fb20e4a4b23sa"><td id="fb20e4a5b2ntf" rowspan="1" colspan="1"><p id="fb20e4a6b27i9">400</p></td><td id="fb20e4a7b2y66" rowspan="1" colspan="1"><p id="fb20e4a8b298z">group.disbanded</p></td><td id="fb20e4a9b2oo2" rowspan="1" colspan="1"><p id="fb20e4aab2soo">群已经解散</p></td><td id="fb20e4abb2cee" rowspan="1" colspan="1"><p id="fb20e4acb2z8o">群已经解散</p></td></tr><tr id="fb20e4adb2lcq"><td id="fb20e4aeb2ota" rowspan="1" colspan="1"><p id="fb20e4afb2d5h">400</p></td><td id="fb20e4b0b2n1k" rowspan="1" colspan="1"><p id="fb20e4b1b2uqq">token.notExisted</p></td><td id="fb20e4b2b2j9z" rowspan="1" colspan="1"><p id="fb20e4b3b2aqm">TOKEN不存在</p></td><td id="fb20e4b4b2z6h" rowspan="1" colspan="1"><p id="fb20e4b5b21el">TOKEN不存在</p></td></tr><tr id="fb20e4b6b29tt"><td id="fb20e4b7b2mh6" rowspan="1" colspan="1"><p id="fb20e4b8b2trr">400</p></td><td id="fb20e4b9b2o1k" rowspan="1" colspan="1"><p id="fb210bb0b2sw6">bot.stopped</p></td><td id="fb210bb1b2f95" rowspan="1" colspan="1"><p id="fb210bb2b23pw">群机器人已经停用</p></td><td id="fb210bb3b2xg0" rowspan="1" colspan="1"><p id="fb210bb4b2pga">群机器人已经停用</p></td></tr><tr id="fb210bb5b29rv"><td id="fb210bb6b2714" rowspan="1" colspan="1"><p id="fb210bb7b2svq">400</p></td><td id="fb210bb8b2ej3" rowspan="1" colspan="1"><p id="fb210bb9b2e45">template.not.existed</p></td><td id="fb210bbab2c24" rowspan="1" colspan="1"><p id="fb210bbbb2xtq">机器人模板不存在</p></td><td id="fb210bbcb2dxh" rowspan="1" colspan="1"><p id="fb210bbdb2p2p">机器人模板不存在</p></td></tr><tr id="fb210bbeb27z8"><td id="fb210bbfb2utn" rowspan="1" colspan="1"><p id="fb210bc0b28at">400</p></td><td id="fb210bc1b20y6" rowspan="1" colspan="1"><p id="fb210bc2b2ykm">template.stopped</p></td><td id="fb210bc3b2iuz" rowspan="1" colspan="1"><p id="fb210bc4b2vdl">机器人模板已经停用</p></td><td id="fb210bc5b2j2h" rowspan="1" colspan="1"><p id="fb210bc6b23gz">机器人模板已经停用</p></td></tr><tr id="fb210bc7b229b"><td id="fb210bc8b2rwl" rowspan="1" colspan="1"><p id="fb210bc9b2766">400</p></td><td id="fb210bcab2rh1" rowspan="1" colspan="1"><p id="fb2132c0b2pol">miss.param.text</p></td><td id="fb2132c1b2wtl" rowspan="1" colspan="1"><p id="fb2132c2b2k2x">需要text属性</p></td><td id="fb2132c3b29ne" rowspan="1" colspan="1"><p id="fb2132c4b2j1s">需要text属性</p></td></tr><tr id="fb2132c5b23xm"><td id="fb2132c6b2sx5" rowspan="1" colspan="1"><p id="fb2132c7b21ab">400</p></td><td id="fb2132c8b21sb" rowspan="1" colspan="1"><p id="fb2132c9b2ion">miss.param.contentOfText</p></td><td id="fb2132cab23gn" rowspan="1" colspan="1"><p id="fb2132cbb2lfs">需要text-&gt;content属性</p></td><td id="fb2132ccb2r1x" rowspan="1" colspan="1"><p id="fb2132cdb2dxt">需要text-&gt;content属性</p></td></tr><tr id="fb2132ceb2gkq"><td id="fb2132cfb2psn" rowspan="1" colspan="1"><p id="fb2132d0b2axk">400</p></td><td id="fb2132d1b284l" rowspan="1" colspan="1"><p id="fb2132d2b2bdb">miss.param.link</p></td><td id="fb2159d0b21h2" rowspan="1" colspan="1"><p id="fb2159d1b2qse">需要link属性</p></td><td id="fb2159d2b29b1" rowspan="1" colspan="1"><p id="fb2159d3b2cy5">需要link属性</p></td></tr><tr id="fb2159d4b2qqz"><td id="fb2159d5b2hf1" rowspan="1" colspan="1"><p id="fb2159d6b2tc1">400</p></td><td id="fb2159d7b2pp4" rowspan="1" colspan="1"><p id="fb2159d8b2h7v">miss.param.textOfLink</p></td><td id="fb2159d9b2zug" rowspan="1" colspan="1"><p id="fb2159dab2qar">需要link-&gt;text属性</p></td><td id="fb2159dbb2gmy" rowspan="1" colspan="1"><p id="fb2159dcb2d8s">需要link-&gt;text属性</p></td></tr><tr id="fb2159ddb2zm6"><td id="fb2159deb2ya0" rowspan="1" colspan="1"><p id="fb2159dfb2n4l">400</p></td><td id="fb2159e0b2zz7" rowspan="1" colspan="1"><p id="fb2159e1b2u17">miss.param.titleOfLink</p></td><td id="fb2159e2b28wg" rowspan="1" colspan="1"><p id="fb2159e3b28bk">需要link-&gt;title属性</p></td><td id="fb2159e4b2xhu" rowspan="1" colspan="1"><p id="fb2180e0b2vld">需要link-&gt;title属性</p></td></tr><tr id="fb2180e1b2hb7"><td id="fb2180e2b2rte" rowspan="1" colspan="1"><p id="fb2180e3b2p93">400</p></td><td id="fb2180e4b2spm" rowspan="1" colspan="1"><p id="fb2180e5b2lke">miss.param.messageUrlOfLink</p></td><td id="fb2180e6b2ps1" rowspan="1" colspan="1"><p id="fb2180e7b2ry4">需要link-&gt;messageUrl属性</p></td><td id="fb2180e8b2s5h" rowspan="1" colspan="1"><p id="fb2180e9b2chq">需要link-&gt;messageUrl属性</p></td></tr><tr id="fb2180eab2fqi"><td id="fb2180ebb2md1" rowspan="1" colspan="1"><p id="fb2180ecb2nxf">400</p></td><td id="fb2180edb22zb" rowspan="1" colspan="1"><p id="fb2180eeb298e">miss.param.markdown</p></td><td id="fb2180efb2ubv" rowspan="1" colspan="1"><p id="fb2180f0b20om">需要markdown属性</p></td><td id="fb2180f1b2plu" rowspan="1" colspan="1"><p id="fb2180f2b2nrk">需要markdown属性</p></td></tr><tr id="fb2180f3b2xbj"><td id="fb2180f4b2a7w" rowspan="1" colspan="1"><p id="fb2180f5b2won">400</p></td><td id="fb2180f6b2cx9" rowspan="1" colspan="1"><p id="fb2180f7b2u1e">miss.param.markdownTotitle</p></td><td id="fb21a7f0b2obl" rowspan="1" colspan="1"><p id="fb21a7f1b25yt">需要markdown-&gt;text属性</p></td><td id="fb21a7f2b2fhm" rowspan="1" colspan="1"><p id="fb21a7f3b2tsd">需要markdown-&gt;text属性</p></td></tr><tr id="fb21a7f4b2fe5"><td id="fb21a7f5b2jlk" rowspan="1" colspan="1"><p id="fb21a7f6b2wah">400</p></td><td id="fb21a7f7b2n5h" rowspan="1" colspan="1"><p id="fb21a7f8b2vho">miss.param.markdownTotext</p></td><td id="fb21a7f9b2cop" rowspan="1" colspan="1"><p id="fb21a7fab2sb3">需要markdown-&gt;text属性</p></td><td id="fb21a7fbb2rwq" rowspan="1" colspan="1"><p id="fb21a7fcb29jz">需要markdown-&gt;text属性</p></td></tr><tr id="fb21a7fdb232j"><td id="fb21a7feb26da" rowspan="1" colspan="1"><p id="fb21a7ffb2d1q">400</p></td><td id="fb21a800b2xys" rowspan="1" colspan="1"><p id="fb21a801b2oy4">miss.param.actionCard</p></td><td id="fb21a802b20xi" rowspan="1" colspan="1"><p id="fb21a803b2pzw">需要actionCard属性</p></td><td id="fb21a804b2yrw" rowspan="1" colspan="1"><p id="fb21a805b2ms0">需要actionCard属性</p></td></tr><tr id="fb21a806b227r"><td id="fb21a807b2zql" rowspan="1" colspan="1"><p id="fb21a808b2vm3">400</p></td><td id="fb21a809b2faw" rowspan="1" colspan="1"><p id="fb21a80ab2xyc">miss.param.actionCardTotitle</p></td><td id="fb21a80bb2opq" rowspan="1" colspan="1"><p id="fb21cf00b22ha">需要actionCard-&gt;title属性</p></td><td id="fb21cf01b2wec" rowspan="1" colspan="1"><p id="fb21cf02b29sh">需要actionCard-&gt;title属性</p></td></tr><tr id="fb21cf03b2iwl"><td id="fb21cf04b2j23" rowspan="1" colspan="1"><p id="fb21cf05b2lxf">400</p></td><td id="fb21cf06b2m9n" rowspan="1" colspan="1"><p id="fb21cf07b2p84">miss.param.actionCardTotext</p></td><td id="fb21cf08b2sgm" rowspan="1" colspan="1"><p id="fb21cf09b2fml">需要actionCard-&gt;text属性</p></td><td id="fb21cf0ab2odl" rowspan="1" colspan="1"><p id="fb21cf0bb2ewb">需要actionCard-&gt;text属性</p></td></tr><tr id="fb21cf0cb2hqk"><td id="fb21cf0db2qim" rowspan="1" colspan="1"><p id="fb21cf0eb2rjs">400</p></td><td id="fb21cf0fb2wo1" rowspan="1" colspan="1"><p id="fb21cf10b2orm">miss.param.actionCardTosingleTitle</p></td><td id="fb21cf11b20km" rowspan="1" colspan="1"><p id="fb21cf12b27z3">需要actionCard-&gt;singleTitle属性</p></td><td id="fb21cf13b2lfx" rowspan="1" colspan="1"><p id="fb21cf14b2nec">需要actionCard-&gt;singleTitle属性</p></td></tr><tr id="fb21cf15b2p9z"><td id="fb21cf16b2o2h" rowspan="1" colspan="1"><p id="fb21cf17b23ir">400</p></td><td id="fb21cf18b2jdu" rowspan="1" colspan="1"><p id="fb21cf19b2mic">miss.param.actionCardTosingleUrl</p></td><td id="fb21f610b2q30" rowspan="1" colspan="1"><p id="fb21f611b2vjj">需要actionCard-&gt;singleURL属性</p></td><td id="fb21f612b25ca" rowspan="1" colspan="1"><p id="fb21f613b2ey4">需要actionCard-&gt;singleURL属性</p></td></tr><tr id="fb21f614b2ss2"><td id="fb21f615b2f2h" rowspan="1" colspan="1"><p id="fb21f616b2kyo">400</p></td><td id="fb21f617b2cwk" rowspan="1" colspan="1"><p id="fb21f618b2qzz">miss.param.actionCardTobtns</p></td><td id="fb21f619b23kz" rowspan="1" colspan="1"><p id="fb21f61ab2qtg">需要actionCard-&gt;btns属性</p></td><td id="fb21f61bb297m" rowspan="1" colspan="1"><p id="fb21f61cb264t">需要actionCard-&gt;btns属性</p></td></tr><tr id="fb21f61db21hv"><td id="fb21f61eb28gg" rowspan="1" colspan="1"><p id="fb21f61fb2kvh">400</p></td><td id="fb21f620b276w" rowspan="1" colspan="1"><p id="fb21f621b26h2">miss.param.actionCardTobtnsTotitle</p></td><td id="fb21f622b2fhj" rowspan="1" colspan="1"><p id="fb21f623b2hwp">需要actionCard-&gt;btns-&gt;title属性</p></td><td id="fb21f624b22tz" rowspan="1" colspan="1"><p id="fb21f625b2j27">需要actionCard-&gt;btns-&gt;title属性</p></td></tr><tr id="fb21f626b2n67"><td id="fb21f627b24cb" rowspan="1" colspan="1"><p id="fb21f628b241a">400</p></td><td id="fb21f629b2ia2" rowspan="1" colspan="1"><p id="fb21f62ab2ra6">miss.param.actionCardTobtnsToactionUrl</p></td><td id="fb21f62bb26qf" rowspan="1" colspan="1"><p id="fb21f62cb2o0a">需要actionCard-&gt;btns-&gt;actionURL属性</p></td><td id="fb21f62db26tf" rowspan="1" colspan="1"><p id="fb21f62eb2co7">需要actionCard-&gt;btns-&gt;actionURL属性</p></td></tr><tr id="fb221d20b2bs1"><td id="fb221d21b2tld" rowspan="1" colspan="1"><p id="fb221d22b2ykm">400</p></td><td id="fb221d23b2f2h" rowspan="1" colspan="1"><p id="fb221d24b2c1q">invalid.param.actionCardTobtnOrientation</p></td><td id="fb221d25b2kje" rowspan="1" colspan="1"><p id="fb221d26b2vlv">错误的actionCard-&gt;btnOrientation</p></td><td id="fb221d27b224x" rowspan="1" colspan="1"><p id="fb221d28b2z4h">错误的actionCard-&gt;btnOrientation</p></td></tr><tr id="fb221d29b2hck"><td id="fb221d2ab2o4i" rowspan="1" colspan="1"><p id="fb221d2bb2jnu">400</p></td><td id="fb221d2cb2bcs" rowspan="1" colspan="1"><p id="fb221d2db2ng5">invalid.param.actionCardTocanForward</p></td><td id="fb221d2eb2udo" rowspan="1" colspan="1"><p id="fb226b40b2o2y">错误的actionCard-&gt;canForward</p></td><td id="fb226b41b2sg6" rowspan="1" colspan="1"><p id="fb226b42b28wd">错误的actionCard-&gt;canForward</p></td></tr><tr id="fb226b43b2gx8"><td id="fb226b44b213g" rowspan="1" colspan="1"><p id="fb226b45b2wgo">400</p></td><td id="fb226b46b2p3i" rowspan="1" colspan="1"><p id="fb226b47b2nzl">miss.param.feedCard</p></td><td id="fb226b48b294r" rowspan="1" colspan="1"><p id="fb226b49b23qq">需要feedCard属性</p></td><td id="fb226b4ab2iqi" rowspan="1" colspan="1"><p id="fb226b4bb2foa">需要feedCard属性</p></td></tr><tr id="fb226b4cb2aol"><td id="fb229250b276e" rowspan="1" colspan="1"><p id="fb229251b2y3i">400</p></td><td id="fb229252b2qnf" rowspan="1" colspan="1"><p id="fb229253b2yi0">miss.param.feedCardTolinks</p></td><td id="fb229254b2mbo" rowspan="1" colspan="1"><p id="fb229255b24tn">需要feedCard-&gt;links属性</p></td><td id="fb229256b2qmt" rowspan="1" colspan="1"><p id="fb229257b25bf">需要feedCard-&gt;links属性</p></td></tr><tr id="fb229258b238r"><td id="fb229259b2o24" rowspan="1" colspan="1"><p id="fb22925ab2xm9">400</p></td><td id="fb22925bb21dz" rowspan="1" colspan="1"><p id="fb22925cb2uqc">miss.param.feedCardTolinksTotitle</p></td><td id="fb22925db2iej" rowspan="1" colspan="1"><p id="fb22925eb2l9n">需要feedCard-&gt;links-&gt;title属性</p></td><td id="fb22925fb2om0" rowspan="1" colspan="1"><p id="fb229260b239s">需要feedCard-&gt;links-&gt;title属性</p></td></tr><tr id="fb229261b24dy"><td id="fb229262b2o5v" rowspan="1" colspan="1"><p id="fb229263b28mu">400</p></td><td id="fb229264b2v9i" rowspan="1" colspan="1"><p id="fb229265b2m6m">miss.param.feedCardTolinksTomessageUrl</p></td><td id="fb229266b2732" rowspan="1" colspan="1"><p id="fb229267b2w1v">需要feedCard-&gt;links-&gt;messageURL属性</p></td><td id="fb229268b2hkz" rowspan="1" colspan="1"><p id="fb229269b2mns">需要feedCard-&gt;links-&gt;messageURL属性</p></td></tr><tr id="fb22926ab2tkb"><td id="fb22926bb2936" rowspan="1" colspan="1"><p id="fb22926cb27gk">400</p></td><td id="fb22926db2c5x" rowspan="1" colspan="1"><p id="fb22926eb2cw2">miss.param.feedCardTolinksTopicUrl</p></td><td id="fb22926fb2nzw" rowspan="1" colspan="1"><p id="fb22b960b248t">需要feedCard-&gt;links-&gt;picURL属性</p></td><td id="fb22b961b2z93" rowspan="1" colspan="1"><p id="fb22b962b2nsk">需要feedCard-&gt;links-&gt;picURL属性</p></td></tr><tr id="fb22b963b2yex"><td id="fb22b964b27c5" rowspan="1" colspan="1"><p id="fb22b965b22x2">400</p></td><td id="fb22b966b2zt3" rowspan="1" colspan="1"><p id="fb22b967b2790">miss.param.photo</p></td><td id="fb22b968b2x3m" rowspan="1" colspan="1"><p id="fb22b969b2av4">需要photo属性</p></td><td id="fb22b96ab27vi" rowspan="1" colspan="1"><p id="fb22b96bb2uvy">需要photo属性</p></td></tr><tr id="fb22b96cb2xzz"><td id="fb22b96db2dqt" rowspan="1" colspan="1"><p id="fb22b96eb27wg">400</p></td><td id="fb22b96fb2t95" rowspan="1" colspan="1"><p id="fb22b970b2483">miss.param.photoTophotoUrl</p></td><td id="fb22b971b2gdz" rowspan="1" colspan="1"><p id="fb22b972b27g9">需要photo-&gt;photoURL属性</p></td><td id="fb22b973b2ia6" rowspan="1" colspan="1"><p id="fb22b974b2zgu">需要photo-&gt;photoURL属性</p></td></tr><tr id="fb22b975b2lma"><td id="fb22b976b2d5c" rowspan="1" colspan="1"><p id="fb22b977b2hkt">400</p></td><td id="fb22b978b28cw" rowspan="1" colspan="1"><p id="fb22b979b2qgx">miss.param.image</p></td><td id="fb22b97ab2dd3" rowspan="1" colspan="1"><p id="fb22b97bb2ezh">需要image属性</p></td><td id="fb22b97cb2ill" rowspan="1" colspan="1"><p id="fb22b97db249r">需要image属性</p></td></tr><tr id="fb22e070b23k4"><td id="fb22e071b2n7r" rowspan="1" colspan="1"><p id="fb22e072b2jv0">400</p></td><td id="fb22e073b2zai" rowspan="1" colspan="1"><p id="fb22e074b2wby">miss.param.imageTopicUrl</p></td><td id="fb22e075b2gf3" rowspan="1" colspan="1"><p id="fb22e076b2giu">需要image-&gt;picURL属性</p></td><td id="fb22e077b2mz1" rowspan="1" colspan="1"><p id="fb22e078b2cra">需要image-&gt;picURL属性</p></td></tr><tr id="fb22e079b2xd5"><td id="fb22e07ab2ipi" rowspan="1" colspan="1"><p id="fb22e07bb2epv">400</p></td><td id="fb22e07cb2uow" rowspan="1" colspan="1"><p id="fb22e07db2ab4">miss.param.beautifulCard</p></td><td id="fb22e07eb2k86" rowspan="1" colspan="1"><p id="fb22e07fb243x">需要beautifulCard属性</p></td><td id="fb22e080b242f" rowspan="1" colspan="1"><p id="fb22e081b2dhb">需要beautifulCard属性</p></td></tr><tr id="fb22e082b2xm3"><td id="fb22e083b22bb" rowspan="1" colspan="1"><p id="fb22e084b2k46">400</p></td><td id="fb22e085b297l" rowspan="1" colspan="1"><p id="fb22e086b23c4">miss.param.beautifulCardToimage</p></td><td id="fb22e087b284j" rowspan="1" colspan="1"><p id="fb22e088b2lnk">需要beautifulCard-&gt;image属性</p></td><td id="fb22e089b2zch" rowspan="1" colspan="1"><p id="fb22e08ab24d2">需要beautifulCard-&gt;image属性</p></td></tr><tr id="fb22e08bb25uj"><td id="fb22e08cb2mea" rowspan="1" colspan="1"><p id="fb22e08db26y0">400</p></td><td id="fb230780b2ln6" rowspan="1" colspan="1"><p id="fb230781b2ui0">miss.param.beautifulCardTotitle</p></td><td id="fb230782b25gb" rowspan="1" colspan="1"><p id="fb230783b2nxx">需要beautifulCard-&gt;title属性</p></td><td id="fb230784b2xm0" rowspan="1" colspan="1"><p id="fb230785b2but">需要beautifulCard-&gt;title属性</p></td></tr><tr id="fb230786b2jnf"><td id="fb230787b2hr1" rowspan="1" colspan="1"><p id="fb230788b22u1">400</p></td><td id="fb230789b2nph" rowspan="1" colspan="1"><p id="fb23078ab2rbl">miss.param.beautifulCardToactionUrl</p></td><td id="fb23078bb2jkc" rowspan="1" colspan="1"><p id="fb23078cb2vrl">需要beautifulCard-&gt;actionUrl属性</p></td><td id="fb23078db2yfx" rowspan="1" colspan="1"><p id="fb23078eb2hz2">需要beautifulCard-&gt;actionUrl属性</p></td></tr><tr id="fb23078fb27x8"><td id="fb230790b21rc" rowspan="1" colspan="1"><p id="fb230791b2cao">400</p></td><td id="fb230792b2v8z" rowspan="1" colspan="1"><p id="fb230793b2ims">miss.param.beautifulCardTointroduction</p></td><td id="fb230794b2zua" rowspan="1" colspan="1"><p id="fb230795b27zx">需要beautifulCard-&gt;introduction属性</p></td><td id="fb230796b2be5" rowspan="1" colspan="1"><p id="fb230797b2z7l">需要beautifulCard-&gt;introduction属性</p></td></tr><tr id="fb230798b2rn0"><td id="fb230799b26b9" rowspan="1" colspan="1"><p id="fb23079ab272q">400</p></td><td id="fb23079bb2ayv" rowspan="1" colspan="1"><p id="fb23079cb2t6j">send.byToken.tooFast</p></td><td id="fb232e90b2aq1" rowspan="1" colspan="1"><p id="fb232e91b2gcb">用TOKEN发送限流错误 </p></td><td id="fb232e92b2h4s" rowspan="1" colspan="1"><p id="fb232e93b2je7">用TOKEN发送限流错误</p></td></tr><tr id="fb232e94b2ivc"><td id="fb232e95b2kfv" rowspan="1" colspan="1"><p id="fb232e96b2mce">400</p></td><td id="fb232e97b23n3" rowspan="1" colspan="1"><p id="fb232e98b2ksa">send.too.fast</p></td><td id="fb232e99b2dlf" rowspan="1" colspan="1"><p id="fb232e9ab2tyo">限流错误</p></td><td id="fb232e9bb26gy" rowspan="1" colspan="1"><p id="fb232e9cb2gt0">限流错误</p></td></tr><tr id="fb232e9db2013"><td id="fb232e9eb2i4a" rowspan="1" colspan="1"><p id="fb232e9fb2ccd">400</p></td><td id="fb232ea0b2ol6" rowspan="1" colspan="1"><p id="fb232ea1b2f34">send.forbidden</p></td><td id="fb232ea2b2vy5" rowspan="1" colspan="1"><p id="fb232ea3b2tha">禁止发送</p></td><td id="fb232ea4b2yzp" rowspan="1" colspan="1"><p id="fb232ea5b23ae">禁止发送</p></td></tr><tr id="fb232ea6b2zwp"><td id="fb232ea7b2j4m" rowspan="1" colspan="1"><p id="fb232ea8b20zh">400</p></td><td id="fb232ea9b28tz" rowspan="1" colspan="1"><p id="fb232eaab2etw">ip.not.match</p></td><td id="fb2355a0b2s3n" rowspan="1" colspan="1"><p id="fb2355a1b2ecl">IP不匹配</p></td><td id="fb2355a2b2g5v" rowspan="1" colspan="1"><p id="fb2355a3b2xfb">IP不匹配</p></td></tr><tr id="fb2355a4b260d"><td id="fb2355a5b20o8" rowspan="1" colspan="1"><p id="fb2355a6b25m9">400</p></td><td id="fb2355a7b2ps4" rowspan="1" colspan="1"><p id="fb2355a8b2unk">keywords.not.match</p></td><td id="fb2355a9b29eq" rowspan="1" colspan="1"><p id="fb2355aab2awz">关键词不匹配</p></td><td id="fb2355abb2yni" rowspan="1" colspan="1"><p id="fb2355acb25t5">关键词不匹配</p></td></tr><tr id="fb2355adb2u8u"><td id="fb2355aeb215o" rowspan="1" colspan="1"><p id="fb2355afb25i1">400</p></td><td id="fb2355b0b2las" rowspan="1" colspan="1"><p id="fb2355b1b2ipd">sign.not.match</p></td><td id="fb2355b2b2m6a" rowspan="1" colspan="1"><p id="fb2355b3b2yg7">签名不匹配</p></td><td id="fb2355b4b2yle" rowspan="1" colspan="1"><p id="fb2355b5b2g55">签名不匹配</p></td></tr><tr id="fb2355b6b2fnj"><td id="fb2355b7b21k6" rowspan="1" colspan="1"><p id="fb2355b8b22nl">400</p></td><td id="fb2355b9b2zpp" rowspan="1" colspan="1"><p id="fb2355bab2qeg">contain.unsafe.url</p></td><td id="fb2355bbb2f6l" rowspan="1" colspan="1"><p id="fb2355bcb2wtf">含有不安全的外链</p></td><td id="fb237cb0b2bxt" rowspan="1" colspan="1"><p id="fb237cb1b2t33">含有不安全的外链</p></td></tr><tr id="fb237cb2b2y81"><td id="fb237cb3b29q3" rowspan="1" colspan="1"><p id="fb237cb4b28re">400</p></td><td id="fb237cb5b29oy" rowspan="1" colspan="1"><p id="fb237cb6b2dc5">contain.notAllowed.text</p></td><td id="fb237cb7b2xvq" rowspan="1" colspan="1"><p id="fb237cb8b2yb0">含有不合适的文本</p></td><td id="fb237cb9b28oq" rowspan="1" colspan="1"><p id="fb237cbab2hjv">含有不合适的文本</p></td></tr><tr id="fb237cbbb2ebm"><td id="fb237cbcb2nob" rowspan="1" colspan="1"><p id="fb237cbdb2ckn">400</p></td><td id="fb237cbeb2u8z" rowspan="1" colspan="1"><p id="fb237cbfb2fbo">contain.notAllowed.picture</p></td><td id="fb237cc0b2e3m" rowspan="1" colspan="1"><p id="fb237cc1b2536">含有不合适的图片</p></td><td id="fb237cc2b2oa4" rowspan="1" colspan="1"><p id="fb237cc3b2dsx">含有不合适的图片</p></td></tr><tr id="fb237cc4b2vgy"><td id="fb237cc5b2zvp" rowspan="1" colspan="1"><p id="fb237cc6b23dd">400</p></td><td id="fb237cc7b2efp" rowspan="1" colspan="1"><p id="fb237cc8b2z1o">contain.notAllowed.content</p></td><td id="fb237cc9b2p9n" rowspan="1" colspan="1"><p id="fb237ccab2uen">含有不合适的内容</p></td><td id="fb237ccbb2i2c" rowspan="1" colspan="1"><p id="fb237cccb2dcx">含有不合适的内容</p></td></tr><tr id="fb23a3c0b2cqs"><td id="fb23a3c1b2jqd" rowspan="1" colspan="1"><p id="fb23a3c2b2x7f">400</p></td><td id="fb23a3c3b25g2" rowspan="1" colspan="1"><p id="fb23a3c4b2tv0">illegal.receivers</p></td><td id="fb23a3c5b2dl3" rowspan="1" colspan="1"><p id="fb23a3c6b2o6t">接收者名单不合法</p></td><td id="fb23a3c7b28sz" rowspan="1" colspan="1"><p id="fb23a3c8b29x4">接收者名单不合法</p></td></tr><tr id="fb23a3c9b29vk"><td id="fb23a3cab20ar" rowspan="1" colspan="1"><p id="fb23a3cbb2irp">400</p></td><td id="fb23a3ccb2bfb" rowspan="1" colspan="1"><p id="fb23a3cdb2y3d">receivers.exceed</p></td><td id="fb23a3ceb242u" rowspan="1" colspan="1"><p id="fb23a3cfb2153">接收者名单超限</p></td><td id="fb23a3d0b2xoy" rowspan="1" colspan="1"><p id="fb23a3d1b22fg">接收者名单超限</p></td></tr><tr id="fb23a3d2b2beg"><td id="fb23a3d3b2yps" rowspan="1" colspan="1"><p id="fb23a3d4b2hoy">400</p></td><td id="fb23a3d5b2s4s" rowspan="1" colspan="1"><p id="fb23a3d6b2e1j">illegal.excludes</p></td><td id="fb23a3d7b2orr" rowspan="1" colspan="1"><p id="fb23a3d8b2oao">不接收者名单不合法</p></td><td id="fb23a3d9b24km" rowspan="1" colspan="1"><p id="fb23a3dab2yk7">不接收者名单不合法</p></td></tr><tr id="fb23cad0b2xgy"><td id="fb23cad1b2isa" rowspan="1" colspan="1"><p id="fb23cad2b2jvd">400</p></td><td id="fb23cad3b2950" rowspan="1" colspan="1"><p id="fb23cad4b23mi">too.many.group</p></td><td id="fb23cad5b258l" rowspan="1" colspan="1"><p id="fb23cad6b2g2a">发送频繁限流</p></td><td id="fb23cad7b2vw8" rowspan="1" colspan="1"><p id="fb23cad8b2mb9">发送频繁限流</p></td></tr><tr id="fb23cad9b2xrq"><td id="fb23cadab2365" rowspan="1" colspan="1"><p id="fb23cadbb2x30">400</p></td><td id="fb23cadcb2o1j" rowspan="1" colspan="1"><p id="fb23caddb2hgd">too.many.people</p></td><td id="fb23cadeb2i0y" rowspan="1" colspan="1"><p id="fb23cadfb26gl">发送频繁限流</p></td><td id="fb23cae0b24pd" rowspan="1" colspan="1"><p id="fb23cae1b2kmk">发送频繁限流</p></td></tr><tr id="fb23cae2b2zpo"><td id="fb23cae3b2ura" rowspan="1" colspan="1"><p id="fb23cae4b2fa4">400</p></td><td id="fb23cae5b2zhs" rowspan="1" colspan="1"><p id="fb23cae6b2map">only.groupAdmin.canAtAll</p></td><td id="fb23cae7b2rzw" rowspan="1" colspan="1"><p id="fb23cae8b21nu">仅群主可@所有人</p></td><td id="fb23cae9b2x0x" rowspan="1" colspan="1"><p id="fb23caeab295w">仅群主可@所有人</p></td></tr><tr id="fb23caebb2ng0"><td id="fb23f1e0b2wej" rowspan="1" colspan="1"><p id="fb23f1e1b23jt">400</p></td><td id="fb23f1e2b2k2l" rowspan="1" colspan="1"><p id="fb23f1e3b2t4q">bot.forbidden.sendMessage</p></td><td id="fb23f1e4b2jjr" rowspan="1" colspan="1"><p id="fb23f1e5b2lm6">账户被禁言</p></td><td id="fb23f1e6b242a" rowspan="1" colspan="1"><p id="fb23f1e7b260m">账户被禁言</p></td></tr><tr id="fb23f1e8b2373"><td id="fb23f1e9b2dq5" rowspan="1" colspan="1"><p id="fb23f1eab2kn1">400</p></td><td id="fb23f1ebb2lh4" rowspan="1" colspan="1"><p id="fb23f1ecb25n0">session.notExisted</p></td><td id="fb23f1edb2rao" rowspan="1" colspan="1"><p id="fb23f1eeb21xa">session不存在</p></td><td id="fb23f1efb2eje" rowspan="1" colspan="1"><p id="fb23f1f0b28tt">session不存在</p></td></tr><tr id="fb23f1f1b2lcz"><td id="fb23f1f2b2lfw" rowspan="1" colspan="1"><p id="fb23f1f3b2k0d">400</p></td><td id="fb23f1f4b22gh" rowspan="1" colspan="1"><p id="fb23f1f5b28um">session.expired</p></td><td id="fb23f1f6b2xzo" rowspan="1" colspan="1"><p id="fb23f1f7b2kqt">session已过期</p></td><td id="fb23f1f8b232y" rowspan="1" colspan="1"><p id="fb23f1f9b2wgh">session已过期</p></td></tr><tr id="fb23f1fab2qs9"><td id="fb23f1fbb29p4" rowspan="1" colspan="1"><p id="fb23f1fcb28ku">400</p></td><td id="fb2418f0b2cob" rowspan="1" colspan="1"><p id="fb2418f1b2249">staffId.notExisted</p></td><td id="fb2418f2b26jx" rowspan="1" colspan="1"><p id="fb2418f3b299o">staffId不存在</p></td><td id="fb2418f4b2wlk" rowspan="1" colspan="1"><p id="fb2418f5b27gt">staffId不存在</p></td></tr><tr id="fb2418f6b2x31"><td id="fb2418f7b24va" rowspan="1" colspan="1"><p id="fb2418f8b20kx">400</p></td><td id="fb2418f9b2in9" rowspan="1" colspan="1"><p id="fb2418fab22tg">chatbotId.notAllow.sendOTO</p></td><td id="fb2418fbb2s8p" rowspan="1" colspan="1"><p id="fb2418fcb2o19">不允许主动发单聊</p></td><td id="fb2418fdb2qqa" rowspan="1" colspan="1"><p id="fb2418feb2pou">不允许主动发单聊</p></td></tr><tr id="fb2418ffb25xb"><td id="fb241900b2bua" rowspan="1" colspan="1"><p id="fb241901b2y52">400</p></td><td id="fb241902b2dqh" rowspan="1" colspan="1"><p id="fb241903b2r7p">robot.oto.notExist</p></td><td id="fb241904b2xt1" rowspan="1" colspan="1"><p id="fb241905b23hy">没有有效的机器人单聊会话</p></td><td id="fb241906b2oll" rowspan="1" colspan="1"><p id="fb241907b2rpr">没有有效的机器人单聊会话</p></td></tr><tr id="fb244000b2gsy"><td id="fb244001b28zk" rowspan="1" colspan="1"><p id="fb244002b2cpm">400</p></td><td id="fb244003b2w43" rowspan="1" colspan="1"><p id="fb244004b2v5y">sendMessage.model.notMatch</p></td><td id="fb244005b2b65" rowspan="1" colspan="1"><p id="fb244006b2bzk">无匹配的消息模型</p></td><td id="fb244007b2pmc" rowspan="1" colspan="1"><p id="fb244008b2qhl">无匹配的消息模型</p></td></tr><tr id="fb244009b2hgi"><td id="fb24400ab2n71" rowspan="1" colspan="1"><p id="fb24400bb2apn">400</p></td><td id="fb24400cb2puk" rowspan="1" colspan="1"><p id="fb24400db2j9y">miss.param.file</p></td><td id="fb24400eb2z7s" rowspan="1" colspan="1"><p id="fb24400fb24zv">%s</p></td><td id="fb244010b24h4" rowspan="1" colspan="1"><p id="fb244011b2akm">消息内容不合法，需要file属性</p></td></tr><tr id="fb244012b20cy"><td id="fb244013b2a9b" rowspan="1" colspan="1"><p id="fb244014b2p84">400</p></td><td id="fb244015b29u1" rowspan="1" colspan="1"><p id="fb244016b2o22">miss.param.video</p></td><td id="fb244017b23x0" rowspan="1" colspan="1"><p id="fb244018b2my4">%s</p></td><td id="fb244019b2lwz" rowspan="1" colspan="1"><p id="fb246710b2iu0">消息内容不合法，需要video-&gt;videoMediaId属性</p></td></tr><tr id="fb246711b2b83"><td id="fb246712b2yfp" rowspan="1" colspan="1"><p id="fb246713b2wzv">400</p></td><td id="fb246714b2cq1" rowspan="1" colspan="1"><p id="fb246715b25kz">miss.param.audio</p></td><td id="fb246716b285t" rowspan="1" colspan="1"><p id="fb246717b2w7x">%s</p></td><td id="fb246718b2qsk" rowspan="1" colspan="1"><p id="fb246719b2r5b">消息内容不合法，需要audio属性</p></td></tr><tr id="fb24671ab2e3w"><td id="fb24671bb2bor" rowspan="1" colspan="1"><p id="fb24671cb2ght">400</p></td><td id="fb24671db2it3" rowspan="1" colspan="1"><p id="fb24671eb2b34">conversation.org.notMatch</p></td><td id="fb24671fb2fzn" rowspan="1" colspan="1"><p id="fb246720b2zdm">会话所属组织信息不匹配</p></td><td id="fb246721b2p45" rowspan="1" colspan="1"><p id="fb246722b2pih">请确认token是否有权限操作对于此会话进行操作</p></td></tr><tr id="fb246723b2916"><td id="fb246724b2256" rowspan="1" colspan="1"><p id="fb246725b206k">400</p></td><td id="fb246726b28xc" rowspan="1" colspan="1"><p id="fb246727b2m0d">resource.not.found</p></td><td id="fb246728b2cqv" rowspan="1" colspan="1"><p id="fb246729b2f1q">%s</p></td><td id="fb24672ab2hc3" rowspan="1" colspan="1"><p id="fb248e20b2zu2">资源不存在，可能是机器人不存在</p></td></tr><tr id="fb248e21b2f7b"><td id="fb248e22b2rci" rowspan="1" colspan="1"><p id="fb248e23b2oaw">400</p></td><td id="fb248e24b24vi" rowspan="1" colspan="1"><p id="fb248e25b2557">unauthorized</p></td><td id="fb248e26b2m5l" rowspan="1" colspan="1"><p id="fb248e27b2b70">%s</p></td><td id="fb248e28b2fpl" rowspan="1" colspan="1"><p id="fb248e29b227y">未授权</p></td></tr><tr id="fb248e2ab2g2c"><td id="fb248e2bb2l3d" rowspan="1" colspan="1"><p id="fb248e2cb2w17">400</p></td><td id="fb248e2db2x3b" rowspan="1" colspan="1"><p id="fb248e2eb20ip">auth.error</p></td><td id="fb248e2fb29ti" rowspan="1" colspan="1"><p id="fb248e30b26uj">%s</p></td><td id="fb248e31b2f1e" rowspan="1" colspan="1"><p id="fb248e32b22e5">权限不足，不允许操作</p></td></tr><tr id="fb248e33b2iwd"><td id="fb248e34b27wu" rowspan="1" colspan="1"><p id="fb248e35b2gb1">400</p></td><td id="fb248e36b27ud" rowspan="1" colspan="1"><p id="fb248e37b2qwo">resource.unavailable</p></td><td id="fb248e38b2f7j" rowspan="1" colspan="1"><p id="fb248e39b299n">%s</p></td><td id="fb248e3ab2lha" rowspan="1" colspan="1"><p id="fb248e3bb270r">资源不可用，可能是机器人已停用或会话未安装酷应用</p></td></tr><tr id="fb248e3cb2r57"><td id="fb248e3db2jdd" rowspan="1" colspan="1"><p id="fb248e3eb2o1t">500</p></td><td id="fb24b530b2wu2" rowspan="1" colspan="1"><p id="fb24b531b281n">system.error</p></td><td id="fb24b532b2osc" rowspan="1" colspan="1"><p id="fb24b533b2njb">未知的系统错误</p></td><td id="fb24b534b218f" rowspan="1" colspan="1"><p id="fb24b535b2stu">未知的系统错误</p></td></tr><tr id="fb24b536b2x9c"><td id="fb24b537b2b48" rowspan="1" colspan="1"><p id="fb24b538b2idi">500</p></td><td id="fb24b539b2cib" rowspan="1" colspan="1"><p id="fb24b53ab2zk6">send.ding.exception</p></td><td id="fb24b53bb2mgd" rowspan="1" colspan="1"><p id="fb24b53cb23d2">发送DING消息异常</p></td><td id="fb24b53db2zv0" rowspan="1" colspan="1"><p id="fb24b53eb2zor">发送DING消息异常</p></td></tr></tbody></table></section></section></div></main></body></html>

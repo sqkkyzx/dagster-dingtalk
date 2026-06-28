@@ -1,0 +1,210 @@
+<!DOCTYPE html><html><head><meta charset="utf8" / /><meta name="searchtitle" content="" / /><meta name="keywords" content="" / /><meta name="author" content="" / /><title>应用的全生命周期管理</title><meta name="gmtModify" content="2026-05-15 18:23:27" / /></head><body id="topic-2187234" data-tag="topic" class="topic"><main id="6f445fe05brzo"><h1 id="title-3rt-23w-fxh" data-tag="title" class="title">应用的全生命周期管理</h1><p id="shortdesc-116-eud-8j0" data-tag="shortdesc" class="shortdesc">本文档介绍了如何调用钉钉开放平台的应用管理相关接口，完成企业内部应用的创建、配置、查询与删除等全生命周期管理。适用于具备管理员权限的企业开发者，通过API实现自动化应用管理。</p><div id="conbody-62o-ypx-ci1" data-tag="conbody" class="conbody"><section id="section-d1i-ry9-o8t" class="section"><h2 id="title-jx5-o8n-bs3" data-tag="title" class="title">流程简介</h2><p id="b9958f0d4cys2">前提条件：</p><ul id="88f556794fx57"><li id="024efb857a33k"><p id="57d85b618428w">已完成<a data-tag="xref" id="06c3df3301x3q" href="/document/dingstart/create-application#" class="xref">应用创建与配置</a>的流程。</p></li><li id="ab9406de2e635"><p id="c349f031036ax">操作者为企业管理员，具备在开发者后台进行配置的权限。</p></li></ul><p id="p-hxl-kdb-r9p">步骤一：<span style="color:rgb(51, 51, 51)">获取应用凭证信息，获取应用 Client ID 和 Client Secret。</span></p><p id="p-zy3-elt-fub">步骤二：<span style="color:rgb(23, 26, 29)">申请接口权限，申请应用管理相关接口的权限。</span></p><p id="p-pd8-69k-8rx">步骤三：获取应用访问凭证<a data-tag="xref" id="79d2e04cffksj" href="/document/development/obtain-the-access-token-of-an-internal-app#" class="xref">获取企业内部应用的accessToken</a>，<span style="color:rgb(23, 26, 29)">通过accessToken鉴权调用者身份。</span></p><p id="p-9zp-uz6-z11">步骤四：调用服务端应用管理相关API。</p><ol id="c6c4ad505bc4y"><li id="c6c4ad515berz"><p id="c6c4ad525ba0z">应用查询操作流程：</p><ol id="c6c4ad535br29"><li id="c6c4ad545bo9t"><p id="c6c4ad555bcqq">调用服务端API-<a data-tag="xref" id="0955e9b2f7xqm" href="/document/development/obtains-a-list-of-all-enterprise-applications#" class="xref">获取企业所有应用列表</a>接口，获取企业应用信息。</p></li><li id="c6c4ad565balx"><p id="c6c4ad575b6yo">调用服务端API-<a data-tag="xref" id="1c7608bb80pas" href="/document/development/obtains-the-list-of-enterprise-applications-visible-to-a-user#" class="xref">获取用户可见的企业应用列表</a>接口，获取当前用户可使用的应用信息。</p></li></ol></li><li id="c6c4ad585bfvp"><p id="c6c4ad595b6r1">应用管理操作流程：</p><ol id="c6c4ad5a5bap2"><li id="c6c4ad5b5b6q2"><p id="c6c4ad5c5bbr4">调用服务端API-<a data-tag="xref" id="506db182fbid8" href="/document/development/create-an-h5-application-for-your-enterprise#" class="xref">创建企业内部应用</a>接口，创建一个企业内部应用-H5微应用，获取应用的agentid。</p></li><li id="c6c4ad5d5btam"><p id="c6c4ad5e5bvtb">根据应用agentid，调用服务端API-<a data-tag="xref" id="5f91e637f9tpc" href="/document/development/update-internal-h5-applications#" class="xref">更新企业内部应用</a>接口，更新企业内部应用-H5微应用信息。</p></li><li id="c6c4ad5f5bswl"><p id="c6c4ad605bc65">根据应用agentid，调用服务端API-<a data-tag="xref" id="ed93d66cc5q5m" href="/document/development/obtains-the-application-visible-range#" class="xref">获取企业内部应用的可使用范围</a>接口，获取当前应用的可使用范围。</p></li><li id="c6c4ad615bqtw"><p id="c6c4ad625bvcl">根据应用agentid，调用服务端API-<a data-tag="xref" id="0e1bc9b050nap" href="/document/development/update-the-visible-range-of-micro-applications#" class="xref">更新企业内部应用的可使用范围</a>接口，更新当前应用的可使用范围。</p></li><li id="c6c4ad635bwsp"><p id="c6c4ad645b4v8">根据应用agentid，调用服务端API-<a data-tag="xref" id="600ecb429adtx" href="/document/development/delete-an-internal-h5-application#" class="xref">删除企业内部应用</a>接口，删除对应的企业内部应用。</p></li></ol></li></ol></section><section id="8a2db5bb6e8ds" class="section"><h2 id="c39c4b6efajex" sourcekey="2000000005502"><b>前提条件</b></h2><p id="1e1b3365881mb">完成<a data-tag="xref" id="baa0eac65b44w" href="/document/dingstart/create-application#" class="xref">应用创建与配置</a>的流程。</p></section><section id="93f1dd80edlix" class="section"><h2 id="4d4f15f3f18pr" sourcekey="2000000005516"><b>步骤一：获取应用凭证</b></h2><ol id="9a1518f0d1b9w" start="1" sourcekey="2000000005519"><li id="c9b0a2236dbpy" sourcekey="2000000005521"><p id="4509535e2abnf">选择目标应用，进入应用详情页，单击<b>基础信息</b> &gt; <b>凭证与基础信息</b>。</p></li><li id="ebccceb078937" sourcekey="2000000005526"><p id="62ef1e7eabvla">获取应用 Client ID 和 Client Secret。</p></li></ol></section><section id="acb968315btk5" class="section"><h2 data-tag="title" id="acb968325bq0p" class="title">步骤二：添加接口权限</h2><p id="ddb0f15d58axp">单击<b>开发配置</b> &gt; <b>权限管理</b>，在权限搜索框中分别输入<code data-tag="code" id="7d2a3514a8yqm" class="code">qyapi_get_microapp_list</code>和<code data-tag="code" id="b54451165ezl0" class="code">qyapi_microapp_manage</code>，并申请权限。</p></section><section id="acb968355bx11" class="section"><h2 data-tag="title" id="acb968365bki3" class="title">步骤三：获取应用访问凭证accessToken</h2><div id="19af0d2086i7a" type="notice" class="note note-notice"><div class="note-icon-wrapper"><i class="icon-note note notice"></i></div><div class="noteContentSpan"><strong>重要 </strong><p id="19af0d21860tp">服务端API差异详情参见<a data-tag="xref" id="42fb893eda03u" href="/document/development/how-to-call-apis#section-8lr-id4-rbz" class="xref">旧版API VS 新版API</a>。以下接口均使用服务端API接口，SDK下载详情参见<a data-tag="xref" id="09b47d55b2uwr" href="/document/development/download-the-server-side-sdk#" class="xref">服务端SDK下载</a>。</p></div></div><p id="acb9683f5byyk">根据步骤一中的 Client ID 和 Client Secret，获取应用访问凭证<a data-tag="xref" id="f6bb3518398ll" href="/document/development/obtain-the-access-token-of-an-internal-app#" class="xref">获取企业内部应用的accessToken</a>。</p><pre outputclass="language-javascript" id="acb968405b4u0" data-tag="codeblock" code-type="xCode" class="pre codeblock language-javascript"><code> public void getAccessToken() throws Exception {
+        Config config = new Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        com.aliyun.dingtalkoauth2_1_0.Client client = new com.aliyun.dingtalkoauth2_1_0.Client(config);
+        GetAccessTokenRequest accessTokenRequest = new GetAccessTokenRequest()
+                .setAppKey("din*********hgn")
+                .setAppSecret("9G_O************mBkhgGIO");
+        GetAccessTokenResponse accessToken = client.getAccessToken(accessTokenRequest);
+        System.out.println(JSON.toJSONString(accessToken.getBody()));
+    }</code></pre></section><section id="section-p9o-lvr-1z6" class="section"><h2 id="title-2ov-aaw-v1g" data-tag="title" class="title">步骤四：调用服务端应用管理相关API</h2><ol id="ol-7c7-n1j-g63"><li id="li-5zz-1hj-gif"><p id="p-4nl-65v-aak">应用查询操作流程：</p><ol id="21f6a7315bn8s"><li id="21c621505b7po"><p id="233ce2d05b09j">调用服务端API-<a data-tag="xref" id="257110b9d7j70" href="/document/development/obtains-a-list-of-all-enterprise-applications#" class="xref">获取企业所有应用列表</a>接口，获取企业应用信息。</p><pre outputclass="language-java" data-tag="codeblock" id="odnktg" code-type="xCode" class="pre codeblock language-java"><code> public void allApps() throws Exception {
+        Config config = new Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        com.aliyun.dingtalkmicro_app_1_0.Client client = new com.aliyun.dingtalkmicro_app_1_0.Client(config);
+        ListAllAppHeaders listAllAppHeaders = new ListAllAppHeaders();
+        listAllAppHeaders.xAcsDingtalkAccessToken = "accessToken";
+        try {
+            ListAllAppResponse listAllAppResponse = client.listAllAppWithOptions(listAllAppHeaders, new RuntimeOptions());
+            System.out.println(JSON.toJSONString(listAllAppResponse.getBody()));
+        } catch (TeaException err) {
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+                System.out.println(err.code);
+                System.out.println(err.message);
+            }
+        } catch (Exception _err) {
+            TeaException err = new TeaException(_err.getMessage(), _err);
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+                System.out.println(err.code);
+                System.out.println(err.message);
+            }
+        }
+    }</code></pre></li><li id="241b0dd15bgx7"><p id="241b0dd05bluv">调用服务端API-<a data-tag="xref" id="9fa5ea7b23xtk" href="/document/development/obtains-the-list-of-enterprise-applications-visible-to-a-user#" class="xref">获取用户可见的企业应用列表</a>接口，获取当前用户可使用的应用信息。</p><pre outputclass="language-java" data-tag="codeblock" id="g16xkk" code-type="xCode" class="pre codeblock language-java"><code>public void usersApps() throws Exception {
+        Config config = new Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        com.aliyun.dingtalkmicro_app_1_0.Client client = new com.aliyun.dingtalkmicro_app_1_0.Client(config);
+        ListUserVilebleAppHeaders listUserVilebleAppHeaders = new ListUserVilebleAppHeaders();
+        listUserVilebleAppHeaders.xAcsDingtalkAccessToken = "accessToken";
+        try {
+            ListUserVilebleAppResponse userAppsList = client.listUserVilebleAppWithOptions("manager7675", listUserVilebleAppHeaders, new RuntimeOptions());
+            System.out.println(JSON.toJSONString(userAppsList.getBody()));
+        } catch (TeaException err) {
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+                System.out.println(err.code);
+                System.out.println(err.message);
+            }
+        } catch (Exception _err) {
+            TeaException err = new TeaException(_err.getMessage(), _err);
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+                System.out.println(err.code);
+                System.out.println(err.message);
+            }
+        }
+    }</code></pre></li></ol></li><li id="018c29205bvo4"><p id="018c02105b1qm">应用管理操作流程：</p><ol id="0b8dce615bvvu"><li id="0b1088115bvld"><p id="0ddb67e05brhe">调用服务端API-<a data-tag="xref" id="b092e442120y5" href="/document/development/create-an-h5-application-for-your-enterprise#" class="xref">创建企业内部应用</a>接口，创建一个企业内部应用，获取应用的agentid。</p><pre data-tag="codeblock" id="gtguof" outputclass="language-java" code-type="xCode" class="pre codeblock language-java"><code> public void appsCreate() throws Exception {
+        Config config = new Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        com.aliyun.dingtalkmicro_app_1_0.Client client = new com.aliyun.dingtalkmicro_app_1_0.Client(config);
+        CreateInnerAppHeaders createInnerAppHeaders = new CreateInnerAppHeaders();
+        createInnerAppHeaders.xAcsDingtalkAccessToken = "accessToken";
+        CreateInnerAppRequest createInnerAppRequest = new CreateInnerAppRequest()
+                .setOpUnionId("E9CS6Xu5*****N7QiEiE")
+                .setName("20221104应用")
+                .setDesc("20221104应用")
+                .setIcon("@lADOd*****0CbA")
+                .setHomepageLink("https://www.dingtalk.com")
+                .setPcHomepageLink("https://www.dingtalk.com")
+                .setOmpLink("https://www.dingtalk.com")
+                .setIpWhiteList(java.util.Arrays.asList(
+                        "1.1.1.1","127.0.0.1"
+                ))
+                .setScopeType("BASE");
+        try {
+            CreateInnerAppResponse innerAppWithOptions = client.createInnerAppWithOptions(createInnerAppRequest, createInnerAppHeaders, new RuntimeOptions());
+            System.out.println(JSON.toJSONString(innerAppWithOptions.getBody()));
+        } catch (TeaException err) {
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+                System.out.println(err.code);
+                System.out.println(err.message);
+            }
+        } catch (Exception _err) {
+            TeaException err = new TeaException(_err.getMessage(), _err);
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+                System.out.println(err.code);
+                System.out.println(err.message);
+            }
+        }
+    }</code></pre></li><li id="ef881f215bjlt"><p id="0e6657e05bwei">根据应用agentid，调用服务端API-<a data-tag="xref" id="b9915f9b1emrh" href="/document/development/update-internal-h5-applications#" class="xref">更新企业内部应用</a>接口，更新企业内部应用信息。</p><pre outputclass="language-java" data-tag="codeblock" id="5bfwww" code-type="xCode" class="pre codeblock language-java"><code>public void appsUpdate() throws Exception {
+        Config config = new Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        com.aliyun.dingtalkmicro_app_1_0.Client client = new com.aliyun.dingtalkmicro_app_1_0.Client(config);
+        UpdateInnerAppHeaders updateInnerAppHeaders = new UpdateInnerAppHeaders();
+        updateInnerAppHeaders.xAcsDingtalkAccessToken = "accessToken";
+        UpdateInnerAppRequest updateInnerAppRequest = new UpdateInnerAppRequest()
+                .setOpUnionId("E9CS6Xu5*****N7QiEiE")
+                .setName("20221104应用测试")
+                .setDesc("20221104应用测试")
+                .setIcon("@lADOd*****bM0CbA")
+                .setHomepageLink("https://www.dingtalk.com")
+                .setPcHomepageLink("https://www.dingtalk.com")
+                .setOmpLink("https://www.dingtalk.com")
+                .setIpWhiteList(java.util.Arrays.asList(
+                       "1.1.1.1","127.0.0.1"
+                ));
+        try {
+            UpdateInnerAppResponse updateInnerAppResponse = client.updateInnerAppWithOptions("2021****82", updateInnerAppRequest, updateInnerAppHeaders, new RuntimeOptions());
+            System.out.println(JSON.toJSONString(updateInnerAppResponse.getBody()));
+        } catch (TeaException err) {
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+                System.out.println(err.code);
+                System.out.println(err.message);
+            }
+        } catch (Exception _err) {
+            TeaException err = new TeaException(_err.getMessage(), _err);
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+                System.out.println(err.code);
+                System.out.println(err.message);
+            }
+        }
+    }</code></pre></li><li id="2d8961d15bu75"><p id="3df83af05bna7">根据应用agentid，调用服务端API-<a data-tag="xref" id="a9427b1b6ebm0" href="/document/development/obtains-the-application-visible-range#" class="xref">获取企业内部应用的可使用范围</a>接口，获取当前应用的可使用范围。</p><pre outputclass="language-java" data-tag="codeblock" id="g5u6vc" code-type="xCode" class="pre codeblock language-java"><code>public void  appsScopes() throws Exception {
+        Config config = new Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        com.aliyun.dingtalkmicro_app_1_0.Client client = new com.aliyun.dingtalkmicro_app_1_0.Client(config);
+        GetMicroAppScopeHeaders getMicroAppScopeHeaders = new GetMicroAppScopeHeaders();
+        getMicroAppScopeHeaders.xAcsDingtalkAccessToken = "accessToken";
+        try {
+            GetMicroAppScopeResponse microAppScopeWithOptions = client.getMicroAppScopeWithOptions("2021****82", getMicroAppScopeHeaders, new RuntimeOptions());
+            System.out.println(JSON.toJSONString(microAppScopeWithOptions.getBody()));
+        } catch (TeaException err) {
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+                System.out.println(err.code);
+                System.out.println(err.message);
+            }
+
+        } catch (Exception _err) {
+            TeaException err = new TeaException(_err.getMessage(), _err);
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+                System.out.println(err.code);
+                System.out.println(err.message);
+            }
+        }
+    }</code></pre></li><li id="602466305besw"><p id="622147a05bd74">根据应用agentid，调用服务端API-<a data-tag="xref" id="a578980789c30" href="/document/development/update-the-visible-range-of-micro-applications#" class="xref">更新企业内部应用的可使用范围</a>接口，更新当前应用的可使用范围。</p><pre outputclass="language-java" data-tag="codeblock" id="xygqhu" code-type="xCode" class="pre codeblock language-java"><code> public void appsScopesUpdate() throws Exception {
+        Config config = new Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        com.aliyun.dingtalkmicro_app_1_0.Client client = new com.aliyun.dingtalkmicro_app_1_0.Client(config);
+        SetMicroAppScopeHeaders setMicroAppScopeHeaders = new SetMicroAppScopeHeaders();
+        setMicroAppScopeHeaders.xAcsDingtalkAccessToken = "accessToken";
+        SetMicroAppScopeRequest setMicroAppScopeRequest = new SetMicroAppScopeRequest()
+                .setAddUserIds(java.util.Arrays.asList(
+                        "01296106445126923197"
+                ))
+                .setOnlyAdminVisible(false);
+        try {
+            SetMicroAppScopeResponse setMicroAppScopeResponse = client.setMicroAppScopeWithOptions("2021****82", setMicroAppScopeRequest, setMicroAppScopeHeaders, new RuntimeOptions());
+            System.out.println(JSON.toJSONString(setMicroAppScopeResponse.getBody()));
+        } catch (TeaException err) {
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+                System.out.println(err.code);
+                System.out.println(err.message);
+            }
+        } catch (Exception _err) {
+            TeaException err = new TeaException(_err.getMessage(), _err);
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+                System.out.println(err.code);
+                System.out.println(err.message);
+            }
+        }
+    }</code></pre></li><li id="7bd617215b90n"><p id="7e6c79705bxa9">根据应用agentid，调用服务端API-<a data-tag="xref" id="f0041f9a40tat" href="/document/development/delete-an-internal-h5-application#" class="xref">删除企业内部应用</a>接口，删除对应的企业内部应用。</p><pre outputclass="language-java" data-tag="codeblock" id="54rfar" code-type="xCode" class="pre codeblock language-java"><code> public void appsDelete() throws Exception {
+        Config config = new Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        com.aliyun.dingtalkmicro_app_1_0.Client client = new com.aliyun.dingtalkmicro_app_1_0.Client(config);
+        DeleteInnerAppHeaders deleteInnerAppHeaders = new DeleteInnerAppHeaders();
+        deleteInnerAppHeaders.xAcsDingtalkAccessToken = "accessToken";
+        DeleteInnerAppRequest deleteInnerAppRequest = new DeleteInnerAppRequest()
+                .setOpUnionId("E9CS6Xu5*****N7QiEiE");
+        try {
+            DeleteInnerAppResponse deleteInnerAppResponse = client.deleteInnerAppWithOptions("2021****82", deleteInnerAppRequest, deleteInnerAppHeaders, new RuntimeOptions());
+            System.out.println(JSON.toJSONString(deleteInnerAppResponse.getBody()));
+        } catch (TeaException err) {
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+                System.out.println(err.code);
+                System.out.println(err.message);
+            }
+        } catch (Exception _err) {
+            TeaException err = new TeaException(_err.getMessage(), _err);
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+                System.out.println(err.code);
+                System.out.println(err.message);
+            }
+        }
+    }</code></pre></li></ol></li></ol></section></div></main></body></html>

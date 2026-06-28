@@ -1,0 +1,259 @@
+<!DOCTYPE html><html><head><meta charset="utf8" / /><meta name="searchtitle" content="" / /><meta name="keywords" content="" / /><meta name="author" content="" / /><title>审批附件的操作流程</title><meta name="gmtModify" content="2025-09-10 19:31:57" / /></head><body data-tag="concept" id="concept-2251203" class="concept"><main id="main-2251203"><h1 id="8640a56035565" data-tag="title" class="title">审批附件的操作流程</h1><p id="8640cc7035kjy" data-tag="shortdesc" class="shortdesc">教程介绍了如何通过官方OA审批API实现发起带附件的审批流，及下载附件。</p><div data-tag="conbody" class="conbody"><div id="ce3b01d035ny4" type="note" class="note note-note"><div class="note-icon-wrapper"><i class="icon-note note note"></i></div><div class="noteContentSpan"><strong>说明 </strong><ul id="ce3b01d235vat"><li id="ce3b01d335buq"><p id="ce3b01d435wfb">本文档以企业内部应用为例，第三方企业应用实现流程类似。</p></li><li id="ce3b01d535557"><p id="ce3b01d6356xg">仅调用服务端API无法实现审批附件的操作流程，必须与客户端JSAPI结合使用。</p></li></ul></div></div><section id="da833bb035fcv" class="section"><h2 id="da833bb135dpx" data-tag="title" class="title">预期效果</h2><section data-tag="sectiondiv" id="da833bb235ri7" class="section sectiondiv"><h3 id="da833bb335i62" data-tag="title" class="title">发起附件审批</h3><p id="da833bb435soq"><img height="403" width="341" id="da833bb5357qa" placement="break" src="https://help-static-aliyun-doc.aliyuncs.com/assets/img/zh-CN/2133980661/p478664.png" alt="0818发起带附件评审" class="image break" / /></p></section></section><section id="e0422e3035u3d" class="section"><h2 id="e0422e3135vsy" data-tag="title" class="title">接入流程简介</h2><p id="e0422e3235k4n">本文档展示了，创建一个企业内部应用，实现使用<b>官方</b>OA审批发起带附件的审批、下载审批附件等流程：</p><p id="08c34fd23cq6f">前提条件：完成<a data-tag="xref" id="febb5d45fc7ip" href="/document/dingstart/create-application#" class="xref">创建应用</a>的流程。</p><p id="e0422e3335buo">步骤一：进入应用详情页，获取应用 Client ID 和 Client Secret。</p><p id="e0422e3435sx0">步骤二：<span style="color:rgb(23, 26, 29)">申请接口权限，申请“</span>OA审批<span style="color:rgb(23, 26, 29)">”相应权限。</span></p><p id="e0422e3635yse">步骤三：获取应用访问凭证<a data-tag="xref" id="818ba30b3a4gm" href="/document/development/obtain-the-access-token-of-an-internal-app#" class="xref">获取企业内部应用的accessToken</a>。调用接口时，通过accessToken鉴权调用者身份。</p><p id="e0422e373508r">步骤四：调用OA审批相关API和客户端JSAPI：</p><ol id="e0422e3835tqm"><li id="e0422e3935p6f"><p id="e0422e3a35tu9">调用服务端API-<a data-tag="xref" id="724a8c1f3dnfg" href="/document/development/obtains-the-information-about-approval-nail-disk#" class="xref">获取审批钉盘空间信息</a>接口，获取审批钉盘空间<code data-tag="code" id="08b818aafctwj" class="code">spaceId</code>。</p></li><li id="e0422e3b353oq"><p id="e0422e3c35dep">调用客户端JSAPI-<a data-tag="xref" id="1184b1c961da1" href="/document/development/jsapi-upload-attachment-to-ding-talk#" class="xref">上传附件到钉盘/从钉盘选择文件</a>接口，获取文件基本信息。</p></li><li id="e0422e3d35u04"><p id="e0422e3e356zk">获取模板的唯一编码<code data-tag="code" id="4a02010439nhc" class="code">processCode</code>。</p><ul id="e0422e3f35jsu"><li id="e0422e40351nk"><p id="e0422e4135c7b">通过<a href="https://aflow.dingtalk.com/dingtalk/web/query/dashboard?dinghash=aflowSetting#/aflowSetting" data-link-href-cangjie="https://aflow.dingtalk.com/dingtalk/web/query/dashboard?dinghash=aflowSetting#/aflowSetting" target="_blank" rel="noopener noreferrer" data-tag="xref" id="a-d5u-k9s-6a1" class="xref">钉钉管理后台</a>-OA审批-打开对应审批模板获取。</p></li><li id="e0422e4235tyt"><p id="e0422e43359or">调用服务端API-<a data-tag="xref" id="7ec032eddcgje" href="/document/development/create-an-approval-form-template#" class="xref">创建或更新审批表单模板</a>接口，创建审批模板获取<code data-tag="code" id="ccba10b9c6sdp" class="code">processCode</code>。</p></li></ul></li><li id="e0422e44351cb"><p id="e0422e45354i8">调用服务端API-<a data-tag="xref" id="7e62fff221lwt" href="/document/development/create-an-approval-instance#" class="xref">发起审批实例</a>接口发起审批，获取审批实例<code data-tag="code" id="aa127aa6147c7" class="code">instanceId</code>。</p></li><li id="e0422e4635mfh"><p id="e0422e4735blo">根据审批实例<code data-tag="code" id="4d8a86a8eavit" class="code">instanceId</code>，调用服务端API-<a data-tag="xref" id="c4672388a1d8k" href="/document/development/obtains-the-details-of-a-single-approval-instance-pop#" class="xref">获取单个审批实例详情</a>接口获取审批实例详情中的<code data-tag="code" id="79a5158c554by" class="code">fileId</code>。</p></li><li id="e0422e48352b3"><p id="328ea4e040ac1">审批附件操作：</p><ol id="51bc038140dis"><li id="515c7e6040hay"><p id="515c5750401hi">下载审批附件</p><ol id="3aba038140s5b"><li id="3a5fae80406u0"><p id="e0422e4935esg">调用服务端API-<a data-tag="xref" id="a0475aac98x8k" href="/document/development/download-the-approval-nail-file#" class="xref">授权下载审批钉盘文件</a>接口，进行审批钉盘文件的授权操作。</p></li><li id="3d2473d140ncv"><p id="3d2473d0403ds">调用服务端API-<a data-tag="xref" id="923d388d69p5w" href="/document/development/download-an-approval-attachment#" class="xref">下载审批附件</a>接口，获取文件的链接<code data-tag="code" id="547684f54348x" class="code">downloadUri</code>实现下载。目前不支持第三方企业应用调用。</p></li></ol></li><li id="5cc5f10140ux5"><p id="5cc5f10040ryw">预览审批附件：</p><ol id="5eea098140rkk"><li id="5e9e337140eed"><p id="5e9e337040nmn">调用服务端API-<a data-tag="xref" id="5fb575f061hwb" href="/document/development/preview-authorization-attachment-pop#" class="xref">授权预览审批附件</a>接口，实现钉盘文件的预览操作。</p></li><li id="6029dc8140kji"><p id="6029dc8040fyx">调用客户端JSAPI-<a data-tag="xref" id="a7abe2a621z1s" href="/document/development/jsapi-preview-file-in-ding-talk#" class="xref">预览钉盘文件</a>接口，实现预览钉盘文件。</p></li></ol></li></ol></li></ol></section><section id="5d94c5e639hev" class="section"><h2 id="83c4b311e6ea2" sourceKey="2000000045449"><b>前提条件</b></h2><p id="e7709e99404zf">完成<a data-tag="xref" id="836a1b2dd2hjc" href="/document/dingstart/create-application#" class="xref">创建应用</a>的流程。</p></section><section id="668f0dd90eg49" class="section"><h2 id="a2e1e76555ax6" sourceKey="2000000045463"><b>步骤一：获取应用凭证</b></h2><ol id="983289892fcxn" start="1" sourceKey="2000000045466"><li id="7188f97774ek8" sourceKey="2000000045468"><p id="c38342ef0by8p">选择目标应用，进入应用详情页，单击<b>基础信息</b> &gt; <b>凭证与基础信息</b>。</p></li><li id="c091bffae1ogq" sourceKey="2000000045473"><p id="43fa5c79a4kmw">获取应用 Client ID 和 Client Secret。</p></li></ol></section><section id="8b50c4d035iio" class="section"><h2 id="8b50c4d135fvy" data-tag="title" class="title">步骤二：添加接口权限</h2><p id="45abafdf33kmp"><span style="color:rgb(23, 26, 29)">单击</span><span style="color:rgb(23, 26, 29)"><b>开发配置 </b></span><span style="color:rgb(23, 26, 29)">&gt; </span><span style="color:rgb(23, 26, 29)"><b>权限管理</b></span><span style="color:rgb(23, 26, 29)">，在权限搜索框中分别输入</span><code data-tag="code" id="105f1a46c079o" class="code"><span style="color:rgb(51, 51, 51)">Workflow.Form.Write</span></code>、<code data-tag="code" id="6e085cb6b05ad" class="code"><span style="color:rgb(51, 51, 51)">Workflow.Instance.Write</span></code><span style="color:rgb(23, 26, 29)">和</span><code data-tag="code" id="31c7c7ae4ero8" class="code"><span style="color:rgb(51, 51, 51)">Workflow.Instance.Read</span></code><span style="color:rgb(102, 102, 102)">，并申请权限。</span></p></section><section id="6741a93603agx" class="section"><h2 id="c24bc98c53ar9" data-tag="title" sourcekey="2000000030145" class="title">步骤三：获取应用访问凭证accessToken</h2><div id="e7227ddf19xrj" type="notice" sourcekey="2000000030148" class="note note-notice"><div class="note-icon-wrapper"><i class="icon-note note notice"></i></div><div class="noteContentSpan"><strong>重要 </strong><p id="60641e7cb6oew">服务端API差异详情参见<a data-tag="xref" id="95903b714cies" href="/document/development/how-to-call-apis#section-8lr-id4-rbz" class="xref">旧版服务端API、新版服务端API的区别</a>。以下接口均使用服务端API接口，SDK下载详情参见<a data-tag="xref" id="382d2aaeb5vm2" href="/document/development/download-the-server-side-sdk#" class="xref">服务端SDK下载</a>。</p></div></div><p id="31bc9ba5a4zgg">根据步骤一中的 Client ID 和 Client Secret，获取应用访问凭证<a data-tag="xref" id="2718c8f3eao11" href="/document/development/obtain-the-access-token-of-an-internal-app#" class="xref">获取企业内部应用的accessToken</a>。</p><pre data-tag="codeblock" id="5cc78451bcfzo" outputclass="language-javascript" code-type="xCode" sourcekey="2000000030191" class="pre codeblock language-javascript"><code> public void getAccessToken() throws Exception {
+        Config config = new Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        com.aliyun.dingtalkoauth2_1_0.Client client = new com.aliyun.dingtalkoauth2_1_0.Client(config);
+        GetAccessTokenRequest accessTokenRequest = new GetAccessTokenRequest()
+                .setAppKey("din*********hgn")
+                .setAppSecret("9G_O************mBkhgGIO");
+        GetAccessTokenResponse accessToken = client.getAccessToken(accessTokenRequest);
+        System.out.println(JSON.toJSONString(accessToken.getBody()));
+    }</code></pre></section><section id="5dc58730358nz" class="section"><h2 id="5dc5873135ajv" data-tag="title" class="title">步骤四：调用OA审批API</h2><ol id="5dc5873835ra2"><li id="5dc58739351kz"><p id="5dc5873a35tev">调用服务端API-<a data-tag="xref" id="f171cfd3e4yy1" href="/document/development/obtains-the-information-about-approval-nail-disk#" class="xref">获取审批钉盘空间信息</a>接口，获取审批钉盘空间<code data-tag="code" id="15afb2902fi6f" class="code">spaceId</code>。</p><pre id="588gmm" data-tag="codeblock" outputclass="language-java" code-type="xCode" class="pre codeblock language-java"><code>public void ProcessSpaceInfo() throws Exception {
+        com.aliyun.teaopenapi.models.Config config = new com.aliyun.teaopenapi.models.Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        com.aliyun.dingtalkworkflow_1_0.Client client = new com.aliyun.dingtalkworkflow_1_0.Client(config);
+        com.aliyun.dingtalkworkflow_1_0.models.GetAttachmentSpaceHeaders getAttachmentSpaceHeaders = new com.aliyun.dingtalkworkflow_1_0.models.GetAttachmentSpaceHeaders();
+        getAttachmentSpaceHeaders.xAcsDingtalkAccessToken ="accessToken";
+        com.aliyun.dingtalkworkflow_1_0.models.GetAttachmentSpaceRequest getAttachmentSpaceRequest = new com.aliyun.dingtalkworkflow_1_0.models.GetAttachmentSpaceRequest()
+                .setUserId("manager7675")
+                .setAgentId(11******75L);
+        try {
+            GetAttachmentSpaceResponse attachmentSpaceWithOptions = client.getAttachmentSpaceWithOptions(getAttachmentSpaceRequest, getAttachmentSpaceHeaders, new RuntimeOptions());
+            System.out.println(JSON.toJSONString(attachmentSpaceWithOptions.getBody()));
+        } catch (TeaException err) {
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+                System.out.println(err.code);
+                System.out.println(err.message);
+            }
+        } catch (Exception _err) {
+            TeaException err = new TeaException(_err.getMessage(), _err);
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+                System.out.println(err.code);
+                System.out.println(err.message);
+            }
+        }
+    }</code></pre></li><li id="5dc5873b35vjf"><p id="5dc5873c35w9k">调用客户端JSAPI-<a data-tag="xref" id="e828cee7162m6" href="/document/development/jsapi-upload-attachment-to-ding-talk#" class="xref">上传附件到钉盘/从钉盘选择文件</a>接口，获取文件基本信息，本流程示例使用<a href="https://open.dingtalk.com/tools/explorer/jsapi?id=10318" data-link-href-cangjie="https://open-dev.dingtalk.com/apiExplorer#/jsapi?api=biz.util.uploadAttachment" target="_blank" rel="noopener noreferrer" data-tag="xref" id="a-oc7-ogu-bz0" class="xref">JSAPI Explorer</a>实现。</p><div id="1895c70035y22" type="notice" class="note note-notice"><div class="note-icon-wrapper"><i class="icon-note note notice"></i></div><div class="noteContentSpan"><strong>重要 </strong><p id="1377815235doo">调用该方法前，需要调用<a data-tag="xref" id="f62844e419rpt" href="/document/development/obtains-the-information-about-approval-nail-disk#" class="xref">获取审批钉盘空间信息</a>进行授权操作。</p></div></div></li><li id="5dc5873d35cj5"><p id="31eaea50353qq">获取模板的唯一编码<code data-tag="code" id="5cef724d591q9" class="code">processCode</code>。有2种方式可以获取processCode，可以选择以下任一种：</p><ul id="5dc5873f35381"><li id="5dc5874035uuh"><p id="5dc5874135hnv">方式一：通过<a href="https://aflow.dingtalk.com/dingtalk/web/query/dashboard?dinghash=aflowSetting#/aflowSetting" data-link-href-cangjie="https://aflow.dingtalk.com/dingtalk/web/query/dashboard?dinghash=aflowSetting#/aflowSetting" target="_blank" rel="noopener noreferrer" data-tag="xref" id="5991396271fo5" class="xref">钉钉管理后台</a>-OA审批-打开对应审批模板获取。</p><div id="41f2c44035vy3" type="note" class="note note-note"><div class="note-icon-wrapper"><i class="icon-note note note"></i></div><div class="noteContentSpan"><strong>说明 </strong><p id="3e13b55035dtb">钉钉管理后台版本不同，获取processCode的方式不同。登录钉钉管理后台，在首页查看版本。如下图所示，页面展示<b>回到旧版</b>和<b>新版反馈</b>，说明当前是新版。<img id="3e13b55135pag" placement="break" src="https://help-static-aliyun-doc.aliyuncs.com/assets/img/zh-CN/6144871461/p381720.png" alt="审批获取processCode " class="image break" / /></p></div></div><p id="4710e2e035358"><b>新版钉钉管理后台</b>：在审批模板编辑页-基础设置-<b>页面底部</b>查看。<img id="4710e2e135xw6" placement="break" src="https://help-static-aliyun-doc.aliyuncs.com/assets/img/zh-CN/3395263561/p443734.png" alt="OA审批-使用案例-审批附件-新增获取processcode新旧版方式 " class="image break" / /><b>旧版钉钉管理后台</b>：在审批模板编辑页的URL中查看。<img id="4710e2e235f1s" placement="break" src="https://help-static-aliyun-doc.aliyuncs.com/assets/img/zh-CN/9342055361/p344894.png" alt="processCode" class="image break" / /></p></li><li id="5dc58742350yw"><p id="5dc58743351oo">调用服务端API-<a data-tag="xref" id="2aa112957co1x" href="/document/development/create-an-approval-form-template#" class="xref">创建或更新审批表单模板</a>接口，创建审批模板获取<code data-tag="code" id="10a67de553og5" class="code">processCode</code>。</p><pre id="w458gt" data-tag="codeblock" outputclass="language-java" code-type="xCode" class="pre codeblock language-java"><code> public void createProcessTemplate() throws Exception {
+        Config config = new Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        com.aliyun.dingtalkworkflow_1_0.Client client = new com.aliyun.dingtalkworkflow_1_0.Client(config);
+        FormCreateHeaders formCreateHeaders = new FormCreateHeaders();
+        formCreateHeaders.xAcsDingtalkAccessToken = "accessToken"；
+
+        // 1. 单行输入控件
+        FormComponentProps formComponentProps = new FormComponentProps()
+                .setComponentId("DDAttachment-sys1001")
+                .setLabel("附件");
+        FormComponent formComponent = new FormComponent()
+                .setComponentType("DDAttachment")
+                .setProps(formComponentProps);
+
+
+        FormCreateRequest formCreateRequest = new FormCreateRequest()
+                .setName("审批附件表单")
+                .setDescription("测试审批附件组件")
+                //有参数processCode时为更新模板，无参数processCode时，为创建模板，该示例为创建模板
+                //.setProcessCode("PROC-42928B7C-****-****-****-B52B4E1702FC")
+                .setFormComponents(java.util.Arrays.asList(
+                        formComponent
+                ));
+        try {
+            FormCreateResponse formCreateResponse = client.formCreateWithOptions(formCreateRequest, formCreateHeaders, new RuntimeOptions());
+            System.out.println(JSON.toJSONString(formCreateResponse.getBody()));
+        } catch (TeaException err) {
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+                System.out.println(err.code);
+                System.out.println(err.message);
+            }
+        } catch (Exception _err) {
+            TeaException err = new TeaException(_err.getMessage(), _err);
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+                System.out.println(err.code);
+                System.out.println(err.message);
+            }
+        }
+    }</code></pre></li></ul></li><li id="5dc5874435sy6"><p id="5dc5874535bzk">调用服务端API-<a data-tag="xref" id="cad1f212e0k10" href="/document/development/create-an-approval-instance#" class="xref">发起审批实例</a>接口发起审批，获取审批实例<code data-tag="code" id="52bdc8749b36z" class="code">instanceId</code>。</p><pre id="obtuhs" data-tag="codeblock" outputclass="language-java" code-type="xCode" class="pre codeblock language-java"><code>public void ProcessInstances() throws Exception {
+        Config config = new Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        com.aliyun.dingtalkworkflow_1_0.Client client = new com.aliyun.dingtalkworkflow_1_0.Client(config);
+        StartProcessInstanceHeaders startProcessInstanceHeaders = new StartProcessInstanceHeaders();
+        startProcessInstanceHeaders.xAcsDingtalkAccessToken = "accessToken";
+
+        //1.附件
+        JSONObject json  = new JSONObject();
+        json.put("spaceId","479****886");
+        json.put("fileName","IMG_2895(1).PNG");
+        json.put("fileSize","2****4");
+        json.put("fileType","png");
+        json.put("fileId","68********11");
+        StartProcessInstanceRequest.StartProcessInstanceRequestFormComponentValues formComponentValues = new StartProcessInstanceRequest.StartProcessInstanceRequestFormComponentValues()
+                .setName("附件")
+                .setValue(JSON.toJSONString(Arrays.asList(json)));
+
+        //设置审批人
+        //会签审批
+        StartProcessInstanceRequest.StartProcessInstanceRequestApprovers approvers0 = new StartProcessInstanceRequest.StartProcessInstanceRequestApprovers()
+                .setActionType("AND")
+                .setUserIds(java.util.Arrays.asList(
+                        "014******877041", "085******4272"
+                ));
+        //或签审批
+        StartProcessInstanceRequest.StartProcessInstanceRequestApprovers approvers1 = new StartProcessInstanceRequest.StartProcessInstanceRequestApprovers()
+                .setActionType("OR")
+                .setUserIds(java.util.Arrays.asList(
+                        "014******877041", "085******4272"
+                ));
+        StartProcessInstanceRequest startProcessInstanceRequest = new StartProcessInstanceRequest()
+                .setOriginatorUserId("审批发起人userId")
+                .setProcessCode("PROC-42928B7C-****-****-****-B52B4E1702FC")
+                .setDeptId(1L)
+                .setMicroappAgentId(11******5L)
+                .setApprovers(java.util.Arrays.asList(
+                        approvers0, approvers1
+                ))
+                .setCcList(java.util.Arrays.asList(
+                        "抄送人userId"
+                ))
+                .setCcPosition("FINISH")
+                .setFormComponentValues(java.util.Arrays.asList(
+                        formComponentValues
+                ));
+        try {
+            StartProcessInstanceResponse startProcessInstanceResponse = client.startProcessInstanceWithOptions(startProcessInstanceRequest, startProcessInstanceHeaders, new RuntimeOptions());
+            System.out.println(JSON.toJSONString(startProcessInstanceResponse.getBody()));
+        } catch (TeaException err) {
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+                System.out.println(err.code);
+                System.out.println(err.message);
+            }
+        } catch (Exception _err) {
+            TeaException err = new TeaException(_err.getMessage(), _err);
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+                System.out.println(err.code);
+                System.out.println(err.message);
+            }
+        }
+    }</code></pre></li><li id="5dc5874635qtr"><p id="5dc5874735rr1">根据审批实例<code data-tag="code" id="d84b93d7c6p7z" class="code">instanceId</code>，调用服务端API-<a data-tag="xref" id="0769d57359oyv" href="/document/development/obtains-the-details-of-a-single-approval-instance-pop#" class="xref">获取单个审批实例详情</a>接口获取审批实例详情中的<code data-tag="code" id="61a74b6defv2n" class="code">fileId</code>。</p><pre id="izftte" data-tag="codeblock" outputclass="language-java" code-type="xCode" class="pre codeblock language-java"><code> public void processInstancesInfo() throws Exception {
+        Config config = new Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        com.aliyun.dingtalkworkflow_1_0.Client client = new com.aliyun.dingtalkworkflow_1_0.Client(config);
+        com.aliyun.dingtalkworkflow_1_0.models.GetProcessInstanceHeaders getProcessInstanceHeaders = new com.aliyun.dingtalkworkflow_1_0.models.GetProcessInstanceHeaders();
+        getProcessInstanceHeaders.xAcsDingtalkAccessToken = "accessToken";
+        com.aliyun.dingtalkworkflow_1_0.models.GetProcessInstanceRequest getProcessInstanceRequest = new com.aliyun.dingtalkworkflow_1_0.models.GetProcessInstanceRequest()
+                .setProcessInstanceId("Ay9***************199");
+        try {
+            GetProcessInstanceResponse processInstanceWithOptions = client.getProcessInstanceWithOptions(getProcessInstanceRequest, getProcessInstanceHeaders, new RuntimeOptions());
+            System.out.println(JSON.toJSONString(processInstanceWithOptions.getBody()));
+        } catch (TeaException err) {
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+                System.out.println(err.code);
+                System.out.println(err.message);
+            }
+        } catch (Exception _err) {
+            TeaException err = new TeaException(_err.getMessage(), _err);
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+                System.out.println(err.code);
+                System.out.println(err.message);
+            }
+        }
+    }</code></pre></li><li id="5dc5874835ine"><p id="ca6397b240ri4">审批附件操作：</p><ol id="e079477140vqe"><li id="e01a3781404bp"><p id="e01a378040hei">下载审批附件：</p><ol id="78dd419140ss6"><li id="7477767040fo5"><p id="74774f6040evk">调用服务端API-<a data-tag="xref" id="b63f3c4dd41ku" href="/document/development/download-the-approval-nail-file#" class="xref">授权下载审批钉盘文件</a>接口，进行审批钉盘文件的授权操作。</p><pre outputclass="language-java" data-tag="codeblock" id="mwo8na" code-type="xCode" class="pre codeblock language-java"><code> public void spaceAuthDownload() throws Exception {
+        com.aliyun.teaopenapi.models.Config config = new com.aliyun.teaopenapi.models.Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        com.aliyun.dingtalkworkflow_1_0.Client client = new com.aliyun.dingtalkworkflow_1_0.Client(config);
+        com.aliyun.dingtalkworkflow_1_0.models.AddApproveDentryAuthHeaders addApproveDentryAuthHeaders = new com.aliyun.dingtalkworkflow_1_0.models.AddApproveDentryAuthHeaders();
+        addApproveDentryAuthHeaders.xAcsDingtalkAccessToken = "accessToken";
+        com.aliyun.dingtalkworkflow_1_0.models.AddApproveDentryAuthRequest.AddApproveDentryAuthRequestFileInfos fileInfos0 = new com.aliyun.dingtalkworkflow_1_0.models.AddApproveDentryAuthRequest.AddApproveDentryAuthRequestFileInfos()
+                .setFileId("49*****61")
+                .setSpaceId(47*****86L);
+        com.aliyun.dingtalkworkflow_1_0.models.AddApproveDentryAuthRequest addApproveDentryAuthRequest = new com.aliyun.dingtalkworkflow_1_0.models.AddApproveDentryAuthRequest()
+                .setUserId("manager7675")
+                .setFileInfos(java.util.Arrays.asList(
+                        fileInfos0
+                ));
+        try {
+            AddApproveDentryAuthResponse addApproveDentryAuthResponse = client.addApproveDentryAuthWithOptions(addApproveDentryAuthRequest, addApproveDentryAuthHeaders, new RuntimeOptions());
+            System.out.println(JSON.toJSONString(addApproveDentryAuthResponse.getBody()));
+        } catch (TeaException err) {
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+                System.out.println(err.code);
+                System.out.println(err.message);
+            }
+
+        } catch (Exception _err) {
+            TeaException err = new TeaException(_err.getMessage(), _err);
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+                System.out.println(err.code);
+                System.out.println(err.message);
+            }
+        }
+    }</code></pre></li><li id="e434058140rrn"><p id="e434058040tu2">调用服务端API-<a data-tag="xref" id="796e09c28ehnd" href="/document/development/download-an-approval-attachment#" class="xref">下载审批附件</a>接口，获取文件的链接<code data-tag="code" id="f9992132cfr4o" class="code">downloadUri</code>实现下载。目前不支持第三方企业应用调用。</p><pre id="47zhew" data-tag="codeblock" outputclass="language-java" code-type="xCode" class="pre codeblock language-java"><code>public void processFileDownload() throws Exception {
+        com.aliyun.teaopenapi.models.Config config = new com.aliyun.teaopenapi.models.Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        com.aliyun.dingtalkworkflow_1_0.Client client = new com.aliyun.dingtalkworkflow_1_0.Client(config);
+        com.aliyun.dingtalkworkflow_1_0.models.GrantProcessInstanceForDownloadFileHeaders grantProcessInstanceForDownloadFileHeaders = new com.aliyun.dingtalkworkflow_1_0.models.GrantProcessInstanceForDownloadFileHeaders();
+        grantProcessInstanceForDownloadFileHeaders.xAcsDingtalkAccessToken = "accessToken";
+        com.aliyun.dingtalkworkflow_1_0.models.GrantProcessInstanceForDownloadFileRequest grantProcessInstanceForDownloadFileRequest = new com.aliyun.dingtalkworkflow_1_0.models.GrantProcessInstanceForDownloadFileRequest()
+                .setProcessInstanceId("Ay9***************199")
+                .setFileId("68********11");
+        try {
+            GrantProcessInstanceForDownloadFileResponse grantProcessInstanceForDownloadFileResponse = client.grantProcessInstanceForDownloadFileWithOptions(grantProcessInstanceForDownloadFileRequest, grantProcessInstanceForDownloadFileHeaders, new RuntimeOptions());
+            System.out.println(JSON.toJSONString(grantProcessInstanceForDownloadFileResponse.getBody()));
+        } catch (TeaException err) {
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+                System.out.println(err.code);
+                System.out.println(err.message);
+            }
+        } catch (Exception _err) {
+            TeaException err = new TeaException(_err.getMessage(), _err);
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+                System.out.println(err.code);
+                System.out.println(err.message);
+            }
+        }
+    }</code></pre></li></ol></li><li id="8f86a5d140g8y"><p id="ca6397b94035w">预览审批附件：</p><ol id="9610144140iep"><li id="958c6551406i5"><p id="958c6550402c6">调用服务端API-<a data-tag="xref" id="de47b4fa6ehid" href="/document/development/preview-authorization-attachment-pop#" class="xref">授权预览审批附件</a>接口，实现钉盘文件的预览操作。</p><pre outputclass="language-java" data-tag="codeblock" id="op6cps" code-type="xCode" class="pre codeblock language-java"><code> public void authPreview() throws Exception {
+        com.aliyun.teaopenapi.models.Config config = new com.aliyun.teaopenapi.models.Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        com.aliyun.dingtalkworkflow_1_0.Client client = new com.aliyun.dingtalkworkflow_1_0.Client(config);
+        com.aliyun.dingtalkworkflow_1_0.models.GetSpaceWithDownloadAuthHeaders getSpaceWithDownloadAuthHeaders = new com.aliyun.dingtalkworkflow_1_0.models.GetSpaceWithDownloadAuthHeaders();
+        getSpaceWithDownloadAuthHeaders.xAcsDingtalkAccessToken = "accessToken";
+        com.aliyun.dingtalkworkflow_1_0.models.GetSpaceWithDownloadAuthRequest getSpaceWithDownloadAuthRequest = new com.aliyun.dingtalkworkflow_1_0.models.GetSpaceWithDownloadAuthRequest()
+                .setUserId("ma*****75")
+                .setAgentId(118****5L)
+                .setProcessInstanceId("yIYiVlR3R***********4433")
+                .setFileId("495******61");
+        try {
+            GetSpaceWithDownloadAuthResponse spaceWithDownloadAuthWithOptions = client.getSpaceWithDownloadAuthWithOptions(getSpaceWithDownloadAuthRequest, getSpaceWithDownloadAuthHeaders, new RuntimeOptions());
+            System.out.println(JSON.toJSONString(spaceWithDownloadAuthWithOptions.getBody()));
+        } catch (TeaException err) {
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+                System.out.println(err.code);
+                System.out.println(err.message);
+            }
+        } catch (Exception _err) {
+            TeaException err = new TeaException(_err.getMessage(), _err);
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+                System.out.println(err.code);
+                System.out.println(err.message);
+            }
+        }
+    }</code></pre></li><li id="a463124040lxq"><p id="aaa5177040c2i">调用客户端JSAPI-<a data-tag="xref" id="5c6aad2b7cnfc" href="/document/development/jsapi-preview-file-in-ding-talk#" class="xref">预览钉盘文件</a>接口，实现预览钉盘文件。可通过访问<a href="https://open.dingtalk.com/tools/explorer/jsapi?id=10317" data-link-href-cangjie="https://open-dev.dingtalk.com/apiExplorer?spm=ding_open_doc.document.0.0.7dad15a7B5FCFQ#/jsapi?api=biz.cspace.preview" target="_blank" rel="noopener noreferrer" data-spm-anchor-id="ding_open_doc.document.0.0" class="xref" data-tag="xref" id="a-krw-uso-ugq">JSAPI Explorer</a>在线调试该接口。</p><div id="b42be76040t44" type="note" class="note note-note"><div class="note-icon-wrapper"><i class="icon-note note note"></i></div><div class="noteContentSpan"><strong>说明 </strong><p id="affbab3040kgh"><span style="color:rgb(51, 51, 51)">每一次预览审批附件前，都需要调用</span><a data-tag="xref" id="897abef2adbah" href="/document/development/preview-authorization-attachment-pop#" class="xref">授权预览审批附件</a>接口实现授权操作。</p></div></div></li></ol></li></ol></li></ol></section></div></main></body></html>

@@ -1,0 +1,1717 @@
+<!DOCTYPE html><html><head><meta charset="utf8" / /><meta name="gmtModify" content="2026-04-24 14:10:49" / /><meta name="searchtitle" content="" / /><meta name="keywords" content="" / /><meta name="author" content="" / /><title>创建并投放卡片</title><meta name="gmtModify" content="2026-06-16 11:37:12" / /></head><body data-tag="topic" id="doc-api-dingtalk-CreateAndDeliver" class="topic"><main id="db5463514fipe" data-init-id="doc-api-dingtalk_CreateAndDeliver"><h1 data-tag="title" id="h1-tcu-4cm-vpw" class="title">创建并投放卡片</h1><p data-tag="shortdesc" id="150b88bed37c5" class="shortdesc">调用本接口，可以创建卡片实例，并将卡片投放至多个指定场域，创建卡片的时候，除了设置卡片的基本数据，还可以设置动态数据源等。</p><div data-tag="conbody" outputclass="icms-api-reference" class="icms-api-reference conbody"><section id="ddaac744b51th" class="section"><h2 id="2c78e38256l8y"><b>接口调用说明</b></h2><section id="45e671e25c6fm" class="section"><h3 id="5b42d4af75i4n"><b>调用说明</b></h3><div type="note" id="a382c7472fae5" class="note note-note"><div class="note-icon-wrapper"><i class="icon-note note note"></i></div><div class="noteContentSpan"><strong>说明 </strong><p id="f114413227v32">目前支持将卡片投放至以下场域：IM群聊、IM单聊酷应用、IM机器人单聊、吊顶。</p></div></div><p id="497f57f015a5i">在将卡片投放到不同的场域时，使用<code data-tag="inlineCode" id="242914dd24igy" class="inlineCode">outTrackId</code>唯一标识一张卡片，通过<code data-tag="inlineCode" id="b5f12d8fc4gb1" class="inlineCode">openSpaceId</code>标识需要被投放的场域及其场域Id，通过<code data-tag="inlineCode" id="4bda394286wfs" class="inlineCode">openDeliverModels</code>传入不同的投放场域。</p><p id="3885b6fc3587x">场域类型及其sapceId定义如下：</p><table id="aae60697137ns" tablewidth="648" tablecolswidth="162 162 162 162" autofit="false" class="table"><colgroup colwidth="1*" style="width:25.00%"></colgroup><colgroup colwidth="1*" style="width:25.00%"></colgroup><colgroup colwidth="1*" style="width:25.00%"></colgroup><colgroup colwidth="1*" style="width:25.00%"></colgroup><tbody class="tbody"><tr id="1cc124bca7q36"><td id="d2bd76413enf2" rowspan="1" style="background-color:#e5e5e5;vertical-align:middle" colspan="1"><p id="73cdb52e476cd">场域类型</p></td><td id="24300fb4262h2" rowspan="1" style="background-color:#e5e5e5;vertical-align:middle" colspan="1"><p id="d866256ab0ulh">SpaceType</p></td><td id="31a4015f50efm" rowspan="1" style="background-color:#e5e5e5;vertical-align:middle" colspan="1"><p id="57bf92bacdugj">SpaceId</p></td><td id="607eb97a42aqj" rowspan="1" style="background-color:#e5e5e5;vertical-align:middle" colspan="1"><p id="300d658e6c2py">SpaceId含义</p></td></tr><tr id="8329fb73ccxn0"><td id="deff1df619daq" rowspan="1" style="vertical-align:middle" colspan="1"><p id="f905ddcf78a61">IM群聊</p></td><td id="c4962459600r0" rowspan="1" style="vertical-align:middle" colspan="1"><p id="317468e8d9w8m">IM_GROUP</p></td><td id="deea0e0c53gmb" rowspan="1" style="vertical-align:middle" colspan="1"><p id="9bbc82d5663a9">openConversationId</p></td><td id="33706ee272ql1" rowspan="1" style="vertical-align:middle" colspan="1"><p id="bc0131fde23ri">会话id</p></td></tr><tr id="bf9eb37d8dlf6"><td id="0c46a9eb02cyl" rowspan="1" style="vertical-align:middle" colspan="1"><p id="b4da48a8b38af">IM单聊酷应用</p></td><td id="19a1b54d9fez6" rowspan="1" style="vertical-align:middle" colspan="1"><p id="3908871a145s4">IM_SINGLE</p></td><td id="189c23badcw9s" rowspan="1" style="vertical-align:middle" colspan="1"><p id="7339c0af31k7l">openConversationId</p></td><td id="3d9d17bfa5wfk" rowspan="1" style="vertical-align:middle" colspan="1"><p id="bd6bfabac207o">会话id</p></td></tr><tr id="cd747afffai4a"><td id="e2f767bcbeko3" rowspan="1" style="vertical-align:middle" colspan="1"><p id="e21e4289dc8wr">IM机器人单聊</p></td><td id="1045f35f8799u" rowspan="1" style="vertical-align:middle" colspan="1"><p id="951e7ebc281yq">IM_ROBOT</p></td><td id="083955d5fdr3b" rowspan="1" style="vertical-align:middle" colspan="1"><p id="b956f2d5e50s3">userId/unionId</p></td><td id="744df698b5lnx" rowspan="1" style="vertical-align:middle" colspan="1"><p id="81e0e7ed9eie8">员工id</p></td></tr><tr id="59a2eaa07a7ul"><td id="38803c7c6coyd" rowspan="1" style="vertical-align:middle" colspan="1"><p id="5ed8686dd9rnj">吊顶</p></td><td id="96f2c73540dpc" rowspan="1" style="vertical-align:middle" colspan="1"><p id="689c884f954sr">ONE_BOX</p></td><td id="566d388348q7t" rowspan="1" style="vertical-align:middle" colspan="1"><p id="a68393eb7eiw9">openConversationId</p></td><td id="2660b90f7b86l" rowspan="1" style="vertical-align:middle" colspan="1"><p id="559f962458uq6">会话id</p></td></tr></tbody></table><p id="6d4f2638ef4bq">例如：IM 群聊的 <code data-tag="inlineCode" id="fd016cf704u3f" class="inlineCode">openSpaceId</code> 为：<code data-tag="inlineCode" id="1ab13cb61cpls" class="inlineCode">dtv1.card//IM_GROUP.cidg2bR***JzmpFY=</code>。其中<code data-tag="inlineCode" id="a2534e89f62ii" class="inlineCode">dtv1.card//</code>为前缀固定值，<code data-tag="inlineCode" id="db6d94ffd2gf2" class="inlineCode">IM_GROUP</code>为群聊标识SpaceType，<code data-tag="inlineCode" id="09ba95831c7p3" class="inlineCode">cidg2bR***JzmpFY=</code>为群会话的openConversationId。</p></section><section id="13f6a9f402fc8" class="section"><h3 id="98d0ec922bfwj">接口示例</h3><p id="015e46c2a12vh">调用示例可参考文档<a data-tag="xref" id="f7cb4b9352od8" href="/document/development/example-of-calling-the-card-api-interface#" class="xref">API 调用示例</a>。</p></section></section><section id="section-request-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-request-1" data-tag="h2" class="h2">请求</h2><section id="section-request-basic-info" class="section"><h3 id="heading-request-basic-info" data-tag="h3" class="h3">基本信息</h3><table id="e6c79e3b0a5rh" tablewidth="648" tablecolswidth="216 432" autofit="false" class="table"><colgroup colwidth="0.67*" style="width:33.33%"></colgroup><colgroup colwidth="1.33*" style="width:66.67%"></colgroup><tbody class="tbody"><tr id="e7e837cb35zvn"><td id="6939dcdf3enqh" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="d22594c3ecujx">字段</p></td><td id="638a1835519di" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="0091049fa0hkm">值</p></td></tr><tr id="599f76207651l"><td id="d324fd5909cqw" rowspan="1" colspan="1"><p id="eb7ad97c32ne1">HTTP URL</p></td><td id="6ba0bd76e5gax" rowspan="1" colspan="1"><p id="a09b3d5048px3">https://api.dingtalk.com/v1.0/card/instances/createAndDeliver</p></td></tr><tr id="21862be287rpb"><td id="640699940al0f" rowspan="1" colspan="1"><p id="4cb61b80abo0p">HTTP Method</p></td><td id="6bdc25274bqwu" rowspan="1" colspan="1"><p id="a141f7dbb0ybm">POST</p></td></tr><tr id="d8c39e351eat8"><td id="4aecb79529eq2" rowspan="1" colspan="1"><p id="6cf95bf8c6556">支持的应用类型</p></td><td id="fc0fccd53ekjj" rowspan="1" colspan="1"><p id="ff09e9bbb1dgf"><span data-tag="ph" id="ph-request-basic-app-type-apptype-0" class="ph ph-app-type" data-ph-raw-text="appType-企业内部应用">appType-企业内部应用</span>　<span data-tag="ph" id="ph-request-basic-app-type-apptype-1" class="ph ph-app-type" data-ph-raw-text="appType-第三方企业应用">appType-第三方企业应用</span></p></td></tr><tr id="53fe83bf62ubd"><td id="f0a460c68brmn" rowspan="1" colspan="1"><p id="e908f993a6wfn">权限要求</p></td><td id="f4ca0508affzk" rowspan="1" colspan="1"><p id="f098d7f241h9r"><span data-tag="ph" id="ph-request-basic-permission-permission-card-instance-write-0" class="ph-permission ph" data-ph-raw-text="permission-Card.Instance.Write-互动卡片实例写权限" data-permission-id="permission-Card.Instance.Write" data-permission-code="Card.Instance.Write" data-permission-detail-api="/document/api/permission/detail" data-permission-query-param="code">permission-Card.Instance.Write-互动卡片实例写权限</span></p></td></tr></tbody></table></section><section id="section-request-header-parameter" class="section"><h3 data-tag="h3" id="h2-jec-8kb-e3o" class="h3 title">请求头</h3><table id="3f37f398da9r0" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="a71a8a79ffkwq"><td id="4f81beeaa759k" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="3e7102b1752g3">名称</p></td><td id="eac1de539b81b" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="2a5fd8b3f6eaj">类型</p></td><td id="9ccd040d3el1h" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="43f97f35e8adn">是否必填</p></td><td id="810708e27cdqf" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="0787c5b94drwh">描述</p></td></tr><tr id="3f27486a14zm5"><td id="6e1baf324cuca" rowspan="1" colspan="1"><p id="89904f500flu4">x-acs-dingtalk-access-token</p></td><td id="635445d671cm2" rowspan="1" colspan="1"><p id="0ceda467c5yn4">String</p></td><td id="da70ea834fn04" rowspan="1" colspan="1"><p id="67819c6a6etqt">是</p></td><td id="5dbcb4cf40mvi" rowspan="1" colspan="1"><p id="cb451d5d94ksw">调用该接口的访问凭证，通过以下获取：</p><ul id="eadf486dbb0mc"><li id="303bbae0d1m8r"><p id="f76dbea566kz0">企业内部应用，调用<a href="https://open.dingtalk.com/document/development/obtain-the-access-token-of-an-internal-app#" id="1856a1f455ksz" class="xref">获取企业内部应用的accessToken</a>接口获取。</p></li><li id="4fc9d804730lo"><p id="26f7203c6ckmh">第三方企业应用，调用<a href="https://open.dingtalk.com/document/development/obtain-the-access-token-of-the-authorized-enterprise-1#" id="91fbf981889rz" class="xref">获取第三方应用授权企业的accessToken</a>接口获取。</p></li></ul></td></tr></tbody></table></section><section id="section-request-body-parameter" class="section"><h3 data-tag="h3" id="h2-kq1-c8n-zzy" class="h3 title">请求体</h3><table id="b26ff55c5demk" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="dfb5a7a30e8iy"><td id="6885a9014ca5r" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="64e7a257capi6">名称</p></td><td id="2e00b8d1e8ku4" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="61a4f3da10w99">类型</p></td><td id="511435a2a31ar" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="56a5fa5bd4hp4">是否必填</p></td><td id="6230e7a32cn9o" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="74f952c2d6p5j">描述</p></td></tr><tr outputclass="row row-level-1" id="360ddd3d77gmy" class="row row-level-1"><td id="1924372d0eusj" rowspan="1" colspan="1"><p id="9d8b6fd8182iq">userId</p></td><td id="5356b9de7628r" rowspan="1" colspan="1"><p id="9bf7f64aebtet">String</p></td><td id="934dc2ce03r0z" rowspan="1" colspan="1"><p id="0817d2657dfuq">否</p></td><td id="04108689f2vjm" rowspan="1" colspan="1"><p id="2abbfc78d1o2p">卡片创建者的userId，可通过<a href="https://open.dingtalk.com/document/development/query-the-list-of-department-userids#" id="018f37224cn08" class="xref">获取部门用户userid列表</a>接口获取。</p></td></tr><tr outputclass="row row-level-2" id="ce2e6be40c7ct" class="row row-level-2"><td id="7fa0dc3f90ngc" rowspan="1" colspan="1"><p id="576d0b6d663kf">cardTemplateId</p></td><td id="b802d3b4949vh" rowspan="1" colspan="1"><p id="21b9339723hba">String</p></td><td id="ced9d6cc512d1" rowspan="1" colspan="1"><p id="93958f2d31gul">是</p></td><td id="090ac74e77bro" rowspan="1" colspan="1"><p id="62c2bd7aa0on2">卡片内容模板ID，可通过登录<a href="https://open-dev.dingtalk.com/fe/card" id="a7c16ab59e6ie">开发者后台 &gt; 卡片平台</a>获取。
+<img src="https://help-static-aliyun-doc.aliyuncs.com/file-manage-files/zh-CN/20230111/qfsi/卡片模板ID.png" alt="" class="image break" / /></p></td></tr><tr outputclass="row row-level-3" id="08283b4f27xkc" class="row row-level-3"><td id="2c672ae728x5e" rowspan="1" colspan="1"><p id="e337f21841kt9">outTrackId</p></td><td id="e944a70591sdg" rowspan="1" colspan="1"><p id="7799f33eecp7s">String</p></td><td id="cc35aaf628mor" rowspan="1" colspan="1"><p id="8b6cd3f67erbx">是</p></td><td id="f1cf373c5d80h" rowspan="1" colspan="1"><p id="8865387ed9q64">外部卡片实例Id。</p><p class="note-icon-wrapper" id="726ef2ebdbyij"></p><ul id="6bfd672387tx9"><li id="a84b168e2edza"><p id="8af6670aa7w52">开发者自己生成并作为入参传递给钉钉的，钉钉只在对应使用到 outTrackId 的场景，帮助开发者对TrackId进行记录</p></li><li id="1b2a90e64aenp"><p id="b176168640k72">一个 outTrackId 唯一标识一张卡片，如果需要使用新的 cardTemplateId 或 cardData 等参数创建一张新的卡片，需要设置全新的 outTrackId，否则更改不会生效。</p></li></ul></td></tr><tr outputclass="row row-level-4" id="67421eb70dt48" class="row row-level-4"><td id="964392ad56ldr" rowspan="1" colspan="1"><p id="117a8019c6e8o">callbackType</p></td><td id="6bd9728ba33wn" rowspan="1" colspan="1"><p id="2eb723e15391g">String</p></td><td id="c13a8def345j3" rowspan="1" colspan="1"><p id="71930f29a4qdd">否</p></td><td id="09b8ff1b717qo" rowspan="1" colspan="1"><p id="8f23a44521se2">卡片回调的类型：</p><ul id="9f377c2b37rsx"><li id="3d0b8f9f98qgr"><p id="b2c58e1ef8jwx"><b>STREAM</b>：stream模式</p></li><li id="a01d96d1eb1lc"><p id="11514451c4r98"><b>HTTP</b>：http模式</p></li></ul><p class="note-icon-wrapper" id="75d01a55bdwqz"></p><p id="69b10a2c539ru">注意参数均为大写。</p><p id="0d9825349b8pe">详情参见<a href="https://open.dingtalk.com/document/development/event-callback-card#" id="e9f04053f5685" class="xref">卡片互动-事件回调</a>文档。</p></td></tr><tr outputclass="row row-level-5" id="7551441d14a71" class="row row-level-5"><td id="550c1d6fff6b7" rowspan="1" colspan="1"><p id="9d80298de21d2">callbackRouteKey</p></td><td id="66616fb8edcmf" rowspan="1" colspan="1"><p id="5a9303afe7f4e">String</p></td><td id="edef82100etzg" rowspan="1" colspan="1"><p id="63998f29a4doh">否</p></td><td id="414794d7aarkb" rowspan="1" colspan="1"><p id="7f19772e3eng0">卡片回调HTTP模式时的路由 Key，用于查询注册的 callbackUrl。可通过调用服务端API-<a href="https://open.dingtalk.com/document/development/register-card-callback-address#" id="428f659233dil" class="xref">注册卡片回调地址</a>接口，根据填写的<code data-tag="inlineCode" id="988b65ae08ivx" class="inlineCode">callbackRouteKey</code>入参字段获取。</p></td></tr><tr outputclass="row row-level-6 has-child" id="e2a0b77361ks4" class="row row-level-6 has-child"><td id="30f3fd6d2b5hq" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="6f13adf006w20">cardData</p></td><td id="3b49a8d4985oz" rowspan="1" colspan="1"><p id="378f0a6efekos">Object</p></td><td id="f69fe20057zk2" rowspan="1" colspan="1"><p id="ae8caacc3bg5q">是</p></td><td id="8964cea673fwc" rowspan="1" colspan="1"><p id="9afcd3f8392cp">卡片数据，示例：</p><pre outputclass="language-json" data-tag="codeblock" code-type="xCode" id="34d4e706b0kp5" class="pre codeblock language-json"><code>"cardData": {
+    "cardParamMap": {
+      "intParam": "1",				   // 整数类型属性
+      "floatParam": "1.2.3",	                   // 浮点类型属性
+      "trueParam": "true",		           // 布尔类型属性，对应 TRUE
+      "falseParam": "false"			   // 布尔类型属性，对应 FALSE
+    }
+}
+</code></pre></td></tr><tr outputclass="row row-level-6-1" id="d4564d5634jrg" class="row row-level-6-1"><td id="09a5cc2a408r0" rowspan="1" colspan="1"><p id="ffb20ddd30zql">cardParamMap</p></td><td id="4ad8fb5002n7l" rowspan="1" colspan="1"><p id="be4e0f64acigo">Map&lt;String, String&gt;</p></td><td id="f12ceae599uhm" rowspan="1" colspan="1"><p id="8be96a3c45lg6">否</p></td><td id="0f17c2e4f87bq" rowspan="1" colspan="1"><p id="e428cd34bf74j">卡片模板内容替换参数：</p><ul id="29850adf5ar8k"><li id="e26b1866364nn"><p id="5102a123d65j2">key：参数名（最长不超过100B）</p></li><li id="78fe8485432gl"><p id="2c265157b073j">value: 参数值（最长不超过1KB）</p></li></ul><p class="note-icon-wrapper" id="d534ea0978ez3"></p><ul id="18390293388xo"><li id="d00601ae8b5ol"><p id="da81f5549453e">属性字段只支持 String 类型，非 String 类型的属性填写请参考文档：<a href="https://open.dingtalk.com/document/development/instructions-for-filling-in-api-card-data#" id="916044fe75fjk" class="xref">API 卡片数据的填写说明</a>。</p></li><li id="950ef4ad3ar7s"><p id="335f3f9d4bt8y">务必确保属性值的类型与卡片搭建器中所配置的变量类型相匹配，否则可能出现属性不生效，或者在移动端无法显示等问题。</p></li></ul></td></tr><tr outputclass="row row-level-7 has-child" id="268427794fmdw" class="row row-level-7 has-child"><td id="6431918112syk" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="631b19392crcr">privateData</p></td><td id="38f7322303f98" rowspan="1" colspan="1"><p id="05417e607a7i3">Map&lt;String, Object&gt;</p></td><td id="4dbe02b3b25p6" rowspan="1" colspan="1"><p id="234d01a396lxq">否</p></td><td id="7684396b1a8h3" rowspan="1" colspan="1"><p id="f42a5511f9w7v">用户的私有数据：</p><ul id="d5d8233018tef"><li id="46a9274951f04"><p id="8f986e5e39s8q">key：用户userId信息（最长不超过100B）</p></li><li id="edd0d32fd94vs"><p id="8286597d5flj3">value：用户私有数据（最长不超过1KB）</p></li></ul><p id="9bb0d626a0xkk">示例：</p><pre outputclass="language-json" data-tag="codeblock" code-type="xCode" id="cb5bff80074zg" class="pre codeblock language-json"><code>"privateData": {
+    "manager1234": {
+        "cardParamMap": {
+            "attendee": "小明、小王",
+            "image1": "mediaIdXXXXX1"
+        }
+    }
+}
+</code></pre></td></tr><tr outputclass="row row-level-7-1 has-child" id="944d799daah0t" class="row row-level-7-1 has-child"><td id="ec454701ceob3" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="942f116f49r6y"></p></td><td id="36aa89dbbbwvm" rowspan="1" colspan="1"><p id="7b276415bdy0a">Object</p></td><td id="e167cfad2247e" rowspan="1" colspan="1"><p id="d414d602b9j4j">否</p></td><td id="922d73f928mwu" rowspan="1" colspan="1"><p id="bb1bc1a0d7wde">私有用户userId。</p></td></tr><tr outputclass="row row-level-7-1-1" id="1e43b94886faa" class="row row-level-7-1-1"><td id="81b17abb28n2q" rowspan="1" colspan="1"><p id="e0476b8f505fn">cardParamMap</p></td><td id="28c5c735acqzy" rowspan="1" colspan="1"><p id="9306b477ba477">Map&lt;String, String&gt;</p></td><td id="2941162962gvb" rowspan="1" colspan="1"><p id="ce338bc0da34d">否</p></td><td id="f2f1108eaefhe" rowspan="1" colspan="1"><p id="6dea05a8d9noi">卡片模板内容替换参数：</p><ul id="8f197f772dkyb"><li id="0fa64adb9795l"><p id="c2d558bb323ea">key：参数名</p></li><li id="98aebd7c3b0ex"><p id="64ec240a0fflo">value: 参数值</p></li></ul><p class="note-icon-wrapper" id="df4aaca8c5zx0"></p><p data-tag="p" id="5abd4ccb96f7d" class="p"></p><ul id="cc1950e2097x0"><li id="9058c2cee33gi"><p id="920ca4d468984">属性字段只支持 String 类型，非 String 类型的属性填写请参考文档：<a href="https://open.dingtalk.com/document/development/instructions-for-filling-in-api-card-data#" id="726e61b198pyy" class="xref">API 卡片数据的填写说明</a>。</p></li><li id="661c7c8b8acoe"><p id="6184c4607f9xn">务必确保属性值的类型与卡片搭建器中所配置的变量类型相匹配，否则可能出现属性不生效，或者在移动端无法显示等问题。</p></li></ul><p id="6fafc89306zyx"></p></td></tr><tr outputclass="row row-level-8 has-child" id="3b91abe7188yt" class="row row-level-8 has-child"><td id="d168404b5b6b1" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="72757df60eksl">openDynamicDataConfig</p></td><td id="138fbca625ofd" rowspan="1" colspan="1"><p id="24af51d5e4yaa">Object</p></td><td id="c074d9b88aryq" rowspan="1" colspan="1"><p id="fafd5c563dmxo">否</p></td><td id="e6a432eaaapln" rowspan="1" colspan="1"><p id="435b0af36b3t1">动态数据源配置。</p></td></tr><tr outputclass="row row-level-8-1 has-child" id="1cc99b5748wfn" class="row row-level-8-1 has-child"><td id="b4a63020cd7wp" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="18e9460dedydl">dynamicDataSourceConfigs</p></td><td id="b13879068463a" rowspan="1" colspan="1"><p id="93bc888304g8q">Array</p></td><td id="f643f3212c9yd" rowspan="1" colspan="1"><p id="394ff9db2ckdo">否</p></td><td id="8aab37a6d9fzd" rowspan="1" colspan="1"><p id="3515ab0507yho">动态数据源配置列表。</p></td></tr><tr outputclass="row row-level-8-1-1" id="402168137c8b4" class="row row-level-8-1-1"><td id="8abea5dd1e5c0" rowspan="1" colspan="1"><p id="fbbf92bd18ucc">dynamicDataSourceId</p></td><td id="e2e5a025eedsj" rowspan="1" colspan="1"><p id="a23cf7ac4e58e">String</p></td><td id="b3b171a5c6rse" rowspan="1" colspan="1"><p id="dbd02aa7bfra8">否</p></td><td id="771eb5071de9i" rowspan="1" colspan="1"><p id="95d618154eyly">数据源的唯一 ID, 调用方指定。</p><p class="note-icon-wrapper" id="0fbd6bb3d6whh"></p><p data-tag="p" id="2fb3f43223tcc" class="p"></p><p id="11c84beba6gh5">使用动态数据源功能时该参数字段必填。</p><p id="601aca912392i"></p></td></tr><tr outputclass="row row-level-8-1-2" id="c07a67400236s" class="row row-level-8-1-2"><td id="6997da0d57lek" rowspan="1" colspan="1"><p id="65931665earml">constParams</p></td><td id="6d207b065308u" rowspan="1" colspan="1"><p id="e53fbf594cebt">Map&lt;String, String&gt;</p></td><td id="cca606fcfcyaq" rowspan="1" colspan="1"><p id="ceb8c76111t73">否</p></td><td id="de60480a1cgyi" rowspan="1" colspan="1"><p id="c5d68f6fa1a6f">回调数据源时回传的固定参数。
+示例：</p><pre outputclass="language-json" data-tag="codeblock" code-type="xCode" id="051f24c220nr4" class="pre codeblock language-json"><code>{
+    "attendee": "小明、小王",
+    "creatorId": "id123456"
+}
+</code></pre></td></tr><tr outputclass="row row-level-8-1-3 has-child" id="b6b3d72401oez" class="row row-level-8-1-3 has-child"><td id="7b7cfb9345a1f" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="63c7a54d82p20">pullConfig</p></td><td id="5d2d7056ec10z" rowspan="1" colspan="1"><p id="4c7be7da62mg7">Object</p></td><td id="fa33393121krr" rowspan="1" colspan="1"><p id="972d4d19d0gxx">否</p></td><td id="cdb372801e0wf" rowspan="1" colspan="1"><p id="42fe4d1309gp5">数据源拉取配置。</p><p class="note-icon-wrapper" id="519350119fzqg"></p><p data-tag="p" id="3fe71d42520dz" class="p"></p><p id="694b041487uap">使用动态数据源功能时该参数字段必填。</p><p id="f038af98cc4u0"></p></td></tr><tr outputclass="row row-level-8-1-3-1" id="d8eb129291bv5" class="row row-level-8-1-3-1"><td id="f7024e737evf7" rowspan="1" colspan="1"><p id="8df5b53e78c1n">pullStrategy</p></td><td id="7dba7890164ue" rowspan="1" colspan="1"><p id="65c27e444esqi">String</p></td><td id="e228378443z3w" rowspan="1" colspan="1"><p id="4d7d9755fcb74">否</p></td><td id="794c159792mgt" rowspan="1" colspan="1"><p id="45fef54618zuq">拉取策略，可选值：</p><ul id="9c4fc7c610bm7"><li id="fe13db3e7crk8"><p id="b1e07e6cdck87"><b>NONE</b>：不拉取，无动态数据</p></li><li id="7580675d20ipr"><p id="4411a07ca5d5q"><b>INTERVAL</b>：间隔拉取</p></li><li id="499dee2303feb"><p id="3074d4d4a6uk1"><b>ONCE</b>：只拉取一次</p></li></ul><p class="note-icon-wrapper" id="6a0c47b947i26"></p><p data-tag="p" id="d0685c9c550uf" class="p"></p><p id="706f1170c2arh">使用动态数据源功能时该参数字段必填。</p><p id="a189cf8964jpb"></p></td></tr><tr outputclass="row row-level-8-1-3-2" id="ff1d29f9339hn" class="row row-level-8-1-3-2"><td id="e60dc592b2l7t" rowspan="1" colspan="1"><p id="fc2a8a7ea3e5d">interval</p></td><td id="16fb90211ax0n" rowspan="1" colspan="1"><p id="c98b1056fbz06">Integer</p></td><td id="de00d1f983nbc" rowspan="1" colspan="1"><p id="7ab7d9729dzgx">否</p></td><td id="bff2177a7030i" rowspan="1" colspan="1"><p id="a6d8ff8138xi5">拉取的间隔时间。</p><p class="note-icon-wrapper" id="56afbe8f3dzpp"></p><p data-tag="p" id="308a0f8ae3h6s" class="p"></p><ul id="f012d1f497ypy"><li id="30645f6c750o2"><p id="5e30b964118ea">只在将<code data-tag="inlineCode" id="f95ac93547id7" class="inlineCode">pullStrategy</code>设置为<b>INTERVAL</b>的时候生效。</p></li><li id="6ecdc5b5235g5"><p id="9db2b965150c7">最小拉取间隔时间3s。</p></li></ul><p id="60ba9fab60d2d"></p></td></tr><tr outputclass="row row-level-8-1-3-3" id="d91bc7188cpf3" class="row row-level-8-1-3-3"><td id="3675a0ef6bqe9" rowspan="1" colspan="1"><p id="4206faf950xik">timeUnit</p></td><td id="708d1115c2g96" rowspan="1" colspan="1"><p id="5350b7fde2hj7">String</p></td><td id="73fa8a79e0q6s" rowspan="1" colspan="1"><p id="5a26fd2ba792o">否</p></td><td id="4f80d8353fnyg" rowspan="1" colspan="1"><p id="4cd9b60ef3k8e">拉取的间隔时间的单位， 可选值：</p><ul id="000b6e9af1kq5"><li id="c9d31adaa4q84"><p id="bbeb13caabn1u"><b>SECONDS</b>：秒</p></li><li id="cc14b3c591j8p"><p id="cafe8691472rw"><b>MINUTES</b>：分钟</p></li><li id="4bd5e8db0bjsm"><p id="a3c939f75ceku"><b>HOURS</b>：小时</p></li><li id="9d5e9cacfde5n"><p id="ff1dca68c24u5"><b>DAYS</b>：天</p></li></ul><p class="note-icon-wrapper" id="0a91c6eb58ngm"></p><p data-tag="p" id="d7cd3e3726m09" class="p"></p><p id="ece82c18b6p8q">只在将<code data-tag="inlineCode" id="d25b2c28ce5ko" class="inlineCode">pullStrategy</code>设置为<b>INTERVAL</b>的时候生效。</p><p id="3e0e7ee228l1r"></p></td></tr><tr outputclass="row row-level-9 has-child" id="be2d021a74edo" class="row row-level-9 has-child"><td id="19e55df4d1ufz" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="e862db97e3l9o">imSingleOpenSpaceModel</p></td><td id="a2e4a352247ut" rowspan="1" colspan="1"><p id="d3a54fbc18589">Object</p></td><td id="01c0514ab8hp6" rowspan="1" colspan="1"><p id="bd26d7e1066ec">否</p></td><td id="d4eb1d62ffef4" rowspan="1" colspan="1"><p id="ea41ce43d4djb">IM单聊酷应用场域信息，具体表现如下：</p><p id="7ea3aa6d97ang"><img src="https://help-static-aliyun-doc.aliyuncs.com/file-manage-files/zh-CN/20230220/zfnc/%E5%8D%95%E8%81%8A%E4%BA%92%E5%8A%A8%E5%8D%A1%E7%89%87.png" alt="" class="image break" / /></p><p class="note-icon-wrapper" id="f588e0703ebzx"></p><p data-tag="p" id="a349d1d25dpn9" class="p"></p><p id="32bdbf0e27oq8">单聊酷应用详情参考<a href="https://open.dingtalk.com/document/dingstart/configuration-private-chat-quick-entry#" id="9ed28d49f8sdm" class="xref">接入单聊酷应用</a>。</p><p id="5ab259f3594p6"></p></td></tr><tr outputclass="row row-level-9-1" id="5f8a72667c8jp" class="row row-level-9-1"><td id="393f2d47ccvmp" rowspan="1" colspan="1"><p id="5e8d7283a4kow">supportForward</p></td><td id="37c06c834f4o2" rowspan="1" colspan="1"><p id="ca4d06acb6hik">Boolean</p></td><td id="96af3b81f829y" rowspan="1" colspan="1"><p id="e7b1cf234arfg">否</p></td><td id="cf85d9523cn2c" rowspan="1" colspan="1"><p id="79195d85faz93">是否支持转发, 默认false。</p></td></tr><tr outputclass="row row-level-9-2" id="aa57049de3dhk" class="row row-level-9-2"><td id="c74b898a7cwj0" rowspan="1" colspan="1"><p id="9b373b7a4ac7z">lastMessageI18n</p></td><td id="5f52fe220ecni" rowspan="1" colspan="1"><p id="32ef348b82byb">Map&lt;String, String&gt;</p></td><td id="e37a1fc69eya5" rowspan="1" colspan="1"><p id="ca0577d29fp8r">否</p></td><td id="1dcd003fe62od" rowspan="1" colspan="1"><p id="1e06417efd6tt">支持国际化的LastMessage，目前支持的语言枚举值：</p><ul id="0934b19739sdb"><li id="4f95baa230zkj"><p id="c059ccfcb0zl3"><b>ZH_CN</b>：简体中文</p></li><li id="2045dbad4du7a"><p id="804cbea5215ms"><b>ZH_TW</b>：繁体中文:</p></li><li id="03d17fdce0pfm"><p id="77935db676fkz"><b>EN_US</b>：英文</p></li><li id="ba5a988cd9dvd"><p id="7ecefb78ees7k"><b>JA_JP</b>：日语</p></li><li id="c6effd76d41ll"><p id="b7de98445fob8"><b>VI_VN</b>：越南语</p></li><li id="8e8e5766a17az"><p id="5064595cbf4uq"><b>TH_TH</b>: 泰语</p></li></ul><p class="note-icon-wrapper" id="8a2d690587lzq"></p><p data-tag="p" id="2082df0f54y8e" class="p"></p><p id="4eacd190edk2q">key为语言枚举值，value为lastMessage内容。</p><p id="db921c1931mcc"></p><p id="dc0b0f1479dpr">示例：</p><pre outputclass="language-json" data-tag="codeblock" code-type="xCode" id="012508a675fhu" class="pre codeblock language-json"><code>{"ZH_CN":"卡片", "EN_US" : "card"}
+</code></pre></td></tr><tr outputclass="row row-level-9-3 has-child" id="ff3215a7ac24n" class="row row-level-9-3 has-child"><td id="73fb4b12dcnpu" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="e35e997749esx">searchSupport</p></td><td id="a39142377d9an" rowspan="1" colspan="1"><p id="f82f476dedmxt">Object</p></td><td id="b93968cdce4jx" rowspan="1" colspan="1"><p id="5c3126c726snh">否</p></td><td id="9b80530f17xrx" rowspan="1" colspan="1"><p id="da6425e8eb3hk">支持卡片消息可被搜索字段。</p></td></tr><tr outputclass="row row-level-9-3-1" id="13cad362dfrim" class="row row-level-9-3-1"><td id="a02bd0709coqd" rowspan="1" colspan="1"><p id="19ebcc9943qn1">searchIcon</p></td><td id="9e01ecc5fdxz6" rowspan="1" colspan="1"><p id="205311f815ind">String</p></td><td id="56823d2c3bm2t" rowspan="1" colspan="1"><p id="a4e13988779nq">否</p></td><td id="c32934b5bew96" rowspan="1" colspan="1"><p id="a52108362b13o">类型的icon，供搜索展示使用。</p></td></tr><tr outputclass="row row-level-9-3-2" id="6f668b58b0sd2" class="row row-level-9-3-2"><td id="d2b7da5a7ba5q" rowspan="1" colspan="1"><p id="4d91d3a2fb7ct">searchTypeName</p></td><td id="fd3fccb899qlf" rowspan="1" colspan="1"><p id="322bd38c82nx0">String</p></td><td id="44232adccc6nw" rowspan="1" colspan="1"><p id="7871f4ec31msk">否</p></td><td id="2b375a45ffa7k" rowspan="1" colspan="1"><p id="d3a6e9ac66lfh">卡片类型名。</p></td></tr><tr outputclass="row row-level-9-3-3" id="89dc2041f0yff" class="row row-level-9-3-3"><td id="6a41ecc65fbii" rowspan="1" colspan="1"><p id="ea1217477b9q4">searchDesc</p></td><td id="2b30597adbnhn" rowspan="1" colspan="1"><p id="fb3df803d15nm">String</p></td><td id="fadb9001b8xw2" rowspan="1" colspan="1"><p id="991606a057pdu">否</p></td><td id="fccccf7188rzj" rowspan="1" colspan="1"><p id="e4f27e7ed6gsr">供消息展示与搜索的字段。</p><p class="note-icon-wrapper" id="8c9133b608kvl"></p><p data-tag="p" id="2bb404db5c5mq" class="p"></p><ul id="f276f5f713n67"><li id="db97be6131krc"><p id="bc367c8a9995e">最大限制200个字符，超过存储截断200。</p></li></ul><p id="06c2f71ce2ml8"></p></td></tr><tr outputclass="row row-level-9-4 has-child" id="9d58645835bmp" class="row row-level-9-4 has-child"><td id="b6e52e625frgj" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="e3ed9fe221mb7">notification</p></td><td id="24b58c72d7g8w" rowspan="1" colspan="1"><p id="216793d4f21ho">Object</p></td><td id="df3ed7bd6fm7k" rowspan="1" colspan="1"><p id="2cdd15b201z9z">否</p></td><td id="3f87edfdd6ir0" rowspan="1" colspan="1"><p id="b52d40a8c6onf">通知信息。</p></td></tr><tr outputclass="row row-level-9-4-1" id="1a15bc897fs2h" class="row row-level-9-4-1"><td id="2ba20c7df2xdy" rowspan="1" colspan="1"><p id="19fd871905ivg">alertContent</p></td><td id="019ce544f3ilk" rowspan="1" colspan="1"><p id="62f3c8cbcd7v1">String</p></td><td id="dc5e26c9a8gi2" rowspan="1" colspan="1"><p id="470324cbd4n5z">否</p></td><td id="7403a6d148jlx" rowspan="1" colspan="1"><p id="90740f2d98zfz">通知内容。</p><p class="note-icon-wrapper" id="6bb12eed58kgz"></p><p data-tag="p" id="00f213b794u1d" class="p"></p><p id="ae9bc842ffsgu">若不填写则使用默认文案：如你收到1条新消息。</p><p id="bbaed8642bey0"></p></td></tr><tr outputclass="row row-level-9-4-2" id="0e39f27a07ek9" class="row row-level-9-4-2"><td id="134ad5ce89w6g" rowspan="1" colspan="1"><p id="0e3d6264e3a4q">notificationOff</p></td><td id="c65b4c5fc14z6" rowspan="1" colspan="1"><p id="adbe855d40s69">Boolean</p></td><td id="9ca9197e08v8q" rowspan="1" colspan="1"><p id="1cf10cd7b3h7p">否</p></td><td id="4b53933026rin" rowspan="1" colspan="1"><p id="9643e6094dnkt">是否关闭推送通知：</p><ul id="f65eb1d4bbtvc"><li id="e97742a7b2u9i"><p id="f8ae6e9e7cf1p"><b>true</b>：关闭</p></li><li id="2120230791xsc"><p id="27c3693d16ntq"><b>false</b>：不关闭</p></li></ul><p class="note-icon-wrapper" id="2a960fb154rlr"></p><p data-tag="p" id="7ea015b3c2ovd" class="p"></p><p id="d4877c2e4dmo4">默认为 false</p><p id="4e0d1801a2ipf"></p></td></tr><tr outputclass="row row-level-10 has-child" id="f9cdee0977pk8" class="row row-level-10 has-child"><td id="55815acba3n3n" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="2cd04ed847tvi">imGroupOpenSpaceModel</p></td><td id="0bb8a8e10f5v2" rowspan="1" colspan="1"><p id="e932254e75lac">Object</p></td><td id="e76778b034to1" rowspan="1" colspan="1"><p id="0e2aedb306x4w">否</p></td><td id="e74f6a4a575dh" rowspan="1" colspan="1"><p id="33def1746dmky">IM群聊场域信息。</p></td></tr><tr outputclass="row row-level-10-1" id="f2a1ee8370ua9" class="row row-level-10-1"><td id="6335b199252bs" rowspan="1" colspan="1"><p id="aef182fa23ruh">supportForward</p></td><td id="e2aac5d842ply" rowspan="1" colspan="1"><p id="f8ed51ffe7c41">Boolean</p></td><td id="ad9df8d8f9wr1" rowspan="1" colspan="1"><p id="b00b850179moe">否</p></td><td id="72b8a408c66zc" rowspan="1" colspan="1"><p id="73d32fe2b3xzl">是否支持转发：</p><ul id="9081375d833ud"><li id="3f204aeb0biet"><p id="af08b4e3bav2y"><b>true</b>：支持</p></li><li id="ad05b00a66oal"><p id="d78d289518lfh"><b>false</b>：不支持</p></li></ul><p class="note-icon-wrapper" id="94b56aa662823"></p><p data-tag="p" id="a09d13e358i0u" class="p"></p><p id="267098964fow6">若使用<code data-tag="inlineCode" id="0de3ec57395rz" class="inlineCode">imGroupOpenSpaceModel</code>对象，则该字段必填。</p><p id="1637d5f09errf"></p></td></tr><tr outputclass="row row-level-10-2" id="163e988426lev" class="row row-level-10-2"><td id="43f30b25a9uku" rowspan="1" colspan="1"><p id="8ee90c7cbb7c9">lastMessageI18n</p></td><td id="04fc0442ebvlp" rowspan="1" colspan="1"><p id="d64927c97a8lf">Map&lt;String, String&gt;</p></td><td id="fb76192fa0b06" rowspan="1" colspan="1"><p id="8797bf87dfqcp">否</p></td><td id="7ec23eff00hbb" rowspan="1" colspan="1"><p id="f2f50e0d75qv4">支持国际化的LastMessage，目前支持的语言枚举值：</p><ul id="27a78ec901a53"><li id="23cd82563awwu"><p id="33a82ffa87opt"><b>ZH_CN</b>：简体中文</p></li><li id="d761d51d9du3h"><p id="69ad2667c64ed"><b>ZH_TW</b>：繁体中文:</p></li><li id="9c1a4e1ad54nv"><p id="b9c04722e00o8"><b>EN_US</b>：英文</p></li><li id="63a0dc4a2bfjh"><p id="0b06505514zyr"><b>JA_JP</b>：日语</p></li><li id="d0da5ffe78ynd"><p id="8dadb0476eudp"><b>VI_VN</b>：越南语</p></li><li id="cb430ec1398yk"><p id="e5adf4294afpc"><b>TH_TH</b>: 泰语</p></li></ul><p class="note-icon-wrapper" id="7dab51c09ac7c"></p><p data-tag="p" id="21a0dd1344pdf" class="p"></p><p id="ff1e3be18aagk">key为语言枚举值，value为lastMessage内容。</p><p id="5d494cdd9220x"></p><p id="114303e65bqnz">示例：</p><pre outputclass="language-json" data-tag="codeblock" code-type="xCode" id="7ec35b2d4cz3j" class="pre codeblock language-json"><code>{"ZH_CN":"卡片", "EN_US" : "card"}
+</code></pre></td></tr><tr outputclass="row row-level-10-3 has-child" id="d28d240651y10" class="row row-level-10-3 has-child"><td id="163ccc73547sh" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="035e91cd8c0w3">searchSupport</p></td><td id="7154a5e3291rh" rowspan="1" colspan="1"><p id="7af691db10x39">Object</p></td><td id="a8d427623edde" rowspan="1" colspan="1"><p id="6d57cc1f1c5t4">否</p></td><td id="3f5ff57bb73ol" rowspan="1" colspan="1"><p id="e2a5fbb507l4j">支持卡片消息可被搜索字段。</p></td></tr><tr outputclass="row row-level-10-3-1" id="c1be0e2fad09q" class="row row-level-10-3-1"><td id="7f4185c907kdc" rowspan="1" colspan="1"><p id="933b4208c4b4o">searchIcon</p></td><td id="5ff0d9064ffu7" rowspan="1" colspan="1"><p id="de5883e4a2pmh">String</p></td><td id="cc572a8380twu" rowspan="1" colspan="1"><p id="9936a557e5irw">否</p></td><td id="00771539d7yo9" rowspan="1" colspan="1"><p id="ac7251c7e5mac">类型的icon，供搜索展示使用。</p></td></tr><tr outputclass="row row-level-10-3-2" id="cc5893cc45hek" class="row row-level-10-3-2"><td id="14d0c87ba4sva" rowspan="1" colspan="1"><p id="fcb3c26b8a3ul">searchTypeName</p></td><td id="9699d0a92d0gx" rowspan="1" colspan="1"><p id="f42b255dfdohe">String</p></td><td id="01863090c0gau" rowspan="1" colspan="1"><p id="a6037f3384sly">否</p></td><td id="1fb2e1c20cxea" rowspan="1" colspan="1"><p id="75f5ad5796719">卡片类型名。</p></td></tr><tr outputclass="row row-level-10-3-3" id="82545fee69fw4" class="row row-level-10-3-3"><td id="a5ef172b1etd9" rowspan="1" colspan="1"><p id="12cff76868ceh">searchDesc</p></td><td id="42ddf58f96l64" rowspan="1" colspan="1"><p id="fe2e1be7588wb">String</p></td><td id="5e0705ffd4o6x" rowspan="1" colspan="1"><p id="e9e7a49faas9f">否</p></td><td id="3d5e4ceba8taz" rowspan="1" colspan="1"><p id="62d00e1df0bav">供消息展示与搜索的字段。</p><p class="note-icon-wrapper" id="0818b16d9dwc9"></p><p data-tag="p" id="350feffc19umu" class="p"></p><ul id="0f7ccf03d0or9"><li id="2af248217ewfv"><p id="f02f7611699uv">最大限制200个字符，超过存储截断200。</p></li></ul><p id="9799127af7beg"></p></td></tr><tr outputclass="row row-level-10-4 has-child" id="aeb1b16400bod" class="row row-level-10-4 has-child"><td id="4304d089baboq" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="6c70e3c2af0h6">notification</p></td><td id="e3d1408f2cjya" rowspan="1" colspan="1"><p id="415fb9b44fxsc">Object</p></td><td id="aff91c6e49xpj" rowspan="1" colspan="1"><p id="a7a2167167m6v">否</p></td><td id="12c7f3f8c456n" rowspan="1" colspan="1"><p id="efcefbc4b6and">通知信息。</p></td></tr><tr outputclass="row row-level-10-4-1" id="9830f653f58cn" class="row row-level-10-4-1"><td id="a82d7020d5yqj" rowspan="1" colspan="1"><p id="1d95b8ef9dc4x">alertContent</p></td><td id="f412ea925egyw" rowspan="1" colspan="1"><p id="c445c0fadd9x6">String</p></td><td id="8b4e259be6619" rowspan="1" colspan="1"><p id="19a5ce4ca06qg">否</p></td><td id="a189badbf8szo" rowspan="1" colspan="1"><p id="f0780431a9max">通知内容。</p><p class="note-icon-wrapper" id="e8d105a993z16"></p><p data-tag="p" id="ac3293b045tar" class="p"></p><p id="7ac0fe677bx74">若不填写则使用默认文案：如你收到1条新消息。</p><p id="c637fdb147igp"></p></td></tr><tr outputclass="row row-level-10-4-2" id="08970379c24sm" class="row row-level-10-4-2"><td id="3ea027c3b69wi" rowspan="1" colspan="1"><p id="05560d9d2fjeu">notificationOff</p></td><td id="45f26fe9ddiub" rowspan="1" colspan="1"><p id="fe87b27ce1bjg">Boolean</p></td><td id="cd43bb45bbgtn" rowspan="1" colspan="1"><p id="c3b5b49154mwx">否</p></td><td id="1ae5d6ec84knk" rowspan="1" colspan="1"><p id="0eee6a7301rpq">是否关闭推送通知：</p><ul id="696408ea09xxd"><li id="fc97e33afcf8h"><p id="eea32ad4bardc"><b>true</b>：关闭</p></li><li id="3ea06c293f7bd"><p id="feaf0d0ce2egl"><b>false</b>：不关闭</p></li></ul><p class="note-icon-wrapper" id="cda9056581pwq"></p><p data-tag="p" id="cc903bae2cp1o" class="p"></p><p id="3165163584zc2">默认为 false</p><p id="26338ea652nqb"></p></td></tr><tr outputclass="row row-level-11 has-child" id="da161cfb9fk53" class="row row-level-11 has-child"><td id="ec871c84b4y13" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="9053bcc5a05ab">imRobotOpenSpaceModel</p></td><td id="daeb17d7b0r88" rowspan="1" colspan="1"><p id="7f744d7f54sc4">Object</p></td><td id="87b5634b334wa" rowspan="1" colspan="1"><p id="1ae8a8b3d4w4g">否</p></td><td id="fbe204f8a74u0" rowspan="1" colspan="1"><p id="42ef4ac3efpmz">IM机器人单聊场域信息。</p></td></tr><tr outputclass="row row-level-11-1" id="510f53b46fmk1" class="row row-level-11-1"><td id="75683527bf7h6" rowspan="1" colspan="1"><p id="3034ab7751yeu">supportForward</p></td><td id="2f66a78c68jct" rowspan="1" colspan="1"><p id="dbdc6545dcfhv">Boolean</p></td><td id="57da1e7b33efw" rowspan="1" colspan="1"><p id="3f1bbc3dd7rst">否</p></td><td id="1ade19edadszk" rowspan="1" colspan="1"><p id="b053a1217dz00">是否支持转发：</p><ul id="68a47e6a7c9wp"><li id="f9cdcd3d686cr"><p id="bdd36f08b94g2"><b>true</b>：转发</p></li><li id="26eb9a2b452h6"><p id="0495dcae898ik"><b>false</b>：不转发</p></li></ul><p class="note-icon-wrapper" id="89ffcbd5e887b"></p><p data-tag="p" id="3e8e07c5624m5" class="p"></p><p id="11a8539e1ee03">若使用<code data-tag="inlineCode" id="0d034c60ffxwj" class="inlineCode">imRobotOpenSpaceModel</code>对象，则该字段必填。</p><p id="1515fa3e36yl0"></p></td></tr><tr outputclass="row row-level-11-2" id="a77f052952izf" class="row row-level-11-2"><td id="82b9b933577ru" rowspan="1" colspan="1"><p id="9af31f25edh22">lastMessageI18n</p></td><td id="0a85b93998r89" rowspan="1" colspan="1"><p id="3ac70f86fd02r">Map&lt;String, String&gt;</p></td><td id="6fd9affa09whm" rowspan="1" colspan="1"><p id="9c3b2507e9nkm">否</p></td><td id="c68263e000prh" rowspan="1" colspan="1"><p id="443b1a54fbatc">支持国际化的LastMessage，目前支持的语言枚举值：</p><ul id="87d7bab362wy0"><li id="8731d9a66990e"><p id="10893e2e5av78"><b>ZH_CN</b>：简体中文</p></li><li id="77e8037f79h0l"><p id="1201647947n6t"><b>ZH_TW</b>：繁体中文:</p></li><li id="f8f26fba182kn"><p id="b96bf91ed7gx8"><b>EN_US</b>：英文</p></li><li id="e5731dcebbgij"><p id="0f82c0a5203ay"><b>JA_JP</b>：日语</p></li><li id="60cff7dc9dit7"><p id="cd1d355e7aaqu"><b>VI_VN</b>：越南语</p></li><li id="ceb133114bcxl"><p id="fed452f98d619"><b>TH_TH</b>: 泰语</p></li></ul><p class="note-icon-wrapper" id="92cd5e933c9x8"></p><p data-tag="p" id="bf36e9a7ce5fp" class="p"></p><p id="8c3fedb8d75tj">key为语言枚举值，value为lastMessage内容。</p><p id="93037af8eattr"></p><p id="3e5187e132p2r">示例：</p><pre outputclass="language-json" data-tag="codeblock" code-type="xCode" id="dd52d2d2d0759" class="pre codeblock language-json"><code>{"ZH_CN":"卡片", "EN_US" : "card"}
+</code></pre></td></tr><tr outputclass="row row-level-11-3 has-child" id="79298957c9tvi" class="row row-level-11-3 has-child"><td id="5f20c27a83sk2" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="fb4b93e12c5rd">searchSupport</p></td><td id="941de6e585xhp" rowspan="1" colspan="1"><p id="92b09031faeyx">Object</p></td><td id="77cd96c9e29uv" rowspan="1" colspan="1"><p id="ebd0e4cd13e1s">否</p></td><td id="28312d2febm9x" rowspan="1" colspan="1"><p id="7078342c2avfw">支持卡片消息可被搜索字段。</p></td></tr><tr outputclass="row row-level-11-3-1" id="09f35d8ac9qno" class="row row-level-11-3-1"><td id="409cd0273awrq" rowspan="1" colspan="1"><p id="1e3c13bb560md">searchIcon</p></td><td id="abcb038f1fat2" rowspan="1" colspan="1"><p id="f59838edcaouo">String</p></td><td id="9acce07131h4s" rowspan="1" colspan="1"><p id="c82c76aed2xzw">否</p></td><td id="8ebf64f155f2t" rowspan="1" colspan="1"><p id="0cae08b9d7xva">类型的icon，供搜索展示使用。</p></td></tr><tr outputclass="row row-level-11-3-2" id="8a7ebb22056ub" class="row row-level-11-3-2"><td id="0fcf0ddf5ad6l" rowspan="1" colspan="1"><p id="0eac0cb084337">searchTypeName</p></td><td id="873bc18117tki" rowspan="1" colspan="1"><p id="fa03a811c6dcp">String</p></td><td id="114c0e24d30s4" rowspan="1" colspan="1"><p id="73339cd5abv4x">否</p></td><td id="58840342565ii" rowspan="1" colspan="1"><p id="762da8d93cfnf">卡片类型名。</p></td></tr><tr outputclass="row row-level-11-3-3" id="85c0575860off" class="row row-level-11-3-3"><td id="33e1e07101efl" rowspan="1" colspan="1"><p id="aaafa9777bcsn">searchDesc</p></td><td id="a67178f391wqo" rowspan="1" colspan="1"><p id="331bcf379915f">String</p></td><td id="7b5cef16016zw" rowspan="1" colspan="1"><p id="9f431eef99b5z">否</p></td><td id="d74247a380cyc" rowspan="1" colspan="1"><p id="18042d49edqfd">供消息展示与搜索的字段。</p><p class="note-icon-wrapper" id="22432d317bujy"></p><p data-tag="p" id="0ebad1ddd70xr" class="p"></p><ul id="0e20788f73331"><li id="d963cd06fc41f"><p id="476435ba9a4lb">最大限制200个字符，超过存储截断200。</p></li></ul><p id="412e6230b07gk"></p></td></tr><tr outputclass="row row-level-11-4 has-child" id="9bac79f6f0vac" class="row row-level-11-4 has-child"><td id="a56eef995ffuq" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="c753f21e29c2b">notification</p></td><td id="591797d1e7ga4" rowspan="1" colspan="1"><p id="02f423c769s2i">Object</p></td><td id="94547c5a65fxk" rowspan="1" colspan="1"><p id="35e4121f0e9v1">否</p></td><td id="7a38f1b602t7a" rowspan="1" colspan="1"><p id="0cde97bf63ejg">通知信息。</p></td></tr><tr outputclass="row row-level-11-4-1" id="3fd58d7b0abb4" class="row row-level-11-4-1"><td id="20010316dczp3" rowspan="1" colspan="1"><p id="e28ae70e8apsw">alertContent</p></td><td id="1b0ce5a523o4o" rowspan="1" colspan="1"><p id="2967ef31c2a2g">String</p></td><td id="f064c3e2e8kc6" rowspan="1" colspan="1"><p id="35c883cec3oys">否</p></td><td id="78f3c217e8rxi" rowspan="1" colspan="1"><p id="b6d9b425f7i9v">供消息展示与搜索的字段。</p><p class="note-icon-wrapper" id="2f132476b3m71"></p><p data-tag="p" id="ea6b5e1f17drd" class="p"></p><ul id="d3b7e41ac4hq4"><li id="b08092a12fg28"><p id="a52432699bwbs">最大限制200个字符，超过存储截断200。</p></li></ul><p id="b87a6a072exh1"></p></td></tr><tr outputclass="row row-level-11-4-2" id="5a800f54d7ctw" class="row row-level-11-4-2"><td id="a7e6eb15bep3f" rowspan="1" colspan="1"><p id="b56625ca6cuia">notificationOff</p></td><td id="2145813478n2f" rowspan="1" colspan="1"><p id="7e2a24b734f3a">Boolean</p></td><td id="be27ac7b6e109" rowspan="1" colspan="1"><p id="18fcf72855rs6">否</p></td><td id="c11abd72e5he8" rowspan="1" colspan="1"><p id="370336619fgc8">是否关闭推送通知：</p><ul id="11a2a441cbhoh"><li id="90c73c319451q"><p id="484f3466e0fja"><b>true</b>：关闭</p></li><li id="42145efc7ef2p"><p id="177c9c2b58w74"><b>false</b>：不关闭</p></li></ul><p class="note-icon-wrapper" id="19819bfc80xs6"></p><p data-tag="p" id="ab29744927xz7" class="p"></p><p id="cd523def2akuo">默认为 false</p><p id="4a212cb24dt2x"></p></td></tr><tr outputclass="row row-level-12 has-child" id="fdf4604a85q57" class="row row-level-12 has-child"><td id="33cc8d9a64q2y" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="60421988cd4np">coFeedOpenSpaceModel</p></td><td id="02d7772d6ds6y" rowspan="1" colspan="1"><p id="0dbfe8e492730">Object</p></td><td id="f976d0945fimg" rowspan="1" colspan="1"><p id="aa0c52f34bj0l">否</p></td><td id="b013263729ojg" rowspan="1" colspan="1"><p id="07004ca655l2b">协作场域信息（废弃）。</p></td></tr><tr outputclass="row row-level-12-1" id="ecde1aab9cxlp" class="row row-level-12-1"><td id="a5b31a7b0dl1d" rowspan="1" colspan="1"><p id="9f7c3d1235794">title</p></td><td id="2a194e388c9xd" rowspan="1" colspan="1"><p id="804907b28588k">String</p></td><td id="fcab6c23e56k1" rowspan="1" colspan="1"><p id="ca21b8344fuej">否</p></td><td id="836a451a3bv1q" rowspan="1" colspan="1"><p id="46be0e8899s8q">卡片标题（废弃）。</p><p class="note-icon-wrapper" id="b0862aab817lw"></p><p data-tag="p" id="32abd2aede5lv" class="p"></p><p id="fa50aa005akcg">若使用<code data-tag="inlineCode" id="c21acd7a399e1" class="inlineCode">coFeedOpenSpaceModel</code>对象，则该字段必填。</p><p id="40f87441ccote"></p></td></tr><tr outputclass="row row-level-12-2" id="ead903fa2a02r" class="row row-level-12-2"><td id="a1956c9579kir" rowspan="1" colspan="1"><p id="4a408e5dd3e00">coolAppCode</p></td><td id="58139f3a6224s" rowspan="1" colspan="1"><p id="ab3fd7a65a86d">String</p></td><td id="1ce5adeb8cu43" rowspan="1" colspan="1"><p id="6463225aab4fy">否</p></td><td id="f35c5df495oii" rowspan="1" colspan="1"><p id="37a4370211mh5">酷应用编码（废弃）。</p></td></tr><tr outputclass="row row-level-13 has-child" id="1e10d61f85sbs" class="row row-level-13 has-child"><td id="af4e9aff85nus" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="431ecf4cd4c21">topOpenSpaceModel</p></td><td id="702ab1d2b95aj" rowspan="1" colspan="1"><p id="b2115b939ezrq">Object</p></td><td id="d0f376c2b74al" rowspan="1" colspan="1"><p id="35c112b815xii">否</p></td><td id="4002d6f412weh" rowspan="1" colspan="1"><p id="a3c428708dtcg">吊顶场域信息。</p></td></tr><tr outputclass="row row-level-13-1" id="6c1fc69f40hiw" class="row row-level-13-1"><td id="a5acaa20eakex" rowspan="1" colspan="1"><p id="31d6f37b740rn">spaceType</p></td><td id="1f72824b185z4" rowspan="1" colspan="1"><p id="16df4c4fbcsv2">String</p></td><td id="e58a36ea5fo37" rowspan="1" colspan="1"><p id="11ddccf038qhm">否</p></td><td id="9026698da3ev6" rowspan="1" colspan="1"><p id="91c223c7b4629">吊顶场域属性，通过增加spaeType使卡片支持吊顶场域。</p><p class="note-icon-wrapper" id="db02d182179ay"></p><p data-tag="p" id="1654b5e8d8jyc" class="p"></p><ul id="3e916d9db9z1q"><li id="8bdcf3e8117q3"><p id="b546598d4faxh">吊顶对应spaceType为<b>ONE_BOX</b>。</p></li><li id="19f08ec780gqo"><p id="f956ac782c3a2">若使用<code data-tag="inlineCode" id="9a24c5aa9bg2i" class="inlineCode">topOpenSpaceModel</code>对象，则该字段必填。</p></li></ul><p id="4f3772b713nq5"></p></td></tr><tr outputclass="row row-level-14" id="39ede26338rcm" class="row row-level-14"><td id="8d8ec8812cz27" rowspan="1" colspan="1"><p id="1b9d5beb52d81">openSpaceId</p></td><td id="f385f7acf28sp" rowspan="1" colspan="1"><p id="9d0c037004lhq">String</p></td><td id="ebb6729f2589x" rowspan="1" colspan="1"><p id="43b1f3d91cxee">是</p></td><td id="6cf9d2ac2ag7f" rowspan="1" colspan="1"><p id="d765b24486xk4">表示场域及其场域id，其格式为<code data-tag="inlineCode" id="17fa57eb13wo2" class="inlineCode">dtv1.card//spaceType1.spaceId1;spaceType2.spaceId2_1;spaceType2.spaceId2_2;spaceType3.spaceId3</code>。</p></td></tr><tr outputclass="row row-level-15 has-child" id="d60d4ef120mb0" class="row row-level-15 has-child"><td id="6fabe7b2cagrw" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="548f0d26884wn">imSingleOpenDeliverModel</p></td><td id="762bdbaadap3p" rowspan="1" colspan="1"><p id="7d7d2c3e42d7f">Object</p></td><td id="81a9305b525wu" rowspan="1" colspan="1"><p id="d1c7551ae7ydh">否</p></td><td id="9331477bf8v67" rowspan="1" colspan="1"><p id="42c053fa73toy">单聊酷应用场域投放参数。</p></td></tr><tr outputclass="row row-level-15-1" id="c266133db79ue" class="row row-level-15-1"><td id="672c1ebadcc3z" rowspan="1" colspan="1"><p id="b3fec63cfeii8">atUserIds</p></td><td id="b704bb8f97xy8" rowspan="1" colspan="1"><p id="cb0dfe2249kuh">Map&lt;String, String&gt;</p></td><td id="0902133dd8tgk" rowspan="1" colspan="1"><p id="dbb478af4cji5">否</p></td><td id="0ebc9ed2bfpb5" rowspan="1" colspan="1"><p id="3825bd51a5tac">消息@人。格式：{"key":"value"}。</p><ul id="4fb0a32e25791"><li id="5b02cf6c7bj81"><p id="d1bdc96de0933">key：用户的userId</p></li><li id="b3d20b8b88rqg"><p id="0537fcb230a1g">value：用户名。</p></li></ul><p class="note-icon-wrapper" id="06280cc6d20ce"></p><p data-tag="p" id="e11ea46651y09" class="p"></p><p id="aeee32e84f67q">如果key、value都为"@ALL"则判断@所有人。</p><p id="d50fa152edt5q"></p><p id="1a6109b700xda">示例：</p><pre outputclass="language-json" data-tag="codeblock" code-type="xCode" id="db654a98e3u6s" class="pre codeblock language-json"><code>"atUserIds" : {
+    "123456" : "小明"
+}
+</code></pre></td></tr><tr outputclass="row row-level-15-2" id="8837f2caafg50" class="row row-level-15-2"><td id="2627c1683eyvz" rowspan="1" colspan="1"><p id="b44c7a0e620c0">extension</p></td><td id="498e0ce17barb" rowspan="1" colspan="1"><p id="2c352200a654f">Map&lt;String, String&gt;</p></td><td id="6c9aca80e7141" rowspan="1" colspan="1"><p id="deaa89f73dify">否</p></td><td id="9d0dd2f20czi9" rowspan="1" colspan="1"><p id="ee4a91c3ae657">扩展字段，示例如下：</p><pre outputclass="language-json" data-tag="codeblock" code-type="xCode" id="111d0ddca44cw" class="pre codeblock language-json"><code>{"key":"value"}
+</code></pre></td></tr><tr outputclass="row row-level-16 has-child" id="c7e057260alr8" class="row row-level-16 has-child"><td id="b3cc57d5c5xoz" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="5610583633i1n">imGroupOpenDeliverModel</p></td><td id="0aa1edb673d7w" rowspan="1" colspan="1"><p id="bf7cae49edc7m">Object</p></td><td id="01ccc3ebbcl3a" rowspan="1" colspan="1"><p id="b4a5463e6bbkj">否</p></td><td id="76abd195c99js" rowspan="1" colspan="1"><p id="9ffd4260dbfvy">群聊投放参数。</p></td></tr><tr outputclass="row row-level-16-1" id="7b96ec2313nln" class="row row-level-16-1"><td id="f440ec677a2aa" rowspan="1" colspan="1"><p id="ab48fbfac1ro8">robotCode</p></td><td id="9779b16a71xyp" rowspan="1" colspan="1"><p id="5962b8a78f9le">String</p></td><td id="45feec4d15yhd" rowspan="1" colspan="1"><p id="639e21b033wxa">否</p></td><td id="53bb380a06f8s" rowspan="1" colspan="1"><p id="440e80afb1xvj">用于发送卡片的机器人编码。</p><ul id="052d19137d1do"><li id="998155a00bcqo"><p id="8e8da46c06gms">场景群机器人发送群聊使用群机器人robotCode</p></li><li id="86f2c11b53h30"><p id="d7ded001bd4n6">非场景群的企业内部开发的机器人发送群聊，使用机器人的AppKey</p></li><li id="10e00dc13bgvh"><p id="a88210518b3t3">第三方企业机器人，使用机器人的robotCode</p></li></ul><p class="note-icon-wrapper" id="1099acf1d8msc"></p><p data-tag="p" id="1ae71b1e8f9oo" class="p"></p><p id="4b218e4e09ded">若使用<code data-tag="inlineCode" id="9736826aa9vw8" class="inlineCode">imGroupOpenDeliverModel</code>对象，则该字段必填。</p><p id="148b6f27e9ya6"></p></td></tr><tr outputclass="row row-level-16-2" id="2e2ec4bdacz0r" class="row row-level-16-2"><td id="981083ef7drc1" rowspan="1" colspan="1"><p id="1250e2edc5z79">atUserIds</p></td><td id="84c8e48c2df6p" rowspan="1" colspan="1"><p id="43d7df609b8ar">Map&lt;String, String&gt;</p></td><td id="e498cb5ab9lfb" rowspan="1" colspan="1"><p id="cac0e2e6fddxa">否</p></td><td id="29ee0fc95dc2l" rowspan="1" colspan="1"><p id="81f9138495gc3">消息@人。格式：{"key":"value"}。</p><ul id="8ff15d70b3ulu"><li id="849fbc19e2yxy"><p id="0b21f1971b9kh">key：用户的userId</p></li><li id="64f4d25f6f3nn"><p id="647431903e4lj">value：用户名。</p></li></ul><p class="note-icon-wrapper" id="a6b13755een4i"></p><p data-tag="p" id="4cb439e2fcsgf" class="p"></p><p id="b429575720epp">如果key、value都为"@ALL"则判断@所有人。</p><p id="035f8acb674j8"></p><p id="5e4d52b9444zj">示例：</p><pre outputclass="language-json" data-tag="codeblock" code-type="xCode" id="f086fb31d65kd" class="pre codeblock language-json"><code>"atUserIds" : {
+    "123456" : "小明"
+}
+</code></pre></td></tr><tr outputclass="row row-level-16-3" id="161b413798mrp" class="row row-level-16-3"><td id="9ddcbd5c56657" rowspan="1" colspan="1"><p id="ebba64c74ehzc">recipients</p></td><td id="cd2dbf4984uw6" rowspan="1" colspan="1"><p id="6f7d3b88e00ie">Array of String</p></td><td id="0a1c3cb9a2ehu" rowspan="1" colspan="1"><p id="cb100f3b5d4ib">否</p></td><td id="47609e1c6bopn" rowspan="1" colspan="1"><p id="25d8d0ccf9781">指定接收人的userId。</p></td></tr><tr outputclass="row row-level-16-4" id="3197b99ec3ak6" class="row row-level-16-4"><td id="760def830888l" rowspan="1" colspan="1"><p id="c5c65a094cinz">extension</p></td><td id="973f0111803g9" rowspan="1" colspan="1"><p id="9682d1aa36c2f">Map&lt;String, String&gt;</p></td><td id="6cc6274ac1ci5" rowspan="1" colspan="1"><p id="3ee8170de34vx">否</p></td><td id="b8c0aab9180la" rowspan="1" colspan="1"><p id="1434ad02e4oob">扩展字段，示例如下：</p><pre outputclass="language-json" data-tag="codeblock" code-type="xCode" id="f4fc6cdbd8xuu" class="pre codeblock language-json"><code>{"key":"value"}
+</code></pre></td></tr><tr outputclass="row row-level-17 has-child" id="33aefffb4akbx" class="row row-level-17 has-child"><td id="22331e00f5rgd" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="8c14dc8ee27fb">imRobotOpenDeliverModel</p></td><td id="0057bf0e80okb" rowspan="1" colspan="1"><p id="5aa2900f07xjj">Object</p></td><td id="311a0d38a8btv" rowspan="1" colspan="1"><p id="9b3eab443528p">否</p></td><td id="37408e7c2brv6" rowspan="1" colspan="1"><p id="97b0b3493bdeq">IM机器人单聊投放参数。</p></td></tr><tr outputclass="row row-level-17-1" id="375ec02fad81o" class="row row-level-17-1"><td id="426cb0ab10sws" rowspan="1" colspan="1"><p id="dc6e1735e3phl">spaceType</p></td><td id="d8927f6acd49d" rowspan="1" colspan="1"><p id="ad8201d870h9l">String</p></td><td id="219bbbc896tj0" rowspan="1" colspan="1"><p id="213b638fa5wbz">否</p></td><td id="58ab0c8a490il" rowspan="1" colspan="1"><p id="0974505250991">IM机器人单聊若未设置其他投放属性，需设置spaeType为<code data-tag="inlineCode" id="8871eca5fam0l" class="inlineCode">IM_ROBOT</code>。</p></td></tr><tr outputclass="row row-level-17-2" id="08a9a36f92bx3" class="row row-level-17-2"><td id="269262e2d0plg" rowspan="1" colspan="1"><p id="59dd99ab65kao">robotCode</p></td><td id="02c92f93e9ksy" rowspan="1" colspan="1"><p id="5bc459f597rn9">String</p></td><td id="c547190939i1h" rowspan="1" colspan="1"><p id="c20da862d8zia">否</p></td><td id="c3ebd6c3e8ahl" rowspan="1" colspan="1"><p id="dbdfe76f238ah">机器人编码。</p></td></tr><tr outputclass="row row-level-17-3" id="1792db0fe7ete" class="row row-level-17-3"><td id="44ca5697c779s" rowspan="1" colspan="1"><p id="b3c328abc17er">extension</p></td><td id="ca81f47474s53" rowspan="1" colspan="1"><p id="3c525f9966160">Map&lt;String, String&gt;</p></td><td id="faf6053b4dqjo" rowspan="1" colspan="1"><p id="1b9d41453fz03">否</p></td><td id="4a1284cd21h6e" rowspan="1" colspan="1"><p id="6d38ecdbadazd">扩展字段，示例如下：</p><pre outputclass="language-json" data-tag="codeblock" code-type="xCode" id="9daa2dee71drn" class="pre codeblock language-json"><code>{"key":"value"}
+</code></pre></td></tr><tr outputclass="row row-level-18 has-child" id="f14a7c38b9jf4" class="row row-level-18 has-child"><td id="28fb3a957fa7u" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="94f415c172jcx">topOpenDeliverModel</p></td><td id="b1fbe0f8d9zav" rowspan="1" colspan="1"><p id="6516c218a5f8f">Object</p></td><td id="bd298caba0ka0" rowspan="1" colspan="1"><p id="20429de6cc0ht">否</p></td><td id="f8f896c7152bo" rowspan="1" colspan="1"><p id="b6477eba591wj">吊顶投放参数。</p></td></tr><tr outputclass="row row-level-18-1" id="4e2e4dbfffyxc" class="row row-level-18-1"><td id="be944590achhf" rowspan="1" colspan="1"><p id="7cbf8f2f072u2">expiredTimeMillis</p></td><td id="6d4df6f2493yp" rowspan="1" colspan="1"><p id="cb34f155e06ol">Long</p></td><td id="d9f332de4a1ym" rowspan="1" colspan="1"><p id="23d62fef8ak1x">否</p></td><td id="007a6842e02w4" rowspan="1" colspan="1"><p id="02192d57a4qkk">过期时间戳。</p><p class="note-icon-wrapper" id="4d1e0e45f5ltz"></p><p data-tag="p" id="2ca4dd54d1paj" class="p"></p><p id="b99fc3f471wmb">若使用<code data-tag="inlineCode" id="8221fb0691a17" class="inlineCode">topOpenDeliverModel</code>对象，则该字段必填。</p><p id="8290fa61b0g1o"></p></td></tr><tr outputclass="row row-level-18-2" id="ad8b528242xic" class="row row-level-18-2"><td id="cf5cf02eea6u6" rowspan="1" colspan="1"><p id="d5de83e81bgt9">userIds</p></td><td id="63d9aea2cdiy7" rowspan="1" colspan="1"><p id="5b3dddff669qk">Array of String</p></td><td id="cffb56c2baq60" rowspan="1" colspan="1"><p id="152f379be9zxs">否</p></td><td id="70f978d28b8zs" rowspan="1" colspan="1"><p id="8c11183cccrq6">可以查看该吊顶卡片的userId。</p></td></tr><tr outputclass="row row-level-18-3" id="97c7b6cc4a8qr" class="row row-level-18-3"><td id="ec9eb59f3cloe" rowspan="1" colspan="1"><p id="53696c86812ze">platforms</p></td><td id="1b77b816cfr2g" rowspan="1" colspan="1"><p id="47604e04b7mck">Array of String</p></td><td id="5203f442f8c2z" rowspan="1" colspan="1"><p id="1a15ae1d81g5j">否</p></td><td id="30ef307cd81qa" rowspan="1" colspan="1"><p id="043ae93f6afa4">可以查看该吊顶卡片的设备：<code data-tag="inlineCode" id="cb4effdcb74dc" class="inlineCode">android｜ios｜win｜mac</code>。</p></td></tr><tr outputclass="row row-level-19 has-child" id="891a034f9e65s" class="row row-level-19 has-child"><td id="62078c5d1axkm" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="d6351086fc231">coFeedOpenDeliverModel</p></td><td id="194d02fb46yij" rowspan="1" colspan="1"><p id="4efcad37d6c70">Object</p></td><td id="c652343fbegag" rowspan="1" colspan="1"><p id="c1af80981cfet">否</p></td><td id="c3835c3932amk" rowspan="1" colspan="1"><p id="18beb75d92clh">协作投放参数（废弃）。</p></td></tr><tr outputclass="row row-level-19-1" id="d94f38ffc7lug" class="row row-level-19-1"><td id="755f8135f9z1q" rowspan="1" colspan="1"><p id="e1eadc63afx10">bizTag</p></td><td id="b65df6f0f3hy2" rowspan="1" colspan="1"><p id="979d283e7ccu4">String</p></td><td id="a54b1a21c35ty" rowspan="1" colspan="1"><p id="3df365b945nxg">否</p></td><td id="0e1322f430tcy" rowspan="1" colspan="1"><p id="d5e0e1369fgl8">业务标识（废弃）。</p><p class="note-icon-wrapper" id="1c1800d15fz6c"></p><p data-tag="p" id="2578aad7e699r" class="p"></p><ul id="9d0f34d0b278c"><li id="d9063bcf61q73"><p id="e8fe6c6ec9nft">若使用<code data-tag="inlineCode" id="b2625e85d9rrf" class="inlineCode">coFeedOpenDeliverModel</code>对象，则该字段必填。</p></li><li id="47c00f9d5bgjb"><p id="b4f90dfa73pxe">需要先申请在协作中投放该bizTag，申请通过后才能使用。</p></li></ul><p id="066ce0cba59cd"></p></td></tr><tr outputclass="row row-level-19-2" id="476b4a7256nhb" class="row row-level-19-2"><td id="b546f9f139gba" rowspan="1" colspan="1"><p id="796599c1703hn">gmtTimeLine</p></td><td id="b55f5b1c914u9" rowspan="1" colspan="1"><p id="367a4950fcfo6">Long</p></td><td id="9a76c7ce6epdg" rowspan="1" colspan="1"><p id="2742db98f359q">否</p></td><td id="c9c20541f605s" rowspan="1" colspan="1"><p id="11522bd32a9ro">协作场域下的排序时间（废弃）。</p><p class="note-icon-wrapper" id="a02653d887kpq"></p><p data-tag="p" id="25fcde5a70ui4" class="p"></p><p id="c86cb7e8e97ub">若使用<code data-tag="inlineCode" id="6e785d8bc4roc" class="inlineCode">coFeedOpenDeliverModel</code>对象，则该字段必填。</p><p id="cea1c22e79fj7"></p></td></tr><tr outputclass="row row-level-20 has-child" id="944db38ee5sft" class="row row-level-20 has-child"><td id="5773de30fevqi" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="773661a6a4rql">docOpenDeliverModel</p></td><td id="82306c91c439o" rowspan="1" colspan="1"><p id="290dc712a3gzy">Object</p></td><td id="4280d2fbe62a9" rowspan="1" colspan="1"><p id="27147cc9d01tj">否</p></td><td id="85088d6058ago" rowspan="1" colspan="1"><p id="4122d0154134k">文档投放参数（废弃）。</p></td></tr><tr outputclass="row row-level-20-1" id="34232fbd21c43" class="row row-level-20-1"><td id="a1cce2a5d2d4v" rowspan="1" colspan="1"><p id="dd74078195alr">userId</p></td><td id="8d42353de6y72" rowspan="1" colspan="1"><p id="a42052df6durv">String</p></td><td id="f177d461c10nn" rowspan="1" colspan="1"><p id="408fdaa2f9z78">否</p></td><td id="9b8462b211vlb" rowspan="1" colspan="1"><p id="fd1027fabesf3">员工userId信息（废弃）。</p><p class="note-icon-wrapper" id="37f0583a31tci"></p><p data-tag="p" id="4594a11442u4k" class="p"></p><p id="641cf869ac6dl">若使用<code data-tag="inlineCode" id="b2bf232c5b2hy" class="inlineCode">docOpenDeliverModel</code>对象，则该字段必填。</p><p id="73f954acddx5j"></p></td></tr><tr outputclass="row row-level-21" id="24c5bf16c4bln" class="row row-level-21"><td id="bceefac02edzl" rowspan="1" colspan="1"><p id="fb018e0852p5f">userIdType</p></td><td id="6d219e04f0wyo" rowspan="1" colspan="1"><p id="b4d3a6db267z5">Integer</p></td><td id="11bf68c579igr" rowspan="1" colspan="1"><p id="b2e668572ch24">否</p></td><td id="b71699b67f7tj" rowspan="1" colspan="1"><p id="5f6832c07f2mc">用户userId类型：</p><ul id="36844331dfpzd"><li id="1fdba61b45kma"><p id="845219cec9elr"><b>1</b>（默认）：userId模式</p></li><li id="ba667fa70awrn"><p id="74831fdfb92k7"><b>2</b>：unionId模式</p></li></ul><p class="note-icon-wrapper" id="5529a8c78e7m9"></p><p data-tag="p" id="62129392fflvf" class="p"></p><p id="d5ec7cb3c7wkc"><code data-tag="inlineCode" id="9f8166a389qb5" class="inlineCode">userIdType</code> 字段的填写请参考：<a href="https://open.dingtalk.com/document/development/faq-card#8cad7f90a8mzg" id="5a90aed037gzx" class="xref">userIdType 字段的填写说明</a>。</p><p id="f5d2a28702pcb"></p></td></tr><tr outputclass="row row-level-22" id="e124b8ffbfxrs" class="row row-level-22"><td id="202fc66a748m6" rowspan="1" colspan="1"><p id="51345b7616j2e">cardAtUserIds</p></td><td id="0aed92de5e306" rowspan="1" colspan="1"><p id="0e9a1cc87f9ka">Array of String</p></td><td id="d39224d4d7ubs" rowspan="1" colspan="1"><p id="44e4afd14e3u5">否</p></td><td id="7df6759906kf9" rowspan="1" colspan="1"><p id="19bf06910dje5">被@人的userId列表:</p><p id="acadcc772cfdx"><img src="https://img.alicdn.com/imgextra/i4/O1CN01yToBo528ZmZFxC8Ft_!!6000000007947-0-tps-750-166.jpg" alt="" class="image break" / /></p><p class="note-icon-wrapper" id="181a25e0b6l01"></p><p data-tag="p" id="2968bd949260u" class="p"></p><ul id="eac54898fftem"><li id="a2235c69c7blx"><p id="4670a6f161m7g">设置此字段，可以实现在卡片中@人的效果；</p></li><li id="cb25e6c98ek21"><p id="21d71d3d37lj0">同时需要在卡片的 markdown 内容中添加：<code data-tag="inlineCode" id="70e8c2fb6fhhb" class="inlineCode">&lt;a atId=example_user_id&gt; 用户昵称&lt;a&gt;</code> ；</p></li></ul><p id="7b2606c364nrv"></p><p id="1982af6535kog">示例：比如卡片模板中的一个 markdown 变量名为 markdown_content，则卡片变量需要设置为：</p><pre outputclass="language-json" data-tag="codeblock" code-type="xCode" id="e98cd354e4r4y" class="pre codeblock language-json"><code>{
+    "cardParamMap": {
+        "markdown_content": "这是一段测@人高亮文字: &lt;a atId=example_user_id_1&gt;小明 &lt;/a&gt; &lt;a atId=example_user_id_2&gt;小红 &lt;/a&gt;"
+    }
+}
+</code></pre></td></tr></tbody></table></section><section id="section-request-body-example" class="section"><h3 id="h3-request-body-example" data-tag="h3" class="h3">请求示例</h3><div outputclass="tabbed-codeblock" data-tag="fig" id="figure-bng-87k-h7b" class="tabbed-codeblock-box"><div class="tab-box"></div><input type="radio" name="check-figure-bng-87k-h7b" id="figure-bng-87k-h7b-HTTP-tab" checked="checked" /><label for="figure-bng-87k-h7b-HTTP-tab">HTTP</label><div class="codeblock-item"><pre id="codeblock-ijo-xns-ptk" outputclass="language-HTTP" code-type="xCode" data-tag="codeblock" class="pre codeblock language-HTTP"><code>POST /v1.0/card/instances/createAndDeliver HTTP/1.1
+Host:api.dingtalk.com
+x-acs-dingtalk-access-token:example_token
+Content-Type:application/json
+
+{
+  "userId" : "example_user_id",
+  "cardTemplateId" : "b4fdsu2119f-9945-4e13-9989-747da19e3bc7",
+  "outTrackId" : "example_out_track_id",
+  "callbackType" : "STREAM",
+  "callbackRouteKey" : "example_route_key",
+  "cardData" : {
+    "cardParamMap" : {
+      "key" : "example_public_value"
+    }
+  },
+  "privateData" : {
+    "key" : {
+      "cardParamMap" : {
+        "key" : "example_private_value"
+      }
+    }
+  },
+  "openDynamicDataConfig" : {
+    "dynamicDataSourceConfigs" : [ {
+      "dynamicDataSourceId" : "example_ds_01",
+      "constParams" : {
+        "key" : "example_const_param_value"
+      },
+      "pullConfig" : {
+        "pullStrategy" : "INTERVAL",
+        "interval" : 600,
+        "timeUnit" : "SECONDS"
+      }
+    } ]
+  },
+  "imSingleOpenSpaceModel" : {
+    "supportForward" : true,
+    "lastMessageI18n" : {
+      "key" : "互动卡片消息"
+    },
+    "searchSupport" : {
+      "searchIcon" : "@lALPDgQ9q8hFhlHNAXzNAqI",
+      "searchTypeName" : "{\"ZH_CN\":\"待办\",\"ZH_TW\":\"待辦\",\"EN_US\":\"ToDo\"}",
+      "searchDesc" : "卡片的具体描述"
+    },
+    "notification" : {
+      "alertContent" : "你收到了1条卡片消息",
+      "notificationOff" : false
+    }
+  },
+  "imGroupOpenSpaceModel" : {
+    "supportForward" : false,
+    "lastMessageI18n" : {
+      "key" : "互动卡片消息"
+    },
+    "searchSupport" : {
+      "searchIcon" : "@lALPDgQ9q8hFhlHNAXzNAqI",
+      "searchTypeName" : "{\"ZH_CN\":\"待办\",\"ZH_TW\":\"待辦\",\"EN_US\":\"ToDo\"}",
+      "searchDesc" : "卡片的具体描述"
+    },
+    "notification" : {
+      "alertContent" : "你收到了1条卡片消息",
+      "notificationOff" : false
+    }
+  },
+  "imRobotOpenSpaceModel" : {
+    "supportForward" : false,
+    "lastMessageI18n" : {
+      "key" : "互动卡片消息"
+    },
+    "searchSupport" : {
+      "searchIcon" : "@lALPDgQ9q8hFhlHNAXzNAqI",
+      "searchTypeName" : "{\"ZH_CN\":\"待办\",\"ZH_TW\":\"待辦\",\"EN_US\":\"ToDo\"}",
+      "searchDesc" : "卡片的具体描述"
+    },
+    "notification" : {
+      "alertContent" : "你收到了1条卡片消息",
+      "notificationOff" : false
+    }
+  },
+  "coFeedOpenSpaceModel" : {
+    "title" : "xxxx卡片",
+    "coolAppCode" : "coolAppCode123"
+  },
+  "topOpenSpaceModel" : {
+    "spaceType" : "ONE_BOX"
+  },
+  "openSpaceId" : "dtv1.card//im_group.cidp4Gh*******VCQ==;im_robot.manager****67;co_feed.manager****67;one_box.cidp4Gh*******VCQ==",
+  "imSingleOpenDeliverModel" : {
+    "atUserIds" : {
+      "key" : "example_user_name"
+    },
+    "extension" : {
+      "key" : "example_ext_value"
+    }
+  },
+  "imGroupOpenDeliverModel" : {
+    "robotCode" : "example_robot_code",
+    "atUserIds" : {
+      "key" : "example_user_name"
+    },
+    "recipients" : [ "example_user_id" ],
+    "extension" : {
+      "key" : "example_ext_value"
+    }
+  },
+  "imRobotOpenDeliverModel" : {
+    "spaceType" : "IM_ROBOT",
+    "robotCode" : "example_robot_code",
+    "extension" : {
+      "key" : "example_ext_value"
+    }
+  },
+  "topOpenDeliverModel" : {
+    "expiredTimeMillis" : 1665473229000,
+    "userIds" : [ "example_user_id" ],
+    "platforms" : [ "android" ]
+  },
+  "coFeedOpenDeliverModel" : {
+    "bizTag" : "example_biz_tag",
+    "gmtTimeLine" : 1665473229000
+  },
+  "docOpenDeliverModel" : {
+    "userId" : "example_user_id"
+  },
+  "userIdType" : 1,
+  "cardAtUserIds" : [ "example_user_id" ]
+}</code></pre></div><input type="radio" name="check-figure-bng-87k-h7b" id="figure-bng-87k-h7b-java-tab" /><label for="figure-bng-87k-h7b-java-tab">Java</label><div class="codeblock-item"><pre id="codeblock-oxi-m3w-hli" outputclass="language-java" code-type="xCode" data-tag="codeblock" class="pre codeblock language-java"><code>// This file is auto-generated, don't edit it. Thanks.
+package com.aliyun.sample;
+
+import com.aliyun.tea.*;
+
+public class Sample {
+
+    /**
+     * &lt;b&gt;description&lt;/b&gt; :
+     * &lt;p&gt;使用 Token 初始化账号Client&lt;/p&gt;
+     * @return Client
+     * 
+     * @throws Exception
+     */
+    public static com.aliyun.dingtalkcard_1_0.Client createClient() throws Exception {
+        com.aliyun.teaopenapi.models.Config config = new com.aliyun.teaopenapi.models.Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        return new com.aliyun.dingtalkcard_1_0.Client(config);
+    }
+
+    public static void main(String[] args_) throws Exception {
+        
+        com.aliyun.dingtalkcard_1_0.Client client = Sample.createClient();
+        com.aliyun.dingtalkcard_1_0.models.CreateAndDeliverHeaders createAndDeliverHeaders = new com.aliyun.dingtalkcard_1_0.models.CreateAndDeliverHeaders();
+        createAndDeliverHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        com.aliyun.dingtalkcard_1_0.models.CreateAndDeliverRequest.CreateAndDeliverRequestDocOpenDeliverModel docOpenDeliverModel = new com.aliyun.dingtalkcard_1_0.models.CreateAndDeliverRequest.CreateAndDeliverRequestDocOpenDeliverModel()
+                .setUserId("example_user_id");
+        com.aliyun.dingtalkcard_1_0.models.CreateAndDeliverRequest.CreateAndDeliverRequestCoFeedOpenDeliverModel coFeedOpenDeliverModel = new com.aliyun.dingtalkcard_1_0.models.CreateAndDeliverRequest.CreateAndDeliverRequestCoFeedOpenDeliverModel()
+                .setBizTag("example_biz_tag")
+                .setGmtTimeLine(1665473229000L);
+        com.aliyun.dingtalkcard_1_0.models.CreateAndDeliverRequest.CreateAndDeliverRequestTopOpenDeliverModel topOpenDeliverModel = new com.aliyun.dingtalkcard_1_0.models.CreateAndDeliverRequest.CreateAndDeliverRequestTopOpenDeliverModel()
+                .setExpiredTimeMillis(1665473229000L)
+                .setUserIds(java.util.Arrays.asList(
+                    "example_user_id"
+                ))
+                .setPlatforms(java.util.Arrays.asList(
+                    "android"
+                ));
+        java.util.Map&lt;String, String&gt; imRobotOpenDeliverModelExtension = TeaConverter.buildMap(
+            new TeaPair("key", "example_ext_value")
+        );
+        com.aliyun.dingtalkcard_1_0.models.CreateAndDeliverRequest.CreateAndDeliverRequestImRobotOpenDeliverModel imRobotOpenDeliverModel = new com.aliyun.dingtalkcard_1_0.models.CreateAndDeliverRequest.CreateAndDeliverRequestImRobotOpenDeliverModel()
+                .setSpaceType("IM_ROBOT")
+                .setRobotCode("example_robot_code")
+                .setExtension(imRobotOpenDeliverModelExtension);
+        java.util.Map&lt;String, String&gt; imGroupOpenDeliverModelExtension = TeaConverter.buildMap(
+            new TeaPair("key", "example_ext_value")
+        );
+        java.util.Map&lt;String, String&gt; imGroupOpenDeliverModelAtUserIds = TeaConverter.buildMap(
+            new TeaPair("key", "example_user_name")
+        );
+        com.aliyun.dingtalkcard_1_0.models.CreateAndDeliverRequest.CreateAndDeliverRequestImGroupOpenDeliverModel imGroupOpenDeliverModel = new com.aliyun.dingtalkcard_1_0.models.CreateAndDeliverRequest.CreateAndDeliverRequestImGroupOpenDeliverModel()
+                .setRobotCode("example_robot_code")
+                .setAtUserIds(imGroupOpenDeliverModelAtUserIds)
+                .setRecipients(java.util.Arrays.asList(
+                    "example_user_id"
+                ))
+                .setExtension(imGroupOpenDeliverModelExtension);
+        java.util.Map&lt;String, String&gt; imSingleOpenDeliverModelExtension = TeaConverter.buildMap(
+            new TeaPair("key", "example_ext_value")
+        );
+        java.util.Map&lt;String, String&gt; imSingleOpenDeliverModelAtUserIds = TeaConverter.buildMap(
+            new TeaPair("key", "example_user_name")
+        );
+        com.aliyun.dingtalkcard_1_0.models.CreateAndDeliverRequest.CreateAndDeliverRequestImSingleOpenDeliverModel imSingleOpenDeliverModel = new com.aliyun.dingtalkcard_1_0.models.CreateAndDeliverRequest.CreateAndDeliverRequestImSingleOpenDeliverModel()
+                .setAtUserIds(imSingleOpenDeliverModelAtUserIds)
+                .setExtension(imSingleOpenDeliverModelExtension);
+        com.aliyun.dingtalkcard_1_0.models.CreateAndDeliverRequest.CreateAndDeliverRequestTopOpenSpaceModel topOpenSpaceModel = new com.aliyun.dingtalkcard_1_0.models.CreateAndDeliverRequest.CreateAndDeliverRequestTopOpenSpaceModel()
+                .setSpaceType("ONE_BOX");
+        com.aliyun.dingtalkcard_1_0.models.CreateAndDeliverRequest.CreateAndDeliverRequestCoFeedOpenSpaceModel coFeedOpenSpaceModel = new com.aliyun.dingtalkcard_1_0.models.CreateAndDeliverRequest.CreateAndDeliverRequestCoFeedOpenSpaceModel()
+                .setTitle("xxxx卡片")
+                .setCoolAppCode("coolAppCode123");
+        com.aliyun.dingtalkcard_1_0.models.CreateAndDeliverRequest.CreateAndDeliverRequestImRobotOpenSpaceModelNotification imRobotOpenSpaceModelNotification = new com.aliyun.dingtalkcard_1_0.models.CreateAndDeliverRequest.CreateAndDeliverRequestImRobotOpenSpaceModelNotification()
+                .setAlertContent("你收到了1条卡片消息")
+                .setNotificationOff(false);
+        com.aliyun.dingtalkcard_1_0.models.CreateAndDeliverRequest.CreateAndDeliverRequestImRobotOpenSpaceModelSearchSupport imRobotOpenSpaceModelSearchSupport = new com.aliyun.dingtalkcard_1_0.models.CreateAndDeliverRequest.CreateAndDeliverRequestImRobotOpenSpaceModelSearchSupport()
+                .setSearchIcon("@lALPDgQ9q8hFhlHNAXzNAqI")
+                .setSearchTypeName("{\"ZH_CN\":\"待办\",\"ZH_TW\":\"待辦\",\"EN_US\":\"ToDo\"}")
+                .setSearchDesc("卡片的具体描述");
+        java.util.Map&lt;String, String&gt; imRobotOpenSpaceModelLastMessageI18n = TeaConverter.buildMap(
+            new TeaPair("key", "互动卡片消息")
+        );
+        com.aliyun.dingtalkcard_1_0.models.CreateAndDeliverRequest.CreateAndDeliverRequestImRobotOpenSpaceModel imRobotOpenSpaceModel = new com.aliyun.dingtalkcard_1_0.models.CreateAndDeliverRequest.CreateAndDeliverRequestImRobotOpenSpaceModel()
+                .setSupportForward(false)
+                .setLastMessageI18n(imRobotOpenSpaceModelLastMessageI18n)
+                .setSearchSupport(imRobotOpenSpaceModelSearchSupport)
+                .setNotification(imRobotOpenSpaceModelNotification);
+        com.aliyun.dingtalkcard_1_0.models.CreateAndDeliverRequest.CreateAndDeliverRequestImGroupOpenSpaceModelNotification imGroupOpenSpaceModelNotification = new com.aliyun.dingtalkcard_1_0.models.CreateAndDeliverRequest.CreateAndDeliverRequestImGroupOpenSpaceModelNotification()
+                .setAlertContent("你收到了1条卡片消息")
+                .setNotificationOff(false);
+        com.aliyun.dingtalkcard_1_0.models.CreateAndDeliverRequest.CreateAndDeliverRequestImGroupOpenSpaceModelSearchSupport imGroupOpenSpaceModelSearchSupport = new com.aliyun.dingtalkcard_1_0.models.CreateAndDeliverRequest.CreateAndDeliverRequestImGroupOpenSpaceModelSearchSupport()
+                .setSearchIcon("@lALPDgQ9q8hFhlHNAXzNAqI")
+                .setSearchTypeName("{\"ZH_CN\":\"待办\",\"ZH_TW\":\"待辦\",\"EN_US\":\"ToDo\"}")
+                .setSearchDesc("卡片的具体描述");
+        java.util.Map&lt;String, String&gt; imGroupOpenSpaceModelLastMessageI18n = TeaConverter.buildMap(
+            new TeaPair("key", "互动卡片消息")
+        );
+        com.aliyun.dingtalkcard_1_0.models.CreateAndDeliverRequest.CreateAndDeliverRequestImGroupOpenSpaceModel imGroupOpenSpaceModel = new com.aliyun.dingtalkcard_1_0.models.CreateAndDeliverRequest.CreateAndDeliverRequestImGroupOpenSpaceModel()
+                .setSupportForward(false)
+                .setLastMessageI18n(imGroupOpenSpaceModelLastMessageI18n)
+                .setSearchSupport(imGroupOpenSpaceModelSearchSupport)
+                .setNotification(imGroupOpenSpaceModelNotification);
+        com.aliyun.dingtalkcard_1_0.models.CreateAndDeliverRequest.CreateAndDeliverRequestImSingleOpenSpaceModelNotification imSingleOpenSpaceModelNotification = new com.aliyun.dingtalkcard_1_0.models.CreateAndDeliverRequest.CreateAndDeliverRequestImSingleOpenSpaceModelNotification()
+                .setAlertContent("你收到了1条卡片消息")
+                .setNotificationOff(false);
+        com.aliyun.dingtalkcard_1_0.models.CreateAndDeliverRequest.CreateAndDeliverRequestImSingleOpenSpaceModelSearchSupport imSingleOpenSpaceModelSearchSupport = new com.aliyun.dingtalkcard_1_0.models.CreateAndDeliverRequest.CreateAndDeliverRequestImSingleOpenSpaceModelSearchSupport()
+                .setSearchIcon("@lALPDgQ9q8hFhlHNAXzNAqI")
+                .setSearchTypeName("{\"ZH_CN\":\"待办\",\"ZH_TW\":\"待辦\",\"EN_US\":\"ToDo\"}")
+                .setSearchDesc("卡片的具体描述");
+        java.util.Map&lt;String, String&gt; imSingleOpenSpaceModelLastMessageI18n = TeaConverter.buildMap(
+            new TeaPair("key", "互动卡片消息")
+        );
+        com.aliyun.dingtalkcard_1_0.models.CreateAndDeliverRequest.CreateAndDeliverRequestImSingleOpenSpaceModel imSingleOpenSpaceModel = new com.aliyun.dingtalkcard_1_0.models.CreateAndDeliverRequest.CreateAndDeliverRequestImSingleOpenSpaceModel()
+                .setSupportForward(true)
+                .setLastMessageI18n(imSingleOpenSpaceModelLastMessageI18n)
+                .setSearchSupport(imSingleOpenSpaceModelSearchSupport)
+                .setNotification(imSingleOpenSpaceModelNotification);
+        com.aliyun.dingtalkcard_1_0.models.CreateAndDeliverRequest.CreateAndDeliverRequestOpenDynamicDataConfigDynamicDataSourceConfigsPullConfig openDynamicDataConfigDynamicDataSourceConfigs0PullConfig = new com.aliyun.dingtalkcard_1_0.models.CreateAndDeliverRequest.CreateAndDeliverRequestOpenDynamicDataConfigDynamicDataSourceConfigsPullConfig()
+                .setPullStrategy("INTERVAL")
+                .setInterval(600)
+                .setTimeUnit("SECONDS");
+        java.util.Map&lt;String, String&gt; openDynamicDataConfigDynamicDataSourceConfigs0ConstParams = TeaConverter.buildMap(
+            new TeaPair("key", "example_const_param_value")
+        );
+        com.aliyun.dingtalkcard_1_0.models.CreateAndDeliverRequest.CreateAndDeliverRequestOpenDynamicDataConfigDynamicDataSourceConfigs openDynamicDataConfigDynamicDataSourceConfigs0 = new com.aliyun.dingtalkcard_1_0.models.CreateAndDeliverRequest.CreateAndDeliverRequestOpenDynamicDataConfigDynamicDataSourceConfigs()
+                .setDynamicDataSourceId("example_ds_01")
+                .setConstParams(openDynamicDataConfigDynamicDataSourceConfigs0ConstParams)
+                .setPullConfig(openDynamicDataConfigDynamicDataSourceConfigs0PullConfig);
+        com.aliyun.dingtalkcard_1_0.models.CreateAndDeliverRequest.CreateAndDeliverRequestOpenDynamicDataConfig openDynamicDataConfig = new com.aliyun.dingtalkcard_1_0.models.CreateAndDeliverRequest.CreateAndDeliverRequestOpenDynamicDataConfig()
+                .setDynamicDataSourceConfigs(java.util.Arrays.asList(
+                    openDynamicDataConfigDynamicDataSourceConfigs0
+                ));
+        java.util.Map&lt;String, String&gt; privateDataValueKeyCardParamMap = TeaConverter.buildMap(
+            new TeaPair("key", "example_private_value")
+        );
+        com.aliyun.dingtalkcard_1_0.models.PrivateDataValue privateDataValueKey = new com.aliyun.dingtalkcard_1_0.models.PrivateDataValue()
+                .setCardParamMap(privateDataValueKeyCardParamMap);
+        java.util.Map&lt;String, com.aliyun.dingtalkcard_1_0.models.PrivateDataValue&gt; privateData = TeaConverter.buildMap(
+            new TeaPair("privateDataValueKey", privateDataValueKey)
+        );
+        java.util.Map&lt;String, String&gt; cardDataCardParamMap = TeaConverter.buildMap(
+            new TeaPair("key", "example_public_value")
+        );
+        com.aliyun.dingtalkcard_1_0.models.CreateAndDeliverRequest.CreateAndDeliverRequestCardData cardData = new com.aliyun.dingtalkcard_1_0.models.CreateAndDeliverRequest.CreateAndDeliverRequestCardData()
+                .setCardParamMap(cardDataCardParamMap);
+        com.aliyun.dingtalkcard_1_0.models.CreateAndDeliverRequest createAndDeliverRequest = new com.aliyun.dingtalkcard_1_0.models.CreateAndDeliverRequest()
+                .setUserId("example_user_id")
+                .setCardTemplateId("b4fdsu2119f-9945-4e13-9989-747da19e3bc7")
+                .setOutTrackId("example_out_track_id")
+                .setCallbackType("STREAM")
+                .setCallbackRouteKey("example_route_key")
+                .setCardData(cardData)
+                .setPrivateData(privateData)
+                .setOpenDynamicDataConfig(openDynamicDataConfig)
+                .setImSingleOpenSpaceModel(imSingleOpenSpaceModel)
+                .setImGroupOpenSpaceModel(imGroupOpenSpaceModel)
+                .setImRobotOpenSpaceModel(imRobotOpenSpaceModel)
+                .setCoFeedOpenSpaceModel(coFeedOpenSpaceModel)
+                .setTopOpenSpaceModel(topOpenSpaceModel)
+                .setOpenSpaceId("dtv1.card//im_group.cidp4Gh*******VCQ==;im_robot.manager****67;co_feed.manager****67;one_box.cidp4Gh*******VCQ==")
+                .setImSingleOpenDeliverModel(imSingleOpenDeliverModel)
+                .setImGroupOpenDeliverModel(imGroupOpenDeliverModel)
+                .setImRobotOpenDeliverModel(imRobotOpenDeliverModel)
+                .setTopOpenDeliverModel(topOpenDeliverModel)
+                .setCoFeedOpenDeliverModel(coFeedOpenDeliverModel)
+                .setDocOpenDeliverModel(docOpenDeliverModel)
+                .setUserIdType(1)
+                .setCardAtUserIds(java.util.Arrays.asList(
+                    "example_user_id"
+                ));
+        try {
+            client.createAndDeliverWithOptions(createAndDeliverRequest, createAndDeliverHeaders, new com.aliyun.teautil.models.RuntimeOptions());
+        } catch (TeaException err) {
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        } catch (Exception _err) {
+            TeaException err = new TeaException(_err.getMessage(), _err);
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        }        
+    }
+}</code></pre></div><input type="radio" name="check-figure-bng-87k-h7b" id="figure-bng-87k-h7b-python-tab" /><label for="figure-bng-87k-h7b-python-tab">Python</label><div class="codeblock-item"><pre id="codeblock-g67-bc3-jez" outputclass="language-python" code-type="xCode" data-tag="codeblock" class="pre codeblock language-python"><code># -*- coding: utf-8 -*-
+# This file is auto-generated, don't edit it. Thanks.
+import os
+import sys
+
+from typing import List
+
+from alibabacloud_dingtalk.card_1_0.client import Client as dingtalkcard_1_0Client
+from alibabacloud_tea_openapi import models as open_api_models
+from alibabacloud_dingtalk.card_1_0 import models as dingtalkcard__1__0_models
+from alibabacloud_tea_util import models as util_models
+from alibabacloud_tea_util.client import Client as UtilClient
+
+
+class Sample:
+    def __init__(self):
+        pass
+
+    @staticmethod
+    def create_client() -&gt; dingtalkcard_1_0Client:
+        """
+        使用 Token 初始化账号Client
+        @return: Client
+        @throws Exception
+        """
+        config = open_api_models.Config()
+        config.protocol = 'https'
+        config.region_id = 'central'
+        return dingtalkcard_1_0Client(config)
+
+    @staticmethod
+    def main(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        create_and_deliver_headers = dingtalkcard__1__0_models.CreateAndDeliverHeaders()
+        create_and_deliver_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        doc_open_deliver_model = dingtalkcard__1__0_models.CreateAndDeliverRequestDocOpenDeliverModel(
+            user_id='example_user_id'
+        )
+        co_feed_open_deliver_model = dingtalkcard__1__0_models.CreateAndDeliverRequestCoFeedOpenDeliverModel(
+            biz_tag='example_biz_tag',
+            gmt_time_line=1665473229000
+        )
+        top_open_deliver_model = dingtalkcard__1__0_models.CreateAndDeliverRequestTopOpenDeliverModel(
+            expired_time_millis=1665473229000,
+            user_ids=[
+                'example_user_id'
+            ],
+            platforms=[
+                'android'
+            ]
+        )
+        im_robot_open_deliver_model_extension = {
+            'key': 'example_ext_value'
+        }
+        im_robot_open_deliver_model = dingtalkcard__1__0_models.CreateAndDeliverRequestImRobotOpenDeliverModel(
+            space_type='IM_ROBOT',
+            robot_code='example_robot_code',
+            extension=im_robot_open_deliver_model_extension
+        )
+        im_group_open_deliver_model_extension = {
+            'key': 'example_ext_value'
+        }
+        im_group_open_deliver_model_at_user_ids = {
+            'key': 'example_user_name'
+        }
+        im_group_open_deliver_model = dingtalkcard__1__0_models.CreateAndDeliverRequestImGroupOpenDeliverModel(
+            robot_code='example_robot_code',
+            at_user_ids=im_group_open_deliver_model_at_user_ids,
+            recipients=[
+                'example_user_id'
+            ],
+            extension=im_group_open_deliver_model_extension
+        )
+        im_single_open_deliver_model_extension = {
+            'key': 'example_ext_value'
+        }
+        im_single_open_deliver_model_at_user_ids = {
+            'key': 'example_user_name'
+        }
+        im_single_open_deliver_model = dingtalkcard__1__0_models.CreateAndDeliverRequestImSingleOpenDeliverModel(
+            at_user_ids=im_single_open_deliver_model_at_user_ids,
+            extension=im_single_open_deliver_model_extension
+        )
+        top_open_space_model = dingtalkcard__1__0_models.CreateAndDeliverRequestTopOpenSpaceModel(
+            space_type='ONE_BOX'
+        )
+        co_feed_open_space_model = dingtalkcard__1__0_models.CreateAndDeliverRequestCoFeedOpenSpaceModel(
+            title='xxxx卡片',
+            cool_app_code='coolAppCode123'
+        )
+        im_robot_open_space_model_notification = dingtalkcard__1__0_models.CreateAndDeliverRequestImRobotOpenSpaceModelNotification(
+            alert_content='你收到了1条卡片消息',
+            notification_off=False
+        )
+        im_robot_open_space_model_search_support = dingtalkcard__1__0_models.CreateAndDeliverRequestImRobotOpenSpaceModelSearchSupport(
+            search_icon='@lALPDgQ9q8hFhlHNAXzNAqI',
+            search_type_name='{"ZH_CN":"待办","ZH_TW":"待辦","EN_US":"ToDo"}',
+            search_desc='卡片的具体描述'
+        )
+        im_robot_open_space_model_last_message_i18n = {
+            'key': '互动卡片消息'
+        }
+        im_robot_open_space_model = dingtalkcard__1__0_models.CreateAndDeliverRequestImRobotOpenSpaceModel(
+            support_forward=False,
+            last_message_i18n=im_robot_open_space_model_last_message_i18n,
+            search_support=im_robot_open_space_model_search_support,
+            notification=im_robot_open_space_model_notification
+        )
+        im_group_open_space_model_notification = dingtalkcard__1__0_models.CreateAndDeliverRequestImGroupOpenSpaceModelNotification(
+            alert_content='你收到了1条卡片消息',
+            notification_off=False
+        )
+        im_group_open_space_model_search_support = dingtalkcard__1__0_models.CreateAndDeliverRequestImGroupOpenSpaceModelSearchSupport(
+            search_icon='@lALPDgQ9q8hFhlHNAXzNAqI',
+            search_type_name='{"ZH_CN":"待办","ZH_TW":"待辦","EN_US":"ToDo"}',
+            search_desc='卡片的具体描述'
+        )
+        im_group_open_space_model_last_message_i18n = {
+            'key': '互动卡片消息'
+        }
+        im_group_open_space_model = dingtalkcard__1__0_models.CreateAndDeliverRequestImGroupOpenSpaceModel(
+            support_forward=False,
+            last_message_i18n=im_group_open_space_model_last_message_i18n,
+            search_support=im_group_open_space_model_search_support,
+            notification=im_group_open_space_model_notification
+        )
+        im_single_open_space_model_notification = dingtalkcard__1__0_models.CreateAndDeliverRequestImSingleOpenSpaceModelNotification(
+            alert_content='你收到了1条卡片消息',
+            notification_off=False
+        )
+        im_single_open_space_model_search_support = dingtalkcard__1__0_models.CreateAndDeliverRequestImSingleOpenSpaceModelSearchSupport(
+            search_icon='@lALPDgQ9q8hFhlHNAXzNAqI',
+            search_type_name='{"ZH_CN":"待办","ZH_TW":"待辦","EN_US":"ToDo"}',
+            search_desc='卡片的具体描述'
+        )
+        im_single_open_space_model_last_message_i18n = {
+            'key': '互动卡片消息'
+        }
+        im_single_open_space_model = dingtalkcard__1__0_models.CreateAndDeliverRequestImSingleOpenSpaceModel(
+            support_forward=True,
+            last_message_i18n=im_single_open_space_model_last_message_i18n,
+            search_support=im_single_open_space_model_search_support,
+            notification=im_single_open_space_model_notification
+        )
+        open_dynamic_data_config_dynamic_data_source_configs_0pull_config = dingtalkcard__1__0_models.CreateAndDeliverRequestOpenDynamicDataConfigDynamicDataSourceConfigsPullConfig(
+            pull_strategy='INTERVAL',
+            interval=600,
+            time_unit='SECONDS'
+        )
+        open_dynamic_data_config_dynamic_data_source_configs_0const_params = {
+            'key': 'example_const_param_value'
+        }
+        open_dynamic_data_config_dynamic_data_source_configs_0 = dingtalkcard__1__0_models.CreateAndDeliverRequestOpenDynamicDataConfigDynamicDataSourceConfigs(
+            dynamic_data_source_id='example_ds_01',
+            const_params=open_dynamic_data_config_dynamic_data_source_configs_0const_params,
+            pull_config=open_dynamic_data_config_dynamic_data_source_configs_0pull_config
+        )
+        open_dynamic_data_config = dingtalkcard__1__0_models.CreateAndDeliverRequestOpenDynamicDataConfig(
+            dynamic_data_source_configs=[
+                open_dynamic_data_config_dynamic_data_source_configs_0
+            ]
+        )
+        private_data_value_key_card_param_map = {
+            'key': 'example_private_value'
+        }
+        private_data_value_key = dingtalkcard__1__0_models.PrivateDataValue(
+            card_param_map=private_data_value_key_card_param_map
+        )
+        private_data = {
+            'privateDataValueKey': private_data_value_key
+        }
+        card_data_card_param_map = {
+            'key': 'example_public_value'
+        }
+        card_data = dingtalkcard__1__0_models.CreateAndDeliverRequestCardData(
+            card_param_map=card_data_card_param_map
+        )
+        create_and_deliver_request = dingtalkcard__1__0_models.CreateAndDeliverRequest(
+            user_id='example_user_id',
+            card_template_id='b4fdsu2119f-9945-4e13-9989-747da19e3bc7',
+            out_track_id='example_out_track_id',
+            callback_type='STREAM',
+            callback_route_key='example_route_key',
+            card_data=card_data,
+            private_data=private_data,
+            open_dynamic_data_config=open_dynamic_data_config,
+            im_single_open_space_model=im_single_open_space_model,
+            im_group_open_space_model=im_group_open_space_model,
+            im_robot_open_space_model=im_robot_open_space_model,
+            co_feed_open_space_model=co_feed_open_space_model,
+            top_open_space_model=top_open_space_model,
+            open_space_id='dtv1.card//im_group.cidp4Gh*******VCQ==;im_robot.manager****67;co_feed.manager****67;one_box.cidp4Gh*******VCQ==',
+            im_single_open_deliver_model=im_single_open_deliver_model,
+            im_group_open_deliver_model=im_group_open_deliver_model,
+            im_robot_open_deliver_model=im_robot_open_deliver_model,
+            top_open_deliver_model=top_open_deliver_model,
+            co_feed_open_deliver_model=co_feed_open_deliver_model,
+            doc_open_deliver_model=doc_open_deliver_model,
+            user_id_type=1,
+            card_at_user_ids=[
+                'example_user_id'
+            ]
+        )
+        try:
+            client.create_and_deliver_with_options(create_and_deliver_request, create_and_deliver_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+    @staticmethod
+    async def main_async(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        create_and_deliver_headers = dingtalkcard__1__0_models.CreateAndDeliverHeaders()
+        create_and_deliver_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        doc_open_deliver_model = dingtalkcard__1__0_models.CreateAndDeliverRequestDocOpenDeliverModel(
+            user_id='example_user_id'
+        )
+        co_feed_open_deliver_model = dingtalkcard__1__0_models.CreateAndDeliverRequestCoFeedOpenDeliverModel(
+            biz_tag='example_biz_tag',
+            gmt_time_line=1665473229000
+        )
+        top_open_deliver_model = dingtalkcard__1__0_models.CreateAndDeliverRequestTopOpenDeliverModel(
+            expired_time_millis=1665473229000,
+            user_ids=[
+                'example_user_id'
+            ],
+            platforms=[
+                'android'
+            ]
+        )
+        im_robot_open_deliver_model_extension = {
+            'key': 'example_ext_value'
+        }
+        im_robot_open_deliver_model = dingtalkcard__1__0_models.CreateAndDeliverRequestImRobotOpenDeliverModel(
+            space_type='IM_ROBOT',
+            robot_code='example_robot_code',
+            extension=im_robot_open_deliver_model_extension
+        )
+        im_group_open_deliver_model_extension = {
+            'key': 'example_ext_value'
+        }
+        im_group_open_deliver_model_at_user_ids = {
+            'key': 'example_user_name'
+        }
+        im_group_open_deliver_model = dingtalkcard__1__0_models.CreateAndDeliverRequestImGroupOpenDeliverModel(
+            robot_code='example_robot_code',
+            at_user_ids=im_group_open_deliver_model_at_user_ids,
+            recipients=[
+                'example_user_id'
+            ],
+            extension=im_group_open_deliver_model_extension
+        )
+        im_single_open_deliver_model_extension = {
+            'key': 'example_ext_value'
+        }
+        im_single_open_deliver_model_at_user_ids = {
+            'key': 'example_user_name'
+        }
+        im_single_open_deliver_model = dingtalkcard__1__0_models.CreateAndDeliverRequestImSingleOpenDeliverModel(
+            at_user_ids=im_single_open_deliver_model_at_user_ids,
+            extension=im_single_open_deliver_model_extension
+        )
+        top_open_space_model = dingtalkcard__1__0_models.CreateAndDeliverRequestTopOpenSpaceModel(
+            space_type='ONE_BOX'
+        )
+        co_feed_open_space_model = dingtalkcard__1__0_models.CreateAndDeliverRequestCoFeedOpenSpaceModel(
+            title='xxxx卡片',
+            cool_app_code='coolAppCode123'
+        )
+        im_robot_open_space_model_notification = dingtalkcard__1__0_models.CreateAndDeliverRequestImRobotOpenSpaceModelNotification(
+            alert_content='你收到了1条卡片消息',
+            notification_off=False
+        )
+        im_robot_open_space_model_search_support = dingtalkcard__1__0_models.CreateAndDeliverRequestImRobotOpenSpaceModelSearchSupport(
+            search_icon='@lALPDgQ9q8hFhlHNAXzNAqI',
+            search_type_name='{"ZH_CN":"待办","ZH_TW":"待辦","EN_US":"ToDo"}',
+            search_desc='卡片的具体描述'
+        )
+        im_robot_open_space_model_last_message_i18n = {
+            'key': '互动卡片消息'
+        }
+        im_robot_open_space_model = dingtalkcard__1__0_models.CreateAndDeliverRequestImRobotOpenSpaceModel(
+            support_forward=False,
+            last_message_i18n=im_robot_open_space_model_last_message_i18n,
+            search_support=im_robot_open_space_model_search_support,
+            notification=im_robot_open_space_model_notification
+        )
+        im_group_open_space_model_notification = dingtalkcard__1__0_models.CreateAndDeliverRequestImGroupOpenSpaceModelNotification(
+            alert_content='你收到了1条卡片消息',
+            notification_off=False
+        )
+        im_group_open_space_model_search_support = dingtalkcard__1__0_models.CreateAndDeliverRequestImGroupOpenSpaceModelSearchSupport(
+            search_icon='@lALPDgQ9q8hFhlHNAXzNAqI',
+            search_type_name='{"ZH_CN":"待办","ZH_TW":"待辦","EN_US":"ToDo"}',
+            search_desc='卡片的具体描述'
+        )
+        im_group_open_space_model_last_message_i18n = {
+            'key': '互动卡片消息'
+        }
+        im_group_open_space_model = dingtalkcard__1__0_models.CreateAndDeliverRequestImGroupOpenSpaceModel(
+            support_forward=False,
+            last_message_i18n=im_group_open_space_model_last_message_i18n,
+            search_support=im_group_open_space_model_search_support,
+            notification=im_group_open_space_model_notification
+        )
+        im_single_open_space_model_notification = dingtalkcard__1__0_models.CreateAndDeliverRequestImSingleOpenSpaceModelNotification(
+            alert_content='你收到了1条卡片消息',
+            notification_off=False
+        )
+        im_single_open_space_model_search_support = dingtalkcard__1__0_models.CreateAndDeliverRequestImSingleOpenSpaceModelSearchSupport(
+            search_icon='@lALPDgQ9q8hFhlHNAXzNAqI',
+            search_type_name='{"ZH_CN":"待办","ZH_TW":"待辦","EN_US":"ToDo"}',
+            search_desc='卡片的具体描述'
+        )
+        im_single_open_space_model_last_message_i18n = {
+            'key': '互动卡片消息'
+        }
+        im_single_open_space_model = dingtalkcard__1__0_models.CreateAndDeliverRequestImSingleOpenSpaceModel(
+            support_forward=True,
+            last_message_i18n=im_single_open_space_model_last_message_i18n,
+            search_support=im_single_open_space_model_search_support,
+            notification=im_single_open_space_model_notification
+        )
+        open_dynamic_data_config_dynamic_data_source_configs_0pull_config = dingtalkcard__1__0_models.CreateAndDeliverRequestOpenDynamicDataConfigDynamicDataSourceConfigsPullConfig(
+            pull_strategy='INTERVAL',
+            interval=600,
+            time_unit='SECONDS'
+        )
+        open_dynamic_data_config_dynamic_data_source_configs_0const_params = {
+            'key': 'example_const_param_value'
+        }
+        open_dynamic_data_config_dynamic_data_source_configs_0 = dingtalkcard__1__0_models.CreateAndDeliverRequestOpenDynamicDataConfigDynamicDataSourceConfigs(
+            dynamic_data_source_id='example_ds_01',
+            const_params=open_dynamic_data_config_dynamic_data_source_configs_0const_params,
+            pull_config=open_dynamic_data_config_dynamic_data_source_configs_0pull_config
+        )
+        open_dynamic_data_config = dingtalkcard__1__0_models.CreateAndDeliverRequestOpenDynamicDataConfig(
+            dynamic_data_source_configs=[
+                open_dynamic_data_config_dynamic_data_source_configs_0
+            ]
+        )
+        private_data_value_key_card_param_map = {
+            'key': 'example_private_value'
+        }
+        private_data_value_key = dingtalkcard__1__0_models.PrivateDataValue(
+            card_param_map=private_data_value_key_card_param_map
+        )
+        private_data = {
+            'privateDataValueKey': private_data_value_key
+        }
+        card_data_card_param_map = {
+            'key': 'example_public_value'
+        }
+        card_data = dingtalkcard__1__0_models.CreateAndDeliverRequestCardData(
+            card_param_map=card_data_card_param_map
+        )
+        create_and_deliver_request = dingtalkcard__1__0_models.CreateAndDeliverRequest(
+            user_id='example_user_id',
+            card_template_id='b4fdsu2119f-9945-4e13-9989-747da19e3bc7',
+            out_track_id='example_out_track_id',
+            callback_type='STREAM',
+            callback_route_key='example_route_key',
+            card_data=card_data,
+            private_data=private_data,
+            open_dynamic_data_config=open_dynamic_data_config,
+            im_single_open_space_model=im_single_open_space_model,
+            im_group_open_space_model=im_group_open_space_model,
+            im_robot_open_space_model=im_robot_open_space_model,
+            co_feed_open_space_model=co_feed_open_space_model,
+            top_open_space_model=top_open_space_model,
+            open_space_id='dtv1.card//im_group.cidp4Gh*******VCQ==;im_robot.manager****67;co_feed.manager****67;one_box.cidp4Gh*******VCQ==',
+            im_single_open_deliver_model=im_single_open_deliver_model,
+            im_group_open_deliver_model=im_group_open_deliver_model,
+            im_robot_open_deliver_model=im_robot_open_deliver_model,
+            top_open_deliver_model=top_open_deliver_model,
+            co_feed_open_deliver_model=co_feed_open_deliver_model,
+            doc_open_deliver_model=doc_open_deliver_model,
+            user_id_type=1,
+            card_at_user_ids=[
+                'example_user_id'
+            ]
+        )
+        try:
+            await client.create_and_deliver_with_options_async(create_and_deliver_request, create_and_deliver_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+
+if __name__ == '__main__':
+    Sample.main(sys.argv[1:])</code></pre></div><input type="radio" name="check-figure-bng-87k-h7b" id="figure-bng-87k-h7b-php-tab" /><label for="figure-bng-87k-h7b-php-tab">PHP</label><div class="codeblock-item"><pre id="codeblock-nxa-ha0-lez" outputclass="language-php" code-type="xCode" data-tag="codeblock" class="pre codeblock language-php"><code>&lt;?php
+
+// This file is auto-generated, don't edit it. Thanks.
+namespace AlibabaCloud\SDK\Sample;
+
+use AlibabaCloud\SDK\Dingtalk\Vcard_1_0\Dingtalk;
+use \Exception;
+use AlibabaCloud\Tea\Exception\TeaError;
+use AlibabaCloud\Tea\Utils\Utils;
+
+use Darabonba\OpenApi\Models\Config;
+use AlibabaCloud\SDK\Dingtalk\Vcard_1_0\Models\CreateAndDeliverHeaders;
+use AlibabaCloud\SDK\Dingtalk\Vcard_1_0\Models\CreateAndDeliverRequest\docOpenDeliverModel;
+use AlibabaCloud\SDK\Dingtalk\Vcard_1_0\Models\CreateAndDeliverRequest\coFeedOpenDeliverModel;
+use AlibabaCloud\SDK\Dingtalk\Vcard_1_0\Models\CreateAndDeliverRequest\topOpenDeliverModel;
+use AlibabaCloud\SDK\Dingtalk\Vcard_1_0\Models\CreateAndDeliverRequest\imRobotOpenDeliverModel;
+use AlibabaCloud\SDK\Dingtalk\Vcard_1_0\Models\CreateAndDeliverRequest\imGroupOpenDeliverModel;
+use AlibabaCloud\SDK\Dingtalk\Vcard_1_0\Models\CreateAndDeliverRequest\imSingleOpenDeliverModel;
+use AlibabaCloud\SDK\Dingtalk\Vcard_1_0\Models\CreateAndDeliverRequest\topOpenSpaceModel;
+use AlibabaCloud\SDK\Dingtalk\Vcard_1_0\Models\CreateAndDeliverRequest\coFeedOpenSpaceModel;
+use AlibabaCloud\SDK\Dingtalk\Vcard_1_0\Models\CreateAndDeliverRequest\imRobotOpenSpaceModel\notification;
+use AlibabaCloud\SDK\Dingtalk\Vcard_1_0\Models\CreateAndDeliverRequest\imRobotOpenSpaceModel\searchSupport;
+use AlibabaCloud\SDK\Dingtalk\Vcard_1_0\Models\CreateAndDeliverRequest\imRobotOpenSpaceModel;
+use AlibabaCloud\SDK\Dingtalk\Vcard_1_0\Models\CreateAndDeliverRequest\imGroupOpenSpaceModel;
+use AlibabaCloud\SDK\Dingtalk\Vcard_1_0\Models\CreateAndDeliverRequest\imSingleOpenSpaceModel;
+use AlibabaCloud\SDK\Dingtalk\Vcard_1_0\Models\CreateAndDeliverRequest\openDynamicDataConfig\dynamicDataSourceConfigs\pullConfig;
+use AlibabaCloud\SDK\Dingtalk\Vcard_1_0\Models\CreateAndDeliverRequest\openDynamicDataConfig\dynamicDataSourceConfigs;
+use AlibabaCloud\SDK\Dingtalk\Vcard_1_0\Models\CreateAndDeliverRequest\openDynamicDataConfig;
+use AlibabaCloud\SDK\Dingtalk\Vcard_1_0\Models\PrivateDataValue;
+use AlibabaCloud\SDK\Dingtalk\Vcard_1_0\Models\CreateAndDeliverRequest\cardData;
+use AlibabaCloud\SDK\Dingtalk\Vcard_1_0\Models\CreateAndDeliverRequest;
+use AlibabaCloud\Tea\Utils\Utils\RuntimeOptions;
+
+class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Dingtalk Client
+     */
+    public static function createClient(){
+        $config = new Config([]);
+        $config-&gt;protocol = "https";
+        $config-&gt;regionId = "central";
+        return new Dingtalk($config);
+    }
+
+    /**
+     * @param string[] $args
+     * @return void
+     */
+    public static function main($args){
+        $client = self::createClient();
+        $createAndDeliverHeaders = new CreateAndDeliverHeaders([]);
+        $createAndDeliverHeaders-&gt;xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        $docOpenDeliverModel = new docOpenDeliverModel([
+            "userId" =&gt; "example_user_id"
+        ]);
+        $coFeedOpenDeliverModel = new coFeedOpenDeliverModel([
+            "bizTag" =&gt; "example_biz_tag",
+            "gmtTimeLine" =&gt; 1665473229000
+        ]);
+        $topOpenDeliverModel = new topOpenDeliverModel([
+            "expiredTimeMillis" =&gt; 1665473229000,
+            "userIds" =&gt; [
+                "example_user_id"
+            ],
+            "platforms" =&gt; [
+                "android"
+            ]
+        ]);
+        $imRobotOpenDeliverModelExtension = [
+            "key" =&gt; "example_ext_value"
+        ];
+        $imRobotOpenDeliverModel = new imRobotOpenDeliverModel([
+            "spaceType" =&gt; "IM_ROBOT",
+            "robotCode" =&gt; "example_robot_code",
+            "extension" =&gt; $imRobotOpenDeliverModelExtension
+        ]);
+        $imGroupOpenDeliverModelExtension = [
+            "key" =&gt; "example_ext_value"
+        ];
+        $imGroupOpenDeliverModelAtUserIds = [
+            "key" =&gt; "example_user_name"
+        ];
+        $imGroupOpenDeliverModel = new imGroupOpenDeliverModel([
+            "robotCode" =&gt; "example_robot_code",
+            "atUserIds" =&gt; $imGroupOpenDeliverModelAtUserIds,
+            "recipients" =&gt; [
+                "example_user_id"
+            ],
+            "extension" =&gt; $imGroupOpenDeliverModelExtension
+        ]);
+        $imSingleOpenDeliverModelExtension = [
+            "key" =&gt; "example_ext_value"
+        ];
+        $imSingleOpenDeliverModelAtUserIds = [
+            "key" =&gt; "example_user_name"
+        ];
+        $imSingleOpenDeliverModel = new imSingleOpenDeliverModel([
+            "atUserIds" =&gt; $imSingleOpenDeliverModelAtUserIds,
+            "extension" =&gt; $imSingleOpenDeliverModelExtension
+        ]);
+        $topOpenSpaceModel = new topOpenSpaceModel([
+            "spaceType" =&gt; "ONE_BOX"
+        ]);
+        $coFeedOpenSpaceModel = new coFeedOpenSpaceModel([
+            "title" =&gt; "xxxx卡片",
+            "coolAppCode" =&gt; "coolAppCode123"
+        ]);
+        $imRobotOpenSpaceModelNotification = new notification([
+            "alertContent" =&gt; "你收到了1条卡片消息",
+            "notificationOff" =&gt; false
+        ]);
+        $imRobotOpenSpaceModelSearchSupport = new searchSupport([
+            "searchIcon" =&gt; "@lALPDgQ9q8hFhlHNAXzNAqI",
+            "searchTypeName" =&gt; "{\"ZH_CN\":\"待办\",\"ZH_TW\":\"待辦\",\"EN_US\":\"ToDo\"}",
+            "searchDesc" =&gt; "卡片的具体描述"
+        ]);
+        $imRobotOpenSpaceModelLastMessageI18n = [
+            "key" =&gt; "互动卡片消息"
+        ];
+        $imRobotOpenSpaceModel = new imRobotOpenSpaceModel([
+            "supportForward" =&gt; false,
+            "lastMessageI18n" =&gt; $imRobotOpenSpaceModelLastMessageI18n,
+            "searchSupport" =&gt; $imRobotOpenSpaceModelSearchSupport,
+            "notification" =&gt; $imRobotOpenSpaceModelNotification
+        ]);
+        $imGroupOpenSpaceModelNotification = new \AlibabaCloud\SDK\Dingtalk\Vcard_1_0\Models\CreateAndDeliverRequest\imGroupOpenSpaceModel\notification([
+            "alertContent" =&gt; "你收到了1条卡片消息",
+            "notificationOff" =&gt; false
+        ]);
+        $imGroupOpenSpaceModelSearchSupport = new \AlibabaCloud\SDK\Dingtalk\Vcard_1_0\Models\CreateAndDeliverRequest\imGroupOpenSpaceModel\searchSupport([
+            "searchIcon" =&gt; "@lALPDgQ9q8hFhlHNAXzNAqI",
+            "searchTypeName" =&gt; "{\"ZH_CN\":\"待办\",\"ZH_TW\":\"待辦\",\"EN_US\":\"ToDo\"}",
+            "searchDesc" =&gt; "卡片的具体描述"
+        ]);
+        $imGroupOpenSpaceModelLastMessageI18n = [
+            "key" =&gt; "互动卡片消息"
+        ];
+        $imGroupOpenSpaceModel = new imGroupOpenSpaceModel([
+            "supportForward" =&gt; false,
+            "lastMessageI18n" =&gt; $imGroupOpenSpaceModelLastMessageI18n,
+            "searchSupport" =&gt; $imGroupOpenSpaceModelSearchSupport,
+            "notification" =&gt; $imGroupOpenSpaceModelNotification
+        ]);
+        $imSingleOpenSpaceModelNotification = new \AlibabaCloud\SDK\Dingtalk\Vcard_1_0\Models\CreateAndDeliverRequest\imSingleOpenSpaceModel\notification([
+            "alertContent" =&gt; "你收到了1条卡片消息",
+            "notificationOff" =&gt; false
+        ]);
+        $imSingleOpenSpaceModelSearchSupport = new \AlibabaCloud\SDK\Dingtalk\Vcard_1_0\Models\CreateAndDeliverRequest\imSingleOpenSpaceModel\searchSupport([
+            "searchIcon" =&gt; "@lALPDgQ9q8hFhlHNAXzNAqI",
+            "searchTypeName" =&gt; "{\"ZH_CN\":\"待办\",\"ZH_TW\":\"待辦\",\"EN_US\":\"ToDo\"}",
+            "searchDesc" =&gt; "卡片的具体描述"
+        ]);
+        $imSingleOpenSpaceModelLastMessageI18n = [
+            "key" =&gt; "互动卡片消息"
+        ];
+        $imSingleOpenSpaceModel = new imSingleOpenSpaceModel([
+            "supportForward" =&gt; true,
+            "lastMessageI18n" =&gt; $imSingleOpenSpaceModelLastMessageI18n,
+            "searchSupport" =&gt; $imSingleOpenSpaceModelSearchSupport,
+            "notification" =&gt; $imSingleOpenSpaceModelNotification
+        ]);
+        $openDynamicDataConfigDynamicDataSourceConfigs0PullConfig = new pullConfig([
+            "pullStrategy" =&gt; "INTERVAL",
+            "interval" =&gt; 600,
+            "timeUnit" =&gt; "SECONDS"
+        ]);
+        $openDynamicDataConfigDynamicDataSourceConfigs0ConstParams = [
+            "key" =&gt; "example_const_param_value"
+        ];
+        $openDynamicDataConfigDynamicDataSourceConfigs0 = new dynamicDataSourceConfigs([
+            "dynamicDataSourceId" =&gt; "example_ds_01",
+            "constParams" =&gt; $openDynamicDataConfigDynamicDataSourceConfigs0ConstParams,
+            "pullConfig" =&gt; $openDynamicDataConfigDynamicDataSourceConfigs0PullConfig
+        ]);
+        $openDynamicDataConfig = new openDynamicDataConfig([
+            "dynamicDataSourceConfigs" =&gt; [
+                $openDynamicDataConfigDynamicDataSourceConfigs0
+            ]
+        ]);
+        $privateDataValueKeyCardParamMap = [
+            "key" =&gt; "example_private_value"
+        ];
+        $privateDataValueKey = new PrivateDataValue([
+            "cardParamMap" =&gt; $privateDataValueKeyCardParamMap
+        ]);
+        $privateData = [
+            "privateDataValueKey" =&gt; $privateDataValueKey
+        ];
+        $cardDataCardParamMap = [
+            "key" =&gt; "example_public_value"
+        ];
+        $cardData = new cardData([
+            "cardParamMap" =&gt; $cardDataCardParamMap
+        ]);
+        $createAndDeliverRequest = new CreateAndDeliverRequest([
+            "userId" =&gt; "example_user_id",
+            "cardTemplateId" =&gt; "b4fdsu2119f-9945-4e13-9989-747da19e3bc7",
+            "outTrackId" =&gt; "example_out_track_id",
+            "callbackType" =&gt; "STREAM",
+            "callbackRouteKey" =&gt; "example_route_key",
+            "cardData" =&gt; $cardData,
+            "privateData" =&gt; $privateData,
+            "openDynamicDataConfig" =&gt; $openDynamicDataConfig,
+            "imSingleOpenSpaceModel" =&gt; $imSingleOpenSpaceModel,
+            "imGroupOpenSpaceModel" =&gt; $imGroupOpenSpaceModel,
+            "imRobotOpenSpaceModel" =&gt; $imRobotOpenSpaceModel,
+            "coFeedOpenSpaceModel" =&gt; $coFeedOpenSpaceModel,
+            "topOpenSpaceModel" =&gt; $topOpenSpaceModel,
+            "openSpaceId" =&gt; "dtv1.card//im_group.cidp4Gh*******VCQ==;im_robot.manager****67;co_feed.manager****67;one_box.cidp4Gh*******VCQ==",
+            "imSingleOpenDeliverModel" =&gt; $imSingleOpenDeliverModel,
+            "imGroupOpenDeliverModel" =&gt; $imGroupOpenDeliverModel,
+            "imRobotOpenDeliverModel" =&gt; $imRobotOpenDeliverModel,
+            "topOpenDeliverModel" =&gt; $topOpenDeliverModel,
+            "coFeedOpenDeliverModel" =&gt; $coFeedOpenDeliverModel,
+            "docOpenDeliverModel" =&gt; $docOpenDeliverModel,
+            "userIdType" =&gt; 1,
+            "cardAtUserIds" =&gt; [
+                "example_user_id"
+            ]
+        ]);
+        try {
+            $client-&gt;createAndDeliverWithOptions($createAndDeliverRequest, $createAndDeliverHeaders, new RuntimeOptions([]));
+        }
+        catch (Exception $err) {
+            if (!($err instanceof TeaError)) {
+                $err = new TeaError([], $err-&gt;getMessage(), $err-&gt;getCode(), $err);
+            }
+            if (!Utils::empty_($err-&gt;code) &amp;&amp; !Utils::empty_($err-&gt;message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+        }
+    }
+}
+$path = __DIR__ . \DIRECTORY_SEPARATOR . '..' . \DIRECTORY_SEPARATOR . 'vendor' . \DIRECTORY_SEPARATOR . 'autoload.php';
+if (file_exists($path)) {
+    require_once $path;
+}
+Sample::main(array_slice($argv, 1));</code></pre></div><input type="radio" name="check-figure-bng-87k-h7b" id="figure-bng-87k-h7b-go-tab" /><label for="figure-bng-87k-h7b-go-tab">Go</label><div class="codeblock-item"><pre id="codeblock-iui-0lz-oik" outputclass="language-go" code-type="xCode" data-tag="codeblock" class="pre codeblock language-go"><code>// This file is auto-generated, don't edit it. Thanks.
+package main
+
+import (
+  "encoding/json"
+  "strings"
+  "fmt"
+  "os"
+  util  "github.com/alibabacloud-go/tea-utils/v2/service"
+  dingtalkcard_1_0  "github.com/alibabacloud-go/dingtalk/card_1_0"
+  openapi  "github.com/alibabacloud-go/darabonba-openapi/v2/client"
+  "github.com/alibabacloud-go/tea/tea"
+)
+
+
+// Description:
+// 
+// 使用 Token 初始化账号Client
+// 
+// @return Client
+// 
+// @throws Exception
+func CreateClient () (_result *dingtalkcard_1_0.Client, _err error) {
+  config := &amp;openapi.Config{}
+  config.Protocol = tea.String("https")
+  config.RegionId = tea.String("central")
+  _result = &amp;dingtalkcard_1_0.Client{}
+  _result, _err = dingtalkcard_1_0.NewClient(config)
+  return _result, _err
+}
+
+func _main (args []*string) (_err error) {
+  client, _err := CreateClient()
+  if _err != nil {
+    return _err
+  }
+
+  createAndDeliverHeaders := &amp;dingtalkcard_1_0.CreateAndDeliverHeaders{}
+  createAndDeliverHeaders.XAcsDingtalkAccessToken = tea.String("&lt;your access token&gt;")
+  docOpenDeliverModel := &amp;dingtalkcard_1_0.CreateAndDeliverRequestDocOpenDeliverModel{
+    UserId: tea.String("example_user_id"),
+  }
+  coFeedOpenDeliverModel := &amp;dingtalkcard_1_0.CreateAndDeliverRequestCoFeedOpenDeliverModel{
+    BizTag: tea.String("example_biz_tag"),
+    GmtTimeLine: tea.Int64(1665473229000),
+  }
+  topOpenDeliverModel := &amp;dingtalkcard_1_0.CreateAndDeliverRequestTopOpenDeliverModel{
+    ExpiredTimeMillis: tea.Int64(1665473229000),
+    UserIds: []*string{tea.String("example_user_id")},
+    Platforms: []*string{tea.String("android")},
+  }
+  imRobotOpenDeliverModelExtension := map[string]*string{
+    "key": tea.String("example_ext_value"),
+  }
+  imRobotOpenDeliverModel := &amp;dingtalkcard_1_0.CreateAndDeliverRequestImRobotOpenDeliverModel{
+    SpaceType: tea.String("IM_ROBOT"),
+    RobotCode: tea.String("example_robot_code"),
+    Extension: imRobotOpenDeliverModelExtension,
+  }
+  imGroupOpenDeliverModelExtension := map[string]*string{
+    "key": tea.String("example_ext_value"),
+  }
+  imGroupOpenDeliverModelAtUserIds := map[string]*string{
+    "key": tea.String("example_user_name"),
+  }
+  imGroupOpenDeliverModel := &amp;dingtalkcard_1_0.CreateAndDeliverRequestImGroupOpenDeliverModel{
+    RobotCode: tea.String("example_robot_code"),
+    AtUserIds: imGroupOpenDeliverModelAtUserIds,
+    Recipients: []*string{tea.String("example_user_id")},
+    Extension: imGroupOpenDeliverModelExtension,
+  }
+  imSingleOpenDeliverModelExtension := map[string]*string{
+    "key": tea.String("example_ext_value"),
+  }
+  imSingleOpenDeliverModelAtUserIds := map[string]*string{
+    "key": tea.String("example_user_name"),
+  }
+  imSingleOpenDeliverModel := &amp;dingtalkcard_1_0.CreateAndDeliverRequestImSingleOpenDeliverModel{
+    AtUserIds: imSingleOpenDeliverModelAtUserIds,
+    Extension: imSingleOpenDeliverModelExtension,
+  }
+  topOpenSpaceModel := &amp;dingtalkcard_1_0.CreateAndDeliverRequestTopOpenSpaceModel{
+    SpaceType: tea.String("ONE_BOX"),
+  }
+  coFeedOpenSpaceModel := &amp;dingtalkcard_1_0.CreateAndDeliverRequestCoFeedOpenSpaceModel{
+    Title: tea.String("xxxx卡片"),
+    CoolAppCode: tea.String("coolAppCode123"),
+  }
+  imRobotOpenSpaceModelNotification := &amp;dingtalkcard_1_0.CreateAndDeliverRequestImRobotOpenSpaceModelNotification{
+    AlertContent: tea.String("你收到了1条卡片消息"),
+    NotificationOff: tea.Bool(false),
+  }
+  imRobotOpenSpaceModelSearchSupport := &amp;dingtalkcard_1_0.CreateAndDeliverRequestImRobotOpenSpaceModelSearchSupport{
+    SearchIcon: tea.String("@lALPDgQ9q8hFhlHNAXzNAqI"),
+    SearchTypeName: tea.String("{\"ZH_CN\":\"待办\",\"ZH_TW\":\"待辦\",\"EN_US\":\"ToDo\"}"),
+    SearchDesc: tea.String("卡片的具体描述"),
+  }
+  imRobotOpenSpaceModelLastMessageI18n := map[string]*string{
+    "key": tea.String("互动卡片消息"),
+  }
+  imRobotOpenSpaceModel := &amp;dingtalkcard_1_0.CreateAndDeliverRequestImRobotOpenSpaceModel{
+    SupportForward: tea.Bool(false),
+    LastMessageI18n: imRobotOpenSpaceModelLastMessageI18n,
+    SearchSupport: imRobotOpenSpaceModelSearchSupport,
+    Notification: imRobotOpenSpaceModelNotification,
+  }
+  imGroupOpenSpaceModelNotification := &amp;dingtalkcard_1_0.CreateAndDeliverRequestImGroupOpenSpaceModelNotification{
+    AlertContent: tea.String("你收到了1条卡片消息"),
+    NotificationOff: tea.Bool(false),
+  }
+  imGroupOpenSpaceModelSearchSupport := &amp;dingtalkcard_1_0.CreateAndDeliverRequestImGroupOpenSpaceModelSearchSupport{
+    SearchIcon: tea.String("@lALPDgQ9q8hFhlHNAXzNAqI"),
+    SearchTypeName: tea.String("{\"ZH_CN\":\"待办\",\"ZH_TW\":\"待辦\",\"EN_US\":\"ToDo\"}"),
+    SearchDesc: tea.String("卡片的具体描述"),
+  }
+  imGroupOpenSpaceModelLastMessageI18n := map[string]*string{
+    "key": tea.String("互动卡片消息"),
+  }
+  imGroupOpenSpaceModel := &amp;dingtalkcard_1_0.CreateAndDeliverRequestImGroupOpenSpaceModel{
+    SupportForward: tea.Bool(false),
+    LastMessageI18n: imGroupOpenSpaceModelLastMessageI18n,
+    SearchSupport: imGroupOpenSpaceModelSearchSupport,
+    Notification: imGroupOpenSpaceModelNotification,
+  }
+  imSingleOpenSpaceModelNotification := &amp;dingtalkcard_1_0.CreateAndDeliverRequestImSingleOpenSpaceModelNotification{
+    AlertContent: tea.String("你收到了1条卡片消息"),
+    NotificationOff: tea.Bool(false),
+  }
+  imSingleOpenSpaceModelSearchSupport := &amp;dingtalkcard_1_0.CreateAndDeliverRequestImSingleOpenSpaceModelSearchSupport{
+    SearchIcon: tea.String("@lALPDgQ9q8hFhlHNAXzNAqI"),
+    SearchTypeName: tea.String("{\"ZH_CN\":\"待办\",\"ZH_TW\":\"待辦\",\"EN_US\":\"ToDo\"}"),
+    SearchDesc: tea.String("卡片的具体描述"),
+  }
+  imSingleOpenSpaceModelLastMessageI18n := map[string]*string{
+    "key": tea.String("互动卡片消息"),
+  }
+  imSingleOpenSpaceModel := &amp;dingtalkcard_1_0.CreateAndDeliverRequestImSingleOpenSpaceModel{
+    SupportForward: tea.Bool(true),
+    LastMessageI18n: imSingleOpenSpaceModelLastMessageI18n,
+    SearchSupport: imSingleOpenSpaceModelSearchSupport,
+    Notification: imSingleOpenSpaceModelNotification,
+  }
+  openDynamicDataConfigDynamicDataSourceConfigs0PullConfig := &amp;dingtalkcard_1_0.CreateAndDeliverRequestOpenDynamicDataConfigDynamicDataSourceConfigsPullConfig{
+    PullStrategy: tea.String("INTERVAL"),
+    Interval: tea.Int32(600),
+    TimeUnit: tea.String("SECONDS"),
+  }
+  openDynamicDataConfigDynamicDataSourceConfigs0ConstParams := map[string]*string{
+    "key": tea.String("example_const_param_value"),
+  }
+  openDynamicDataConfigDynamicDataSourceConfigs0 := &amp;dingtalkcard_1_0.CreateAndDeliverRequestOpenDynamicDataConfigDynamicDataSourceConfigs{
+    DynamicDataSourceId: tea.String("example_ds_01"),
+    ConstParams: openDynamicDataConfigDynamicDataSourceConfigs0ConstParams,
+    PullConfig: openDynamicDataConfigDynamicDataSourceConfigs0PullConfig,
+  }
+  openDynamicDataConfig := &amp;dingtalkcard_1_0.CreateAndDeliverRequestOpenDynamicDataConfig{
+    DynamicDataSourceConfigs: []*dingtalkcard_1_0.CreateAndDeliverRequestOpenDynamicDataConfigDynamicDataSourceConfigs{openDynamicDataConfigDynamicDataSourceConfigs0},
+  }
+  privateDataValueKeyCardParamMap := map[string]*string{
+    "key": tea.String("example_private_value"),
+  }
+  privateDataValueKey := &amp;dingtalkcard_1_0.PrivateDataValue{
+    CardParamMap: privateDataValueKeyCardParamMap,
+  }
+  privateData := map[string]*dingtalkcard_1_0.PrivateDataValue{
+    "privateDataValueKey": privateDataValueKey,
+  }
+  cardDataCardParamMap := map[string]*string{
+    "key": tea.String("example_public_value"),
+  }
+  cardData := &amp;dingtalkcard_1_0.CreateAndDeliverRequestCardData{
+    CardParamMap: cardDataCardParamMap,
+  }
+  createAndDeliverRequest := &amp;dingtalkcard_1_0.CreateAndDeliverRequest{
+    UserId: tea.String("example_user_id"),
+    CardTemplateId: tea.String("b4fdsu2119f-9945-4e13-9989-747da19e3bc7"),
+    OutTrackId: tea.String("example_out_track_id"),
+    CallbackType: tea.String("STREAM"),
+    CallbackRouteKey: tea.String("example_route_key"),
+    CardData: cardData,
+    PrivateData: privateData,
+    OpenDynamicDataConfig: openDynamicDataConfig,
+    ImSingleOpenSpaceModel: imSingleOpenSpaceModel,
+    ImGroupOpenSpaceModel: imGroupOpenSpaceModel,
+    ImRobotOpenSpaceModel: imRobotOpenSpaceModel,
+    CoFeedOpenSpaceModel: coFeedOpenSpaceModel,
+    TopOpenSpaceModel: topOpenSpaceModel,
+    OpenSpaceId: tea.String("dtv1.card//im_group.cidp4Gh*******VCQ==;im_robot.manager****67;co_feed.manager****67;one_box.cidp4Gh*******VCQ=="),
+    ImSingleOpenDeliverModel: imSingleOpenDeliverModel,
+    ImGroupOpenDeliverModel: imGroupOpenDeliverModel,
+    ImRobotOpenDeliverModel: imRobotOpenDeliverModel,
+    TopOpenDeliverModel: topOpenDeliverModel,
+    CoFeedOpenDeliverModel: coFeedOpenDeliverModel,
+    DocOpenDeliverModel: docOpenDeliverModel,
+    UserIdType: tea.Int32(1),
+    CardAtUserIds: []*string{tea.String("example_user_id")},
+  }
+  tryErr := func()(_e error) {
+    defer func() {
+      if r := tea.Recover(recover()); r != nil {
+        _e = r
+      }
+    }()
+    _, _err = client.CreateAndDeliverWithOptions(createAndDeliverRequest, createAndDeliverHeaders, &amp;util.RuntimeOptions{})
+    if _err != nil {
+      return _err
+    }
+
+    return nil
+  }()
+
+  if tryErr != nil {
+    var err = &amp;tea.SDKError{}
+    if _t, ok := tryErr.(*tea.SDKError); ok {
+      err = _t
+    } else {
+      err.Message = tea.String(tryErr.Error())
+    }
+    if !tea.BoolValue(util.Empty(err.Code)) &amp;&amp; !tea.BoolValue(util.Empty(err.Message)) {
+      // err 中含有 code 和 message 属性，可帮助开发定位问题
+    }
+
+  }
+  return _err
+}
+
+
+func main() {
+  err := _main(tea.StringSlice(os.Args[1:]))
+  if err != nil {
+    panic(err)
+  }
+}</code></pre></div><input type="radio" name="check-figure-bng-87k-h7b" id="figure-bng-87k-h7b-nodejs-tab" /><label for="figure-bng-87k-h7b-nodejs-tab">Node.js</label><div class="codeblock-item"><pre id="codeblock-8qu-jid-ttl" outputclass="language-nodejs" code-type="xCode" data-tag="codeblock" class="pre codeblock language-nodejs"><code>'use strict';
+// This file is auto-generated, don't edit it
+const Util = require('@alicloud/tea-util');
+const dingtalkcard_1_0 = require('@alicloud/dingtalk/card_1_0');
+const OpenApi = require('@alicloud/openapi-client');
+const Tea = require('@alicloud/tea-typescript');
+
+class Client {
+
+  /**
+   * 使用 Token 初始化账号Client
+   * @return Client
+   * @throws Exception
+   */
+  static createClient() {
+    let config = new OpenApi.Config({ });
+    config.protocol = 'https';
+    config.regionId = 'central';
+    return new dingtalkcard_1_0.default(config);
+  }
+
+  static async main(args) {
+    let client = Client.createClient();
+    let createAndDeliverHeaders = new dingtalkcard_1_0.CreateAndDeliverHeaders({ });
+    createAndDeliverHeaders.xAcsDingtalkAccessToken = '&lt;your access token&gt;';
+    let docOpenDeliverModel = new dingtalkcard_1_0.CreateAndDeliverRequestDocOpenDeliverModel({
+      userId: 'example_user_id',
+    });
+    let coFeedOpenDeliverModel = new dingtalkcard_1_0.CreateAndDeliverRequestCoFeedOpenDeliverModel({
+      bizTag: 'example_biz_tag',
+      gmtTimeLine: 1665473229000,
+    });
+    let topOpenDeliverModel = new dingtalkcard_1_0.CreateAndDeliverRequestTopOpenDeliverModel({
+      expiredTimeMillis: 1665473229000,
+      userIds: [
+        'example_user_id'
+      ],
+      platforms: [
+        'android'
+      ],
+    });
+    let imRobotOpenDeliverModelExtension = {
+      key: 'example_ext_value',
+    };
+    let imRobotOpenDeliverModel = new dingtalkcard_1_0.CreateAndDeliverRequestImRobotOpenDeliverModel({
+      spaceType: 'IM_ROBOT',
+      robotCode: 'example_robot_code',
+      extension: imRobotOpenDeliverModelExtension,
+    });
+    let imGroupOpenDeliverModelExtension = {
+      key: 'example_ext_value',
+    };
+    let imGroupOpenDeliverModelAtUserIds = {
+      key: 'example_user_name',
+    };
+    let imGroupOpenDeliverModel = new dingtalkcard_1_0.CreateAndDeliverRequestImGroupOpenDeliverModel({
+      robotCode: 'example_robot_code',
+      atUserIds: imGroupOpenDeliverModelAtUserIds,
+      recipients: [
+        'example_user_id'
+      ],
+      extension: imGroupOpenDeliverModelExtension,
+    });
+    let imSingleOpenDeliverModelExtension = {
+      key: 'example_ext_value',
+    };
+    let imSingleOpenDeliverModelAtUserIds = {
+      key: 'example_user_name',
+    };
+    let imSingleOpenDeliverModel = new dingtalkcard_1_0.CreateAndDeliverRequestImSingleOpenDeliverModel({
+      atUserIds: imSingleOpenDeliverModelAtUserIds,
+      extension: imSingleOpenDeliverModelExtension,
+    });
+    let topOpenSpaceModel = new dingtalkcard_1_0.CreateAndDeliverRequestTopOpenSpaceModel({
+      spaceType: 'ONE_BOX',
+    });
+    let coFeedOpenSpaceModel = new dingtalkcard_1_0.CreateAndDeliverRequestCoFeedOpenSpaceModel({
+      title: 'xxxx卡片',
+      coolAppCode: 'coolAppCode123',
+    });
+    let imRobotOpenSpaceModelNotification = new dingtalkcard_1_0.CreateAndDeliverRequestImRobotOpenSpaceModelNotification({
+      alertContent: '你收到了1条卡片消息',
+      notificationOff: false,
+    });
+    let imRobotOpenSpaceModelSearchSupport = new dingtalkcard_1_0.CreateAndDeliverRequestImRobotOpenSpaceModelSearchSupport({
+      searchIcon: '@lALPDgQ9q8hFhlHNAXzNAqI',
+      searchTypeName: '{"ZH_CN":"待办","ZH_TW":"待辦","EN_US":"ToDo"}',
+      searchDesc: '卡片的具体描述',
+    });
+    let imRobotOpenSpaceModelLastMessageI18n = {
+      key: '互动卡片消息',
+    };
+    let imRobotOpenSpaceModel = new dingtalkcard_1_0.CreateAndDeliverRequestImRobotOpenSpaceModel({
+      supportForward: false,
+      lastMessageI18n: imRobotOpenSpaceModelLastMessageI18n,
+      searchSupport: imRobotOpenSpaceModelSearchSupport,
+      notification: imRobotOpenSpaceModelNotification,
+    });
+    let imGroupOpenSpaceModelNotification = new dingtalkcard_1_0.CreateAndDeliverRequestImGroupOpenSpaceModelNotification({
+      alertContent: '你收到了1条卡片消息',
+      notificationOff: false,
+    });
+    let imGroupOpenSpaceModelSearchSupport = new dingtalkcard_1_0.CreateAndDeliverRequestImGroupOpenSpaceModelSearchSupport({
+      searchIcon: '@lALPDgQ9q8hFhlHNAXzNAqI',
+      searchTypeName: '{"ZH_CN":"待办","ZH_TW":"待辦","EN_US":"ToDo"}',
+      searchDesc: '卡片的具体描述',
+    });
+    let imGroupOpenSpaceModelLastMessageI18n = {
+      key: '互动卡片消息',
+    };
+    let imGroupOpenSpaceModel = new dingtalkcard_1_0.CreateAndDeliverRequestImGroupOpenSpaceModel({
+      supportForward: false,
+      lastMessageI18n: imGroupOpenSpaceModelLastMessageI18n,
+      searchSupport: imGroupOpenSpaceModelSearchSupport,
+      notification: imGroupOpenSpaceModelNotification,
+    });
+    let imSingleOpenSpaceModelNotification = new dingtalkcard_1_0.CreateAndDeliverRequestImSingleOpenSpaceModelNotification({
+      alertContent: '你收到了1条卡片消息',
+      notificationOff: false,
+    });
+    let imSingleOpenSpaceModelSearchSupport = new dingtalkcard_1_0.CreateAndDeliverRequestImSingleOpenSpaceModelSearchSupport({
+      searchIcon: '@lALPDgQ9q8hFhlHNAXzNAqI',
+      searchTypeName: '{"ZH_CN":"待办","ZH_TW":"待辦","EN_US":"ToDo"}',
+      searchDesc: '卡片的具体描述',
+    });
+    let imSingleOpenSpaceModelLastMessageI18n = {
+      key: '互动卡片消息',
+    };
+    let imSingleOpenSpaceModel = new dingtalkcard_1_0.CreateAndDeliverRequestImSingleOpenSpaceModel({
+      supportForward: true,
+      lastMessageI18n: imSingleOpenSpaceModelLastMessageI18n,
+      searchSupport: imSingleOpenSpaceModelSearchSupport,
+      notification: imSingleOpenSpaceModelNotification,
+    });
+    let openDynamicDataConfigDynamicDataSourceConfigs0PullConfig = new dingtalkcard_1_0.CreateAndDeliverRequestOpenDynamicDataConfigDynamicDataSourceConfigsPullConfig({
+      pullStrategy: 'INTERVAL',
+      interval: 600,
+      timeUnit: 'SECONDS',
+    });
+    let openDynamicDataConfigDynamicDataSourceConfigs0ConstParams = {
+      key: 'example_const_param_value',
+    };
+    let openDynamicDataConfigDynamicDataSourceConfigs0 = new dingtalkcard_1_0.CreateAndDeliverRequestOpenDynamicDataConfigDynamicDataSourceConfigs({
+      dynamicDataSourceId: 'example_ds_01',
+      constParams: openDynamicDataConfigDynamicDataSourceConfigs0ConstParams,
+      pullConfig: openDynamicDataConfigDynamicDataSourceConfigs0PullConfig,
+    });
+    let openDynamicDataConfig = new dingtalkcard_1_0.CreateAndDeliverRequestOpenDynamicDataConfig({
+      dynamicDataSourceConfigs: [
+        openDynamicDataConfigDynamicDataSourceConfigs0
+      ],
+    });
+    let privateDataValueKeyCardParamMap = {
+      key: 'example_private_value',
+    };
+    let privateDataValueKey = new dingtalkcard_1_0.PrivateDataValue({
+      cardParamMap: privateDataValueKeyCardParamMap,
+    });
+    let privateData = {
+      privateDataValueKey: privateDataValueKey,
+    };
+    let cardDataCardParamMap = {
+      key: 'example_public_value',
+    };
+    let cardData = new dingtalkcard_1_0.CreateAndDeliverRequestCardData({
+      cardParamMap: cardDataCardParamMap,
+    });
+    let createAndDeliverRequest = new dingtalkcard_1_0.CreateAndDeliverRequest({
+      userId: 'example_user_id',
+      cardTemplateId: 'b4fdsu2119f-9945-4e13-9989-747da19e3bc7',
+      outTrackId: 'example_out_track_id',
+      callbackType: 'STREAM',
+      callbackRouteKey: 'example_route_key',
+      cardData: cardData,
+      privateData: privateData,
+      openDynamicDataConfig: openDynamicDataConfig,
+      imSingleOpenSpaceModel: imSingleOpenSpaceModel,
+      imGroupOpenSpaceModel: imGroupOpenSpaceModel,
+      imRobotOpenSpaceModel: imRobotOpenSpaceModel,
+      coFeedOpenSpaceModel: coFeedOpenSpaceModel,
+      topOpenSpaceModel: topOpenSpaceModel,
+      openSpaceId: 'dtv1.card//im_group.cidp4Gh*******VCQ==;im_robot.manager****67;co_feed.manager****67;one_box.cidp4Gh*******VCQ==',
+      imSingleOpenDeliverModel: imSingleOpenDeliverModel,
+      imGroupOpenDeliverModel: imGroupOpenDeliverModel,
+      imRobotOpenDeliverModel: imRobotOpenDeliverModel,
+      topOpenDeliverModel: topOpenDeliverModel,
+      coFeedOpenDeliverModel: coFeedOpenDeliverModel,
+      docOpenDeliverModel: docOpenDeliverModel,
+      userIdType: 1,
+      cardAtUserIds: [
+        'example_user_id'
+      ],
+    });
+    try {
+      await client.createAndDeliverWithOptions(createAndDeliverRequest, createAndDeliverHeaders, new Util.RuntimeOptions({ }));
+    } catch (err) {
+      if (!Util.default.empty(err.code) &amp;&amp; !Util.default.empty(err.message)) {
+        // err 中含有 code 和 message 属性，可帮助开发定位问题
+      }
+
+    }    
+  }
+
+}
+
+exports.Client = Client;
+Client.main(process.argv.slice(2));</code></pre></div><input type="radio" name="check-figure-bng-87k-h7b" id="figure-bng-87k-h7b-csharp-tab" /><label for="figure-bng-87k-h7b-csharp-tab">C#</label><div class="codeblock-item"><pre id="codeblock-faz-08q-ivj" outputclass="language-csharp" code-type="xCode" data-tag="codeblock" class="pre codeblock language-csharp"><code>// This file is auto-generated, don't edit it. Thanks.
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
+
+using Tea;
+using Tea.Utils;
+
+
+namespace AlibabaCloud.SDK.Sample
+{
+    public class Sample 
+    {
+
+        /// &lt;term&gt;&lt;b&gt;Description:&lt;/b&gt;&lt;/term&gt;
+        /// &lt;description&gt;
+        /// &lt;para&gt;使用 Token 初始化账号Client&lt;/para&gt;
+        /// &lt;/description&gt;
+        /// 
+        /// &lt;returns&gt;
+        /// Client
+        /// &lt;/returns&gt;
+        /// 
+        /// &lt;term&gt;&lt;b&gt;Exception:&lt;/b&gt;&lt;/term&gt;
+        /// Exception
+        public static AlibabaCloud.SDK.Dingtalkcard_1_0.Client CreateClient()
+        {
+            AlibabaCloud.OpenApiClient.Models.Config config = new AlibabaCloud.OpenApiClient.Models.Config();
+            config.Protocol = "https";
+            config.RegionId = "central";
+            return new AlibabaCloud.SDK.Dingtalkcard_1_0.Client(config);
+        }
+
+        public static void Main(string[] args)
+        {
+            AlibabaCloud.SDK.Dingtalkcard_1_0.Client client = CreateClient();
+            AlibabaCloud.SDK.Dingtalkcard_1_0.Models.CreateAndDeliverHeaders createAndDeliverHeaders = new AlibabaCloud.SDK.Dingtalkcard_1_0.Models.CreateAndDeliverHeaders();
+            createAndDeliverHeaders.XAcsDingtalkAccessToken = "&lt;your access token&gt;";
+            AlibabaCloud.SDK.Dingtalkcard_1_0.Models.CreateAndDeliverRequest.CreateAndDeliverRequestDocOpenDeliverModel docOpenDeliverModel = new AlibabaCloud.SDK.Dingtalkcard_1_0.Models.CreateAndDeliverRequest.CreateAndDeliverRequestDocOpenDeliverModel
+            {
+                UserId = "example_user_id",
+            };
+            AlibabaCloud.SDK.Dingtalkcard_1_0.Models.CreateAndDeliverRequest.CreateAndDeliverRequestCoFeedOpenDeliverModel coFeedOpenDeliverModel = new AlibabaCloud.SDK.Dingtalkcard_1_0.Models.CreateAndDeliverRequest.CreateAndDeliverRequestCoFeedOpenDeliverModel
+            {
+                BizTag = "example_biz_tag",
+                GmtTimeLine = 1665473229000,
+            };
+            AlibabaCloud.SDK.Dingtalkcard_1_0.Models.CreateAndDeliverRequest.CreateAndDeliverRequestTopOpenDeliverModel topOpenDeliverModel = new AlibabaCloud.SDK.Dingtalkcard_1_0.Models.CreateAndDeliverRequest.CreateAndDeliverRequestTopOpenDeliverModel
+            {
+                ExpiredTimeMillis = 1665473229000,
+                UserIds = new List&lt;string&gt;
+                {
+                    "example_user_id"
+                },
+                Platforms = new List&lt;string&gt;
+                {
+                    "android"
+                },
+            };
+            Dictionary&lt;string, string&gt; imRobotOpenDeliverModelExtension = new Dictionary&lt;string, string&gt;
+            {
+                {"key", "example_ext_value"},
+            };
+            AlibabaCloud.SDK.Dingtalkcard_1_0.Models.CreateAndDeliverRequest.CreateAndDeliverRequestImRobotOpenDeliverModel imRobotOpenDeliverModel = new AlibabaCloud.SDK.Dingtalkcard_1_0.Models.CreateAndDeliverRequest.CreateAndDeliverRequestImRobotOpenDeliverModel
+            {
+                SpaceType = "IM_ROBOT",
+                RobotCode = "example_robot_code",
+                Extension = imRobotOpenDeliverModelExtension,
+            };
+            Dictionary&lt;string, string&gt; imGroupOpenDeliverModelExtension = new Dictionary&lt;string, string&gt;
+            {
+                {"key", "example_ext_value"},
+            };
+            Dictionary&lt;string, string&gt; imGroupOpenDeliverModelAtUserIds = new Dictionary&lt;string, string&gt;
+            {
+                {"key", "example_user_name"},
+            };
+            AlibabaCloud.SDK.Dingtalkcard_1_0.Models.CreateAndDeliverRequest.CreateAndDeliverRequestImGroupOpenDeliverModel imGroupOpenDeliverModel = new AlibabaCloud.SDK.Dingtalkcard_1_0.Models.CreateAndDeliverRequest.CreateAndDeliverRequestImGroupOpenDeliverModel
+            {
+                RobotCode = "example_robot_code",
+                AtUserIds = imGroupOpenDeliverModelAtUserIds,
+                Recipients = new List&lt;string&gt;
+                {
+                    "example_user_id"
+                },
+                Extension = imGroupOpenDeliverModelExtension,
+            };
+            Dictionary&lt;string, string&gt; imSingleOpenDeliverModelExtension = new Dictionary&lt;string, string&gt;
+            {
+                {"key", "example_ext_value"},
+            };
+            Dictionary&lt;string, string&gt; imSingleOpenDeliverModelAtUserIds = new Dictionary&lt;string, string&gt;
+            {
+                {"key", "example_user_name"},
+            };
+            AlibabaCloud.SDK.Dingtalkcard_1_0.Models.CreateAndDeliverRequest.CreateAndDeliverRequestImSingleOpenDeliverModel imSingleOpenDeliverModel = new AlibabaCloud.SDK.Dingtalkcard_1_0.Models.CreateAndDeliverRequest.CreateAndDeliverRequestImSingleOpenDeliverModel
+            {
+                AtUserIds = imSingleOpenDeliverModelAtUserIds,
+                Extension = imSingleOpenDeliverModelExtension,
+            };
+            AlibabaCloud.SDK.Dingtalkcard_1_0.Models.CreateAndDeliverRequest.CreateAndDeliverRequestTopOpenSpaceModel topOpenSpaceModel = new AlibabaCloud.SDK.Dingtalkcard_1_0.Models.CreateAndDeliverRequest.CreateAndDeliverRequestTopOpenSpaceModel
+            {
+                SpaceType = "ONE_BOX",
+            };
+            AlibabaCloud.SDK.Dingtalkcard_1_0.Models.CreateAndDeliverRequest.CreateAndDeliverRequestCoFeedOpenSpaceModel coFeedOpenSpaceModel = new AlibabaCloud.SDK.Dingtalkcard_1_0.Models.CreateAndDeliverRequest.CreateAndDeliverRequestCoFeedOpenSpaceModel
+            {
+                Title = "xxxx卡片",
+                CoolAppCode = "coolAppCode123",
+            };
+            AlibabaCloud.SDK.Dingtalkcard_1_0.Models.CreateAndDeliverRequest.CreateAndDeliverRequestImRobotOpenSpaceModel.CreateAndDeliverRequestImRobotOpenSpaceModelNotification imRobotOpenSpaceModelNotification = new AlibabaCloud.SDK.Dingtalkcard_1_0.Models.CreateAndDeliverRequest.CreateAndDeliverRequestImRobotOpenSpaceModel.CreateAndDeliverRequestImRobotOpenSpaceModelNotification
+            {
+                AlertContent = "你收到了1条卡片消息",
+                NotificationOff = false,
+            };
+            AlibabaCloud.SDK.Dingtalkcard_1_0.Models.CreateAndDeliverRequest.CreateAndDeliverRequestImRobotOpenSpaceModel.CreateAndDeliverRequestImRobotOpenSpaceModelSearchSupport imRobotOpenSpaceModelSearchSupport = new AlibabaCloud.SDK.Dingtalkcard_1_0.Models.CreateAndDeliverRequest.CreateAndDeliverRequestImRobotOpenSpaceModel.CreateAndDeliverRequestImRobotOpenSpaceModelSearchSupport
+            {
+                SearchIcon = "@lALPDgQ9q8hFhlHNAXzNAqI",
+                SearchTypeName = "{\"ZH_CN\":\"待办\",\"ZH_TW\":\"待辦\",\"EN_US\":\"ToDo\"}",
+                SearchDesc = "卡片的具体描述",
+            };
+            Dictionary&lt;string, string&gt; imRobotOpenSpaceModelLastMessageI18n = new Dictionary&lt;string, string&gt;
+            {
+                {"key", "互动卡片消息"},
+            };
+            AlibabaCloud.SDK.Dingtalkcard_1_0.Models.CreateAndDeliverRequest.CreateAndDeliverRequestImRobotOpenSpaceModel imRobotOpenSpaceModel = new AlibabaCloud.SDK.Dingtalkcard_1_0.Models.CreateAndDeliverRequest.CreateAndDeliverRequestImRobotOpenSpaceModel
+            {
+                SupportForward = false,
+                LastMessageI18n = imRobotOpenSpaceModelLastMessageI18n,
+                SearchSupport = imRobotOpenSpaceModelSearchSupport,
+                Notification = imRobotOpenSpaceModelNotification,
+            };
+            AlibabaCloud.SDK.Dingtalkcard_1_0.Models.CreateAndDeliverRequest.CreateAndDeliverRequestImGroupOpenSpaceModel.CreateAndDeliverRequestImGroupOpenSpaceModelNotification imGroupOpenSpaceModelNotification = new AlibabaCloud.SDK.Dingtalkcard_1_0.Models.CreateAndDeliverRequest.CreateAndDeliverRequestImGroupOpenSpaceModel.CreateAndDeliverRequestImGroupOpenSpaceModelNotification
+            {
+                AlertContent = "你收到了1条卡片消息",
+                NotificationOff = false,
+            };
+            AlibabaCloud.SDK.Dingtalkcard_1_0.Models.CreateAndDeliverRequest.CreateAndDeliverRequestImGroupOpenSpaceModel.CreateAndDeliverRequestImGroupOpenSpaceModelSearchSupport imGroupOpenSpaceModelSearchSupport = new AlibabaCloud.SDK.Dingtalkcard_1_0.Models.CreateAndDeliverRequest.CreateAndDeliverRequestImGroupOpenSpaceModel.CreateAndDeliverRequestImGroupOpenSpaceModelSearchSupport
+            {
+                SearchIcon = "@lALPDgQ9q8hFhlHNAXzNAqI",
+                SearchTypeName = "{\"ZH_CN\":\"待办\",\"ZH_TW\":\"待辦\",\"EN_US\":\"ToDo\"}",
+                SearchDesc = "卡片的具体描述",
+            };
+            Dictionary&lt;string, string&gt; imGroupOpenSpaceModelLastMessageI18n = new Dictionary&lt;string, string&gt;
+            {
+                {"key", "互动卡片消息"},
+            };
+            AlibabaCloud.SDK.Dingtalkcard_1_0.Models.CreateAndDeliverRequest.CreateAndDeliverRequestImGroupOpenSpaceModel imGroupOpenSpaceModel = new AlibabaCloud.SDK.Dingtalkcard_1_0.Models.CreateAndDeliverRequest.CreateAndDeliverRequestImGroupOpenSpaceModel
+            {
+                SupportForward = false,
+                LastMessageI18n = imGroupOpenSpaceModelLastMessageI18n,
+                SearchSupport = imGroupOpenSpaceModelSearchSupport,
+                Notification = imGroupOpenSpaceModelNotification,
+            };
+            AlibabaCloud.SDK.Dingtalkcard_1_0.Models.CreateAndDeliverRequest.CreateAndDeliverRequestImSingleOpenSpaceModel.CreateAndDeliverRequestImSingleOpenSpaceModelNotification imSingleOpenSpaceModelNotification = new AlibabaCloud.SDK.Dingtalkcard_1_0.Models.CreateAndDeliverRequest.CreateAndDeliverRequestImSingleOpenSpaceModel.CreateAndDeliverRequestImSingleOpenSpaceModelNotification
+            {
+                AlertContent = "你收到了1条卡片消息",
+                NotificationOff = false,
+            };
+            AlibabaCloud.SDK.Dingtalkcard_1_0.Models.CreateAndDeliverRequest.CreateAndDeliverRequestImSingleOpenSpaceModel.CreateAndDeliverRequestImSingleOpenSpaceModelSearchSupport imSingleOpenSpaceModelSearchSupport = new AlibabaCloud.SDK.Dingtalkcard_1_0.Models.CreateAndDeliverRequest.CreateAndDeliverRequestImSingleOpenSpaceModel.CreateAndDeliverRequestImSingleOpenSpaceModelSearchSupport
+            {
+                SearchIcon = "@lALPDgQ9q8hFhlHNAXzNAqI",
+                SearchTypeName = "{\"ZH_CN\":\"待办\",\"ZH_TW\":\"待辦\",\"EN_US\":\"ToDo\"}",
+                SearchDesc = "卡片的具体描述",
+            };
+            Dictionary&lt;string, string&gt; imSingleOpenSpaceModelLastMessageI18n = new Dictionary&lt;string, string&gt;
+            {
+                {"key", "互动卡片消息"},
+            };
+            AlibabaCloud.SDK.Dingtalkcard_1_0.Models.CreateAndDeliverRequest.CreateAndDeliverRequestImSingleOpenSpaceModel imSingleOpenSpaceModel = new AlibabaCloud.SDK.Dingtalkcard_1_0.Models.CreateAndDeliverRequest.CreateAndDeliverRequestImSingleOpenSpaceModel
+            {
+                SupportForward = true,
+                LastMessageI18n = imSingleOpenSpaceModelLastMessageI18n,
+                SearchSupport = imSingleOpenSpaceModelSearchSupport,
+                Notification = imSingleOpenSpaceModelNotification,
+            };
+            AlibabaCloud.SDK.Dingtalkcard_1_0.Models.CreateAndDeliverRequest.CreateAndDeliverRequestOpenDynamicDataConfig.CreateAndDeliverRequestOpenDynamicDataConfigDynamicDataSourceConfigs.CreateAndDeliverRequestOpenDynamicDataConfigDynamicDataSourceConfigsPullConfig openDynamicDataConfigDynamicDataSourceConfigs0PullConfig = new AlibabaCloud.SDK.Dingtalkcard_1_0.Models.CreateAndDeliverRequest.CreateAndDeliverRequestOpenDynamicDataConfig.CreateAndDeliverRequestOpenDynamicDataConfigDynamicDataSourceConfigs.CreateAndDeliverRequestOpenDynamicDataConfigDynamicDataSourceConfigsPullConfig
+            {
+                PullStrategy = "INTERVAL",
+                Interval = 600,
+                TimeUnit = "SECONDS",
+            };
+            Dictionary&lt;string, string&gt; openDynamicDataConfigDynamicDataSourceConfigs0ConstParams = new Dictionary&lt;string, string&gt;
+            {
+                {"key", "example_const_param_value"},
+            };
+            AlibabaCloud.SDK.Dingtalkcard_1_0.Models.CreateAndDeliverRequest.CreateAndDeliverRequestOpenDynamicDataConfig.CreateAndDeliverRequestOpenDynamicDataConfigDynamicDataSourceConfigs openDynamicDataConfigDynamicDataSourceConfigs0 = new AlibabaCloud.SDK.Dingtalkcard_1_0.Models.CreateAndDeliverRequest.CreateAndDeliverRequestOpenDynamicDataConfig.CreateAndDeliverRequestOpenDynamicDataConfigDynamicDataSourceConfigs
+            {
+                DynamicDataSourceId = "example_ds_01",
+                ConstParams = openDynamicDataConfigDynamicDataSourceConfigs0ConstParams,
+                PullConfig = openDynamicDataConfigDynamicDataSourceConfigs0PullConfig,
+            };
+            AlibabaCloud.SDK.Dingtalkcard_1_0.Models.CreateAndDeliverRequest.CreateAndDeliverRequestOpenDynamicDataConfig openDynamicDataConfig = new AlibabaCloud.SDK.Dingtalkcard_1_0.Models.CreateAndDeliverRequest.CreateAndDeliverRequestOpenDynamicDataConfig
+            {
+                DynamicDataSourceConfigs = new List&lt;AlibabaCloud.SDK.Dingtalkcard_1_0.Models.CreateAndDeliverRequest.CreateAndDeliverRequestOpenDynamicDataConfig.CreateAndDeliverRequestOpenDynamicDataConfigDynamicDataSourceConfigs&gt;
+                {
+                    openDynamicDataConfigDynamicDataSourceConfigs0
+                },
+            };
+            Dictionary&lt;string, string&gt; privateDataValueKeyCardParamMap = new Dictionary&lt;string, string&gt;
+            {
+                {"key", "example_private_value"},
+            };
+            AlibabaCloud.SDK.Dingtalkcard_1_0.Models.PrivateDataValue privateDataValueKey = new AlibabaCloud.SDK.Dingtalkcard_1_0.Models.PrivateDataValue
+            {
+                CardParamMap = privateDataValueKeyCardParamMap,
+            };
+            Dictionary&lt;string, AlibabaCloud.SDK.Dingtalkcard_1_0.Models.PrivateDataValue&gt; privateData = new Dictionary&lt;string, AlibabaCloud.SDK.Dingtalkcard_1_0.Models.PrivateDataValue&gt;
+            {
+                {"privateDataValueKey", privateDataValueKey},
+            };
+            Dictionary&lt;string, string&gt; cardDataCardParamMap = new Dictionary&lt;string, string&gt;
+            {
+                {"key", "example_public_value"},
+            };
+            AlibabaCloud.SDK.Dingtalkcard_1_0.Models.CreateAndDeliverRequest.CreateAndDeliverRequestCardData cardData = new AlibabaCloud.SDK.Dingtalkcard_1_0.Models.CreateAndDeliverRequest.CreateAndDeliverRequestCardData
+            {
+                CardParamMap = cardDataCardParamMap,
+            };
+            AlibabaCloud.SDK.Dingtalkcard_1_0.Models.CreateAndDeliverRequest createAndDeliverRequest = new AlibabaCloud.SDK.Dingtalkcard_1_0.Models.CreateAndDeliverRequest
+            {
+                UserId = "example_user_id",
+                CardTemplateId = "b4fdsu2119f-9945-4e13-9989-747da19e3bc7",
+                OutTrackId = "example_out_track_id",
+                CallbackType = "STREAM",
+                CallbackRouteKey = "example_route_key",
+                CardData = cardData,
+                PrivateData = privateData,
+                OpenDynamicDataConfig = openDynamicDataConfig,
+                ImSingleOpenSpaceModel = imSingleOpenSpaceModel,
+                ImGroupOpenSpaceModel = imGroupOpenSpaceModel,
+                ImRobotOpenSpaceModel = imRobotOpenSpaceModel,
+                CoFeedOpenSpaceModel = coFeedOpenSpaceModel,
+                TopOpenSpaceModel = topOpenSpaceModel,
+                OpenSpaceId = "dtv1.card//im_group.cidp4Gh*******VCQ==;im_robot.manager****67;co_feed.manager****67;one_box.cidp4Gh*******VCQ==",
+                ImSingleOpenDeliverModel = imSingleOpenDeliverModel,
+                ImGroupOpenDeliverModel = imGroupOpenDeliverModel,
+                ImRobotOpenDeliverModel = imRobotOpenDeliverModel,
+                TopOpenDeliverModel = topOpenDeliverModel,
+                CoFeedOpenDeliverModel = coFeedOpenDeliverModel,
+                DocOpenDeliverModel = docOpenDeliverModel,
+                UserIdType = 1,
+                CardAtUserIds = new List&lt;string&gt;
+                {
+                    "example_user_id"
+                },
+            };
+            try
+            {
+                client.CreateAndDeliverWithOptions(createAndDeliverRequest, createAndDeliverHeaders, new AlibabaCloud.TeaUtil.Models.RuntimeOptions());
+            }
+            catch (TeaException err)
+            {
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+            catch (Exception _err)
+            {
+                TeaException err = new TeaException(new Dictionary&lt;string, object&gt;
+                {
+                    { "message", _err.Message }
+                });
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+        }
+
+
+    }
+}</code></pre></div></div></section></section><section id="section-response-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-response-1" data-tag="h2" class="h2">响应</h2><section id="section-response-parameter" class="section"><h3 data-tag="h3" id="h2-sgd-xsv-cgj" class="h3 title">响应体</h3><table id="506058c334ul4" tablewidth="710" tablecolswidth="213 142 355" autofit="false" class="table"><colgroup colwidth="0.9*" style="width:30.00%"></colgroup><colgroup colwidth="0.6*" style="width:20.00%"></colgroup><colgroup colwidth="1.5*" style="width:50.00%"></colgroup><tbody class="tbody"><tr id="60cf099ab1gg3"><td id="49ccc0cd95i5j" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="e347df4462iev">名称</p></td><td id="dd3608e735nyo" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="1223081ff3w9p">类型</p></td><td id="2bff452b26i3t" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="f322410442han">描述</p></td></tr><tr outputclass="row row-level-1" id="1e01cc9e667eo" class="row row-level-1"><td id="1b010bccd22aq" rowspan="1" colspan="1"><p id="e8f1bfcd8bwxb">success</p></td><td id="33dcf177e1tp2" rowspan="1" colspan="1"><p id="247cb99396he9">Boolean</p></td><td id="ead02207d9nmi" rowspan="1" colspan="1"><p id="92b0fecf31bf4">调用结果。</p></td></tr><tr outputclass="row row-level-2 has-child" id="d5a6823ac8l4r" class="row row-level-2 has-child"><td id="dbd897cf96ejm" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="9a1b24eff0bdd">result</p></td><td id="a9f90a2860dku" rowspan="1" colspan="1"><p id="55c4ecefbb0fl">Object</p></td><td id="c8316e51a1bkg" rowspan="1" colspan="1"><p id="41d9fc4b6cybp">创建实例结果。</p></td></tr><tr outputclass="row row-level-2-1" id="2fcd6afc6agey" class="row row-level-2-1"><td id="d5419a292bgpi" rowspan="1" colspan="1"><p id="a530396b15ch2">outTrackId</p></td><td id="7a84cfb6ccsrj" rowspan="1" colspan="1"><p id="abdf230230ebi">String</p></td><td id="8f981aadd02hc" rowspan="1" colspan="1"><p id="7a7dcb4ba0eje">外部卡片实例Id。</p></td></tr><tr outputclass="row row-level-2-2 has-child" id="67a83a19f84e7" class="row row-level-2-2 has-child"><td id="5cd991e71apja" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="c4218accb1ua0">deliverResults</p></td><td id="987f2e50b965b" rowspan="1" colspan="1"><p id="b43917ef43zfa">Array</p></td><td id="8bd60eb4f28cd" rowspan="1" colspan="1"><p id="528f54d3b6x1s">投放结果。</p></td></tr><tr outputclass="row row-level-2-2-1" id="00f0db5deburo" class="row row-level-2-2-1"><td id="6a07dd003chr5" rowspan="1" colspan="1"><p id="d57f9bf089z4t">spaceType</p></td><td id="6cd5d5b5f20ez" rowspan="1" colspan="1"><p id="a824e9c51cwhb">String</p></td><td id="514a27e521wss" rowspan="1" colspan="1"><p id="0e962e59adur5">场域类型 ：</p><ul id="89952628f1igr"><li id="11e74ba0d9qnh"><p id="9c45a55c40rj8"><b>IM</b>：IM</p></li><li id="254919513f2le"><p id="86ca0c6b93q8t"><b>IM_GROUP</b>：IM群聊</p></li><li id="bcad932d962ee"><p id="6a7d7d9144cg9"><b>IM_ROBOT</b>：IM机器人单聊</p></li><li id="baea086ba5ahg"><p id="b042a9f24c6nu"><b>ONE_BOX</b>：群吊顶</p></li></ul></td></tr><tr outputclass="row row-level-2-2-2" id="2d6f09ce4et17" class="row row-level-2-2-2"><td id="271260eed4q9r" rowspan="1" colspan="1"><p id="0b7f5d2569kmn">spaceId</p></td><td id="c572e3068a9at" rowspan="1" colspan="1"><p id="d8b8e6ffa6peu">String</p></td><td id="12b958a23eixj" rowspan="1" colspan="1"><p id="e84a0424b7o5h">场域Id。</p></td></tr><tr outputclass="row row-level-2-2-3" id="d835836ae2uc4" class="row row-level-2-2-3"><td id="b8146b37fa8rg" rowspan="1" colspan="1"><p id="15270584b00l7">success</p></td><td id="b51fd05c03upb" rowspan="1" colspan="1"><p id="5e2f6398b2ciz">Boolean</p></td><td id="8432a28051cob" rowspan="1" colspan="1"><p id="461279b3edenw">投放成功。</p></td></tr><tr outputclass="row row-level-2-2-4" id="f9502a5aa840w" class="row row-level-2-2-4"><td id="8f7c58609fcl6" rowspan="1" colspan="1"><p id="54d18d2538mlm">carrierId</p></td><td id="96586d53d28ie" rowspan="1" colspan="1"><p id="f41287707e6qd">String</p></td><td id="366c0c8e462uu" rowspan="1" colspan="1"><p id="b8dba5df36s3j">投放结果id。</p><p class="note-icon-wrapper" id="22bebb46a00na"></p><p data-tag="p" id="6edd1041d3iry" class="p"></p><p id="8e8ec92ea8cmw">IM场域返回<code data-tag="inlineCode" id="ac84f5bec5kl2" class="inlineCode">processQueryKey</code>，用于业务后续查看消息已读列表，其他场域暂不返回。</p><p id="404b83c57d6qx"></p></td></tr><tr outputclass="row row-level-2-2-5" id="7be4f11e7d2rn" class="row row-level-2-2-5"><td id="aa8e8fa50dhmx" rowspan="1" colspan="1"><p id="b948128b07foq">errorMsg</p></td><td id="0ee66e11f2bfh" rowspan="1" colspan="1"><p id="43315dfc4fxwo">String</p></td><td id="15bfff3131yzd" rowspan="1" colspan="1"><p id="53bfe208e8xc1">错误信息。</p></td></tr></tbody></table></section><section id="section-response-body-example" class="section"><h3 id="h3-response-body-example" data-tag="h3" class="h3">响应体示例</h3><pre id="70a8727f85rwi" outputclass="language-json" code-type="xCode" data-tag="codeblock" class="pre codeblock language-json"><code>HTTP/1.1 200 OK
+Content-Type:application/json
+
+{
+  "success" : true,
+  "result" : {
+    "outTrackId" : "example_out_track_id",
+    "deliverResults" : [ {
+      "spaceType" : "IM_GROUP",
+      "spaceId" : "cidp4Gh*******VCQ==",
+      "success" : true,
+      "carrierId" : "4v+AzUEDuC0dKuO*********J0w8=",
+      "errorMsg" : "SYSTEM_ERROR"
+    } ]
+  }
+}</code></pre></section><section id="section-error-code-1" class="section"><h3 id="h3-error-code-1" data-tag="h3" class="h3">错误码</h3><p data-tag="p" id="p-error-code-global-guide" class="p">若调用该接口报错，可根据错误信息在<a href="https://open.dingtalk.com/document/development/server-api-error-codes-1" id="a-error-code-global-guide">全局错误码</a>文档中查找解决方案。</p><table id="22692800a25kv" tablewidth="709" tablecolswidth="142 177 177 213" autofit="false" class="table"><colgroup colwidth="0.8*" style="width:20.03%"></colgroup><colgroup colwidth="1*" style="width:24.96%"></colgroup><colgroup colwidth="1*" style="width:24.96%"></colgroup><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><tbody class="tbody"><tr id="032831f9bcgz6"><td id="4493dbab419yn" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="a1bc4aa5d4y6l">HttpCode</p></td><td id="2edea85cb7fnk" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="a04e211e335sr">错误码</p></td><td id="39bd76f29blej" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="897df701a0x55">错误信息</p></td><td id="406b82a02boch" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="f662306871av9">说明</p></td></tr><tr id="b73cfeb56cx6m"><td id="41903d6e0dt50" rowspan="1" colspan="1"><p id="f71ba751cfjjx">400</p></td><td id="e251c17118f8w" rowspan="1" colspan="1"><p id="49fab02470qim">param.empty</p></td><td id="a0df925aa8xma" rowspan="1" colspan="1"><p id="3707c0b64b6mm">param.empty</p></td><td id="5e798be2ebe50" rowspan="1" colspan="1"><p id="db719d3291zr8">入参为空</p></td></tr><tr id="4cc5ad639ceof"><td id="1a15ae676flgn" rowspan="1" colspan="1"><p id="865cee183ch32">400</p></td><td id="86ffc2f4242i0" rowspan="1" colspan="1"><p id="2c7233b37dcjx">param.outTrackIdEmpty</p></td><td id="cb3253bbcd80r" rowspan="1" colspan="1"><p id="4d23c6f8292tl">param.outTrackIdEmpty</p></td><td id="bff52d070ftdi" rowspan="1" colspan="1"><p id="02ea49c1c8zsr">业务标识outTrackId为空</p></td></tr><tr id="9eaf86f1a5nxt"><td id="026bae4ad9vjr" rowspan="1" colspan="1"><p id="5c75e83f84t7r">400</p></td><td id="07ab8a3057zhb" rowspan="1" colspan="1"><p id="51b235d625y6p">param.openSpaceIdEmpty</p></td><td id="dcd69ff713h3t" rowspan="1" colspan="1"><p id="6f6a34d5c7hub">param.openSpaceIdEmpty</p></td><td id="cbd90a4061ms9" rowspan="1" colspan="1"><p id="c58bd310daxgn">投放openSpaceId为空</p></td></tr><tr id="f558f5cb36qkw"><td id="84ef3c26aa2i9" rowspan="1" colspan="1"><p id="736c02ca63n6p">400</p></td><td id="2b9a28ab4f72r" rowspan="1" colspan="1"><p id="e7283dfb71sb0">param.openDeliverModelEmpty</p></td><td id="7eab60abc81du" rowspan="1" colspan="1"><p id="8d0a6ff65a1w8">param.openDeliverModelEmpty</p></td><td id="8388437efbsnr" rowspan="1" colspan="1"><p id="9b3d72948fj64">场域投放模型为空</p></td></tr><tr id="4ae069435ak73"><td id="f44e48a09294u" rowspan="1" colspan="1"><p id="f2a73fc488if3">400</p></td><td id="bfb7f29a50t5u" rowspan="1" colspan="1"><p id="ef6f3fc1acblp">param.openDeliverModelError</p></td><td id="eb2dafb0e19yb" rowspan="1" colspan="1"><p id="2008439a67o69">param.openDeliverModelError</p></td><td id="9c5e3fb32d9cr" rowspan="1" colspan="1"><p id="c9d6a3b647eju">场域投放模型格式错误</p></td></tr><tr id="09499b844fr6s"><td id="be618c75beqt4" rowspan="1" colspan="1"><p id="c8f1095bc5xuj">400</p></td><td id="bbfab31a69v4w" rowspan="1" colspan="1"><p id="c830e71ea02ot">param.openSpaceIdInvalid</p></td><td id="e00d3baafen1a" rowspan="1" colspan="1"><p id="bc36746022a4o">param.openSpaceIdInvalid</p></td><td id="fc5a76242aanx" rowspan="1" colspan="1"><p id="2cd7aa9c6f0nw">openSpaceId不符合规范</p></td></tr><tr id="ef967dc17d4pw"><td id="0892c8979as27" rowspan="1" colspan="1"><p id="bef8a4b77bq5s">400</p></td><td id="a9573846a78g2" rowspan="1" colspan="1"><p id="2eb60f86c5bcg">param.cardTemplateIdEmpty</p></td><td id="81a906fd97g0h" rowspan="1" colspan="1"><p id="b9dc45e115ud2">param.cardTemplateIdEmpty</p></td><td id="62a10b2b93zv3" rowspan="1" colspan="1"><p id="8af5313505ylj">卡片模板Id为空</p></td></tr><tr id="696a0595b2tjy"><td id="6604f244cbokw" rowspan="1" colspan="1"><p id="01ff5234c6fsb">400</p></td><td id="19a78f5195r16" rowspan="1" colspan="1"><p id="89f612450dpl4">param.userIdEmpty</p></td><td id="53593ec454dko" rowspan="1" colspan="1"><p id="c23fe5c17cv3z">param.userIdEmpty</p></td><td id="f2055cec7ec1j" rowspan="1" colspan="1"><p id="214bca8f00r9y">用户userId为空</p></td></tr><tr id="1e0cbf38c942f"><td id="4709b67ae3tp9" rowspan="1" colspan="1"><p id="9e7f7312d26g4">400</p></td><td id="1d7f6fef71w3b" rowspan="1" colspan="1"><p id="b9506c8beetny">param.cardPublicDataEmpty</p></td><td id="0cd9e3babatkh" rowspan="1" colspan="1"><p id="0d8fc981bf4tr">param.cardPublicDataEmpty</p></td><td id="9b232f9164fc9" rowspan="1" colspan="1"><p id="bd9c9ef01egwc">卡片公共数据为空</p></td></tr><tr id="30237cd3551zv"><td id="ad81667212rp9" rowspan="1" colspan="1"><p id="46b1bee579k45">400</p></td><td id="3a308882eevdt" rowspan="1" colspan="1"><p id="e9543723344xg">param.userIdNotExist</p></td><td id="9f90483e11d26" rowspan="1" colspan="1"><p id="c7ac741db9zfj">param.userIdNotExist</p></td><td id="77877fbaaeqhw" rowspan="1" colspan="1"><p id="0067ab5161250">用户user不存在</p></td></tr><tr id="df60e9bfb3acs"><td id="6ae2de2fab4z7" rowspan="1" colspan="1"><p id="2643f262272m2">400</p></td><td id="0622f754fb51j" rowspan="1" colspan="1"><p id="43588873cdoag">param.dynamicDataMappingEmpty</p></td><td id="e17c4ab3f060q" rowspan="1" colspan="1"><p id="ec27cda00dsa2">param.dynamicDataMappingEmpty</p></td><td id="406e766234pt4" rowspan="1" colspan="1"><p id="8437db6489vtl">动态数据源数据映射为空</p></td></tr><tr id="804e2d3a6ba69"><td id="68e15b3e82g52" rowspan="1" colspan="1"><p id="5c547ab315a8k">400</p></td><td id="22867d13a839j" rowspan="1" colspan="1"><p id="3083bb2d32g90">param.dynamicSourceIdEmpty</p></td><td id="4c6090c43c1x5" rowspan="1" colspan="1"><p id="c2421dcb08gp2">param.dynamicSourceIdEmpty</p></td><td id="5aa6a2ceee1z0" rowspan="1" colspan="1"><p id="ced0f394ealgv">动态数据源配置ID为空</p></td></tr><tr id="00872c5559osh"><td id="8dbe75de53gsk" rowspan="1" colspan="1"><p id="5045d355e6sio">400</p></td><td id="6aa108e1d61gg" rowspan="1" colspan="1"><p id="2f18b2b72dzgt">param.dynamicDataPullConfigEmpty</p></td><td id="64f79f4260ea5" rowspan="1" colspan="1"><p id="d6db4d89b7kg1">param.dynamicDataPullConfigEmpty</p></td><td id="bfe71abb28ypg" rowspan="1" colspan="1"><p id="52f1774e889qy">动态数据源拉取配置为空</p></td></tr><tr id="fb40f8991cm9b"><td id="52d21cb85fc4f" rowspan="1" colspan="1"><p id="aca4f4e4fago8">400</p></td><td id="a938143eb4cej" rowspan="1" colspan="1"><p id="5139b979a7una">param.dynamicDataPullIntervalInvalid</p></td><td id="382860213fibc" rowspan="1" colspan="1"><p id="61a6d5c81et68">param.dynamicDataPullIntervalInvalid</p></td><td id="42c825704fw9l" rowspan="1" colspan="1"><p id="1c895f271f18f">动态数据源拉取间隔时间为空或非法</p></td></tr><tr id="314db70b6b8hu"><td id="83cc241199lwn" rowspan="1" colspan="1"><p id="d4171aa5d8al1">400</p></td><td id="b721d10f67fdd" rowspan="1" colspan="1"><p id="9ec9186a84jsd">param.dynamicDataPullIntervalTimeUnitInvalid</p></td><td id="3cb5fc39e40tm" rowspan="1" colspan="1"><p id="c39b76000cuj2">param.dynamicDataPullIntervalTimeUnitInvalid </p></td><td id="03f2d99b53ej0" rowspan="1" colspan="1"><p id="9c3dcf9c48tld">动态数据源拉取间隔时间单位为空或非法</p></td></tr><tr id="dcfbd44405s95"><td id="0d73f619e3cen" rowspan="1" colspan="1"><p id="a5eec05cd12fn">400</p></td><td id="281992d930gfu" rowspan="1" colspan="1"><p id="b8a97f522f1ie">param.dynamicDataSourcePullStrategyEmpty</p></td><td id="4b6144ed85ob3" rowspan="1" colspan="1"><p id="a3ccb9ca60s06">param.dynamicDataSourcePullStrategyEmpty</p></td><td id="b3c3cea0b76s7" rowspan="1" colspan="1"><p id="924c8433d5bbp">动态数据源拉取策略为空</p></td></tr><tr id="27a7e6f7620vt"><td id="595e5b8b0f8fi" rowspan="1" colspan="1"><p id="0163a7f473973">400</p></td><td id="243b300c2bf7p" rowspan="1" colspan="1"><p id="b9bbd110cdipj">param.dynamicDataMappingPathEmpty</p></td><td id="c6197bc0689hn" rowspan="1" colspan="1"><p id="618496497bq7r">param.dynamicDataMappingPathEmpty</p></td><td id="bd781a3be36ni" rowspan="1" colspan="1"><p id="11ce9e2447yxk">动态数据源数据映射路径为空</p></td></tr><tr id="b6c061ea97na2"><td id="e7c31a728an8n" rowspan="1" colspan="1"><p id="bda1e66281yen">400</p></td><td id="02948d8b911wg" rowspan="1" colspan="1"><p id="8a168c0d46k7m">param.dynamicDataValueTypeEmpty</p></td><td id="37ba1df1c1oi2" rowspan="1" colspan="1"><p id="9867a5014anq1">param.dynamicDataValueTypeEmpty</p></td><td id="87974e2cf8m6x" rowspan="1" colspan="1"><p id="254ffdc57fv0d">动态数据源数据类型为空</p></td></tr><tr id="4a3d08abf6hpi"><td id="628c5a6ed7kez" rowspan="1" colspan="1"><p id="a5940f1df43oa">400</p></td><td id="07f7514a47ine" rowspan="1" colspan="1"><p id="e01ed3f4aa160">param.contentUnsafe</p></td><td id="4d11832179t0z" rowspan="1" colspan="1"><p id="f491a41bf9y70">param.contentUnsafe</p></td><td id="192581890c81s" rowspan="1" colspan="1"><p id="81bf27ab669cp">卡片数据不能通过安全审查</p></td></tr><tr id="65b1a56f8c2ns"><td id="0bfd5691bc3lc" rowspan="1" colspan="1"><p id="378a3f65aclmw">400</p></td><td id="21b627cd369ea" rowspan="1" colspan="1"><p id="f37a2bc7529qx">param.openSpaceModelInvalid</p></td><td id="279eba5b334z8" rowspan="1" colspan="1"><p id="b4f415a65dlr4">param.openSpaceModellnvalid</p></td><td id="61a45135a7ta9" rowspan="1" colspan="1"><p id="c63eb42c24sw9">错误的场域属性模型</p></td></tr><tr id="3b57fbf09dq7l"><td id="ebe10781587kb" rowspan="1" colspan="1"><p id="deb61b3153bod">400</p></td><td id="39b8de64b30rz" rowspan="1" colspan="1"><p id="9d1b04b077tpy">param.cardNotExist</p></td><td id="3ad229a2bafrl" rowspan="1" colspan="1"><p id="82d7ee2fb7hx4">param.cardNotExist</p></td><td id="d937c54840gi6" rowspan="1" colspan="1"><p id="df99bc823c5n3">卡片不存在</p></td></tr><tr id="a664b5c13ac5q"><td id="dbfef4b622nkn" rowspan="1" colspan="1"><p id="2e6ecbd940oet">400</p></td><td id="76363f3fd6xnv" rowspan="1" colspan="1"><p id="1f758d596amx5">param.cardAlreadyExist</p></td><td id="3491a0761cte7" rowspan="1" colspan="1"><p id="143e965482fw0">param.cardAlreadyExist</p></td><td id="c37a8c88fdpk7" rowspan="1" colspan="1"><p id="265adebc5f4ao">卡片已经存在</p></td></tr><tr id="9599ed66bafnp"><td id="3e2dea352159t" rowspan="1" colspan="1"><p id="d0bead320arlj">400</p></td><td id="c3fa48970bq39" rowspan="1" colspan="1"><p id="2183c8e34dj43">param.templateNotExist</p></td><td id="af42e396a2grx" rowspan="1" colspan="1"><p id="ce003d0e94csr">param.templateNotExist</p></td><td id="c737daec8bn3c" rowspan="1" colspan="1"><p id="9668a5868ey7c">模板不存在</p></td></tr><tr id="ba3db3012d479"><td id="14268875e9iij" rowspan="1" colspan="1"><p id="2d8bcacd1dnkj">400</p></td><td id="ee132b1c716kx" rowspan="1" colspan="1"><p id="f1727c4266q71">param.templateUnpublished</p></td><td id="66c6bcaa912uf" rowspan="1" colspan="1"><p id="392869c194h1c">param.templateUnpublished</p></td><td id="1f3bc3bc9al17" rowspan="1" colspan="1"><p id="2fe58b98f4rif">模板未发布</p></td></tr><tr id="f00b73127a2mc"><td id="c9097a6ee8glz" rowspan="1" colspan="1"><p id="8ab7bacb41eyp">400</p></td><td id="3ad3bfc39223b" rowspan="1" colspan="1"><p id="5db450633bztj">param.invalid</p></td><td id="fb669836023hk" rowspan="1" colspan="1"><p id="b26901e347iz8">param.invalid</p></td><td id="045a8386b3czt" rowspan="1" colspan="1"><p id="2700f909b82gx">存在非法参数</p></td></tr><tr id="139e5f769687r"><td id="c23ca02e6c2q0" rowspan="1" colspan="1"><p id="34c7a2ebf5io0">500</p></td><td id="de5ab4bcd3arr" rowspan="1" colspan="1"><p id="a1dcf0b86fssm">system.busy</p></td><td id="cc5a547b31dif" rowspan="1" colspan="1"><p id="dc005cdec7tdm">system.busy</p></td><td id="3c46fdcb53jrc" rowspan="1" colspan="1"><p id="aeee845c92lxc">系统繁忙</p></td></tr></tbody></table></section></section></div></main></body></html>

@@ -1,0 +1,427 @@
+<!DOCTYPE html><html><head><meta charset="utf8" / /><meta name="gmtModify" content="2025-09-23 19:19:30" / /><meta name="searchtitle" content="" / /><meta name="keywords" content="" / /><meta name="author" content="" / /><title>分页获取企业词条信息</title><meta name="gmtModify" content="2026-06-04 19:10:44" / /></head><body data-tag="topic" id="doc-api-dingtalk-PediaWordsSearch" class="topic"><main id="f28e475b6avcm" data-init-id="doc-api-dingtalk_PediaWordsSearch"><h1 data-tag="title" id="h1-zag-rga-ytb" class="title">分页获取企业词条信息</h1><p data-tag="shortdesc" id="6fd7522b4dw0k" class="shortdesc">调用本接口，根据词条名称搜索符合条件的词条列表，如果名称为空的情况则分页返回所有符合条件的词条列表。</p><div data-tag="conbody" outputclass="icms-api-reference" class="icms-api-reference conbody"><section id="section-request-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-request-1" data-tag="h2" class="h2">请求</h2><section id="section-request-basic-info" class="section"><h3 id="heading-request-basic-info" data-tag="h3" class="h3">基本信息</h3><table id="d64e3ebb70bwa" tablewidth="648" tablecolswidth="216 432" autofit="false" class="table"><colgroup colwidth="0.67*" style="width:33.33%"></colgroup><colgroup colwidth="1.33*" style="width:66.67%"></colgroup><tbody class="tbody"><tr id="8eec0f43962gx"><td id="0eddba67b8oj0" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="c9020c0cd7g4p">字段</p></td><td id="cd5eeb7deayfp" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="f9b2be88925pv">值</p></td></tr><tr id="af3d3f6cb90gi"><td id="7fe1e1508fo0s" rowspan="1" colspan="1"><p id="04f782ad73ldy">HTTP URL</p></td><td id="c57fd82093npv" rowspan="1" colspan="1"><p id="fec5fa8bc7407">https://api.dingtalk.com/v1.0/pedia/words/search</p></td></tr><tr id="0b26f49c4e6rn"><td id="dc80b686f359g" rowspan="1" colspan="1"><p id="13781fe31871p">HTTP Method</p></td><td id="0508aa88b65pb" rowspan="1" colspan="1"><p id="d675cc911f4dv">POST</p></td></tr><tr id="7eca27b6f3vno"><td id="cc1935af5a1q5" rowspan="1" colspan="1"><p id="497f1d36506a3">支持的应用类型</p></td><td id="55e7edceeek99" rowspan="1" colspan="1"><p id="0996cb3c416nn"><span data-tag="ph" id="ph-request-basic-app-type-apptype-0" class="ph ph-app-type" data-ph-raw-text="appType-企业内部应用">appType-企业内部应用</span>　<span data-tag="ph" id="ph-request-basic-app-type-apptype-1" class="ph ph-app-type" data-ph-raw-text="appType-第三方企业应用">appType-第三方企业应用</span></p></td></tr><tr id="361555f9759qf"><td id="bb95abbf57paq" rowspan="1" colspan="1"><p id="4da2183504p81">权限要求</p></td><td id="c8b121513dy0q" rowspan="1" colspan="1"><p id="15709c99fa335"><span data-tag="ph" id="ph-request-basic-permission-permission-pedia-words-read-0" class="ph-permission ph" data-ph-raw-text="permission-Pedia.Words.Read-企业百科词条读权限" data-permission-id="permission-Pedia.Words.Read" data-permission-code="Pedia.Words.Read" data-permission-detail-api="/document/api/permission/detail" data-permission-query-param="code">permission-Pedia.Words.Read-企业百科词条读权限</span></p></td></tr></tbody></table></section><section id="section-request-header-parameter" class="section"><h3 data-tag="h3" id="h2-8ec-auv-t10" class="h3 title">请求头</h3><table id="c985432c14035" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="5881f4d257qm7"><td id="3aa4d79d365tu" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="558bd6a96fglf">名称</p></td><td id="d2102f007e47m" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="7b967531ebtdf">类型</p></td><td id="e088f2f9b6j5y" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="2d8323eef662x">是否必填</p></td><td id="f6c141d79e0w8" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="c5fcb305ba150">描述</p></td></tr><tr id="97a502cc59bk4"><td id="730db297d4vqe" rowspan="1" colspan="1"><p id="f0c0b2c818km7">x-acs-dingtalk-access-token</p></td><td id="a9a8bd6063crw" rowspan="1" colspan="1"><p id="c61dae6c44gsq">String</p></td><td id="6452ee30607kh" rowspan="1" colspan="1"><p id="5eca4ceb40x6f">是</p></td><td id="3bf4e806d6ymt" rowspan="1" colspan="1"><p id="cb451d5d94ksw">调用该接口的访问凭证，通过以下获取：</p><ul id="eadf486dbb0mc"><li id="303bbae0d1m8r"><p id="f76dbea566kz0">企业内部应用，调用<a href="https://open.dingtalk.com/document/development/obtain-the-access-token-of-an-internal-app#" id="211a7786e2th1" class="xref">获取企业内部应用的accessToken</a>接口获取。</p></li><li id="4fc9d804730lo"><p id="26f7203c6ckmh">第三方企业应用，调用<a href="https://open.dingtalk.com/document/development/obtain-the-access-token-of-the-authorized-enterprise-1#" id="f4d144ffb3d2a" class="xref">获取第三方应用授权企业的accessToken</a>接口获取。</p></li></ul></td></tr></tbody></table></section><section id="section-request-body-parameter" class="section"><h3 data-tag="h3" id="h2-bjk-fhc-556" class="h3 title">请求体</h3><table id="55924ba271mfa" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="7e73a288efcnw"><td id="c1a2df947duh0" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="4696b7aa0dc6r">名称</p></td><td id="3a22296a10mqm" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="440335b2c9o93">类型</p></td><td id="f1c8679c4actl" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="ecfc387a95moe">是否必填</p></td><td id="ec099ddcddxo3" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="e332ccec71wq1">描述</p></td></tr><tr outputclass="row row-level-1" id="37b55e25cauql" class="row row-level-1"><td id="86f27d17a69ny" rowspan="1" colspan="1"><p id="3591305620ryk">wordName</p></td><td id="e1f1e49c66gw8" rowspan="1" colspan="1"><p id="f2c0c98fc4rut">String</p></td><td id="fd6469fab0366" rowspan="1" colspan="1"><p id="9cf0d7b97f707">否</p></td><td id="05f98e0c92bg9" rowspan="1" colspan="1"><p id="52157fac12yl5">搜索关键词。</p><p class="note-icon-wrapper" id="d0a439d032we7"></p><p id="69d3317273sjx">当关键词为空时，分页获取所有词条。</p></td></tr><tr outputclass="row row-level-2" id="5f4850adb6umk" class="row row-level-2"><td id="7c8fb89cddka7" rowspan="1" colspan="1"><p id="5a69d2d7deh9f">userId</p></td><td id="9e134723efhys" rowspan="1" colspan="1"><p id="4273d181da77x">String</p></td><td id="249a09a0abfwz" rowspan="1" colspan="1"><p id="fc77a728dbq1t">是</p></td><td id="13800419a4crh" rowspan="1" colspan="1"><p id="9ab55992e1ybc">操作人的userId。</p></td></tr><tr outputclass="row row-level-3" id="cc54f67b61uah" class="row row-level-3"><td id="da521ed3d4k2z" rowspan="1" colspan="1"><p id="e24da54027y2c">pageSize</p></td><td id="2884a32ddde4t" rowspan="1" colspan="1"><p id="0ec3f8ca966x5">Integer</p></td><td id="3ed88bfc428yz" rowspan="1" colspan="1"><p id="b1d856db39jjm">是</p></td><td id="85bd631fc0wuo" rowspan="1" colspan="1"><p id="8ea677242eixd">当前每页需要展示的数量，最大20。</p></td></tr><tr outputclass="row row-level-4" id="6cde3c45a12ts" class="row row-level-4"><td id="6164d4dc9fnjh" rowspan="1" colspan="1"><p id="6376328f24t9x">pageNumber</p></td><td id="425b4f4195gry" rowspan="1" colspan="1"><p id="5ded11adbf3rb">Integer</p></td><td id="14c615cf63zv0" rowspan="1" colspan="1"><p id="23ee9cfd27g13">是</p></td><td id="b174e6b2e7tjy" rowspan="1" colspan="1"><p id="9100d711a8s97">当前查询的页数，从1开始。</p></td></tr><tr outputclass="row row-level-5" id="084236132egav" class="row row-level-5"><td id="9dd1232662w0a" rowspan="1" colspan="1"><p id="69403b55f8z2l">status</p></td><td id="aca608f88fl6d" rowspan="1" colspan="1"><p id="2df656076bzh0">String</p></td><td id="2e49fb69a9uzf" rowspan="1" colspan="1"><p id="7dfefe09815io">是</p></td><td id="62c1adc78a40p" rowspan="1" colspan="1"><p id="613b99404awxn">当前搜索列表的状态：</p><ul id="c251fa1bd7jiu"><li id="39582a65870cu"><p id="ca48c36e2f5yx">0：审核通过</p></li><li id="f580056a7b1aj"><p id="83a664e765ap3">1：创建待审核</p></li><li id="ed9acdaa3frtc"><p id="4ea84e58e77he">2：更新待审核</p></li></ul><p class="note-icon-wrapper" id="0b5ace7538umx"></p><p id="7aef6732cccad">默认是0，代表获取所有审核完成的词条。</p></td></tr></tbody></table></section><section id="section-request-body-example" class="section"><h3 id="h3-request-body-example" data-tag="h3" class="h3">请求示例</h3><div outputclass="tabbed-codeblock" data-tag="fig" id="figure-il7-wka-ngl" class="tabbed-codeblock-box"><div class="tab-box"></div><input type="radio" name="check-figure-il7-wka-ngl" id="figure-il7-wka-ngl-HTTP-tab" checked="checked" /><label for="figure-il7-wka-ngl-HTTP-tab">HTTP</label><div class="codeblock-item"><pre id="codeblock-lzm-zkm-tnl" outputclass="language-HTTP" code-type="xCode" data-tag="codeblock" class="pre codeblock language-HTTP"><code>POST /v1.0/pedia/words/search HTTP/1.1
+Host:api.dingtalk.com
+x-acs-dingtalk-access-token:xxxxx
+Content-Type:application/json
+
+{
+  "wordName" : "企业百科",
+  "userId" : "121213213",
+  "pageSize" : 1,
+  "pageNumber" : 1,
+  "status" : "1"
+}</code></pre></div><input type="radio" name="check-figure-il7-wka-ngl" id="figure-il7-wka-ngl-java-tab" /><label for="figure-il7-wka-ngl-java-tab">Java</label><div class="codeblock-item"><pre id="codeblock-cxj-90r-rjd" outputclass="language-java" code-type="xCode" data-tag="codeblock" class="pre codeblock language-java"><code>// This file is auto-generated, don't edit it. Thanks.
+package com.aliyun.sample;
+
+import com.aliyun.tea.*;
+
+public class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Client
+     * @throws Exception
+     */
+    public static com.aliyun.dingtalkpedia_1_0.Client createClient() throws Exception {
+        com.aliyun.teaopenapi.models.Config config = new com.aliyun.teaopenapi.models.Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        return new com.aliyun.dingtalkpedia_1_0.Client(config);
+    }
+
+    public static void main(String[] args_) throws Exception {
+        java.util.List&lt;String&gt; args = java.util.Arrays.asList(args_);
+        com.aliyun.dingtalkpedia_1_0.Client client = Sample.createClient();
+        com.aliyun.dingtalkpedia_1_0.models.PediaWordsSearchHeaders pediaWordsSearchHeaders = new com.aliyun.dingtalkpedia_1_0.models.PediaWordsSearchHeaders();
+        pediaWordsSearchHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        com.aliyun.dingtalkpedia_1_0.models.PediaWordsSearchRequest pediaWordsSearchRequest = new com.aliyun.dingtalkpedia_1_0.models.PediaWordsSearchRequest()
+                .setWordName("企业百科")
+                .setUserId("121213213")
+                .setPageSize(1)
+                .setPageNumber(1)
+                .setStatus("1");
+        try {
+            client.pediaWordsSearchWithOptions(pediaWordsSearchRequest, pediaWordsSearchHeaders, new com.aliyun.teautil.models.RuntimeOptions());
+        } catch (TeaException err) {
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        } catch (Exception _err) {
+            TeaException err = new TeaException(_err.getMessage(), _err);
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        }        
+    }
+}</code></pre></div><input type="radio" name="check-figure-il7-wka-ngl" id="figure-il7-wka-ngl-python-tab" /><label for="figure-il7-wka-ngl-python-tab">Python</label><div class="codeblock-item"><pre id="codeblock-uiv-u8e-vnj" outputclass="language-python" code-type="xCode" data-tag="codeblock" class="pre codeblock language-python"><code># -*- coding: utf-8 -*-
+# This file is auto-generated, don't edit it. Thanks.
+import sys
+
+from typing import List
+
+from alibabacloud_dingtalk.pedia_1_0.client import Client as dingtalkpedia_1_0Client
+from alibabacloud_tea_openapi import models as open_api_models
+from alibabacloud_dingtalk.pedia_1_0 import models as dingtalkpedia__1__0_models
+from alibabacloud_tea_util import models as util_models
+from alibabacloud_tea_util.client import Client as UtilClient
+
+
+class Sample:
+    def __init__(self):
+        pass
+
+    @staticmethod
+    def create_client() -&gt; dingtalkpedia_1_0Client:
+        """
+        使用 Token 初始化账号Client
+        @return: Client
+        @throws Exception
+        """
+        config = open_api_models.Config()
+        config.protocol = 'https'
+        config.region_id = 'central'
+        return dingtalkpedia_1_0Client(config)
+
+    @staticmethod
+    def main(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        pedia_words_search_headers = dingtalkpedia__1__0_models.PediaWordsSearchHeaders()
+        pedia_words_search_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        pedia_words_search_request = dingtalkpedia__1__0_models.PediaWordsSearchRequest(
+            word_name='企业百科',
+            user_id='121213213',
+            page_size=1,
+            page_number=1,
+            status='1'
+        )
+        try:
+            client.pedia_words_search_with_options(pedia_words_search_request, pedia_words_search_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+    @staticmethod
+    async def main_async(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        pedia_words_search_headers = dingtalkpedia__1__0_models.PediaWordsSearchHeaders()
+        pedia_words_search_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        pedia_words_search_request = dingtalkpedia__1__0_models.PediaWordsSearchRequest(
+            word_name='企业百科',
+            user_id='121213213',
+            page_size=1,
+            page_number=1,
+            status='1'
+        )
+        try:
+            await client.pedia_words_search_with_options_async(pedia_words_search_request, pedia_words_search_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+
+if __name__ == '__main__':
+    Sample.main(sys.argv[1:])</code></pre></div><input type="radio" name="check-figure-il7-wka-ngl" id="figure-il7-wka-ngl-php-tab" /><label for="figure-il7-wka-ngl-php-tab">PHP</label><div class="codeblock-item"><pre id="codeblock-nln-w1y-ovg" outputclass="language-php" code-type="xCode" data-tag="codeblock" class="pre codeblock language-php"><code>&lt;?php
+
+// This file is auto-generated, don't edit it. Thanks.
+namespace AlibabaCloud\SDK\Sample;
+
+use AlibabaCloud\SDK\Dingtalk\Vpedia_1_0\Dingtalk;
+use \Exception;
+use AlibabaCloud\Tea\Exception\TeaError;
+use AlibabaCloud\Tea\Utils\Utils;
+
+use Darabonba\OpenApi\Models\Config;
+use AlibabaCloud\SDK\Dingtalk\Vpedia_1_0\Models\PediaWordsSearchHeaders;
+use AlibabaCloud\SDK\Dingtalk\Vpedia_1_0\Models\PediaWordsSearchRequest;
+use AlibabaCloud\Tea\Utils\Utils\RuntimeOptions;
+
+class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Dingtalk Client
+     */
+    public static function createClient(){
+        $config = new Config([]);
+        $config-&gt;protocol = "https";
+        $config-&gt;regionId = "central";
+        return new Dingtalk($config);
+    }
+
+    /**
+     * @param string[] $args
+     * @return void
+     */
+    public static function main($args){
+        $client = self::createClient();
+        $pediaWordsSearchHeaders = new PediaWordsSearchHeaders([]);
+        $pediaWordsSearchHeaders-&gt;xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        $pediaWordsSearchRequest = new PediaWordsSearchRequest([
+            "wordName" =&gt; "企业百科",
+            "userId" =&gt; "121213213",
+            "pageSize" =&gt; 1,
+            "pageNumber" =&gt; 1,
+            "status" =&gt; "1"
+        ]);
+        try {
+            $client-&gt;pediaWordsSearchWithOptions($pediaWordsSearchRequest, $pediaWordsSearchHeaders, new RuntimeOptions([]));
+        }
+        catch (Exception $err) {
+            if (!($err instanceof TeaError)) {
+                $err = new TeaError([], $err-&gt;getMessage(), $err-&gt;getCode(), $err);
+            }
+            if (!Utils::empty_($err-&gt;code) &amp;&amp; !Utils::empty_($err-&gt;message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+        }
+    }
+}
+$path = __DIR__ . \DIRECTORY_SEPARATOR . '..' . \DIRECTORY_SEPARATOR . 'vendor' . \DIRECTORY_SEPARATOR . 'autoload.php';
+if (file_exists($path)) {
+    require_once $path;
+}
+Sample::main(array_slice($argv, 1));</code></pre></div><input type="radio" name="check-figure-il7-wka-ngl" id="figure-il7-wka-ngl-go-tab" /><label for="figure-il7-wka-ngl-go-tab">Go</label><div class="codeblock-item"><pre id="codeblock-ghd-ybt-mgo" outputclass="language-go" code-type="xCode" data-tag="codeblock" class="pre codeblock language-go"><code>// This file is auto-generated, don't edit it. Thanks.
+package main
+
+import (
+  "os"
+  util  "github.com/alibabacloud-go/tea-utils/v2/service"
+  dingtalkpedia_1_0  "github.com/alibabacloud-go/dingtalk/pedia_1_0"
+  openapi  "github.com/alibabacloud-go/darabonba-openapi/v2/client"
+  "github.com/alibabacloud-go/tea/tea"
+)
+
+
+/**
+ * 使用 Token 初始化账号Client
+ * @return Client
+ * @throws Exception
+ */
+func CreateClient () (_result *dingtalkpedia_1_0.Client, _err error) {
+  config := &amp;openapi.Config{}
+  config.Protocol = tea.String("https")
+  config.RegionId = tea.String("central")
+  _result = &amp;dingtalkpedia_1_0.Client{}
+  _result, _err = dingtalkpedia_1_0.NewClient(config)
+  return _result, _err
+}
+
+func _main (args []*string) (_err error) {
+  client, _err := CreateClient()
+  if _err != nil {
+    return _err
+  }
+
+  pediaWordsSearchHeaders := &amp;dingtalkpedia_1_0.PediaWordsSearchHeaders{}
+  pediaWordsSearchHeaders.XAcsDingtalkAccessToken = tea.String("&lt;your access token&gt;")
+  pediaWordsSearchRequest := &amp;dingtalkpedia_1_0.PediaWordsSearchRequest{
+    WordName: tea.String("企业百科"),
+    UserId: tea.String("121213213"),
+    PageSize: tea.Int32(1),
+    PageNumber: tea.Int32(1),
+    Status: tea.String("1"),
+  }
+  tryErr := func()(_e error) {
+    defer func() {
+      if r := tea.Recover(recover()); r != nil {
+        _e = r
+      }
+    }()
+    _, _err = client.PediaWordsSearchWithOptions(pediaWordsSearchRequest, pediaWordsSearchHeaders, &amp;util.RuntimeOptions{})
+    if _err != nil {
+      return _err
+    }
+
+    return nil
+  }()
+
+  if tryErr != nil {
+    var err = &amp;tea.SDKError{}
+    if _t, ok := tryErr.(*tea.SDKError); ok {
+      err = _t
+    } else {
+      err.Message = tea.String(tryErr.Error())
+    }
+    if !tea.BoolValue(util.Empty(err.Code)) &amp;&amp; !tea.BoolValue(util.Empty(err.Message)) {
+      // err 中含有 code 和 message 属性，可帮助开发定位问题
+    }
+
+  }
+  return _err
+}
+
+
+func main() {
+  err := _main(tea.StringSlice(os.Args[1:]))
+  if err != nil {
+    panic(err)
+  }
+}</code></pre></div><input type="radio" name="check-figure-il7-wka-ngl" id="figure-il7-wka-ngl-nodejs-tab" /><label for="figure-il7-wka-ngl-nodejs-tab">Node.js</label><div class="codeblock-item"><pre id="codeblock-l9o-bgp-ked" outputclass="language-nodejs" code-type="xCode" data-tag="codeblock" class="pre codeblock language-nodejs"><code>// This file is auto-generated, don't edit it
+import Util, * as $Util from '@alicloud/tea-util';
+import dingtalkpedia_1_0, * as $dingtalkpedia_1_0 from '@alicloud/dingtalk/pedia_1_0';
+import OpenApi, * as $OpenApi from '@alicloud/openapi-client';
+import * as $tea from '@alicloud/tea-typescript';
+
+
+export default class Client {
+
+  /**
+   * 使用 Token 初始化账号Client
+   * @return Client
+   * @throws Exception
+   */
+  static createClient(): dingtalkpedia_1_0 {
+    let config = new $OpenApi.Config({ });
+    config.protocol = "https";
+    config.regionId = "central";
+    return new dingtalkpedia_1_0(config);
+  }
+
+  static async main(args: string[]): Promise&lt;void&gt; {
+    let client = Client.createClient();
+    let pediaWordsSearchHeaders = new $dingtalkpedia_1_0.PediaWordsSearchHeaders({ });
+    pediaWordsSearchHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+    let pediaWordsSearchRequest = new $dingtalkpedia_1_0.PediaWordsSearchRequest({
+      wordName: "企业百科",
+      userId: "121213213",
+      pageSize: 1,
+      pageNumber: 1,
+      status: "1",
+    });
+    try {
+      await client.pediaWordsSearchWithOptions(pediaWordsSearchRequest, pediaWordsSearchHeaders, new $Util.RuntimeOptions({ }));
+    } catch (err) {
+      if (!Util.empty(err.code) &amp;&amp; !Util.empty(err.message)) {
+        // err 中含有 code 和 message 属性，可帮助开发定位问题
+      }
+
+    }    
+  }
+
+}
+
+Client.main(process.argv.slice(2));</code></pre></div><input type="radio" name="check-figure-il7-wka-ngl" id="figure-il7-wka-ngl-csharp-tab" /><label for="figure-il7-wka-ngl-csharp-tab">C#</label><div class="codeblock-item"><pre id="codeblock-ckv-ytd-6om" outputclass="language-csharp" code-type="xCode" data-tag="codeblock" class="pre codeblock language-csharp"><code>// This file is auto-generated, don't edit it. Thanks.
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
+
+using Tea;
+using Tea.Utils;
+
+
+namespace AlibabaCloud.SDK.Sample
+{
+    public class Sample 
+    {
+
+        /**
+         * 使用 Token 初始化账号Client
+         * @return Client
+         * @throws Exception
+         */
+        public static AlibabaCloud.SDK.Dingtalkpedia_1_0.Client CreateClient()
+        {
+            AlibabaCloud.OpenApiClient.Models.Config config = new AlibabaCloud.OpenApiClient.Models.Config();
+            config.Protocol = "https";
+            config.RegionId = "central";
+            return new AlibabaCloud.SDK.Dingtalkpedia_1_0.Client(config);
+        }
+
+        public static void Main(string[] args)
+        {
+            AlibabaCloud.SDK.Dingtalkpedia_1_0.Client client = CreateClient();
+            AlibabaCloud.SDK.Dingtalkpedia_1_0.Models.PediaWordsSearchHeaders pediaWordsSearchHeaders = new AlibabaCloud.SDK.Dingtalkpedia_1_0.Models.PediaWordsSearchHeaders();
+            pediaWordsSearchHeaders.XAcsDingtalkAccessToken = "&lt;your access token&gt;";
+            AlibabaCloud.SDK.Dingtalkpedia_1_0.Models.PediaWordsSearchRequest pediaWordsSearchRequest = new AlibabaCloud.SDK.Dingtalkpedia_1_0.Models.PediaWordsSearchRequest
+            {
+                WordName = "企业百科",
+                UserId = "121213213",
+                PageSize = 1,
+                PageNumber = 1,
+                Status = "1",
+            };
+            try
+            {
+                client.PediaWordsSearchWithOptions(pediaWordsSearchRequest, pediaWordsSearchHeaders, new AlibabaCloud.TeaUtil.Models.RuntimeOptions());
+            }
+            catch (TeaException err)
+            {
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+            catch (Exception _err)
+            {
+                TeaException err = new TeaException(new Dictionary&lt;string, object&gt;
+                {
+                    { "message", _err.Message }
+                });
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+        }
+
+
+    }
+}</code></pre></div></div></section></section><section id="section-response-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-response-1" data-tag="h2" class="h2">响应</h2><section id="section-response-parameter" class="section"><h3 data-tag="h3" id="h2-90j-vck-58t" class="h3 title">响应体</h3><table id="890c60fab8kje" tablewidth="710" tablecolswidth="213 142 355" autofit="false" class="table"><colgroup colwidth="0.9*" style="width:30.00%"></colgroup><colgroup colwidth="0.6*" style="width:20.00%"></colgroup><colgroup colwidth="1.5*" style="width:50.00%"></colgroup><tbody class="tbody"><tr id="3970b02f65bga"><td id="ce835d58b38ru" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="93d8c79669v28">名称</p></td><td id="078e249697knk" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="c4f87a7748o7q">类型</p></td><td id="fe6bafdcdah3a" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="98bd039037lzp">描述</p></td></tr><tr outputclass="row row-level-1 has-child" id="32456de66bpii" class="row row-level-1 has-child"><td id="7de545be20f4w" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="deab622a46s5p">data</p></td><td id="d99d67909abtx" rowspan="1" colspan="1"><p id="102b676a32sv2">Array</p></td><td id="d4a0e37bf3bdb" rowspan="1" colspan="1"><p id="32b17dd27crgm">词条详情列表。</p></td></tr><tr outputclass="row row-level-1-1" id="88cd4634few07" class="row row-level-1-1"><td id="7376dd9582e56" rowspan="1" colspan="1"><p id="6309bcabfb8mf">wordName</p></td><td id="a6e0948469bjf" rowspan="1" colspan="1"><p id="92840d28c76ql">String</p></td><td id="ff0a7b174601d" rowspan="1" colspan="1"><p id="bddb35647ebtq">词条名称。</p></td></tr><tr outputclass="row row-level-1-2" id="d9b1d3c94exc2" class="row row-level-1-2"><td id="773791fd99rcb" rowspan="1" colspan="1"><p id="e3bf17a098see">uuid</p></td><td id="1a7e0c3d6es2z" rowspan="1" colspan="1"><p id="4e8205debfjl1">Long</p></td><td id="5ea90da06437a" rowspan="1" colspan="1"><p id="2bda35bdb1euq">当前词条对应的主键ID。</p></td></tr><tr outputclass="row row-level-1-3" id="e257ca54a8dbd" class="row row-level-1-3"><td id="8bb1f06518ltf" rowspan="1" colspan="1"><p id="163533bebexr3">gmtCreate</p></td><td id="6a034dc8729cg" rowspan="1" colspan="1"><p id="bee75e5d46km4">Long</p></td><td id="633cefb68c0nk" rowspan="1" colspan="1"><p id="b91e6cd20b15k">词条创建时间戳，单位毫秒。</p></td></tr><tr outputclass="row row-level-1-4" id="de397c6d309mq" class="row row-level-1-4"><td id="38ce96a6287kc" rowspan="1" colspan="1"><p id="5964098b52svs">gmtModify</p></td><td id="ed2826f322pu9" rowspan="1" colspan="1"><p id="ce56f2019bysy">Long</p></td><td id="ee6ff61d4628a" rowspan="1" colspan="1"><p id="1763c62bd8kuq">词条修改时间戳，单位毫秒。</p></td></tr><tr outputclass="row row-level-1-5" id="33d1f96b3f3xs" class="row row-level-1-5"><td id="864652e563w9v" rowspan="1" colspan="1"><p id="69fdfc4758rfe">wordAlias</p></td><td id="5989e49cd9009" rowspan="1" colspan="1"><p id="14d211f0cehyg">Array of String</p></td><td id="ab91ad4b1808a" rowspan="1" colspan="1"><p id="cd9f00c2ff47u">词条别名列表。</p></td></tr><tr outputclass="row row-level-1-6" id="4563fd8bad4np" class="row row-level-1-6"><td id="484906a882gfe" rowspan="1" colspan="1"><p id="efb4890cd26h0">highLightWordAlias</p></td><td id="7359a062c3puc" rowspan="1" colspan="1"><p id="32269b63e4fu8">Array of String</p></td><td id="6ae6ea5328xci" rowspan="1" colspan="1"><p id="e1e8438eccfqi">词条中可高亮的别名列表。</p></td></tr><tr outputclass="row row-level-1-7 has-child" id="ca3ed0e51ekj4" class="row row-level-1-7 has-child"><td id="f4acb3ea11vhy" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="ea0a77e0203xs">relatedLink</p></td><td id="b2c5c7cf2ae1c" rowspan="1" colspan="1"><p id="827853f1c7s3b">Array</p></td><td id="e228c31543bw1" rowspan="1" colspan="1"><p id="cf3bba6ebdd5i">相关链接列表。</p></td></tr><tr outputclass="row row-level-1-7-1" id="cb54f389b2827" class="row row-level-1-7-1"><td id="fb8fb3d6b2phg" rowspan="1" colspan="1"><p id="93efc2b211yo7">name</p></td><td id="a7a7cda2f6yqr" rowspan="1" colspan="1"><p id="cb286a688du66">String</p></td><td id="038ee85e838vz" rowspan="1" colspan="1"><p id="b201a4530e7kt">链接名称。</p></td></tr><tr outputclass="row row-level-1-7-2" id="38eff5c789ajm" class="row row-level-1-7-2"><td id="84081d38be3ru" rowspan="1" colspan="1"><p id="2dcf2cce7eb6y">type</p></td><td id="bb2ad2146b1ke" rowspan="1" colspan="1"><p id="2a298bd72f90k">String</p></td><td id="17b7a42b2chs3" rowspan="1" colspan="1"><p id="eaabc4d194bk5">链接类型。</p></td></tr><tr outputclass="row row-level-1-7-3" id="968c51a112qgk" class="row row-level-1-7-3"><td id="c6e5932d35wnv" rowspan="1" colspan="1"><p id="7fa20aa54bq9e">link</p></td><td id="24dd0b9d4c413" rowspan="1" colspan="1"><p id="5acabfd666h4l">String</p></td><td id="979ff9be331ee" rowspan="1" colspan="1"><p id="8f11ac528dr6r">链接地址。</p></td></tr><tr outputclass="row row-level-1-8 has-child" id="216d3747453dv" class="row row-level-1-8 has-child"><td id="76342cbc0agj8" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="9fff63e922drr">relatedDoc</p></td><td id="f4b2fb59c8rdu" rowspan="1" colspan="1"><p id="3637a57b19upl">Array</p></td><td id="cc6c3c35975vv" rowspan="1" colspan="1"><p id="4b50656dcdbkt">相关文档链接列表。</p></td></tr><tr outputclass="row row-level-1-8-1" id="0d53336277x2n" class="row row-level-1-8-1"><td id="871e3a3fc01ow" rowspan="1" colspan="1"><p id="54599cfd42248">name</p></td><td id="5522096a768nl" rowspan="1" colspan="1"><p id="0adcdebfb5xla">String</p></td><td id="2a8949e8cchnh" rowspan="1" colspan="1"><p id="642d33bedbyhc">在线文档的名称。</p></td></tr><tr outputclass="row row-level-1-8-2" id="2004e5d9413je" class="row row-level-1-8-2"><td id="914dd8d5a6af3" rowspan="1" colspan="1"><p id="b0fecf5c29o2q">type</p></td><td id="cad396ec61nqn" rowspan="1" colspan="1"><p id="38c7f76965g9l">String</p></td><td id="1e0732e183sf6" rowspan="1" colspan="1"><p id="33044bdfe7x57">在线文档的类型：</p><ul id="fc39bc02fdn9s"><li id="af0c563afcxir"><p id="43a9b7792c6rb">adoc：纯文本</p></li><li id="ba37e7f6257xr"><p id="a3ffde0965xyh">asheet：表格</p></li></ul></td></tr><tr outputclass="row row-level-1-8-3" id="154e819202ruu" class="row row-level-1-8-3"><td id="978bc63fe8kqz" rowspan="1" colspan="1"><p id="e3cfb13197kfg">link</p></td><td id="5726a973eemje" rowspan="1" colspan="1"><p id="d4785546ff0s8">String</p></td><td id="06e5b22adc4wm" rowspan="1" colspan="1"><p id="4b7c579c57tor">当前在线文档链接地址。</p></td></tr><tr outputclass="row row-level-1-9" id="91a9129f22i8x" class="row row-level-1-9"><td id="c454863d9bz7g" rowspan="1" colspan="1"><p id="a7419e914385v">creatorName</p></td><td id="099237c599reo" rowspan="1" colspan="1"><p id="8185cc24fecd5">String</p></td><td id="04d6264c60ywv" rowspan="1" colspan="1"><p id="1d63e082c2h1p">创建者的名称。</p></td></tr><tr outputclass="row row-level-1-10" id="47f4918f28x2p" class="row row-level-1-10"><td id="87c0f468deh0c" rowspan="1" colspan="1"><p id="945d54294awyz">updaterName</p></td><td id="b9dc2b0db0iv8" rowspan="1" colspan="1"><p id="810244ca4e1yz">String</p></td><td id="3d78ff858do27" rowspan="1" colspan="1"><p id="a4a9df4d1af0v">更新者名称。</p></td></tr><tr outputclass="row row-level-1-11" id="0b82c144cd70o" class="row row-level-1-11"><td id="519be304318yp" rowspan="1" colspan="1"><p id="2aad8327dajsu">approveName</p></td><td id="83eed5f739hxj" rowspan="1" colspan="1"><p id="858bec687f8r3">String</p></td><td id="2ede662340nxd" rowspan="1" colspan="1"><p id="0ca568b757jzu">审核者名称。</p></td></tr><tr outputclass="row row-level-1-12" id="e58ad2f8b0sqs" class="row row-level-1-12"><td id="6dec609bcda2g" rowspan="1" colspan="1"><p id="b1f73552adqnv">wordParaphrase</p></td><td id="a42df980abgg1" rowspan="1" colspan="1"><p id="f9bf8f34cfet1">String</p></td><td id="d0eaa42563dgb" rowspan="1" colspan="1"><p id="77cdb658510jj">词条富文本释义。</p></td></tr><tr outputclass="row row-level-1-13" id="c07f2ca35d001" class="row row-level-1-13"><td id="61bea7b829xsm" rowspan="1" colspan="1"><p id="b0dab4e26d2s4">simpleWordParaphrase</p></td><td id="64ae240f5aq1w" rowspan="1" colspan="1"><p id="7b9ab2fb6f07j">String</p></td><td id="2be9436cf7g90" rowspan="1" colspan="1"><p id="d30eb89d50i4n">词条非富文本释义。</p></td></tr><tr outputclass="row row-level-1-14" id="32beb4d135i4g" class="row row-level-1-14"><td id="003504f1bb510" rowspan="1" colspan="1"><p id="a016ccedb6b8a">contacts</p></td><td id="99d830ecdakt5" rowspan="1" colspan="1"><p id="43717aac74nyw">Array of String</p></td><td id="f3fad2f94316p" rowspan="1" colspan="1"><p id="58b0d5c085yhz">相关联系人列表。</p></td></tr><tr outputclass="row row-level-1-15" id="804dd4c927owd" class="row row-level-1-15"><td id="6c817df4c1ngk" rowspan="1" colspan="1"><p id="fd5d0969ebe9s">tagsList</p></td><td id="2670602aff1g3" rowspan="1" colspan="1"><p id="01f2b2ead1i51">Array of String</p></td><td id="b1ff063892l2f" rowspan="1" colspan="1"><p id="67affae7840gu">分类列表。</p></td></tr><tr outputclass="row row-level-1-16 has-child" id="770b3fa7d749p" class="row row-level-1-16 has-child"><td id="b5ad9af9e96u8" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="03c81f5d86zua">appLink</p></td><td id="11f1fd8599yu8" rowspan="1" colspan="1"><p id="f575007315q4w">Array</p></td><td id="0de4351dbd989" rowspan="1" colspan="1"><p id="14a7585f56zze">相关应用列表。</p></td></tr><tr outputclass="row row-level-1-16-1" id="74861499c4f3q" class="row row-level-1-16-1"><td id="39f296d734n4r" rowspan="1" colspan="1"><p id="6136c3ad5cm0f">appName</p></td><td id="4389529208opi" rowspan="1" colspan="1"><p id="d5c0f372948if">String</p></td><td id="f5c31a6a0277i" rowspan="1" colspan="1"><p id="dabd2294cdx3j">应用名称。</p></td></tr><tr outputclass="row row-level-1-16-2" id="c17642c232s9q" class="row row-level-1-16-2"><td id="9800b8e37733t" rowspan="1" colspan="1"><p id="d1e28d0fb34pj">pcLink</p></td><td id="9b17747027en6" rowspan="1" colspan="1"><p id="552e80fe229lw">String</p></td><td id="ce76550a91gs2" rowspan="1" colspan="1"><p id="b1bb4c7ca50jg">PC端链接地址。</p></td></tr><tr outputclass="row row-level-1-16-3" id="9574f6898bll3" class="row row-level-1-16-3"><td id="4663fc17e0w38" rowspan="1" colspan="1"><p id="e0508ae4ef057">phoneLink</p></td><td id="38f493a2c7cbx" rowspan="1" colspan="1"><p id="1570604c7amg7">String</p></td><td id="d84b9fb510ka8" rowspan="1" colspan="1"><p id="7cd87cd635151">手机端地址。</p></td></tr><tr outputclass="row row-level-1-16-4" id="eb6d83f2d1o97" class="row row-level-1-16-4"><td id="0b909b7b91lbw" rowspan="1" colspan="1"><p id="fb7ff2d025nvb">iconLink</p></td><td id="ba9ebd953662x" rowspan="1" colspan="1"><p id="d134f1d6f2s9p">String</p></td><td id="6577a97707kt2" rowspan="1" colspan="1"><p id="ed37dd2be8o81">应用图标地址。</p></td></tr><tr outputclass="row row-level-1-17" id="429f6f4badcfn" class="row row-level-1-17"><td id="e77faac2ee5cq" rowspan="1" colspan="1"><p id="f8c22f6af2yle">imHighLight</p></td><td id="dcda225a9cxg6" rowspan="1" colspan="1"><p id="c479643bac05l">Boolean</p></td><td id="5fa19db78cxqr" rowspan="1" colspan="1"><p id="995d0ad592ycs">该词条内部群是否高亮：</p><ul id="537fcba1eezza"><li id="b5a651ad7fjtv"><p id="dac692ba8c95k">true：高亮</p></li><li id="56c6150690cu7"><p id="3688e08838y2m">false：不高亮</p></li></ul></td></tr><tr outputclass="row row-level-1-18" id="1bcbae973f2of" class="row row-level-1-18"><td id="65b7109f68osk" rowspan="1" colspan="1"><p id="212af7e1677yn">simHighLight</p></td><td id="28d3cbb205jlr" rowspan="1" colspan="1"><p id="73c9b688c0mfp">Boolean</p></td><td id="5da62ac92d2tb" rowspan="1" colspan="1"><p id="26b28e68acngl">该词条服务群是否分词：</p><ul id="08235375671bu"><li id="15120c2cacxfn"><p id="0ea4b318355td">true：高亮</p></li><li id="9a6863c9f4n8l"><p id="9a969fa656t3l">false：不高亮</p></li></ul></td></tr><tr outputclass="row row-level-1-19 has-child" id="5235e163ffvk6" class="row row-level-1-19 has-child"><td id="17cfd0a9b4kcf" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="85142fb2fer7t">picList</p></td><td id="b50b4976dd3lc" rowspan="1" colspan="1"><p id="478076e1c9qhd">Array</p></td><td id="8a2ad3caeeq1u" rowspan="1" colspan="1"><p id="3e7c677312pdz">相关图片列表。</p></td></tr><tr outputclass="row row-level-1-19-1" id="ee25cd672bff9" class="row row-level-1-19-1"><td id="d361d4ca70k9y" rowspan="1" colspan="1"><p id="9b96209667mj7">mediaIdUrl</p></td><td id="a6ff43957er7v" rowspan="1" colspan="1"><p id="c9ec642d05ukp">String</p></td><td id="964550e0bfa2e" rowspan="1" colspan="1"><p id="3e589fe97evb1">相关图片地址。</p></td></tr><tr outputclass="row row-level-1-20 has-child" id="1c5e9069cdlvc" class="row row-level-1-20 has-child"><td id="05134e12f41vy" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="68ec41fd4etme">contactList</p></td><td id="a19e5758ddts6" rowspan="1" colspan="1"><p id="322f45d1bfdna">Array</p></td><td id="f7b1a77bbf738" rowspan="1" colspan="1"><p id="3dc32126acji3">相关联系人列表。</p></td></tr><tr outputclass="row row-level-1-20-1" id="9c25e3433aits" class="row row-level-1-20-1"><td id="49a1652044o97" rowspan="1" colspan="1"><p id="50ab37fd38tvn">userId</p></td><td id="208c0fbc2ddr6" rowspan="1" colspan="1"><p id="86df8b1857s1f">String</p></td><td id="f42fe6ef5ex2a" rowspan="1" colspan="1"><p id="7351424f34p4e">员工的userId。</p></td></tr><tr outputclass="row row-level-1-20-2" id="a0e31319cd5fa" class="row row-level-1-20-2"><td id="b9214b5fee7ua" rowspan="1" colspan="1"><p id="533ed00405kbu">nickName</p></td><td id="a6161817ca50g" rowspan="1" colspan="1"><p id="02588f3da0udj">String</p></td><td id="df1bf119e4kfa" rowspan="1" colspan="1"><p id="6b64fdf89fmal">员工的名字。</p></td></tr><tr outputclass="row row-level-1-20-3" id="7f90e9b477e2j" class="row row-level-1-20-3"><td id="3cf55a73e7vk2" rowspan="1" colspan="1"><p id="76ac26dae8cu4">avatarMediaId</p></td><td id="5b68426347shf" rowspan="1" colspan="1"><p id="a1175ee528d0n">String</p></td><td id="8fb6fce0dbpoi" rowspan="1" colspan="1"><p id="5053be00e3egv">员工头像。</p></td></tr><tr outputclass="row row-level-1-21" id="7045caf0d7dvn" class="row row-level-1-21"><td id="1ea693a0ccbb1" rowspan="1" colspan="1"><p id="c333f892e2jfe">userId</p></td><td id="6b58d4d01bbbs" rowspan="1" colspan="1"><p id="e7f7c91aa78f1">String</p></td><td id="1d2aa39593bs7" rowspan="1" colspan="1"><p id="3c14720a0an6h">员工的userId。</p></td></tr><tr outputclass="row row-level-1-22" id="14a984f81cfy4" class="row row-level-1-22"><td id="01540ab769bfy" rowspan="1" colspan="1"><p id="dccd5a8575ghn">parentUuid</p></td><td id="d5160f1fc22o0" rowspan="1" colspan="1"><p id="02f8a63b70qn5">Long</p></td><td id="f2fe67cbf8l66" rowspan="1" colspan="1"><p id="1297b04114f9n">当前词条的父类ID，审核通过的该字段为空。</p></td></tr><tr outputclass="row row-level-2" id="b52f9420c4euy" class="row row-level-2"><td id="04b5703729qyh" rowspan="1" colspan="1"><p id="2cc932b8097ud">success</p></td><td id="5b7f85cea71sd" rowspan="1" colspan="1"><p id="e5e3f25ac04h8">Boolean</p></td><td id="23ea545ab91xm" rowspan="1" colspan="1"><p id="11479472c4oqe">请求是否成功。</p></td></tr></tbody></table></section><section id="section-response-body-example" class="section"><h3 id="h3-response-body-example" data-tag="h3" class="h3">响应体示例</h3><pre id="16acd6af23u8a" outputclass="language-json" code-type="xCode" data-tag="codeblock" class="pre codeblock language-json"><code>HTTP/1.1 200 OK
+Content-Type:application/json
+
+{
+  "data" : [ {
+    "wordName" : "词条名称",
+    "uuid" : 12312321312,
+    "gmtCreate" : 312312312,
+    "gmtModify" : 3123123123,
+    "wordAlias" : [ "词条别名" ],
+    "highLightWordAlias" : [ "词条别名" ],
+    "relatedLink" : [ {
+      "name" : "相关链接",
+      "type" : "xxxxx",
+      "link" : "https://example.com"
+    } ],
+    "relatedDoc" : [ {
+      "name" : "相关文档",
+      "type" : "adoc",
+      "link" : "https://example.com"
+    } ],
+    "creatorName" : "创建人",
+    "updaterName" : "更新人",
+    "approveName" : "审核人",
+    "wordParaphrase" : "释义",
+    "simpleWordParaphrase" : "非富文本释义",
+    "contacts" : [ "联系人" ],
+    "tagsList" : [ "分类" ],
+    "appLink" : [ {
+      "appName" : "相关应用",
+      "pcLink" : "https://example.com",
+      "phoneLink" : "https://example.com",
+      "iconLink" : "https://example.com"
+    } ],
+    "imHighLight" : true,
+    "simHighLight" : true,
+    "picList" : [ {
+      "mediaIdUrl" : "https://example.com"
+    } ],
+    "contactList" : [ {
+      "userId" : "1232343",
+      "nickName" : "小钉",
+      "avatarMediaId" : "@12313"
+    } ],
+    "userId" : "312312312",
+    "parentUuid" : 1231312312
+  } ],
+  "success" : true
+}</code></pre></section><section id="section-error-code-1" class="section"><h3 id="h3-error-code-1" data-tag="h3" class="h3">错误码</h3><p data-tag="p" id="p-error-code-global-guide" class="p">若调用该接口报错，可根据错误信息在<a href="https://open.dingtalk.com/document/development/server-api-error-codes-1" id="a-error-code-global-guide">全局错误码</a>文档中查找解决方案。</p><table id="fd37b8898bv0f" tablewidth="709" tablecolswidth="142 177 177 213" autofit="false" class="table"><colgroup colwidth="0.8*" style="width:20.03%"></colgroup><colgroup colwidth="1*" style="width:24.96%"></colgroup><colgroup colwidth="1*" style="width:24.96%"></colgroup><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><tbody class="tbody"><tr id="fccd4c2efexx4"><td id="2fa6ffaea1duj" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="0edd783f6dgy0">HttpCode</p></td><td id="b71d3afeda0va" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="6ee7904dcapyc">错误码</p></td><td id="8b20a4b030ozi" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="211f5775b3e3u">错误信息</p></td><td id="4975aa40039ty" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="7cde19b29csks">说明</p></td></tr><tr id="3d1fa09d91u18"><td id="be3abc9a428zc" rowspan="1" colspan="1"><p id="d7e091690dz65">400</p></td><td id="038c73f81d7fc" rowspan="1" colspan="1"><p id="412ac72761xau">paramError.corpId</p></td><td id="b4cc6e86bd7fr" rowspan="1" colspan="1"><p id="4e42384349dnb">获取到的企业编号不能为空</p></td><td id="b723b91dbfkxq" rowspan="1" colspan="1"><p id="d97faf820fxi3">获取到的企业编号不能为空</p></td></tr><tr id="7e9d51a266mlm"><td id="2f7b688ef8gm4" rowspan="1" colspan="1"><p id="3dcc11ab2f9d2">400</p></td><td id="79decd31b8s73" rowspan="1" colspan="1"><p id="c455ca6c4cmtv">paramError.request</p></td><td id="3412c3e155o8w" rowspan="1" colspan="1"><p id="6ff4477d1cet3">请求的参数信息不能为空</p></td><td id="e29bf5743f43v" rowspan="1" colspan="1"><p id="3cf90adcbaj9l">请求的参数信息不能为空</p></td></tr><tr id="5490f2467dt3c"><td id="2ed336f357jqk" rowspan="1" colspan="1"><p id="4850c8add85z4">400</p></td><td id="55bac6f6d1d95" rowspan="1" colspan="1"><p id="d90c82d6a3r2d">paramError.pageSize</p></td><td id="4e8d4bd060y50" rowspan="1" colspan="1"><p id="f7360fbafdm9e">搜索接口的分页数pageSize必须传递</p></td><td id="69fc42524ea0t" rowspan="1" colspan="1"><p id="70560252d4lj0">搜索接口的分页数pageSize必须传递</p></td></tr><tr id="51ab7c4e7e0bq"><td id="8c34c4326fs8e" rowspan="1" colspan="1"><p id="37949da720hr3">400</p></td><td id="970b889afebwr" rowspan="1" colspan="1"><p id="ddc3fdcdd6s4h">paramError.userId</p></td><td id="acc2e876bac20" rowspan="1" colspan="1"><p id="b1007a323fliv">操作员工编号userId不能为空</p></td><td id="567e40ff296k9" rowspan="1" colspan="1"><p id="5356a15f20382">操作员工编号userId不能为空</p></td></tr><tr id="f918c9e043pti"><td id="1c5253b048mkj" rowspan="1" colspan="1"><p id="9d0a1a47d8rgw">400</p></td><td id="14421dfcb16go" rowspan="1" colspan="1"><p id="4dbfa1c918wb1">paramError.userId</p></td><td id="a3259e31dawxt" rowspan="1" colspan="1"><p id="649d96fd2bv09">操作员工编号userId填写错误未找到对应员工信息</p></td><td id="06e87f9fcfn7j" rowspan="1" colspan="1"><p id="4c35824de36ne">操作员工编号userId填写错误未找到对应员工信息</p></td></tr><tr id="447154aaachnv"><td id="bd6a88ab38vzm" rowspan="1" colspan="1"><p id="0e1b5e7e8813l">400</p></td><td id="d2856dce7fk28" rowspan="1" colspan="1"><p id="01d478a3f44jt">paramError.pageSize</p></td><td id="eb15c6c9e0cmp" rowspan="1" colspan="1"><p id="2802591896uwh">当前搜索pageSize数据大于默认值20</p></td><td id="d123efb6ceioe" rowspan="1" colspan="1"><p id="ec53e7c58553p">当前搜索pageSize数据大于默认值20</p></td></tr></tbody></table></section></section></div></main></body></html>

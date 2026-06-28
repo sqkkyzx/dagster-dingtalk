@@ -1,0 +1,357 @@
+<!DOCTYPE html><html><head><meta charset="utf8" / /><meta name="gmtModify" content="2025-09-12 17:18:48" / /><meta name="searchtitle" content="" / /><meta name="keywords" content="" / /><meta name="author" content="" / /><title>获取群内机器人列表</title><meta name="gmtModify" content="2026-06-05 13:49:07" / /></head><body data-tag="topic" id="doc-api-dingtalk-GetBotListInGroup" class="topic"><main id="05af10e0e7vig" data-init-id="doc-api-dingtalk_GetBotListInGroup"><h1 data-tag="title" id="h1-wv4-3w2-sx1" class="title">获取群内机器人列表</h1><p data-tag="shortdesc" id="af9004d7f2nh2" class="shortdesc">调用本接口获取群内机器人列表。</p><div data-tag="conbody" outputclass="icms-api-reference" class="icms-api-reference conbody"><section id="bc15f7634fvsg" class="section"><h2 id="0367f2a0bdtj0"><b>接口调用说明</b></h2><p id="47d08dd249rnl"><span style="color:rgb(24, 28, 31)">目前只支持获取企业内部机器人、第三方企业应用机器人，场景群机器人和公共模板机器人四种类型的机器人，其他类型的机器人均无法查询，如小钉。</span></p></section><section id="section-request-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-request-1" data-tag="h2" class="h2">请求</h2><section id="section-request-basic-info" class="section"><h3 id="heading-request-basic-info" data-tag="h3" class="h3">基本信息</h3><table id="46f1648751oni" tablewidth="648" tablecolswidth="216 432" autofit="false" class="table"><colgroup colwidth="0.67*" style="width:33.33%"></colgroup><colgroup colwidth="1.33*" style="width:66.67%"></colgroup><tbody class="tbody"><tr id="9e8ef878d6yqk"><td id="457c81f8036wk" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="2adaf9421ey07">字段</p></td><td id="cb988e3af1wjd" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="b2daacb70atn5">值</p></td></tr><tr id="dca3e9c94007k"><td id="8063f827f6uoz" rowspan="1" colspan="1"><p id="e454936a6a5rt">HTTP URL</p></td><td id="8f42cb1a17xe2" rowspan="1" colspan="1"><p id="fc7114753b8s4">https://api.dingtalk.com/v1.0/robot/groups/robots/query</p></td></tr><tr id="815c9855bej4t"><td id="65e04cbda2d65" rowspan="1" colspan="1"><p id="5342df9e8ey48">HTTP Method</p></td><td id="10ca069d0367o" rowspan="1" colspan="1"><p id="4f00bcc67ds8f">POST</p></td></tr><tr id="386df0224bdd7"><td id="88b677ad0bp0g" rowspan="1" colspan="1"><p id="397bbb3114cle">支持的应用类型</p></td><td id="1e196b77ef3tp" rowspan="1" colspan="1"><p id="153c2167695vq"><span data-tag="ph" id="ph-request-basic-app-type-apptype-0" class="ph ph-app-type" data-ph-raw-text="appType-企业内部应用">appType-企业内部应用</span></p></td></tr><tr id="e2cdbf5d666rd"><td id="a9b334eae80r1" rowspan="1" colspan="1"><p id="7a0555d105w5g">权限要求</p></td><td id="702100e441bue" rowspan="1" colspan="1"><p id="b09ef6c205vw8"><span data-tag="ph" id="ph-request-basic-permission-permission-qyapi-chat-manage-0" class="ph-permission ph" data-ph-raw-text="permission-qyapi_chat_manage-钉钉群基础信息管理权限" data-permission-id="permission-qyapi_chat_manage" data-permission-code="qyapi_chat_manage" data-permission-detail-api="/document/api/permission/detail" data-permission-query-param="code">permission-qyapi_chat_manage-钉钉群基础信息管理权限</span></p></td></tr></tbody></table></section><section id="section-request-header-parameter" class="section"><h3 data-tag="h3" id="h2-tkt-93k-puo" class="h3 title">请求头</h3><table id="21101424ac1ts" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="aba5ae38ebbot"><td id="3366bc286370a" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="49d69846e0xe8">名称</p></td><td id="84a2acf291d7s" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="bc27474ee0hrf">类型</p></td><td id="2d0a2a6f19y9e" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="70b2fb3cbfmat">是否必填</p></td><td id="104cea128cw8x" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="2340c6a103z2p">描述</p></td></tr><tr id="4b0d745b26lsk"><td id="4edcac4498xv1" rowspan="1" colspan="1"><p id="a96ead33157dv">x-acs-dingtalk-access-token</p></td><td id="d9607ca7281me" rowspan="1" colspan="1"><p id="9fce4a4583dyt">String</p></td><td id="5fe652e6eano4" rowspan="1" colspan="1"><p id="db39f095baxum">是</p></td><td id="5587f6ed1evzs" rowspan="1" colspan="1"><p id="662b2ce9a1i4i">调用该接口的访问凭证，通过调用<a href="https://open.dingtalk.com/document/development/obtain-the-access-token-of-an-internal-app#" id="ac80c36502b74" class="xref">获取企业内部应用的accessToken</a>接口获取。</p></td></tr></tbody></table></section><section id="section-request-body-parameter" class="section"><h3 data-tag="h3" id="h2-xrb-mdx-yui" class="h3 title">请求体</h3><table id="5764610877tzm" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="997ae33863lxy"><td id="25a292ef7c138" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="4eed513547o3r">名称</p></td><td id="e8026fb302l07" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="cca5a45e5e5to">类型</p></td><td id="e468a6d7e2zsz" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="90c274a1ee8v3">是否必填</p></td><td id="3de6851d6a9yj" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="dbc483cb4fd96">描述</p></td></tr><tr outputclass="row row-level-1" id="8124af55b77yy" class="row row-level-1"><td id="17fb675b60fhz" rowspan="1" colspan="1"><p id="8f6c5828889y3">openConversationId</p></td><td id="9081e183eb9nl" rowspan="1" colspan="1"><p id="0ce9f07598ixr">String</p></td><td id="0fbf40af4353l" rowspan="1" colspan="1"><p id="aad90b832fj9n">是</p></td><td id="14ff789e54k7a" rowspan="1" colspan="1"><p id="5df9d9a51fkfa">群ID：基于群模板创建的群，调用<a href="https://open.dingtalk.com/document/development/create-a-scene-group-v2#" id="d713649c5fon6" class="xref">创建群</a>接口获取<code data-tag="inlineCode" id="c13dce9b03yka" class="inlineCode">open_conversation_id</code>参数值。</p></td></tr></tbody></table></section><section id="section-request-body-example" class="section"><h3 id="h3-request-body-example" data-tag="h3" class="h3">请求示例</h3><div outputclass="tabbed-codeblock" data-tag="fig" id="figure-ozo-vri-j1g" class="tabbed-codeblock-box"><div class="tab-box"></div><input type="radio" name="check-figure-ozo-vri-j1g" id="figure-ozo-vri-j1g-HTTP-tab" checked="checked" /><label for="figure-ozo-vri-j1g-HTTP-tab">HTTP</label><div class="codeblock-item"><pre id="codeblock-cv5-lsm-pv6" outputclass="language-HTTP" code-type="xCode" data-tag="codeblock" class="pre codeblock language-HTTP"><code>POST /v1.0/robot/groups/robots/query HTTP/1.1
+Host:api.dingtalk.com
+x-acs-dingtalk-access-token:qkopsdangcfoonacviojsdjn
+Content-Type:application/json
+
+{
+  "openConversationId" : "cidjknasndcbaXXXXX"
+}</code></pre></div><input type="radio" name="check-figure-ozo-vri-j1g" id="figure-ozo-vri-j1g-java-tab" /><label for="figure-ozo-vri-j1g-java-tab">Java</label><div class="codeblock-item"><pre id="codeblock-ot0-ih1-ahd" outputclass="language-java" code-type="xCode" data-tag="codeblock" class="pre codeblock language-java"><code>// This file is auto-generated, don't edit it. Thanks.
+package com.aliyun.sample;
+
+import com.aliyun.tea.*;
+
+public class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Client
+     * @throws Exception
+     */
+    public static com.aliyun.dingtalkrobot_1_0.Client createClient() throws Exception {
+        com.aliyun.teaopenapi.models.Config config = new com.aliyun.teaopenapi.models.Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        return new com.aliyun.dingtalkrobot_1_0.Client(config);
+    }
+
+    public static void main(String[] args_) throws Exception {
+        java.util.List&lt;String&gt; args = java.util.Arrays.asList(args_);
+        com.aliyun.dingtalkrobot_1_0.Client client = Sample.createClient();
+        com.aliyun.dingtalkrobot_1_0.models.GetBotListInGroupHeaders getBotListInGroupHeaders = new com.aliyun.dingtalkrobot_1_0.models.GetBotListInGroupHeaders();
+        getBotListInGroupHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        com.aliyun.dingtalkrobot_1_0.models.GetBotListInGroupRequest getBotListInGroupRequest = new com.aliyun.dingtalkrobot_1_0.models.GetBotListInGroupRequest()
+                .setOpenConversationId("cidjknasndcbaXXXXX");
+        try {
+            client.getBotListInGroupWithOptions(getBotListInGroupRequest, getBotListInGroupHeaders, new com.aliyun.teautil.models.RuntimeOptions());
+        } catch (TeaException err) {
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        } catch (Exception _err) {
+            TeaException err = new TeaException(_err.getMessage(), _err);
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        }        
+    }
+}</code></pre></div><input type="radio" name="check-figure-ozo-vri-j1g" id="figure-ozo-vri-j1g-python-tab" /><label for="figure-ozo-vri-j1g-python-tab">Python</label><div class="codeblock-item"><pre id="codeblock-iuo-szj-rw9" outputclass="language-python" code-type="xCode" data-tag="codeblock" class="pre codeblock language-python"><code># -*- coding: utf-8 -*-
+# This file is auto-generated, don't edit it. Thanks.
+import sys
+
+from typing import List
+
+from alibabacloud_dingtalk.robot_1_0.client import Client as dingtalkrobot_1_0Client
+from alibabacloud_tea_openapi import models as open_api_models
+from alibabacloud_dingtalk.robot_1_0 import models as dingtalkrobot__1__0_models
+from alibabacloud_tea_util import models as util_models
+from alibabacloud_tea_util.client import Client as UtilClient
+
+
+class Sample:
+    def __init__(self):
+        pass
+
+    @staticmethod
+    def create_client() -&gt; dingtalkrobot_1_0Client:
+        """
+        使用 Token 初始化账号Client
+        @return: Client
+        @throws Exception
+        """
+        config = open_api_models.Config()
+        config.protocol = 'https'
+        config.region_id = 'central'
+        return dingtalkrobot_1_0Client(config)
+
+    @staticmethod
+    def main(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        get_bot_list_in_group_headers = dingtalkrobot__1__0_models.GetBotListInGroupHeaders()
+        get_bot_list_in_group_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        get_bot_list_in_group_request = dingtalkrobot__1__0_models.GetBotListInGroupRequest(
+            open_conversation_id='cidjknasndcbaXXXXX'
+        )
+        try:
+            client.get_bot_list_in_group_with_options(get_bot_list_in_group_request, get_bot_list_in_group_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+    @staticmethod
+    async def main_async(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        get_bot_list_in_group_headers = dingtalkrobot__1__0_models.GetBotListInGroupHeaders()
+        get_bot_list_in_group_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        get_bot_list_in_group_request = dingtalkrobot__1__0_models.GetBotListInGroupRequest(
+            open_conversation_id='cidjknasndcbaXXXXX'
+        )
+        try:
+            await client.get_bot_list_in_group_with_options_async(get_bot_list_in_group_request, get_bot_list_in_group_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+
+if __name__ == '__main__':
+    Sample.main(sys.argv[1:])</code></pre></div><input type="radio" name="check-figure-ozo-vri-j1g" id="figure-ozo-vri-j1g-php-tab" /><label for="figure-ozo-vri-j1g-php-tab">PHP</label><div class="codeblock-item"><pre id="codeblock-fgr-wae-90x" outputclass="language-php" code-type="xCode" data-tag="codeblock" class="pre codeblock language-php"><code>&lt;?php
+
+// This file is auto-generated, don't edit it. Thanks.
+namespace AlibabaCloud\SDK\Sample;
+
+use AlibabaCloud\SDK\Dingtalk\Vrobot_1_0\Dingtalk;
+use \Exception;
+use AlibabaCloud\Tea\Exception\TeaError;
+use AlibabaCloud\Tea\Utils\Utils;
+
+use Darabonba\OpenApi\Models\Config;
+use AlibabaCloud\SDK\Dingtalk\Vrobot_1_0\Models\GetBotListInGroupHeaders;
+use AlibabaCloud\SDK\Dingtalk\Vrobot_1_0\Models\GetBotListInGroupRequest;
+use AlibabaCloud\Tea\Utils\Utils\RuntimeOptions;
+
+class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Dingtalk Client
+     */
+    public static function createClient(){
+        $config = new Config([]);
+        $config-&gt;protocol = "https";
+        $config-&gt;regionId = "central";
+        return new Dingtalk($config);
+    }
+
+    /**
+     * @param string[] $args
+     * @return void
+     */
+    public static function main($args){
+        $client = self::createClient();
+        $getBotListInGroupHeaders = new GetBotListInGroupHeaders([]);
+        $getBotListInGroupHeaders-&gt;xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        $getBotListInGroupRequest = new GetBotListInGroupRequest([
+            "openConversationId" =&gt; "cidjknasndcbaXXXXX"
+        ]);
+        try {
+            $client-&gt;getBotListInGroupWithOptions($getBotListInGroupRequest, $getBotListInGroupHeaders, new RuntimeOptions([]));
+        }
+        catch (Exception $err) {
+            if (!($err instanceof TeaError)) {
+                $err = new TeaError([], $err-&gt;getMessage(), $err-&gt;getCode(), $err);
+            }
+            if (!Utils::empty_($err-&gt;code) &amp;&amp; !Utils::empty_($err-&gt;message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+        }
+    }
+}
+$path = __DIR__ . \DIRECTORY_SEPARATOR . '..' . \DIRECTORY_SEPARATOR . 'vendor' . \DIRECTORY_SEPARATOR . 'autoload.php';
+if (file_exists($path)) {
+    require_once $path;
+}
+Sample::main(array_slice($argv, 1));</code></pre></div><input type="radio" name="check-figure-ozo-vri-j1g" id="figure-ozo-vri-j1g-go-tab" /><label for="figure-ozo-vri-j1g-go-tab">Go</label><div class="codeblock-item"><pre id="codeblock-f3g-9bh-qpo" outputclass="language-go" code-type="xCode" data-tag="codeblock" class="pre codeblock language-go"><code>// This file is auto-generated, don't edit it. Thanks.
+package main
+
+import (
+  "os"
+  util  "github.com/alibabacloud-go/tea-utils/v2/service"
+  dingtalkrobot_1_0  "github.com/alibabacloud-go/dingtalk/robot_1_0"
+  openapi  "github.com/alibabacloud-go/darabonba-openapi/v2/client"
+  "github.com/alibabacloud-go/tea/tea"
+)
+
+
+/**
+ * 使用 Token 初始化账号Client
+ * @return Client
+ * @throws Exception
+ */
+func CreateClient () (_result *dingtalkrobot_1_0.Client, _err error) {
+  config := &amp;openapi.Config{}
+  config.Protocol = tea.String("https")
+  config.RegionId = tea.String("central")
+  _result = &amp;dingtalkrobot_1_0.Client{}
+  _result, _err = dingtalkrobot_1_0.NewClient(config)
+  return _result, _err
+}
+
+func _main (args []*string) (_err error) {
+  client, _err := CreateClient()
+  if _err != nil {
+    return _err
+  }
+
+  getBotListInGroupHeaders := &amp;dingtalkrobot_1_0.GetBotListInGroupHeaders{}
+  getBotListInGroupHeaders.XAcsDingtalkAccessToken = tea.String("&lt;your access token&gt;")
+  getBotListInGroupRequest := &amp;dingtalkrobot_1_0.GetBotListInGroupRequest{
+    OpenConversationId: tea.String("cidjknasndcbaXXXXX"),
+  }
+  tryErr := func()(_e error) {
+    defer func() {
+      if r := tea.Recover(recover()); r != nil {
+        _e = r
+      }
+    }()
+    _, _err = client.GetBotListInGroupWithOptions(getBotListInGroupRequest, getBotListInGroupHeaders, &amp;util.RuntimeOptions{})
+    if _err != nil {
+      return _err
+    }
+
+    return nil
+  }()
+
+  if tryErr != nil {
+    var err = &amp;tea.SDKError{}
+    if _t, ok := tryErr.(*tea.SDKError); ok {
+      err = _t
+    } else {
+      err.Message = tea.String(tryErr.Error())
+    }
+    if !tea.BoolValue(util.Empty(err.Code)) &amp;&amp; !tea.BoolValue(util.Empty(err.Message)) {
+      // err 中含有 code 和 message 属性，可帮助开发定位问题
+    }
+
+  }
+  return _err
+}
+
+
+func main() {
+  err := _main(tea.StringSlice(os.Args[1:]))
+  if err != nil {
+    panic(err)
+  }
+}</code></pre></div><input type="radio" name="check-figure-ozo-vri-j1g" id="figure-ozo-vri-j1g-nodejs-tab" /><label for="figure-ozo-vri-j1g-nodejs-tab">Node.js</label><div class="codeblock-item"><pre id="codeblock-ynf-eyn-zcr" outputclass="language-nodejs" code-type="xCode" data-tag="codeblock" class="pre codeblock language-nodejs"><code>// This file is auto-generated, don't edit it
+import Util, * as $Util from '@alicloud/tea-util';
+import dingtalkrobot_1_0, * as $dingtalkrobot_1_0 from '@alicloud/dingtalk/robot_1_0';
+import OpenApi, * as $OpenApi from '@alicloud/openapi-client';
+import * as $tea from '@alicloud/tea-typescript';
+
+
+export default class Client {
+
+  /**
+   * 使用 Token 初始化账号Client
+   * @return Client
+   * @throws Exception
+   */
+  static createClient(): dingtalkrobot_1_0 {
+    let config = new $OpenApi.Config({ });
+    config.protocol = "https";
+    config.regionId = "central";
+    return new dingtalkrobot_1_0(config);
+  }
+
+  static async main(args: string[]): Promise&lt;void&gt; {
+    let client = Client.createClient();
+    let getBotListInGroupHeaders = new $dingtalkrobot_1_0.GetBotListInGroupHeaders({ });
+    getBotListInGroupHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+    let getBotListInGroupRequest = new $dingtalkrobot_1_0.GetBotListInGroupRequest({
+      openConversationId: "cidjknasndcbaXXXXX",
+    });
+    try {
+      await client.getBotListInGroupWithOptions(getBotListInGroupRequest, getBotListInGroupHeaders, new $Util.RuntimeOptions({ }));
+    } catch (err) {
+      if (!Util.empty(err.code) &amp;&amp; !Util.empty(err.message)) {
+        // err 中含有 code 和 message 属性，可帮助开发定位问题
+      }
+
+    }    
+  }
+
+}
+
+Client.main(process.argv.slice(2));</code></pre></div><input type="radio" name="check-figure-ozo-vri-j1g" id="figure-ozo-vri-j1g-csharp-tab" /><label for="figure-ozo-vri-j1g-csharp-tab">C#</label><div class="codeblock-item"><pre id="codeblock-rvi-xcl-3sh" outputclass="language-csharp" code-type="xCode" data-tag="codeblock" class="pre codeblock language-csharp"><code>// This file is auto-generated, don't edit it. Thanks.
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
+
+using Tea;
+using Tea.Utils;
+
+
+namespace AlibabaCloud.SDK.Sample
+{
+    public class Sample 
+    {
+
+        /**
+         * 使用 Token 初始化账号Client
+         * @return Client
+         * @throws Exception
+         */
+        public static AlibabaCloud.SDK.Dingtalkrobot_1_0.Client CreateClient()
+        {
+            AlibabaCloud.OpenApiClient.Models.Config config = new AlibabaCloud.OpenApiClient.Models.Config();
+            config.Protocol = "https";
+            config.RegionId = "central";
+            return new AlibabaCloud.SDK.Dingtalkrobot_1_0.Client(config);
+        }
+
+        public static void Main(string[] args)
+        {
+            AlibabaCloud.SDK.Dingtalkrobot_1_0.Client client = CreateClient();
+            AlibabaCloud.SDK.Dingtalkrobot_1_0.Models.GetBotListInGroupHeaders getBotListInGroupHeaders = new AlibabaCloud.SDK.Dingtalkrobot_1_0.Models.GetBotListInGroupHeaders();
+            getBotListInGroupHeaders.XAcsDingtalkAccessToken = "&lt;your access token&gt;";
+            AlibabaCloud.SDK.Dingtalkrobot_1_0.Models.GetBotListInGroupRequest getBotListInGroupRequest = new AlibabaCloud.SDK.Dingtalkrobot_1_0.Models.GetBotListInGroupRequest
+            {
+                OpenConversationId = "cidjknasndcbaXXXXX",
+            };
+            try
+            {
+                client.GetBotListInGroupWithOptions(getBotListInGroupRequest, getBotListInGroupHeaders, new AlibabaCloud.TeaUtil.Models.RuntimeOptions());
+            }
+            catch (TeaException err)
+            {
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+            catch (Exception _err)
+            {
+                TeaException err = new TeaException(new Dictionary&lt;string, object&gt;
+                {
+                    { "message", _err.Message }
+                });
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+        }
+
+
+    }
+}</code></pre></div></div></section></section><section id="section-response-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-response-1" data-tag="h2" class="h2">响应</h2><section id="section-response-parameter" class="section"><h3 data-tag="h3" id="h2-bl0-3kg-tkg" class="h3 title">响应体</h3><table id="a6c6aab295iwt" tablewidth="710" tablecolswidth="213 142 355" autofit="false" class="table"><colgroup colwidth="0.9*" style="width:30.00%"></colgroup><colgroup colwidth="0.6*" style="width:20.00%"></colgroup><colgroup colwidth="1.5*" style="width:50.00%"></colgroup><tbody class="tbody"><tr id="b2994863951xa"><td id="c700b3c87ar8v" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="e98cc2f0fd6t1">名称</p></td><td id="97e138ea9esrr" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="e66e244f44tsr">类型</p></td><td id="efaa634243pai" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="0eeaadaccab52">描述</p></td></tr><tr outputclass="row row-level-1 has-child" id="b069fcd033gwp" class="row row-level-1 has-child"><td id="3e77eb9be4adg" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="e663eed3e1iha">chatbotInstanceVOList</p></td><td id="5d2ee1e97b0xc" rowspan="1" colspan="1"><p id="06d01ebddccmi">Array</p></td><td id="714cc95cf14zp" rowspan="1" colspan="1"><p id="bd7e3c2acek8x">返回的机器人列表。</p></td></tr><tr outputclass="row row-level-1-1" id="b057abb5ad0h5" class="row row-level-1-1"><td id="ab7e589fe2ofa" rowspan="1" colspan="1"><p id="fa05edd367fy7">robotCode</p></td><td id="d87a0b14fa4ed" rowspan="1" colspan="1"><p id="2b5e6b7864myx">String</p></td><td id="320649f8cd0ux" rowspan="1" colspan="1"><p id="7372abfabcr0q">机器人的编码，参见<a href="https://open.dingtalk.com/document/development/robot-overview#" id="5abbfbd89awom" class="xref">机器人名词表-robotCode</a>内容，获取<code data-tag="inlineCode" id="ecb325c8f682x" class="inlineCode">robotCode</code>。</p></td></tr><tr outputclass="row row-level-1-2" id="afc1ac47ecfsw" class="row row-level-1-2"><td id="15039f9de3d9w" rowspan="1" colspan="1"><p id="0f344547179k8">name</p></td><td id="54e322356fdbq" rowspan="1" colspan="1"><p id="d852e24c06uce">String</p></td><td id="40209c0336l51" rowspan="1" colspan="1"><p id="174d27d2f8g3z">机器人的名称。</p></td></tr><tr outputclass="row row-level-1-3" id="6ebb309ad2qg0" class="row row-level-1-3"><td id="dcaf880c78voe" rowspan="1" colspan="1"><p id="7f66983fefu59">downloadIconURL</p></td><td id="376c25091bzv2" rowspan="1" colspan="1"><p id="21d58fdddanwy">String</p></td><td id="61326ed6d9p6i" rowspan="1" colspan="1"><p id="54c160118ct32">机器人头像的下载链接。</p></td></tr><tr outputclass="row row-level-1-4" id="cd91355a74aib" class="row row-level-1-4"><td id="f299a584b0l5b" rowspan="1" colspan="1"><p id="43072fa927yyh">openRobotType</p></td><td id="f85c16a5886wl" rowspan="1" colspan="1"><p id="c43dcfb02eqcy">Integer</p></td><td id="edc359197beu9" rowspan="1" colspan="1"><p id="9ec0b98691p34">机器人的类型：</p><ul id="cc90e28a6fjhm"><li id="5a66d0d601mlb"><p id="74047f2665iv9"><b>1</b>：公共模板机器人，如自定义机器人，心知天气等等。</p></li><li id="09660232344iv"><p id="54d30d4634yvo"><b>2</b>：企业内部应用机器人。</p></li><li id="8f51f0504fung"><p id="f57ef61ceajgf"><b>3</b>：第三方企业应用机器人。</p></li><li id="0cf64c721369k"><p id="03a9128d69aq4"><b>4</b>：场景群机器人。</p></li></ul></td></tr></tbody></table></section><section id="section-response-body-example" class="section"><h3 id="h3-response-body-example" data-tag="h3" class="h3">响应体示例</h3><pre id="fdd2c59e7ehna" outputclass="language-json" code-type="xCode" data-tag="codeblock" class="pre codeblock language-json"><code>HTTP/1.1 200 OK
+Content-Type:application/json
+
+{
+  "chatbotInstanceVOList" : [ {
+    "robotCode" : "dingcdsjfXXXXX",
+    "name" : "机器人",
+    "downloadIconURL" : "https://img.alicdn.comXXXXXX.jpg",
+    "openRobotType" : 1
+  } ]
+}</code></pre></section><section id="section-error-code-1" class="section"><h3 id="h3-error-code-1" data-tag="h3" class="h3">错误码</h3><p data-tag="p" id="p-error-code-global-guide" class="p">若调用该接口报错，可根据错误信息在<a href="https://open.dingtalk.com/document/development/server-api-error-codes-1" id="a-error-code-global-guide">全局错误码</a>文档中查找解决方案。</p><table id="0a2e6331115th" tablewidth="709" tablecolswidth="142 177 177 213" autofit="false" class="table"><colgroup colwidth="0.8*" style="width:20.03%"></colgroup><colgroup colwidth="1*" style="width:24.96%"></colgroup><colgroup colwidth="1*" style="width:24.96%"></colgroup><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><tbody class="tbody"><tr id="9cb8f597f5v0o"><td id="fd16d9e9d802s" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="f301de6586u6w">HttpCode</p></td><td id="3f2c9188e6azc" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="bc8dc9bdf8a18">错误码</p></td><td id="99dea75904so3" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="6fc6f89175zv7">错误信息</p></td><td id="b68a8f1c70oo1" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="07b1dd67aaavm">说明</p></td></tr><tr id="4be650af20y4j"><td id="35e9b27251hr6" rowspan="1" colspan="1"><p id="bbcc516590hcw">400</p></td><td id="be4fa5ab21h56" rowspan="1" colspan="1"><p id="18591d0963g4k">unauthorized</p></td><td id="400cb073acveu" rowspan="1" colspan="1"><p id="d7f91faf3d20q">%s</p></td><td id="5b69e5288ehfy" rowspan="1" colspan="1"><p id="16a0cf048erz8">调用权限不足</p></td></tr><tr id="9ce0ef90aeo0u"><td id="e150366af5umg" rowspan="1" colspan="1"><p id="4ea3a813829p2">400</p></td><td id="8b074f7a65c0d" rowspan="1" colspan="1"><p id="b77bbdcd22fv6">illegal.openconevrsation.id</p></td><td id="eebc46753d24v" rowspan="1" colspan="1"><p id="aa1af9bacbruv">%s</p></td><td id="a5e0bf87aep6u" rowspan="1" colspan="1"><p id="7f5250178d3xj">无效的会话id</p></td></tr><tr id="b56c8052536w8"><td id="6ebb9d82c32jm" rowspan="1" colspan="1"><p id="ac196b8a2edk4">400</p></td><td id="97324602b43wh" rowspan="1" colspan="1"><p id="ea1e3e0d9bgak">reject</p></td><td id="15de69a7fease" rowspan="1" colspan="1"><p id="c860f2082expi">%s</p></td><td id="0e1371dcd5ter" rowspan="1" colspan="1"><p id="9edb2d16d3wak">群中机器人数量太多，无法查询</p></td></tr><tr id="ef39f1b180ogm"><td id="b72939655dyp8" rowspan="1" colspan="1"><p id="b4300e8541h7y">500</p></td><td id="6758a27c15j76" rowspan="1" colspan="1"><p id="0e87a46db6799">system.error</p></td><td id="e54a0182deq4t" rowspan="1" colspan="1"><p id="beacf32caexk7">%s</p></td><td id="788fbbd203acr" rowspan="1" colspan="1"><p id="90583509428yk">系统错误</p></td></tr></tbody></table></section></section></div></main></body></html>

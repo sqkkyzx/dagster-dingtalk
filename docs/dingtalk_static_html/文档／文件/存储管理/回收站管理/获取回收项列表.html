@@ -1,0 +1,373 @@
+<!DOCTYPE html><html><head><meta charset="utf8" / /><meta name="gmtModify" content="2025-09-23 19:17:44" / /><meta name="searchtitle" content="" / /><meta name="keywords" content="" / /><meta name="author" content="" / /><title>获取回收项列表</title><meta name="gmtModify" content="2026-06-04 19:09:43" / /></head><body data-tag="topic" id="doc-api-dingtalk-ListRecycleItems" class="topic"><main id="51a8f28bebmuk" data-init-id="doc-api-dingtalk_ListRecycleItems"><h1 data-tag="title" id="h1-cxs-hxo-7qk" class="title">获取回收项列表</h1><p data-tag="shortdesc" id="99c7ef22b0gts" class="shortdesc">调用本接口，分页获取回收站所有回收项的详情信息，包括原来所在空间Id、原路径、大小、名称等信息。</p><div data-tag="conbody" outputclass="icms-api-reference" class="icms-api-reference conbody"><section id="section-request-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-request-1" data-tag="h2" class="h2">请求</h2><section id="section-request-basic-info" class="section"><h3 id="heading-request-basic-info" data-tag="h3" class="h3">基本信息</h3><table id="aaf2f66070xg1" tablewidth="648" tablecolswidth="216 432" autofit="false" class="table"><colgroup colwidth="0.67*" style="width:33.33%"></colgroup><colgroup colwidth="1.33*" style="width:66.67%"></colgroup><tbody class="tbody"><tr id="2635f3c79eb0l"><td id="645041ce3a5n7" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="c93f856e78nqj">字段</p></td><td id="d939a8ffa9pbx" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="409888378diui">值</p></td></tr><tr id="6f504075c654z"><td id="adfda852acnvn" rowspan="1" colspan="1"><p id="1aee525383djz">HTTP URL</p></td><td id="0c6d83ac8ccad" rowspan="1" colspan="1"><p id="22eb47caae2uz">https://api.dingtalk.com/v1.0/storage/recycleBins/{recycleBinId}/recycleItems</p></td></tr><tr id="ad034b765dz65"><td id="f12e56889cucp" rowspan="1" colspan="1"><p id="11d5ef13bfju4">HTTP Method</p></td><td id="98d4c0d22arim" rowspan="1" colspan="1"><p id="01ff0e5fe1a8y">GET</p></td></tr><tr id="710835e7405vj"><td id="2c24bb869eedj" rowspan="1" colspan="1"><p id="05814942566ra">支持的应用类型</p></td><td id="445944b79ertt" rowspan="1" colspan="1"><p id="bba7adffc2hhp"><span data-tag="ph" id="ph-request-basic-app-type-apptype-0" class="ph ph-app-type" data-ph-raw-text="appType-企业内部应用">appType-企业内部应用</span>　<span data-tag="ph" id="ph-request-basic-app-type-apptype-1" class="ph ph-app-type" data-ph-raw-text="appType-第三方企业应用">appType-第三方企业应用</span></p></td></tr><tr id="c1dc486939gfp"><td id="2350557c28mo6" rowspan="1" colspan="1"><p id="a75f29a22b3gr">权限要求</p></td><td id="da2a6641a426u" rowspan="1" colspan="1"><p id="ee503c6aabftn"><span data-tag="ph" id="ph-request-basic-permission-permission-storage-recyclebin-read-0" class="ph-permission ph" data-ph-raw-text="permission-Storage.RecycleBin.Read-企业存储回收站读权限" data-permission-id="permission-Storage.RecycleBin.Read" data-permission-code="Storage.RecycleBin.Read" data-permission-detail-api="/document/api/permission/detail" data-permission-query-param="code">permission-Storage.RecycleBin.Read-企业存储回收站读权限</span></p></td></tr></tbody></table></section><section id="section-request-header-parameter" class="section"><h3 data-tag="h3" id="h2-3ig-rha-cuq" class="h3 title">请求头</h3><table id="c5ac8ed83a2gb" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="799f100e94e6t"><td id="6600c4d00cmgu" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="3c666113767nj">名称</p></td><td id="d0e9fbe96efa4" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="4343ae0af3o8h">类型</p></td><td id="f4c9033e837ja" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="0470ab6c6bkff">是否必填</p></td><td id="c71d661ebfe5j" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="a42a6c4a04l9e">描述</p></td></tr><tr id="194c806483xdw"><td id="0ccd9083b7a05" rowspan="1" colspan="1"><p id="8e078ed71ay2s">x-acs-dingtalk-access-token</p></td><td id="8e3b838d87xmb" rowspan="1" colspan="1"><p id="ce72ce3cd7s2g">String</p></td><td id="a8fd0a8dd7o6l" rowspan="1" colspan="1"><p id="b434b602b8sjv">是</p></td><td id="9f9d511c60ufs" rowspan="1" colspan="1"><p id="b24523bd502iz">调用该接口的访问凭证，通过以下获取：</p><ul id="a0d4f3b0fcqrc"><li id="34af5369c5rsy"><p id="c2c1e514a1ykv">企业内部应用，调用<a href="https://open.dingtalk.com/document/development/obtain-the-access-token-of-an-internal-app#" id="512bac6e7arzc" class="xref">获取企业内部应用的accessToken</a>接口获取。</p></li><li id="a020db131bujx"><p id="73d17d89f4vs7">第三方企业应用，调用<a href="https://open.dingtalk.com/document/development/obtain-the-access-token-of-the-authorized-enterprise-1#" id="bffd9674ded2y" class="xref">获取第三方应用授权企业的accessToken</a>接口获取。</p></li></ul></td></tr></tbody></table></section><section id="section-request-path-parameter" class="section"><h3 data-tag="h3" id="h2-6yu-9xc-myf" class="h3 title">路径参数</h3><table id="ad37eb975etm6" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="e42f8a5fcdi10"><td id="c2a62c1064f75" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="8f76352082e45">名称</p></td><td id="e626caba928yp" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="5d4e0da94eyou">类型</p></td><td id="828525e4ee32f" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="4c5c1c70bbwhe">是否必填</p></td><td id="7f7ba81d5c17m" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="a7d3305fe4wju">描述</p></td></tr><tr id="c02df9b351kyf"><td id="d2fbcdd2bemps" rowspan="1" colspan="1"><p id="c78fac79cbe8n">recycleBinId</p></td><td id="4463d3b340vkk" rowspan="1" colspan="1"><p id="ff924896fb02e">String</p></td><td id="920c7e10e6nas" rowspan="1" colspan="1"><p id="7462d00beest9">是</p></td><td id="5dc8050337yr0" rowspan="1" colspan="1"><p id="ee85473ff5kbz">回收站Id，可调用<a href="https://open.dingtalk.com/document/development/obtain-information-about-the-recycle-bin#" id="eca635ed5flnf" class="xref">获取回收站信息</a>接口获取id参数值。</p></td></tr></tbody></table></section><section id="section-request-query-parameter" class="section"><h3 data-tag="h3" id="h2-xsv-rex-jw1" class="h3 title">查询参数</h3><table id="4168b93e448eb" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="ad2f38896ajgb"><td id="74a5901542rfw" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="7527f335508bb">名称</p></td><td id="3de88c4e897n7" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="1dab379c13pzg">类型</p></td><td id="66689fc0f1ifb" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="b8a85e1e5b8rw">是否必填</p></td><td id="97e0b8beaacw5" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="497fc1f1c3au8">描述</p></td></tr><tr id="58cedbd8d53xu"><td id="d6e4bf0eafd5p" rowspan="1" colspan="1"><p id="0b820c7278uv2">nextToken</p></td><td id="bc894dffedknq" rowspan="1" colspan="1"><p id="72079b8b86av0">String</p></td><td id="a309acbca5u5x" rowspan="1" colspan="1"><p id="4a72dd9721ctj">否</p></td><td id="2f86b8fb04qzu" rowspan="1" colspan="1"><p id="a90d8ea448qjd">分页游标。</p><ul id="90036b4d82hmc"><li id="53d70af13f6ik"><p id="87dfe9f8feaud">如果是首次调用，该参数不传。</p></li><li id="6a8e168751qil"><p id="dc6ebaa71co3z">如果是非首次调用，该参数传上次调用时返回的nextToken。</p></li></ul></td></tr><tr id="cade29b553pbk"><td id="c1dc8965c84kb" rowspan="1" colspan="1"><p id="8c6932a287v4m">maxResults</p></td><td id="53ad190cdc7r2" rowspan="1" colspan="1"><p id="7a5877c16bp4t">Integer</p></td><td id="c5c2f208ba5up" rowspan="1" colspan="1"><p id="df153fd9efenh">否</p></td><td id="6371b05586r3j" rowspan="1" colspan="1"><p id="dbdb71d5d7499">每页最大条目数，默认值50，最大值50。</p></td></tr><tr id="3714f746eec5x"><td id="6d586b6e64yl3" rowspan="1" colspan="1"><p id="ecf8dd1eadmg6">unionId</p></td><td id="f324f84132k44" rowspan="1" colspan="1"><p id="e04c344d0cefi">String</p></td><td id="11a564477b239" rowspan="1" colspan="1"><p id="027abb4e912ua">是</p></td><td id="64776357f159s" rowspan="1" colspan="1"><p id="62eeabe19bqps">操作者unionId，可调用<a href="https://open.dingtalk.com/document/development/query-user-details#" id="84f6e2bf4aoy2" class="xref">查询用户详情</a>接口获取。</p></td></tr></tbody></table></section><section id="section-request-body-example" class="section"><h3 id="h3-request-body-example" data-tag="h3" class="h3">请求示例</h3><div outputclass="tabbed-codeblock" data-tag="fig" id="figure-gr6-qpz-wov" class="tabbed-codeblock-box"><div class="tab-box"></div><input type="radio" name="check-figure-gr6-qpz-wov" id="figure-gr6-qpz-wov-HTTP-tab" checked="checked" /><label for="figure-gr6-qpz-wov-HTTP-tab">HTTP</label><div class="codeblock-item"><pre id="codeblock-kjm-y5a-wme" outputclass="language-HTTP" code-type="xCode" data-tag="codeblock" class="pre codeblock language-HTTP"><code>GET /v1.0/storage/recycleBins/recyclebin_id/recycleItems?nextToken=next_token&amp;maxResults=30&amp;unionId=chyxxxxx HTTP/1.1
+Host:api.dingtalk.com
+x-acs-dingtalk-access-token:access_token
+Content-Type:application/json</code></pre></div><input type="radio" name="check-figure-gr6-qpz-wov" id="figure-gr6-qpz-wov-java-tab" /><label for="figure-gr6-qpz-wov-java-tab">Java</label><div class="codeblock-item"><pre id="codeblock-hua-qel-ypt" outputclass="language-java" code-type="xCode" data-tag="codeblock" class="pre codeblock language-java"><code>// This file is auto-generated, don't edit it. Thanks.
+package com.aliyun.sample;
+
+import com.aliyun.tea.*;
+
+public class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Client
+     * @throws Exception
+     */
+    public static com.aliyun.dingtalkstorage_1_0.Client createClient() throws Exception {
+        com.aliyun.teaopenapi.models.Config config = new com.aliyun.teaopenapi.models.Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        return new com.aliyun.dingtalkstorage_1_0.Client(config);
+    }
+
+    public static void main(String[] args_) throws Exception {
+        java.util.List&lt;String&gt; args = java.util.Arrays.asList(args_);
+        com.aliyun.dingtalkstorage_1_0.Client client = Sample.createClient();
+        com.aliyun.dingtalkstorage_1_0.models.ListRecycleItemsHeaders listRecycleItemsHeaders = new com.aliyun.dingtalkstorage_1_0.models.ListRecycleItemsHeaders();
+        listRecycleItemsHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        com.aliyun.dingtalkstorage_1_0.models.ListRecycleItemsRequest listRecycleItemsRequest = new com.aliyun.dingtalkstorage_1_0.models.ListRecycleItemsRequest()
+                .setNextToken("next_token")
+                .setMaxResults(30)
+                .setUnionId("chyxxxxx");
+        try {
+            client.listRecycleItemsWithOptions("recyclebin_id", listRecycleItemsRequest, listRecycleItemsHeaders, new com.aliyun.teautil.models.RuntimeOptions());
+        } catch (TeaException err) {
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        } catch (Exception _err) {
+            TeaException err = new TeaException(_err.getMessage(), _err);
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        }        
+    }
+}</code></pre></div><input type="radio" name="check-figure-gr6-qpz-wov" id="figure-gr6-qpz-wov-python-tab" /><label for="figure-gr6-qpz-wov-python-tab">Python</label><div class="codeblock-item"><pre id="codeblock-smr-atj-cj4" outputclass="language-python" code-type="xCode" data-tag="codeblock" class="pre codeblock language-python"><code># -*- coding: utf-8 -*-
+# This file is auto-generated, don't edit it. Thanks.
+import sys
+
+from typing import List
+
+from alibabacloud_dingtalk.storage_1_0.client import Client as dingtalkstorage_1_0Client
+from alibabacloud_tea_openapi import models as open_api_models
+from alibabacloud_dingtalk.storage_1_0 import models as dingtalkstorage__1__0_models
+from alibabacloud_tea_util import models as util_models
+from alibabacloud_tea_util.client import Client as UtilClient
+
+
+class Sample:
+    def __init__(self):
+        pass
+
+    @staticmethod
+    def create_client() -&gt; dingtalkstorage_1_0Client:
+        """
+        使用 Token 初始化账号Client
+        @return: Client
+        @throws Exception
+        """
+        config = open_api_models.Config()
+        config.protocol = 'https'
+        config.region_id = 'central'
+        return dingtalkstorage_1_0Client(config)
+
+    @staticmethod
+    def main(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        list_recycle_items_headers = dingtalkstorage__1__0_models.ListRecycleItemsHeaders()
+        list_recycle_items_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        list_recycle_items_request = dingtalkstorage__1__0_models.ListRecycleItemsRequest(
+            next_token='next_token',
+            max_results=30,
+            union_id='chyxxxxx'
+        )
+        try:
+            client.list_recycle_items_with_options('recyclebin_id', list_recycle_items_request, list_recycle_items_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+    @staticmethod
+    async def main_async(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        list_recycle_items_headers = dingtalkstorage__1__0_models.ListRecycleItemsHeaders()
+        list_recycle_items_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        list_recycle_items_request = dingtalkstorage__1__0_models.ListRecycleItemsRequest(
+            next_token='next_token',
+            max_results=30,
+            union_id='chyxxxxx'
+        )
+        try:
+            await client.list_recycle_items_with_options_async('recyclebin_id', list_recycle_items_request, list_recycle_items_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+
+if __name__ == '__main__':
+    Sample.main(sys.argv[1:])</code></pre></div><input type="radio" name="check-figure-gr6-qpz-wov" id="figure-gr6-qpz-wov-php-tab" /><label for="figure-gr6-qpz-wov-php-tab">PHP</label><div class="codeblock-item"><pre id="codeblock-2tc-juu-qjr" outputclass="language-php" code-type="xCode" data-tag="codeblock" class="pre codeblock language-php"><code>&lt;?php
+
+// This file is auto-generated, don't edit it. Thanks.
+namespace AlibabaCloud\SDK\Sample;
+
+use AlibabaCloud\SDK\Dingtalk\Vstorage_1_0\Dingtalk;
+use \Exception;
+use AlibabaCloud\Tea\Exception\TeaError;
+use AlibabaCloud\Tea\Utils\Utils;
+
+use Darabonba\OpenApi\Models\Config;
+use AlibabaCloud\SDK\Dingtalk\Vstorage_1_0\Models\ListRecycleItemsHeaders;
+use AlibabaCloud\SDK\Dingtalk\Vstorage_1_0\Models\ListRecycleItemsRequest;
+use AlibabaCloud\Tea\Utils\Utils\RuntimeOptions;
+
+class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Dingtalk Client
+     */
+    public static function createClient(){
+        $config = new Config([]);
+        $config-&gt;protocol = "https";
+        $config-&gt;regionId = "central";
+        return new Dingtalk($config);
+    }
+
+    /**
+     * @param string[] $args
+     * @return void
+     */
+    public static function main($args){
+        $client = self::createClient();
+        $listRecycleItemsHeaders = new ListRecycleItemsHeaders([]);
+        $listRecycleItemsHeaders-&gt;xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        $listRecycleItemsRequest = new ListRecycleItemsRequest([
+            "nextToken" =&gt; "next_token",
+            "maxResults" =&gt; 30,
+            "unionId" =&gt; "chyxxxxx"
+        ]);
+        try {
+            $client-&gt;listRecycleItemsWithOptions("recyclebin_id", $listRecycleItemsRequest, $listRecycleItemsHeaders, new RuntimeOptions([]));
+        }
+        catch (Exception $err) {
+            if (!($err instanceof TeaError)) {
+                $err = new TeaError([], $err-&gt;getMessage(), $err-&gt;getCode(), $err);
+            }
+            if (!Utils::empty_($err-&gt;code) &amp;&amp; !Utils::empty_($err-&gt;message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+        }
+    }
+}
+$path = __DIR__ . \DIRECTORY_SEPARATOR . '..' . \DIRECTORY_SEPARATOR . 'vendor' . \DIRECTORY_SEPARATOR . 'autoload.php';
+if (file_exists($path)) {
+    require_once $path;
+}
+Sample::main(array_slice($argv, 1));</code></pre></div><input type="radio" name="check-figure-gr6-qpz-wov" id="figure-gr6-qpz-wov-go-tab" /><label for="figure-gr6-qpz-wov-go-tab">Go</label><div class="codeblock-item"><pre id="codeblock-agu-ogq-cjh" outputclass="language-go" code-type="xCode" data-tag="codeblock" class="pre codeblock language-go"><code>// This file is auto-generated, don't edit it. Thanks.
+package main
+
+import (
+  "os"
+  util  "github.com/alibabacloud-go/tea-utils/service"
+  dingtalkstorage_1_0  "github.com/alibabacloud-go/dingtalk/storage_1_0"
+  openapi  "github.com/alibabacloud-go/darabonba-openapi/client"
+  "github.com/alibabacloud-go/tea/tea"
+)
+
+
+/**
+ * 使用 Token 初始化账号Client
+ * @return Client
+ * @throws Exception
+ */
+func CreateClient () (_result *dingtalkstorage_1_0.Client, _err error) {
+  config := &amp;openapi.Config{}
+  config.Protocol = tea.String("https")
+  config.RegionId = tea.String("central")
+  _result = &amp;dingtalkstorage_1_0.Client{}
+  _result, _err = dingtalkstorage_1_0.NewClient(config)
+  return _result, _err
+}
+
+func _main (args []*string) (_err error) {
+  client, _err := CreateClient()
+  if _err != nil {
+    return _err
+  }
+
+  listRecycleItemsHeaders := &amp;dingtalkstorage_1_0.ListRecycleItemsHeaders{}
+  listRecycleItemsHeaders.XAcsDingtalkAccessToken = tea.String("&lt;your access token&gt;")
+  listRecycleItemsRequest := &amp;dingtalkstorage_1_0.ListRecycleItemsRequest{
+    NextToken: tea.String("next_token"),
+    MaxResults: tea.Int32(30),
+    UnionId: tea.String("chyxxxxx"),
+  }
+  tryErr := func()(_e error) {
+    defer func() {
+      if r := tea.Recover(recover()); r != nil {
+        _e = r
+      }
+    }()
+    _, _err = client.ListRecycleItemsWithOptions(tea.String("recyclebin_id"), listRecycleItemsRequest, listRecycleItemsHeaders, &amp;util.RuntimeOptions{})
+    if _err != nil {
+      return _err
+    }
+
+    return nil
+  }()
+
+  if tryErr != nil {
+    var err = &amp;tea.SDKError{}
+    if _t, ok := tryErr.(*tea.SDKError); ok {
+      err = _t
+    } else {
+      err.Message = tea.String(tryErr.Error())
+    }
+    if !tea.BoolValue(util.Empty(err.Code)) &amp;&amp; !tea.BoolValue(util.Empty(err.Message)) {
+      // err 中含有 code 和 message 属性，可帮助开发定位问题
+    }
+
+  }
+  return _err
+}
+
+
+func main() {
+  err := _main(tea.StringSlice(os.Args[1:]))
+  if err != nil {
+    panic(err)
+  }
+}</code></pre></div><input type="radio" name="check-figure-gr6-qpz-wov" id="figure-gr6-qpz-wov-nodejs-tab" /><label for="figure-gr6-qpz-wov-nodejs-tab">Node.js</label><div class="codeblock-item"><pre id="codeblock-wsx-xqt-boh" outputclass="language-nodejs" code-type="xCode" data-tag="codeblock" class="pre codeblock language-nodejs"><code>// This file is auto-generated, don't edit it
+import Util, * as $Util from '@alicloud/tea-util';
+import dingtalkstorage_1_0, * as $dingtalkstorage_1_0 from '@alicloud/dingtalk/storage_1_0';
+import OpenApi, * as $OpenApi from '@alicloud/openapi-client';
+import * as $tea from '@alicloud/tea-typescript';
+
+
+export default class Client {
+
+  /**
+   * 使用 Token 初始化账号Client
+   * @return Client
+   * @throws Exception
+   */
+  static createClient(): dingtalkstorage_1_0 {
+    let config = new $OpenApi.Config({ });
+    config.protocol = "https";
+    config.regionId = "central";
+    return new dingtalkstorage_1_0(config);
+  }
+
+  static async main(args: string[]): Promise&lt;void&gt; {
+    let client = Client.createClient();
+    let listRecycleItemsHeaders = new $dingtalkstorage_1_0.ListRecycleItemsHeaders({ });
+    listRecycleItemsHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+    let listRecycleItemsRequest = new $dingtalkstorage_1_0.ListRecycleItemsRequest({
+      nextToken: "next_token",
+      maxResults: 30,
+      unionId: "chyxxxxx",
+    });
+    try {
+      await client.listRecycleItemsWithOptions("recyclebin_id", listRecycleItemsRequest, listRecycleItemsHeaders, new $Util.RuntimeOptions({ }));
+    } catch (err) {
+      if (!Util.empty(err.code) &amp;&amp; !Util.empty(err.message)) {
+        // err 中含有 code 和 message 属性，可帮助开发定位问题
+      }
+
+    }    
+  }
+
+}
+
+Client.main(process.argv.slice(2));</code></pre></div><input type="radio" name="check-figure-gr6-qpz-wov" id="figure-gr6-qpz-wov-csharp-tab" /><label for="figure-gr6-qpz-wov-csharp-tab">C#</label><div class="codeblock-item"><pre id="codeblock-dwr-ajz-exp" outputclass="language-csharp" code-type="xCode" data-tag="codeblock" class="pre codeblock language-csharp"><code>// This file is auto-generated, don't edit it. Thanks.
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
+
+using Tea;
+using Tea.Utils;
+
+
+namespace AlibabaCloud.SDK.Sample
+{
+    public class Sample 
+    {
+
+        /**
+         * 使用 Token 初始化账号Client
+         * @return Client
+         * @throws Exception
+         */
+        public static AlibabaCloud.SDK.Dingtalkstorage_1_0.Client CreateClient()
+        {
+            AlibabaCloud.OpenApiClient.Models.Config config = new AlibabaCloud.OpenApiClient.Models.Config();
+            config.Protocol = "https";
+            config.RegionId = "central";
+            return new AlibabaCloud.SDK.Dingtalkstorage_1_0.Client(config);
+        }
+
+        public static void Main(string[] args)
+        {
+            AlibabaCloud.SDK.Dingtalkstorage_1_0.Client client = CreateClient();
+            AlibabaCloud.SDK.Dingtalkstorage_1_0.Models.ListRecycleItemsHeaders listRecycleItemsHeaders = new AlibabaCloud.SDK.Dingtalkstorage_1_0.Models.ListRecycleItemsHeaders();
+            listRecycleItemsHeaders.XAcsDingtalkAccessToken = "&lt;your access token&gt;";
+            AlibabaCloud.SDK.Dingtalkstorage_1_0.Models.ListRecycleItemsRequest listRecycleItemsRequest = new AlibabaCloud.SDK.Dingtalkstorage_1_0.Models.ListRecycleItemsRequest
+            {
+                NextToken = "next_token",
+                MaxResults = 30,
+                UnionId = "chyxxxxx",
+            };
+            try
+            {
+                client.ListRecycleItemsWithOptions("recyclebin_id", listRecycleItemsRequest, listRecycleItemsHeaders, new AlibabaCloud.TeaUtil.Models.RuntimeOptions());
+            }
+            catch (TeaException err)
+            {
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+            catch (Exception _err)
+            {
+                TeaException err = new TeaException(new Dictionary&lt;string, object&gt;
+                {
+                    { "message", _err.Message }
+                });
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+        }
+
+
+    }
+}</code></pre></div></div></section></section><section id="section-response-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-response-1" data-tag="h2" class="h2">响应</h2><section id="section-response-parameter" class="section"><h3 data-tag="h3" id="h2-p40-viv-3jm" class="h3 title">响应体</h3><table id="9107eeee56t9n" tablewidth="710" tablecolswidth="213 142 355" autofit="false" class="table"><colgroup colwidth="0.9*" style="width:30.00%"></colgroup><colgroup colwidth="0.6*" style="width:20.00%"></colgroup><colgroup colwidth="1.5*" style="width:50.00%"></colgroup><tbody class="tbody"><tr id="68d2b85e05aya"><td id="ae9d3e0633ld6" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="e882fa2ee6v3o">名称</p></td><td id="7bade6bafest9" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="77ec7aaf8187x">类型</p></td><td id="d2c1107326bkt" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="f86e3fde51ubw">描述</p></td></tr><tr outputclass="row row-level-1 has-child" id="c9d66ef844ne0" class="row row-level-1 has-child"><td id="04f0f3e70fpo1" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="2b8cc1f5bftfb">recycleItems</p></td><td id="ef59c678125sk" rowspan="1" colspan="1"><p id="d030821f61niv">Array</p></td><td id="4ffbca70ac5ri" rowspan="1" colspan="1"><p id="7f093d8aad95q">回收项列表。</p></td></tr><tr outputclass="row row-level-1-1" id="e7eeaebb3eevw" class="row row-level-1-1"><td id="08fe6841d1oq7" rowspan="1" colspan="1"><p id="33867a50c7mcl">id</p></td><td id="4aa744865exs0" rowspan="1" colspan="1"><p id="b4e0a7946cmv5">String</p></td><td id="8d0abedd7cbsm" rowspan="1" colspan="1"><p id="8eef9eae20h3h">回收项id。</p></td></tr><tr outputclass="row row-level-1-2" id="f642799466s9s" class="row row-level-1-2"><td id="1d2006e9c8vwf" rowspan="1" colspan="1"><p id="d8c3f9d4673uj">spaceId</p></td><td id="db620e3a78zam" rowspan="1" colspan="1"><p id="391a029f5b1bp">String</p></td><td id="c9b1275250ykw" rowspan="1" colspan="1"><p id="38033fd850wje">原文件或文件夹所在的空间Id。</p></td></tr><tr outputclass="row row-level-1-3" id="2cf5c4c487m1x" class="row row-level-1-3"><td id="d42a8c75d39y1" rowspan="1" colspan="1"><p id="0c641bac390ik">dentryId</p></td><td id="c754ff0763a2u" rowspan="1" colspan="1"><p id="700b0e0e60suo">String</p></td><td id="cf22c88e72tnn" rowspan="1" colspan="1"><p id="d47c8304549s3">原文件或文件夹Id。</p></td></tr><tr outputclass="row row-level-1-4" id="ba58cd0385f0q" class="row row-level-1-4"><td id="6484a40fcbk2g" rowspan="1" colspan="1"><p id="0c5a273e93yy9">size</p></td><td id="ee5cebb4d226t" rowspan="1" colspan="1"><p id="c2d9e78315h68">Long</p></td><td id="bf1707a7595ae" rowspan="1" colspan="1"><p id="6723c4d75a1um">原文件或文件夹大小，单位Byte。</p></td></tr><tr outputclass="row row-level-1-5" id="6c92739b32k1f" class="row row-level-1-5"><td id="d47af626d4qrb" rowspan="1" colspan="1"><p id="cd871c43452fl">type</p></td><td id="29e35608862tt" rowspan="1" colspan="1"><p id="403c6397e3836">String</p></td><td id="e1666e332av5d" rowspan="1" colspan="1"><p id="86c1638048ttk">类型。</p><ul id="dcf253e1b0bw0"><li id="3fa9c7d31fygj"><p id="5ee49bf47ahqk"><b>FILE</b>：文件</p></li><li id="8bd6579545s7u"><p id="8c608a69e7czh"><b>FOLDER</b>：文件夹</p></li></ul></td></tr><tr outputclass="row row-level-1-6" id="749c0ad10d5cr" class="row row-level-1-6"><td id="e2bd6d2d58x6h" rowspan="1" colspan="1"><p id="fa06c0e6be16r">originalName</p></td><td id="6a14084667wpu" rowspan="1" colspan="1"><p id="ce848ab2aayem">String</p></td><td id="f39af60426lb8" rowspan="1" colspan="1"><p id="7cb780bfc1tbg">原文件或文件夹名称。</p></td></tr><tr outputclass="row row-level-1-7" id="e5db947bf4ff6" class="row row-level-1-7"><td id="13fe67157carr" rowspan="1" colspan="1"><p id="34e039f849689">originalPath</p></td><td id="6ac9028e337op" rowspan="1" colspan="1"><p id="869391acb1ab4">String</p></td><td id="4e925d31d8jnj" rowspan="1" colspan="1"><p id="e2eec9cbfamqv">原文件或文件夹路径。</p></td></tr><tr outputclass="row row-level-1-8" id="21c6d53ee4ox2" class="row row-level-1-8"><td id="63cbd64dc1gp4" rowspan="1" colspan="1"><p id="7e24f6257bn2f">operatorId</p></td><td id="642d5adbdab4r" rowspan="1" colspan="1"><p id="7bd3353f06pd8">String</p></td><td id="7ebc7b4920m5i" rowspan="1" colspan="1"><p id="aeb5c806a2vtr">删除操作人unionId。</p></td></tr><tr outputclass="row row-level-1-9" id="ceba10adbdzlc" class="row row-level-1-9"><td id="c60864d7e4k9d" rowspan="1" colspan="1"><p id="c759375fe52jn">operatorTime</p></td><td id="1763ce51c1s4u" rowspan="1" colspan="1"><p id="4944e09c41wod">String</p></td><td id="4235fcef77llg" rowspan="1" colspan="1"><p id="52f58b22426u4">删除时间，iso8601格式，例如：2022-07-29T14:55Z。</p></td></tr><tr outputclass="row row-level-2" id="63190dcfd5e5m" class="row row-level-2"><td id="1729817876yjc" rowspan="1" colspan="1"><p id="fd4fa54cd3pfk">nextToken</p></td><td id="ce73f522788dv" rowspan="1" colspan="1"><p id="0867c82981988">String</p></td><td id="f93d9922f9upk" rowspan="1" colspan="1"><p id="13a5e06d84m18">分页游标。</p><p class="note-icon-wrapper" id="8e910a5684juk"></p><p data-tag="p" id="1c533a02f52nu" class="p"></p><p id="9fd928b787kz3">不为空表示有更多数据。</p><p id="2df037b6f1qtj"></p></td></tr></tbody></table></section><section id="section-response-body-example" class="section"><h3 id="h3-response-body-example" data-tag="h3" class="h3">响应体示例</h3><pre id="e3a65c4ce8qg1" outputclass="language-json" code-type="xCode" data-tag="codeblock" class="pre codeblock language-json"><code>HTTP/1.1 200 OK
+Content-Type:application/json
+
+{
+  "recycleItems" : [ {
+    "id" : "2528xxxxx",
+    "spaceId" : "8415xxxxx",
+    "dentryId" : "6585xxxxx",
+    "size" : 512,
+    "type" : "FILE",
+    "originalName" : "测试文件夹",
+    "originalPath" : "./测试文件夹",
+    "operatorId" : "chyxxxxx",
+    "operatorTime" : "2022-01-01T10:00:00Z"
+  } ],
+  "nextToken" : "1660268242000:2528089682"
+}</code></pre></section><section id="section-error-code-1" class="section"><h3 id="h3-error-code-1" data-tag="h3" class="h3">错误码</h3><p data-tag="p" id="p-error-code-global-guide" class="p">若调用该接口报错，可根据错误信息在<a href="https://open.dingtalk.com/document/development/server-api-error-codes-1" id="a-error-code-global-guide">全局错误码</a>文档中查找解决方案。</p><table id="d2146a149akaf" tablewidth="709" tablecolswidth="142 177 177 213" autofit="false" class="table"><colgroup colwidth="0.8*" style="width:20.03%"></colgroup><colgroup colwidth="1*" style="width:24.96%"></colgroup><colgroup colwidth="1*" style="width:24.96%"></colgroup><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><tbody class="tbody"><tr id="88310dddfarz4"><td id="6eab15861aktp" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="95928c9dedov0">HttpCode</p></td><td id="cda1e6e46cf28" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="1669eef8385mq">错误码</p></td><td id="067cfa8396oju" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="867639cbe4rvq">错误信息</p></td><td id="f1ec683b475xm" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="feb0d871c150k">说明</p></td></tr><tr id="4142cb36bepbe"><td id="0d455280febam" rowspan="1" colspan="1"><p id="c926920725m20">400</p></td><td id="1c1b371c01vkp" rowspan="1" colspan="1"><p id="f61b2c2e99yt5">paramError</p></td><td id="7d6d8de2adzb0" rowspan="1" colspan="1"><p id="1d9de8e9495kn">%s</p></td><td id="d15e54c6ccceh" rowspan="1" colspan="1"><p id="a1ce929dd2lyg">参数错误</p></td></tr><tr id="8fa06ed2632ww"><td id="3bf5e18208ysn" rowspan="1" colspan="1"><p id="445b0e7b675zr">400</p></td><td id="6f4bbee5b5342" rowspan="1" colspan="1"><p id="dd1408d84elqn">paramError.recycleBinId</p></td><td id="024baf12e610y" rowspan="1" colspan="1"><p id="3c7ace08bas4s">%s</p></td><td id="d7821b3915hz6" rowspan="1" colspan="1"><p id="1e438d345d400">参数错误-recycleBinId</p></td></tr><tr id="a2e0f464d6icj"><td id="991bef1fb19x0" rowspan="1" colspan="1"><p id="61bfa91c8832r">400</p></td><td id="8b598a09d7a4k" rowspan="1" colspan="1"><p id="ea8af3d968mhm">paramError.maxResults</p></td><td id="d8664ffde1o87" rowspan="1" colspan="1"><p id="fc23698ca1ijz">%s</p></td><td id="b4fa9b0390xu4" rowspan="1" colspan="1"><p id="50babdfd0a7o9">参数错误-maxResults</p></td></tr><tr id="15771184156ar"><td id="4b9fa64febl1y" rowspan="1" colspan="1"><p id="eb3ae2c03frpv">404</p></td><td id="53b7ca0a4cpbp" rowspan="1" colspan="1"><p id="c5795534efxv1">recycleBinNotExist</p></td><td id="a74d6abe0ayif" rowspan="1" colspan="1"><p id="1ac3624c76mt3">%s</p></td><td id="d99431569d0c7" rowspan="1" colspan="1"><p id="84b3a3ef16gfu">回收站不存在</p></td></tr><tr id="0d297ac4da8ju"><td id="940e059c3dvvj" rowspan="1" colspan="1"><p id="4ac8367cb6ma5">500</p></td><td id="a320b4fc25imc" rowspan="1" colspan="1"><p id="e9c41bc4582nc">systemError</p></td><td id="542a2d4648r00" rowspan="1" colspan="1"><p id="bb90bfa1faohn">%s</p></td><td id="a2abb275f8y9w" rowspan="1" colspan="1"><p id="f3ce3a5a38otz">系统错误</p></td></tr><tr id="2e76b641de9hc"><td id="dbab92959f7p6" rowspan="1" colspan="1"><p id="6d866b2e7cswj">500</p></td><td id="672bffe913oy2" rowspan="1" colspan="1"><p id="b943ab2b27kut">unknownError</p></td><td id="8910fc877ara9" rowspan="1" colspan="1"><p id="b579f0d080kzf">Unknown Error</p></td><td id="477fef5f46hhh" rowspan="1" colspan="1"><p id="1074eae33dm5c">未知错误</p></td></tr><tr id="e767790eb53yv"><td id="92d3fd6f8bdms" rowspan="1" colspan="1"><p id="59b090c6cdiz1">503</p></td><td id="6f203c663bo16" rowspan="1" colspan="1"><p id="de50ce848494j">operationTimeout</p></td><td id="edd1b3b74472u" rowspan="1" colspan="1"><p id="f5fa5f0a1eq7d">%s</p></td><td id="bc9d2e6e38gz7" rowspan="1" colspan="1"><p id="88cd8dcc0byxr">请求超时</p></td></tr></tbody></table></section></section></div></main></body></html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html><html><head><meta charset="utf8" / /><meta name="searchtitle" content="" / /><meta name="keywords" content="" / /><meta name="author" content="" / /><title>上传本地文件到钉钉文档（我的文档）</title><meta name="gmtModify" content="2026-05-15 12:27:36" / /></head><body data-tag="topic" id="topic-2990911" class="topic"><main id="main-2990911"><h1 data-tag="title" id="1bfc45760dykp" class="title">上传本地文件到钉钉文档（我的文档）</h1><p id="35ab0f33a00m9" data-tag="shortdesc" class="shortdesc">本文档将指引你如何将本地文件上传到钉钉文档（我的文档）目录下。</p><div data-tag="body" class="body"><section id="c922649e39k3c" class="section"><h2 id="b3b5774cd9me8"><b>简介</b></h2><section id="1bf39b5b73s3r" class="section"><h3 id="1d3488aefeudc"><b>教学内容</b></h3><p id="eb5fbea19akcj">本教程介绍开发者如何将本地文件上传到钉钉文档（我的文档）目录中。</p><p id="ddd266ebeep12"><img id="02d156a732iax" src="https://help-static-aliyun-doc.aliyuncs.com/assets/img/zh-CN/1287161571/p981575.png" alt="image" placement="break" class="image break" / /></p></section><section id="31f36d4e93x7t" class="section"><h3 id="50a4505fb4kld"><b>教学目标</b></h3><p id="aac97df367szu">帮助开发者快速掌握本地文件上传至钉钉文档（我的文档）目录中的能力。</p></section><section id="55ca5ba4818bn" class="section"><h3 id="284a9665580l1"><b>教学范围</b></h3><p id="d11561c578jcq">面向钉钉所有开发者</p></section></section><section id="2b12e4d62bujv" class="section"><h2 id="62e910631eafj"><b>前提条件</b></h2><ul id="e2f7ac657ajw0"><li id="8b42435c5egk0"><p id="f52f61a5eeeju">已经获取开发者权限。</p></li><li id="76fb7d4659ftl"><p id="c14bcd94casmk">已经安装了 IDE 或其他开发工具。</p></li><li id="b354e387078ny"><p id="fe759c01fbctm">已经安装了 <a href="https://nodejs.org/en/download" id="da6c4b94cbiqe">node.js</a>，并完成了相关<a href="https://m.runoob.com/nodejs/nodejs-install-setup.html" id="19c990873fe0k">环境的配置</a>。</p></li><li id="546d2f6be8og0"><p id="1d933931ec98p">已经安装了 <a href="https://maven.apache.org/" id="a0676e9b3f3fq">maven</a>，并完成了相关<a href="https://maven.apache.org/install.html" id="13ba7304944hb">环境的配置</a>。</p></li><li id="4e88bd769f1si"><p id="965c436871sa1">已经安装了 <a href="https://www.oracle.com/java/technologies/downloads/?er=221886" id="d3cbafe9bejzc">JDK</a>，并完成了相关<a href="https://docs.oracle.com/en/java/javase/24/install/overview-jdk-installation.html" id="007b9997c0bla">环境的配置</a>。</p></li></ul></section><section id="aac5770936c1p" class="section"><h2 id="d30a5e9247ffb"><b>开发流程</b></h2><ol id="b880a3fdbd82k" start="1"><li id="0d97c0e76d30d"><p id="6c34c4ee3d1dw">调用<a data-tag="xref" id="537c2713d90sd" href="/document/development/get-my-documents#" class="xref">获取我的文档知识库信息</a>接口，获取“我的文档”根节点 ID，即返回参数<code data-tag="code" id="d4d6a78a7ad65" class="code"><span style="color:rgb(23, 26, 29)">rootNodeId</span></code><span style="color:rgb(23, 26, 29)">（parentDentryUuid）。</span></p></li><li id="0724e245991l5"><p id="92443a1a26976">调用<a data-tag="xref" id="e478cfd86ddmj" href="/document/development/obtain-file-upload-informations#" class="xref">获取文件上传信息</a>接口，获取上传文件所需的<code data-tag="code" id="7bde2baa07gmb" class="code"><span style="color:rgba(0, 0, 0, 0.85)">resourceUrls</span></code><span style="color:rgba(0, 0, 0, 0.85)">和</span><code data-tag="code" id="6024365be5i5e" class="code"><span style="color:rgba(0, 0, 0, 0.85)">headers</span></code><span style="color:rgba(0, 0, 0, 0.85)">参数值。</span></p></li><li id="033cd2ff6b8a4"><p id="3fa9e627da2h2"><span style="color:rgba(0, 0, 0, 0.85)">使用 OSS 的 header 加签方式上传文件：</span></p><div outputclass="tabbed-codeblock" data-tag="fig" id="0658488c2889j" class="tabbed-codeblock-box"><div class="tab-box"></div><input type="radio" name="check-0658488c2889j" id="0658488c2889j-java-tab" checked="checked" /><label for="0658488c2889j-java-tab">Java</label><div class="codeblock-item"><pre code-type="xCode" id="5aa051b5bems0" index="0" data-tag="codeblock" outputclass="language-java" class="pre codeblock language-java"><code>import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
+public void test(){
+               // 从接口返回信息中拿到resourceUrls
+                String resourceUrl = "上述接口返回的resourceUrls";
+              // 从接口返回信息中拿到headers
+                Map&lt;String, String&gt; headers = "上述接口返回的headers";
+                URL url = new URL(resourceUrl);
+                HttpURLConnection connection = (HttpURLConnection)url.openConnection();
+               if (headers != null) {
+                for (Map.Entry&lt;String, String&gt; entry : headers.entrySet()) {
+                    connection.setRequestProperty(entry.getKey(), entry.getValue());
+                }
+            }
+                connection.setDoOutput(true);
+                connection.setRequestMethod("PUT");
+                connection.setUseCaches(false);
+                connection.setReadTimeout(10000);
+                connection.setConnectTimeout(10000);
+                connection.connect();
+                OutputStream out = connection.getOutputStream();
+                InputStream is = new FileInputStream(new File("/Users/xxxxx/Desktop/测试文件.xls"));
+                byte[] b =new byte[1024];
+                int temp;
+                while ((temp=is.read(b))!=-1){
+                       out.write(b,0,temp);
+                }
+                out.flush();
+                out.close();
+                int responseCode = connection.getResponseCode();
+                connection.disconnect();
+                if (responseCode == 200) {
+                    System.out.println("上传成功");
+                 } else {
+                    System.out.println("上传失败");
+                 }
+}
+</code></pre></div><input type="radio" name="check-0658488c2889j" id="0658488c2889j-python-tab" /><label for="0658488c2889j-python-tab">Python</label><div class="codeblock-item"><pre code-type="xCode" id="ebc992fcdcn53" index="0" data-tag="codeblock" outputclass="language-python" class="pre codeblock language-python"><code>#!/usr/bin/env python
+
+import requests
+
+url = '&lt;第一步接口获取的resourceUrl&gt;'
+headers = &lt;第一步接口返回的headers&gt;
+result = requests.put(url, data=open('&lt;path_to_file&gt;', 'rb'), headers=headers)
+print(result)</code></pre></div><input type="radio" name="check-0658488c2889j" id="0658488c2889j-csharp-tab" /><label for="0658488c2889j-csharp-tab">C#</label><div class="codeblock-item"><pre code-type="xCode" id="dc653a3248f3h" index="0" data-tag="codeblock" outputclass="language-csharp" class="pre codeblock language-csharp"><code>public static string HttpRequest(string url, string filePath, Dictionary&lt;string, string&gt; headers) {
+
+    FileStream fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read);
+    BinaryReader reader = new BinaryReader(fileStream);
+    reader.BaseStream.Seek(0, SeekOrigin.Begin);
+    byte[] datas = reader.ReadBytes((int)reader.BaseStream.Length);
+    HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+    request.Method = "PUT";
+    request.Timeout = 150000;
+    foreach (var header in headers) {
+        request.Headers.Add($"{header.Key}", $"{header.Value}");
+    }
+    Stream requestStream = null;
+    string responseStr = null;
+    try {
+        if (datas != null) {
+            request.ContentLength = datas.Length;
+            requestStream = request.GetRequestStream();
+            requestStream.Write(datas, 0, datas.Length);
+            requestStream.Close();
+        } else {
+            request.ContentLength = 0;
+        }
+        HttpWebResponse response = request.GetResponse() as HttpWebResponse;
+        responseStr = response.Headers.GetValues("x-oss-request-id")[0];
+    } catch (Exception ex) {
+        Console.WriteLine("error");
+    } finally {
+        request = null;
+        requestStream = null;
+    }
+    return responseStr;
+}</code></pre></div><input type="radio" name="check-0658488c2889j" id="0658488c2889j-php-tab" /><label for="0658488c2889j-php-tab">PHP</label><div class="codeblock-item"><pre code-type="xCode" id="bd3eeb75a4s3g" index="0" data-tag="codeblock" outputclass="language-php" class="pre codeblock language-php"><code>$url = $result-&gt;body-&gt;headerSignatureInfo-&gt;resourceUrls[0];
+$headersSource = $result-&gt;body-&gt;headerSignatureInfo-&gt;headers;
+foreach ($headersSource as $key =&gt; $value) {
+$headers[] = $key . ': ' . $value;
+}
+// 需要主动指定content-type为空
+$headers['Content-Type'] = '';
+
+$file = '/Users/dengxian.ldx/Desktop/test.txt';
+
+$ch = curl_init();
+curl_setopt_array($ch, array(
+CURLOPT_URL =&gt; $url,
+CURLOPT_RETURNTRANSFER =&gt; true,
+CURLOPT_HEADER =&gt; true,
+CURLOPT_TIMEOUT =&gt; 100,
+CURLOPT_CONNECTTIMEOUT =&gt; 100,
+CURLOPT_HTTP_VERSION =&gt; CURL_HTTP_VERSION_1_1,
+CURLOPT_PUT =&gt; true,
+CURLOPT_HTTPHEADER =&gt; $headers,
+CURLOPT_SSL_VERIFYPEER =&gt; false,
+CURLOPT_SSL_VERIFYHOST =&gt; false,
+));
+curl_setopt($ch, CURLOPT_INFILE, fopen($file , 'rb'));
+curl_setopt($ch, CURLOPT_INFILESIZE, filesize($file) );
+curl_setopt($ch, CURLOPT_UPLOAD, true);
+
+$response = curl_exec($ch);
+curl_close($ch);
+
+echo $response .PHP_EOL;</code></pre></div><input type="radio" name="check-0658488c2889j" id="0658488c2889j-nodejs-tab" /><label for="0658488c2889j-nodejs-tab">Node.js</label><div class="codeblock-item"><pre code-type="xCode" id="23853bf91ci66" index="0" data-tag="codeblock" outputclass="language-nodejs" class="pre codeblock language-nodejs"><code>const fs = require('fs');
+const request = require('request-promise');
+
+url = &lt;url&gt;;
+header = &lt;headers&gt;;
+
+// 注意: 需要主动指定content-type为空
+headers['content-type']='';
+
+var options = {
+  method: 'PUT',
+  url: url,
+  headers: headers
+};
+
+fs.createReadStream('/Users/dengxian.ldx/temp/test/a.txt').pipe(request(options)).then(body =&gt;{
+  console.log(body);
+}).catch(err =&gt; {
+  console.log(err);
+});</code></pre></div></div></li><li id="76b887b1a9mxm"><p id="02d63fd659yyq">调用<a data-tag="xref" id="d87ccc16314xv" href="/document/development/submittal-file#" class="xref">提交文件</a>接口，上传文件到钉钉文档（我的文档）目录中。 </p></li></ol></section><section id="de2b5edc54sr1" class="section"><h2 id="423196337649e"><b>步骤一：创建应用</b></h2><ol id="b9619ef7bcpwr" start="1"><li id="a582e102fdh2d"><p id="28a68627fc7cs"><span style="color:rgb(23, 26, 29)">登录</span><a href="https://open-dev.dingtalk.com/#/" id="779955b0586t3" target="_blank"><span style="background-color:initial">开发者后台</span></a><span style="color:rgb(23, 26, 29)">。</span></p></li><li id="3e4edcc67b9je"><p id="df5967ded2ek0"><span style="color:rgb(23, 26, 29)">单击</span><span style="color:rgb(23, 26, 29)"><b>应用开发</b></span><span style="color:rgb(23, 26, 29)">&nbsp;&gt;&nbsp;</span><span style="color:rgb(23, 26, 29)"><b>企业内部应用</b></span><span style="color:rgb(23, 26, 29)">&nbsp;&gt;&nbsp;</span><span style="color:rgb(23, 26, 29)"><b>钉钉应用</b></span><span style="color:rgb(23, 26, 29)">&nbsp;&gt;&nbsp;</span><span style="color:rgb(23, 26, 29)"><b>创建应用</b></span><span style="color:rgb(23, 26, 29)">。</span></p></li><li id="f4f8298c55u20"><p jc="left" id="94d444d102yqn" style="text-align:left"><span style="color:rgb(23, 26, 29)">填写应用信息。</span></p><table id="b66505101foxu" tablewidth="707" tablecolswidth="202 101 404" autofit="false" class="table"><colgroup colwidth="0.86*" style="width:28.57%"></colgroup><colgroup colwidth="0.43*" style="width:14.29%"></colgroup><colgroup colwidth="1.72*" style="width:57.14%"></colgroup><tbody class="tbody"><tr id="76fb435056yfr"><td id="76fb4351566a2" rowspan="1" style="background-color:rgb(229, 229, 229);vertical-align:middle" colspan="1"><p id="526bc80054i4z"><span style="color:rgb(23, 26, 29)"><b>配置项</b></span></p></td><td id="76fb435356kxa" rowspan="1" style="background-color:rgb(229, 229, 229);vertical-align:middle" colspan="1"><p id="befed9e254pgt"><span style="color:rgb(23, 26, 29)"><b>是否必选</b></span></p></td><td id="76fb4355562l7" rowspan="1" style="background-color:rgb(229, 229, 229);vertical-align:middle" colspan="1"><p id="1af40ac403sxi"><span style="color:rgb(23, 26, 29)"><b>配置说明</b></span></p></td></tr><tr id="b665052b1f766"><td id="b665052c1fcjv" rowspan="1" style="vertical-align:middle" colspan="1"><p id="074c4c49bcs7g"><span style="color:rgb(23, 26, 29)"><b>应用名称</b></span></p></td><td id="b665052e1f5h8" rowspan="1" style="vertical-align:middle" colspan="1"><p id="e93fb590b1ohk"><span style="color:rgb(23, 26, 29)">是</span></p></td><td id="b66505301fpj6" rowspan="1" style="vertical-align:middle" colspan="1"><p id="b04a8a88bb9wr"><span style="color:rgb(23, 26, 29)">输入应用名称，应用名称最小长度为 2 个字符。</span></p></td></tr><tr id="b66505371fd8b"><td id="b66505381fa0d" rowspan="1" style="vertical-align:middle" colspan="1"><p id="991f5b22dd3xt"><span style="color:rgb(23, 26, 29)"><b>应用描述</b></span></p></td><td id="b665053a1f0nm" rowspan="1" style="vertical-align:middle" colspan="1"><p id="82b4f729c794t"><span style="color:rgb(23, 26, 29)">是</span></p></td><td id="b665053c1fg1d" rowspan="1" style="vertical-align:middle" colspan="1"><p id="b03e103a6afek"><span style="color:rgb(23, 26, 29)">简要描述应用提供的产品或服务，应用描述最小长度为 4 个字符。</span></p></td></tr><tr id="b66505401f45o"><td id="b66505411fttn" rowspan="1" style="vertical-align:middle" colspan="1"><p id="52046ebc22gqj"><span style="color:rgb(23, 26, 29)"><b>应用图标</b></span></p></td><td id="b66505431f9fi" rowspan="1" style="vertical-align:middle" colspan="1"><p id="15a4077d2c4th"><span style="color:rgb(23, 26, 29)">否</span></p></td><td id="b66505451fmco" rowspan="1" style="vertical-align:middle" colspan="1"><p id="da4f0e94e8nsj"><span style="color:rgb(23, 26, 29)">上传应用图标，图标要求 JPG/PNG 格式、240 px * 240 px 以上、1:1 、2 MB 以内的无圆角图标。</span></p></td></tr></tbody></table></li><li id="79ffe73567rsf"><p id="1fb577382fjg0"><span style="color:rgb(23, 26, 29)">单击</span><span style="color:rgb(23, 26, 29)"><b>保存</b></span><span style="color:rgb(23, 26, 29)">，进入应用详情页。</span></p></li></ol><p jc="left" id="391512c011wmg" style="text-align:left"><span style="color:rgb(23, 26, 29)">创建完成后，即可单击</span><span style="color:rgb(23, 26, 29)"><b>基础信息</b></span><span style="color:rgb(23, 26, 29)">&nbsp;&gt;&nbsp;</span><span style="color:rgb(23, 26, 29)"><b>凭证与基础信息</b></span><span style="color:rgb(23, 26, 29)">，查看应用 Client ID 和 Client Secret。</span></p><blockquote id="7a2938175cb87"><span style="color:rgb(119, 119, 119)"><i>注意：保存 Client ID 和 Client Secret，后续需要使用。</i></span></blockquote></section><section id="c30016e15brpm" class="section"><h2 id="27795fbc41jan"><b>步骤二：配置网页应用</b></h2><ol id="cb05fa781ffv1" start="1"><li id="efd192ce1c8uv"><p id="2e6984c9c3bs8">在应用详情页，单击<b>应用能力</b> &gt; <b>添加应用能力</b>。</p></li><li id="33d07864d3igz"><p id="e68f1ac4b9u7m">选择添加网页应用。</p></li><li id="5f13d2cf3e1dj"><p id="83ed320211fdu">配置网页应用（H5）信息：</p><table id="cd9613e975a95" tablewidth="100" tablecolswidth="50 50" autofit="true" class="table"><colgroup colwidth="1*" style="width:50.00%"></colgroup><colgroup colwidth="1*" style="width:50.00%"></colgroup><tbody class="tbody"><tr id="9876b9f9f7e2e"><td id="2e06d5c652n57" rowspan="1" style="background-color:#e5e5e5;vertical-align:middle" colspan="1"><p id="43b3025998s8f"><b>配置项</b></p></td><td id="e8d2dece191wn" rowspan="1" style="background-color:#e5e5e5;vertical-align:middle" colspan="1"><p id="3eef740920nd2"><b>说明</b></p></td></tr><tr id="42d4ddbe841ed"><td id="2f521fe118ia9" rowspan="1" style="vertical-align:middle" colspan="1"><p id="1e32a73abach0">应用首页地址</p></td><td id="57fd5d5e6ewca" rowspan="2" style="vertical-align:middle" colspan="1"><p id="245a72d767z3q">填写首页地址，本示例使用：<code data-tag="code" id="f3a21fb032gli" class="code">http://localhost:5173?corpid=$CORPID$</code>用于后续测试。</p><blockquote id="83285b82bdbax">本示例仅用于本地测试。</blockquote><p id="abb8b7a248wjc"><img id="eb3a7c50b01r4" src="https://help-static-aliyun-doc.aliyuncs.com/assets/img/zh-CN/1287161571/p981593.png" alt="image" placement="break" class="image break" / /></p></td></tr><tr id="13627866a5xhl"><td id="48903ddac04zf" rowspan="1" style="vertical-align:middle" colspan="1"><p id="2c31a4faa5b05">PC端首页地址</p></td></tr></tbody></table><p id="a322df1feeaq5">配置完成后，单击保存。</p></li></ol></section><section id="04e5d15a29qzi" class="section"><h2 id="976c6acf9155p"><b>步骤三：申请接口权限</b></h2><ol id="e4b30b4890pvl" start="1"><li id="c96d8c7320xi7"><p id="c0810af4407wv">在应用详情页，单击<b>开发配置</b> &gt; <b>权限管理</b>，进入权限申请页面。</p></li><li id="3a74fe1d5ev0g"><p id="b22b29b9f78mg">在权限搜索框中分别输入<code data-tag="code" id="a8f5753dbbusn" class="code">Wiki.Workspace.Read</code>、<code data-tag="code" id="0cdfc287f9kmc" class="code">Storage.UploadInfo.Read</code>和<code data-tag="code" id="5408eac3661mg" class="code">Storage.File.Write</code>，并申请接口权限。</p><blockquote id="1ec8a4e210gqw">如果你不是企业管理员/没有应用开发权限，申请权限时需要企业管理员审批。</blockquote></li></ol></section><section id="b9b85bfe40a22" class="section"><h2 id="3426862faavrt"><b>步骤四：发布应用</b></h2><ol id="fc218ef1b839x" start="1"><li id="9851b5b321vk8"><p id="4acccfca99xlu">应用配置完成后，你需要发布应用，在应用详情页，单击<b>应用发布</b> &gt; <b>版本管理与发布</b>。</p></li><li id="9847642a0a9g9"><p id="dfd4feb27dgp3"><span style="color:rgb(23, 26, 29)">单击</span><span style="color:rgb(23, 26, 29)"><b>创建新版本</b></span><span style="color:rgb(23, 26, 29)">，进入版本详情页面。</span></p></li><li id="ce61450ef5fva"><p id="e7335ebeccy9o">配置版本信息：</p><table id="4398ad39092nz" tablewidth="100" tablecolswidth="50 50" autofit="true" class="table"><colgroup colwidth="1*" style="width:50.00%"></colgroup><colgroup colwidth="1*" style="width:50.00%"></colgroup><tbody class="tbody"><tr id="61d3da7c72ajs"><td id="07b5e91e8aizc" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="98fbcb7d0fc3a"><b>配置项</b></p></td><td id="dbe69d2830eil" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="86ceaa1142ve0"><b>说明</b></p></td></tr><tr id="a129db635e9wk"><td id="67205f612fttz" rowspan="1" colspan="1"><p id="2375388ed6o1p">应用版本号</p></td><td id="75bedf13aepv1" rowspan="1" colspan="1"><p id="53a17382ff8n2">填写应用版本号，使用默认版本即可。</p></td></tr><tr id="4cc142d902fja"><td id="4cddd6acbd5oz" rowspan="1" colspan="1"><p id="bd6768f983mwk">版本描述</p></td><td id="8e80f1b2e0ndk" rowspan="1" colspan="1"><p id="5d3124dfffcsq">填写版本描述信息，自定义即可。</p></td></tr><tr id="2a9d8dc6f783o"><td id="b898763f58mmc" rowspan="1" colspan="1"><p id="957f297518e6l">待发布内容</p></td><td id="cbe3d79f5af1b" rowspan="1" colspan="1"><p id="8c93ae40003p5">工作台显示的应用能力：</p><ul id="04b2f44821bcu"><li id="31fbfdcfbb12n"><p id="9ad6d01703az3">选择网页应用</p></li></ul></td></tr></tbody></table><p id="ec88c74f8crb6">配置完成后，单击下方保存。</p></li><li id="cfb16bb30b7di"><p id="5d8629a3313pr"><span style="color:rgb(23, 26, 29)">在保存成功的弹框页面，单击直接发布。</span></p><blockquote id="02cf022a46c2s"><span style="color:rgb(119, 119, 119)"><i>如果你不是企业管理员，发布应用时需要企业管理员审批，发布仅我可见则无需管理员审批。</i></span></blockquote></li></ol></section><section id="7355a9fd38diy" class="section"><h2 id="78f9235edcraq"><b>步骤五：构建服务</b></h2><ol id="fbfcb918efuqm" start="1"><li id="561ea0696fk1i"><p id="3175c9803a81k">确保已经完成上述步骤，获取下方 Demo 运行的参数信息。</p></li><li id="c804fccacfczb"><p id="257c3b9834zv7">你可以下载 <a id="48e13d8ff1ywj" href="https://help-static-aliyun-doc.aliyuncs.com/file-manage-files/zh-CN/20250704/bpihcw/doc-demo.zip" data-tag="file" class="file">doc-demo.zip</a> Demo。</p></li><li id="a5fc74aab4b2z"><p id="eaa1e1c0ecivn">打开 IDE，并导入已下载的 Demo。</p><blockquote id="02c5d524d5y15">示例代码分为 backend（后端代码目录）和frontend（前端代码目录）。</blockquote><p id="d964a20ecddkv"><img id="e1026d4010i04" src="https://help-static-aliyun-doc.aliyuncs.com/assets/img/zh-CN/6369733671/p1026995.png" alt="image" placement="break" class="image break" / /></p></li><li id="19d00aad2d0e3"><p id="4828ab8f24hcr">打开后端代码目录，在 resources 目录中修改<code data-tag="code" id="c0befc674bjae" class="code">application.properties</code>文件，填写<code data-tag="code" id="04b303540drh6" class="code">clientId（应用<span style="color:rgb(23, 26, 29)">Client ID</span>）</code>、<code data-tag="code" id="60a22e2085aff" class="code">clientSecret（应用<span style="color:rgb(23, 26, 29)">Client Secret</span>）</code>。<span style="color:rgb(23, 26, 29)"> </span></p><p id="2ecae811c1lhq"><img id="97f3db2f40a3q" src="https://help-static-aliyun-doc.aliyuncs.com/assets/img/zh-CN/6369733671/p1026996.png" alt="image" placement="break" class="image break" / /></p></li><li id="f15cef047bn0l"><p id="b2667e7659hll">点击启动后端服务。</p><div type="note" id="15bd0dc6fepaf" class="note note-note"><div class="note-icon-wrapper"><i class="icon-note note note"></i></div><div class="noteContentSpan"><strong>说明 </strong><ul id="282e415bddcj4"><li id="23197393ddqmk"><p id="21cf9ea5e95g2">在启动后端服务前，请确保已经正确安装Maven 和 JDK，并配置了相关环境；如果是初次安装 IDE，需要在 IDE 中修改相关配置文件。</p></li><li id="3b43bf461akj4"><p id="b3ffcdcfcepo0">确保 5173 和 8080 端口没有被占用。</p></li></ul></div></div><p id="f92a433110i4y"><img id="aa524213804ht" src="https://help-static-aliyun-doc.aliyuncs.com/assets/img/zh-CN/6369733671/p1026998.png" alt="image" placement="break" class="image break" / /></p></li><li id="4af0911bd31eb"><p id="c884d8429c4bl">打开前端代码目录，修改 <code data-tag="code" id="15ad0be3306co" class="code">vite.config.ts</code>,并填写正确的<code data-tag="code" id="38c93a8f99b6h" data-init-id="04b303540drh6" class="code">clientId（应用<span style="color:rgb(23, 26, 29)">Client ID</span>）</code>。</p><p id="c7950ff2eat1u"><img id="4ce7ebfab0vph" src="https://help-static-aliyun-doc.aliyuncs.com/assets/img/zh-CN/6369733671/p1026997.png" alt="image" placement="break" class="image break" / /></p></li><li id="43d44599a6alv"><p id="76b822fc36eq7">点击前端项目文件，鼠标右键并选择<b>终端</b>打开。</p><p id="8cd8b39a69v6i"><img id="c1cf9df964lhf" src="https://help-static-aliyun-doc.aliyuncs.com/assets/img/zh-CN/6369733671/p1026999.png" alt="image" placement="break" class="image break" / /></p></li><li id="054fe715f705f"><p id="a5273a5c72680">在终端窗口中，输出以下命令：</p><ol id="3130053cfclu6"><li id="c2169e8c5bw49"><p id="08b076ad58cxn"><code data-tag="code" id="9aafda546cy2l" class="code"><span style="color:rgb(23, 26, 29);background-color:rgb(246, 246, 246)">npm install</span></code></p></li><li id="832909f6a1otu"><p id="476d6d9e180rp"><code data-tag="code" id="258af5fae1h0c" class="code"><span style="color:rgb(23, 26, 29);background-color:rgb(246, 246, 246)">npm run dev</span></code></p><blockquote id="03ca4160bftgj"><span style="color:rgb(23, 26, 29);background-color:rgb(246, 246, 246)">注意：windows 在启动时候，请使用</span><code data-tag="code" id="45bb1ce9cefkd" class="code"><span style="color:rgb(23, 26, 29);background-color:rgb(246, 246, 246)">npm run dev:raw</span></code><span style="color:rgb(23, 26, 29);background-color:rgb(246, 246, 246)">。</span></blockquote></li></ol></li><li id="f9638d248e1fc"><p id="0889febecdjfi"><span style="color:rgb(23, 26, 29);background-color:rgb(246, 246, 246)">至此，前端和后端服务已经启动成功。</span></p></li></ol></section><section id="e3fd8fe77fpmd" class="section"><h2 id="9a22d42c84gbt"><b>步骤六：测试应用</b></h2><ol id="5db7ea3181k2g" start="1"><li id="ae78cac1ffk9w"><p id="3e2c0c4e86bkd">登录钉钉客户端，选择应用所在的组织。</p><p id="8c0051e373diw"><img id="7440152caf3xq" src="https://help-static-aliyun-doc.aliyuncs.com/assets/img/zh-CN/1287161571/p981635.png" alt="image" placement="break" class="image break" / /></p></li><li id="4b2d8ca26c2l0"><p id="7d6e07c0f909b">单击<b>工作台</b> &gt; <b>添加</b>，搜索上方你创建的企业应用并完成添加操作。</p><p id="7a7f1ac3a53o9"><img id="f0b38f025dadd" src="https://help-static-aliyun-doc.aliyuncs.com/assets/img/zh-CN/1287161571/p981637.png" alt="image" placement="break" class="image break" / /></p></li><li id="fdf8b51eb3f72"><p id="b03af9994elik">在工作台访问应用，并单击<b>选择本地文件</b>上传。</p><blockquote id="636d69b125ri0">要求上传文件小于 50M。</blockquote><p id="8fa03160c9c11"><img id="551879b73dohn" src="https://help-static-aliyun-doc.aliyuncs.com/assets/img/zh-CN/1287161571/p981647.png" alt="image" placement="break" class="image break" / /></p></li><li id="2586d3f9da6co"><p id="3367a8e79amc2">选择文件后，单击<b>提交</b>，完成上传操作。</p><p id="819bd7840c9g4"><img id="7cbaff9758kv7" src="https://help-static-aliyun-doc.aliyuncs.com/assets/img/zh-CN/1287161571/p981651.png" alt="image" placement="break" class="image break" / /></p></li><li id="df21b552a3kon"><p id="47963716521hc">上传完成后，即可打开文件查看上传内容。</p><p id="3e94714e597zj"><img id="9dc3dfa7cepg5" src="https://help-static-aliyun-doc.aliyuncs.com/assets/img/zh-CN/1287161571/p981786.png" alt="image" placement="break" class="image break" / /></p></li></ol></section><p id="d57f9cd8fa2d3"></p></div></main></body></html>

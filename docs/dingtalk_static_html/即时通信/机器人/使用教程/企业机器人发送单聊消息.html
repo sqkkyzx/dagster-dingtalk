@@ -1,0 +1,132 @@
+<!DOCTYPE html><html><head><meta charset="utf8" / /><meta name="searchtitle" content="" / /><meta name="keywords" content="" / /><meta name="author" content="" / /><title>企业机器人发送单聊消息</title><meta name="gmtModify" content="2026-05-15 13:07:53" / /></head><body data-tag="topic" id="topic-2324431" class="topic"><main id="main-2324431"><h1 data-tag="title" id="ef8edbd0ddgy2" class="title">企业机器人发送单聊消息</h1><p id="ef8edbd2ddd60" data-tag="shortdesc" class="shortdesc">如果你需要通过企业机器人给你发送单聊消息，可以参考本文档操作步骤。</p><div data-tag="body" class="body"><section id="a7a7db75c6dvu" class="section"><h2 uuid="lrq052mbusvalhy1wcr" id="aecfc50376wa2"><b>明确需求</b></h2><p uuid="lrrmevb90ls1eaaag70c" id="553bc67b3c3i5">在正式开发之前，你可以提前了解，本文档将帮助你在 Stream 模式下，当你与机器人进行单独聊天时，你可以发送消息给机器人，接着通过调用 <a data-tag="xref" id="3207f1a701waz" href="/document/development/chatbots-send-one-on-one-chat-messages-in-batches#" class="xref">批量发送人与机器人会话中机器人消息</a>接口，使机器人回复你的消息。你可以尝试运行“快速体验”提供的示例 demo。这将帮助你对企业机器人的使用有一个直观的体验。</p></section><section id="b7cd05345agro" class="section"><h2 id="a1f8847fe7fer"><b>前提条件</b></h2><ol id="07ff218bb0hfp" start="1"><li id="cc979e4f02tho"><p id="d7353d1c78gyd">完成<a data-tag="xref" id="ecb775c6bbed0" href="/document/dingstart/configure-the-robot-application#" class="xref">配置企业机器人</a>流程（消息接收模式选择 Stream 模式）。</p></li><li id="cc54d256f4prt"><p id="c41ba9c8208cd">完成 OpenAPI 接口的<a data-tag="xref" id="d4130cba4b8dm" href="/document/development/add-api-permission#" class="xref">调用权限申请</a>，需申请<code data-tag="code" id="0abfbcdef11k9" class="code">企业内机器人发送消息权限</code>。</p></li><li id="ef617350a0jix"><p id="677e95f3c0rxe">开发环境准备：</p><table id="c82fa07b61phv" tablewidth="100" tablecolswidth="50 50" autofit="true" class="table"><colgroup colwidth="1*" style="width:50.00%"></colgroup><colgroup colwidth="1*" style="width:50.00%"></colgroup><tbody class="tbody"><tr id="8b2ded15cb9ne"><td id="23851267f09c8" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="9867b5b676z0s"><b>开发环境</b></p></td><td id="0494091509arj" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="bef305794b4v8"><b>说明</b></p></td></tr><tr id="e69b3af40fpk9"><td id="9e7fe355ec9b3" rowspan="1" colspan="1"><p id="5d3c9c299ac74">Java</p></td><td id="d7d1c8e083bd8" rowspan="1" colspan="1"><ul id="cd73fc802cz39"><li id="5032719a6fskh"><p id="37ef56efee1d8">已安装 JDK 1.8 及以上</p></li><li id="7af5613265ipf"><p id="09e6e904e16pl">已安装 Maven 3 </p></li></ul></td></tr><tr id="f798949db5l7g"><td id="9822cbea42fqn" rowspan="1" colspan="1"><p id="ae276c4312qbk">Python</p></td><td id="7fb9e9342a97a" rowspan="1" colspan="1"><ul id="baccb062d8tni"><li id="fcbde0cb192ob"><p id="2ff5f10d0fde3">Python 3 </p></li></ul></td></tr></tbody></table></li></ol></section><section id="58457e0d69u34" class="section"><h2 id="fb32a7c221xdx"><b>快速体验</b></h2><ol id="a4ba48cdd1tbs" start="1"><li id="886a438514w2j"><p id="a0503708af80y">你可以下载示例 demo：</p><table id="ae6357aa23t4n" tablewidth="690" tablecolswidth="345 345" autofit="true" class="table"><colgroup colwidth="1*" style="width:50.00%"></colgroup><colgroup colwidth="1*" style="width:50.00%"></colgroup><tbody class="tbody"><tr id="efa2f150cash5"><td id="852a8bc2a20ty" rowspan="1" style="background-color:#e5e5e5;vertical-align:middle" colspan="1"><p id="c7a08db96ao5c"><b>示例</b></p></td><td id="c2011578b1y6g" rowspan="1" style="background-color:#e5e5e5;vertical-align:middle" colspan="1"><p id="11b4b936f8n8v"><b>说明</b></p></td></tr><tr id="9e2a371d17onf"><td id="db8cb334bf2u6" rowspan="1" style="vertical-align:middle" colspan="1"><p id="30be70dab6aig">Java</p></td><td id="aaafcf273dfj7" rowspan="1" style="vertical-align:middle" colspan="1"><p id="cb56723de4a20"><a id="fa251415d7jpj" href="https://help-static-aliyun-doc.aliyuncs.com/file-manage-files/zh-CN/20250519/llkrhu/stream-robot-private-message-quick-start-java.zip" data-tag="file" class="file">stream-robot-private-message-quick-start-java.zip</a></p></td></tr><tr id="877fb3ffe22m3"><td id="bee1db5df57rc" rowspan="1" style="vertical-align:middle" colspan="1"><p id="36b02dfabahf4">Python</p></td><td id="397b9eb1c2st6" rowspan="1" style="vertical-align:middle" colspan="1"><p id="1e7e0fa5a9pqp"><a id="4dc8f699ad19p" href="https://help-static-aliyun-doc.aliyuncs.com/file-manage-files/zh-CN/20250519/senypi/stream-robot-private-message-quick-start-python.zip" data-tag="file" class="file">stream-robot-private-message-quick-start-python.zip</a></p></td></tr></tbody></table></li><li id="7d57efc19bcoo"><p id="15a2e68126hlz">启动示例 demo：</p><table id="faf1bb9a83gt4" tablewidth="690" tablecolswidth="133 557" autofit="true" class="table"><colgroup colwidth="0.39*" style="width:19.28%"></colgroup><colgroup colwidth="1.61*" style="width:80.72%"></colgroup><tbody class="tbody"><tr id="9d8c84ef66pu3"><td id="68b9a3afbbgm0" rowspan="1" style="background-color:#e5e5e5;vertical-align:middle" colspan="1"><p id="eedc478bf4axw"><b>类型</b></p></td><td id="c5f0fda3912se" rowspan="1" style="background-color:#e5e5e5;vertical-align:middle" colspan="1"><p id="4f09b57c8c4m2"><b>说明</b></p></td></tr><tr id="27fc5a8130ybe"><td id="19115857701dt" rowspan="1" style="vertical-align:middle" colspan="1"><p id="789e265d4b2kd">Java</p></td><td id="944b59131a0lb" rowspan="1" style="vertical-align:middle" colspan="1"><p id="167f7f3ccauu4">1. 修改 application.properties 配置文件的参数：</p><ul id="640aea1871bnv"><li id="d123d1d218keo"><p id="2804c39d817be">app.appKey：应用的 Client ID，详情参考 <a data-tag="xref" id="b0844ddb9ec6m" href="/document/dingstart/basic-concepts-beta#section-pje-9wf-l7c" class="xref">Client ID</a>。</p></li><li id="bd4d6afbbayiz"><p id="c4300acb86lue">app.appSecret：应用的 Client Secret，详情参考<a data-tag="xref" id="3bd2a41389bti" href="/document/dingstart/basic-concepts-beta#section-pje-9wf-l7c" class="xref">Client Secret</a>。</p></li><li id="e18118c12cy7h"><p id="47421db648kpr">robot.code：机器人的编码，详情参考<a data-tag="xref" id="51ddd3af7b7hs" href="/document/development/development-robot-overview#" class="xref">机器人ID</a>。</p></li></ul><p id="ca3066dfa5d2i">2. 启动 Application.java 文件。</p><p id="e55aaaada0bhi">3. 在单聊会话中发送消息给机器人，例如：“你好”。</p><p id="e272dcf2a3xe6"><img src="https://help-static-aliyun-doc.aliyuncs.com/assets/img/zh-CN/7834868071/p768550.png" alt="image.png" placement="break" id="1ddde647d8ipu" class="image break" / /></p><p id="19bb609da3196">此时，你可以看到机器人发送的消息内容。​</p></td></tr><tr id="ddcea5e4b930e"><td id="6ea26488fa8v1" rowspan="1" style="vertical-align:middle" colspan="1"><p id="08cb145415ho9">Python</p></td><td id="677a93f833m55" rowspan="1" style="vertical-align:middle" colspan="1"><p id="6902e47883vs9">1. 引入依赖：<code data-tag="code" id="057aced9f62vj" class="code">pip install alibabacloud-dingtalk dingtalk-stream</code>。</p><p id="aeea20d07e6dr">2. 在当前文件目录下输入启动命令：<code data-tag="code" id="ad475a3b7bmqw" class="code">python3 send_robot_private_message.py --client_id="<span style="color:rgb(0, 177, 77)">your app client id</span>" --client_secret="<span style="color:rgb(0, 177, 77)">your app client secret</span>" --robot_code="<span style="color:rgb(0, 177, 77)">your robot code</span>"</code>。</p><blockquote id="6840d8c7d5zyb">注意替换 client_id、client_secret 和 robot_code，参数如何获取请参考 Java 中的说明。</blockquote><p id="a00a2750954c6">3. 在单聊会话中发送消息给机器人，例如：“你好”。</p></td></tr></tbody></table></li></ol></section><section id="11b3877daaukk" class="section"><h2 id="d50a2cf1be77b"><b>操作步骤</b></h2><blockquote id="2b16e49162cfw">下方为 Java 示例，Python 示例请下载上方体验 demo。</blockquote><ol id="a9113420e8yon"><li id="5aced69289cfj"><p id="7716c9c912st3">添加依赖项到工程的<code data-tag="code" uuid="lrq47p4ys00y1z3c3z" id="680930cf9220q" class="code">pom.xml</code>文件。</p><pre id="uaoqgp" data-tag="codeblock" outputclass="language-xml" code-type="xCode" class="pre codeblock language-xml"><code> &lt;dependencies&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;com.dingtalk.open&lt;/groupId&gt;
+            &lt;artifactId&gt;dingtalk-stream&lt;/artifactId&gt;
+            &lt;version&gt;1.1.0&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
+            &lt;version&gt;2.7.4&lt;/version&gt;
+        &lt;/dependency&gt;
+
+        &lt;dependency&gt;
+            &lt;groupId&gt;com.aliyun&lt;/groupId&gt;
+            &lt;artifactId&gt;dingtalk&lt;/artifactId&gt;
+            &lt;version&gt;2.0.76&lt;/version&gt;
+        &lt;/dependency&gt;
+
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.projectlombok&lt;/groupId&gt;
+            &lt;artifactId&gt;lombok&lt;/artifactId&gt;
+            &lt;version&gt;1.18.26&lt;/version&gt;
+            &lt;optional&gt;true&lt;/optional&gt;
+        &lt;/dependency&gt;
+
+        &lt;dependency&gt;
+            &lt;groupId&gt;com.alibaba&lt;/groupId&gt;
+            &lt;artifactId&gt;fastjson&lt;/artifactId&gt;
+            &lt;version&gt;1.2.68&lt;/version&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;</code></pre></li><li id="e890808aeczb7"><p id="1a39e71070syp">创建 main 方法，并启动。</p><pre id="7husvx" data-tag="codeblock" outputclass="language-java" code-type="xCode" class="pre codeblock language-java"><code>import com.alibaba.fastjson.JSONObject;
+import com.aliyun.dingtalkoauth2_1_0.models.GetAccessTokenRequest;
+import com.aliyun.dingtalkoauth2_1_0.models.GetAccessTokenResponse;
+import com.aliyun.dingtalkrobot_1_0.Client;
+import com.aliyun.dingtalkrobot_1_0.models.BatchSendOTOHeaders;
+import com.aliyun.dingtalkrobot_1_0.models.BatchSendOTORequest;
+import com.aliyun.dingtalkrobot_1_0.models.BatchSendOTOResponse;
+import com.aliyun.tea.TeaException;
+import com.aliyun.teaopenapi.models.Config;
+import com.aliyun.teautil.models.RuntimeOptions;
+import com.dingtalk.open.app.api.OpenDingTalkClient;
+import com.dingtalk.open.app.api.OpenDingTalkStreamClientBuilder;
+import com.dingtalk.open.app.api.callback.OpenDingTalkCallbackListener;
+import com.dingtalk.open.app.api.security.AuthClientCredential;
+import lombok.extern.slf4j.Slf4j;
+
+import java.util.Objects;
+
+@Slf4j
+public class sendPrivateMessage {
+
+    public static final String CLIENT_ID = "&lt; your client id&gt;";
+
+    public static final String CLIENT_SECRET = "&lt;your client secret&gt;";
+
+    public static void main(String[] args) throws Exception {
+        OpenDingTalkClient client = OpenDingTalkStreamClientBuilder
+                .custom()
+                .credential(new AuthClientCredential(CLIENT_ID, CLIENT_SECRET))
+                .registerCallbackListener("/v1.0/im/bot/messages/get", new sendPrivateMessage.RobotMsgCallbackConsumer())
+                .build();
+        client.start();
+    }
+
+    public static class RobotMsgCallbackConsumer implements OpenDingTalkCallbackListener&lt;JSONObject, JSONObject&gt; {
+
+        /*
+         * @param request
+         * @return
+         */
+        @Override
+        public JSONObject execute(JSONObject request) {
+            String userId = request.get("senderStaffId").toString();
+            String content = request.getJSONObject("text").getString("content");
+            String robotCode = request.get("robotCode").toString();
+            log.info("receive bot message from user={}, msg={},robotCode={} ", userId, content,robotCode);
+
+            BatchSendOTOHeaders batchSendOTOHeaders = new BatchSendOTOHeaders();
+            batchSendOTOHeaders.setXAcsDingtalkAccessToken(getToken());
+
+            BatchSendOTORequest batchSendOTORequest = new BatchSendOTORequest();
+            batchSendOTORequest.setMsgKey("sampleText");
+            batchSendOTORequest.setRobotCode(robotCode);
+            batchSendOTORequest.setUserIds(java.util.Arrays.asList(userId));
+
+            JSONObject msgParam = new JSONObject();
+            msgParam.put("content", "java-getting-start say : " + "hello");
+            batchSendOTORequest.setMsgParam(msgParam.toJSONString());
+            try {
+                Config config = new Config();
+                config.protocol = "https";
+                config.regionId = "central";
+                com.aliyun.dingtalkrobot_1_0.Client client = new Client(config);
+                BatchSendOTOResponse batchSendOTOResponse = client.batchSendOTOWithOptions(batchSendOTORequest, batchSendOTOHeaders, new RuntimeOptions());
+                if (Objects.isNull(batchSendOTOResponse) || Objects.isNull(batchSendOTOResponse.getBody())) {
+                    log.error("RobotPrivateMessages_send batchSendOTOResponse return error, response={}",
+                            batchSendOTOResponse);
+                    return null;
+                }
+                return new JSONObject();
+            } catch (TeaException e) {
+                log.error("RobotPrivateMessages_send batchSendOTOResponse throw TeaException, errCode={}, " +
+                        "errorMessage={}", e.getCode(), e.getMessage(), e);
+                throw e;
+            } catch (Exception e) {
+                log.error("RobotPrivateMessages_send batchSendOTOResponse throw Exception", e);
+                try {
+                    throw e;
+                } catch (Exception ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        }
+
+        public static String getToken() {
+            GetAccessTokenRequest getAccessTokenRequest = new GetAccessTokenRequest();
+            getAccessTokenRequest.setAppKey(CLIENT_ID);
+            getAccessTokenRequest.setAppSecret(CLIENT_SECRET);
+            Config config = new Config();
+            config.protocol = "https";
+            config.regionId = "central";
+            try {
+                com.aliyun.dingtalkoauth2_1_0.Client client = new com.aliyun.dingtalkoauth2_1_0.Client(config);
+                GetAccessTokenResponse accessToken = client.getAccessToken(getAccessTokenRequest);
+                return accessToken.getBody().getAccessToken();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+}
+</code></pre></li><li id="29bb1d74c6dsz"><p id="ac9f8017ce3vt">你可以在单聊会话中发送消息给机器人。​</p><p id="02c108b28bxf1"><img src="https://help-static-aliyun-doc.aliyuncs.com/assets/img/zh-CN/7834868071/p768550.png" alt="image.png" placement="break" id="83fb7d9e9bztl" class="image break" / /></p><p id="81e496ce3fcsy">此时，你可以看到机器人发送的消息内容。​</p></li></ol></section><section id="16e9ac433eqff" class="section"><h2 id="401fec0d95ghh"><b>相关文档</b></h2><ul id="6c404298a3p8i"><li id="6777a95c3acpa"><p id="ad5a351ad53uo"><a data-tag="xref" id="bc996fcd56s2w" href="/document/dingstart/robot-receive-message#" class="xref">机器人接收消息</a></p></li><li id="1cb10e6ec0ndi"><p id="cf4adc707cyas"><a data-tag="xref" id="54197440c9hsv" href="/document/development/introduction-to-stream-mode#" class="xref">服务端Stream模式</a></p></li><li id="cb00168988h5u"><p id="808c9ff5f1981"><a data-tag="xref" id="b5fe4a2897e0s" href="/document/dingstart/types-of-messages-sent-by-robots#" class="xref">企业机器人发送消息的消息类型</a></p></li><li id="0741f7b8e49dt"><p id="c4555a32f7vtp"><a data-tag="xref" id="b285663a4bf7u" href="/document/development/chatbots-send-one-on-one-chat-messages-in-batches#" class="xref">批量发送人与机器人会话中机器人消息</a></p></li></ul><blockquote id="894fc0b0c1pm1">如果企业机器人发送消息的消息类型无法满足你的需求，你可以参考<a data-tag="xref" id="57ffc95e4dt9g" href="/document/development/overview-card#" class="xref">互动卡片</a>。</blockquote></section></div></main></body></html>

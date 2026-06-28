@@ -1,0 +1,427 @@
+<!DOCTYPE html><html><head><meta charset="utf8" / /><meta name="searchtitle" content="" / /><meta name="keywords" content="" / /><meta name="author" content="" / /><title>根据迁移后的unionId查询原unionId</title><meta name="gmtModify" content="2025-09-11 21:01:44" / /><meta name="gmtModify" content="2026-06-01 15:43:34" / /></head><body data-tag="topic" id="doc-api-dingtalk-GetUnionIdByMigrationUnionId" class="topic"><main id="b26dcf5d6ck8j" data-init-id="doc-api-dingtalk_GetUnionIdByMigrationUnionId"><h1 data-tag="title" id="h1-jxd-j3k-wrb" class="title">根据迁移后的unionId查询原unionId</h1><p data-tag="shortdesc" id="bcd659a6c2k9o" class="shortdesc">普通帐号迁移为专属帐号后，根据迁移后的unionId查询原unionId</p><div data-tag="conbody" outputclass="icms-api-reference" class="icms-api-reference conbody"><section id="section-request-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-request-1" data-tag="h2" class="h2">请求</h2><section id="section-request-basic-info" class="section"><h3 id="heading-request-basic-info" data-tag="h3" class="h3">基本信息</h3><table tablewidth="648" tablecolswidth="216 432" autofit="false" class="table"><colgroup colwidth="1*" style="width:33.33%"></colgroup><colgroup colwidth="2*" style="width:66.67%"></colgroup><tbody class="tbody"><tr><td rowspan="1" style="background-color:#e5e5e5" colspan="1"><p>字段</p></td><td rowspan="1" style="background-color:#e5e5e5" colspan="1"><p>值</p></td></tr><tr><td rowspan="1" colspan="1"><p>HTTP URL</p></td><td rowspan="1" colspan="1"><p>https://api.dingtalk.com/v1.0/contact/orgAccount/getUnionIdByMigrationUnionIds</p></td></tr><tr><td rowspan="1" colspan="1"><p>HTTP Method</p></td><td rowspan="1" colspan="1"><p>GET</p></td></tr><tr><td rowspan="1" colspan="1"><p>支持的应用类型</p></td><td rowspan="1" colspan="1"><p><span data-tag="ph" id="ph-request-basic-app-type-apptype-0" class="ph ph-app-type" data-ph-raw-text="appType-企业内部应用">appType-企业内部应用</span>　<span data-tag="ph" id="ph-request-basic-app-type-apptype-1" class="ph ph-app-type" data-ph-raw-text="appType-第三方企业应用">appType-第三方企业应用</span></p></td></tr><tr><td rowspan="1" colspan="1"><p>权限要求</p></td><td rowspan="1" colspan="1"><p><span data-tag="ph" id="ph-request-basic-permission-permission-contact-orgaccountmigration-read-0" class="ph-permission ph" data-ph-raw-text="permission-Contact.OrgAccountMigration.Read-通讯录企业账号迁移数据读权限" data-permission-id="permission-Contact.OrgAccountMigration.Read" data-permission-code="Contact.OrgAccountMigration.Read" data-permission-detail-api="/document/api/permission/detail" data-permission-query-param="code">permission-Contact.OrgAccountMigration.Read-通讯录企业账号迁移数据读权限</span></p></td></tr></tbody></table></section><section id="section-request-header-parameter" class="section"><h3 data-tag="h3" id="h2-avv-lnn-xok" class="h3 title">请求头</h3><table id="62516c720azjr" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="5a4bc50b242v2"><td id="071bb6745dwkw" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="5c8e77a5034e9">名称</p></td><td id="fedf5b457c8ac" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="e3645ea6ddagl">类型</p></td><td id="0e1f65d690494" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="ab350f4e50d2c">是否必填</p></td><td id="6689935bb3sta" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="2b9e7b0ca1cdz">描述</p></td></tr><tr id="3d796d28a2sx3"><td id="d1052c49a0ist" rowspan="1" colspan="1"><p id="70cf1163b308d">x-acs-dingtalk-access-token</p></td><td id="3770bb7bce78n" rowspan="1" colspan="1"><p id="1d579980576gn">String</p></td><td id="f7df9171b242y" rowspan="1" colspan="1"><p id="c8e01ca3afqb9">是</p></td><td id="a11fc88b744ai" rowspan="1" colspan="1"><p id="6b7f3c7e1ea18">调用该接口的访问凭证，通过以下获取：</p><ul id="8fba8ccbectnj"><li id="dace943c20vbe"><p id="ca09404059yfy">企业内部应用，调用<a id="b080b5c3c9g13" href="https://open.dingtalk.com/document/development/obtain-the-access-token-of-an-internal-app#" class="xref">获取企业内部应用的accessToken</a>接口获取。</p></li><li id="4198465b2bgql"><p id="65bfc18266teh">第三方企业应用，调用<a id="68449fc8f3xbf" href="https://open.dingtalk.com/document/development/obtain-the-access-token-of-the-authorized-enterprise-1#" class="xref">获取第三方应用授权企业的accessToken</a>接口获取。</p></li></ul></td></tr></tbody></table></section><section id="section-request-query-parameter" class="section"><h3 data-tag="h3" id="h2-fzw-62k-zzf" class="h3 title">查询参数</h3><table id="91b03fe92cpqr" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="55fe767f582na"><td id="1865bc320abb8" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="2106718300c0g">名称</p></td><td id="fa6c09e941wgl" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="96970ccfe1eox">类型</p></td><td id="8d0694e1b1j4b" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="18fa4ae887db8">是否必填</p></td><td id="901ae119a0z1t" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="27ffa5f7d89ey">描述</p></td></tr><tr id="0a036609a4x72"><td id="20532435d4zk5" rowspan="1" colspan="1"><p id="d5704aaff6zy2">migrationUnionId</p></td><td id="0ff68e7e97dxa" rowspan="1" colspan="1"><p id="0967259b97t1i">String</p></td><td id="409fe1b982884" rowspan="1" colspan="1"><p id="167f894814sxq">是</p></td><td id="7152825fb3bun" rowspan="1" colspan="1"><p id="d302c6a8724m5">迁移后企业账号的unionId，可调用<a id="27095c7f54z94" href="https://open.dingtalk.com/document/development/queries-the-details-of-a-dedicated-account#" class="xref">查询企业账号用户详情</a>接口获得unionid参数值。</p></td></tr></tbody></table></section><section id="section-request-body-example" class="section"><h3 id="h3-request-body-example" data-tag="h3" class="h3">请求示例</h3><div id="figure-emm-1s8-bhu" outputclass="tabbed-codeblock" data-tag="fig" class="tabbed-codeblock-box"><div class="tab-box"></div><input type="radio" name="check-figure-emm-1s8-bhu" id="figure-emm-1s8-bhu-HTTP-tab" checked="checked" /><label for="figure-emm-1s8-bhu-HTTP-tab">HTTP</label><div class="codeblock-item"><pre id="codeblock-37w-uad-dj6" outputclass="language-HTTP" code-type="xCode" data-tag="codeblock" class="pre codeblock language-HTTP"><code>GET /v1.0/contact/orgAccount/getUnionIdByMigrationUnionIds?migrationUnionId=yyyy HTTP/1.1
+Host:api.dingtalk.com
+x-acs-dingtalk-access-token:BExxxx
+Content-Type:application/json</code></pre></div><input type="radio" name="check-figure-emm-1s8-bhu" id="figure-emm-1s8-bhu-java-tab" /><label for="figure-emm-1s8-bhu-java-tab">Java</label><div class="codeblock-item"><pre id="codeblock-jom-qic-axd" outputclass="language-java" code-type="xCode" data-tag="codeblock" class="pre codeblock language-java"><code>// This file is auto-generated, don't edit it. Thanks.
+package com.aliyun.sample;
+
+import com.aliyun.tea.*;
+import com.aliyun.teautil.*;
+import com.aliyun.teautil.models.*;
+import com.aliyun.dingtalkcontact_1_0.*;
+import com.aliyun.dingtalkcontact_1_0.models.*;
+import com.aliyun.teaopenapi.*;
+import com.aliyun.teaopenapi.models.*;
+
+public class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Client
+     * @throws Exception
+     */
+    public static com.aliyun.dingtalkcontact_1_0.Client createClient() throws Exception {
+        Config config = new Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        return new com.aliyun.dingtalkcontact_1_0.Client(config);
+    }
+
+    public static void main(String[] args_) throws Exception {
+        java.util.List&lt;String&gt; args = java.util.Arrays.asList(args_);
+        com.aliyun.dingtalkcontact_1_0.Client client = Sample.createClient();
+        GetUnionIdByMigrationUnionIdHeaders getUnionIdByMigrationUnionIdHeaders = new GetUnionIdByMigrationUnionIdHeaders();
+        getUnionIdByMigrationUnionIdHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        GetUnionIdByMigrationUnionIdRequest getUnionIdByMigrationUnionIdRequest = new GetUnionIdByMigrationUnionIdRequest()
+                .setMigrationUnionId("yyyy");
+        try {
+            client.getUnionIdByMigrationUnionIdWithOptions(getUnionIdByMigrationUnionIdRequest, getUnionIdByMigrationUnionIdHeaders, new RuntimeOptions());
+        } catch (TeaException err) {
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        } catch (Exception _err) {
+            TeaException err = new TeaException(_err.getMessage(), _err);
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        }        
+    }
+}</code></pre></div><input type="radio" name="check-figure-emm-1s8-bhu" id="figure-emm-1s8-bhu-python-tab" /><label for="figure-emm-1s8-bhu-python-tab">Python</label><div class="codeblock-item"><pre id="codeblock-fk7-etd-0iq" outputclass="language-python" code-type="xCode" data-tag="codeblock" class="pre codeblock language-python"><code># -*- coding: utf-8 -*-
+# This file is auto-generated, don't edit it. Thanks.
+import sys
+
+from typing import List
+
+from alibabacloud_dingtalk.contact_1_0.client import Client as dingtalkcontact_1_0Client
+from alibabacloud_tea_openapi import models as open_api_models
+from alibabacloud_dingtalk.contact_1_0 import models as dingtalkcontact__1__0_models
+from alibabacloud_tea_util import models as util_models
+from alibabacloud_tea_util.client import Client as UtilClient
+
+
+class Sample:
+    def __init__(self):
+        pass
+
+    @staticmethod
+    def create_client() -&gt; dingtalkcontact_1_0Client:
+        """
+        使用 Token 初始化账号Client
+        @return: Client
+        @throws Exception
+        """
+        config = open_api_models.Config()
+        config.protocol = 'https'
+        config.region_id = 'central'
+        return dingtalkcontact_1_0Client(config)
+
+    @staticmethod
+    def main(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        get_union_id_by_migration_union_id_headers = dingtalkcontact__1__0_models.GetUnionIdByMigrationUnionIdHeaders()
+        get_union_id_by_migration_union_id_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        get_union_id_by_migration_union_id_request = dingtalkcontact__1__0_models.GetUnionIdByMigrationUnionIdRequest(
+            migration_union_id='yyyy'
+        )
+        try:
+            client.get_union_id_by_migration_union_id_with_options(get_union_id_by_migration_union_id_request, get_union_id_by_migration_union_id_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+    @staticmethod
+    async def main_async(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        get_union_id_by_migration_union_id_headers = dingtalkcontact__1__0_models.GetUnionIdByMigrationUnionIdHeaders()
+        get_union_id_by_migration_union_id_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        get_union_id_by_migration_union_id_request = dingtalkcontact__1__0_models.GetUnionIdByMigrationUnionIdRequest(
+            migration_union_id='yyyy'
+        )
+        try:
+            await client.get_union_id_by_migration_union_id_with_options_async(get_union_id_by_migration_union_id_request, get_union_id_by_migration_union_id_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+
+if __name__ == '__main__':
+    Sample.main(sys.argv[1:])</code></pre></div><input type="radio" name="check-figure-emm-1s8-bhu" id="figure-emm-1s8-bhu-php-tab" /><label for="figure-emm-1s8-bhu-php-tab">PHP</label><div class="codeblock-item"><pre id="codeblock-afe-b1v-ucw" outputclass="language-php" code-type="xCode" data-tag="codeblock" class="pre codeblock language-php"><code>&lt;?php
+
+// This file is auto-generated, don't edit it. Thanks.
+namespace AlibabaCloud\SDK\Sample;
+
+use AlibabaCloud\SDK\Dingtalk\Vcontact_1_0\Dingtalk;
+use \Exception;
+use AlibabaCloud\Tea\Exception\TeaError;
+use AlibabaCloud\Tea\Utils\Utils;
+
+use Darabonba\OpenApi\Models\Config;
+use AlibabaCloud\SDK\Dingtalk\Vcontact_1_0\Models\GetUnionIdByMigrationUnionIdHeaders;
+use AlibabaCloud\SDK\Dingtalk\Vcontact_1_0\Models\GetUnionIdByMigrationUnionIdRequest;
+use AlibabaCloud\Tea\Utils\Utils\RuntimeOptions;
+
+class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Dingtalk Client
+     */
+    public static function createClient(){
+        $config = new Config([]);
+        $config-&gt;protocol = "https";
+        $config-&gt;regionId = "central";
+        return new Dingtalk($config);
+    }
+
+    /**
+     * @param string[] $args
+     * @return void
+     */
+    public static function main($args){
+        $client = self::createClient();
+        $getUnionIdByMigrationUnionIdHeaders = new GetUnionIdByMigrationUnionIdHeaders([]);
+        $getUnionIdByMigrationUnionIdHeaders-&gt;xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        $getUnionIdByMigrationUnionIdRequest = new GetUnionIdByMigrationUnionIdRequest([
+            "migrationUnionId" =&gt; "yyyy"
+        ]);
+        try {
+            $client-&gt;getUnionIdByMigrationUnionIdWithOptions($getUnionIdByMigrationUnionIdRequest, $getUnionIdByMigrationUnionIdHeaders, new RuntimeOptions([]));
+        }
+        catch (Exception $err) {
+            if (!($err instanceof TeaError)) {
+                $err = new TeaError([], $err-&gt;getMessage(), $err-&gt;getCode(), $err);
+            }
+            if (!Utils::empty_($err-&gt;code) &amp;&amp; !Utils::empty_($err-&gt;message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+        }
+    }
+}
+$path = __DIR__ . \DIRECTORY_SEPARATOR . '..' . \DIRECTORY_SEPARATOR . 'vendor' . \DIRECTORY_SEPARATOR . 'autoload.php';
+if (file_exists($path)) {
+    require_once $path;
+}
+Sample::main(array_slice($argv, 1));</code></pre></div><input type="radio" name="check-figure-emm-1s8-bhu" id="figure-emm-1s8-bhu-go-tab" /><label for="figure-emm-1s8-bhu-go-tab">Go</label><div class="codeblock-item"><pre id="codeblock-fqx-a8l-jfl" outputclass="language-go" code-type="xCode" data-tag="codeblock" class="pre codeblock language-go"><code>// This file is auto-generated, don't edit it. Thanks.
+package main
+
+import (
+  "os"
+  util  "github.com/alibabacloud-go/tea-utils/service"
+  dingtalkcontact_1_0  "github.com/alibabacloud-go/dingtalk/contact_1_0"
+  openapi  "github.com/alibabacloud-go/darabonba-openapi/client"
+  "github.com/alibabacloud-go/tea/tea"
+)
+
+
+/**
+ * 使用 Token 初始化账号Client
+ * @return Client
+ * @throws Exception
+ */
+func CreateClient () (_result *dingtalkcontact_1_0.Client, _err error) {
+  config := &amp;openapi.Config{}
+  config.Protocol = tea.String("https")
+  config.RegionId = tea.String("central")
+  _result = &amp;dingtalkcontact_1_0.Client{}
+  _result, _err = dingtalkcontact_1_0.NewClient(config)
+  return _result, _err
+}
+
+func _main (args []*string) (_err error) {
+  client, _err := CreateClient()
+  if _err != nil {
+    return _err
+  }
+
+  getUnionIdByMigrationUnionIdHeaders := &amp;dingtalkcontact_1_0.GetUnionIdByMigrationUnionIdHeaders{}
+  getUnionIdByMigrationUnionIdHeaders.XAcsDingtalkAccessToken = tea.String("&lt;your access token&gt;")
+  getUnionIdByMigrationUnionIdRequest := &amp;dingtalkcontact_1_0.GetUnionIdByMigrationUnionIdRequest{
+    MigrationUnionId: tea.String("yyyy"),
+  }
+  tryErr := func()(_e error) {
+    defer func() {
+      if r := tea.Recover(recover()); r != nil {
+        _e = r
+      }
+    }()
+    _, _err = client.GetUnionIdByMigrationUnionIdWithOptions(getUnionIdByMigrationUnionIdRequest, getUnionIdByMigrationUnionIdHeaders, &amp;util.RuntimeOptions{})
+    if _err != nil {
+      return _err
+    }
+
+    return nil
+  }()
+
+  if tryErr != nil {
+    var err = &amp;tea.SDKError{}
+    if _t, ok := tryErr.(*tea.SDKError); ok {
+      err = _t
+    } else {
+      err.Message = tea.String(tryErr.Error())
+    }
+    if !tea.BoolValue(util.Empty(err.Code)) &amp;&amp; !tea.BoolValue(util.Empty(err.Message)) {
+      // err 中含有 code 和 message 属性，可帮助开发定位问题
+    }
+
+  }
+  return _err
+}
+
+
+func main() {
+  err := _main(tea.StringSlice(os.Args[1:]))
+  if err != nil {
+    panic(err)
+  }
+}</code></pre></div><input type="radio" name="check-figure-emm-1s8-bhu" id="figure-emm-1s8-bhu-nodejs-tab" /><label for="figure-emm-1s8-bhu-nodejs-tab">Node.js</label><div class="codeblock-item"><pre id="codeblock-74h-kog-ts6" outputclass="language-nodejs" code-type="xCode" data-tag="codeblock" class="pre codeblock language-nodejs"><code>// This file is auto-generated, don't edit it
+import Util, * as $Util from '@alicloud/tea-util';
+import dingtalkcontact_1_0, * as $dingtalkcontact_1_0 from '@alicloud/dingtalk/contact_1_0';
+import OpenApi, * as $OpenApi from '@alicloud/openapi-client';
+import * as $tea from '@alicloud/tea-typescript';
+
+
+export default class Client {
+
+  /**
+   * 使用 Token 初始化账号Client
+   * @return Client
+   * @throws Exception
+   */
+  static createClient(): dingtalkcontact_1_0 {
+    let config = new $OpenApi.Config({ });
+    config.protocol = "https";
+    config.regionId = "central";
+    return new dingtalkcontact_1_0(config);
+  }
+
+  static async main(args: string[]): Promise&lt;void&gt; {
+    let client = Client.createClient();
+    let getUnionIdByMigrationUnionIdHeaders = new $dingtalkcontact_1_0.GetUnionIdByMigrationUnionIdHeaders({ });
+    getUnionIdByMigrationUnionIdHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+    let getUnionIdByMigrationUnionIdRequest = new $dingtalkcontact_1_0.GetUnionIdByMigrationUnionIdRequest({
+      migrationUnionId: "yyyy",
+    });
+    try {
+      await client.getUnionIdByMigrationUnionIdWithOptions(getUnionIdByMigrationUnionIdRequest, getUnionIdByMigrationUnionIdHeaders, new $Util.RuntimeOptions({ }));
+    } catch (err) {
+      if (!Util.empty(err.code) &amp;&amp; !Util.empty(err.message)) {
+        // err 中含有 code 和 message 属性，可帮助开发定位问题
+      }
+
+    }    
+  }
+
+}
+
+Client.main(process.argv.slice(2));</code></pre></div><input type="radio" name="check-figure-emm-1s8-bhu" id="figure-emm-1s8-bhu-csharp-tab" /><label for="figure-emm-1s8-bhu-csharp-tab">C#</label><div class="codeblock-item"><pre id="codeblock-cgb-7ag-9ib" outputclass="language-csharp" code-type="xCode" data-tag="codeblock" class="pre codeblock language-csharp"><code>// This file is auto-generated, don't edit it. Thanks.
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
+
+using Tea;
+using Tea.Utils;
+
+
+namespace AlibabaCloud.SDK.Sample
+{
+    public class Sample 
+    {
+
+        /**
+         * 使用 Token 初始化账号Client
+         * @return Client
+         * @throws Exception
+         */
+        public static AlibabaCloud.SDK.Dingtalkcontact_1_0.Client CreateClient()
+        {
+            AlibabaCloud.OpenApiClient.Models.Config config = new AlibabaCloud.OpenApiClient.Models.Config();
+            config.Protocol = "https";
+            config.RegionId = "central";
+            return new AlibabaCloud.SDK.Dingtalkcontact_1_0.Client(config);
+        }
+
+        public static void Main(string[] args)
+        {
+            AlibabaCloud.SDK.Dingtalkcontact_1_0.Client client = CreateClient();
+            AlibabaCloud.SDK.Dingtalkcontact_1_0.Models.GetUnionIdByMigrationUnionIdHeaders getUnionIdByMigrationUnionIdHeaders = new AlibabaCloud.SDK.Dingtalkcontact_1_0.Models.GetUnionIdByMigrationUnionIdHeaders();
+            getUnionIdByMigrationUnionIdHeaders.XAcsDingtalkAccessToken = "&lt;your access token&gt;";
+            AlibabaCloud.SDK.Dingtalkcontact_1_0.Models.GetUnionIdByMigrationUnionIdRequest getUnionIdByMigrationUnionIdRequest = new AlibabaCloud.SDK.Dingtalkcontact_1_0.Models.GetUnionIdByMigrationUnionIdRequest
+            {
+                MigrationUnionId = "yyyy",
+            };
+            try
+            {
+                client.GetUnionIdByMigrationUnionIdWithOptions(getUnionIdByMigrationUnionIdRequest, getUnionIdByMigrationUnionIdHeaders, new AlibabaCloud.TeaUtil.Models.RuntimeOptions());
+            }
+            catch (TeaException err)
+            {
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+            catch (Exception _err)
+            {
+                TeaException err = new TeaException(new Dictionary&lt;string, object&gt;
+                {
+                    { "message", _err.Message }
+                });
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+        }
+
+
+    }
+}</code></pre></div><input type="radio" name="check-figure-emm-1s8-bhu" id="figure-emm-1s8-bhu-cpp-tab" /><label for="figure-emm-1s8-bhu-cpp-tab">C++</label><div class="codeblock-item"><pre id="codeblock-ov2-3it-7ex" outputclass="language-cpp" code-type="xCode" data-tag="codeblock" class="pre codeblock language-cpp"><code>// This file is auto-generated, don't edit it. Thanks.
+
+#include &lt;alibabacloud/dingtalkcontact__1__0.hpp&gt;
+#include &lt;alibabacloud/open_api.hpp&gt;
+#include &lt;boost/any.hpp&gt;
+#include &lt;darabonba/core.hpp&gt;
+#include &lt;darabonba/util.hpp&gt;
+#include &lt;iostream&gt;
+#include &lt;map&gt;
+
+using namespace std;
+
+Alibabacloud_Dingtalkcontact_1_0::Client createClient() {
+  shared_ptr&lt;Alibabacloud_OpenApi::Config&gt; config = make_shared&lt;Alibabacloud_OpenApi::Config&gt;();
+  config-&gt;protocol = make_shared&lt;string&gt;("https");
+  config-&gt;regionId = make_shared&lt;string&gt;("central");
+  return Alibabacloud_Dingtalkcontact_1_0::Client(config);
+}
+
+int main(int argc, char *args[]) {
+  args++;
+  shared_ptr&lt;Alibabacloud_Dingtalkcontact_1_0::Client&gt; client = make_shared&lt;Alibabacloud_Dingtalkcontact_1_0::Client&gt;(createClient());
+  shared_ptr&lt;Alibabacloud_Dingtalkcontact_1_0::GetUnionIdByMigrationUnionIdHeaders&gt; getUnionIdByMigrationUnionIdHeaders = make_shared&lt;Alibabacloud_Dingtalkcontact_1_0::GetUnionIdByMigrationUnionIdHeaders&gt;();
+  getUnionIdByMigrationUnionIdHeaders-&gt;xAcsDingtalkAccessToken = make_shared&lt;string&gt;("&lt;your access token&gt;");
+  shared_ptr&lt;Alibabacloud_Dingtalkcontact_1_0::GetUnionIdByMigrationUnionIdRequest&gt; getUnionIdByMigrationUnionIdRequest = make_shared&lt;Alibabacloud_Dingtalkcontact_1_0::GetUnionIdByMigrationUnionIdRequest&gt;(map&lt;string, boost::any&gt;({
+    {"migrationUnionId", boost::any(string("yyyy"))}
+  }));
+  try {
+    client-&gt;getUnionIdByMigrationUnionIdWithOptions(getUnionIdByMigrationUnionIdRequest, getUnionIdByMigrationUnionIdHeaders, make_shared&lt;Darabonba_Util::RuntimeOptions&gt;(Darabonba_Util::RuntimeOptions()));
+  }
+  catch (std::exception &amp;err) {
+    if (!Darabonba_Util::Client::empty(err.code) &amp;&amp; !Darabonba_Util::Client::empty(err.message)) {
+      // err 中含有 code 和 message 属性，可帮助开发定位问题
+    }
+  }
+}</code></pre></div></div></section></section><section id="section-response-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-response-1" data-tag="h2" class="h2">响应</h2><section id="section-response-parameter" class="section"><h3 data-tag="h3" id="h2-tld-ghf-zik" class="h3 title">响应体</h3><table id="0186d70dd40uu" tablewidth="710" tablecolswidth="213 142 355" autofit="false" class="table"><colgroup colwidth="0.9*" style="width:30.00%"></colgroup><colgroup colwidth="0.6*" style="width:20.00%"></colgroup><colgroup colwidth="1.5*" style="width:50.00%"></colgroup><tbody class="tbody"><tr id="d28ed62640pm6"><td id="e44f53afafz00" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="358d5476235t6">名称</p></td><td id="0f3859af1aafq" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="ee148ae6f15dl">类型</p></td><td id="bb77631c44ysd" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="d58911af5bulb">描述</p></td></tr><tr outputclass="row row-level-1" id="4d19ead50bind" class="row row-level-1 row-level-1 row"><td id="03233b534b0we" rowspan="1" colspan="1"><p id="25bf23fbbfmkf">unionId</p></td><td id="57caca8bf3rx2" rowspan="1" colspan="1"><p id="db34053e5b81d">String</p></td><td id="6d3607dfb1onc" rowspan="1" colspan="1"><p id="1dcf089b30nw6">原普通账号的unionId。</p></td></tr></tbody></table></section><section id="section-response-body-example" class="section"><h3 id="h3-response-body-example" data-tag="h3" class="h3">响应体示例</h3><pre id="d48e026abbi7q" outputclass="language-json" code-type="xCode" data-tag="codeblock" class="pre codeblock language-json"><code>HTTP/1.1 200 OK
+Content-Type:application/json
+
+{
+  "unionId" : "zzzz"
+}</code></pre></section><section id="section-error-code-1" class="section"><h3 id="h3-error-code-1" data-tag="h3" class="h3">错误码</h3><p data-tag="p" id="p-error-code-global-guide" class="p">若调用该接口报错，可根据错误信息在<a id="a-error-code-global-guide" href="https://open.dingtalk.com/document/development/server-api-error-codes-1">全局错误码</a>文档中查找解决方案。</p><table id="dff744589bu7t" tablewidth="709" tablecolswidth="142 177 177 213" autofit="false" class="table">
+  <colgroup colwidth="0.8*" style="width:20.03%"></colgroup>
+  <colgroup colwidth="1*" style="width:24.96%"></colgroup>
+  <colgroup colwidth="1*" style="width:24.96%"></colgroup>
+  <colgroup colwidth="1.2*" style="width:30.04%"></colgroup>
+  <tbody class="tbody">
+   <tr id="8681ad61afl27">
+    <td id="53257bd8602wk" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="ec276e906f11m">HttpCode</p></td>
+    <td id="c806819eees0y" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="811feba7c0fn0">错误码</p></td>
+    <td id="ac6bc259824u0" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="ed2aac492ehby">错误信息</p></td>
+    <td id="afaef6ebd83ii" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="3637170486jno">说明</p></td>
+   </tr>
+   <tr id="981fc3b1eb7jc">
+    <td id="66076d8e6062p" rowspan="1" colspan="1"><p id="ac14cd5478o8q">400</p></td>
+    <td id="1bb7251a30r41" rowspan="1" colspan="1"><p id="22910773a6cmz">invalid.param</p></td>
+    <td id="6d20407247w3x" rowspan="1" colspan="1"><p id="6b036a1b94gqe">无效参数</p></td>
+    <td id="10c8f328c3y4y" rowspan="1" colspan="1"><p id="55f875bfe1qyb">无效参数</p></td>
+   </tr>
+   <tr id="b2ff564e5dvxw">
+    <td id="bafefe1e30m05" rowspan="1" colspan="1"><p id="5486029f910mv">400</p></td>
+    <td id="24fc7322c67ti" rowspan="1" colspan="1"><p id="be4c6ba351dfx">invalid.userid</p></td>
+    <td id="ee01230646291" rowspan="1" colspan="1"><p id="298ed969f6vkf">找不到该用户</p></td>
+    <td id="c8479f2f1dt9p" rowspan="1" colspan="1"><p id="3bbc417d10ccw">找不到该用户</p></td>
+   </tr>
+   <tr id="17156c7dacpwu">
+    <td id="bd7cfe5bc8rrb" rowspan="1" colspan="1"><p id="13a2ed430aj1h">400</p></td>
+    <td id="fc1b77b6cag8q" rowspan="1" colspan="1"><p id="fdbdf1f938rk6">illegal.migration.unionId</p></td>
+    <td id="2d82898cf8o4n" rowspan="1" colspan="1"><p id="2448025a42t7n">非法的migrationUnionId</p></td>
+    <td id="efa0bfa37bapr" rowspan="1" colspan="1"><p id="e8c3aa444ek19">非法的migrationUnionId</p></td>
+   </tr>
+   <tr id="7a7b7a1c45y16">
+    <td id="fee47777a6j1r" rowspan="1" colspan="1"><p id="4f60b1e4d1jlw">500</p></td>
+    <td id="247df400afilu" rowspan="1" colspan="1"><p id="4656661805l52">system.busy</p></td>
+    <td id="f2952bf269apu" rowspan="1" colspan="1"><p id="cef62f870aqsm">系统繁忙</p></td>
+    <td id="7fba259678zlj" rowspan="1" colspan="1"><p id="948b3f8ae2cfu">系统繁忙</p></td>
+   </tr>
+  </tbody>
+ </table></section></section></div></main>
+</body></html>

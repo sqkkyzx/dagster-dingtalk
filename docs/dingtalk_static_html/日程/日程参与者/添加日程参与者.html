@@ -1,0 +1,394 @@
+<!DOCTYPE html><html><head><meta charset="utf8" / /><meta name="gmtModify" content="2025-09-11 21:02:33" / /><meta name="searchtitle" content="" / /><meta name="keywords" content="" / /><meta name="author" content="" / /><title>添加日程参与者</title><meta name="gmtModify" content="2026-06-02 09:25:03" / /></head><body data-tag="topic" id="doc-api-dingtalk-AddAttendee" class="topic"><main id="3ac93b57b1pv5" data-init-id="doc-api-dingtalk_AddAttendee"><h1 data-tag="title" id="h1-2dg-ywo-acn" class="title">添加日程参与者</h1><p data-tag="shortdesc" id="507d8d8935726" class="shortdesc">调用本接口，添加日程参与者。</p><div data-tag="conbody" outputclass="icms-api-reference" class="icms-api-reference conbody"><section id="section-prerequisites-1" class="section icms-module" data-tag="section" data-source="latest-mounted-icms-html"><h2 id="h2-prerequisites-1" data-tag="h2" class="h2">接口调用说明</h2><p class="note-icon-wrapper" id="6111849a6526c">每次日程参与者操作最大支持500人，最大支持操作5000人的日程。</p></section><section id="section-request-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-request-1" data-tag="h2" class="h2">请求</h2><section id="section-request-basic-info" class="section"><h3 id="heading-request-basic-info" data-tag="h3" class="h3">基本信息</h3><table id="a452238dc99pm" tablewidth="648" tablecolswidth="216 432" autofit="false" class="table"><colgroup colwidth="0.67*" style="width:33.33%"></colgroup><colgroup colwidth="1.33*" style="width:66.67%"></colgroup><tbody class="tbody"><tr id="2c98d785d6omt"><td id="94825530e2h26" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="37ef701795do3">字段</p></td><td id="899946b5767x6" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="683d17b37a2w3">值</p></td></tr><tr id="86f26d37f1ofi"><td id="767719b14bhqt" rowspan="1" colspan="1"><p id="0c2576e3a0y8a">HTTP URL</p></td><td id="2aad3b1bdd3ex" rowspan="1" colspan="1"><p id="a86439b8c5dxw">https://api.dingtalk.com/v1.0/calendar/users/{userId}/calendars/{calendarId}/events/{eventId}/attendees</p></td></tr><tr id="c5f08cdeb1x8o"><td id="ff6dec9b2bqsg" rowspan="1" colspan="1"><p id="f33fd493dea14">HTTP Method</p></td><td id="ed05b1d640bo2" rowspan="1" colspan="1"><p id="1f840cd20872l">POST</p></td></tr><tr id="ee05ef64c786z"><td id="ca8ccf59ccooh" rowspan="1" colspan="1"><p id="47dec91cb112r">支持的应用类型</p></td><td id="36b3d3ce9fhnq" rowspan="1" colspan="1"><p id="89029889feqvw"><span data-tag="ph" id="ph-request-basic-app-type-apptype-0" class="ph ph-app-type" data-ph-raw-text="appType-企业内部应用">appType-企业内部应用</span>　<span data-tag="ph" id="ph-request-basic-app-type-apptype-1" class="ph ph-app-type" data-ph-raw-text="appType-第三方企业应用">appType-第三方企业应用</span>　<span data-tag="ph" id="ph-request-basic-app-type-apptype-2" class="ph ph-app-type" data-ph-raw-text="appType-第三方个人应用">appType-第三方个人应用</span></p></td></tr><tr id="17a5613b3ebih"><td id="56db34a848b9e" rowspan="1" colspan="1"><p id="b47e8dced9u1p">权限要求</p></td><td id="6fc77ef9a2fab" rowspan="1" colspan="1"><p id="b18bc5edcfjrf"><span data-tag="ph" id="ph-request-basic-permission-permission-calendar-event-write-0" class="ph-permission ph" data-ph-raw-text="permission-Calendar.Event.Write-日历应用中日程写权限" data-permission-id="permission-Calendar.Event.Write" data-permission-code="Calendar.Event.Write" data-permission-detail-api="/document/api/permission/detail" data-permission-query-param="code">permission-Calendar.Event.Write-日历应用中日程写权限</span></p></td></tr></tbody></table></section><section id="section-request-header-parameter" class="section"><h3 data-tag="h3" id="h2-biy-omf-djl" class="h3 title">请求头</h3><table id="5aba4a9058mrq" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="b077c9cd96vcp"><td id="b9410117ee300" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="0c3e928eadov3">名称</p></td><td id="47e9a124c316q" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="6d0f958b10oxi">类型</p></td><td id="32cf99984bbyg" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="48ad3d5ae0dth">是否必填</p></td><td id="badd5d1f61epu" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="c60bb432842ci">描述</p></td></tr><tr id="488f04ad2dg3o"><td id="8c410a70dd350" rowspan="1" colspan="1"><p id="f9c87ed61c94z">x-client-token</p></td><td id="e358567ca110o" rowspan="1" colspan="1"><p id="049319b4de4hz">String</p></td><td id="d6e41f978219l" rowspan="1" colspan="1"><p id="721ac54741c72">否</p></td><td id="92557acf26geq" rowspan="1" colspan="1"><p id="525dac5141sr7">幂等校验。</p><p class="note-icon-wrapper" id="4bbc69effdxp9"></p><p data-tag="p" id="deae5075b89xn" class="p"></p><ul id="8751ff5d5awtd"><li id="a1c433d57bfud"><p id="07004119b94dv">相同的<code data-tag="inlineCode" id="dd3bc621998oz" class="inlineCode">x-client-token</code>表示同一次请求。</p></li><li id="75faf27ef98ok"><p id="edaf636debhqp">过期失效，1天。</p></li></ul><p id="b040c510382zd"></p></td></tr><tr id="93f000907c83a"><td id="87205f225az9p" rowspan="1" colspan="1"><p id="17c9ff1c7fn1o">x-acs-dingtalk-access-token</p></td><td id="47770790a8vn1" rowspan="1" colspan="1"><p id="006f2f3b89jbh">String</p></td><td id="94739e0e88dxi" rowspan="1" colspan="1"><p id="b87bc16949wxh">是</p></td><td id="dd2a2e56198to" rowspan="1" colspan="1"><p id="ce43bd296a4ib">调用该接口的访问凭证，通过以下获取：</p><ul id="734aae8d64yop"><li id="fe201287f0fht"><p id="54f74f3261xm3">企业内部应用，调用<a href="https://open.dingtalk.com/document/development/obtain-the-access-token-of-an-internal-app#" id="7819cb74efvmc" class="xref">获取企业内部应用的accessToken</a>接口获取。</p></li><li id="d25c443fd3t38"><p id="69725d38b4avv">第三方企业应用，调用<a href="https://open.dingtalk.com/document/development/obtain-the-access-token-of-the-authorized-enterprise-1#" id="62ced48cddpq9" class="xref">获取第三方应用授权企业的accessToken</a>接口获取。</p></li><li id="94c122981ef0t"><p id="d94773db740j1">第三方个人应用，调用<a href="https://open.dingtalk.com/document/development/obtain-user-token#" id="d82798dafegqp" class="xref">获取用户token</a>接口获取。</p></li></ul></td></tr></tbody></table></section><section id="section-request-path-parameter" class="section"><h3 data-tag="h3" id="h2-1pn-bsy-ssl" class="h3 title">路径参数</h3><table id="c493c62de1ikx" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="b73f4cc394r4u"><td id="b8fa9dd967kxl" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="fbc25c5454yxd">名称</p></td><td id="8b512d20903rh" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="4562155656ajv">类型</p></td><td id="59dae77e1anwr" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="3577aa93b64kn">是否必填</p></td><td id="4e6adc5861ukj" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="8c232d54e2oa9">描述</p></td></tr><tr id="826b8c032cxq5"><td id="3887987ceavjn" rowspan="1" colspan="1"><p id="ff61e88af7kxb">userId</p></td><td id="329fdd6df9xy2" rowspan="1" colspan="1"><p id="4803d99296x43">String</p></td><td id="0115bfba07kev" rowspan="1" colspan="1"><p id="5e9ce4a197238">是</p></td><td id="a5ac293039ho9" rowspan="1" colspan="1"><p id="585b77f842ih2">日程创建者的unionId。</p><ul id="4cb45b57c8gvv"><li id="6d56586c40bp6"><p id="d82e334b42l27">企业内部应用和第三方企业应用，调用<a href="https://open.dingtalk.com/document/development/query-user-details#" id="9fb57ceaf2r3v" class="xref">查询用户详情</a>接口获取unionid参数值。</p></li><li id="a542ad5624lvz"><p id="c4bde4acfef1s">第三方个人应用，调用<a href="https://open.dingtalk.com/document/development/dingtalk-retrieve-user-information#" id="3ea3ab75ec2aa" class="xref">获取用户通讯录个人信息</a>接口获取unionId参数值。</p></li></ul></td></tr><tr id="9f54c96560ar7"><td id="8bfa1c171czvc" rowspan="1" colspan="1"><p id="7cce1183f7a0e">calendarId</p></td><td id="e92dc6a989yzu" rowspan="1" colspan="1"><p id="9b74e26066ncy">String</p></td><td id="8f0e65ca25dh8" rowspan="1" colspan="1"><p id="aa056a592emzm">是</p></td><td id="3c8e9f0c98bl5" rowspan="1" colspan="1"><p id="9b661b7349u1g">日程所属的日历id，统一为primary，表示用户的主日历。</p></td></tr><tr id="b7a3d21d0c822"><td id="879a763bbffp6" rowspan="1" colspan="1"><p id="b75809646b872">eventId</p></td><td id="8b0cb5cd9ecq2" rowspan="1" colspan="1"><p id="59bc7d0680j83">String</p></td><td id="2135974710fbr" rowspan="1" colspan="1"><p id="1f7f4c489crnj">是</p></td><td id="c9aee05588yoh" rowspan="1" colspan="1"><p id="9d06986aafoy6">日程ID，可调用<a href="https://open.dingtalk.com/document/development/query-an-event-list#" id="a9494e72e9dst" class="xref">查询日程列表</a>接口获取id参数值。</p></td></tr></tbody></table></section><section id="section-request-body-parameter" class="section"><h3 data-tag="h3" id="h2-u2m-k4e-z64" class="h3 title">请求体</h3><table id="673eace8b9u3x" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="f9acec487a5eh"><td id="201d45c60637w" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="fc9aeb636d2uc">名称</p></td><td id="b68ce632c7poy" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="bb458c58c8120">类型</p></td><td id="426c60be4f821" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="9edfc72d7c48m">是否必填</p></td><td id="7e537593a22ph" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="9ea0af3fff4dm">描述</p></td></tr><tr outputclass="row row-level-4 has-child" id="6dcb0d24798t2" class="row row-level-4 has-child"><td id="e2bf933adfhk8" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="c75d71524b1iq">attendeesToAdd</p></td><td id="e8c165fb50b1d" rowspan="1" colspan="1"><p id="0240ef7e46gzj">Array</p></td><td id="0ea949c2df9id" rowspan="1" colspan="1"><p id="848a65c065spq">是</p></td><td id="3aa7e09ec2l6g" rowspan="1" colspan="1"><p id="5a59944438hby">需要添加的参与人列表。</p></td></tr><tr outputclass="row row-level-4-1" id="00fd1d960ahun" class="row row-level-4-1"><td id="469aaff6ec5nn" rowspan="1" colspan="1"><p id="87b10f7659x3c">id</p></td><td id="6986c208b73gz" rowspan="1" colspan="1"><p id="3386a6163arll">String</p></td><td id="48324100b2zss" rowspan="1" colspan="1"><p id="c5b6985bfew6v">否</p></td><td id="929156b037l1l" rowspan="1" colspan="1"><p id="3f3ba88e29h90">参与人uninonId。</p><ul id="9ea8d88488t73"><li id="ef54f6665910x"><p id="5fff758954hlk">企业内部应用和第三方企业应用，调用<a href="https://open.dingtalk.com/document/development/query-user-details#" id="602facf4b0azr" class="xref">查询用户详情</a>接口获取unionid参数值。</p></li><li id="3b079f7cf7yrn"><p id="660ea03614v4n">第三方个人应用，调用<a href="https://open.dingtalk.com/document/development/dingtalk-retrieve-user-information#" id="197527ec8fgsk" class="xref">获取用户通讯录个人信息</a>接口获取unionId参数值。</p></li></ul></td></tr><tr outputclass="row row-level-4-2" id="cd12a9bac720x" class="row row-level-4-2"><td id="48c7c0a43b2sy" rowspan="1" colspan="1"><p id="41f2ef3a81qcw">isOptional</p></td><td id="743f153c28e9k" rowspan="1" colspan="1"><p id="e232d9f8768yd">Boolean</p></td><td id="35efddb4007c6" rowspan="1" colspan="1"><p id="a48dbebd53ty6">否</p></td><td id="bef8be0b5b0um" rowspan="1" colspan="1"><p id="ad3057f0d2x3u">是否为可选参与人。</p><ul id="86a671e787w4q"><li id="91a8cff6e3gw7"><p id="37a05811c5tat"><b>true</b>：是</p></li><li id="3eb89b95e3a84"><p id="b09bd843b2a34"><b>false</b>：不是</p></li></ul></td></tr><tr outputclass="row row-level-5" id="5fa7c857d638c" class="row row-level-5"><td id="ad59b5d16flk4" rowspan="1" colspan="1"><p id="04a8670753oh7">pushNotification</p></td><td id="a2dc9eca99pjf" rowspan="1" colspan="1"><p id="eb56bf64ebeyp">Boolean</p></td><td id="672d345d17mwf" rowspan="1" colspan="1"><p id="29738f10e0auy">否</p></td><td id="a28d9cbb830ab" rowspan="1" colspan="1"><p id="2d752438c99ub">是否弹窗提醒。</p></td></tr><tr outputclass="row row-level-6" id="b2c6a2fe7b5x6" class="row row-level-6"><td id="a22a820f96o2t" rowspan="1" colspan="1"><p id="4052f70b3156a">chatNotification</p></td><td id="06bf324958qil" rowspan="1" colspan="1"><p id="d31420db4fve6">Boolean</p></td><td id="a7a208472cx6i" rowspan="1" colspan="1"><p id="e9d9eac92f0av">否</p></td><td id="78fe2506b6c3c" rowspan="1" colspan="1"><p id="025bb35531idw">是否单聊提醒。</p></td></tr></tbody></table></section><section id="section-request-body-example" class="section"><h3 id="h3-request-body-example" data-tag="h3" class="h3">请求示例</h3><div outputclass="tabbed-codeblock" data-tag="fig" id="figure-2nx-78o-ovu" class="tabbed-codeblock-box"><div class="tab-box"></div><input type="radio" name="check-figure-2nx-78o-ovu" id="figure-2nx-78o-ovu-HTTP-tab" checked="checked" /><label for="figure-2nx-78o-ovu-HTTP-tab">HTTP</label><div class="codeblock-item"><pre id="codeblock-a3m-f1y-9wg" outputclass="language-HTTP" code-type="xCode" data-tag="codeblock" class="pre codeblock language-HTTP"><code>POST /v1.0/calendar/users/U5KPwll3QjgiG/calendars/primary/events/cnNTbW1YbU9sL2p6aFJZdEgvdlQrQT08/attendees HTTP/1.1
+Host:api.dingtalk.com
+x-client-token:******
+x-acs-dingtalk-access-token:dd43888e26953deead8cba556389b063
+Content-Type:application/json
+
+{
+  "attendeesToAdd" : [ {
+    "id" : "iiiP35sJadba8aBSgjrwPRKgiEiF",
+    "isOptional" : false
+  } ]
+}</code></pre></div><input type="radio" name="check-figure-2nx-78o-ovu" id="figure-2nx-78o-ovu-java-tab" /><label for="figure-2nx-78o-ovu-java-tab">Java</label><div class="codeblock-item"><pre id="codeblock-xx1-pue-exv" outputclass="language-java" code-type="xCode" data-tag="codeblock" class="pre codeblock language-java"><code>// This file is auto-generated, don't edit it. Thanks.
+package com.aliyun.sample;
+
+import com.aliyun.tea.*;
+
+public class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Client
+     * @throws Exception
+     */
+    public static com.aliyun.dingtalkcalendar_1_0.Client createClient() throws Exception {
+        com.aliyun.teaopenapi.models.Config config = new com.aliyun.teaopenapi.models.Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        return new com.aliyun.dingtalkcalendar_1_0.Client(config);
+    }
+
+    public static void main(String[] args_) throws Exception {
+        java.util.List&lt;String&gt; args = java.util.Arrays.asList(args_);
+        com.aliyun.dingtalkcalendar_1_0.Client client = Sample.createClient();
+        com.aliyun.dingtalkcalendar_1_0.models.AddAttendeeHeaders addAttendeeHeaders = new com.aliyun.dingtalkcalendar_1_0.models.AddAttendeeHeaders();
+        addAttendeeHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        com.aliyun.dingtalkcalendar_1_0.models.AddAttendeeRequest.AddAttendeeRequestAttendeesToAdd attendeesToAdd0 = new com.aliyun.dingtalkcalendar_1_0.models.AddAttendeeRequest.AddAttendeeRequestAttendeesToAdd()
+                .setId("iiiP35sJadba8aBSgjrwPRKgiEiF")
+                .setIsOptional(false);
+        com.aliyun.dingtalkcalendar_1_0.models.AddAttendeeRequest addAttendeeRequest = new com.aliyun.dingtalkcalendar_1_0.models.AddAttendeeRequest()
+                .setAttendeesToAdd(java.util.Arrays.asList(
+                    attendeesToAdd0
+                ));
+        try {
+            client.addAttendeeWithOptions("U5KPwll3QjgiG", "primary", "cnNTbW1YbU9sL2p6aFJZdEgvdlQrQT08", addAttendeeRequest, addAttendeeHeaders, new com.aliyun.teautil.models.RuntimeOptions());
+        } catch (TeaException err) {
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        } catch (Exception _err) {
+            TeaException err = new TeaException(_err.getMessage(), _err);
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        }        
+    }
+}</code></pre></div><input type="radio" name="check-figure-2nx-78o-ovu" id="figure-2nx-78o-ovu-python-tab" /><label for="figure-2nx-78o-ovu-python-tab">Python</label><div class="codeblock-item"><pre id="codeblock-zkn-zfg-yqr" outputclass="language-python" code-type="xCode" data-tag="codeblock" class="pre codeblock language-python"><code># -*- coding: utf-8 -*-
+# This file is auto-generated, don't edit it. Thanks.
+import os
+import sys
+
+from typing import List
+
+from alibabacloud_dingtalk.calendar_1_0.client import Client as dingtalkcalendar_1_0Client
+from alibabacloud_tea_openapi import models as open_api_models
+from alibabacloud_dingtalk.calendar_1_0 import models as dingtalkcalendar__1__0_models
+from alibabacloud_tea_util import models as util_models
+from alibabacloud_tea_util.client import Client as UtilClient
+
+
+class Sample:
+    def __init__(self):
+        pass
+
+    @staticmethod
+    def create_client() -&gt; dingtalkcalendar_1_0Client:
+        """
+        使用 Token 初始化账号Client
+        @return: Client
+        @throws Exception
+        """
+        config = open_api_models.Config()
+        config.protocol = 'https'
+        config.region_id = 'central'
+        return dingtalkcalendar_1_0Client(config)
+
+    @staticmethod
+    def main(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        add_attendee_headers = dingtalkcalendar__1__0_models.AddAttendeeHeaders()
+        add_attendee_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        attendees_to_add_0 = dingtalkcalendar__1__0_models.AddAttendeeRequestAttendeesToAdd(
+            id='iiiP35sJadba8aBSgjrwPRKgiEiF',
+            is_optional=False
+        )
+        add_attendee_request = dingtalkcalendar__1__0_models.AddAttendeeRequest(
+            attendees_to_add=[
+                attendees_to_add_0
+            ]
+        )
+        try:
+            client.add_attendee_with_options('U5KPwll3QjgiG', 'primary', 'cnNTbW1YbU9sL2p6aFJZdEgvdlQrQT08', add_attendee_request, add_attendee_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+    @staticmethod
+    async def main_async(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        add_attendee_headers = dingtalkcalendar__1__0_models.AddAttendeeHeaders()
+        add_attendee_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        attendees_to_add_0 = dingtalkcalendar__1__0_models.AddAttendeeRequestAttendeesToAdd(
+            id='iiiP35sJadba8aBSgjrwPRKgiEiF',
+            is_optional=False
+        )
+        add_attendee_request = dingtalkcalendar__1__0_models.AddAttendeeRequest(
+            attendees_to_add=[
+                attendees_to_add_0
+            ]
+        )
+        try:
+            await client.add_attendee_with_options_async('U5KPwll3QjgiG', 'primary', 'cnNTbW1YbU9sL2p6aFJZdEgvdlQrQT08', add_attendee_request, add_attendee_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+
+if __name__ == '__main__':
+    Sample.main(sys.argv[1:])</code></pre></div><input type="radio" name="check-figure-2nx-78o-ovu" id="figure-2nx-78o-ovu-php-tab" /><label for="figure-2nx-78o-ovu-php-tab">PHP</label><div class="codeblock-item"><pre id="codeblock-p4k-uj1-f2t" outputclass="language-php" code-type="xCode" data-tag="codeblock" class="pre codeblock language-php"><code>&lt;?php
+
+// This file is auto-generated, don't edit it. Thanks.
+namespace AlibabaCloud\SDK\Sample;
+
+use AlibabaCloud\SDK\Dingtalk\Vcalendar_1_0\Dingtalk;
+use \Exception;
+use AlibabaCloud\Tea\Exception\TeaError;
+use AlibabaCloud\Tea\Utils\Utils;
+
+use Darabonba\OpenApi\Models\Config;
+use AlibabaCloud\SDK\Dingtalk\Vcalendar_1_0\Models\AddAttendeeHeaders;
+use AlibabaCloud\SDK\Dingtalk\Vcalendar_1_0\Models\AddAttendeeRequest\attendeesToAdd;
+use AlibabaCloud\SDK\Dingtalk\Vcalendar_1_0\Models\AddAttendeeRequest;
+use AlibabaCloud\Tea\Utils\Utils\RuntimeOptions;
+
+class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Dingtalk Client
+     */
+    public static function createClient(){
+        $config = new Config([]);
+        $config-&gt;protocol = "https";
+        $config-&gt;regionId = "central";
+        return new Dingtalk($config);
+    }
+
+    /**
+     * @param string[] $args
+     * @return void
+     */
+    public static function main($args){
+        $client = self::createClient();
+        $addAttendeeHeaders = new AddAttendeeHeaders([]);
+        $addAttendeeHeaders-&gt;xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        $attendeesToAdd0 = new attendeesToAdd([
+            "id" =&gt; "iiiP35sJadba8aBSgjrwPRKgiEiF",
+            "isOptional" =&gt; false
+        ]);
+        $addAttendeeRequest = new AddAttendeeRequest([
+            "attendeesToAdd" =&gt; [
+                $attendeesToAdd0
+            ]
+        ]);
+        try {
+            $client-&gt;addAttendeeWithOptions("U5KPwll3QjgiG", "primary", "cnNTbW1YbU9sL2p6aFJZdEgvdlQrQT08", $addAttendeeRequest, $addAttendeeHeaders, new RuntimeOptions([]));
+        }
+        catch (Exception $err) {
+            if (!($err instanceof TeaError)) {
+                $err = new TeaError([], $err-&gt;getMessage(), $err-&gt;getCode(), $err);
+            }
+            if (!Utils::empty_($err-&gt;code) &amp;&amp; !Utils::empty_($err-&gt;message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+        }
+    }
+}
+$path = __DIR__ . \DIRECTORY_SEPARATOR . '..' . \DIRECTORY_SEPARATOR . 'vendor' . \DIRECTORY_SEPARATOR . 'autoload.php';
+if (file_exists($path)) {
+    require_once $path;
+}
+Sample::main(array_slice($argv, 1));</code></pre></div><input type="radio" name="check-figure-2nx-78o-ovu" id="figure-2nx-78o-ovu-go-tab" /><label for="figure-2nx-78o-ovu-go-tab">Go</label><div class="codeblock-item"><pre id="codeblock-v7f-mts-x4o" outputclass="language-go" code-type="xCode" data-tag="codeblock" class="pre codeblock language-go"><code>// This file is auto-generated, don't edit it. Thanks.
+package main
+
+import (
+  "os"
+  util  "github.com/alibabacloud-go/tea-utils/v2/service"
+  dingtalkcalendar_1_0  "github.com/alibabacloud-go/dingtalk/calendar_1_0"
+  openapi  "github.com/alibabacloud-go/darabonba-openapi/v2/client"
+  "github.com/alibabacloud-go/tea/tea"
+)
+
+
+/**
+ * 使用 Token 初始化账号Client
+ * @return Client
+ * @throws Exception
+ */
+func CreateClient () (_result *dingtalkcalendar_1_0.Client, _err error) {
+  config := &amp;openapi.Config{}
+  config.Protocol = tea.String("https")
+  config.RegionId = tea.String("central")
+  _result = &amp;dingtalkcalendar_1_0.Client{}
+  _result, _err = dingtalkcalendar_1_0.NewClient(config)
+  return _result, _err
+}
+
+func _main (args []*string) (_err error) {
+  client, _err := CreateClient()
+  if _err != nil {
+    return _err
+  }
+
+  addAttendeeHeaders := &amp;dingtalkcalendar_1_0.AddAttendeeHeaders{}
+  addAttendeeHeaders.XAcsDingtalkAccessToken = tea.String("&lt;your access token&gt;")
+  attendeesToAdd0 := &amp;dingtalkcalendar_1_0.AddAttendeeRequestAttendeesToAdd{
+    Id: tea.String("iiiP35sJadba8aBSgjrwPRKgiEiF"),
+    IsOptional: tea.Bool(false),
+  }
+  addAttendeeRequest := &amp;dingtalkcalendar_1_0.AddAttendeeRequest{
+    AttendeesToAdd: []*dingtalkcalendar_1_0.AddAttendeeRequestAttendeesToAdd{attendeesToAdd0},
+  }
+  tryErr := func()(_e error) {
+    defer func() {
+      if r := tea.Recover(recover()); r != nil {
+        _e = r
+      }
+    }()
+    _, _err = client.AddAttendeeWithOptions(tea.String("U5KPwll3QjgiG"), tea.String("primary"), tea.String("cnNTbW1YbU9sL2p6aFJZdEgvdlQrQT08"), addAttendeeRequest, addAttendeeHeaders, &amp;util.RuntimeOptions{})
+    if _err != nil {
+      return _err
+    }
+
+    return nil
+  }()
+
+  if tryErr != nil {
+    var err = &amp;tea.SDKError{}
+    if _t, ok := tryErr.(*tea.SDKError); ok {
+      err = _t
+    } else {
+      err.Message = tea.String(tryErr.Error())
+    }
+    if !tea.BoolValue(util.Empty(err.Code)) &amp;&amp; !tea.BoolValue(util.Empty(err.Message)) {
+      // err 中含有 code 和 message 属性，可帮助开发定位问题
+    }
+
+  }
+  return _err
+}
+
+
+func main() {
+  err := _main(tea.StringSlice(os.Args[1:]))
+  if err != nil {
+    panic(err)
+  }
+}</code></pre></div><input type="radio" name="check-figure-2nx-78o-ovu" id="figure-2nx-78o-ovu-nodejs-tab" /><label for="figure-2nx-78o-ovu-nodejs-tab">Node.js</label><div class="codeblock-item"><pre id="codeblock-op5-yya-cs1" outputclass="language-nodejs" code-type="xCode" data-tag="codeblock" class="pre codeblock language-nodejs"><code>// This file is auto-generated, don't edit it
+import Util, * as $Util from '@alicloud/tea-util';
+import dingtalkcalendar_1_0, * as $dingtalkcalendar_1_0 from '@alicloud/dingtalk/calendar_1_0';
+import OpenApi, * as $OpenApi from '@alicloud/openapi-client';
+import * as $tea from '@alicloud/tea-typescript';
+
+
+export default class Client {
+
+  /**
+   * 使用 Token 初始化账号Client
+   * @return Client
+   * @throws Exception
+   */
+  static createClient(): dingtalkcalendar_1_0 {
+    let config = new $OpenApi.Config({ });
+    config.protocol = "https";
+    config.regionId = "central";
+    return new dingtalkcalendar_1_0(config);
+  }
+
+  static async main(args: string[]): Promise&lt;void&gt; {
+    let client = Client.createClient();
+    let addAttendeeHeaders = new $dingtalkcalendar_1_0.AddAttendeeHeaders({ });
+    addAttendeeHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+    let attendeesToAdd0 = new $dingtalkcalendar_1_0.AddAttendeeRequestAttendeesToAdd({
+      id: "iiiP35sJadba8aBSgjrwPRKgiEiF",
+      isOptional: false,
+    });
+    let addAttendeeRequest = new $dingtalkcalendar_1_0.AddAttendeeRequest({
+      attendeesToAdd: [
+        attendeesToAdd0
+      ],
+    });
+    try {
+      await client.addAttendeeWithOptions("U5KPwll3QjgiG", "primary", "cnNTbW1YbU9sL2p6aFJZdEgvdlQrQT08", addAttendeeRequest, addAttendeeHeaders, new $Util.RuntimeOptions({ }));
+    } catch (err) {
+      if (!Util.empty(err.code) &amp;&amp; !Util.empty(err.message)) {
+        // err 中含有 code 和 message 属性，可帮助开发定位问题
+      }
+
+    }    
+  }
+
+}
+
+Client.main(process.argv.slice(2));</code></pre></div><input type="radio" name="check-figure-2nx-78o-ovu" id="figure-2nx-78o-ovu-csharp-tab" /><label for="figure-2nx-78o-ovu-csharp-tab">C#</label><div class="codeblock-item"><pre id="codeblock-kem-9lh-glr" outputclass="language-csharp" code-type="xCode" data-tag="codeblock" class="pre codeblock language-csharp"><code>// This file is auto-generated, don't edit it. Thanks.
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
+
+using Tea;
+using Tea.Utils;
+
+
+namespace AlibabaCloud.SDK.Sample
+{
+    public class Sample 
+    {
+
+        /**
+         * 使用 Token 初始化账号Client
+         * @return Client
+         * @throws Exception
+         */
+        public static AlibabaCloud.SDK.Dingtalkcalendar_1_0.Client CreateClient()
+        {
+            AlibabaCloud.OpenApiClient.Models.Config config = new AlibabaCloud.OpenApiClient.Models.Config();
+            config.Protocol = "https";
+            config.RegionId = "central";
+            return new AlibabaCloud.SDK.Dingtalkcalendar_1_0.Client(config);
+        }
+
+        public static void Main(string[] args)
+        {
+            AlibabaCloud.SDK.Dingtalkcalendar_1_0.Client client = CreateClient();
+            AlibabaCloud.SDK.Dingtalkcalendar_1_0.Models.AddAttendeeHeaders addAttendeeHeaders = new AlibabaCloud.SDK.Dingtalkcalendar_1_0.Models.AddAttendeeHeaders();
+            addAttendeeHeaders.XAcsDingtalkAccessToken = "&lt;your access token&gt;";
+            AlibabaCloud.SDK.Dingtalkcalendar_1_0.Models.AddAttendeeRequest.AddAttendeeRequestAttendeesToAdd attendeesToAdd0 = new AlibabaCloud.SDK.Dingtalkcalendar_1_0.Models.AddAttendeeRequest.AddAttendeeRequestAttendeesToAdd
+            {
+                Id = "iiiP35sJadba8aBSgjrwPRKgiEiF",
+                IsOptional = false,
+            };
+            AlibabaCloud.SDK.Dingtalkcalendar_1_0.Models.AddAttendeeRequest addAttendeeRequest = new AlibabaCloud.SDK.Dingtalkcalendar_1_0.Models.AddAttendeeRequest
+            {
+                AttendeesToAdd = new List&lt;AlibabaCloud.SDK.Dingtalkcalendar_1_0.Models.AddAttendeeRequest.AddAttendeeRequestAttendeesToAdd&gt;
+                {
+                    attendeesToAdd0
+                },
+            };
+            try
+            {
+                client.AddAttendeeWithOptions("U5KPwll3QjgiG", "primary", "cnNTbW1YbU9sL2p6aFJZdEgvdlQrQT08", addAttendeeRequest, addAttendeeHeaders, new AlibabaCloud.TeaUtil.Models.RuntimeOptions());
+            }
+            catch (TeaException err)
+            {
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+            catch (Exception _err)
+            {
+                TeaException err = new TeaException(new Dictionary&lt;string, object&gt;
+                {
+                    { "message", _err.Message }
+                });
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+        }
+
+
+    }
+}</code></pre></div></div></section></section><section id="section-response-1" class="section icms-module" data-tag="section" data-source="apiMeta"><h2 id="h2-response-1" data-tag="h2" class="h2">响应</h2><section id="section-response-body-example" class="section"><h3 id="h3-response-body-example" data-tag="h3" class="h3">响应体示例</h3><pre id="ace997e2282hr" outputclass="language-json" code-type="xCode" data-tag="codeblock" class="pre codeblock language-json"><code>HTTP/1.1 200 OK</code></pre></section><section id="section-error-code-1" class="section"><h3 id="h3-error-code-1" data-tag="h3" class="h3">错误码</h3><p data-tag="p" id="p-error-code-global-guide" class="p">若调用该接口报错，可根据错误信息在<a href="https://open.dingtalk.com/document/development/server-api-error-codes-1" id="a-error-code-global-guide">全局错误码</a>文档中查找解决方案。</p><table id="cd5b677842120" tablewidth="709" tablecolswidth="142 177 177 213" autofit="false" class="table"><colgroup colwidth="0.8*" style="width:20.03%"></colgroup><colgroup colwidth="1*" style="width:24.96%"></colgroup><colgroup colwidth="1*" style="width:24.96%"></colgroup><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><tbody class="tbody"><tr id="f31414b1ebcgh"><td id="4348768bafwi0" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="233c847bb9rn9">HttpCode</p></td><td id="951ada8eafode" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="44e1b5384a2um">错误码</p></td><td id="3d36b2fcb40kp" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="51b1fb50a6o7u">错误信息</p></td><td id="ce54ba5b18x4a" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="9823b84daeuov">说明</p></td></tr><tr id="47ee2e4de4gpx"><td id="3c9835cd50ftn" rowspan="1" colspan="1"><p id="2be44dc3a8j9r">400</p></td><td id="7a99b31955wds" rowspan="1" colspan="1"><p id="369e06d47bnlm">invalidParameter</p></td><td id="19f727aae2ysj" rowspan="1" colspan="1"><p id="58604571119y7">forwardErrorMessage</p></td><td id="a9a4ce8be81kt" rowspan="1" colspan="1"><p id="888e6010cf1oi">参数异常</p></td></tr><tr id="1e00473643fuz"><td id="7990157cadkes" rowspan="1" colspan="1"><p id="8db219df31fet">400</p></td><td id="5841925804m2f" rowspan="1" colspan="1"><p id="c181cd0dcc2vo">idempotencyProcessing</p></td><td id="4ed8522eff96v" rowspan="1" colspan="1"><p id="3c77758783uw1">Idempotency processing</p></td><td id="8051428ecc6wa" rowspan="1" colspan="1"><p id="c90f27b847ll6">幂等请求处理中</p></td></tr><tr id="a7dd63e7a2wf1"><td id="17507766d0dn1" rowspan="1" colspan="1"><p id="18a82579c4vue">404</p></td><td id="55a92f0d58ehx" rowspan="1" colspan="1"><p id="bd6e37fc0c4bs">itemNotFound</p></td><td id="f8768417601t3" rowspan="1" colspan="1"><p id="973188f3b5gai">forwardErrorMessage</p></td><td id="78300850329zg" rowspan="1" colspan="1"><p id="6665165552t2w">无法找到指定日程</p></td></tr></tbody></table></section></section></div></main></body></html>

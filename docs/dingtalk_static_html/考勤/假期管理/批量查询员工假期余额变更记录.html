@@ -1,0 +1,418 @@
+<!DOCTYPE html><html><head><meta charset="utf8" / /><meta name="gmtModify" content="2025-09-11 21:02:21" / /><meta name="searchtitle" content="" / /><meta name="keywords" content="" / /><meta name="author" content="" / /><title>批量查询员工假期余额变更记录</title><meta name="gmtModify" content="2026-06-02 09:24:54" / /></head><body data-tag="topic" id="doc-api-dingtalk-GetLeaveRecords" class="topic"><main id="ab508ef415d55" data-init-id="doc-api-dingtalk_GetLeaveRecords"><h1 data-tag="title" id="h1-tqt-dub-ppt" class="title">批量查询员工假期余额变更记录</h1><p data-tag="shortdesc" id="320877207bjq0" class="shortdesc"><span style="color:rgb(23, 26, 29)">调用本接口实现可获取关于某员工的所有假期余额的变更记录，包括假期余额初始化、员工消费额度、假期余额更新记录等。</span></p><div data-tag="conbody" outputclass="icms-api-reference" class="icms-api-reference conbody"><section id="section-request-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-request-1" data-tag="h2" class="h2">请求</h2><section id="section-request-basic-info" class="section"><h3 id="heading-request-basic-info" data-tag="h3" class="h3">基本信息</h3><table id="1d3307a0ad5vv" tablewidth="648" tablecolswidth="216 432" autofit="false" class="table"><colgroup colwidth="0.67*" style="width:33.33%"></colgroup><colgroup colwidth="1.33*" style="width:66.67%"></colgroup><tbody class="tbody"><tr id="df1eb77a45j4u"><td id="0e814827acg9h" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="6c82a6cd89z3c">字段</p></td><td id="3fc8a2892edqc" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="e4babeba2ei67">值</p></td></tr><tr id="51ad77984efjc"><td id="21b4cfd81a0y8" rowspan="1" colspan="1"><p id="0d5775999ddz5">HTTP URL</p></td><td id="f6a06df3c04xi" rowspan="1" colspan="1"><p id="2271af19cab27">https://api.dingtalk.com/v1.0/attendance/vacations/records/query</p></td></tr><tr id="24ce613ef5yfm"><td id="6874f5199djgu" rowspan="1" colspan="1"><p id="9a99a02bb60hh">HTTP Method</p></td><td id="0b5c489654tfp" rowspan="1" colspan="1"><p id="9648307d8aryh">POST</p></td></tr><tr id="f53eaf702ft91"><td id="f97f788f7ectd" rowspan="1" colspan="1"><p id="5a4b723dd4cwr">支持的应用类型</p></td><td id="b7037a12ac3sa" rowspan="1" colspan="1"><p id="accd655de7pqt"><span data-tag="ph" id="ph-request-basic-app-type-apptype-0" class="ph ph-app-type" data-ph-raw-text="appType-企业内部应用">appType-企业内部应用</span>　<span data-tag="ph" id="ph-request-basic-app-type-apptype-1" class="ph ph-app-type" data-ph-raw-text="appType-第三方企业应用">appType-第三方企业应用</span></p></td></tr><tr id="5afe4af54dpn3"><td id="deb47b2058aw5" rowspan="1" colspan="1"><p id="88a37a4901xek">权限要求</p></td><td id="af396de3104sl" rowspan="1" colspan="1"><p id="02c441e2a39aa"><span data-tag="ph" id="ph-request-basic-permission-permission-qyapi-holiday-readonly-0" class="ph-permission ph" data-ph-raw-text="permission-qyapi_holiday_readonly-钉钉假期查询的权限" data-permission-id="permission-qyapi_holiday_readonly" data-permission-code="qyapi_holiday_readonly" data-permission-detail-api="/document/api/permission/detail" data-permission-query-param="code">permission-qyapi_holiday_readonly-钉钉假期查询的权限</span></p></td></tr></tbody></table></section><section id="section-request-header-parameter" class="section"><h3 data-tag="h3" id="h2-diz-0rs-qnp" class="h3 title">请求头</h3><table id="50b4a2b334prk" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="c7314236c979m"><td id="d5f4bd28eeqh4" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="fe54773e499uw">名称</p></td><td id="dcee2e6e3505y" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="ea492827806gm">类型</p></td><td id="b9624587d0udt" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="0bca93c4954bs">是否必填</p></td><td id="25d8a2f8d7u9w" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="d8c90ed304qqd">描述</p></td></tr><tr id="70e3f4b9d5uu2"><td id="69ece7ba85sre" rowspan="1" colspan="1"><p id="429e0ebf7ffeh">x-acs-dingtalk-access-token</p></td><td id="98d4c3a6ffdi6" rowspan="1" colspan="1"><p id="8f151f9c63aa2">String</p></td><td id="f2583d0963pte" rowspan="1" colspan="1"><p id="03cfb498c9sml">是</p></td><td id="14a23bad3eeyo" rowspan="1" colspan="1"><p id="6b7f3c7e1ea18">调用该接口的访问凭证，通过以下获取：</p><ul id="8fba8ccbectnj"><li id="dace943c20vbe"><p id="ca09404059yfy">企业内部应用，调用<a href="https://open.dingtalk.com/document/development/obtain-the-access-token-of-an-internal-app#" id="8f7e8a7784pf3" class="xref">获取企业内部应用的accessToken</a>接口获取。</p></li><li id="4198465b2bgql"><p id="65bfc18266teh">第三方企业应用，调用<a href="https://open.dingtalk.com/document/development/obtain-the-access-token-of-the-authorized-enterprise-1#" id="fc9e869d85jao" class="xref">获取第三方应用授权企业的accessToken</a>接口获取。</p></li></ul></td></tr></tbody></table></section><section id="section-request-body-parameter" class="section"><h3 data-tag="h3" id="h2-aoy-ene-dzh" class="h3 title">请求体</h3><table id="ec5582fe81no0" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="edc1f114e95ft"><td id="a595ee21284fa" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="e4455bc70adzn">名称</p></td><td id="1bf41d4a7fkay" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="cda71677539vt">类型</p></td><td id="6bf3d011c3jgl" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="0a7042dd2b95r">是否必填</p></td><td id="d72c43327f3d8" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="49da1c8d74efd">描述</p></td></tr><tr outputclass="row row-level-1" id="2ac9c99c40iuf" class="row row-level-1"><td id="120c20b6ba2o5" rowspan="1" colspan="1"><p id="b9073d374cf2p">opUserId</p></td><td id="172106f8d0nsg" rowspan="1" colspan="1"><p id="0ab4798cf7b0k">String</p></td><td id="c5bce7f1c7v60" rowspan="1" colspan="1"><p id="ac103d7abb30a">是</p></td><td id="a2e4a79df203o" rowspan="1" colspan="1"><p id="6cc0e1d815vi9">当前企业内拥有OA审批应用权限的管理员的userId，建议传入企业主管理员userId，可调用<a href="https://open.dingtalk.com/document/development/query-the-administrator-list#" id="22f62dcf3fxhu" class="xref">获取管理员列表</a>接口，获取返回参数主管理员<code data-tag="code" id="de43767798xz0" class="code">userId</code>字段。</p></td></tr><tr outputclass="row row-level-2" id="f77a6b4415jio" class="row row-level-2"><td id="673976e2ebsjh" rowspan="1" colspan="1"><p id="ce6d1a471bo9i">leaveCode</p></td><td id="9a158ae53cxgd" rowspan="1" colspan="1"><p id="b630c0b937yxs">String</p></td><td id="fe17ec7679itf" rowspan="1" colspan="1"><p id="f171d1d5b16ey">是</p></td><td id="d4d68f7d36oe5" rowspan="1" colspan="1"><p id="d7ed4d8b2cjx9">假期类型唯一标识，调用<a href="https://open.dingtalk.com/document/development/holiday-type-query#" id="928f2444f0x85" class="xref">查询假期规则列表</a>接口获取<code data-tag="code" id="5eec8b2282dh3" class="code">leave_code</code>参数值。</p></td></tr><tr outputclass="row row-level-3" id="980ef95af820g" class="row row-level-3"><td id="e245a2651dpqn" rowspan="1" colspan="1"><p id="3ad525e8b9sa3">userIds</p></td><td id="a2ab1cebe7tik" rowspan="1" colspan="1"><p id="abaca78051kay">Array of String</p></td><td id="5964554a7b68i" rowspan="1" colspan="1"><p id="86b9ca93ea47c">是</p></td><td id="76033f46683ni" rowspan="1" colspan="1"><p id="b0419a6b48jxw">待查询员工userId列表，每次调用最多传50个userId。</p></td></tr><tr outputclass="row row-level-4" id="465ab6e31b1u6" class="row row-level-4"><td id="c3ab6144dfqu2" rowspan="1" colspan="1"><p id="4cef66416d3sb">pageNumber</p></td><td id="ac0c94ab5a1op" rowspan="1" colspan="1"><p id="5a4eb9e2cch2r">Long</p></td><td id="7e0630835e6d2" rowspan="1" colspan="1"><p id="ce33ebaf60u02">是</p></td><td id="a4cf591055du9" rowspan="1" colspan="1"><p id="b5bfab2f00eir">分页游标：</p><ul id="00ebb42250ufb"><li id="390dfa807ejmj"><p id="835f77f509du8">首次查询，该参数传0。</p></li><li id="06e9a2d93cyl1"><p id="98239a8b79j5a">非首次查询，根据上一次的偏移量的累积值进行传参。</p></li></ul></td></tr><tr outputclass="row row-level-5" id="64bd6ff92avyu" class="row row-level-5"><td id="37d294bb0605u" rowspan="1" colspan="1"><p id="eae50bf0fasqn">pageSize</p></td><td id="65b1d5057aiub" rowspan="1" colspan="1"><p id="2d64b65d84xg6">Integer</p></td><td id="95dab92fadn53" rowspan="1" colspan="1"><p id="e1948662117bu">是</p></td><td id="3089863635lnp" rowspan="1" colspan="1"><p id="30024faf1fnfd">分页偏移量，最大200。</p></td></tr></tbody></table></section><section id="section-request-body-example" class="section"><h3 id="h3-request-body-example" data-tag="h3" class="h3">请求示例</h3><div outputclass="tabbed-codeblock" data-tag="fig" id="figure-iyi-kjf-72a" class="tabbed-codeblock-box"><div class="tab-box"></div><input type="radio" name="check-figure-iyi-kjf-72a" id="figure-iyi-kjf-72a-HTTP-tab" checked="checked" /><label for="figure-iyi-kjf-72a-HTTP-tab">HTTP</label><div class="codeblock-item"><pre id="codeblock-ovk-p55-kcg" outputclass="language-HTTP" code-type="xCode" data-tag="codeblock" class="pre codeblock language-HTTP"><code>POST /v1.0/attendance/vacations/records/query HTTP/1.1
+Host:api.dingtalk.com
+x-acs-dingtalk-access-token:xxxxx
+Content-Type:application/json
+
+{
+  "opUserId" : "user01",
+  "leaveCode" : "f84a2dxxxx",
+  "userIds" : [ "user1" ],
+  "pageNumber" : 1,
+  "pageSize" : 100
+}</code></pre></div><input type="radio" name="check-figure-iyi-kjf-72a" id="figure-iyi-kjf-72a-java-tab" /><label for="figure-iyi-kjf-72a-java-tab">Java</label><div class="codeblock-item"><pre id="codeblock-fxo-oo5-5jh" outputclass="language-java" code-type="xCode" data-tag="codeblock" class="pre codeblock language-java"><code>// This file is auto-generated, don't edit it. Thanks.
+package com.aliyun.sample;
+
+import com.aliyun.tea.*;
+
+public class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Client
+     * @throws Exception
+     */
+    public static com.aliyun.dingtalkattendance_1_0.Client createClient() throws Exception {
+        com.aliyun.teaopenapi.models.Config config = new com.aliyun.teaopenapi.models.Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        return new com.aliyun.dingtalkattendance_1_0.Client(config);
+    }
+
+    public static void main(String[] args_) throws Exception {
+        java.util.List&lt;String&gt; args = java.util.Arrays.asList(args_);
+        com.aliyun.dingtalkattendance_1_0.Client client = Sample.createClient();
+        com.aliyun.dingtalkattendance_1_0.models.GetLeaveRecordsHeaders getLeaveRecordsHeaders = new com.aliyun.dingtalkattendance_1_0.models.GetLeaveRecordsHeaders();
+        getLeaveRecordsHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        com.aliyun.dingtalkattendance_1_0.models.GetLeaveRecordsRequest getLeaveRecordsRequest = new com.aliyun.dingtalkattendance_1_0.models.GetLeaveRecordsRequest()
+                .setOpUserId("user01")
+                .setLeaveCode("f84a2dxxxx")
+                .setUserIds(java.util.Arrays.asList(
+                    "user1"
+                ))
+                .setPageNumber(1L)
+                .setPageSize(100);
+        try {
+            client.getLeaveRecordsWithOptions(getLeaveRecordsRequest, getLeaveRecordsHeaders, new com.aliyun.teautil.models.RuntimeOptions());
+        } catch (TeaException err) {
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        } catch (Exception _err) {
+            TeaException err = new TeaException(_err.getMessage(), _err);
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        }        
+    }
+}</code></pre></div><input type="radio" name="check-figure-iyi-kjf-72a" id="figure-iyi-kjf-72a-python-tab" /><label for="figure-iyi-kjf-72a-python-tab">Python</label><div class="codeblock-item"><pre id="codeblock-0sg-m2v-035" outputclass="language-python" code-type="xCode" data-tag="codeblock" class="pre codeblock language-python"><code># -*- coding: utf-8 -*-
+# This file is auto-generated, don't edit it. Thanks.
+import sys
+
+from typing import List
+
+from alibabacloud_dingtalk.attendance_1_0.client import Client as dingtalkattendance_1_0Client
+from alibabacloud_tea_openapi import models as open_api_models
+from alibabacloud_dingtalk.attendance_1_0 import models as dingtalkattendance__1__0_models
+from alibabacloud_tea_util import models as util_models
+from alibabacloud_tea_util.client import Client as UtilClient
+
+
+class Sample:
+    def __init__(self):
+        pass
+
+    @staticmethod
+    def create_client() -&gt; dingtalkattendance_1_0Client:
+        """
+        使用 Token 初始化账号Client
+        @return: Client
+        @throws Exception
+        """
+        config = open_api_models.Config()
+        config.protocol = 'https'
+        config.region_id = 'central'
+        return dingtalkattendance_1_0Client(config)
+
+    @staticmethod
+    def main(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        get_leave_records_headers = dingtalkattendance__1__0_models.GetLeaveRecordsHeaders()
+        get_leave_records_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        get_leave_records_request = dingtalkattendance__1__0_models.GetLeaveRecordsRequest(
+            op_user_id='user01',
+            leave_code='f84a2dxxxx',
+            user_ids=[
+                'user1'
+            ],
+            page_number=1,
+            page_size=100
+        )
+        try:
+            client.get_leave_records_with_options(get_leave_records_request, get_leave_records_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+    @staticmethod
+    async def main_async(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        get_leave_records_headers = dingtalkattendance__1__0_models.GetLeaveRecordsHeaders()
+        get_leave_records_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        get_leave_records_request = dingtalkattendance__1__0_models.GetLeaveRecordsRequest(
+            op_user_id='user01',
+            leave_code='f84a2dxxxx',
+            user_ids=[
+                'user1'
+            ],
+            page_number=1,
+            page_size=100
+        )
+        try:
+            await client.get_leave_records_with_options_async(get_leave_records_request, get_leave_records_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+
+if __name__ == '__main__':
+    Sample.main(sys.argv[1:])</code></pre></div><input type="radio" name="check-figure-iyi-kjf-72a" id="figure-iyi-kjf-72a-php-tab" /><label for="figure-iyi-kjf-72a-php-tab">PHP</label><div class="codeblock-item"><pre id="codeblock-j8a-rh7-pw9" outputclass="language-php" code-type="xCode" data-tag="codeblock" class="pre codeblock language-php"><code>&lt;?php
+
+// This file is auto-generated, don't edit it. Thanks.
+namespace AlibabaCloud\SDK\Sample;
+
+use AlibabaCloud\SDK\Dingtalk\Vattendance_1_0\Dingtalk;
+use \Exception;
+use AlibabaCloud\Tea\Exception\TeaError;
+use AlibabaCloud\Tea\Utils\Utils;
+
+use Darabonba\OpenApi\Models\Config;
+use AlibabaCloud\SDK\Dingtalk\Vattendance_1_0\Models\GetLeaveRecordsHeaders;
+use AlibabaCloud\SDK\Dingtalk\Vattendance_1_0\Models\GetLeaveRecordsRequest;
+use AlibabaCloud\Tea\Utils\Utils\RuntimeOptions;
+
+class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Dingtalk Client
+     */
+    public static function createClient(){
+        $config = new Config([]);
+        $config-&gt;protocol = "https";
+        $config-&gt;regionId = "central";
+        return new Dingtalk($config);
+    }
+
+    /**
+     * @param string[] $args
+     * @return void
+     */
+    public static function main($args){
+        $client = self::createClient();
+        $getLeaveRecordsHeaders = new GetLeaveRecordsHeaders([]);
+        $getLeaveRecordsHeaders-&gt;xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        $getLeaveRecordsRequest = new GetLeaveRecordsRequest([
+            "opUserId" =&gt; "user01",
+            "leaveCode" =&gt; "f84a2dxxxx",
+            "userIds" =&gt; [
+                "user1"
+            ],
+            "pageNumber" =&gt; 1,
+            "pageSize" =&gt; 100
+        ]);
+        try {
+            $client-&gt;getLeaveRecordsWithOptions($getLeaveRecordsRequest, $getLeaveRecordsHeaders, new RuntimeOptions([]));
+        }
+        catch (Exception $err) {
+            if (!($err instanceof TeaError)) {
+                $err = new TeaError([], $err-&gt;getMessage(), $err-&gt;getCode(), $err);
+            }
+            if (!Utils::empty_($err-&gt;code) &amp;&amp; !Utils::empty_($err-&gt;message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+        }
+    }
+}
+$path = __DIR__ . \DIRECTORY_SEPARATOR . '..' . \DIRECTORY_SEPARATOR . 'vendor' . \DIRECTORY_SEPARATOR . 'autoload.php';
+if (file_exists($path)) {
+    require_once $path;
+}
+Sample::main(array_slice($argv, 1));</code></pre></div><input type="radio" name="check-figure-iyi-kjf-72a" id="figure-iyi-kjf-72a-go-tab" /><label for="figure-iyi-kjf-72a-go-tab">Go</label><div class="codeblock-item"><pre id="codeblock-dpf-znp-s4l" outputclass="language-go" code-type="xCode" data-tag="codeblock" class="pre codeblock language-go"><code>// This file is auto-generated, don't edit it. Thanks.
+package main
+
+import (
+  "os"
+  util  "github.com/alibabacloud-go/tea-utils/v2/service"
+  dingtalkattendance_1_0  "github.com/alibabacloud-go/dingtalk/attendance_1_0"
+  openapi  "github.com/alibabacloud-go/darabonba-openapi/v2/client"
+  "github.com/alibabacloud-go/tea/tea"
+)
+
+
+/**
+ * 使用 Token 初始化账号Client
+ * @return Client
+ * @throws Exception
+ */
+func CreateClient () (_result *dingtalkattendance_1_0.Client, _err error) {
+  config := &amp;openapi.Config{}
+  config.Protocol = tea.String("https")
+  config.RegionId = tea.String("central")
+  _result = &amp;dingtalkattendance_1_0.Client{}
+  _result, _err = dingtalkattendance_1_0.NewClient(config)
+  return _result, _err
+}
+
+func _main (args []*string) (_err error) {
+  client, _err := CreateClient()
+  if _err != nil {
+    return _err
+  }
+
+  getLeaveRecordsHeaders := &amp;dingtalkattendance_1_0.GetLeaveRecordsHeaders{}
+  getLeaveRecordsHeaders.XAcsDingtalkAccessToken = tea.String("&lt;your access token&gt;")
+  getLeaveRecordsRequest := &amp;dingtalkattendance_1_0.GetLeaveRecordsRequest{
+    OpUserId: tea.String("user01"),
+    LeaveCode: tea.String("f84a2dxxxx"),
+    UserIds: []*string{tea.String("user1")},
+    PageNumber: tea.Int64(1),
+    PageSize: tea.Int32(100),
+  }
+  tryErr := func()(_e error) {
+    defer func() {
+      if r := tea.Recover(recover()); r != nil {
+        _e = r
+      }
+    }()
+    _, _err = client.GetLeaveRecordsWithOptions(getLeaveRecordsRequest, getLeaveRecordsHeaders, &amp;util.RuntimeOptions{})
+    if _err != nil {
+      return _err
+    }
+
+    return nil
+  }()
+
+  if tryErr != nil {
+    var err = &amp;tea.SDKError{}
+    if _t, ok := tryErr.(*tea.SDKError); ok {
+      err = _t
+    } else {
+      err.Message = tea.String(tryErr.Error())
+    }
+    if !tea.BoolValue(util.Empty(err.Code)) &amp;&amp; !tea.BoolValue(util.Empty(err.Message)) {
+      // err 中含有 code 和 message 属性，可帮助开发定位问题
+    }
+
+  }
+  return _err
+}
+
+
+func main() {
+  err := _main(tea.StringSlice(os.Args[1:]))
+  if err != nil {
+    panic(err)
+  }
+}</code></pre></div><input type="radio" name="check-figure-iyi-kjf-72a" id="figure-iyi-kjf-72a-nodejs-tab" /><label for="figure-iyi-kjf-72a-nodejs-tab">Node.js</label><div class="codeblock-item"><pre id="codeblock-lk8-fdx-mfs" outputclass="language-nodejs" code-type="xCode" data-tag="codeblock" class="pre codeblock language-nodejs"><code>// This file is auto-generated, don't edit it
+import Util, * as $Util from '@alicloud/tea-util';
+import dingtalkattendance_1_0, * as $dingtalkattendance_1_0 from '@alicloud/dingtalk/attendance_1_0';
+import OpenApi, * as $OpenApi from '@alicloud/openapi-client';
+import * as $tea from '@alicloud/tea-typescript';
+
+
+export default class Client {
+
+  /**
+   * 使用 Token 初始化账号Client
+   * @return Client
+   * @throws Exception
+   */
+  static createClient(): dingtalkattendance_1_0 {
+    let config = new $OpenApi.Config({ });
+    config.protocol = "https";
+    config.regionId = "central";
+    return new dingtalkattendance_1_0(config);
+  }
+
+  static async main(args: string[]): Promise&lt;void&gt; {
+    let client = Client.createClient();
+    let getLeaveRecordsHeaders = new $dingtalkattendance_1_0.GetLeaveRecordsHeaders({ });
+    getLeaveRecordsHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+    let getLeaveRecordsRequest = new $dingtalkattendance_1_0.GetLeaveRecordsRequest({
+      opUserId: "user01",
+      leaveCode: "f84a2dxxxx",
+      userIds: [
+        "user1"
+      ],
+      pageNumber: 1,
+      pageSize: 100,
+    });
+    try {
+      await client.getLeaveRecordsWithOptions(getLeaveRecordsRequest, getLeaveRecordsHeaders, new $Util.RuntimeOptions({ }));
+    } catch (err) {
+      if (!Util.empty(err.code) &amp;&amp; !Util.empty(err.message)) {
+        // err 中含有 code 和 message 属性，可帮助开发定位问题
+      }
+
+    }    
+  }
+
+}
+
+Client.main(process.argv.slice(2));</code></pre></div><input type="radio" name="check-figure-iyi-kjf-72a" id="figure-iyi-kjf-72a-csharp-tab" /><label for="figure-iyi-kjf-72a-csharp-tab">C#</label><div class="codeblock-item"><pre id="codeblock-gai-aet-pss" outputclass="language-csharp" code-type="xCode" data-tag="codeblock" class="pre codeblock language-csharp"><code>// This file is auto-generated, don't edit it. Thanks.
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
+
+using Tea;
+using Tea.Utils;
+
+
+namespace AlibabaCloud.SDK.Sample
+{
+    public class Sample 
+    {
+
+        /**
+         * 使用 Token 初始化账号Client
+         * @return Client
+         * @throws Exception
+         */
+        public static AlibabaCloud.SDK.Dingtalkattendance_1_0.Client CreateClient()
+        {
+            AlibabaCloud.OpenApiClient.Models.Config config = new AlibabaCloud.OpenApiClient.Models.Config();
+            config.Protocol = "https";
+            config.RegionId = "central";
+            return new AlibabaCloud.SDK.Dingtalkattendance_1_0.Client(config);
+        }
+
+        public static void Main(string[] args)
+        {
+            AlibabaCloud.SDK.Dingtalkattendance_1_0.Client client = CreateClient();
+            AlibabaCloud.SDK.Dingtalkattendance_1_0.Models.GetLeaveRecordsHeaders getLeaveRecordsHeaders = new AlibabaCloud.SDK.Dingtalkattendance_1_0.Models.GetLeaveRecordsHeaders();
+            getLeaveRecordsHeaders.XAcsDingtalkAccessToken = "&lt;your access token&gt;";
+            AlibabaCloud.SDK.Dingtalkattendance_1_0.Models.GetLeaveRecordsRequest getLeaveRecordsRequest = new AlibabaCloud.SDK.Dingtalkattendance_1_0.Models.GetLeaveRecordsRequest
+            {
+                OpUserId = "user01",
+                LeaveCode = "f84a2dxxxx",
+                UserIds = new List&lt;string&gt;
+                {
+                    "user1"
+                },
+                PageNumber = 1,
+                PageSize = 100,
+            };
+            try
+            {
+                client.GetLeaveRecordsWithOptions(getLeaveRecordsRequest, getLeaveRecordsHeaders, new AlibabaCloud.TeaUtil.Models.RuntimeOptions());
+            }
+            catch (TeaException err)
+            {
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+            catch (Exception _err)
+            {
+                TeaException err = new TeaException(new Dictionary&lt;string, object&gt;
+                {
+                    { "message", _err.Message }
+                });
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+        }
+
+
+    }
+}</code></pre></div></div></section></section><section id="section-response-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-response-1" data-tag="h2" class="h2">响应</h2><section id="section-response-parameter" class="section"><h3 data-tag="h3" id="h2-xdw-ynr-z8s" class="h3 title">响应体</h3><table id="b5fa640a75584" tablewidth="710" tablecolswidth="213 142 355" autofit="false" class="table"><colgroup colwidth="0.9*" style="width:30.00%"></colgroup><colgroup colwidth="0.6*" style="width:20.00%"></colgroup><colgroup colwidth="1.5*" style="width:50.00%"></colgroup><tbody class="tbody"><tr id="0cfea3fe7f79m"><td id="73f6c199d8thf" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="4aa874af8d0yb">名称</p></td><td id="170d51bc40j41" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="3c1e6235afsnz">类型</p></td><td id="37ac2e11b6vz1" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="c9de8ec3eawbr">描述</p></td></tr><tr outputclass="row row-level-1 has-child" id="56b45ef4918bb" class="row row-level-1 has-child"><td id="79c39a02050mi" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="adf49393daa98">result</p></td><td id="157a54ff2b6xu" rowspan="1" colspan="1"><p id="ed2a1067e2mbb">Object</p></td><td id="a33b526a91d9t" rowspan="1" colspan="1"><p id="09da451bee5u2">返回结果。</p></td></tr><tr outputclass="row row-level-1-1" id="af4e22c59ak03" class="row row-level-1-1"><td id="4029aa1ab8dq7" rowspan="1" colspan="1"><p id="54889742d0m3o">hasMore</p></td><td id="163ad162f3h8l" rowspan="1" colspan="1"><p id="fb00b9aa8egzy">Boolean</p></td><td id="8d6b2db1417nz" rowspan="1" colspan="1"><p id="05cf162facigg">是否存在更多结果。</p><ul id="1a0e3ff1e1tad"><li id="541645615b6ik"><p id="6121676ba4xpb"><b>true</b>：存在</p></li><li id="92f30ca65f91j"><p id="2f1bab56ad6tf"><b>false</b>：不存在</p></li></ul></td></tr><tr outputclass="row row-level-1-2 has-child" id="c43a5e15853tg" class="row row-level-1-2 has-child"><td id="5bc423bc27rgk" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="0e977533a1e33">leaveRecords</p></td><td id="1e4f1683908qy" rowspan="1" colspan="1"><p id="df007a92ccpw7">Array</p></td><td id="24e6b599d98cs" rowspan="1" colspan="1"><p id="97bc73debbqho">假期消费记录列表。</p></td></tr><tr outputclass="row row-level-1-2-1" id="8c0cbf807ak6l" class="row row-level-1-2-1"><td id="821f211974j0x" rowspan="1" colspan="1"><p id="2004c98563itm">userId</p></td><td id="b6a82d8c352cj" rowspan="1" colspan="1"><p id="d30be27d60696">String</p></td><td id="27b74a4f61hhc" rowspan="1" colspan="1"><p id="890ea22cb24y8">员工userId。</p></td></tr><tr outputclass="row row-level-1-2-2" id="b0fbfefcb2oug" class="row row-level-1-2-2"><td id="32322b8a9b0u8" rowspan="1" colspan="1"><p id="61ebd7b3fbpxy">leaveCode</p></td><td id="f562f3ee62nqd" rowspan="1" colspan="1"><p id="3aab8d6216xiu">String</p></td><td id="f4bcbb9473ek3" rowspan="1" colspan="1"><p id="a1ee790d8e1ob">假期类型唯一标识。</p></td></tr><tr outputclass="row row-level-1-2-3" id="18cdc18645ynu" class="row row-level-1-2-3"><td id="601b742b46vmd" rowspan="1" colspan="1"><p id="d0d0ef9908awc">recordId</p></td><td id="f2825a5f4eq1w" rowspan="1" colspan="1"><p id="9a4b918d68zky">String</p></td><td id="c1e6e8e38b96f" rowspan="1" colspan="1"><p id="4bef89350cmdb">假期消费记录唯一标识。</p></td></tr><tr outputclass="row row-level-1-2-4" id="eb0ec6b1f4s2d" class="row row-level-1-2-4"><td id="9336e6a0d3xgm" rowspan="1" colspan="1"><p id="ff823b6a7dsch">quotaId</p></td><td id="dbd44ef450l9d" rowspan="1" colspan="1"><p id="605b633cc42mh">String</p></td><td id="5eba029575f3f" rowspan="1" colspan="1"><p id="97813727a1d5w">假期额度唯一标识。</p></td></tr><tr outputclass="row row-level-1-2-5" id="f08f8d0d3aiw6" class="row row-level-1-2-5"><td id="4dd226979cuye" rowspan="1" colspan="1"><p id="3954dc975d7dx">calType</p></td><td id="b9f9cc57e9kph" rowspan="1" colspan="1"><p id="5ccbd429f577l">String</p></td><td id="883ff54bb7app" rowspan="1" colspan="1"><p id="44218c8e313zc">计算类型。</p><ul id="fc3644f39da3p"><li id="8447493f7cqe8"><p id="9b6454d3c31jg"><b>insert</b>：新纪录</p></li><li id="7db1a44ab3aoo"><p id="36f87162f42gi"><b>add</b>：新增</p></li><li id="8d6b07fb1a2h6"><p id="1909ffab60u99"><b>delete</b>：删除</p></li><li id="b6bccac384okt"><p id="b82fa27bd25bf"><b>update</b>：更新</p></li><li id="0a2632c321wha"><p id="ba2913aa3a5ht"><b>null</b>（或者不返回该字段）：请假消耗</p></li></ul></td></tr><tr outputclass="row row-level-1-2-6" id="ed55e43f62p5b" class="row row-level-1-2-6"><td id="f0cf1bb1ba5ta" rowspan="1" colspan="1"><p id="bfbcf6e91al1k">startTime</p></td><td id="95729a5adfwnp" rowspan="1" colspan="1"><p id="29293290bduft">Long</p></td><td id="bab6d169446r9" rowspan="1" colspan="1"><p id="7de5831bc9vse">额度有效期开始时间或请假开始时间，毫秒级时间戳。</p></td></tr><tr outputclass="row row-level-1-2-7" id="9e496e303dd91" class="row row-level-1-2-7"><td id="26570b4401rwl" rowspan="1" colspan="1"><p id="f2a679902btn4">endTime</p></td><td id="8e5b6d0601xte" rowspan="1" colspan="1"><p id="b492c88dedp7s">Long</p></td><td id="1e755c009381u" rowspan="1" colspan="1"><p id="64749f0c1428g">额度有效期结束时间或请假结束时间，毫秒级时间戳。</p></td></tr><tr outputclass="row row-level-1-2-8" id="140795ed0bn99" class="row row-level-1-2-8"><td id="31df96df8f6hg" rowspan="1" colspan="1"><p id="d3582da3dbszq">leaveViewUnit</p></td><td id="8fd329d242y1e" rowspan="1" colspan="1"><p id="ff897876ef7vs">String</p></td><td id="c80a86f0c7zur" rowspan="1" colspan="1"><p id="3fc3e905a9arc">显示单位。</p><ul id="a79c7e49d3fhk"><li id="d9d677c15fcjl"><p id="50e015968f975"><b>day</b>：天</p></li><li id="718d827f66zm0"><p id="423fb1f6efvi7"><b>hour</b>：小时</p></li></ul></td></tr><tr outputclass="row row-level-1-2-9" id="a2b49035962pl" class="row row-level-1-2-9"><td id="f43f024656u9q" rowspan="1" colspan="1"><p id="ec958cea3dco9">leaveReason</p></td><td id="ecd7c50cb3tb9" rowspan="1" colspan="1"><p id="400ac0e819o1n">String</p></td><td id="99511cde4boom" rowspan="1" colspan="1"><p id="d5a16ba730j0c">原因。</p></td></tr><tr outputclass="row row-level-1-2-10" id="e2d9b7f157oh9" class="row row-level-1-2-10"><td id="86980f5b5680d" rowspan="1" colspan="1"><p id="8863d4cd6ex49">leaveRecordType</p></td><td id="4734c0c5b9jkk" rowspan="1" colspan="1"><p id="bd081f9391zwl">String</p></td><td id="cd6a95fbf9sis" rowspan="1" colspan="1"><p id="4f4e9665942zk">假期记录类型。</p><ul id="9a0800b433szt"><li id="ee04ce9f08tjf"><p id="a62f9c0defaq1"><b>leave</b>：请假</p></li><li id="b17e434e99t4v"><p id="ef2319711ehbj"><b>update</b>：更新配额</p></li><li id="9b49a5814fall"><p id="62d1c4b274qdz"><b>modify_quota</b>:初始化余额或者更新余额</p></li></ul></td></tr><tr outputclass="row row-level-1-2-11" id="a12c09d91470c" class="row row-level-1-2-11"><td id="26fb638deesu4" rowspan="1" colspan="1"><p id="a1bf5978ef9gb">leaveStatus</p></td><td id="71c10709de9hj" rowspan="1" colspan="1"><p id="24953a6d9c468">String</p></td><td id="acad787373zm4" rowspan="1" colspan="1"><p id="95da57c2b7ami">请假状态。</p><ul id="293b527364tpu"><li id="de866bbbdfos8"><p id="3fc7528a39r8j"><b>init</b>：请假申请中</p></li><li id="338d726ad1l57"><p id="49d5f6221b748"><b>success</b>：请假并已通过</p></li><li id="aead0de9e0xnf"><p id="8ab12351e516z"><b>refuse</b>：请假但被被拒</p></li><li id="9d31ec744dsm9"><p id="99b86c310brq1"><b>abort</b>：请假撤销</p></li><li id="31ccdac3405mx"><p id="d33036d1b092c"><b>revoke</b>：请假已通过但是撤销了请假并已同意</p></li></ul></td></tr><tr outputclass="row row-level-1-2-12" id="65fc51e654cn1" class="row row-level-1-2-12"><td id="a06dded940n9s" rowspan="1" colspan="1"><p id="3c1dc48eb6fhr">recordNumPerDay</p></td><td id="c3635a8f7caol" rowspan="1" colspan="1"><p id="3362c90dc4e13">Long</p></td><td id="4afd70232093i" rowspan="1" colspan="1"><p id="41e9f0fa99qix">以天计算的消费额度。</p><ul id="3c13730b33xxv"><li id="c440ffb3d8nc1"><p id="c43b40c984pa7"><b>说明</b></p><p id="438a0eee78k5x">假期类型按天计算时，该值不为空且按百分之一天折算。 例如：1000=10天。</p></li></ul></td></tr><tr outputclass="row row-level-1-2-13" id="09c5b5f59eath" class="row row-level-1-2-13"><td id="4b32c460dbcm5" rowspan="1" colspan="1"><p id="a5c8bb59c4ics">recordNumPerHour</p></td><td id="81182a9c9bmt9" rowspan="1" colspan="1"><p id="9e1aae6432rnc">Long</p></td><td id="8bc56f731frog" rowspan="1" colspan="1"><p id="37e5d7696daxg">以小时计算的消费额度。</p><ul id="73be1a32d4q8l"><li id="a771add0d0qes"><p id="24db46c2f5owx"><b>说明</b></p><p id="76225a71e1swz">假期类型按小时，计算该值不为空且按百分之一小时折算。例如：1000=10小时。</p></li></ul></td></tr><tr outputclass="row row-level-1-2-14" id="ad26b5e469guv" class="row row-level-1-2-14"><td id="a07de07a02se1" rowspan="1" colspan="1"><p id="5162fe0abc72o">gmtCreate</p></td><td id="c0b07f782ffto" rowspan="1" colspan="1"><p id="2bffe0f2c58d2">Long</p></td><td id="c6527944bdcoi" rowspan="1" colspan="1"><p id="54993609e0bo3">记录创建时间，毫秒级时间戳。</p></td></tr><tr outputclass="row row-level-1-2-15" id="5590697814k1a" class="row row-level-1-2-15"><td id="31c180c42bsj4" rowspan="1" colspan="1"><p id="d6724b26acdbb">gmtModified</p></td><td id="b76f32ce3ahu8" rowspan="1" colspan="1"><p id="df700ddc2b7qa">Long</p></td><td id="e1f96b4c1dnlo" rowspan="1" colspan="1"><p id="d6070aa9eec4d">记录修改时间，毫秒级时间戳。</p></td></tr><tr outputclass="row row-level-1-2-16" id="ce69daf594ibx" class="row row-level-1-2-16"><td id="82889f6e66h5y" rowspan="1" colspan="1"><p id="9d9837d273tz2">opUserId</p></td><td id="510d5c9495m0f" rowspan="1" colspan="1"><p id="e17a711908dcf">String</p></td><td id="29d0ee925c5gy" rowspan="1" colspan="1"><p id="33f7ae2ef2uuz">记录的操作人Id。</p></td></tr><tr outputclass="row row-level-2" id="6211be2d321y9" class="row row-level-2"><td id="c3e4369ad20nx" rowspan="1" colspan="1"><p id="ccfc993cd0psp">success</p></td><td id="f1820d186dqee" rowspan="1" colspan="1"><p id="262564aec6ai0">Boolean</p></td><td id="cafd3d2f3846g" rowspan="1" colspan="1"><p id="c6aaa45d1f5jt">是否正确访问。</p><ul id="dd5a0113c721f"><li id="dfc0874cfaxq9"><p id="d0550d8351ejs"><b>true</b>：是</p></li><li id="b8134022d28ht"><p id="8ae86fc18e06t"><b>false</b>：不是</p></li></ul></td></tr></tbody></table></section><section id="section-response-body-example" class="section"><h3 id="h3-response-body-example" data-tag="h3" class="h3">响应体示例</h3><pre id="e2486057e4oab" outputclass="language-json" code-type="xCode" data-tag="codeblock" class="pre codeblock language-json"><code>HTTP/1.1 200 OK
+Content-Type:application/json
+
+{
+  "result" : {
+    "hasMore" : true,
+    "leaveRecords" : [ {
+      "userId" : "user1",
+      "leaveCode" : "f84a2dxxxx",
+      "recordId" : "db1d74xxxxbaa",
+      "quotaId" : "db1d74xxxxbaa",
+      "calType" : "add",
+      "startTime" : 1653851001000,
+      "endTime" : 1753851001000,
+      "leaveViewUnit" : "day",
+      "leaveReason" : "管理员导入",
+      "leaveRecordType" : "update",
+      "leaveStatus" : "init",
+      "recordNumPerDay" : 100,
+      "recordNumPerHour" : 100,
+      "gmtCreate" : 1653851001000,
+      "gmtModified" : 1753851001000,
+      "opUserId" : "manage2323"
+    } ]
+  },
+  "success" : true
+}</code></pre></section><section id="section-error-code-1" class="section"><h3 id="h3-error-code-1" data-tag="h3" class="h3">错误码</h3><p data-tag="p" id="p-error-code-global-guide" class="p">若调用该接口报错，可根据错误信息在<a href="https://open.dingtalk.com/document/development/server-api-error-codes-1" id="a-error-code-global-guide">全局错误码</a>文档中查找解决方案。</p><table id="b39d390dd3tpb" tablewidth="709" tablecolswidth="142 177 177 213" autofit="false" class="table"><colgroup colwidth="0.8*" style="width:20.03%"></colgroup><colgroup colwidth="1*" style="width:24.96%"></colgroup><colgroup colwidth="1*" style="width:24.96%"></colgroup><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><tbody class="tbody"><tr id="2972b820f8nkr"><td id="ca9656a660g5h" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="04a8b64b63sc4">HttpCode</p></td><td id="6af12f3e5c9y6" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="bcd75b9b02bvn">错误码</p></td><td id="9e3f86261f6wr" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="158b34c251qjs">错误信息</p></td><td id="29e167f6cbl1d" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="140cbc409ec0c">说明</p></td></tr><tr id="e766f35c15fr2"><td id="06cd65e096alk" rowspan="1" colspan="1"><p id="8cc58d41e2xb7">400</p></td><td id="2e1a4fb7606wl" rowspan="1" colspan="1"><p id="ba6e903bc47xj">userNotExist</p></td><td id="27494f42529wi" rowspan="1" colspan="1"><p id="a3585138ecibv">用户不存在</p></td><td id="8917d155ab91k" rowspan="1" colspan="1"><p id="f890300c6c0a8">用户不存在</p></td></tr><tr id="61090496a9nhw"><td id="543a8e0f45yii" rowspan="1" colspan="1"><p id="53cf2f4ade232">400</p></td><td id="88434b6400fqy" rowspan="1" colspan="1"><p id="1b14a947da1fd">leaveOpuserIdIsNotAdmin</p></td><td id="a9b938fdb879b" rowspan="1" colspan="1"><p id="4022b6364a6n1">非管理员只能查询本人相关信息</p></td><td id="fb5a7874b62tn" rowspan="1" colspan="1"><p id="3e228fdfef6it">非管理员只能查询本人相关信息</p></td></tr><tr id="cac00bc8cbc8l"><td id="77106c1576u3e" rowspan="1" colspan="1"><p id="01afcd65761wc">400</p></td><td id="fcb7e7d260blo" rowspan="1" colspan="1"><p id="1f01dbe7c7er6">leaveTypeNotFound</p></td><td id="35624ddd6cqfr" rowspan="1" colspan="1"><p id="f510e8a67b380">未找到该假期类型</p></td><td id="d88081ef3bztv" rowspan="1" colspan="1"><p id="65e778b960910">未找到该假期类型</p></td></tr><tr id="63a6ddb7d0ciz"><td id="8c6cad550ebpn" rowspan="1" colspan="1"><p id="1c18137993r41">400</p></td><td id="97e56fcf305j7" rowspan="1" colspan="1"><p id="1a37468239hlw">paramterInvalid</p></td><td id="a292ddc6c78i8" rowspan="1" colspan="1"><p id="55c950af88hsp">参数错误</p></td><td id="8e3be2c73fkmr" rowspan="1" colspan="1"><p id="f775b3fce1sl2">opUserId和userId参数不能为空</p></td></tr><tr id="e9f1abe9e84nn"><td id="27987908a41g8" rowspan="1" colspan="1"><p id="6770af616c700">400</p></td><td id="ce835e512c7i2" rowspan="1" colspan="1"><p id="f57799f29dn8h">leaveUserIdListMax</p></td><td id="9f4cd75e279yy" rowspan="1" colspan="1"><p id="04836c63773rl">每次最多查询50条记录</p></td><td id="4ecb5b4623576" rowspan="1" colspan="1"><p id="6747fac92fuf7">每次最多查询50个员工userIds</p></td></tr><tr id="7684e69ba2nvd"><td id="6a8f69084c6xo" rowspan="1" colspan="1"><p id="e8f96fcc1c8vb">400</p></td><td id="2ad8e8fda602r" rowspan="1" colspan="1"><p id="5a9bd707b4ura">pageIndexIllegal</p></td><td id="ec409da3b014w" rowspan="1" colspan="1"><p id="5fcf5385b9yz4">分页参数错误</p></td><td id="51b64764d9zau" rowspan="1" colspan="1"><p id="284dac0e49z2v">分页参数从0开始非负整数</p></td></tr><tr id="7b598e31c7v9k"><td id="1236c93d8fgsv" rowspan="1" colspan="1"><p id="8005209756wyp">400</p></td><td id="790ca03fbek3g" rowspan="1" colspan="1"><p id="4e2258f7fc7a6">pageSizeIllegal</p></td><td id="6c8463286cits" rowspan="1" colspan="1"><p id="a521fb5f4fnhk">分页大小超过限制</p></td><td id="1e5329446bbc1" rowspan="1" colspan="1"><p id="d2b662e281uq6">分页大小最大200条</p></td></tr><tr id="43a1bf0c16gpx"><td id="0df2799d82yur" rowspan="1" colspan="1"><p id="f23dba5ddacf8">400</p></td><td id="bb87a12dbebg5" rowspan="1" colspan="1"><p id="e3cb15c0c8l0e">noPermission</p></td><td id="fe6b8e4bfea7r" rowspan="1" colspan="1"><p id="08711803410rr">无访问权限</p></td><td id="c66a6ce16070r" rowspan="1" colspan="1"><p id="9926e377d2z80">无访问权限</p></td></tr><tr id="2804a4b792snb"><td id="6e30ae1e0cvv0" rowspan="1" colspan="1"><p id="16c8ce29b43hi">400</p></td><td id="68f9f63755156" rowspan="1" colspan="1"><p id="6c4d2b871a3bd">leaveOrgIsUsed</p></td><td id="210c65fa27e2n" rowspan="1" colspan="1"><p id="9cde6c17416od">只允许企业接入使用</p></td><td id="36ec296d48l3t" rowspan="1" colspan="1"><p id="c1de1814a9uf6">只允许企业接入使用</p></td></tr></tbody></table></section></section></div></main></body></html>

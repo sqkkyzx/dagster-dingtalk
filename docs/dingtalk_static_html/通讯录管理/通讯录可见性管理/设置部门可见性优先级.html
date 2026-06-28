@@ -1,0 +1,425 @@
+<!DOCTYPE html><html><head><meta charset="utf8" / /><meta name="searchtitle" content="" / /><meta name="keywords" content="" / /><meta name="author" content="" / /><title>设置部门可见性优先级</title><meta name="gmtModify" content="2025-09-11 21:02:03" / /><meta name="gmtModify" content="2026-06-01 16:21:33" / /></head><body data-tag="topic" id="doc-api-dingtalk-UpdateDeptSettngTailFirst" class="topic"><main id="001af65a953lo" data-init-id="doc-api-dingtalk_UpdateDeptSettngTailFirst"><h1 data-tag="title" id="h1-evc-lcq-i6s" class="title">设置部门可见性优先级</h1><p data-tag="shortdesc" id="2fdde0caadtgj" class="shortdesc">调用本接口，设置通讯录部门可见性优先级。</p><div data-tag="conbody" outputclass="icms-api-reference" class="icms-api-reference conbody"><section id="section-prerequisites-1" class="section icms-module" data-tag="section" data-source="latest-mounted-icms-html"><h2 id="h2-prerequisites-1" data-tag="h2" class="h2">接口调用说明</h2><p>如下图所示，在默认情况下子部门（高管）<b>部门成员对通讯录查看范围</b>虽然与其父部门不同，但是仍会沿用父部门的配置。</p><p>如果需要使子部门（高管）单独设置的<b>部门成员对通讯录查看范围</b>生效，可调用本接口将子部门的优先级进行提升。</p><div type="note" class="note note-note">
+ <div class="note-icon-wrapper">
+  <i class="icon-note note note"></i>
+ </div>
+ <div class="noteContentSpan">
+  
+  <p data-tag="p" class="p"></p>
+  <p>部门设置的优先级默认为：<b>父部门设置优先于子部门</b>。</p>
+  <p></p>
+ </div>
+</div><p><img src="https://img.alicdn.com/imgextra/i3/O1CN01A2FvbD1t7dgW9p1Cp_!!6000000005855-2-tps-1080-399.png" alt="部门成员对通讯录查看范围设置" class="image break" / /></p></section><section id="section-request-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-request-1" data-tag="h2" class="h2">请求</h2><section id="section-request-basic-info" class="section"><h3 id="heading-request-basic-info" data-tag="h3" class="h3">基本信息</h3><table tablewidth="648" tablecolswidth="216 432" autofit="false" class="table"><colgroup colwidth="1*" style="width:33.33%"></colgroup><colgroup colwidth="2*" style="width:66.67%"></colgroup><tbody class="tbody"><tr><td rowspan="1" style="background-color:#e5e5e5" colspan="1"><p>字段</p></td><td rowspan="1" style="background-color:#e5e5e5" colspan="1"><p>值</p></td></tr><tr><td rowspan="1" colspan="1"><p>HTTP URL</p></td><td rowspan="1" colspan="1"><p>https://api.dingtalk.com/v1.0/contact/depts/settings/priorities</p></td></tr><tr><td rowspan="1" colspan="1"><p>HTTP Method</p></td><td rowspan="1" colspan="1"><p>POST</p></td></tr><tr><td rowspan="1" colspan="1"><p>支持的应用类型</p></td><td rowspan="1" colspan="1"><p><span data-tag="ph" id="ph-request-basic-app-type-apptype-0" class="ph ph-app-type" data-ph-raw-text="appType-企业内部应用">appType-企业内部应用</span></p></td></tr><tr><td rowspan="1" colspan="1"><p>权限要求</p></td><td rowspan="1" colspan="1"><p><span data-tag="ph" id="ph-request-basic-permission-permission-contact-visibility-readwrite-0" class="ph-permission ph" data-ph-raw-text="permission-Contact.Visibility.ReadWrite-通讯录数据可见范围管理权限" data-permission-id="permission-Contact.Visibility.ReadWrite" data-permission-code="Contact.Visibility.ReadWrite" data-permission-detail-api="/document/api/permission/detail" data-permission-query-param="code">permission-Contact.Visibility.ReadWrite-通讯录数据可见范围管理权限</span></p></td></tr></tbody></table></section><section id="section-request-header-parameter" class="section"><h3 data-tag="h3" id="h2-t7a-qj6-tlx" class="h3 title">请求头</h3><table id="a9b4b1caf7b4q" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="7289b3c0fae1v"><td id="093bfdb438du1" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="0b5c37aed533g">名称</p></td><td id="4bcbe4161aeac" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="bb3093b395p9i">类型</p></td><td id="02144851eex1q" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="1ba76088bc62p">是否必填</p></td><td id="29752ad167a8w" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="99a393446adlg">描述</p></td></tr><tr id="4f7bc5e800j0e"><td id="b5fd9aadbeanj" rowspan="1" colspan="1"><p id="20681ca052hxm">x-acs-dingtalk-access-token</p></td><td id="baf885c855nv3" rowspan="1" colspan="1"><p id="36111144a1ndq">String</p></td><td id="56bb60f201929" rowspan="1" colspan="1"><p id="cc88758773mpj">是</p></td><td id="eb59a8bc3e4or" rowspan="1" colspan="1"><p id="85c124b83d6qk">调用该接口的访问凭证，通过调用<a id="381d03437af92" href="https://open.dingtalk.com/document/development/obtain-the-access-token-of-an-internal-app#" class="xref">获取企业内部应用的accessToken</a>接口获取。</p></td></tr></tbody></table></section><section id="section-request-body-parameter" class="section"><h3 data-tag="h3" id="h2-0hz-8zk-v5k" class="h3 title">请求体</h3><table id="21565963259ft" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="637fc6921dbuo"><td id="be815c1bff2tm" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="6b3090e198v5y">名称</p></td><td id="a97c6acdc08dn" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="54f913d7a33wg">类型</p></td><td id="997054aa16elc" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="173b4b5cbbhbc">是否必填</p></td><td id="fe3d61c911500" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="f5f11d1758jdi">描述</p></td></tr><tr outputclass="row row-level-1" id="26c3a0359aoud" class="row row-level-1 row-level-1 row"><td id="f9ebc5c8d3v4h" rowspan="1" colspan="1"><p id="fdae349df6v5f">enable</p></td><td id="96c1472b398k5" rowspan="1" colspan="1"><p id="b9a653c910sef">Boolean</p></td><td id="5ed1966f0bpyo" rowspan="1" colspan="1"><p id="b982357bcao9y">是</p></td><td id="840db3533exg4" rowspan="1" colspan="1"><p id="ee3506cf7258c">是否开启子部门设置优先，取值：</p><ul id="26b47f96f4g5w"><li id="790d466e7fjj7"><p id="18d11183e7hc7"><b>true</b>: 子部门设置优先于父部门</p></li><li id="24a40fdc6560l"><p id="667a74227dvt6"><b>false(默认值)</b>: 父部门设置优先于子部门</p></li></ul></td></tr></tbody></table></section><section id="section-request-body-example" class="section"><h3 id="h3-request-body-example" data-tag="h3" class="h3">请求示例</h3><div id="figure-8ai-lra-y19" outputclass="tabbed-codeblock" data-tag="fig" class="tabbed-codeblock-box"><div class="tab-box"></div><input type="radio" name="check-figure-8ai-lra-y19" id="figure-8ai-lra-y19-HTTP-tab" checked="checked" /><label for="figure-8ai-lra-y19-HTTP-tab">HTTP</label><div class="codeblock-item"><pre id="codeblock-6cj-1le-0dl" outputclass="language-HTTP" code-type="xCode" data-tag="codeblock" class="pre codeblock language-HTTP"><code>POST /v1.0/contact/depts/settings/priorities HTTP/1.1
+Host:api.dingtalk.com
+x-acs-dingtalk-access-token:ebf12xxx
+Content-Type:application/json
+
+{
+  "enable" : true
+}</code></pre></div><input type="radio" name="check-figure-8ai-lra-y19" id="figure-8ai-lra-y19-java-tab" /><label for="figure-8ai-lra-y19-java-tab">Java</label><div class="codeblock-item"><pre id="codeblock-e90-kdy-lol" outputclass="language-java" code-type="xCode" data-tag="codeblock" class="pre codeblock language-java"><code>// This file is auto-generated, don't edit it. Thanks.
+package com.aliyun.sample;
+
+import com.aliyun.tea.*;
+import com.aliyun.teautil.*;
+import com.aliyun.teautil.models.*;
+import com.aliyun.dingtalkcontact_1_0.*;
+import com.aliyun.dingtalkcontact_1_0.models.*;
+import com.aliyun.teaopenapi.*;
+import com.aliyun.teaopenapi.models.*;
+
+public class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Client
+     * @throws Exception
+     */
+    public static com.aliyun.dingtalkcontact_1_0.Client createClient() throws Exception {
+        Config config = new Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        return new com.aliyun.dingtalkcontact_1_0.Client(config);
+    }
+
+    public static void main(String[] args_) throws Exception {
+        java.util.List&lt;String&gt; args = java.util.Arrays.asList(args_);
+        com.aliyun.dingtalkcontact_1_0.Client client = Sample.createClient();
+        UpdateDeptSettngTailFirstHeaders updateDeptSettngTailFirstHeaders = new UpdateDeptSettngTailFirstHeaders();
+        updateDeptSettngTailFirstHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        UpdateDeptSettngTailFirstRequest updateDeptSettngTailFirstRequest = new UpdateDeptSettngTailFirstRequest()
+                .setEnable(true);
+        try {
+            client.updateDeptSettngTailFirstWithOptions(updateDeptSettngTailFirstRequest, updateDeptSettngTailFirstHeaders, new RuntimeOptions());
+        } catch (TeaException err) {
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        } catch (Exception _err) {
+            TeaException err = new TeaException(_err.getMessage(), _err);
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        }        
+    }
+}</code></pre></div><input type="radio" name="check-figure-8ai-lra-y19" id="figure-8ai-lra-y19-python-tab" /><label for="figure-8ai-lra-y19-python-tab">Python</label><div class="codeblock-item"><pre id="codeblock-irq-icl-jb0" outputclass="language-python" code-type="xCode" data-tag="codeblock" class="pre codeblock language-python"><code># -*- coding: utf-8 -*-
+# This file is auto-generated, don't edit it. Thanks.
+import sys
+
+from typing import List
+
+from alibabacloud_dingtalk.contact_1_0.client import Client as dingtalkcontact_1_0Client
+from alibabacloud_tea_openapi import models as open_api_models
+from alibabacloud_dingtalk.contact_1_0 import models as dingtalkcontact__1__0_models
+from alibabacloud_tea_util import models as util_models
+from alibabacloud_tea_util.client import Client as UtilClient
+
+
+class Sample:
+    def __init__(self):
+        pass
+
+    @staticmethod
+    def create_client() -&gt; dingtalkcontact_1_0Client:
+        """
+        使用 Token 初始化账号Client
+        @return: Client
+        @throws Exception
+        """
+        config = open_api_models.Config()
+        config.protocol = 'https'
+        config.region_id = 'central'
+        return dingtalkcontact_1_0Client(config)
+
+    @staticmethod
+    def main(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        update_dept_settng_tail_first_headers = dingtalkcontact__1__0_models.UpdateDeptSettngTailFirstHeaders()
+        update_dept_settng_tail_first_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        update_dept_settng_tail_first_request = dingtalkcontact__1__0_models.UpdateDeptSettngTailFirstRequest(
+            enable=True
+        )
+        try:
+            client.update_dept_settng_tail_first_with_options(update_dept_settng_tail_first_request, update_dept_settng_tail_first_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+    @staticmethod
+    async def main_async(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        update_dept_settng_tail_first_headers = dingtalkcontact__1__0_models.UpdateDeptSettngTailFirstHeaders()
+        update_dept_settng_tail_first_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        update_dept_settng_tail_first_request = dingtalkcontact__1__0_models.UpdateDeptSettngTailFirstRequest(
+            enable=True
+        )
+        try:
+            await client.update_dept_settng_tail_first_with_options_async(update_dept_settng_tail_first_request, update_dept_settng_tail_first_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+
+if __name__ == '__main__':
+    Sample.main(sys.argv[1:])</code></pre></div><input type="radio" name="check-figure-8ai-lra-y19" id="figure-8ai-lra-y19-php-tab" /><label for="figure-8ai-lra-y19-php-tab">PHP</label><div class="codeblock-item"><pre id="codeblock-aul-s6p-qkx" outputclass="language-php" code-type="xCode" data-tag="codeblock" class="pre codeblock language-php"><code>&lt;?php
+
+// This file is auto-generated, don't edit it. Thanks.
+namespace AlibabaCloud\SDK\Sample;
+
+use AlibabaCloud\SDK\Dingtalk\Vcontact_1_0\Dingtalk;
+use \Exception;
+use AlibabaCloud\Tea\Exception\TeaError;
+use AlibabaCloud\Tea\Utils\Utils;
+
+use Darabonba\OpenApi\Models\Config;
+use AlibabaCloud\SDK\Dingtalk\Vcontact_1_0\Models\UpdateDeptSettngTailFirstHeaders;
+use AlibabaCloud\SDK\Dingtalk\Vcontact_1_0\Models\UpdateDeptSettngTailFirstRequest;
+use AlibabaCloud\Tea\Utils\Utils\RuntimeOptions;
+
+class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Dingtalk Client
+     */
+    public static function createClient(){
+        $config = new Config([]);
+        $config-&gt;protocol = "https";
+        $config-&gt;regionId = "central";
+        return new Dingtalk($config);
+    }
+
+    /**
+     * @param string[] $args
+     * @return void
+     */
+    public static function main($args){
+        $client = self::createClient();
+        $updateDeptSettngTailFirstHeaders = new UpdateDeptSettngTailFirstHeaders([]);
+        $updateDeptSettngTailFirstHeaders-&gt;xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        $updateDeptSettngTailFirstRequest = new UpdateDeptSettngTailFirstRequest([
+            "enable" =&gt; true
+        ]);
+        try {
+            $client-&gt;updateDeptSettngTailFirstWithOptions($updateDeptSettngTailFirstRequest, $updateDeptSettngTailFirstHeaders, new RuntimeOptions([]));
+        }
+        catch (Exception $err) {
+            if (!($err instanceof TeaError)) {
+                $err = new TeaError([], $err-&gt;getMessage(), $err-&gt;getCode(), $err);
+            }
+            if (!Utils::empty_($err-&gt;code) &amp;&amp; !Utils::empty_($err-&gt;message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+        }
+    }
+}
+$path = __DIR__ . \DIRECTORY_SEPARATOR . '..' . \DIRECTORY_SEPARATOR . 'vendor' . \DIRECTORY_SEPARATOR . 'autoload.php';
+if (file_exists($path)) {
+    require_once $path;
+}
+Sample::main(array_slice($argv, 1));</code></pre></div><input type="radio" name="check-figure-8ai-lra-y19" id="figure-8ai-lra-y19-go-tab" /><label for="figure-8ai-lra-y19-go-tab">Go</label><div class="codeblock-item"><pre id="codeblock-ka1-h3w-2ws" outputclass="language-go" code-type="xCode" data-tag="codeblock" class="pre codeblock language-go"><code>// This file is auto-generated, don't edit it. Thanks.
+package main
+
+import (
+  "os"
+  util  "github.com/alibabacloud-go/tea-utils/service"
+  dingtalkcontact_1_0  "github.com/alibabacloud-go/dingtalk/contact_1_0"
+  openapi  "github.com/alibabacloud-go/darabonba-openapi/client"
+  "github.com/alibabacloud-go/tea/tea"
+)
+
+
+/**
+ * 使用 Token 初始化账号Client
+ * @return Client
+ * @throws Exception
+ */
+func CreateClient () (_result *dingtalkcontact_1_0.Client, _err error) {
+  config := &amp;openapi.Config{}
+  config.Protocol = tea.String("https")
+  config.RegionId = tea.String("central")
+  _result = &amp;dingtalkcontact_1_0.Client{}
+  _result, _err = dingtalkcontact_1_0.NewClient(config)
+  return _result, _err
+}
+
+func _main (args []*string) (_err error) {
+  client, _err := CreateClient()
+  if _err != nil {
+    return _err
+  }
+
+  updateDeptSettngTailFirstHeaders := &amp;dingtalkcontact_1_0.UpdateDeptSettngTailFirstHeaders{}
+  updateDeptSettngTailFirstHeaders.XAcsDingtalkAccessToken = tea.String("&lt;your access token&gt;")
+  updateDeptSettngTailFirstRequest := &amp;dingtalkcontact_1_0.UpdateDeptSettngTailFirstRequest{
+    Enable: tea.Bool(true),
+  }
+  tryErr := func()(_e error) {
+    defer func() {
+      if r := tea.Recover(recover()); r != nil {
+        _e = r
+      }
+    }()
+    _, _err = client.UpdateDeptSettngTailFirstWithOptions(updateDeptSettngTailFirstRequest, updateDeptSettngTailFirstHeaders, &amp;util.RuntimeOptions{})
+    if _err != nil {
+      return _err
+    }
+
+    return nil
+  }()
+
+  if tryErr != nil {
+    var err = &amp;tea.SDKError{}
+    if _t, ok := tryErr.(*tea.SDKError); ok {
+      err = _t
+    } else {
+      err.Message = tea.String(tryErr.Error())
+    }
+    if !tea.BoolValue(util.Empty(err.Code)) &amp;&amp; !tea.BoolValue(util.Empty(err.Message)) {
+      // err 中含有 code 和 message 属性，可帮助开发定位问题
+    }
+
+  }
+  return _err
+}
+
+
+func main() {
+  err := _main(tea.StringSlice(os.Args[1:]))
+  if err != nil {
+    panic(err)
+  }
+}</code></pre></div><input type="radio" name="check-figure-8ai-lra-y19" id="figure-8ai-lra-y19-nodejs-tab" /><label for="figure-8ai-lra-y19-nodejs-tab">Node.js</label><div class="codeblock-item"><pre id="codeblock-6wi-ntp-tmk" outputclass="language-nodejs" code-type="xCode" data-tag="codeblock" class="pre codeblock language-nodejs"><code>// This file is auto-generated, don't edit it
+import Util, * as $Util from '@alicloud/tea-util';
+import dingtalkcontact_1_0, * as $dingtalkcontact_1_0 from '@alicloud/dingtalk/contact_1_0';
+import OpenApi, * as $OpenApi from '@alicloud/openapi-client';
+import * as $tea from '@alicloud/tea-typescript';
+
+
+export default class Client {
+
+  /**
+   * 使用 Token 初始化账号Client
+   * @return Client
+   * @throws Exception
+   */
+  static createClient(): dingtalkcontact_1_0 {
+    let config = new $OpenApi.Config({ });
+    config.protocol = "https";
+    config.regionId = "central";
+    return new dingtalkcontact_1_0(config);
+  }
+
+  static async main(args: string[]): Promise&lt;void&gt; {
+    let client = Client.createClient();
+    let updateDeptSettngTailFirstHeaders = new $dingtalkcontact_1_0.UpdateDeptSettngTailFirstHeaders({ });
+    updateDeptSettngTailFirstHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+    let updateDeptSettngTailFirstRequest = new $dingtalkcontact_1_0.UpdateDeptSettngTailFirstRequest({
+      enable: true,
+    });
+    try {
+      await client.updateDeptSettngTailFirstWithOptions(updateDeptSettngTailFirstRequest, updateDeptSettngTailFirstHeaders, new $Util.RuntimeOptions({ }));
+    } catch (err) {
+      if (!Util.empty(err.code) &amp;&amp; !Util.empty(err.message)) {
+        // err 中含有 code 和 message 属性，可帮助开发定位问题
+      }
+
+    }    
+  }
+
+}
+
+Client.main(process.argv.slice(2));</code></pre></div><input type="radio" name="check-figure-8ai-lra-y19" id="figure-8ai-lra-y19-csharp-tab" /><label for="figure-8ai-lra-y19-csharp-tab">C#</label><div class="codeblock-item"><pre id="codeblock-5q2-hqc-xor" outputclass="language-csharp" code-type="xCode" data-tag="codeblock" class="pre codeblock language-csharp"><code>// This file is auto-generated, don't edit it. Thanks.
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
+
+using Tea;
+using Tea.Utils;
+
+
+namespace AlibabaCloud.SDK.Sample
+{
+    public class Sample 
+    {
+
+        /**
+         * 使用 Token 初始化账号Client
+         * @return Client
+         * @throws Exception
+         */
+        public static AlibabaCloud.SDK.Dingtalkcontact_1_0.Client CreateClient()
+        {
+            AlibabaCloud.OpenApiClient.Models.Config config = new AlibabaCloud.OpenApiClient.Models.Config();
+            config.Protocol = "https";
+            config.RegionId = "central";
+            return new AlibabaCloud.SDK.Dingtalkcontact_1_0.Client(config);
+        }
+
+        public static void Main(string[] args)
+        {
+            AlibabaCloud.SDK.Dingtalkcontact_1_0.Client client = CreateClient();
+            AlibabaCloud.SDK.Dingtalkcontact_1_0.Models.UpdateDeptSettngTailFirstHeaders updateDeptSettngTailFirstHeaders = new AlibabaCloud.SDK.Dingtalkcontact_1_0.Models.UpdateDeptSettngTailFirstHeaders();
+            updateDeptSettngTailFirstHeaders.XAcsDingtalkAccessToken = "&lt;your access token&gt;";
+            AlibabaCloud.SDK.Dingtalkcontact_1_0.Models.UpdateDeptSettngTailFirstRequest updateDeptSettngTailFirstRequest = new AlibabaCloud.SDK.Dingtalkcontact_1_0.Models.UpdateDeptSettngTailFirstRequest
+            {
+                Enable = true,
+            };
+            try
+            {
+                client.UpdateDeptSettngTailFirstWithOptions(updateDeptSettngTailFirstRequest, updateDeptSettngTailFirstHeaders, new AlibabaCloud.TeaUtil.Models.RuntimeOptions());
+            }
+            catch (TeaException err)
+            {
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+            catch (Exception _err)
+            {
+                TeaException err = new TeaException(new Dictionary&lt;string, object&gt;
+                {
+                    { "message", _err.Message }
+                });
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+        }
+
+
+    }
+}</code></pre></div><input type="radio" name="check-figure-8ai-lra-y19" id="figure-8ai-lra-y19-cpp-tab" /><label for="figure-8ai-lra-y19-cpp-tab">C++</label><div class="codeblock-item"><pre id="codeblock-qne-y96-qdh" outputclass="language-cpp" code-type="xCode" data-tag="codeblock" class="pre codeblock language-cpp"><code>// This file is auto-generated, don't edit it. Thanks.
+
+#include &lt;alibabacloud/dingtalkcontact__1__0.hpp&gt;
+#include &lt;alibabacloud/open_api.hpp&gt;
+#include &lt;boost/any.hpp&gt;
+#include &lt;darabonba/core.hpp&gt;
+#include &lt;darabonba/util.hpp&gt;
+#include &lt;iostream&gt;
+#include &lt;map&gt;
+
+using namespace std;
+
+Alibabacloud_Dingtalkcontact_1_0::Client createClient() {
+  shared_ptr&lt;Alibabacloud_OpenApi::Config&gt; config = make_shared&lt;Alibabacloud_OpenApi::Config&gt;();
+  config-&gt;protocol = make_shared&lt;string&gt;("https");
+  config-&gt;regionId = make_shared&lt;string&gt;("central");
+  return Alibabacloud_Dingtalkcontact_1_0::Client(config);
+}
+
+int main(int argc, char *args[]) {
+  args++;
+  shared_ptr&lt;Alibabacloud_Dingtalkcontact_1_0::Client&gt; client = make_shared&lt;Alibabacloud_Dingtalkcontact_1_0::Client&gt;(createClient());
+  shared_ptr&lt;Alibabacloud_Dingtalkcontact_1_0::UpdateDeptSettngTailFirstHeaders&gt; updateDeptSettngTailFirstHeaders = make_shared&lt;Alibabacloud_Dingtalkcontact_1_0::UpdateDeptSettngTailFirstHeaders&gt;();
+  updateDeptSettngTailFirstHeaders-&gt;xAcsDingtalkAccessToken = make_shared&lt;string&gt;("&lt;your access token&gt;");
+  shared_ptr&lt;Alibabacloud_Dingtalkcontact_1_0::UpdateDeptSettngTailFirstRequest&gt; updateDeptSettngTailFirstRequest = make_shared&lt;Alibabacloud_Dingtalkcontact_1_0::UpdateDeptSettngTailFirstRequest&gt;(map&lt;string, boost::any&gt;({
+    {"enable", boost::any(true)}
+  }));
+  try {
+    client-&gt;updateDeptSettngTailFirstWithOptions(updateDeptSettngTailFirstRequest, updateDeptSettngTailFirstHeaders, make_shared&lt;Darabonba_Util::RuntimeOptions&gt;(Darabonba_Util::RuntimeOptions()));
+  }
+  catch (std::exception &amp;err) {
+    if (!Darabonba_Util::Client::empty(err.code) &amp;&amp; !Darabonba_Util::Client::empty(err.message)) {
+      // err 中含有 code 和 message 属性，可帮助开发定位问题
+    }
+  }
+}</code></pre></div></div></section></section><section id="section-response-1" class="section icms-module" data-tag="section" data-source="apiMeta"><h2 id="h2-response-1" data-tag="h2" class="h2">响应</h2><section id="section-response-body-example" class="section"><h3 id="h3-response-body-example" data-tag="h3" class="h3">响应体示例</h3><pre id="6e913c36a80oo" outputclass="language-json" code-type="xCode" data-tag="codeblock" class="pre codeblock language-json"><code>HTTP/1.1 200 OK
+Content-Type:application/json</code></pre></section><section id="section-error-code-1" class="section"><h3 id="h3-error-code-1" data-tag="h3" class="h3">错误码</h3><p data-tag="p" id="p-error-code-global-guide" class="p">若调用该接口报错，可根据错误信息在<a id="a-error-code-global-guide" href="https://open.dingtalk.com/document/development/server-api-error-codes-1">全局错误码</a>文档中查找解决方案。</p><table id="c208f3d513vki" tablewidth="709" tablecolswidth="142 177 177 213" autofit="false" class="table">
+  <colgroup colwidth="0.8*" style="width:20.03%"></colgroup>
+  <colgroup colwidth="1*" style="width:24.96%"></colgroup>
+  <colgroup colwidth="1*" style="width:24.96%"></colgroup>
+  <colgroup colwidth="1.2*" style="width:30.04%"></colgroup>
+  <tbody class="tbody">
+   <tr id="0c69d4d3be5dt">
+    <td id="a585d68d09a2h" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="ecbe48af0f7iq">HttpCode</p></td>
+    <td id="cd08236925pxb" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="b14850f691lax">错误码</p></td>
+    <td id="18e1e760301kc" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="b72b4e1a33vyb">错误信息</p></td>
+    <td id="039bf634bbdpz" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="5b0b22ef6a4a9">说明</p></td>
+   </tr>
+   <tr id="9c99c597c9ulx">
+    <td id="795f6f6c582m4" rowspan="1" colspan="1"><p id="98125e5ee3saq">400</p></td>
+    <td id="7c3b83bba568j" rowspan="1" colspan="1"><p id="d9b981f4711ga">parameter.error</p></td>
+    <td id="93bf554c2enmg" rowspan="1" colspan="1"><p id="7594e2bec5xl7">参数错误</p></td>
+    <td id="a069259ee8h1n" rowspan="1" colspan="1"><p id="83133848f9vnm">参数错误</p></td>
+   </tr>
+   <tr id="76409ac316ska">
+    <td id="d10af6b89ddar" rowspan="1" colspan="1"><p id="9f85ba1c4c6rr">500</p></td>
+    <td id="f716e6b5335p0" rowspan="1" colspan="1"><p id="1fcc2068687aa">system.error</p></td>
+    <td id="f55312b836pg8" rowspan="1" colspan="1"><p id="a07f5860d7v1p">更新设置出错</p></td>
+    <td id="0670d53b59pin" rowspan="1" colspan="1"><p id="cf58e6f071w73">更新设置出错</p></td>
+   </tr>
+  </tbody>
+ </table></section></section></div></main>
+</body></html>

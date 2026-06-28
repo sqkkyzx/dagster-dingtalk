@@ -1,0 +1,217 @@
+<!DOCTYPE html><html><head><meta charset="utf8" / /><meta name="searchtitle" content="" / /><meta name="keywords" content="" / /><meta name="author" content="" / /><title>常见问题</title><meta name="gmtModify" content="2026-03-31 10:01:36" / /></head><body data-tag="topic" id="topic-3257000" class="topic"><main id="main-3257000"><h1 data-tag="title" id="bff2542db5wie" class="title">常见问题</h1><p id="2a6e3c4290k8c" data-tag="shortdesc" class="shortdesc"></p><div data-tag="body" class="body"><section id="9edd3a43067lm" class="section"><h2 id="1a3843392497e">内容写入</h2><section id="30b7b7a514bld" class="section"><h3 id="4ed31c0c95v51">如何将 Markdown 格式的内容写入钉钉文档？</h3><p id="bd22cf9ad86cl">有两种方式可以将 Markdown 内容写入文档：</p><ul id="f0a1c73b3fw62"><li id="7c4af9ece46vj"><p id="6a93ad7c7fg4f"><b>方式一：插入内容（追加，不影响已有内容）</b></p><p id="b8d46c33dediz">调用<a data-tag="xref" id="02a4fa4572q6u" href="/document/development/api-insertcontent#" class="xref">插入内容</a>接口，将 Markdown 内容插入到文档指定位置：</p><pre code-type="xCode" id="a3f09801f4bp8" data-tag="codeblock" outputclass="language-bash" class="pre codeblock language-bash"><code>curl --location --request POST 'https://api.dingtalk.com/v1.0/doc/suites/documents/{documentId}/content?operatorId={operatorId}' \
+--header 'x-acs-dingtalk-access-token: {ACCESS_TOKEN}' \
+--header 'Content-Type: application/json' \
+--data '{
+  "content": {
+    "type": "markdown",
+    "content": "# 一级标题\n\n这是一段正文内容。"
+  }
+}'</code></pre></li><li id="6c52c4dc39px2"><p id="1d67b0e1793eo"><b>方式二：覆写文档（清空后重写）</b></p><p id="b1bac34d22s62">调用<a data-tag="xref" id="c20d4939842ez" href="/document/development/api-doc-updatecontent#" class="xref">覆写文档（应用授权）</a>接口，以 Markdown 格式覆写文档全部内容：</p><pre code-type="xCode" id="23ed19836erj3" data-tag="codeblock" outputclass="language-bash" class="pre codeblock language-bash"><code>curl --location --request POST 'https://api.dingtalk.com/v1.0/doc/suites/documents/{docKey}/overwriteContent?operatorId={operatorId}' \
+--header 'x-acs-dingtalk-access-token: {ACCESS_TOKEN}' \
+--header 'Content-Type: application/json' \
+--data '{
+  "content": "# 文档标题\n\n正文内容。",
+  "dataType": "markdown"
+}'</code></pre><p id="1b0814a519095">覆写文档会<b>清空</b>文档现有全部内容，属于破坏性操作，请谨慎使用。如果只需追加内容，请使用插入内容接口。</p></li></ul></section></section><section id="2bb65cffed34a" class="section"><h2 id="686f28c8d6mw4">块元素操作</h2><section id="25aa2be6c81m5" class="section"><h3 id="371c98f2a7ue5">如何插入带内容的段落</h3><p id="afb0bfb2f79af">调用<a data-tag="xref" id="4c9f4f95c8tq4" href="/document/development/api-docinsertblocks#" class="xref">插入块元素</a>接口，在文档中插入一个段落块，并通过<code data-tag="inlineCode" id="0b4963ae42ai1" class="inlineCode">children</code>字段指定段落内的行内元素：</p><pre code-type="xCode" id="559e4960ceifo" data-tag="codeblock" outputclass="language-bash" class="pre codeblock language-bash"><code>curl --location --request POST 'https://api.dingtalk.com/v1.0/doc/suites/documents/{dentryUuid}/blocks?operatorId={operatorId}' \
+--header 'x-acs-dingtalk-access-token: {ACCESS_TOKEN}' \
+--header 'Content-Type: application/json' \
+--data '{
+  "element": {
+    "blockType": "paragraph",
+    "paragraph": {},
+    "children": [
+      {
+        "text": "这是一段加粗的红色文字",
+        "bold": true,
+        "color": "#FF5733"
+      },
+      {
+        "elementType": "sticker",
+        "properties": { "code": "大笑" }
+      }
+    ]
+  }
+}'</code></pre><p id="5553e7fa53yxo">如果调用成功，预计将返回以下格式数据：</p><pre code-type="xCode" id="59941802b6b1t" data-tag="codeblock" outputclass="language-json" class="pre codeblock language-json"><code>{
+  "result": {
+    "data": {
+      "paragraph": { "text": "这是一段加粗的红色文字" },
+      "blockType": "paragraph",
+      "index": 0,
+      "id": "......"
+    }
+  },
+  "success": true
+}</code></pre><p id="7aef667f8cq2q"><code data-tag="inlineCode" id="07eb6b96e1v6e" class="inlineCode">paragraph</code>对象不能被省略，即使段落无特殊属性，也需要传入空对象<code data-tag="inlineCode" id="d1edcce4cf460" class="inlineCode">{}</code>。</p></section><section id="eaf6c63dc88rh" class="section"><h3 id="e2f74d4dcd3oi">如何在文档指定位置（而非末尾）插入块元素</h3><p id="b9a84302ac21r">调用<a data-tag="xref" id="e3fe9d69b08fk" href="/document/development/api-docinsertblocks#" class="xref">插入块元素</a>接口时，通过<code data-tag="inlineCode" id="144d12098br3n" class="inlineCode">blockId</code>或<code data-tag="inlineCode" id="d92fc2d95dfx5" class="inlineCode">index</code>指定目标位置，并通过<code data-tag="inlineCode" id="5c26522d3eq9v" class="inlineCode">where</code>参数控制插入到目标位置之前还是之后：</p><pre code-type="xCode" id="4b95aa8b35iey" data-tag="codeblock" outputclass="language-bash" class="pre codeblock language-bash"><code>curl --location --request POST 'https://api.dingtalk.com/v1.0/doc/suites/documents/{docKey}/blocks?operatorId={operatorId}' \
+--header 'x-acs-dingtalk-access-token: {ACCESS_TOKEN}' \
+--header 'Content-Type: application/json' \
+--data '{
+  "element": {
+    "blockType": "paragraph",
+    "paragraph": {}
+  },
+  "blockId": "lc4si5p3n84zwqxxx",
+  "where": "before"
+}'</code></pre><table id="d4b68cc68fkmo" tablewidth="635" tablecolswidth="182 453" autofit="false" class="table"><colgroup colwidth="0.57*" style="width:28.66%"></colgroup><colgroup colwidth="1.43*" style="width:71.34%"></colgroup><tbody class="tbody"><tr id="4941110b04sbf"><td id="1e40aa59ff90z" rowspan="1" style="background-color:#e5e5e5;vertical-align:middle" colspan="1"><p id="323c7b8eb640n">参数</p></td><td id="07a1fcb6d5omb" rowspan="1" style="background-color:#e5e5e5;vertical-align:middle" colspan="1"><p id="d8fa871fa707g">说明</p></td></tr><tr id="c3b6be32b1y6a"><td id="a1daa74d41u0n" rowspan="1" style="vertical-align:middle" colspan="1"><p id="cd2d18ee9fjw1"><code data-tag="inlineCode" id="474a5e1cc0ovh" class="inlineCode">blockId</code></p></td><td id="2e9f81b391nin" rowspan="1" style="vertical-align:middle" colspan="1"><p id="fffd487557nn1">目标块的唯一标识，插入到该块之前或之后</p></td></tr><tr id="68bc8fc6f5ye7"><td id="fdafa2ec4fr77" rowspan="1" style="vertical-align:middle" colspan="1"><p id="3b2f6ce243pei"><code data-tag="inlineCode" id="e1bc67a16c0x8" class="inlineCode">index</code></p></td><td id="9b9570c738uo6" rowspan="1" style="vertical-align:middle" colspan="1"><p id="561ff12a31k1l">当<code data-tag="inlineCode" id="1d11557f3644r" class="inlineCode">blockId</code>不存在时，使用文档第<code data-tag="inlineCode" id="5e6882bc3e844" class="inlineCode">index</code>个一级块作为目标位置（从 0 开始）</p></td></tr><tr id="fa308e2876ays"><td id="c81a9328f06m9" rowspan="1" style="vertical-align:middle" colspan="1"><p id="711efa50d3mrm"><code data-tag="inlineCode" id="39c1f449cb47p" class="inlineCode">where</code></p></td><td id="1258dc6f17c3e" rowspan="1" style="vertical-align:middle" colspan="1"><p id="316b3fde28zev"><code data-tag="inlineCode" id="6608aa7449y4p" class="inlineCode">"before"</code>表示插入到目标位置之前，<code data-tag="inlineCode" id="a13ed435b9rds" class="inlineCode">"after"</code>表示之后（默认为<code data-tag="inlineCode" id="83bda5905byuh" class="inlineCode">"after"</code>）</p></td></tr></tbody></table></section><section id="e235fbd2d5jmr" class="section"><h3 id="6a32d6957ayyh">如何插入标题</h3><p id="d6fb748606xum">调用<a data-tag="xref" id="accc859482tdn" href="/document/development/api-docinsertblocks#" class="xref">插入块元素</a>接口，将<code data-tag="inlineCode" id="d334c35fd1ncf" class="inlineCode">blockType</code>设置为<code data-tag="inlineCode" id="e4e2dca79ezex" class="inlineCode">heading</code>，并在<code data-tag="inlineCode" id="dd236881c7t1r" class="inlineCode">heading</code>对象中通过<code data-tag="inlineCode" id="e3b3a08cadjz4" class="inlineCode">level</code>指定标题级别（1~6）：</p><pre code-type="xCode" id="8129df8cd1e74" data-tag="codeblock" outputclass="language-bash" class="pre codeblock language-bash"><code>curl --location --request POST 'https://api.dingtalk.com/v1.0/doc/suites/documents/{docKey}/blocks?operatorId={operatorId}' \
+--header 'x-acs-dingtalk-access-token: {ACCESS_TOKEN}' \
+--header 'Content-Type: application/json' \
+--data '{
+  "element": {
+    "blockType": "heading",
+    "heading": {
+      "level": 2,
+      "text": "这是一个二级标题"
+    }
+  }
+}'</code></pre><p id="62b6c2a6b1xi4">如果调用成功，预计将返回以下格式数据：</p><pre code-type="xCode" id="c2f7c56abf8bi" data-tag="codeblock" outputclass="language-json" class="pre codeblock language-json"><code>{
+  "success": true
+}</code></pre><p id="75e6febcfd4lx"><code data-tag="inlineCode" id="eaa64e463begm" class="inlineCode">heading.level</code> 与标题级别的对应关系：</p><table id="420ade32acaxl" tablewidth="650" tablecolswidth="325 325" autofit="false" class="table"><colgroup colwidth="1*" style="width:50.00%"></colgroup><colgroup colwidth="1*" style="width:50.00%"></colgroup><tbody class="tbody"><tr id="9f2de094f89qw"><td id="16160217a45bq" rowspan="1" style="background-color:#e5e5e5;vertical-align:middle" colspan="1"><p id="7cc7abfaa56w6">level 值</p></td><td id="2dbf97f757qmw" rowspan="1" style="background-color:#e5e5e5;vertical-align:middle" colspan="1"><p id="f6408366f7law">对应标题</p></td></tr><tr id="4aaf182d333h1"><td id="60c0a7a765ijc" rowspan="1" style="vertical-align:middle" colspan="1"><p id="ea45388815eg6"><code data-tag="inlineCode" id="66048b9602w26" class="inlineCode">1</code></p></td><td id="7fa9f16bcdscj" rowspan="1" style="vertical-align:middle" colspan="1"><p id="a87e7f67a0waf">一级标题（H1）</p></td></tr><tr id="c10b963dd030v"><td id="d1e7525b7awa4" rowspan="1" style="vertical-align:middle" colspan="1"><p id="25fcced68evn6"><code data-tag="inlineCode" id="bb8fbcdbf5rib" class="inlineCode">2</code></p></td><td id="8c1aa98dd8tfu" rowspan="1" style="vertical-align:middle" colspan="1"><p id="f06e199a56xao">二级标题（H2）</p></td></tr><tr id="41de16bbf485p"><td id="04c54d0925mii" rowspan="1" style="vertical-align:middle" colspan="1"><p id="d109d71983hm4"><code data-tag="inlineCode" id="4b2f0c0983qgg" class="inlineCode">3</code></p></td><td id="41798397b5hpg" rowspan="1" style="vertical-align:middle" colspan="1"><p id="591e80509bueq">三级标题（H3）</p></td></tr><tr id="d338af031dty7"><td id="03baa10f60ncc" rowspan="1" style="vertical-align:middle" colspan="1"><p id="1e1538c7b3fk9"><code data-tag="inlineCode" id="d20b6abf85g4z" class="inlineCode">4</code></p></td><td id="0ae98818eafxy" rowspan="1" style="vertical-align:middle" colspan="1"><p id="e12c320f89f02">四级标题（H4）</p></td></tr><tr id="b9abb2c276cbe"><td id="af0855f0a2xpn" rowspan="1" style="vertical-align:middle" colspan="1"><p id="4dc1dea6ec0w3"><code data-tag="inlineCode" id="0744a3c0877ln" class="inlineCode">5</code></p></td><td id="9e27a2e427hjc" rowspan="1" style="vertical-align:middle" colspan="1"><p id="cbb0e70c293yx">五级标题（H5）</p></td></tr><tr id="2e9bfe3d2ebho"><td id="2bff47f275ho3" rowspan="1" style="vertical-align:middle" colspan="1"><p id="d35850f7c7lyv"><code data-tag="inlineCode" id="a9ed76100fowm" class="inlineCode">6</code></p></td><td id="815e6feee248d" rowspan="1" style="vertical-align:middle" colspan="1"><p id="2e07553b5757p">六级标题（H6）</p></td></tr></tbody></table></section><section id="4c9a76d44d7kp" class="section"><h3 id="411d64d625rqy">如何插入引用块</h3><p id="d540aa215549w">调用<a data-tag="xref" id="fe72b897efr5q" href="/document/development/api-docinsertblocks#" class="xref">插入块元素</a>接口，将<code data-tag="inlineCode" id="246cf210d9wjp" class="inlineCode">blockType</code>设置为<code data-tag="inlineCode" id="c4dd3a745d2ov" class="inlineCode">blockquote</code>，并在<code data-tag="inlineCode" id="e3fb4842e7927" class="inlineCode">blockquote</code>对象中传入引用内容：</p><pre code-type="xCode" id="12c0deed9ef3x" data-tag="codeblock" outputclass="language-bash" class="pre codeblock language-bash"><code>curl --location --request POST 'https://api.dingtalk.com/v1.0/doc/suites/documents/{docKey}/blocks?operatorId={operatorId}' \
+--header 'x-acs-dingtalk-access-token: {ACCESS_TOKEN}' \
+--header 'Content-Type: application/json' \
+--data '{
+  "element": {
+    "blockType": "blockquote",
+    "blockquote": {
+      "text": "这是一段引用内容"
+    }
+  }
+}'</code></pre><p id="8dc260bfc0mkt">如果调用成功，预计将返回以下格式数据：</p><pre code-type="xCode" id="aee0e19eceewd" data-tag="codeblock" outputclass="language-json" class="pre codeblock language-json"><code>{
+  "result": {
+    "data": {
+      "blockType": "blockquote",
+      "index": 4,
+      "id": "......"
+    }
+  },
+  "success": true
+}</code></pre></section><section id="2030b547e24o8" class="section"><h3 id="45f6a21258s1z">如何插入高亮块并在其中嵌套段落</h3><p id="eda1136aa5roa">高亮块的<code data-tag="inlineCode" id="ad8967f5c451a" class="inlineCode">children</code>只能是<code data-tag="inlineCode" id="3a30964fdagub" class="inlineCode">BlockElement</code>数组。调用<a data-tag="xref" id="3f96f03c56p2g" href="/document/development/api-docinsertblocks#" class="xref">插入块元素</a>接口时，在<code data-tag="inlineCode" id="7a60293079lcm" class="inlineCode">children</code>中传入子段落：</p><pre code-type="xCode" id="9393fd8b26wyp" data-tag="codeblock" outputclass="language-bash" class="pre codeblock language-bash"><code>curl --location --request POST 'https://api.dingtalk.com/v1.0/doc/suites/documents/{docKey}/blocks?operatorId={operatorId}' \
+--header 'x-acs-dingtalk-access-token: {ACCESS_TOKEN}' \
+--header 'Content-Type: application/json' \
+--data '{
+  "element": {
+    "blockType": "callout",
+    "callout": {
+      "sticker": "灯泡",
+      "showstk": true,
+      "bgcolor": "#FFF9C4",
+      "border": "#FFD700"
+    },
+    "children": [
+      {
+        "blockType": "paragraph",
+        "paragraph": { "text": "这是高亮块内的段落内容" }
+      }
+    ]
+  }
+}'</code></pre><p id="e1e80f5693vvp">不同类型块元素的<code data-tag="inlineCode" id="d48de93a9dtx6" class="inlineCode">children</code>类型不同：段落块的<code data-tag="inlineCode" id="0dff2abc9ahj3" class="inlineCode">children</code>只能是行内元素；高亮块的<code data-tag="inlineCode" id="c714695a30zsl" class="inlineCode">children</code>只能是块元素。</p></section><section id="5fac534331rwa" class="section"><h3 id="edefa31ae5o64">如何插入分栏</h3><p id="b19ca28045hsx">调用<a data-tag="xref" id="83f6fdf00cujl" href="/document/development/api-docinsertblocks#" class="xref">插入块元素</a>接口，将<code data-tag="inlineCode" id="073dc14b0a8hw" class="inlineCode">blockType</code>设置为<code data-tag="inlineCode" id="604eee7ca984y" class="inlineCode">columns</code>，通过<code data-tag="inlineCode" id="2b954036a29vp" class="inlineCode">columns.size</code>指定分栏数量，并在<code data-tag="inlineCode" id="24c07ee8544d4" class="inlineCode">children</code>中传入各栏的块元素内容：</p><pre code-type="xCode" id="1497950050a0t" data-tag="codeblock" outputclass="language-bash" class="pre codeblock language-bash"><code>curl --location --request POST 'https://api.dingtalk.com/v1.0/doc/suites/documents/{docKey}/blocks?operatorId={operatorId}' \
+--header 'x-acs-dingtalk-access-token: {ACCESS_TOKEN}' \
+--header 'Content-Type: application/json' \
+--data '{
+  "element": {
+    "blockType": "columns",
+    "columns": {
+      "size": 2,
+      "noFill": false
+    },
+    "children": [
+      {
+        "blockType": "paragraph",
+        "paragraph": { "text": "左栏内容" }
+      },
+      {
+        "blockType": "paragraph",
+        "paragraph": { "text": "右栏内容" }
+      }
+    ]
+  }
+}'</code></pre><p id="6caeba727aap7">如果调用成功，预计将返回以下格式数据：</p><pre code-type="xCode" id="929a7a1354ut5" data-tag="codeblock" outputclass="language-json" class="pre codeblock language-json"><code>{
+  "result": {
+    "data": {
+      "columns": { "size": 2 },
+      "blockType": "columns",
+      "index": 7,
+      "id": "......"
+    }
+  },
+  "success": true
+}</code></pre><p id="57c822ddc1ql6"><code data-tag="inlineCode" id="63fae2b775j7m" class="inlineCode">columns</code> 对象的字段说明：</p><table id="1ac36b388c8hj" tablewidth="575" tablecolswidth="163 130 282" autofit="false" class="table"><colgroup colwidth="0.85*" style="width:28.35%"></colgroup><colgroup colwidth="0.68*" style="width:22.61%"></colgroup><colgroup colwidth="1.48*" style="width:49.04%"></colgroup><tbody class="tbody"><tr id="07f3f7d23eo2p"><td id="55559e9d001hd" rowspan="1" style="background-color:#e5e5e5;vertical-align:middle" colspan="1"><p id="1ef263405cu0a">字段</p></td><td id="135c388164pvq" rowspan="1" style="background-color:#e5e5e5;vertical-align:middle" colspan="1"><p id="0d8515ab4eb0s">类型</p></td><td id="5d5dd32536d07" rowspan="1" style="background-color:#e5e5e5;vertical-align:middle" colspan="1"><p id="5ebc1c79e63w0">说明</p></td></tr><tr id="4033c40d6cke1"><td id="9cf64940e2q5l" rowspan="1" style="vertical-align:middle" colspan="1"><p id="1c827db05b53c"><code data-tag="inlineCode" id="e6d0336520j75" class="inlineCode">size</code></p></td><td id="f1152728eekcq" rowspan="1" style="vertical-align:middle" colspan="1"><p id="3e0c3fe7e4zuh">Number</p></td><td id="147fef73191s5" rowspan="1" style="vertical-align:middle" colspan="1"><p id="f28039b1134uv">分栏数量</p></td></tr><tr id="7afcdbde934x1"><td id="9c70ac149cg7w" rowspan="1" style="vertical-align:middle" colspan="1"><p id="98b33552385j6"><code data-tag="inlineCode" id="b34939bbf06as" class="inlineCode">noFill</code></p></td><td id="667bd8af5d9zp" rowspan="1" style="vertical-align:middle" colspan="1"><p id="e4281de26e7wx">Boolean</p></td><td id="9097c9fc02g47" rowspan="1" style="vertical-align:middle" colspan="1"><p id="1dfa9066eey2c">是否自动填充背景色，默认<code data-tag="inlineCode" id="1413db7cf0lck" class="inlineCode">false</code></p></td></tr></tbody></table><p id="19554e42bbs2m"><code data-tag="inlineCode" id="0844ea8fb2yw4" class="inlineCode">columns</code>的<code data-tag="inlineCode" id="aa23681a6doya" class="inlineCode">children</code>只能是 <b>BlockElement 数组</b>，不能是行内元素。</p></section><section id="cb1e8de3a37ae" class="section"><h3 id="f7ae68c5079ur">如何插入有序列表</h3><p id="309cac492f4sr">调用<a data-tag="xref" id="f03dad0ccbum1" href="/document/development/api-docinsertblocks#" class="xref">插入块元素</a>接口，将<code data-tag="inlineCode" id="ec5918c3ecbwr" class="inlineCode">blockType</code>设置为<code data-tag="inlineCode" id="8898557e66plw" class="inlineCode">orderedList</code>，并在<code data-tag="inlineCode" id="19d250a75etaj" class="inlineCode">orderedList</code>对象中传入列表属性，在<code data-tag="inlineCode" id="721258824ekas" class="inlineCode">children</code>中传入列表项文本：</p><pre code-type="xCode" id="cb91bd03fatkc" data-tag="codeblock" outputclass="language-bash" class="pre codeblock language-bash"><code>curl --location --request POST 'https://api.dingtalk.com/v1.0/doc/suites/documents/{docKey}/blocks?operatorId={operatorId}' \
+--header 'x-acs-dingtalk-access-token: {ACCESS_TOKEN}' \
+--header 'Content-Type: application/json' \
+--data '{
+  "element": {
+    "blockType": "orderedList",
+    "orderedList": {
+      "list": {
+        "listId": "my-ordered-list-001",
+        "level": 0,
+        "listStyleType": "decimal",
+        "listStyle": {
+          "format": "decimal",
+          "text": "%1.",
+          "align": "left"
+        }
+      }
+    },
+    "children": [
+      { "text": "有序列表第一项" }
+    ]
+  }
+}'</code></pre><p id="db6932bdf7evr">如果调用成功，预计将返回以下格式数据：</p><pre code-type="xCode" id="c138d9d2e2wp2" data-tag="codeblock" outputclass="language-json" class="pre codeblock language-json"><code>{
+  "result": {
+    "data": {
+      "blockType": "orderedList",
+      "index": 6,
+      "id": "......"
+    }
+  },
+  "success": true
+}</code></pre><p id="160d7a5751k11"><code data-tag="inlineCode" id="d2473be2e1w8u" class="inlineCode">list</code> 对象的常用字段说明：</p><table id="0c2e498bbeww7" tablewidth="566" tablecolswidth="156 99 311" autofit="false" class="table"><colgroup colwidth="0.83*" style="width:27.56%"></colgroup><colgroup colwidth="0.53*" style="width:17.49%"></colgroup><colgroup colwidth="1.65*" style="width:54.95%"></colgroup><tbody class="tbody"><tr id="d27f8ef9e8r40"><td id="a0197a5003iet" rowspan="1" style="background-color:#e5e5e5;vertical-align:middle" colspan="1"><p id="7c34cb3e933lw">字段</p></td><td id="4f23f026b8iwq" rowspan="1" style="background-color:#e5e5e5;vertical-align:middle" colspan="1"><p id="a24bbf9948m9v">类型</p></td><td id="d61beece8en8g" rowspan="1" style="background-color:#e5e5e5;vertical-align:middle" colspan="1"><p id="a6f6a9adef03c">说明</p></td></tr><tr id="2c7d04ebdfns7"><td id="8e870512220cp" rowspan="1" style="vertical-align:middle" colspan="1"><p id="319614358dc8u"><code data-tag="inlineCode" id="b9a97a6872ibf" class="inlineCode">listId</code></p></td><td id="aa072513adk4c" rowspan="1" style="vertical-align:middle" colspan="1"><p id="ee2fbe0d4ci7m">String</p></td><td id="cb0fc62cdfuj8" rowspan="1" style="vertical-align:middle" colspan="1"><p id="7506af20ccetw">列表的唯一标识，同一列表的多个列表项应使用相同的<code data-tag="inlineCode" id="aea3c8baab3bb" class="inlineCode">listId</code></p></td></tr><tr id="50425e86d8s3e"><td id="2ea13472c9p0u" rowspan="1" style="vertical-align:middle" colspan="1"><p id="53ccc29bfacmt"><code data-tag="inlineCode" id="f82afc65a1bv6" class="inlineCode">level</code></p></td><td id="5f45ab64cfaqg" rowspan="1" style="vertical-align:middle" colspan="1"><p id="a115ab0c44ofs">Number</p></td><td id="0a4a6d87482v1" rowspan="1" style="vertical-align:middle" colspan="1"><p id="aed2a5ed27iqm">列表缩进层级，从<code data-tag="inlineCode" id="01a4451462gi8" class="inlineCode">0</code>开始</p></td></tr><tr id="b04cbbee54ad8"><td id="949e26feedxlc" rowspan="1" style="vertical-align:middle" colspan="1"><p id="bc83278640ug8"><code data-tag="inlineCode" id="e18c331b8fs94" class="inlineCode">listStyleType</code></p></td><td id="dd5b6551d9c38" rowspan="1" style="vertical-align:middle" colspan="1"><p id="b782c2301c96g">String</p></td><td id="dbe7eda828leh" rowspan="1" style="vertical-align:middle" colspan="1"><p id="2a64ac2a01raz">列表样式类型，有序列表使用<code data-tag="inlineCode" id="992bdd3d73piw" class="inlineCode">"decimal"</code></p></td></tr></tbody></table></section><section id="14652d54ea7lx" class="section"><h3 id="38637de1f2vx7">如何插入无序列表</h3><p id="c536364298f7u">调用<a data-tag="xref" id="e4267f9a6axo7" href="/document/development/api-docinsertblocks#" class="xref">插入块元素</a>接口，将<code data-tag="inlineCode" id="8091d62e87wkn" class="inlineCode">blockType</code>设置为<code data-tag="inlineCode" id="9aca4470e7nla" class="inlineCode">unorderedList</code>，并在<code data-tag="inlineCode" id="298d38d118knw" class="inlineCode">unorderedList</code>对象中传入列表属性，在<code data-tag="inlineCode" id="a71e58beddgr1" class="inlineCode">children</code>中传入列表项文本：</p><pre code-type="xCode" id="0a9e022d98zqz" data-tag="codeblock" outputclass="language-bash" class="pre codeblock language-bash"><code>curl --location --request POST 'https://api.dingtalk.com/v1.0/doc/suites/documents/{docKey}/blocks?operatorId={operatorId}' \
+--header 'x-acs-dingtalk-access-token: {ACCESS_TOKEN}' \
+--header 'Content-Type: application/json' \
+--data '{
+  "element": {
+    "blockType": "unorderedList",
+    "unorderedList": {
+      "list": {
+        "listId": "my-unordered-list-001",
+        "level": 0,
+        "listStyleType": "disc",
+        "listStyle": {
+          "format": "disc",
+          "text": "%1",
+          "align": "left"
+        }
+      }
+    },
+    "children": [
+      { "text": "无序列表第一项" }
+    ]
+  }
+}'</code></pre><p id="f60ed3b486y8f">如果调用成功，预计将返回以下格式数据：</p><pre code-type="xCode" id="5b4539ef3bu5e" data-tag="codeblock" outputclass="language-json" class="pre codeblock language-json"><code>{
+  "result": {
+    "data": {
+      "blockType": "unorderedList",
+      "index": 8,
+      "id": "......"
+    }
+  },
+  "success": true
+}</code></pre><p id="9ef7f35b58am8">有序列表和无序列表的<code data-tag="inlineCode" id="0f877970a42zh" class="inlineCode">listId</code>用于将多个列表项关联为同一个列表。若要插入同一列表的多个列表项，每个列表项应使用相同的<code data-tag="inlineCode" id="39084b955bi61" class="inlineCode">listId</code>，可通过 BatchOperate 批量接口一次性插入。</p></section></section><section id="c69e47d5c3aym" class="section"><h2 id="4339d3d47f5te">查询操作</h2><section id="170b7bd532n7l" class="section"><h3 id="22257e46f7yer">如何获取文档中所有块元素的 blockId？</h3><p id="45b6515b0cn1b">调用<a data-tag="xref" id="f752845294uow" href="/document/development/api-docblocksquery#" class="xref">查询块元素</a>接口，获取文档根节点下的一级块元素列表，每个元素包含其<code data-tag="inlineCode" id="3706eec928d2c" class="inlineCode">id</code>（即<code data-tag="inlineCode" id="8c385e3b64xu7" class="inlineCode">blockId</code>）：</p><pre code-type="xCode" id="28d3a653bcbnz" data-tag="codeblock" outputclass="language-bash" class="pre codeblock language-bash"><code>curl --location --request GET 'https://api.dingtalk.com/v1.0/doc/suites/documents/{docKey}/blocks?operatorId={operatorId}' \
+--header 'x-acs-dingtalk-access-token: {ACCESS_TOKEN}'</code></pre><p id="981f9ca22a5zx">如果调用成功，预计将返回以下格式数据：</p><pre code-type="xCode" id="28573c78539zn" data-tag="codeblock" outputclass="language-json" class="pre codeblock language-json"><code>{
+  "success": true,
+  "result": {
+    "data": [
+      {
+        "heading": { "level": "heading-1", "text": "文档标题" },
+        "blockType": "heading",
+        "index": 0,
+        "id": "......"
+      },
+      {
+        "paragraph": { "text": "正文内容。" },
+        "blockType": "paragraph",
+        "index": 1,
+        "id": "......"
+      }
+    ]
+  }
+}</code></pre><p id="e886e37316bgp">目前查询块元素接口<b>仅支持查询文档根节点下的一级块元素</b>，不支持递归查询嵌套在高亮块等容器内的子块元素。</p></section></section></div></main></body></html>

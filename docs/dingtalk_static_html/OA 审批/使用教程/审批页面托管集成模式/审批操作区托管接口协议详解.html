@@ -1,0 +1,873 @@
+<!DOCTYPE html><html><head><meta charset="utf8" / /><meta name="searchtitle" content="" / /><meta name="keywords" content="" / /><meta name="author" content="" / /><title>审批操作区托管接口协议详解</title><meta name="gmtModify" content="2025-09-10 19:31:53" / /></head><body data-tag="topic" id="topic-2802995" class="topic"><main id="main-2802995"><h1 data-tag="title" id="4ef1f3a725ckq" class="title">审批操作区托管接口协议详解</h1><p id="acb753ff20vcs" data-tag="shortdesc" class="shortdesc"></p><div data-tag="body" class="body"><section id="section-1fx-nuz-9ww" class="section"><h2 data-tag="title" id="title-xjn-eug-ci9" class="title">审批操作区介绍</h2><p uuid="lz9bmtzk0sn2fc5q248" id="99cdda6baaet8">红框部分为审批详情页中的主要操作区，通俗的说就是审批的主要操作按钮，在审批单托管模式中此部分区域可由三方业务实现自定义灵活配置。</p><p uuid="lz9bc06vuw0ld4xa8bo" id="af79bafaddfso"><img id="751c276532pbo" src="https://help-static-aliyun-doc.aliyuncs.com/assets/img/zh-CN/4087165271/p844719.png" alt="image" placement="break" width="1291" class="image break" / /></p><p uuid="lz9bfb6v2umvhhv88sr" id="b13b3af9bcxe7"></p><h2 uuid="lz9bfv9h3muy0hicdf5" id="72830ae06bfab"><b>审批操作区机制说明</b></h2><p uuid="lz9blazqeek09gc450s" id="dcb8c4435camt">三方业务在创建审批模板/创建审批实例时可注册审批操作区自定义渲染按钮&amp;提交请求的回调，因此需要提供两个接口用于托管渲染和处理用户请求。一个用于回调三方获取操作区按钮数据的定义（按钮渲染），一个用于回调三方接口进行接收和处理用户的审批提交操作（操作审批）。</p><p uuid="m0noujv28qlj0bcvfd4" id="0759cda579egv"><img id="505ffeaefe1wp" src="https://help-static-aliyun-doc.aliyuncs.com/assets/img/zh-CN/1405165271/p844682.png" alt="image" placement="break" width="1295" class="image break" / /></p><h2 id="fdbc3495f2drl" uuid="m0novzppqyyg7pturw"><b>核心模型定义</b></h2><h3 uuid="lydvlysytrh5pzw0bk" id="0ffc68cbaf2a4"><b>ProcessFeatureConfig </b>流程中心集成配置</h3><p uuid="lz9fsx5drchmuby5oa" id="099c3eae4cugh">以流程中心模式集成时，通过该配置支持三方进行自定义配置某些业务功能模块的实现逻辑，在此基础上，审批页面托管方案支持详情页中整个审批操作区按钮由三方业务灵活自定义，因此需新增两个回调接口配置，CUSTOM_ACTION_DEFINITION用于回调三方获取操作区按钮数据的定义（按钮渲染），CUSTOM_ACTION_APPLY用于回调三方接口进行接收和处理用户的审批提交操作（操作审批）。</p><pre id="xxvgkz" title="审批操作区按钮自定义示例" uuid="lvg35nqbh8m9r1kjoqb" data-tag="codeblock" outputclass="language-json" code-type="xCode" class="pre codeblock language-json"><code> "featureConfig":{
+           "features":  [
+               {
+                     // 表示获取操作区（按钮）数据的回调地址（按钮渲染）
+                    "name":"CUSTOM_ACTION_DEFINITION",  
+                    "runType":"OUTBIZ_CUSTOM",
+                    "callback":{
+                            "apiKey":"customActionDefinitionApiKey",
+                            "appUuid":"appUuid",
+                            "version":"1"
+                    }
+                },
+                {
+                     // 表示进行审批操作时回调的回调地址（操作审批）
+                    "name":"CUSTOM_ACTION_APPLY",  
+                    "runType":"OUTBIZ_CUSTOM",
+                    "callback":{
+                            "apiKey":"customActionApplyApiKey",
+                            "appUuid":"appUuid",
+                            "version":"1"
+                    }
+                }
+           ]
+        }</code></pre><p uuid="lvg3hexrvsopjgdy2fk" id="07008fee9c10p"></p><h3 uuid="lye2o3ro3p9pn9lj039" id="826f435d6735m">CustomActionDefinition<b> 自定义操作按钮</b></h3><h4 uuid="lye508uaso7so0s0lt" id="37826312a6wua"><b>详情页操作区详解</b></h4><table id="e91b06f7858au" tablewidth="650" tablecolswidth="325 325" autofit="false" class="table"><colgroup colwidth="1*" style="width:50.00%"></colgroup><colgroup colwidth="1*" style="width:50.00%"></colgroup><tbody class="tbody"><tr id="a8f7255a90csc"><td id="915fd6c480r6y" rowspan="1" style="background-color:#E8F2FE;vertical-align:top" colspan="1"><p uuid="lye5fqpoe6mw1uc8woj" id="fff6d6ff09hic">官方OA审批：</p><p uuid="lye5kadbcrkp422dnzi" id="b3f970f4d3zfc">分享、下载、打印、再次提交、编辑模板</p><p uuid="lye5l99496luz143u7" id="aa689af40a446">同意、拒绝、修改、撤销、转交、加签、退回、评论、发起群聊、自动化、删除审批单</p><p uuid="lye5g1cm10yzhqapwf0e" id="3346065453jel"><img id="3e480fa85dktg" src="https://help-static-aliyun-doc.aliyuncs.com/assets/img/zh-CN/4087165271/p844725.png" alt="image" placement="break" class="image break" / /></p></td><td id="c18f07b3b4fnx" rowspan="1" style="background-color:#FFFAE5;vertical-align:top" colspan="1"><p uuid="lye5fqpomdn540mgrsh" id="b800260d93pqw">流程中心ORIGIN托管模式：</p><p uuid="lye5klr2plgcsjqodjb" id="0be19fca8eada">分享、下载、打印</p><p uuid="lye5l29pfprqg690tx7" id="ac08fe10fb92t">同意、拒绝、评论、建群讨论、删除、返回原表单</p><p uuid="lye5n5llsol5l1ahow" id="f9cde01f83zs7"><img id="15af0809cckdx" src="https://help-static-aliyun-doc.aliyuncs.com/assets/img/zh-CN/4087165271/p844726.png" alt="image" placement="break" class="image break" / /></p></td></tr></tbody></table><p uuid="lz9g8k2pqdjavakd0k9" id="b74725457fifs"></p><h4 uuid="lye5qowpixsx0g70y6" id="1f683b10aczom"><b>详情页操作区按钮分类</b></h4><h5 uuid="lye5qyp7yrqnpv18r7" id="05506393d3f2e"><b>通用按钮</b></h5><p uuid="lye5eff5va0tptblyi7" id="9a32ba74f3fts">指钉钉OA审批单详情页托管平台默认提供的按钮能力，可直接复用，不需要接入方回传数据。交互以默认实现为准，支持业务方配置按钮是否展示。</p><table id="fd49bb55b5sy3" tablewidth="747" tablecolswidth="148 183 209 207" autofit="true" class="table"><colgroup colwidth="0.8*" style="width:19.81%"></colgroup><colgroup colwidth="0.98*" style="width:24.50%"></colgroup><colgroup colwidth="1.12*" style="width:27.98%"></colgroup><colgroup colwidth="1.11*" style="width:27.71%"></colgroup><tbody class="tbody"><tr id="a5fb1d153de7m" style="height:53px"><td id="dc48216e2ew31" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lye5wnol00xssphyikorn" id="610cad3da0xtv">按钮标识【actionType】</p></td><td id="f4bd88eeb029a" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lye5wnols2ty2ntbtki" id="46c05c77f3x8s">能力</p></td><td id="adbc69557cl7x" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lye67zdbt05t30z6e8" id="f53d01989bm1y">交互形态类型</p></td><td id="429229e7e159m" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lye5wnolesz99wxsugd" id="f09dfcc644dcd">说明</p></td></tr><tr id="e2969320a27ti"><td id="44e116e6584em" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lye642ay4rlt5ybkdbn" id="7316de547f8t0">INSTANCE_SHARE</p></td><td id="1d37ea5929k5o" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lye642ay6pdquels5no" id="253ff77773vv5">分享审批单到群聊</p></td><td id="cc8758c57esgl" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lye67zdf2t5h62sici3" id="01c4823539zn8">点击唤起选群组件，确定后执行回调</p></td><td id="c22bfa130crgn" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lye642ay2bfg5rtlky" id="f7d3030a259jo">交互以默认实现为准，支持业务方配置按钮是否展示。</p></td></tr><tr id="f84caf7ac3jen"><td id="e6c83bee3bkq2" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lye6a8xl0qwp9wiyxoq" id="9e0172f62eofb">INSTANCE_DOWNLOAD</p></td><td id="272737c112sz1" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lye6a8xliwlwsd8gwr" id="57f14d7fd2wu2">下载审批单，文件将以工作通知发送</p></td><td id="9a027bb81cd3m" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lye6a8xmh07nwl9elia" id="cc5fe35326oaj">点击执行回调，同时弹出提示框</p></td><td id="04a74a8eedwna" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lye6a8xl5kh52g54sh" id="357ab3adf8xog">交互以默认实现为准，支持业务方配置按钮是否展示。</p></td></tr><tr id="5f07eb54753h9"><td id="e2feba0f8dpyr" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lye6gpz9s0s8pjfg77" id="f7f65f61bandt">INSTANCE_PRINT</p></td><td id="dd7bce47cae7z" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lye6gpz9qafx4hwq3u" id="7ff5ec0df1ph7">打印审批单</p></td><td id="74b7d5dfd97gw" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lye6gpz9lki3wqz80x" id="52343288d9e3c">点击弹出按钮组</p></td><td id="d2395b1bc2y80" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lye6gpz9dfj40zf8w4" id="7b5d677d63lgl">交互以默认实现为准，支持业务方配置按钮是否展示。</p></td></tr><tr id="abbb2e18373dq" style="height:53px"><td id="31e9d486f76zx" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lye5wnolp52uqmmwwih" id="5f55a5ddaeu81">INSTANCE_DING</p></td><td id="ba1e94cb9aptn" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lye5wnolq7ghtkxkn3c" id="ad625646b15zm">催办：审批流程发起人，向当前节点审批人发送催办消息</p></td><td id="1a8fd7cb77c06" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lye67zdh2924y1ierio" id="794103d81fm3p">点击唤起发DING组件</p></td><td id="7b333c1855agw" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lye5wnol6p2siit0nqk" id="4ec743dca4h2r">交互以默认实现为准，支持业务方配置按钮是否展示。</p></td></tr><tr id="1eeac1278drlz" style="height:89px"><td id="eacaf278fcy91" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lye5wnolwodjt868pbp" id="2b9bc0cc6b9qd">INSTANCE_IM_GROUP</p></td><td id="bb8f7287806mz" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lye5wnolt3a0e9njlo" id="a378024653677">基于实例建群讨论</p></td><td id="3989938b90zwx" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lye67zdk06iptrc8c6uh" id="893510ee2feag">点击弹出选人组件，选人后弹出二次确认框</p></td><td id="930fde977fs1f" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lye5wnolryw77nm4sed" id="cd58b328e2jjo">交互以默认实现为准，支持业务方配置按钮是否展示。</p></td></tr><tr id="7ccaef2f27rj1" style="height:39px"><td id="f804e35b59yet" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lye5wnol6w3q2d8zwqv" id="d12d261d13ej1">INSTANCE_COMMENT</p></td><td id="1d69fa8278tqy" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lye5wnolnk6198gzffh" id="b498e81473f3a">评论审批单</p></td><td id="8d639295a0z23" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lye67zdlqx464zqc69f" id="95d4635dbfnvt">点击弹出评论二次确认框</p></td><td id="2963835bafzb5" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lye5wnolyu1m5xbcpp8" id="90165b1485fyh">交互以默认实现为准，支持业务方配置按钮是否展示。</p></td></tr></tbody></table><p id="08ca3b7883k5o"></p><h5 uuid="lye74k5u4aw56atuta6" id="36a7cb0e03ser"><b>预定义按钮</b></h5><p uuid="lye76z7vg2xdd88t8qm" id="9e3a49c3355s6">指单据托管预置的一些审批操作按钮，自动实现了一些常用的交互机制，这些按钮需要业务方根据当前流程和人员的情况按需传递，实际的能力由接入方进行实现，可能在不同的流程引擎上会有少许差异。</p><table id="d27adb02d96k9" tablewidth="747" tablecolswidth="202 260 285" autofit="true" class="table"><colgroup colwidth="0.81*" style="width:27.04%"></colgroup><colgroup colwidth="1.04*" style="width:34.81%"></colgroup><colgroup colwidth="1.14*" style="width:38.15%"></colgroup><tbody class="tbody"><tr id="e521f4ab9dkwa" style="height:53px"><td id="4e17878349glu" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lye79nupsk1ps0aavz" id="dda19fd4fcfkm">按钮标识【actionType】</p></td><td id="36538f7351qbx" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lye79nuppx49abi1as" id="f599f4421b2up">能力</p></td><td id="3d7b9d9155ina" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lye79ooeujmi7x6z8ze" id="e363f3b02d3vj">说明</p></td></tr><tr id="52774a5b26pby"><td id="6122b6695ao01" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lye79nup6e83ve8n0ld" id="ae0164577366i">TASK_APPROVE</p></td><td id="aedf48b8ebxus" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lye79nupiwg3v79b9sl" id="be188175034q9">同意审批任务</p></td><td id="e0eda1a8f6buc" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lye79oolyhfrvr5w59" id="1b8da4d47c9it">交互固定。按钮文案、回调实现逻辑支持自定义</p></td></tr><tr id="33cc76d66950t"><td id="7b6ae1367dqu5" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lye7m8jbqe20xspxpbp" id="32ab0e768c386">TASK_REJECT</p></td><td id="7e2c2d9439dba" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lye7m8jecyfm03ov86g" id="50bb9e7653fz9">拒绝审批任务</p></td><td id="1970cf4d2amso" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lye7m8ji8zjh8cf453t" id="040f97e283gco">交互固定。按钮文案、回调实现逻辑支持自定义</p></td></tr><tr id="06ad8ae944s1y"><td id="f400dbb5d34ec" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lye7o8afij8de1adns" id="2bb24b64a8vj3">TASK_FORWARD</p></td><td id="939f10e14c0n2" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lye7o8ai20f7ja1x0as" id="483a4a8d7dayo">转交审批任务</p></td><td id="a104fec42fjw6" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lye7o8anarl8jknlg65" id="d9200b442avvr">交互固定。按钮文案、可选人员列表、回调实现逻辑支持自定义</p></td></tr><tr id="f611e4d2a5rpx"><td id="f6e10c3ad6v7v" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lye7xqwevipoh0z25kl" id="5aa5cf05374fe">TASK_APPEND</p></td><td id="3c8ce80997t9v" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lye7xqwickbshhk5blr" id="529bcf697fjw7">加签</p></td><td id="4138f00bb8q83" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lye7xqwqc0rvgk80ezw" id="7771c8a3363cg">交互固定。按钮文案、加签审批人可选人员列表、加签方式、回调实现逻辑支持自定义</p></td></tr><tr id="17134bfebas4v"><td id="23753fe471ozh" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lyef4zqzfyqoycx0qs8" id="22325ced28srm">INSTANCE_REVERT</p></td><td id="2d256adc79m0e" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lyef4zr05yzxgitf6fc" id="73ca6dc8499xh">退回</p></td><td id="9c40125d01lvu" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lyef4zr01ovhkmnfnosh" id="a3e99844b1p4t">交互固定。按钮文案、退回到节点列表、回调实现逻辑支持自定义</p></td></tr><tr id="1302f3a9a8yh3"><td id="d6516ee06cqiu" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lye79nupk3q02hjtk3o" id="066fba82659gd">INSTANCE_MODIFY</p></td><td id="b681f0c16er1o" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lye79nupzeky9bdhto9" id="6e8484090cnq7">修改审批单</p></td><td id="bdca8fdae7ah5" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lye79oondb2dxwfhm56" id="94b65c8846ndj">交互固定。按钮文案、是否置灰、置灰原因等支持自定义</p></td></tr><tr id="c05f9e70e25bd" style="height:67px"><td id="33dcca4e7628x" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lye79nup1mc23iq5p7p" id="19139cde6cwx5">INSTANCE_TERMINATE</p></td><td id="9a439b9cc94i8" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lye79nupni8er0in4k" id="6e49b6a84b7jx">撤销审批单</p></td><td id="83dfd47bccjsg" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lye79ooosrxaqfxhmt9" id="913de876424no">交互固定。按钮文案、二次确认提示文案、回调实现逻辑支持自定义</p></td></tr><tr id="2bc3431d02hin" style="height:89px"><td id="d8005661acn47" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lye79nupt2h5b1xxlrm" id="42517de8da7rk">INSTANCE_DELETE</p></td><td id="cf12fc5a1fxs0" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lye79nupfs67pv2ti2j" id="e48118caf8hlj">删除审批单</p></td><td id="0072a63039nk2" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lye79ooqwbtcfvx8iht" id="b9e4636d793uk">交互固定。按钮文案、二次确认提示文案、回调实现逻辑支持自定义</p></td></tr><tr id="a6346fe1f62gm" style="height:39px"><td id="82b91aa2f8j6t" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lye79nupq539m3recpi" id="296f5a053akc9">INSTANCE_EXTERNAL_DETAIL</p></td><td id="bb0d3d9acd8r5" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lye79nupci8vhpejf9" id="f6623de0f3y1e">返回原表单：审批详情页展示外部详情页跳转按钮</p></td><td id="c88d3b31d099x" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lye79ooqffscqt0eg0r" id="2fc21efdbemhu">交互固定。按钮文案、是否展示支持自定义</p></td></tr></tbody></table><p id="2e4807e6afnmz"></p><h5 uuid="lyefp2hczidkweuc5i" id="a336eb1d52fsg"><b>业务自定义按钮</b></h5><p uuid="lyefpm3qoxqavc85eo" id="db8788cd430in">指三方接入系统自行定义的按钮，可以通过简单的配置，让这些按钮拥有类似于预定义按钮的样式，在用户点击时，通过审批操作接口，将数据回调到接入方的系统上，执行自定义的操作逻辑。</p><table id="b0f0220f6f7vu" tablewidth="747" tablecolswidth="148 190 201 208" autofit="true" class="table"><colgroup colwidth="0.8*" style="width:19.81%"></colgroup><colgroup colwidth="1.02*" style="width:25.44%"></colgroup><colgroup colwidth="1.08*" style="width:26.91%"></colgroup><colgroup colwidth="1.12*" style="width:27.84%"></colgroup><tbody class="tbody"><tr id="421d8523ebl4o" style="height:53px"><td id="7308670c0eda8" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lyefqpbet0p1o8xgoze" id="ea25f52674w2h">按钮标识【actionType】</p></td><td id="5e18bc2e78ucd" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lyefqpbeiqw1s7ltax" id="592e5ca125wgt">能力</p></td><td id="b0cf9a9069s7d" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lyefqpbe26l8au76pif" id="7f43b8edd2y2n">交互形态类型</p></td><td id="9b6161a1efsxf" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lyefqpbe2ux6jy7v3c9" id="9568420f75jzp">说明</p></td></tr><tr id="ce84ac2d3cwx7"><td id="7a5d80d6e05gl" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lyefqpbesozv0cxltb" id="fc80a59c85un6">CUSTOM_ACTION_xxx</p></td><td id="e864995ecb9df" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lyefqpbes2akarulmhf" id="ce4cbe3a60ern">业务自定义按钮</p></td><td id="de12be21f3bpj" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lyefqpbe6yr2gfrroac" id="577ec488b8zu3">平台可支持的标准交互类型</p><p uuid="lyeg48mklkwa3s7fqg" id="0540918f1en9e"></p><ul id="596e2c3c69or7"><li id="93e444d854m5q"><p id="ccc28be39e328">link：直接跳转）</p></li><li id="af2f1732a1bos"><p id="21855b5ab9aej">confirm：二次确认框</p></li><li id="4b69037412fh3"><p id="7b498d2ec8osk">modal：打开弹窗（弹窗内的组件内容可支持业务自定义</p></li></ul></td><td id="440deb85c78cs" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lyefqpbehp9bva9mt3k" id="1ddca3ded04dz">不能与托管平台的预留标识重名</p></td></tr></tbody></table><p id="0ad5e273f1a0k"></p><h4 uuid="lyfridtaltkjmbqopnh" id="42641a1644fho"><b>按钮排序、渲染规则</b></h4><p uuid="lyfridtcjtn3scbhmhk" id="cedb3a97f7vwr">托管平台默认对接入方传的按钮进行排序修饰。</p><ul id="1a96e4bc498oc"><li id="cfdefa770f2q6"><p id="39ed974a535n5">检查是否需要增加通用按钮，如果是，则由托管平台增加</p></li><li id="7d0e635e40rab"><p id="1ac2bb9f62laj">回调三方获取操作区按钮数据的定义（按钮渲染），按三方返回的数据进行渲染；回调异常则按现有ORIGIN托管方案中已有按钮做兜底。（分享、下载、打印、同意、拒绝、评论、建群讨论、删除、返回原表单）</p></li><li id="8deeaf75f94by"><p id="4864d2e26a7wx">全部按钮排序</p><ul id="c2b5303118s8n"><li id="846150bd31z09"><p id="bb588c7424cuk">通用按钮按照特定顺序排在前面</p></li><li id="38def76da7isv"><p id="fa9da10dcee6t">预定义按钮+自定义按钮按照传入顺序跟在后面</p></li></ul></li></ul><p id="3884bf7030wfr"></p><h3 uuid="lyeg6ieku3qk5um39g" id="de425f8297izc">CustomActionDefinition 模型解析</h3><p uuid="lyglujw3ovsaxeclpib" id="1be1b97378jkz">根据以上审批操作区各按钮分类和交互形态，抽象定义操作按钮模型如下：</p><table id="a4ff42b200iht" tablewidth="747" tablecolswidth="187 187 187 186" autofit="true" class="table"><colgroup colwidth="1.01*" style="width:25.03%"></colgroup><colgroup colwidth="1.01*" style="width:25.03%"></colgroup><colgroup colwidth="1.01*" style="width:25.03%"></colgroup><colgroup colwidth="1*" style="width:24.90%"></colgroup><tbody class="tbody"><tr id="09bf6a97065ga" style="height:70px"><td id="f3ff0d2714ji5" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lyglvw7q6v0cf1fqpm" id="24ea9e6d258mw"></p><p uuid="lyglvw7qj0a10s88sfk" id="160525f02dw8u"><span style="color:rgb(0, 0, 0)"><b>名称</b></span></p></td><td id="7c12882783wus" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lyglvw7qqy3q9pl4akm" id="20ddae1aab3an"><span style="color:rgb(0, 0, 0)"><b>类型</b></span></p></td><td id="629846fa24450" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lyglvw7qxpc6ywqm3b" id="7277ef49a96v9"><span style="color:rgb(0, 0, 0)"><b>含义</b></span></p></td><td id="cea76ee5cdorc" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lyglvw7q3qxmkoqegkd" id="17970e4b5a56c"><span style="color:rgb(0, 0, 0)"><b>说明</b></span></p></td></tr><tr id="6244ed45af6xk" style="height:39px"><td id="409634fef9kue" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lyglvw7qxuwizb8hnzb" id="8a8e825771hcs">actions</p></td><td id="a8e2d59d15kqz" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lyglvw7qjdmzkbaoeh" id="4ad77b3787fbt">list</p></td><td id="43e72fa1022gg" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lyglvw7qit0fysmcj9l" id="62daf634b4hz1">审批动作按钮</p></td><td id="50105ef6fd202" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lyglvw7qolfaz0d85ug" id="93a05b7860d4o"></p></td></tr><tr id="97cbc3b84f61l" style="height:125px"><td id="836233de4amey" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lyglvw7r6cadm8c6h4d" id="95bc47732ab2l">∟context</p><p uuid="lyglvw7ru43w76ec0bn" id="3b15c941c2vhp"></p></td><td id="f0366853acny7" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lyglvw7rw4e2t88gw1" id="578536d893em0">string</p><p uuid="lyglvw7r8y90q1fh1tg" id="cf6198c711zy1"></p></td><td id="025a5e7d6diss" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lyglvw7rkxj22xyzbn" id="381861a23dn94">业务方定义的审批上下文，ApplyAction 接口中透传。</p></td><td id="110a4ad2c1xt4" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lyglvw7r59l6jsb8nm6" id="9b9d1ed3e91tk">上下文是指业务方自行定义的一个字符串。当审批回调时，会回传此字符串，帮助业务方理解当前场景信息。</p></td></tr><tr id="f3a8f51d54ojw" style="height:107px"><td id="361b380848lm6" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lyglvw7rmn22a0oqpmj" id="b5973b5e8bpjk">∟actionKey</p></td><td id="eb2b4a48c159y" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lyglvw7ra2fjtkl0oti" id="69e3c83363old">string</p></td><td id="892332e82c6ou" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lyglvw7rfm8svsglda9" id="659fde8fb771c">业务方定义的操作 Key，ApplyAction 接口中透传，如配置，需在 actions 数组中唯一。</p></td><td id="1ce72caf1caqx" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lyglvw7ree3im6fx4z" id="2687304fb3nzw">非必须，默认可不传。</p><p uuid="lyglvw7rznx039va6ak" id="e966dae6d6fjo"></p></td></tr><tr id="54be0315acddr" style="height:53px"><td id="8936a2e12axfl" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lyglvw7qxugc1gzy9yl" id="a55b44ad690ik">∟actionType</p></td><td id="b540fa1af0ky9" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lyglvw7qab1l9v6ydm7" id="cd60f9377e8xq">string</p></td><td id="f410df3f92lzj" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lyglvw7qf027oirbkhs" id="07cc3fbd79n9m">审批动作的类型，即按钮类型</p></td><td id="f835f090b8y6o" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lyglvw7qs1z46joyxns" id="42d2b2db2bjxi">枚举。详见【<b>详情页操作区按钮分类</b>】</p><p uuid="lz9h8ey25w6ky39d9ia" id="00ef89ecb5lov">ProcessFeatureEnum枚举</p></td></tr><tr id="a44f9989c9gmy" style="height:89px"><td id="7d2e86e723ot4" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lyglvw7qom3rk93efh" id="a6f7aa92f30v4">∟name</p></td><td id="9d567e78fbsjj" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lyglvw7qm4ltg2apxe" id="2776d77a21avm">i18n</p></td><td id="878467f2d5u0b" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lyglvw7qm7wtuxf48mo" id="16d00f2d0580b">审批动作的名称</p></td><td id="c06e573e083xw" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lyglvw7qj5o0jwdjvd" id="42cd9417b8i07">非必须，默认可不传。不传为<code data-tag="code" uuid="lyglvw7qms83uct9his" code-type="xCode" id="c57c4485743t1" class="code">actionType</code>的默认名称。</p></td></tr><tr id="030be916c7e37"><td id="3ffadc576e9xy" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lyo7txaidxh3zlqz4vs" id="5023cb46aa9ho">∟icon</p></td><td id="690fd0ac76nqy" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lyo7txajt0r80r0xoi8" id="4deb7cfea8o3j">string</p></td><td id="56e3298bedndh" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lyo7txaji0d3hases1" id="4314ddc8d0rcw">按钮icon</p></td><td id="fda88a2861diw" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lyo7txajqmvic2fgcja" id="9866ad756e3u2">非必须，默认可不传。不传为默认icon图标。</p><p uuid="lyqyulxjsvkf8u3lop" id="524e757f76gvd">支持传url类型，icon尺寸大小需符合钉钉侧设计规范要求。</p></td></tr><tr id="67cf5af4d5ub0"><td id="130dedbb3cxwy" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lyo1igqglcnd8urg0qh" id="9c366eed7d5rt">∟hidden</p></td><td id="677df2a8793e4" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lyo1igqgbeqbwzj1a3k" id="7fd26ca6f64gz">boolean</p></td><td id="b5c4c417b80t2" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lyo1igqgg23ianb2m9o" id="e5ce21cf0ai1g">是否隐藏按钮</p></td><td id="e5dfa934e16u9" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lyo1igqguo4ayw8lsa" id="dfd02ba32cxkd">平台内置的通用按钮（分享、下载、打印、评论、建群等）支持业务配置为隐藏</p></td></tr><tr id="eff520a00bpae" style="height:39px"><td id="c52df84c647r6" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lyglvw7rjngqrf7du7" id="462954d9b8jvk">∟disabled</p></td><td id="daba8d36c01e9" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lyglvw7r3o5nhnap0n4" id="b1e763a6fee2p">boolean</p></td><td id="2cee73c44b2rn" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lyglvw7rfndejwzaad" id="4350833456abw">禁用</p></td><td id="fb53b971dbupq" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lyglvw7rbll6pbetxy" id="d8b5019ffbiu7">前端变灰不能点</p></td></tr><tr id="173d2e2e76l88" style="height:53px"><td id="83d95bf4985kh" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lyglvw7r8om1zs0kzun" id="da6c350eb5uga">∟disabledReason</p></td><td id="5b02ebe9fchj8" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lyglvw7r1y2e85efoe9i" id="2921727dd8nr9">i18n</p></td><td id="91134c037118c" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lyglvw7r35bfxzzzi5i" id="22292340da719">禁用原因</p></td><td id="390b0ded3fcn9" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lyglvw7rxvy3x6x7ydi" id="eea6917229s6o">禁用后，tips展示此文案</p></td></tr><tr id="cea4052329xcz" style="height:53px"><td id="6a9c9ae0bdc04" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lyglvw7qwal2dypuwri" id="b26e6ed898ruo">∟primary</p></td><td id="5ffd30b96fxir" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lyglvw7qt4xla7t958" id="bf775b005b8ze">boolean</p></td><td id="2f315afed41et" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lyglvw7q71r23yyhmox" id="76923f89d9l0u">是否是主按钮</p></td><td id="f09141f484nyz" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lyglvw7qv4r1xrv756e" id="1cb7f790404by">主按钮会变大，如同意拒绝按钮。界面同时超过2个后会降级为普通按钮</p></td></tr><tr id="c5f785fa81w0j" style="height:39px"><td id="ac2fafaa07d3j" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lyglvw7r1sjiideb7ej" id="87ac1f72869nm">∟behavior</p></td><td id="4970fa4bafore" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lyglvw7remfitg7t4im" id="de7d1ba1c6kal">string</p></td><td id="758bbcb462q2r" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lyglvw7rnqd58m4frz" id="f6ef95eb0ai09">打开方式，可选</p></td><td id="f378c225f610i" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lyglvw7r4s74mekyp97" id="8f1f5f56fanab">枚举。详见BehaviorType枚举</p><p uuid="lyo2tx6ujvzmgiyrn" id="d6d91f204283v">link 打开链接</p><p uuid="lyo2uzs1rpwl61ko8l" id="44e0551642zrs">modal 打开弹窗</p><p uuid="lz81li1cmjzh0bdupe" id="1bd35d64789gl">confirm 打开二次确认框</p></td></tr><tr id="9d59f5ae61hdh"><td id="8bba40618fbzc" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lyocynitns24ntctj5" id="f3c44f785bx8u">∟behaviorProps</p></td><td id="f03a49121b17m" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lyocynitc37za9plf8r" id="9c6c3fc47347n">object</p></td><td id="cccd719ce4q1m" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lyocynitvpb4jv2doz" id="62e14b3d93wpb"></p></td><td id="b8e8d257e39dr" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lyocynitixp5u53cpj" id="81d1391542gap">behavior打开方式对应的具体行为属性</p><ul id="f79ee1b3bcd53"><li id="053b841d080wz"><p id="62d05b0a831mj">link类型，需配置具体的打开链接url值</p></li><li id="188292c88dnjy"><p id="dee4ea2157uyz">modal类型，需配置弹窗中具体表单控件schema内容</p></li><li id="2e28c2e0320nv"><p id="acd1973b13h1j">confirm类型，需配置二次确认框中的标题和提示文案</p></li></ul></td></tr><tr id="9bf8296dd14rt" style="height:39px"><td id="bbc39424cfamu" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lyglvw7r6dn057qlc9o" id="752bccff632j0"> ∟title</p></td><td id="896f574c77kwr" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lyglvw7rqbk322hxbe" id="9087bada48t9w">string</p></td><td id="6ec2d0b624cdz" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lyglvw7rfekwsem698i" id="dfc3688e2exui">标题，可选（behavior为confirm类型时需配置该值）</p></td><td id="aa11c4fed7fyr" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lyglvw7r7p1xiop76po" id="3dec2bb1f6izw"></p></td></tr><tr id="1bd0d715a9ygb"><td id="a8af974678ezl" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lz81o87kowqj971qywb" id="e01d36ef03gbk"> ∟message</p></td><td id="bcb526e42asho" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lz81o87ldcax5303jgd" id="fe583656e8lyg">string</p></td><td id="84fe4f884053v" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lz81o87mgjjsi0l1nar" id="7c994a3458ddx">提示文案，可选（behavior为confirm类型时需配置该值）</p></td><td id="7ca592c9da86g" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lz81o87na1cptuep0fm" id="cab44c7e74rev"></p></td></tr><tr id="b03912fa9fbcv"><td id="12c3f47cfc8ec" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lz81mylvqh08q2bbepf" id="2abb4be11d5co"> ∟link</p></td><td id="134d9fc13en1x" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lz81mylw6jbz9ljagkr" id="359e1c76121ic">string</p></td><td id="91c838f148wdn" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lz81mylyudd478rcad9" id="086eea48e3wpz">打开链接，可选（behavior为link类型时需配置该值）</p></td><td id="512fbd09acarw" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lz81ms81tgpxulpt45" id="e256ac0d8dryu"></p></td></tr><tr id="71e7b9fa0fj2d"><td id="4b598b69fa31d" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lyob53q84p26q0h6n67" id="2294fdebc91lj"> ∟schema</p></td><td id="c95548df14p1c" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lyob53q875ffds7vnaj" id="f83e045e5bzyg">json Array</p><p uuid="lyodjzjvc0pnfplz1yh" id="a231ebc17e35a">[{</p><p uuid="lyodkk1xazvywjd08ot" id="f830af795cbqv"> componentName: 'TextareaField',</p><p uuid="lyodk3w6rsw3r0jm1c" id="d1f753c7331kh"><b> props: {</b></p><p uuid="lyodkfixac2fyr9psqb" id="07543074d8o7r"><b> id: 'comment',</b></p><p uuid="lyodkdnu5x5279qmhww" id="f46bf823c2vnv"><b> },</b></p><p uuid="lyodk2fnt63ptepsor" id="105852bc74why">}]</p></td><td id="3c09c76eb33qz" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lyob53q8a2899rvboqt" id="27bb5d3384hf2">弹窗中的表单定义组件列表（behavior为modal类型时需配置该值）</p></td><td id="1693bc95af0bo" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lyob53q8wx86hem2csd" id="dc54119e20xvq">参考<a data-tag="xref" id="27ac70a007lt1" href="/document/development/api-premiumsaveintegratedprocess#" class="xref">保存流程中心外部集成审批模板</a>中的【<b>FormComponent参数补充说明</b>】</p><ul id="85ac0302dfc7l"><li id="d618eae8feb65"><p id="08d5529ea0dob"><b>TextField</b>：单行输入框</p></li><li id="f1489ddac9ukv"><p id="88b61cdb30if7"><b>TextareaField</b>：多行输入框</p></li><li id="7872b76da3c0g"><p id="4a73af0ec680c"><b>DDSelectField</b>：单选框</p></li><li id="ed8ee830bd3kt"><p id="61590b5a54cnm"><b>DDMultiSelectField</b>：多选框</p></li><li id="2833abe196k0g"><p id="b78ad4a249trb"><b>TextNote</b>：文字说明控件</p></li><li id="71c3f210f7s43"><p id="7bb59d52967v1"><b>DDPhotoField</b>：图片控件</p></li><li id="bc40236065ppy"><p id="4960fd7eef0n4"><b>DDAttachment</b>：附件</p></li><li id="207fbc01a0vo4"><p id="ae3b465739msj"><b>InnerContactField</b>：联系人控件</p><ul id="f7e1bbc7deo78"><li id="b666b051achjw"><p id="5003b93e1bk0w">users string[] staffId列表</p></li></ul></li></ul></td></tr><tr id="eb17e89c5cy7r"><td id="2b8607c39alil" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lyobfj3ecafulvc929" id="a693fdfaa7b46"> ∟componentName</p></td><td id="e03d756b1a6f8" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lyobfj3e5d1cyb3p8j" id="be8d8b0437ipv">string</p></td><td id="e3739352e9o4w" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lyobfj3ehmwlilkqt7u" id="af6665a120uit">控件类型</p></td><td id="87cd41c91cjlu" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lyobfj3e5n6futewtwe" id="7d584de719vw3"></p></td></tr><tr id="9235fe7086xtr"><td id="908e9f2f1bdmc" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lyobho9339hhekr441u" id="ffe0dfbd35ho2"> ∟props</p></td><td id="13846cd2439r9" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lyobho943ojcyky1wvl" id="e6b9371594tpm">json</p></td><td id="e49cf1f8b4trp" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lyobho94gloipe3j8o4" id="c2fc5914740vf">控件属性</p></td><td id="8301945edeiy1" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lyobho94j4n747ld9xp" id="80a83b267anci">{
+ "label": "单行输入框", // 控件标题
+ "placeholder": "请输入", // 输入提示
+ "componentId": "TextField_17EZKEGSOCTC0", // 控件id，表单内唯一，无业务语义
+ "required": false, // 是否必填，默认非必填
+ "bizAlias": "staffId" // 控件的业务标识，表单内唯一，与componentId二选一
+ }
+</p></td></tr><tr id="29b2b720297a0"><td id="ef96913cdfspc" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lyobmvuvxrw7i1t26l" id="7ffbc63318t7s"> ∟value</p></td><td id="c0a8389b27gij" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lyobmvuvejjpov3klyg" id="400a903e83hsn">string</p></td><td id="50bc9b1fa194s" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lyobmvuvmuidf4yx45" id="a44cc959a7s85">控件值</p></td><td id="cca24d4aacgqo" rowspan="1" style="vertical-align:middle" colspan="1"><p uuid="lyobmvuvfcufmivtmag" id="e7d2ec5fc22vq">参考<a data-tag="xref" id="a59528b9c3iw1" href="/document/development/api-premiumsaveintegratedprocess#" class="xref">保存流程中心外部集成审批模板</a>中的示例</p></td></tr></tbody></table><h4 uuid="lz9h7yuwq1j3mkw8soq" id="32bcd8ada7lfc"><b>详情页操作区按钮分类枚举 </b>ProcessFeatureEnum</h4><pre id="s859dr" title="" font="{&quot;fontFamily&quot;:&quot;defaultFont&quot;,&quot;ligatures&quot;:false}" uuid="lz9gjrttv9lb4t2hx5b" data-tag="codeblock" outputclass="language-json" code-type="xCode" class="pre codeblock language-json"><code>public enum ProcessFeatureEnum {
+    /**
+     * 删除任务
+     */
+    TASK_DELETE,
+
+    /**
+     * 转交任务
+     */
+    TASK_FORWARD,
+
+    /**
+     * 任务加签
+     */
+    TASK_APPEND,
+
+    /**
+     * 任务签阅
+     */
+    TASK_SIGN,
+
+    /**
+     * 分享审批单
+     */
+    INSTANCE_SHARE,
+
+    /**
+     * 审批单下载
+     */
+    INSTANCE_DOWNLOAD,
+
+    /**
+     * 打印审批单
+     */
+    INSTANCE_PRINT,
+
+    /**
+     * 再次提交审批单
+     */
+    INSTANCE_RESUBMIT,
+
+    /**
+     * 发起审批
+     */
+    INSTANCE_START,
+
+    /**
+     * 删除审批实例
+     */
+    INSTANCE_DELETE,
+
+    /**
+     * 展示详情页
+     */
+    INSTANCE_DETAIL,
+
+    /**
+     * 撤销审批单
+     */
+    INSTANCE_TERMINATE,
+
+    /**
+     * 修改审批单
+     */
+    INSTANCE_MODIFY,
+
+    /**
+     * 插销修改
+     */
+    INSTANCE_REVOKE_MODIFY,
+
+    /**
+     * 评论审批单
+     */
+    INSTANCE_COMMENT,
+
+    /**
+     * 基于实例建群讨论
+     */
+    INSTANCE_IM_GROUP,
+
+    /**
+     * 审批单退回
+     */
+    INSTANCE_REVERT,
+
+    /**
+     * 催办
+     */
+    INSTANCE_DING,
+
+    /**
+     * 审批详情页展示外部详情页跳转按钮
+     */
+    INSTANCE_EXTERNAL_DETAIL
+}</code></pre><p uuid="lz9gjpwwa8l07s0r356" id="15a6a23f60zdq"></p><h4 uuid="lz9hihyr0xaselgmzm8" id="8f9cc086adrcs"><b>按钮交互行为类型枚举 </b>CustomActionBehaviorTypeEnum</h4><pre uuid="lz9hgzj1iga8yk01qxl" data-tag="codeblock" outputclass="language-plaintext" code-type="xCode" id="402bf807412gy" class="pre codeblock language-plaintext"><code>public enum CustomActionBehaviorTypeEnum {
+    /**
+     * 打开链接
+     */
+    LINK("link"),
+
+    /**
+     * 打开弹窗
+     */
+    MODAL("modal"),
+
+    /**
+     * 打开二次确认框
+     */
+    CONFIRM("confirm")
+}</code></pre><p uuid="lz9hkepn1jnb7rbj38" id="08055a5b8f5x5"></p><h4 uuid="lz9hkf3k4udwt8j3klw" id="fd138c8edf8za"><b>弹窗中的表单定义组件列表（behavior为modal类型时需配置该值）</b></h4><p uuid="lz9hkga556qxesdjrwd" id="7e70655aceb9q">参考<a data-tag="xref" id="2bd2dca206fhk" href="/document/development/create-or-update-approval-templates-new#" class="xref">创建或更新审批模板</a>中的【<b>FormComponent参数补充说明</b>】，当前支持以下表单组件类型：</p><ul id="1df9568b77wzx"><li id="84602ed8fbpg7"><p id="6a5fe0a1d78vy"><b>TextField</b>：单行输入框</p></li><li id="027a645cc4erb"><p id="1b2b55b026cas"><b>TextareaField</b>：多行输入框</p></li><li id="6afe8580e2zs7"><p id="3eb2a23dfbzy1"><b>DDSelectField</b>：单选框</p></li><li id="9f07b7d676z1y"><p id="9c63ee08cdcjj"><b>DDMultiSelectField</b>：多选框</p></li><li id="2e3e45dac12b5"><p id="bdee6d9c9aj6u"><b>TextNote</b>：文字说明控件</p></li><li id="a281205308paq"><p id="25ae4efaea41u"><b>DDPhotoField</b>：图片控件</p></li><li id="561a7df076ofp"><p id="1d586c51f84u2"><b>DDAttachment</b>：附件</p></li><li id="ce7a0b57fadp6"><p id="a2b47c4427udv"><b>InnerContactField</b>：联系人控件</p><ul id="977c43bfaf4rg"><li id="fce66e9cf9uo4"><p id="ea6a1bcc5amgy">users string[] staffId列表</p></li></ul></li></ul><h3 uuid="m0np66qzkws021w19kk" id="7b1af6bb0cohq">CustomActionDefinition 模型示例</h3><pre id="ugd6rg" title="" font="{&quot;fontFamily&quot;:&quot;defaultFont&quot;,&quot;ligatures&quot;:false}" uuid="lye3ryxdfnb5g0v6baq" data-tag="codeblock" outputclass="language-json" code-type="xCode" class="pre codeblock language-json"><code>{
+    "code": 200,
+    "body": [
+        {
+            "actionKey": "default",
+            "actionType": "INSTANCE_COMMENT",
+            "name": "评论审批单",
+            "hidden": true
+        },
+        {
+            "actionKey": "default",
+            "actionType": "INSTANCE_DING",
+            "name": "催办",
+            "disabled": true,
+            "disabledReason": "当前审批单不支持此功能"
+        },
+        {
+            "actionKey": "custom",
+            "actionType": "INSTANCE_EXTERNAL_DETAIL",
+            "name": "返回原表单",
+            "icon": "icon1",
+            "primary": false,
+            "behavior": "link",
+            "behaviorProps": {
+                "link": "https://www.dingtalk.com"
+            }
+        },
+        {
+            "actionKey": "general",
+            "actionType": "TASK_APPROVE",
+            "name": "同意",
+            "icon": "icon1",
+            "primary": true,
+            "behavior": "modal",
+            "behaviorProps": {
+                "schema": [
+                    {
+                        "componentName": "TextareaField",
+                        "props": {
+                            "label": "评论意见",
+                            "placeholder": "请输入多行文本内容，需要换行时请输入\r\n",
+                            "id": "TextareaField_comment",
+                            "required": true,
+                            "bizAlias": "comment",
+                            "value": "这是审批意见评论内容\r\n"
+                        }
+                    }
+                ]
+            },
+            "context": "{\"command_id\":\"HandleCommand_2\",\"task_id\":\"1xxxxx6-2xx6-4xxd-bxxf-6xxxxxxxxf\",\"node_id\":\"UserTask_4\"}",
+            "disabled": false
+        },
+        {
+            "key": "general",
+            "actionType": "TASK_FORWARD",
+            "name": "同意并转交",
+            "icon": "icon2",
+            "primary": true,
+            "behavior": "modal",
+            "behaviorProps": {
+                "schema": [
+                    {
+                        "componentName": "InnerContactField",
+                        "props": {
+                            "label": "转交人",
+                            "placeholder": "请选择转交人",
+                            "id": "InnerContactField_forward_user",
+                            "choice": "1",
+                            "required": false,
+                            "bizAlias": "taskForward",
+                            "users": "[\"0135185610551036178639\",\"0135185610551036178639\"]",
+                            "value": "[\"0135185610551036178639\"]"
+                        }
+                    },
+                    {
+                        "componentName": "TextareaField",
+                        "props": {
+                            "label": "评论意见",
+                            "placeholder": "请输入多行文本内容，需要换行时请输入\r\n",
+                            "id": "TextareaField_comment",
+                            "required": true,
+                            "bizAlias": "comment",
+                            "value": "这是审批意见评论内容\r\n"
+                        }
+                    }
+                ]
+            },
+            "context": "{\"command_id\":\"HandleCommand_2\",\"task_id\":\"1xxxxx6-2xx6-4xxd-bxxf-6xxxxxxxxf\",\"node_id\":\"UserTask_4\"}",
+            "disabled": false
+        }
+    ]
+}</code></pre><p uuid="lye2q8mzf2q0p3fogwq" id="7033f3aa45cx4"></p><h2 uuid="m0npb7w299z149vyiet" id="22f6b406ab953">接入步骤示例</h2><h3 uuid="lw4eahqy45lcuvq5tv" id="0ce692066c6w8"><b>步骤一：注册自定义审批操作按钮callback回调示例</b></h3><pre id="n3gdtt" title="" font="{&quot;fontFamily&quot;:&quot;defaultFont&quot;,&quot;ligatures&quot;:false}" uuid="lyy0zm8p967ii2q8abt" data-tag="codeblock" outputclass="language-json" code-type="xCode" class="pre codeblock language-json"><code>{
+                // 表示获取操作区（按钮）数据的回调地址（按钮渲染）
+                "name": "CUSTOM_ACTION_DEFINITION",
+                "runType": "OUTBIZ_CUSTOM",
+                "callback": {
+                    "apiKey": "getIntegratedCustomActionDefinitions",
+                    "appUuid": "dingec6f7227666ad00ba39a90f97fcb1e09",
+                    "version": "1"
+                }
+            },
+            {
+                // 表示进行审批操作时回调的回调地址（操作审批）
+                "name": "CUSTOM_ACTION_APPLY",
+                "runType": "OUTBIZ_CUSTOM",
+                "callback": {
+                    "apiKey": "applyIntegratedCustomAction",
+                    "appUuid": "dingec6f7227666ad00ba39a90f97fcb1e09",
+                    "version": "1"
+                }
+            }</code></pre><p uuid="lyy8xm6nnhggnjnb2w" id="8c6ce13df7z0b"></p><h4 uuid="lyy0qt9s4k899cv4h7w" id="7fd18d1bf1oe5"><b>流程中心获取审批操作区自定义按钮列表</b></h4><p uuid="lw1i2zd5yasqjd8bk89" id="978f5562fduuo">apiKey：getIntegratedCustomActionDefinitions</p><p uuid="lyy0ssjnkzz8p5nngk" id="3e94f2ca55kas">URL：<a href="https://connector.dingtalk.com/webhook/flow/d8c375d76acb7eb01019fe0b" uuid="lyy8odvoc1cjjnrdauc" id="78559dcd46wz2">https://connector.dingtalk.com/webhook/flow/d8c375d76acb7eb01019fe0b</a></p><p uuid="lyy0t1agwbdz9o8507" id="219973f3effii">参数：corpId,processInstanceId,activityId,taskId,operator,platform,locale,context,customData</p><p uuid="lyy0t3nqfwm01gxybm" id="bd530974baqb0">apiSecret：getIntegratedCustomActionDefinitions</p><p uuid="lyy0sj9ifms8q6v8c04" id="718282352823m"></p><h5 uuid="lyy8vfygplpsfyqamz" id="0529309fa58aj"><b>请求示例</b></h5><pre id="v2hxbm" title="请求示例" font="{&quot;fontFamily&quot;:&quot;defaultFont&quot;,&quot;ligatures&quot;:false}" uuid="lyy8p7kndvbnbc7uh9t" data-tag="codeblock" outputclass="language-json" code-type="xCode" class="pre codeblock language-json"><code>{
+    "activityId": "001",
+    "processInstanceId": "fR7Adw93R0KmzhijxMkrpQ09641721716975",
+    "corpId": "dingec6f7227666ad00ba39a90f97fcb1e09",
+    "locale": "zh_CN",
+    "operator": "manager9814",
+    "platform": "pc",
+    "taskId": 87622494607,
+    "customData": "{\"apiKey\":\"customActionDefinitionApiKey2\",\"appUuid\":\"appUuid2\",\"version\":\"2\"}"
+}</code></pre><p uuid="lyy8rj383o0zsao6k9t" id="2c8dd189021em"></p><h5 uuid="lyy8vo0jt5eobceo08" id="dd980ce914u71"><b>成功响应示例</b></h5><pre id="vcxgtc" title="成功响应示例" font="{&quot;fontFamily&quot;:&quot;defaultFont&quot;,&quot;ligatures&quot;:false}" uuid="lyy8paux0lw7lrjpss2o" data-tag="codeblock" outputclass="language-json" code-type="xCode" class="pre codeblock language-json"><code>{
+    "success": true,
+    "errorCode": "",
+    "errorMessage": "",
+    "result": [
+        {
+            "actionKey": "custom",
+            "actionType": "INSTANCE_EXTERNAL_DETAIL",
+            "name": "返回原表单",
+            "icon": "icon1",
+            "primary": false,
+            "behavior": "link",
+            "behaviorProps": {
+                "link": "https://www.dingtalk.com"
+            }
+        },
+        {
+            "actionKey": "custom",
+            "actionType": "INSTANCE_DELETE",
+            "name": "删除审批单",
+            "icon": "icon1",
+            "primary": false,
+            "behavior": "confirm",
+            "behaviorProps": {
+                "title": "确认删除审批单吗？",
+                "message": "删除后不可恢复，请三思"
+            }
+        },
+        {
+            "actionKey": "general",
+            "actionType": "TASK_APPROVE",
+            "name": "同意",
+            "icon": "icon1",
+            "primary": true,
+            "behavior": "modal",
+            "behaviorProps": {
+                "schema": [
+                    {
+                        "componentName": "TextareaField",
+                        "props": {
+                            "label": "评论意见",
+                            "placeholder": "请输入多行文本内容，需要换行时请输入\r\n",
+                            "id": "TextareaField_comment",
+                            "required": true,
+                            "bizAlias": "comment",
+                            "value": "这是审批意见评论内容\r\n"
+                        }
+                    }
+                ]
+            },
+            "context": "{\"command_id\":\"HandleCommand_2\",\"task_id\":\"1xxxxx6-2xx6-4xxd-bxxf-6xxxxxxxxf\",\"node_id\":\"UserTask_4\"}",
+            "disabled": false
+        },
+        {
+            "key": "general",
+            "actionType": "TASK_FORWARD",
+            "name": "同意并转交",
+            "icon": "icon2",
+            "primary": true,
+            "behavior": "modal",
+            "behaviorProps": {
+                "schema": [
+                    {
+                        "componentName": "InnerContactField",
+                        "props": {
+                            "label": "转交人",
+                            "placeholder": "请选择转交人",
+                            "id": "InnerContactField_forward_user",
+                            "choice": "0",
+                            "required": false,
+                            "bizAlias": "taskForward",
+                            "users": [
+                                "0213523642-1025002834",
+                                "14516942141077447"
+                            ]
+                        }
+                    },
+                    {
+                        "componentName": "TextareaField",
+                        "props": {
+                            "label": "评论意见",
+                            "placeholder": "请输入多行文本内容，需要换行时请输入\r\n",
+                            "id": "TextareaField_comment",
+                            "required": true,
+                            "bizAlias": "comment",
+                            "value": "这是审批意见评论内容\r\n"
+                        }
+                    }
+                ]
+            },
+            "context": "{\"command_id\":\"HandleCommand_2\",\"task_id\":\"1xxxxx6-2xx6-4xxd-bxxf-6xxxxxxxxf\",\"node_id\":\"UserTask_4\"}",
+            "disabled": false
+        }
+    ]
+}</code></pre><p uuid="lyy8p4jutx0z3zmepza" id="f6a60e0336m8h"></p><h5 uuid="lyy8vvog6lay962yb0h" id="2bc8f8e759plp"><b>异常返回示例</b></h5><pre id="1xrkwf" title="异常返回示例" font="{&quot;fontFamily&quot;:&quot;defaultFont&quot;,&quot;ligatures&quot;:false}" uuid="lyy8rnyj0xt4famf292d" data-tag="codeblock" outputclass="language-json" code-type="xCode" class="pre codeblock language-json"><code>{
+    "success": false,
+    "errorCode": "FORM_SPI_CUSTOM_ERROR",
+    "errorMessage": "三方回调获取审批操作区自定义按钮列表异常",
+    "result": []
+}</code></pre><p uuid="lyy8xfx5xprdao7qz2r" id="2a8394e4909sy"></p><p uuid="lyy0sd3iq0rymbzklfo" id="8477e41109yz2"></p><h4 uuid="lyy8wyudos9yrq05ka" id="a8d25a42fbafk"><b>流程中心执行自定义按钮审批操作</b></h4><p uuid="lyy8wyuetz156e6r1ps" id="0dce7d50686sl">apiKey：applyIntegratedCustomAction</p><p uuid="lyy8wyuefh01192dizk" id="9caf6bfc83j65">URL：https://connector.dingtalk.com/webhook/flow/a8d743d0afd948bd5d9dc2a8</p><p uuid="lyy8wyuf1oukv9p0ukm" id="4f1a9a5bd4jcl">参数：corpId,processInstanceId,activityId,taskId,operator,platform,locale,context,customData,formDataArray,actionKey,actionType</p><p uuid="lyy8wyufueb5qfx0vkh" id="ad1ac550268z1">apiSecret：applyIntegratedCustomAction</p><p uuid="lyy8wyuf5wgzcqea4w4" id="4c6b6c8909c5j"></p><h5 uuid="lyy8wyugkd093rx9dn" id="067a706c5b6a1"><b>请求示例</b></h5><pre id="40c57cde09prn" title="请求示例" font="{&quot;fontFamily&quot;:&quot;defaultFont&quot;,&quot;ligatures&quot;:false}" uuid="lyy8wyuhb4jeoxm1n26" data-tag="codeblock" outputclass="language-json" code-type="xCode" class="pre codeblock language-json"><code>{
+    "activityId": "001",
+    "processInstanceId": "fR7Adw93R0KmzhijxMkrpQ09641721716975",
+    "corpId": "dingec6f7227666ad00ba39a90f97fcb1e09",
+    "locale": "zh_CN",
+    "operator": "manager9814",
+    "platform": "pc",
+    "taskId": 87622494607,
+    "customData": "{\"apiKey\":\"customActionDefinitionApiKey2\",\"appUuid\":\"appUuid2\",\"version\":\"2\"}"
+}</code></pre><p uuid="lyy8wyuhnpqisfussul" id="079b397648fz1"></p><h5 uuid="lyy8wyuh4xsey63kiug" id="7a2260206bid2"><b>成功响应示例</b></h5><pre id="e002fcd66a55t" title="成功响应示例" font="{&quot;fontFamily&quot;:&quot;defaultFont&quot;,&quot;ligatures&quot;:false}" uuid="lyy8wyuki1v8ytt4ytr" data-tag="codeblock" outputclass="language-json" code-type="xCode" class="pre codeblock language-json"><code>{
+    "success": true,
+    "errorCode": "",
+    "errorMessage": "",
+    "result": [
+        {
+            "actionKey": "custom",
+            "actionType": "INSTANCE_EXTERNAL_DETAIL",
+            "name": "返回原表单",
+            "icon": "icon1",
+            "primary": false,
+            "behavior": "link",
+            "behaviorProps": {
+                "link": "https://www.dingtalk.com"
+            }
+        },
+        {
+            "actionKey": "custom",
+            "actionType": "INSTANCE_DELETE",
+            "name": "删除审批单",
+            "icon": "icon1",
+            "primary": false,
+            "behavior": "confirm",
+            "behaviorProps": {
+                "title": "确认删除审批单吗？",
+                "message": "删除后不可恢复，请三思"
+            }
+        },
+        {
+            "actionKey": "general",
+            "actionType": "TASK_APPROVE",
+            "name": "同意",
+            "icon": "icon1",
+            "primary": true,
+            "behavior": "modal",
+            "behaviorProps": {
+                "schema": [
+                    {
+                        "componentName": "TextareaField",
+                        "props": {
+                            "label": "评论意见",
+                            "placeholder": "请输入多行文本内容，需要换行时请输入\r\n",
+                            "id": "TextareaField_comment",
+                            "required": true,
+                            "bizAlias": "comment",
+                            "value": "这是审批意见评论内容\r\n"
+                        }
+                    }
+                ]
+            },
+            "context": "{\"command_id\":\"HandleCommand_2\",\"task_id\":\"1xxxxx6-2xx6-4xxd-bxxf-6xxxxxxxxf\",\"node_id\":\"UserTask_4\"}",
+            "disabled": false
+        },
+        {
+            "key": "general",
+            "actionType": "TASK_FORWARD",
+            "name": "同意并转交",
+            "icon": "icon2",
+            "primary": true,
+            "behavior": "modal",
+            "behaviorProps": {
+                "schema": [
+                    {
+                        "componentName": "InnerContactField",
+                        "props": {
+                            "label": "转交人",
+                            "placeholder": "请选择转交人",
+                            "id": "InnerContactField_forward_user",
+                            "choice": "0",
+                            "required": false,
+                            "bizAlias": "taskForward",
+                            "users": [
+                                "0213523642-1025002834",
+                                "14516942141077447"
+                            ]
+                        }
+                    },
+                    {
+                        "componentName": "TextareaField",
+                        "props": {
+                            "label": "评论意见",
+                            "placeholder": "请输入多行文本内容，需要换行时请输入\r\n",
+                            "id": "TextareaField_comment",
+                            "required": true,
+                            "bizAlias": "comment",
+                            "value": "这是审批意见评论内容\r\n"
+                        }
+                    }
+                ]
+            },
+            "context": "{\"command_id\":\"HandleCommand_2\",\"task_id\":\"1xxxxx6-2xx6-4xxd-bxxf-6xxxxxxxxf\",\"node_id\":\"UserTask_4\"}",
+            "disabled": false
+        }
+    ]
+}</code></pre><p uuid="lyy8wyuki6pu0mnlrk" id="42d3ddea0d29d"></p><h5 uuid="lyy8wyuksm5bv83zmt" id="df99803749lfb"><b>异常返回示例</b></h5><pre id="c196091722qxb" title="异常返回示例" font="{&quot;fontFamily&quot;:&quot;defaultFont&quot;,&quot;ligatures&quot;:false}" uuid="lyy8wyulqfh76q7ykki" data-tag="codeblock" outputclass="language-json" code-type="xCode" class="pre codeblock language-json"><code>{
+    "success": false,
+    "errorCode": "FORM_SPI_CUSTOM_ERROR",
+    "errorMessage": "三方回调获取审批操作区自定义按钮列表异常",
+    "result": []
+}</code></pre><h3 uuid="lw4e96c4cfqur4csnp7" id="9a9c499e24ako"><b>步骤二：保存流程中心外部集成审批模板 (高级版专享接口)</b></h3><p uuid="lw4e9x2ogpubqfw328" id="b99dedc78dtyw">https://api.dingtalk.com/v1.0/workflow/premium/processCentres/schemas</p><p uuid="lz9aq8dk5nawbcg2sfm" id="58edd077a6tzs" left="0"><span style="color:rgb(254, 3, 0)"><b>同步审批模板数据到钉钉</b></span><b>：</b>调用新版服务端API-<a data-tag="xref" id="e1ea0c7f8c43y" href="/document/development/api-premiumsaveintegratedprocess#" class="xref">保存流程中心外部集成审批模板</a>，获取模板的唯一编码<code data-tag="code" uuid="lxcop8hgaw09jfhufrc" code-type="xCode" id="fdaef32e3bgbi" class="code">processCode</code>。<span style="color:rgb(254, 3, 0)"><b>注意：该场景需对processFeatureConfig中的CUSTOM_ACTION_DEFINITION（表示获取操作区按钮数据的回调地址，即按钮渲染回调）、CUSTOM_ACTION_APPLY（表示进行审批操作时回调的回调地址，即操作审批回调）模块进行自定义配置。</b></span></p><pre id="l4whqn" title="" font="{&quot;fontFamily&quot;:&quot;defaultFont&quot;,&quot;ligatures&quot;:false}" uuid="lz98vbizjhpvxn2caah" data-tag="codeblock" outputclass="language-json" code-type="xCode" class="pre codeblock language-json"><code>{
+    "name": "审批页面托管集成模式",
+    "description": "流程中心自定义托管模式：自定义审批操作区",
+    "formComponents": [
+        {
+            "componentType": "TextField",
+            "props": {
+                "componentId": "TextField-1",
+                "label": "单行输入框",
+                "required": true,
+                "bizAlias": "TextField-bizAlias",
+                "disabled": false
+            }
+        },
+        {
+            "componentType": "TextareaField",
+            "props": {
+                "placeholder": "请输入",
+                "label": "多行输入框"
+            }
+        },
+        {
+            "componentType": "NumberField",
+            "props": {
+                "placeholder": "请输入数字",
+                "label": "数字输入框",
+                "id": "NumberField-1"
+            }
+        },
+        {
+            "componentType": "DDSelectField",
+            "props": {
+                "options": [ // 可选选项列表
+                    {
+                        "value": "选项1", // 选项显示名称
+                        "key": "option_0" // 控件内唯一key，非必填，系统会默认生成
+                    },
+                    {
+                        "value": "选项2",
+                        "key": "option_1"
+                    },
+                    {
+                        "value": "选项3",
+                        "key": "option_2"
+                    },
+                    {
+                        "key": "other", // 其他项特殊key
+                        "value": "其它"
+                    }
+                ],
+                "label": "单选框",
+                "placeholder": "请选择",
+                "componentId": "DDSelectField_1",
+                "required": false
+            }
+        },
+        {
+            "componentType": "DDMultiSelectField",
+            "props": {
+                "options": [
+                    {
+                        "value": "选项1",
+                        "key": "option_0"
+                    },
+                    {
+                        "value": "选项2",
+                        "key": "option_1"
+                    },
+                    {
+                        "value": "选项3",
+                        "key": "option_2"
+                    },
+                    {
+                        "key": "other", // 其他项特殊key
+                        "value": "其它"
+                    }
+                ],
+                "label": "多选框",
+                "placeholder": "请选择",
+                "componentId": "DDMultiSelectField_1",
+                "required": false
+            }
+        },
+        {
+            "componentType": "DDDateField",
+            "props": {
+                "unit": "小时", // 日期格式，枚举值（小时、天）
+                "format": "yyyy-MM-dd HH:mm", // 日期格式，非必填，小时对应yyyy-MM-dd HH:mm，天对应yyyy-MM-dd
+                "bizAlias": "",
+                "label": "日期",
+                "placeholder": "请选择",
+                "componentId": "DDDateField_1",
+                "required": false,
+                "defaultValue": "2021-12-21 17:46" // 默认值
+            }
+        },
+        {
+            "componentType": "DDDateRangeField",
+            "props": {
+                "unit": "天",
+                "format": "yyyy-MM-dd",
+                "bizAlias": "",
+                "label": "[\"开始时间\",\"结束时间\"]",
+                "placeholder": "请选择",
+                "componentId": "DDDateRangeField_1",
+                "duration": true, // 是否自动计算时长
+                "durationLabel": "时长", // 时长计算显示文本
+                "required": false
+            }
+        },
+        {
+            "componentType": "TextNote",
+            "props": {
+                "link": "https://www.dingtalk.com/", // 超链接
+                "notPrint": "0",
+                "bizAlias": "",
+                "componentId": "TextNote_1",
+                "content": "这是一个说明文字" // 说明文字
+            }
+        },
+        {
+            "componentType": "DDPhotoField",
+            "props": {
+                "label": "图片",
+                "componentId": "DDPhotoField_1",
+                "required": false
+            }
+        },
+        {
+            "componentType": "MoneyField",
+            "props": {
+                "upper": "0", // 金额需要大写(0不大写，1需要大写)，默认需要大写
+                "label": "金额（元）",
+                "placeholder": "请输入金额",
+                "componentId": "MoneyField_1",
+                "required": false
+            }
+        },
+        {
+            "children": [
+                {
+                    "componentType": "TextField",
+                    "props": {
+                        "label": "单行输入框",
+                        "placeholder": "请输入",
+                        "componentId": "TextField_1UE1ZY1A28AO0",
+                        "required": false
+                    }
+                },
+                {
+                    "componentType": "MoneyField",
+                    "props": {
+                        "upper": "0",
+                        "bizAlias": "",
+                        "label": "金额（元）",
+                        "placeholder": "请输入金额",
+                        "componentId": "MoneyField_1S85G0",
+                        "required": false
+                    }
+                },
+                {
+                    "componentType": "NumberField",
+                    "props": {
+                        "unit": "元",
+                        "bizAlias": "",
+                        "label": "数字输入框",
+                        "placeholder": "请输入数字",
+                        "componentId": "NumberField_1XP6A",
+                        "required": false
+                    }
+                }
+            ],
+            "componentType": "TableField",
+            "props": {
+                "tableViewMode": "table",
+                "verticalPrint": true,
+                "statField": [
+                    {
+                        "componentId": "MoneyField_1S85G0",
+                        "label": "金额（元）"
+                    },
+                    {
+                        "componentId": "NumberField_1XP6A",
+                        "label": "数字输入框"
+                    }
+                ],
+                "bizAlias": "table",
+                "label": "表格",
+                "componentId": "TableField_1MLEPEA"
+            }
+        },
+        {
+            "componentType": "DDAttachment",
+            "props": {
+                "label": "附件",
+                "componentId": "DDAttachment_1",
+                "required": false
+            }
+        },
+        {
+            "componentType": "InnerContactField",
+            "props": {
+                "label": "联系人",
+                "placeholder": "请选择",
+                "componentId": "InnerContactField_1",
+                "choice": "1", //枚举值：1标识支持多选，0标识单选，默认为0
+                "required": false,
+                "bizAlias": ""
+            }
+        },
+        {
+            "componentType": "DepartmentField",
+            "props": {
+                "multiple": false, // 是否支持多选，true多选，false单选
+                "label": "部门",
+                "placeholder": "请选择",
+                "componentId": "DepartmentField_1",
+                "required": false
+            }
+        },
+        {
+            "componentType": "RelateField",
+            "props": {
+                "label": "关联审批单",
+                "placeholder": "请选择",
+                "componentId": "RelateField_1",
+                "required": false,
+                "bizAlias": "",
+                "availableTemplates": [ // 可被关联的审批模板列表，为空时表示可关联所有审批模板的实例数据
+                ]
+            }
+        },
+        {
+            "componentType": "AddressField",
+            "props": {
+                "addressModel": "district", // 枚举值,city省市,district省市区,street省市区-街道
+                "bizAlias": "",
+                "label": "省市区",
+                "componentId": "AddressField_1",
+                "required": false
+            }
+        },
+        {
+            "componentType": "StarRatingField",
+            "props": {
+                "limit": 5, // 枚举值：5分制、10分制
+                "label": "评分",
+                "placeholder": "请输入",
+                "componentId": "StarRatingField_1",
+                "required": false,
+                "bizAlias": ""
+            }
+        }
+    ],
+    "processFeatureConfig": {
+        "features": [
+            {
+                // 表示获取操作区（按钮）数据的回调地址（按钮渲染）
+                "name": "CUSTOM_ACTION_DEFINITION",
+                "runType": "OUTBIZ_CUSTOM",
+                "callback": {
+                    "apiKey": "getIntegratedCustomActionDefinitions",
+                    "appUuid": "dingec6f7227666ad00ba39a90f97fcb1e09",
+                    "version": "1"
+                }
+            },
+            {
+                // 表示进行审批操作时回调的回调地址（操作审批）
+                "name": "CUSTOM_ACTION_APPLY",
+                "runType": "OUTBIZ_CUSTOM",
+                "callback": {
+                    "apiKey": "applyIntegratedCustomAction",
+                    "appUuid": "dingec6f7227666ad00ba39a90f97fcb1e09",
+                    "version": "1"
+                }
+            }
+        ]
+    }
+}</code></pre><h3 uuid="lw4e99im5wujf45z1fi" id="22cc8d048ef7w"><b>步骤三：保存流程中心外部集成审批实例(高级版专享接口)</b></h3><p uuid="lw4ea2r5w65rv4tmx0j" id="618d76b9b7k2k">https://api.dingtalk.com/v1.0/workflow/premium/processCentres/instances</p><p uuid="m0nmpwab93k6175ctx" id="8d71d281f2nob" left="0"><span style="color:rgb(254, 3, 0)"><b>同步审批实例数据到钉钉</b></span><b>：</b>根据模板编码<code data-tag="code" uuid="lxcop8hklqgmkde8r9f" code-type="xCode" id="3aacda3457tp2" class="code">processCode</code>，调用新版服务端API-<a data-tag="xref" id="d58301dd65nwc" href="/document/development/api-premiumsaveintegratedprocessinstance#" class="xref">保存流程中心外部集成审批实例</a>发起审批实例，获取审批实例<code data-tag="code" uuid="lxcop8hkk2ckvunix2k" code-type="xCode" id="fcca5a09a584a" class="code">processInstanceId</code>。<span style="color:rgb(254, 3, 0)"><b>注意：若在创建审批模板时未注册自定义审批操作按钮相关配置，也支持在创建实例维度进行指定，若同时在模板/实例维度进行了配置，优先以实例维度为准。</b></span></p><pre id="covypw" title="" font="{&quot;fontFamily&quot;:&quot;defaultFont&quot;,&quot;ligatures&quot;:false}" uuid="lz98x5tjpuxzul3tx7m" data-tag="codeblock" outputclass="language-json" code-type="xCode" class="pre codeblock language-json"><code>{
+    "formComponentValueList": [
+        {
+            "name": "单行输入框",
+            "value": "[钉钉](https://www.dingtalk.com/)"
+        },
+        {
+            "name": "多行输入框",
+            "value": "请输入多行文本内容，需要换行时请输入\r\n请输入多行文本内容，需要换行时请输入\r\n"
+        },
+        {
+            "name": "数字输入框",
+            "value": "100"
+        },
+        {
+            "name": "单选框",
+            "value": "选项1"
+        },
+        {
+            "name": "多选框",
+            "value": "[\"选项1\",\"选项2\"]"
+        },
+        {
+            "name": "日期",
+            "value": "2021-08-17 11:11"
+        },
+        {
+            "name": "[\"开始时间\",\"结束时间\"]",
+            "value": "[\"2019-02-19 11:11\",\"2019-02-25 11:11\"]"
+        },
+        {
+            "name": "图片",
+            "value": "[\"https://img.alicdn.com/imgextra/i3/O1CN01TDKbCW28HuskT5vnR_!!6000000007908-2-tps-2724-650.png\",\"https://img.alicdn.com/imgextra/i3/O1CN01TDKbCW28HuskT5vnR_!!6000000007908-2-tps-2724-650.png\",\"http://url3\"]"
+        },
+        {
+            "name": "表格",
+            "value": "[[{\"name\":\"单行输入框\",\"value\":\"[钉钉](https://www.dingtalk.com/)\"},{\"name\":\"数字输入框\",\"value\":\"100\"}]]"
+        },
+        {
+            "name": "金额（元）",
+            "value": "100"
+        },
+        {
+            "name": "附件",
+            "value": "[{\"spaceId\": \"163xxxx658\", \"fileName\": \"2644.JPG\", \"fileSize\": \"333\", \"fileType\": \"jpg\", \"fileId\": \"643xxxx140\"}]"
+        },
+        {
+            "name": "联系人",
+            "value": "[\"0135185610551036178639\"]"
+        },
+        {
+            "name": "关联审批单",
+            "value": "[\"9XCLWKxNTom6W_u88iKbug09641720074458\", \"9XCLWKxNTom6W_u88iKbug09641720074458\"]"
+        },
+        {
+            "name": "电话",
+            "value": "18015586666"
+        },
+        {
+            "name": "省市区",
+            "value": "北京,北京市,河东区"
+        },
+        {
+            "name": "评分",
+            "value": "5"
+        },
+        {
+            "name": "部门",
+            "value": "714738614"
+        }
+    ],
+    "title": "审批页面托管集成模式",
+    "processCode": "PROC-A807C4FF-93AF-409A-A0C5-197CC81E8FF9",
+    "originatorUserId": "manager9814",
+    "url": "http://www.dingtalk.com",
+    "notifiers": [
+        {
+            "userid": "manager9814",
+            "position": "start"
+        }
+    ],
+    "featureConfig": {
+        "features": [
+            {
+                // 表示获取操作区（按钮）数据的回调地址（按钮渲染）
+                "name": "CUSTOM_ACTION_DEFINITION",
+                "runType": "OUTBIZ_CUSTOM",
+                "callback": {
+                    "apiKey": "getIntegratedCustomActionDefinitions",
+                    "appUuid": "dingec6f7227666ad00ba39a90f97fcb1e09",
+                    "version": "1"
+                }
+            },
+            {
+                // 表示进行审批操作时回调的回调地址（操作审批）
+                "name": "CUSTOM_ACTION_APPLY",
+                "runType": "OUTBIZ_CUSTOM",
+                "callback": {
+                    "apiKey": "applyIntegratedCustomAction",
+                    "appUuid": "dingec6f7227666ad00ba39a90f97fcb1e09",
+                    "version": "1"
+                }
+            }
+        ]
+    },
+    "bizData": "{\"apiKey\":\"customActionDefinitionApiKey2\",\"appUuid\":\"appUuid2\",\"version\":\"2\"}"
+}</code></pre><p uuid="lz98x2mdw98jhqrz2nq" id="c301e6dde0rx3" left="0"></p><h3 uuid="lw4e9nspak25l3idzgq" id="11c0625165446"><b>步骤四：保存流程中心外部集成审批任务 (高级版专享接口)</b></h3><p uuid="lw4ea8qx92asy48nvm" id="3f8ce7a750rxj">https://api.dingtalk.com/v1.0/workflow/premium/processCentres/tasks</p><p uuid="lxcop8hmsy59lz9rjuj" id="153ff91c94iu3" left="0"></p><p uuid="m0nmr3vyzwltat3u0mm" id="f8a32b81eeztr" left="0"><b>同步审批任务数据到钉钉：</b>根据审批实例<code data-tag="code" uuid="lxcop8hm4pnwe3cqka7" code-type="xCode" id="b1258e23e7vj5" class="code">processInstanceId</code>和待办事项列表tasks，调用<a data-tag="xref" id="d4b0ff097fsp4" href="/document/development/api-premiumsaveintegratedtask#" class="xref">保存流程中心外部集成审批任务</a>，可以将三方系统内的审批节点信息同步到钉钉OA审批，获取待办事项的taskId并生成对应的钉钉待办任务。</p><pre id="8i6pbz" title="" font="{&quot;fontFamily&quot;:&quot;defaultFont&quot;,&quot;ligatures&quot;:false}" uuid="lz9b8rkamoti49nmal" data-tag="codeblock" outputclass="language-json" code-type="xCode" class="pre codeblock language-json"><code>{
+    "processInstanceId": "snfwBXcRTWuxuAnpBLGsqQ09641722392174",
+    "activityId": "001",
+    "tasks": [
+        {
+            "userId": "manager9814",
+            "url": "https://www.dingtalk.com"
+        },
+        {
+            "userId": "0135185610551036178639",
+            "url": "https://www.dingtalk.com"
+        }
+    ]
+}</code></pre><p uuid="m0nmr89a5wb8ssum5m7" id="48a7b19521993"></p><h3 uuid="lz99pptjv51d9g69ja" id="e920ab02c5g7r"><b>步骤五：更新流程中心外部集成审批任务状态接口</b></h3><p uuid="lz99pptjsgq37fejrcc" id="73631843929g4">https://api.dingtalk.com/v1.0/workflow/processCentres/tasks</p><p uuid="lz99rmal1xx0t6yuhud" id="3e56175d86wjf"></p><p uuid="lxcop8hph9xp200wqf" id="30d8470b0a51a" left="0"><span style="color:rgb(254, 3, 0)"><b>自定义同意/拒绝审批任务</b></span><b>：</b>审批人从钉钉端打开自定义审批页进行审批时，操作同意/拒绝等功能模块，将会回调<a data-tag="xref" id="0d775185e0gnt" href="/document/development/api-premiumsaveintegratedprocess#" class="xref">保存流程中心外部集成审批模板</a>接口中<span style="color:rgb(254, 3, 0)"><b>CUSTOM_ACTION_APPLY</b></span>模块中配置的回调接口，三方在执行自身业务逻辑完之后，需主动同步任务状态至钉钉。根据审批实例<code data-tag="code" uuid="lxcop8hpftob20hux36" code-type="xCode" id="e5bdfb92279uq" class="code">processInstanceId</code>和审批待办任务taskId，可以调用<a data-tag="xref" id="c04fa1ec9146g" href="/document/development/update-process-center-task-status#" class="xref">更新流程中心任务状态</a>接口，同步完成自有审批待办状态的更新。在或签等场景，可以调用<a data-tag="xref" id="eaba5a5db1tag" href="/document/development/cancel-multiple-oa-approval-tasks#" class="xref">批量取消流程中心待处理任务</a>接口，批量将审批实例下正在运行中的待办事项设置为CANCELED。</p><pre id="mb89ne" title="" font="{&quot;fontFamily&quot;:&quot;defaultFont&quot;,&quot;ligatures&quot;:false}" uuid="lz9b93ocwuc04ed8d3m" data-tag="codeblock" outputclass="language-json" code-type="xCode" class="pre codeblock language-json"><code>{
+    "processInstanceId": "qZpLKAIuTGWHFq8YLx4llA09641722243810",
+    "tasks": [
+        {
+            "taskId": 88094338042,
+            "status": "COMPLETED",
+            "result": "AGREE"
+        }
+    ]
+}</code></pre></section></div></main></body></html>

@@ -1,0 +1,390 @@
+<!DOCTYPE html><html><head><meta charset="utf8" / /><meta name="gmtModify" content="2025-09-11 21:01:59" / /><meta name="searchtitle" content="" / /><meta name="keywords" content="" / /><meta name="author" content="" / /><title>获取异步转译任务结果</title><meta name="gmtModify" content="2026-06-02 09:18:19" / /></head><body data-tag="topic" id="doc-api-dingtalk-GetTranslateFileJobResult" class="topic"><main id="c00abbf1aebyn" data-init-id="doc-api-dingtalk_GetTranslateFileJobResult"><h1 data-tag="title" id="h1-r2v-pna-kvs" class="title">获取异步转译任务结果</h1><p data-tag="shortdesc" id="695ec931532k1" class="shortdesc">调用本接口，获取查询已经提交过的转译任务结果。</p><div data-tag="conbody" outputclass="icms-api-reference" class="icms-api-reference conbody"><section id="68d4c155e98hz" class="section"><h2 id="4672759d24abw"><b>接口调用说明</b></h2><section id="db5814efaeni9" class="section"><h3 id="cd60f4d4c51hg">接口功能介绍</h3><p id="0656a3a10ae5i">如果第三方企业应用选择了<a href="https://open.dingtalk.com/document/isvapp/address-book-encryption" id="4836a27ac2h5i">通讯录加密</a>部署方式，该应用调用通讯录等相关接口，无法获取授权企业员工姓名、职位和所在部门名称等信息。可以通过以下方法获取：</p><p id="8f5dba06754nx">例如，某企业授权开通一个第三方企业应用，使用应用导出本企业可以使用该第三方应用的员工列表及信息，包含员工userID、员工姓名、员工所在部门ID和员工所在部门名称。可按照以下步骤实现。</p><ol id="05402737fc685"><li id="e910954185m2a"><p id="918c191d6fhe6">构造需要转译的文档，示例如下图所示。</p><div type="note" id="7276c7f533omd" class="note note-note"><div class="note-icon-wrapper"><i class="icon-note note note"></i></div><div class="noteContentSpan"><strong>说明 </strong><p id="cfde1dffefo9x">只支持xlsx，xls，csv，txt格式文件。</p></div></div><p id="078e0f7bdfz0m"><img id="d51e8e325b03p" src="https://help-static-aliyun-doc.aliyuncs.com/assets/img/zh-CN/9903630871/p1075881.png" alt="image" placement="break" class="image break" / /></p></li><li id="84a86fbbe02i4"><p id="da630cbba5t49">调用<a href="https://open.dingtalk.com/document/isvapp/single-step-file-upload" id="f84ae778ffc2i">单步文件上传</a>接口，获取media_id。</p></li><li id="84bfe82f7a52m"><p id="54b63840716yn">调用<a href="https://open.dingtalk.com/document/isvapp/asynchronous-address-book-file-content-translation" id="556f3336a4uok">异步转译通讯录ID</a>接口，获取转译任务ID。</p><div type="note" id="f6c0d63f58db6" class="note note-note"><div class="note-icon-wrapper"><i class="icon-note note note"></i></div><div class="noteContentSpan"><strong>说明 </strong><p id="637ad00b61uj4">调用异步转译通讯录ID接口后，如果文件转译成功，会触发异步任务回调通知。</p></div></div></li><li id="cc511d66eamkk"><p id="a2f7380861zs5">调用本接口，获取转译后的文件下载链接。</p><div type="note" id="eda63c0852gcw" class="note note-note"><div class="note-icon-wrapper"><i class="icon-note note note"></i></div><div class="noteContentSpan"><strong>说明 </strong><p id="21118acfcamf5">返回的文件下载链接建议使用<code data-tag="inlineCode" id="22689a0887czc" class="inlineCode">&lt;a&gt;标签</code>引用，<code data-tag="inlineCode" id="f554046ff26lt" class="inlineCode">download</code>属性不可指定（浏览器兼容性问题）。</p></div></div></li><li id="ad9bdda34f8a1"><p id="fb6601d607517">用户下载得到的文件内容，如下图所示。</p><p id="3fe49a2a34yll"><img id="6ba636aa4030d" src="https://help-static-aliyun-doc.aliyuncs.com/assets/img/zh-CN/9903630871/p1075882.png" alt="image" placement="break" class="image break" / /></p></li></ol></section></section><section id="section-request-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-request-1" data-tag="h2" class="h2">请求</h2><section id="section-request-basic-info" class="section"><h3 id="heading-request-basic-info" data-tag="h3" class="h3">基本信息</h3><table id="de62cdcbc4z6v" tablewidth="648" tablecolswidth="216 432" autofit="false" class="table"><colgroup colwidth="0.67*" style="width:33.33%"></colgroup><colgroup colwidth="1.33*" style="width:66.67%"></colgroup><tbody class="tbody"><tr id="aa66627ba4g5n"><td id="5690921d48riz" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="fedc12e78dmna">字段</p></td><td id="5698d2c83981w" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="8fa8dfbd1cu54">值</p></td></tr><tr id="7d911f45596xy"><td id="f5acb47c2dni9" rowspan="1" colspan="1"><p id="a359e6a2bdn3l">HTTP URL</p></td><td id="28a41c4868j92" rowspan="1" colspan="1"><p id="f469dd9105mee">https://api.dingtalk.com/v1.0/contact/files/translateResults</p></td></tr><tr id="ed2b4eacdfroz"><td id="90d7d4496edr2" rowspan="1" colspan="1"><p id="a3965923b24pc">HTTP Method</p></td><td id="74872df73ann0" rowspan="1" colspan="1"><p id="03f2972b0aqdo">GET</p></td></tr><tr id="cf78fa451ckza"><td id="75b2ead543v87" rowspan="1" colspan="1"><p id="360f2dbd95v8p">支持的应用类型</p></td><td id="9e2f21ca87skd" rowspan="1" colspan="1"><p id="7404b5c1ccp0f"><span data-tag="ph" id="ph-request-basic-app-type-apptype-0" class="ph ph-app-type" data-ph-raw-text="appType-第三方企业应用">appType-第三方企业应用</span></p></td></tr><tr id="7b4287c596e98"><td id="e671eadc96bel" rowspan="1" colspan="1"><p id="892d9a59aftsr">权限要求</p></td><td id="80d5d30d10jr0" rowspan="1" colspan="1"><p id="4a63abaea1a0f"><span data-tag="ph" id="ph-request-basic-permission-permission-qyapi-get-member-0" class="ph-permission ph" data-ph-raw-text="permission-qyapi_get_member-成员信息读权限" data-permission-id="permission-qyapi_get_member" data-permission-code="qyapi_get_member" data-permission-detail-api="/document/api/permission/detail" data-permission-query-param="code">permission-qyapi_get_member-成员信息读权限</span></p></td></tr></tbody></table></section><section id="section-request-header-parameter" class="section"><h3 data-tag="h3" id="h2-mfz-eoe-wpc" class="h3 title">请求头</h3><table id="c767aff61ai4r" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="1dd248c9e2pou"><td id="a5a18ac5651jm" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="d994d9b47ato8">名称</p></td><td id="516002cabbacn" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="b0926c8046crf">类型</p></td><td id="9013f784dav73" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="6422a24799v3e">是否必填</p></td><td id="5267c5a65blc6" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="268619dc38m96">描述</p></td></tr><tr id="6cfc14400fc6y"><td id="f025ef81f1ajx" rowspan="1" colspan="1"><p id="7e977bbdfbesx">x-acs-dingtalk-access-token</p></td><td id="5fd1d1cc3cs0g" rowspan="1" colspan="1"><p id="f5f356d41e1s6">String</p></td><td id="786363df97oco" rowspan="1" colspan="1"><p id="1a20a8ff63q0f">是</p></td><td id="920e6e31614qd" rowspan="1" colspan="1"><p id="f8e2ecd3ca35f">调用该接口的访问凭证，通过调用<a href="https://open.dingtalk.com/document/development/obtain-the-access-token-of-the-authorized-enterprise-1#" id="d714531968j1c" class="xref">获取第三方应用授权企业的accessToken</a>接口获取。</p></td></tr></tbody></table></section><section id="section-request-query-parameter" class="section"><h3 data-tag="h3" id="h2-d4w-3hw-csz" class="h3 title">查询参数</h3><table id="f7b32180a70mi" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="79374134c5xaq"><td id="2cbdfad8fbjb1" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="436680661ailf">名称</p></td><td id="e70d030c488nn" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="278f1dde6ck6l">类型</p></td><td id="052f46a86901q" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="7292a6de48itv">是否必填</p></td><td id="8255006b5ce04" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="43ee1461318yp">描述</p></td></tr><tr id="4842ab64641pq"><td id="d1d88cc723r25" rowspan="1" colspan="1"><p id="fd721df7546fc">jobId</p></td><td id="8fdb710235pej" rowspan="1" colspan="1"><p id="8222f53391aut">String</p></td><td id="5d6d608952nv4" rowspan="1" colspan="1"><p id="28285b767aucq">是</p></td><td id="a5a17c51dawgz" rowspan="1" colspan="1"><p id="3d67db83c6fdk">异步转译任务ID，调用<a href="https://open.dingtalk.com/document/development/asynchronous-address-book-file-content-translation#" id="edbb1e20ec6pt" class="xref">异步转译通讯录ID</a>接口获取jobId参数值。</p></td></tr></tbody></table></section><section id="section-request-body-example" class="section"><h3 id="h3-request-body-example" data-tag="h3" class="h3">请求示例</h3><div outputclass="tabbed-codeblock" data-tag="fig" id="figure-3ev-tqq-w1y" class="tabbed-codeblock-box"><div class="tab-box"></div><input type="radio" name="check-figure-3ev-tqq-w1y" id="figure-3ev-tqq-w1y-HTTP-tab" checked="checked" /><label for="figure-3ev-tqq-w1y-HTTP-tab">HTTP</label><div class="codeblock-item"><pre id="codeblock-hgm-hyd-bhd" outputclass="language-HTTP" code-type="xCode" data-tag="codeblock" class="pre codeblock language-HTTP"><code>GET /v1.0/contact/files/translateResults?jobId=fXrgPrvsNiZNa8RWis9Nk1SY HTTP/1.1
+Host:api.dingtalk.com
+x-acs-dingtalk-access-token:BE6hsxxxx
+Content-Type:application/json</code></pre></div><input type="radio" name="check-figure-3ev-tqq-w1y" id="figure-3ev-tqq-w1y-java-tab" /><label for="figure-3ev-tqq-w1y-java-tab">Java</label><div class="codeblock-item"><pre id="codeblock-ur9-8ew-9vh" outputclass="language-java" code-type="xCode" data-tag="codeblock" class="pre codeblock language-java"><code>// This file is auto-generated, don't edit it. Thanks.
+package com.aliyun.sample;
+
+import com.aliyun.tea.*;
+import com.aliyun.teautil.*;
+import com.aliyun.teautil.models.*;
+import com.aliyun.dingtalkcontact_1_0.*;
+import com.aliyun.dingtalkcontact_1_0.models.*;
+import com.aliyun.teaopenapi.*;
+import com.aliyun.teaopenapi.models.*;
+
+public class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Client
+     * @throws Exception
+     */
+    public static com.aliyun.dingtalkcontact_1_0.Client createClient() throws Exception {
+        Config config = new Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        return new com.aliyun.dingtalkcontact_1_0.Client(config);
+    }
+
+    public static void main(String[] args_) throws Exception {
+        java.util.List&lt;String&gt; args = java.util.Arrays.asList(args_);
+        com.aliyun.dingtalkcontact_1_0.Client client = Sample.createClient();
+        GetTranslateFileJobResultHeaders getTranslateFileJobResultHeaders = new GetTranslateFileJobResultHeaders();
+        getTranslateFileJobResultHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        GetTranslateFileJobResultRequest getTranslateFileJobResultRequest = new GetTranslateFileJobResultRequest()
+                .setJobId("fXrgPrvsNiZNa8RWis9Nk1SY");
+        try {
+            client.getTranslateFileJobResultWithOptions(getTranslateFileJobResultRequest, getTranslateFileJobResultHeaders, new RuntimeOptions());
+        } catch (TeaException err) {
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        } catch (Exception _err) {
+            TeaException err = new TeaException(_err.getMessage(), _err);
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        }        
+    }
+}</code></pre></div><input type="radio" name="check-figure-3ev-tqq-w1y" id="figure-3ev-tqq-w1y-python-tab" /><label for="figure-3ev-tqq-w1y-python-tab">Python</label><div class="codeblock-item"><pre id="codeblock-ru6-mas-l7x" outputclass="language-python" code-type="xCode" data-tag="codeblock" class="pre codeblock language-python"><code># -*- coding: utf-8 -*-
+# This file is auto-generated, don't edit it. Thanks.
+import sys
+
+from typing import List
+
+from alibabacloud_dingtalk.contact_1_0.client import Client as dingtalkcontact_1_0Client
+from alibabacloud_tea_openapi import models as open_api_models
+from alibabacloud_dingtalk.contact_1_0 import models as dingtalkcontact__1__0_models
+from alibabacloud_tea_util import models as util_models
+from alibabacloud_tea_util.client import Client as UtilClient
+
+
+class Sample:
+    def __init__(self):
+        pass
+
+    @staticmethod
+    def create_client() -&gt; dingtalkcontact_1_0Client:
+        """
+        使用 Token 初始化账号Client
+        @return: Client
+        @throws Exception
+        """
+        config = open_api_models.Config()
+        config.protocol = 'https'
+        config.region_id = 'central'
+        return dingtalkcontact_1_0Client(config)
+
+    @staticmethod
+    def main(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        get_translate_file_job_result_headers = dingtalkcontact__1__0_models.GetTranslateFileJobResultHeaders()
+        get_translate_file_job_result_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        get_translate_file_job_result_request = dingtalkcontact__1__0_models.GetTranslateFileJobResultRequest(
+            job_id='fXrgPrvsNiZNa8RWis9Nk1SY'
+        )
+        try:
+            client.get_translate_file_job_result_with_options(get_translate_file_job_result_request, get_translate_file_job_result_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+    @staticmethod
+    async def main_async(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        get_translate_file_job_result_headers = dingtalkcontact__1__0_models.GetTranslateFileJobResultHeaders()
+        get_translate_file_job_result_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        get_translate_file_job_result_request = dingtalkcontact__1__0_models.GetTranslateFileJobResultRequest(
+            job_id='fXrgPrvsNiZNa8RWis9Nk1SY'
+        )
+        try:
+            await client.get_translate_file_job_result_with_options_async(get_translate_file_job_result_request, get_translate_file_job_result_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+
+if __name__ == '__main__':
+    Sample.main(sys.argv[1:])</code></pre></div><input type="radio" name="check-figure-3ev-tqq-w1y" id="figure-3ev-tqq-w1y-php-tab" /><label for="figure-3ev-tqq-w1y-php-tab">PHP</label><div class="codeblock-item"><pre id="codeblock-ole-goz-2b7" outputclass="language-php" code-type="xCode" data-tag="codeblock" class="pre codeblock language-php"><code>&lt;?php
+
+// This file is auto-generated, don't edit it. Thanks.
+namespace AlibabaCloud\SDK\Sample;
+
+use AlibabaCloud\SDK\Dingtalk\Vcontact_1_0\Dingtalk;
+use \Exception;
+use AlibabaCloud\Tea\Exception\TeaError;
+use AlibabaCloud\Tea\Utils\Utils;
+
+use Darabonba\OpenApi\Models\Config;
+use AlibabaCloud\SDK\Dingtalk\Vcontact_1_0\Models\GetTranslateFileJobResultHeaders;
+use AlibabaCloud\SDK\Dingtalk\Vcontact_1_0\Models\GetTranslateFileJobResultRequest;
+use AlibabaCloud\Tea\Utils\Utils\RuntimeOptions;
+
+class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Dingtalk Client
+     */
+    public static function createClient(){
+        $config = new Config([]);
+        $config-&gt;protocol = "https";
+        $config-&gt;regionId = "central";
+        return new Dingtalk($config);
+    }
+
+    /**
+     * @param string[] $args
+     * @return void
+     */
+    public static function main($args){
+        $client = self::createClient();
+        $getTranslateFileJobResultHeaders = new GetTranslateFileJobResultHeaders([]);
+        $getTranslateFileJobResultHeaders-&gt;xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        $getTranslateFileJobResultRequest = new GetTranslateFileJobResultRequest([
+            "jobId" =&gt; "fXrgPrvsNiZNa8RWis9Nk1SY"
+        ]);
+        try {
+            $client-&gt;getTranslateFileJobResultWithOptions($getTranslateFileJobResultRequest, $getTranslateFileJobResultHeaders, new RuntimeOptions([]));
+        }
+        catch (Exception $err) {
+            if (!($err instanceof TeaError)) {
+                $err = new TeaError([], $err-&gt;getMessage(), $err-&gt;getCode(), $err);
+            }
+            if (!Utils::empty_($err-&gt;code) &amp;&amp; !Utils::empty_($err-&gt;message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+        }
+    }
+}
+$path = __DIR__ . \DIRECTORY_SEPARATOR . '..' . \DIRECTORY_SEPARATOR . 'vendor' . \DIRECTORY_SEPARATOR . 'autoload.php';
+if (file_exists($path)) {
+    require_once $path;
+}
+Sample::main(array_slice($argv, 1));</code></pre></div><input type="radio" name="check-figure-3ev-tqq-w1y" id="figure-3ev-tqq-w1y-go-tab" /><label for="figure-3ev-tqq-w1y-go-tab">Go</label><div class="codeblock-item"><pre id="codeblock-h26-1ag-ghw" outputclass="language-go" code-type="xCode" data-tag="codeblock" class="pre codeblock language-go"><code>// This file is auto-generated, don't edit it. Thanks.
+package main
+
+import (
+  "os"
+  util  "github.com/alibabacloud-go/tea-utils/service"
+  dingtalkcontact_1_0  "github.com/alibabacloud-go/dingtalk/contact_1_0"
+  openapi  "github.com/alibabacloud-go/darabonba-openapi/client"
+  "github.com/alibabacloud-go/tea/tea"
+)
+
+
+/**
+ * 使用 Token 初始化账号Client
+ * @return Client
+ * @throws Exception
+ */
+func CreateClient () (_result *dingtalkcontact_1_0.Client, _err error) {
+  config := &amp;openapi.Config{}
+  config.Protocol = tea.String("https")
+  config.RegionId = tea.String("central")
+  _result = &amp;dingtalkcontact_1_0.Client{}
+  _result, _err = dingtalkcontact_1_0.NewClient(config)
+  return _result, _err
+}
+
+func _main (args []*string) (_err error) {
+  client, _err := CreateClient()
+  if _err != nil {
+    return _err
+  }
+
+  getTranslateFileJobResultHeaders := &amp;dingtalkcontact_1_0.GetTranslateFileJobResultHeaders{}
+  getTranslateFileJobResultHeaders.XAcsDingtalkAccessToken = tea.String("&lt;your access token&gt;")
+  getTranslateFileJobResultRequest := &amp;dingtalkcontact_1_0.GetTranslateFileJobResultRequest{
+    JobId: tea.String("fXrgPrvsNiZNa8RWis9Nk1SY"),
+  }
+  tryErr := func()(_e error) {
+    defer func() {
+      if r := tea.Recover(recover()); r != nil {
+        _e = r
+      }
+    }()
+    _, _err = client.GetTranslateFileJobResultWithOptions(getTranslateFileJobResultRequest, getTranslateFileJobResultHeaders, &amp;util.RuntimeOptions{})
+    if _err != nil {
+      return _err
+    }
+
+    return nil
+  }()
+
+  if tryErr != nil {
+    var err = &amp;tea.SDKError{}
+    if _t, ok := tryErr.(*tea.SDKError); ok {
+      err = _t
+    } else {
+      err.Message = tea.String(tryErr.Error())
+    }
+    if !tea.BoolValue(util.Empty(err.Code)) &amp;&amp; !tea.BoolValue(util.Empty(err.Message)) {
+      // err 中含有 code 和 message 属性，可帮助开发定位问题
+    }
+
+  }
+  return _err
+}
+
+
+func main() {
+  err := _main(tea.StringSlice(os.Args[1:]))
+  if err != nil {
+    panic(err)
+  }
+}</code></pre></div><input type="radio" name="check-figure-3ev-tqq-w1y" id="figure-3ev-tqq-w1y-nodejs-tab" /><label for="figure-3ev-tqq-w1y-nodejs-tab">Node.js</label><div class="codeblock-item"><pre id="codeblock-0ia-bpi-ntq" outputclass="language-nodejs" code-type="xCode" data-tag="codeblock" class="pre codeblock language-nodejs"><code>// This file is auto-generated, don't edit it
+import Util, * as $Util from '@alicloud/tea-util';
+import dingtalkcontact_1_0, * as $dingtalkcontact_1_0 from '@alicloud/dingtalk/contact_1_0';
+import OpenApi, * as $OpenApi from '@alicloud/openapi-client';
+import * as $tea from '@alicloud/tea-typescript';
+
+
+export default class Client {
+
+  /**
+   * 使用 Token 初始化账号Client
+   * @return Client
+   * @throws Exception
+   */
+  static createClient(): dingtalkcontact_1_0 {
+    let config = new $OpenApi.Config({ });
+    config.protocol = "https";
+    config.regionId = "central";
+    return new dingtalkcontact_1_0(config);
+  }
+
+  static async main(args: string[]): Promise&lt;void&gt; {
+    let client = Client.createClient();
+    let getTranslateFileJobResultHeaders = new $dingtalkcontact_1_0.GetTranslateFileJobResultHeaders({ });
+    getTranslateFileJobResultHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+    let getTranslateFileJobResultRequest = new $dingtalkcontact_1_0.GetTranslateFileJobResultRequest({
+      jobId: "fXrgPrvsNiZNa8RWis9Nk1SY",
+    });
+    try {
+      await client.getTranslateFileJobResultWithOptions(getTranslateFileJobResultRequest, getTranslateFileJobResultHeaders, new $Util.RuntimeOptions({ }));
+    } catch (err) {
+      if (!Util.empty(err.code) &amp;&amp; !Util.empty(err.message)) {
+        // err 中含有 code 和 message 属性，可帮助开发定位问题
+      }
+
+    }    
+  }
+
+}
+
+Client.main(process.argv.slice(2));</code></pre></div><input type="radio" name="check-figure-3ev-tqq-w1y" id="figure-3ev-tqq-w1y-csharp-tab" /><label for="figure-3ev-tqq-w1y-csharp-tab">C#</label><div class="codeblock-item"><pre id="codeblock-ohi-ra8-9dn" outputclass="language-csharp" code-type="xCode" data-tag="codeblock" class="pre codeblock language-csharp"><code>// This file is auto-generated, don't edit it. Thanks.
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
+
+using Tea;
+using Tea.Utils;
+
+
+namespace AlibabaCloud.SDK.Sample
+{
+    public class Sample 
+    {
+
+        /**
+         * 使用 Token 初始化账号Client
+         * @return Client
+         * @throws Exception
+         */
+        public static AlibabaCloud.SDK.Dingtalkcontact_1_0.Client CreateClient()
+        {
+            AlibabaCloud.OpenApiClient.Models.Config config = new AlibabaCloud.OpenApiClient.Models.Config();
+            config.Protocol = "https";
+            config.RegionId = "central";
+            return new AlibabaCloud.SDK.Dingtalkcontact_1_0.Client(config);
+        }
+
+        public static void Main(string[] args)
+        {
+            AlibabaCloud.SDK.Dingtalkcontact_1_0.Client client = CreateClient();
+            AlibabaCloud.SDK.Dingtalkcontact_1_0.Models.GetTranslateFileJobResultHeaders getTranslateFileJobResultHeaders = new AlibabaCloud.SDK.Dingtalkcontact_1_0.Models.GetTranslateFileJobResultHeaders();
+            getTranslateFileJobResultHeaders.XAcsDingtalkAccessToken = "&lt;your access token&gt;";
+            AlibabaCloud.SDK.Dingtalkcontact_1_0.Models.GetTranslateFileJobResultRequest getTranslateFileJobResultRequest = new AlibabaCloud.SDK.Dingtalkcontact_1_0.Models.GetTranslateFileJobResultRequest
+            {
+                JobId = "fXrgPrvsNiZNa8RWis9Nk1SY",
+            };
+            try
+            {
+                client.GetTranslateFileJobResultWithOptions(getTranslateFileJobResultRequest, getTranslateFileJobResultHeaders, new AlibabaCloud.TeaUtil.Models.RuntimeOptions());
+            }
+            catch (TeaException err)
+            {
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+            catch (Exception _err)
+            {
+                TeaException err = new TeaException(new Dictionary&lt;string, object&gt;
+                {
+                    { "message", _err.Message }
+                });
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+        }
+
+
+    }
+}</code></pre></div><input type="radio" name="check-figure-3ev-tqq-w1y" id="figure-3ev-tqq-w1y-cpp-tab" /><label for="figure-3ev-tqq-w1y-cpp-tab">C++</label><div class="codeblock-item"><pre id="codeblock-bqg-5ji-fpz" outputclass="language-cpp" code-type="xCode" data-tag="codeblock" class="pre codeblock language-cpp"><code>// This file is auto-generated, don't edit it. Thanks.
+
+#include &lt;alibabacloud/dingtalkcontact__1__0.hpp&gt;
+#include &lt;alibabacloud/open_api.hpp&gt;
+#include &lt;boost/any.hpp&gt;
+#include &lt;darabonba/core.hpp&gt;
+#include &lt;darabonba/util.hpp&gt;
+#include &lt;iostream&gt;
+#include &lt;map&gt;
+
+using namespace std;
+
+Alibabacloud_Dingtalkcontact_1_0::Client createClient() {
+  shared_ptr&lt;Alibabacloud_OpenApi::Config&gt; config = make_shared&lt;Alibabacloud_OpenApi::Config&gt;();
+  config-&gt;protocol = make_shared&lt;string&gt;("https");
+  config-&gt;regionId = make_shared&lt;string&gt;("central");
+  return Alibabacloud_Dingtalkcontact_1_0::Client(config);
+}
+
+int main(int argc, char *args[]) {
+  args++;
+  shared_ptr&lt;Alibabacloud_Dingtalkcontact_1_0::Client&gt; client = make_shared&lt;Alibabacloud_Dingtalkcontact_1_0::Client&gt;(createClient());
+  shared_ptr&lt;Alibabacloud_Dingtalkcontact_1_0::GetTranslateFileJobResultHeaders&gt; getTranslateFileJobResultHeaders = make_shared&lt;Alibabacloud_Dingtalkcontact_1_0::GetTranslateFileJobResultHeaders&gt;();
+  getTranslateFileJobResultHeaders-&gt;xAcsDingtalkAccessToken = make_shared&lt;string&gt;("&lt;your access token&gt;");
+  shared_ptr&lt;Alibabacloud_Dingtalkcontact_1_0::GetTranslateFileJobResultRequest&gt; getTranslateFileJobResultRequest = make_shared&lt;Alibabacloud_Dingtalkcontact_1_0::GetTranslateFileJobResultRequest&gt;(map&lt;string, boost::any&gt;({
+    {"jobId", boost::any(string("fXrgPrvsNiZNa8RWis9Nk1SY"))}
+  }));
+  try {
+    client-&gt;getTranslateFileJobResultWithOptions(getTranslateFileJobResultRequest, getTranslateFileJobResultHeaders, make_shared&lt;Darabonba_Util::RuntimeOptions&gt;(Darabonba_Util::RuntimeOptions()));
+  }
+  catch (std::exception &amp;err) {
+    if (!Darabonba_Util::Client::empty(err.code) &amp;&amp; !Darabonba_Util::Client::empty(err.message)) {
+      // err 中含有 code 和 message 属性，可帮助开发定位问题
+    }
+  }
+}</code></pre></div></div></section></section><section id="section-response-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-response-1" data-tag="h2" class="h2">响应</h2><section id="section-response-parameter" class="section"><h3 data-tag="h3" id="h2-6r8-etq-ltx" class="h3 title">响应体</h3><table id="fcc23958a69y8" tablewidth="710" tablecolswidth="213 142 355" autofit="false" class="table"><colgroup colwidth="0.9*" style="width:30.00%"></colgroup><colgroup colwidth="0.6*" style="width:20.00%"></colgroup><colgroup colwidth="1.5*" style="width:50.00%"></colgroup><tbody class="tbody"><tr id="72edc80bed6mp"><td id="6697c7da6asmi" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="1f65344115w3d">名称</p></td><td id="adc095da20djn" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="1767e87972c0v">类型</p></td><td id="ea52f81a98z6r" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="eaa64d6d155oe">描述</p></td></tr><tr outputclass="row row-level-1" id="29615017ffaqa" class="row row-level-1"><td id="a1111b77a8gjn" rowspan="1" colspan="1"><p id="d74b8546684s1">status</p></td><td id="6367e164bb3w5" rowspan="1" colspan="1"><p id="e8806d8d81fz7">String</p></td><td id="35631100fcwmo" rowspan="1" colspan="1"><p id="665e0015e2jwo">转译任务结果，取值：</p><ul id="faddf2f689tpn"><li id="e97e0ea57eobf"><p id="2594fec0965gv"><b>0</b>：任务进行中</p></li><li id="489fa54c5dr4s"><p id="e2e759c3d9tef"><b>1</b>：任务处理成功</p></li><li id="50632afe1dmej"><p id="3b6d982469dw1"><b>2</b>：任务处理失败</p></li></ul></td></tr><tr outputclass="row row-level-2" id="ddb6d53db0dq1" class="row row-level-2"><td id="3080185026gdc" rowspan="1" colspan="1"><p id="4dc4fad21e5fh">url</p></td><td id="bed7d88078fdh" rowspan="1" colspan="1"><p id="e24528ed516jz">String</p></td><td id="5dd8c266607pk" rowspan="1" colspan="1"><p id="5c98d4cec7u1z">文件内容转译成功后的URL。</p><p class="note-icon-wrapper" id="a3516931aegin"></p><p id="9010d6c84d90f">需要通过oauth2授权登录在用户侧打开。</p></td></tr></tbody></table></section><section id="section-response-body-example" class="section"><h3 id="h3-response-body-example" data-tag="h3" class="h3">响应体示例</h3><pre id="d2384cafc0mxy" outputclass="language-json" code-type="xCode" data-tag="codeblock" class="pre codeblock language-json"><code>HTTP/1.1 200 OK
+Content-Type:application/json
+
+{
+  "status" : "1",
+  "url" : "xxxx"
+}</code></pre></section><section id="section-error-code-1" class="section"><h3 id="h3-error-code-1" data-tag="h3" class="h3">错误码</h3><p data-tag="p" id="p-error-code-global-guide" class="p">若调用该接口报错，可根据错误信息在<a href="https://open.dingtalk.com/document/development/server-api-error-codes-1" id="a-error-code-global-guide">全局错误码</a>文档中查找解决方案。</p><table id="a484c708a3pqm" tablewidth="709" tablecolswidth="142 177 177 213" autofit="false" class="table"><colgroup colwidth="0.8*" style="width:20.03%"></colgroup><colgroup colwidth="1*" style="width:24.96%"></colgroup><colgroup colwidth="1*" style="width:24.96%"></colgroup><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><tbody class="tbody"><tr id="e0dd1f7cb0vj9"><td id="147ac2d996mwx" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="c9f6bcc4b809c">HttpCode</p></td><td id="b4cca29cdc39l" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="aff018744ecp1">错误码</p></td><td id="f483b43de8n50" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="dc24e09243hkm">错误信息</p></td><td id="e6d8f31dd8izp" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="66b164c59ehon">说明</p></td></tr><tr id="15ec9aec9d1zx"><td id="3bca81688fd3a" rowspan="1" colspan="1"><p id="ee01d7e47c5ku">400</p></td><td id="aca1b5b11duf7" rowspan="1" colspan="1"><p id="7d32d25547p2s">param.invalid</p></td><td id="74afb4baf1sk4" rowspan="1" colspan="1"><p id="a04061943c7a2">%s</p></td><td id="0076096ffdpfp" rowspan="1" colspan="1"><p id="784bbfe33ejk7">参数不合法</p></td></tr><tr id="999986ddc9n1c"><td id="3ef2f08312y5p" rowspan="1" colspan="1"><p id="b493d2611fmpj">500</p></td><td id="910edccd61usd" rowspan="1" colspan="1"><p id="05b31f17cfj4w">system.busy</p></td><td id="d414f79c21sln" rowspan="1" colspan="1"><p id="b2f0579107yn9">系统繁忙</p></td><td id="68a3228a40b93" rowspan="1" colspan="1"><p id="6c31bf57764nu">系统繁忙</p></td></tr></tbody></table></section></section></div></main></body></html>

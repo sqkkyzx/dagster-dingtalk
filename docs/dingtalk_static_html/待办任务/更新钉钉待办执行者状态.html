@@ -1,0 +1,445 @@
+<!DOCTYPE html><html><head><meta charset="utf8" / /><meta name="gmtModify" content="2025-09-12 17:19:48" / /><meta name="searchtitle" content="" / /><meta name="keywords" content="" / /><meta name="author" content="" / /><title>更新钉钉待办执行者状态</title><meta name="gmtModify" content="2026-06-04 19:09:52" / /></head><body data-tag="topic" id="doc-api-dingtalk-UpdateTodoTaskExecutorStatus" class="topic"><main id="3c6fae1041dz7"><h1 data-tag="title" id="h1-tee-tcq-zfz" class="title">更新钉钉待办执行者状态</h1><p data-tag="shortdesc" id="3ce2460741q04" class="shortdesc">调用本接口，当待办存在多个执行者时，可更新部分执行者的完成状态。</p><div data-tag="conbody" outputclass="icms-api-reference" class="icms-api-reference conbody"><section id="section-request-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-request-1" data-tag="h2" class="h2">请求</h2><section id="section-request-basic-info" class="section"><h3 id="heading-request-basic-info" data-tag="h3" class="h3">基本信息</h3><table id="706627a69efvf" tablewidth="648" tablecolswidth="216 432" autofit="false" class="table"><colgroup colwidth="0.67*" style="width:33.33%"></colgroup><colgroup colwidth="1.33*" style="width:66.67%"></colgroup><tbody class="tbody"><tr id="7585ba7869gb4"><td id="5f43fac727rap" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="a3cb304b9cx9i">字段</p></td><td id="e0945ebe08il2" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="6d1604466f006">值</p></td></tr><tr id="d34473bbe8icm"><td id="30acbb0fb6czx" rowspan="1" colspan="1"><p id="bcd42c5ebf4ty">HTTP URL</p></td><td id="5b597d76c3as0" rowspan="1" colspan="1"><p id="3b466b69b4g9d">https://api.dingtalk.com/v1.0/todo/users/{unionId}/tasks/{taskId}/executorStatus</p></td></tr><tr id="534573781a6uw"><td id="fb6b5b05d0y3o" rowspan="1" colspan="1"><p id="b70ce47576kkz">HTTP Method</p></td><td id="8cc869e618off" rowspan="1" colspan="1"><p id="9e7726baacwse">PUT</p></td></tr><tr id="e67a4eb4e3wj4"><td id="677eb39d7acav" rowspan="1" colspan="1"><p id="158cd31c96lhl">支持的应用类型</p></td><td id="ae11758c877gl" rowspan="1" colspan="1"><p id="4aa1c862a6zoh"><span data-tag="ph" id="ph-request-basic-app-type-apptype-0" class="ph ph-app-type" data-ph-raw-text="appType-企业内部应用">appType-企业内部应用</span>　<span data-tag="ph" id="ph-request-basic-app-type-apptype-1" class="ph ph-app-type" data-ph-raw-text="appType-第三方企业应用">appType-第三方企业应用</span></p></td></tr><tr id="b40599d72bwgy"><td id="90007df60ay3k" rowspan="1" colspan="1"><p id="f161bebe65t5u">权限要求</p></td><td id="80ccfd0162rwt" rowspan="1" colspan="1"><p id="a05ed2c0a6koe"><span data-tag="ph" id="ph-request-basic-permission-permission-todo-todo-write-0" class="ph-permission ph" data-ph-raw-text="permission-Todo.Todo.Write-待办应用中待办写权限,待办应用中待办读权限" data-permission-id="permission-Todo.Todo.Write" data-permission-code="Todo.Todo.Write" data-permission-detail-api="/document/api/permission/detail" data-permission-query-param="code">permission-Todo.Todo.Write-待办应用中待办写权限,待办应用中待办读权限</span></p></td></tr></tbody></table></section><section id="section-request-header-parameter" class="section"><h3 data-tag="h3" id="h2-wa7-zr4-grd" class="h3 title">请求头</h3><table id="3ce29424410u2" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="3ce2942541fou"><td id="3ce29426416u6" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="3ce2942741fxy">名称</p></td><td id="3ce29428412t3" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="3ce29429417a8">类型</p></td><td id="3ce2942a41gh9" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="3ce2942b415fn">是否必填</p></td><td id="3ce2942c41e2g" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="3ce2942d411ii">描述</p></td></tr><tr id="3ce2942e41ww6"><td id="3ce2942f41olm" rowspan="1" colspan="1"><p id="3ce2943041qcf">x-acs-dingtalk-access-token</p></td><td id="3ce2943141pu2" rowspan="1" colspan="1"><p id="3ce2943241n8j">String</p></td><td id="3ce2943341hck" rowspan="1" colspan="1"><p id="3ce2943441dmw">是</p></td><td id="3ce2943541fhv" rowspan="1" colspan="1"><p id="6b7f3c7e1ea18">调用该接口的访问凭证，通过以下获取：</p><ul id="8fba8ccbectnj"><li id="dace943c20vbe"><p id="ca09404059yfy">企业内部应用，调用<a href="https://open.dingtalk.com/document/development/obtain-the-access-token-of-an-internal-app#" id="9f43bd17dbg9j" class="xref">获取企业内部应用的accessToken</a>接口获取。</p></li><li id="4198465b2bgql"><p id="65bfc18266teh">第三方企业应用，调用<a href="https://open.dingtalk.com/document/development/obtain-the-access-token-of-the-authorized-enterprise-1#" id="f8e4834a0d7zu" class="xref">获取第三方应用授权企业的accessToken</a>接口获取。</p></li></ul></td></tr></tbody></table></section><section id="section-request-path-parameter" class="section"><h3 data-tag="h3" id="h2-txf-39h-fnl" class="h3 title">路径参数</h3><table id="3ce2bb354119j" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="3ce2bb3641khe"><td id="3ce2bb3741uhr" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="3ce2bb3841keu">名称</p></td><td id="3ce2bb3941p3o" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="3ce2bb3a41stz">类型</p></td><td id="3ce2bb3b411ht" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="3ce2bb3c41bop">是否必填</p></td><td id="3ce2bb3d410rg" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="3ce2bb3e41dze">描述</p></td></tr><tr id="3ce2bb3f41ilw"><td id="3ce2bb4041214" rowspan="1" colspan="1"><p id="3ce2bb4141k4q">unionId</p></td><td id="3ce2bb4241xb7" rowspan="1" colspan="1"><p id="3ce2bb4341eqc">String</p></td><td id="3ce2bb4441slb" rowspan="1" colspan="1"><p id="3ce2bb45414jy">是</p></td><td id="3ce2bb4641ljs" rowspan="1" colspan="1"><p id="3ce2bb4741epf">当前访问的资源所归属用户的unionId，可调用<a href="https://open.dingtalk.com/document/development/query-user-details#" id="0676d6db65a0z" class="xref">查询用户详情</a>接口获取。</p></td></tr><tr id="3ce2e246419ge"><td id="3ce2e24741z6g" rowspan="1" colspan="1"><p id="3ce2e24841zra">taskId</p></td><td id="3ce2e24941x41" rowspan="1" colspan="1"><p id="3ce2e24a41th6">String</p></td><td id="3ce2e24b41npq" rowspan="1" colspan="1"><p id="3ce2e24c41gb2">是</p></td><td id="3ce2e24d413tl" rowspan="1" colspan="1"><p id="3ce2e24e4158h">待办ID。</p></td></tr></tbody></table></section><section id="section-request-query-parameter" class="section"><h3 data-tag="h3" id="h2-p5o-9wz-bnk" class="h3 title">查询参数</h3><table id="3ce2e24f41c1e" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="3ce2e25041e7z"><td id="3ce2e25141j7x" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="3ce2e25241ui2">名称</p></td><td id="3ce2e25341k8r" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="3ce2e25441gph">类型</p></td><td id="3ce2e25541o80" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="3ce2e25641nso">是否必填</p></td><td id="3ce2e25741jmf" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="3ce2e25841904">描述</p></td></tr><tr id="3ce2e25941u4c"><td id="3ce2e25a41qa3" rowspan="1" colspan="1"><p id="3ce2e25b41jrf">operatorId</p></td><td id="3ce2e25c41wv5" rowspan="1" colspan="1"><p id="3ce3095041p4q">String</p></td><td id="3ce3095141rtv" rowspan="1" colspan="1"><p id="3ce309524194l">否</p></td><td id="3ce3095341xac" rowspan="1" colspan="1"><p id="3ce3095441hpn">当前操作者的用户的unionId，可调用<a href="https://open.dingtalk.com/document/development/query-user-details#" id="8666216323vuf" class="xref">查询用户详情</a>接口获取。</p></td></tr></tbody></table></section><section id="section-request-body-parameter" class="section"><h3 data-tag="h3" id="h2-vzo-w0i-hbc" class="h3 title">请求体</h3><table id="3ce3095c41spu" tablewidth="709" tablecolswidth="213 106 106 284" autofit="false" class="table"><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="0.6*" style="width:14.95%"></colgroup><colgroup colwidth="1.6*" style="width:40.06%"></colgroup><tbody class="tbody"><tr id="3ce3095d41skj"><td id="3ce3095e41t7a" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="3ce3095f41t1w">名称</p></td><td id="3ce30960410s7" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="3ce3096141gy5">类型</p></td><td id="3ce309624103x" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="3ce30963411al">是否必填</p></td><td id="3ce3096441iy0" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="3ce3096541kiv">描述</p></td></tr><tr outputclass="row row-level-4 has-child" id="3ce3096641ppe" class="row row-level-4 has-child"><td id="3ce3096741n7j" rowspan="1" colspan="1"><span class="icms-tree-table-trigger" type="checkbox"></span><p id="3ce3096841wat">executorStatusList</p></td><td id="3ce30969419i6" rowspan="1" colspan="1"><p id="3ce3096a417e6">Array</p></td><td id="3ce330604107m" rowspan="1" colspan="1"><p id="3ce3306141v1s">否</p></td><td id="3ce3306241gby" rowspan="1" colspan="1"><p id="3ce3306341w3o">执行者状态列表，id需传用户的unionId，调用<a href="https://open.dingtalk.com/document/development/query-user-details#" id="4d6b4616c7u6v" class="xref">查询用户详情</a>接口获取unionid参数值，最大数量1000。</p></td></tr><tr outputclass="row row-level-4-1" id="3ce3306b41e95" class="row row-level-4-1"><td id="3ce3306c416a2" rowspan="1" colspan="1"><p id="3ce3306d41lat">id</p></td><td id="3ce3306e41ngz" rowspan="1" colspan="1"><p id="3ce3306f419qf">String</p></td><td id="3ce3307041514" rowspan="1" colspan="1"><p id="3ce3307141mcb">否</p></td><td id="3ce330724188i" rowspan="1" colspan="1"><p id="3ce3307341rn6">执行者的unionId，可调用<a href="https://open.dingtalk.com/document/development/query-user-details#" id="a20a3b4cfeeg5" class="xref">查询用户详情</a>接口获取。</p></td></tr><tr outputclass="row row-level-4-2" id="3ce3577041w9d" class="row row-level-4-2"><td id="3ce3577141qtd" rowspan="1" colspan="1"><p id="3ce3577241zl9">isDone</p></td><td id="3ce3577341yui" rowspan="1" colspan="1"><p id="3ce3577441ssd">Boolean</p></td><td id="3ce35775416yi" rowspan="1" colspan="1"><p id="3ce3577641gfs">否</p></td><td id="3ce3577741f9j" rowspan="1" colspan="1"><p id="3ce3577841mo8">执行者完成状态。</p></td></tr></tbody></table></section><section id="section-request-body-example" class="section"><h3 id="h3-request-body-example" data-tag="h3" class="h3">请求示例</h3><div outputclass="tabbed-codeblock" data-tag="fig" id="figure-2pe-ztl-lda" class="tabbed-codeblock-box"><div class="tab-box"></div><input type="radio" name="check-figure-2pe-ztl-lda" id="figure-2pe-ztl-lda-HTTP-tab" checked="checked" /><label for="figure-2pe-ztl-lda-HTTP-tab">HTTP</label><div class="codeblock-item"><pre id="codeblock-jjb-wbm-jva" outputclass="language-HTTP" code-type="xCode" data-tag="codeblock" class="pre codeblock language-HTTP"><code>PUT /v1.0/todo/users/PUoiinWIpa2yH2ymhiiGiP6g/tasks/OPJpwtwPVNGIFKURjrzd/executorStatus?operatorId=PUoiinWIpa2yH2ymhiiGiP6g HTTP/1.1
+Host:api.dingtalk.com
+x-acs-dingtalk-access-token:b3ba046c118a3445b111db282824c0b4
+Content-Type:application/json
+
+{
+  "executorStatusList" : [ {
+    "id" : "PUoiinWIpa2yH2ymhiiGiP6g",
+    "isDone" : true
+  } ]
+}</code></pre></div><input type="radio" name="check-figure-2pe-ztl-lda" id="figure-2pe-ztl-lda-java-tab" /><label for="figure-2pe-ztl-lda-java-tab">Java</label><div class="codeblock-item"><pre id="codeblock-tsm-3nq-otr" outputclass="language-java" code-type="xCode" data-tag="codeblock" class="pre codeblock language-java"><code>// This file is auto-generated, don't edit it. Thanks.
+package com.aliyun.sample;
+
+import com.aliyun.tea.*;
+import com.aliyun.teautil.*;
+import com.aliyun.teautil.models.*;
+import com.aliyun.dingtalktodo_1_0.*;
+import com.aliyun.dingtalktodo_1_0.models.*;
+import com.aliyun.teaopenapi.*;
+import com.aliyun.teaopenapi.models.*;
+
+public class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Client
+     * @throws Exception
+     */
+    public static com.aliyun.dingtalktodo_1_0.Client createClient() throws Exception {
+        Config config = new Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        return new com.aliyun.dingtalktodo_1_0.Client(config);
+    }
+
+    public static void main(String[] args_) throws Exception {
+        java.util.List&lt;String&gt; args = java.util.Arrays.asList(args_);
+        com.aliyun.dingtalktodo_1_0.Client client = Sample.createClient();
+        UpdateTodoTaskExecutorStatusHeaders updateTodoTaskExecutorStatusHeaders = new UpdateTodoTaskExecutorStatusHeaders();
+        updateTodoTaskExecutorStatusHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        UpdateTodoTaskExecutorStatusRequest.UpdateTodoTaskExecutorStatusRequestExecutorStatusList executorStatusList0 = new UpdateTodoTaskExecutorStatusRequest.UpdateTodoTaskExecutorStatusRequestExecutorStatusList()
+                .setId("PUoiinWIpa2yH2ymhiiGiP6g")
+                .setIsDone(true);
+        UpdateTodoTaskExecutorStatusRequest updateTodoTaskExecutorStatusRequest = new UpdateTodoTaskExecutorStatusRequest()
+                .setExecutorStatusList(java.util.Arrays.asList(
+                    executorStatusList0
+                ));
+        try {
+            client.updateTodoTaskExecutorStatusWithOptions("PUoiinWIpa2yH2ymhiiGiP6g", "OPJpwtwPVNGIFKURjrzd", updateTodoTaskExecutorStatusRequest, updateTodoTaskExecutorStatusHeaders, new RuntimeOptions());
+        } catch (TeaException err) {
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        } catch (Exception _err) {
+            TeaException err = new TeaException(_err.getMessage(), _err);
+            if (!com.aliyun.teautil.Common.empty(err.code) &amp;&amp; !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        }        
+    }
+}</code></pre></div><input type="radio" name="check-figure-2pe-ztl-lda" id="figure-2pe-ztl-lda-python-tab" /><label for="figure-2pe-ztl-lda-python-tab">Python</label><div class="codeblock-item"><pre id="codeblock-lkv-lrg-czb" outputclass="language-python" code-type="xCode" data-tag="codeblock" class="pre codeblock language-python"><code># -*- coding: utf-8 -*-
+# This file is auto-generated, don't edit it. Thanks.
+import sys
+
+from typing import List
+
+from alibabacloud_dingtalk.todo_1_0.client import Client as dingtalktodo_1_0Client
+from alibabacloud_tea_openapi import models as open_api_models
+from alibabacloud_dingtalk.todo_1_0 import models as dingtalktodo__1__0_models
+from alibabacloud_tea_util import models as util_models
+from alibabacloud_tea_util.client import Client as UtilClient
+
+
+class Sample:
+    def __init__(self):
+        pass
+
+    @staticmethod
+    def create_client() -&gt; dingtalktodo_1_0Client:
+        """
+        使用 Token 初始化账号Client
+        @return: Client
+        @throws Exception
+        """
+        config = open_api_models.Config()
+        config.protocol = 'https'
+        config.region_id = 'central'
+        return dingtalktodo_1_0Client(config)
+
+    @staticmethod
+    def main(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        update_todo_task_executor_status_headers = dingtalktodo__1__0_models.UpdateTodoTaskExecutorStatusHeaders()
+        update_todo_task_executor_status_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        executor_status_list_0 = dingtalktodo__1__0_models.UpdateTodoTaskExecutorStatusRequestExecutorStatusList(
+            id='PUoiinWIpa2yH2ymhiiGiP6g',
+            is_done=True
+        )
+        update_todo_task_executor_status_request = dingtalktodo__1__0_models.UpdateTodoTaskExecutorStatusRequest(
+            executor_status_list=[
+                executor_status_list_0
+            ]
+        )
+        try:
+            client.update_todo_task_executor_status_with_options('PUoiinWIpa2yH2ymhiiGiP6g', 'OPJpwtwPVNGIFKURjrzd', update_todo_task_executor_status_request, update_todo_task_executor_status_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+    @staticmethod
+    async def main_async(
+        args: List[str],
+    ) -&gt; None:
+        client = Sample.create_client()
+        update_todo_task_executor_status_headers = dingtalktodo__1__0_models.UpdateTodoTaskExecutorStatusHeaders()
+        update_todo_task_executor_status_headers.x_acs_dingtalk_access_token = '&lt;your access token&gt;'
+        executor_status_list_0 = dingtalktodo__1__0_models.UpdateTodoTaskExecutorStatusRequestExecutorStatusList(
+            id='PUoiinWIpa2yH2ymhiiGiP6g',
+            is_done=True
+        )
+        update_todo_task_executor_status_request = dingtalktodo__1__0_models.UpdateTodoTaskExecutorStatusRequest(
+            executor_status_list=[
+                executor_status_list_0
+            ]
+        )
+        try:
+            await client.update_todo_task_executor_status_with_options_async('PUoiinWIpa2yH2ymhiiGiP6g', 'OPJpwtwPVNGIFKURjrzd', update_todo_task_executor_status_request, update_todo_task_executor_status_headers, util_models.RuntimeOptions())
+        except Exception as err:
+            if not UtilClient.empty(err.code) and not UtilClient.empty(err.message):
+                # err 中含有 code 和 message 属性，可帮助开发定位问题
+                pass
+
+
+if __name__ == '__main__':
+    Sample.main(sys.argv[1:])</code></pre></div><input type="radio" name="check-figure-2pe-ztl-lda" id="figure-2pe-ztl-lda-php-tab" /><label for="figure-2pe-ztl-lda-php-tab">PHP</label><div class="codeblock-item"><pre id="codeblock-giv-0tv-lrx" outputclass="language-php" code-type="xCode" data-tag="codeblock" class="pre codeblock language-php"><code>&lt;?php
+
+// This file is auto-generated, don't edit it. Thanks.
+namespace AlibabaCloud\SDK\Sample;
+
+use AlibabaCloud\SDK\Dingtalk\Vtodo_1_0\Dingtalk;
+use \Exception;
+use AlibabaCloud\Tea\Exception\TeaError;
+use AlibabaCloud\Tea\Utils\Utils;
+
+use Darabonba\OpenApi\Models\Config;
+use AlibabaCloud\SDK\Dingtalk\Vtodo_1_0\Models\UpdateTodoTaskExecutorStatusHeaders;
+use AlibabaCloud\SDK\Dingtalk\Vtodo_1_0\Models\UpdateTodoTaskExecutorStatusRequest\executorStatusList;
+use AlibabaCloud\SDK\Dingtalk\Vtodo_1_0\Models\UpdateTodoTaskExecutorStatusRequest;
+use AlibabaCloud\Tea\Utils\Utils\RuntimeOptions;
+
+class Sample {
+
+    /**
+     * 使用 Token 初始化账号Client
+     * @return Dingtalk Client
+     */
+    public static function createClient(){
+        $config = new Config([]);
+        $config-&gt;protocol = "https";
+        $config-&gt;regionId = "central";
+        return new Dingtalk($config);
+    }
+
+    /**
+     * @param string[] $args
+     * @return void
+     */
+    public static function main($args){
+        $client = self::createClient();
+        $updateTodoTaskExecutorStatusHeaders = new UpdateTodoTaskExecutorStatusHeaders([]);
+        $updateTodoTaskExecutorStatusHeaders-&gt;xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+        $executorStatusList0 = new executorStatusList([
+            "id" =&gt; "PUoiinWIpa2yH2ymhiiGiP6g",
+            "isDone" =&gt; true
+        ]);
+        $updateTodoTaskExecutorStatusRequest = new UpdateTodoTaskExecutorStatusRequest([
+            "executorStatusList" =&gt; [
+                $executorStatusList0
+            ]
+        ]);
+        try {
+            $client-&gt;updateTodoTaskExecutorStatusWithOptions("PUoiinWIpa2yH2ymhiiGiP6g", "OPJpwtwPVNGIFKURjrzd", $updateTodoTaskExecutorStatusRequest, $updateTodoTaskExecutorStatusHeaders, new RuntimeOptions([]));
+        }
+        catch (Exception $err) {
+            if (!($err instanceof TeaError)) {
+                $err = new TeaError([], $err-&gt;getMessage(), $err-&gt;getCode(), $err);
+            }
+            if (!Utils::empty_($err-&gt;code) &amp;&amp; !Utils::empty_($err-&gt;message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+        }
+    }
+}
+$path = __DIR__ . \DIRECTORY_SEPARATOR . '..' . \DIRECTORY_SEPARATOR . 'vendor' . \DIRECTORY_SEPARATOR . 'autoload.php';
+if (file_exists($path)) {
+    require_once $path;
+}
+Sample::main(array_slice($argv, 1));</code></pre></div><input type="radio" name="check-figure-2pe-ztl-lda" id="figure-2pe-ztl-lda-go-tab" /><label for="figure-2pe-ztl-lda-go-tab">Go</label><div class="codeblock-item"><pre id="codeblock-dch-lfe-v69" outputclass="language-go" code-type="xCode" data-tag="codeblock" class="pre codeblock language-go"><code>// This file is auto-generated, don't edit it. Thanks.
+package main
+
+import (
+  "os"
+  util  "github.com/alibabacloud-go/tea-utils/service"
+  dingtalktodo_1_0  ""github.com/alibabacloud-go/dingtalk/todo_1_0"
+  openapi  "github.com/alibabacloud-go/darabonba-openapi/client"
+  "github.com/alibabacloud-go/tea/tea"
+)
+
+
+/**
+ * 使用 Token 初始化账号Client
+ * @return Client
+ * @throws Exception
+ */
+func CreateClient () (_result *dingtalktodo_1_0.Client, _err error) {
+  config := &amp;openapi.Config{}
+  config.Protocol = tea.String("https")
+  config.RegionId = tea.String("central")
+  _result = &amp;dingtalktodo_1_0.Client{}
+  _result, _err = dingtalktodo_1_0.NewClient(config)
+  return _result, _err
+}
+
+func _main (args []*string) (_err error) {
+  client, _err := CreateClient()
+  if _err != nil {
+    return _err
+  }
+
+  updateTodoTaskExecutorStatusHeaders := &amp;dingtalktodo_1_0.UpdateTodoTaskExecutorStatusHeaders{}
+  updateTodoTaskExecutorStatusHeaders.XAcsDingtalkAccessToken = tea.String("&lt;your access token&gt;")
+  executorStatusList0 := &amp;dingtalktodo_1_0.UpdateTodoTaskExecutorStatusRequestExecutorStatusList{
+    Id: tea.String("PUoiinWIpa2yH2ymhiiGiP6g"),
+    IsDone: tea.Bool(true),
+  }
+  updateTodoTaskExecutorStatusRequest := &amp;dingtalktodo_1_0.UpdateTodoTaskExecutorStatusRequest{
+    ExecutorStatusList: []*dingtalktodo_1_0.UpdateTodoTaskExecutorStatusRequestExecutorStatusList{executorStatusList0},
+  }
+  tryErr := func()(_e error) {
+    defer func() {
+      if r := tea.Recover(recover()); r != nil {
+        _e = r
+      }
+    }()
+    _, _err = client.UpdateTodoTaskExecutorStatusWithOptions(tea.String("PUoiinWIpa2yH2ymhiiGiP6g"), tea.String("OPJpwtwPVNGIFKURjrzd"), updateTodoTaskExecutorStatusRequest, updateTodoTaskExecutorStatusHeaders, &amp;util.RuntimeOptions{})
+    if _err != nil {
+      return _err
+    }
+
+    return nil
+  }()
+
+  if tryErr != nil {
+    var err = &amp;tea.SDKError{}
+    if _t, ok := tryErr.(*tea.SDKError); ok {
+      err = _t
+    } else {
+      err.Message = tea.String(tryErr.Error())
+    }
+    if !tea.BoolValue(util.Empty(err.Code)) &amp;&amp; !tea.BoolValue(util.Empty(err.Message)) {
+      // err 中含有 code 和 message 属性，可帮助开发定位问题
+    }
+
+  }
+  return _err
+}
+
+
+func main() {
+  err := _main(tea.StringSlice(os.Args[1:]))
+  if err != nil {
+    panic(err)
+  }
+}</code></pre></div><input type="radio" name="check-figure-2pe-ztl-lda" id="figure-2pe-ztl-lda-nodejs-tab" /><label for="figure-2pe-ztl-lda-nodejs-tab">Node.js</label><div class="codeblock-item"><pre id="codeblock-3k4-i60-1sv" outputclass="language-nodejs" code-type="xCode" data-tag="codeblock" class="pre codeblock language-nodejs"><code>// This file is auto-generated, don't edit it
+import Util, * as $Util from '@alicloud/tea-util';
+import dingtalktodo_1_0, * as $dingtalktodo_1_0 from '"@alicloud/dingtalk/todo_1_0';
+import OpenApi, * as $OpenApi from '@alicloud/openapi-client';
+import * as $tea from '@alicloud/tea-typescript';
+
+
+export default class Client {
+
+  /**
+   * 使用 Token 初始化账号Client
+   * @return Client
+   * @throws Exception
+   */
+  static createClient(): dingtalktodo_1_0 {
+    let config = new $OpenApi.Config({ });
+    config.protocol = "https";
+    config.regionId = "central";
+    return new dingtalktodo_1_0(config);
+  }
+
+  static async main(args: string[]): Promise&lt;void&gt; {
+    let client = Client.createClient();
+    let updateTodoTaskExecutorStatusHeaders = new $dingtalktodo_1_0.UpdateTodoTaskExecutorStatusHeaders({ });
+    updateTodoTaskExecutorStatusHeaders.xAcsDingtalkAccessToken = "&lt;your access token&gt;";
+    let executorStatusList0 = new $dingtalktodo_1_0.UpdateTodoTaskExecutorStatusRequestExecutorStatusList({
+      id: "PUoiinWIpa2yH2ymhiiGiP6g",
+      isDone: true,
+    });
+    let updateTodoTaskExecutorStatusRequest = new $dingtalktodo_1_0.UpdateTodoTaskExecutorStatusRequest({
+      executorStatusList: [
+        executorStatusList0
+      ],
+    });
+    try {
+      await client.updateTodoTaskExecutorStatusWithOptions("PUoiinWIpa2yH2ymhiiGiP6g", "OPJpwtwPVNGIFKURjrzd", updateTodoTaskExecutorStatusRequest, updateTodoTaskExecutorStatusHeaders, new $Util.RuntimeOptions({ }));
+    } catch (err) {
+      if (!Util.empty(err.code) &amp;&amp; !Util.empty(err.message)) {
+        // err 中含有 code 和 message 属性，可帮助开发定位问题
+      }
+
+    }    
+  }
+
+}
+
+Client.main(process.argv.slice(2));</code></pre></div><input type="radio" name="check-figure-2pe-ztl-lda" id="figure-2pe-ztl-lda-csharp-tab" /><label for="figure-2pe-ztl-lda-csharp-tab">C#</label><div class="codeblock-item"><pre id="codeblock-xed-mgo-bhd" outputclass="language-csharp" code-type="xCode" data-tag="codeblock" class="pre codeblock language-csharp"><code>// This file is auto-generated, don't edit it. Thanks.
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
+
+using Tea;
+using Tea.Utils;
+
+
+namespace AlibabaCloud.SDK.Sample
+{
+    public class Sample 
+    {
+
+        /**
+         * 使用 Token 初始化账号Client
+         * @return Client
+         * @throws Exception
+         */
+        public static AlibabaCloud.SDK.Dingtalktodo_1_0.Client CreateClient()
+        {
+            AlibabaCloud.OpenApiClient.Models.Config config = new AlibabaCloud.OpenApiClient.Models.Config();
+            config.Protocol = "https";
+            config.RegionId = "central";
+            return new AlibabaCloud.SDK.Dingtalktodo_1_0.Client(config);
+        }
+
+        public static void Main(string[] args)
+        {
+            AlibabaCloud.SDK.Dingtalktodo_1_0.Client client = CreateClient();
+            AlibabaCloud.SDK.Dingtalktodo_1_0.Models.UpdateTodoTaskExecutorStatusHeaders updateTodoTaskExecutorStatusHeaders = new AlibabaCloud.SDK.Dingtalktodo_1_0.Models.UpdateTodoTaskExecutorStatusHeaders();
+            updateTodoTaskExecutorStatusHeaders.XAcsDingtalkAccessToken = "&lt;your access token&gt;";
+            AlibabaCloud.SDK.Dingtalktodo_1_0.Models.UpdateTodoTaskExecutorStatusRequest.UpdateTodoTaskExecutorStatusRequestExecutorStatusList executorStatusList0 = new AlibabaCloud.SDK.Dingtalktodo_1_0.Models.UpdateTodoTaskExecutorStatusRequest.UpdateTodoTaskExecutorStatusRequestExecutorStatusList
+            {
+                Id = "PUoiinWIpa2yH2ymhiiGiP6g",
+                IsDone = true,
+            };
+            AlibabaCloud.SDK.Dingtalktodo_1_0.Models.UpdateTodoTaskExecutorStatusRequest updateTodoTaskExecutorStatusRequest = new AlibabaCloud.SDK.Dingtalktodo_1_0.Models.UpdateTodoTaskExecutorStatusRequest
+            {
+                ExecutorStatusList = new List&lt;AlibabaCloud.SDK.Dingtalktodo_1_0.Models.UpdateTodoTaskExecutorStatusRequest.UpdateTodoTaskExecutorStatusRequestExecutorStatusList&gt;
+                {
+                    executorStatusList0
+                },
+            };
+            try
+            {
+                client.UpdateTodoTaskExecutorStatusWithOptions("PUoiinWIpa2yH2ymhiiGiP6g", "OPJpwtwPVNGIFKURjrzd", updateTodoTaskExecutorStatusRequest, updateTodoTaskExecutorStatusHeaders, new AlibabaCloud.TeaUtil.Models.RuntimeOptions());
+            }
+            catch (TeaException err)
+            {
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+            catch (Exception _err)
+            {
+                TeaException err = new TeaException(new Dictionary&lt;string, object&gt;
+                {
+                    { "message", _err.Message }
+                });
+                if (!AlibabaCloud.TeaUtil.Common.Empty(err.Code) &amp;&amp; !AlibabaCloud.TeaUtil.Common.Empty(err.Message))
+                {
+                    // err 中含有 code 和 message 属性，可帮助开发定位问题
+                }
+            }
+        }
+
+
+    }
+}</code></pre></div><input type="radio" name="check-figure-2pe-ztl-lda" id="figure-2pe-ztl-lda-cpp-tab" /><label for="figure-2pe-ztl-lda-cpp-tab">C++</label><div class="codeblock-item"><pre id="codeblock-jmx-xio-pnm" outputclass="language-cpp" code-type="xCode" data-tag="codeblock" class="pre codeblock language-cpp"><code>// This file is auto-generated, don't edit it. Thanks.
+
+#include &lt;alibabacloud/dingtalktodo__1__0.hpp&gt;
+#include &lt;alibabacloud/open_api.hpp&gt;
+#include &lt;boost/any.hpp&gt;
+#include &lt;darabonba/core.hpp&gt;
+#include &lt;darabonba/util.hpp&gt;
+#include &lt;iostream&gt;
+#include &lt;map&gt;
+#include &lt;vector&gt;
+
+using namespace std;
+
+Alibabacloud_Dingtalktodo_1_0::Client createClient() {
+  shared_ptr&lt;Alibabacloud_OpenApi::Config&gt; config = make_shared&lt;Alibabacloud_OpenApi::Config&gt;();
+  config-&gt;protocol = make_shared&lt;string&gt;("https");
+  config-&gt;regionId = make_shared&lt;string&gt;("central");
+  return Alibabacloud_Dingtalktodo_1_0::Client(config);
+}
+
+int main(int argc, char *args[]) {
+  args++;
+  shared_ptr&lt;Alibabacloud_Dingtalktodo_1_0::Client&gt; client = make_shared&lt;Alibabacloud_Dingtalktodo_1_0::Client&gt;(createClient());
+  shared_ptr&lt;Alibabacloud_Dingtalktodo_1_0::UpdateTodoTaskExecutorStatusHeaders&gt; updateTodoTaskExecutorStatusHeaders = make_shared&lt;Alibabacloud_Dingtalktodo_1_0::UpdateTodoTaskExecutorStatusHeaders&gt;();
+  updateTodoTaskExecutorStatusHeaders-&gt;xAcsDingtalkAccessToken = make_shared&lt;string&gt;("&lt;your access token&gt;");
+  shared_ptr&lt;Alibabacloud_Dingtalktodo_1_0::UpdateTodoTaskExecutorStatusRequestExecutorStatusList&gt; executorStatusList0 = make_shared&lt;Alibabacloud_Dingtalktodo_1_0::UpdateTodoTaskExecutorStatusRequestExecutorStatusList&gt;(map&lt;string, boost::any&gt;({
+    {"id", boost::any(string("PUoiinWIpa2yH2ymhiiGiP6g"))},
+    {"isDone", boost::any(true)}
+  }));
+  shared_ptr&lt;Alibabacloud_Dingtalktodo_1_0::UpdateTodoTaskExecutorStatusRequest&gt; updateTodoTaskExecutorStatusRequest = make_shared&lt;Alibabacloud_Dingtalktodo_1_0::UpdateTodoTaskExecutorStatusRequest&gt;(map&lt;string, boost::any&gt;({
+    {"executorStatusList", boost::any(vector&lt;Alibabacloud_Dingtalktodo_1_0::UpdateTodoTaskExecutorStatusRequestExecutorStatusList&gt;({
+      executorStatusList0
+    }))}
+  }));
+  try {
+    client-&gt;updateTodoTaskExecutorStatusWithOptions(make_shared&lt;string&gt;("PUoiinWIpa2yH2ymhiiGiP6g"), make_shared&lt;string&gt;("OPJpwtwPVNGIFKURjrzd"), updateTodoTaskExecutorStatusRequest, updateTodoTaskExecutorStatusHeaders, make_shared&lt;Darabonba_Util::RuntimeOptions&gt;(Darabonba_Util::RuntimeOptions()));
+  }
+  catch (std::exception &amp;err) {
+    if (!Darabonba_Util::Client::empty(err.code) &amp;&amp; !Darabonba_Util::Client::empty(err.message)) {
+      // err 中含有 code 和 message 属性，可帮助开发定位问题
+    }
+  }
+}</code></pre></div></div></section></section><section id="section-response-1" class="section icms-module" data-tag="section" data-source="manual"><h2 id="h2-response-1" data-tag="h2" class="h2">响应</h2><section id="section-response-parameter" class="section"><h3 data-tag="h3" id="h2-9cc-mak-6ik" class="h3 title">响应体</h3><table id="3ce3577941ynv" tablewidth="710" tablecolswidth="213 142 355" autofit="false" class="table"><colgroup colwidth="0.9*" style="width:30.00%"></colgroup><colgroup colwidth="0.6*" style="width:20.00%"></colgroup><colgroup colwidth="1.5*" style="width:50.00%"></colgroup><tbody class="tbody"><tr id="3ce3577a41943"><td id="3ce3577b4146z" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="3ce3577c41he2">名称</p></td><td id="3ce3577d41jzl" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="3ce3577e41mx3">类型</p></td><td id="3ce3577f41j7y" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="3ce35780418em">描述</p></td></tr><tr outputclass="row row-level-1" id="3ce357814134a" class="row row-level-1"><td id="3ce3578241vyf" rowspan="1" colspan="1"><p id="3ce3578341cam">result</p></td><td id="3ce3578441qbt" rowspan="1" colspan="1"><p id="3ce35785410tw">Boolean</p></td><td id="3ce35786415c6" rowspan="1" colspan="1"><p id="3ce3578741ao9">更新结果。true表示成功。</p></td></tr></tbody></table></section><section id="section-response-body-example" class="section"><h3 id="h3-response-body-example" data-tag="h3" class="h3">响应体示例</h3><pre id="3c6fae124161z" outputclass="language-json" code-type="xCode" data-tag="codeblock" class="pre codeblock language-json"><code>HTTP/1.1 200 OK
+Content-Type:application/json
+
+{
+  "result" : true
+}</code></pre></section><section id="section-error-code-1" class="section"><h3 id="h3-error-code-1" data-tag="h3" class="h3">错误码</h3><p data-tag="p" id="p-error-code-global-guide" class="p">若调用该接口报错，可根据错误信息在<a href="https://open.dingtalk.com/document/development/server-api-error-codes-1" id="a-error-code-global-guide">全局错误码</a>文档中查找解决方案。</p><table id="3ce3578a417ur" tablewidth="709" tablecolswidth="142 177 177 213" autofit="false" class="table"><colgroup colwidth="0.8*" style="width:20.03%"></colgroup><colgroup colwidth="1*" style="width:24.96%"></colgroup><colgroup colwidth="1*" style="width:24.96%"></colgroup><colgroup colwidth="1.2*" style="width:30.04%"></colgroup><tbody class="tbody"><tr id="3ce3578b41t6e"><td id="3ce37e80410b6" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="3ce37e8141bve">HttpCode</p></td><td id="3ce37e8241vg9" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="3ce37e8341r12">错误码</p></td><td id="3ce37e84411w5" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="3ce37e8541a9w">错误信息</p></td><td id="3ce37e86414dl" rowspan="1" style="background-color:#e5e5e5" colspan="1"><p id="3ce37e8741fv4">说明</p></td></tr><tr id="3ce37e8841771"><td id="3ce37e89410vu" rowspan="1" colspan="1"><p id="3ce37e8a41fu6">400</p></td><td id="3ce37e8b41rct" rowspan="1" colspan="1"><p id="3ce37e8c41ojk">todo.taskExecutorStatusUpdate.paramError</p></td><td id="3ce37e8d411rh" rowspan="1" colspan="1"><p id="3ce37e8e41gr0">todo.taskExecutorStatusUpdate.paramError</p></td><td id="3ce37e8f41c75" rowspan="1" colspan="1"><p id="3ce37e9041sed">更新待办执行者状态参数异常</p></td></tr><tr id="3ce37e91413hn"><td id="3ce37e9241t9u" rowspan="1" colspan="1"><p id="3ce37e9341rtv">400</p></td><td id="3ce37e9441dcn" rowspan="1" colspan="1"><p id="3ce37e9541p0u">todo.taskExecutorStatusUpdate.paramError</p></td><td id="3ce37e96413nu" rowspan="1" colspan="1"><p id="3ce37e9741wi9">task not exist</p></td><td id="3ce37e9841v3f" rowspan="1" colspan="1"><p id="3ce37e99413zr">待办任务不存在</p></td></tr><tr id="3ce37e9a41ujn"><td id="3ce37e9b41zi0" rowspan="1" colspan="1"><p id="3ce37e9c41yxm">400</p></td><td id="3ce37e9d41jcb" rowspan="1" colspan="1"><p id="3ce37e9e412b7">todo.taskExecutorStatusUpdate.paramError</p></td><td id="3ce3a59041qm9" rowspan="1" colspan="1"><p id="3ce3a59141ba3">task not belong to bizTag</p></td><td id="3ce3a592418j5" rowspan="1" colspan="1"><p id="3ce3a59341uyr">待办任务不属于该应用</p></td></tr><tr id="3ce3a59441z0a"><td id="3ce3a595410ef" rowspan="1" colspan="1"><p id="3ce3a59641nx3">400</p></td><td id="3ce3a59741n5x" rowspan="1" colspan="1"><p id="3ce3a598414ly">todo.taskExecutorStatusUpdate.paramError</p></td><td id="3ce3a59941l80" rowspan="1" colspan="1"><p id="3ce3a59a413xa">executors is oversize</p></td><td id="3ce3a59b41q20" rowspan="1" colspan="1"><p id="3ce3a59c415o7">待办执行人超出限制</p></td></tr><tr id="3ce3a59d41wbh"><td id="3ce3a59e41enu" rowspan="1" colspan="1"><p id="3ce3a59f411g9">500</p></td><td id="3ce3a5a0410kw" rowspan="1" colspan="1"><p id="3ce3a5a141ukf">todo.taskExecutorStatusUpdate.systemError</p></td><td id="3ce3a5a241vki" rowspan="1" colspan="1"><p id="3ce3a5a341hvl">todo.taskExecutorStatusUpdate.systemError</p></td><td id="3ce3a5a441qpc" rowspan="1" colspan="1"><p id="3ce3a5a541wku">更新待办执行者状态系统异常</p></td></tr></tbody></table></section></section></div></main></body></html>
