@@ -1401,6 +1401,124 @@ class OA审批_审批实例__:
     def __init__(self, _client: DingTalkClient):
         self.__client: DingTalkClient = _client
 
+    def 发起审批实例(
+            self,
+            process_code: str,
+            originator_user_id: str,
+            form_component_values: List[Dict],
+            dept_id: int | None = None,
+            approvers: List[Dict] | None = None,
+            cc_list: List[str] | None = None,
+            cc_position: Literal["START", "FINISH", "START_FINISH"] | None = None,
+            target_select_actioners: List[Dict] | None = None,
+            microapp_agent_id: int | None = None,
+            biz_detail_page_url: str | None = None,
+    ) -> dict:
+        """
+        调用本接口，为指定发起人创建并发起一个钉钉OA审批实例。
+
+        根据文档 [发起审批实例](https://open.dingtalk.com/document/development/create-an-approval-instance?update_at=2026-06-03)
+        修订，更新于 2026-06-03。
+
+        本方法对应 ``POST /v1.0/workflow/processInstances``，调用应用需要申请
+        ``Workflow.Instance.Write``（工作流实例写权限）。假勤、人事、财税、法务、商旅等套件的审批模板，
+        暂不支持通过本接口直接发起。审批实例创建成功后，无法再通过API修改实例信息。
+
+        ``originator_user_id`` 决定审批单上显示的发起人，因此可以传入某位企业成员的userId，
+        由应用为该成员发起审批。接口没有独立的“代提交人”或“实际操作人”字段：这并不是会额外记录代理人
+        身份的代理提交，审批单发起人就是此参数指定的成员。该成员必须为当前企业的在职成员，并拥有对应
+        审批模板的发起权限。
+
+        审批流程有两种选择方式：
+
+        1. 不传 ``approvers``，复用OA管理后台为模板配置的审批流和抄送人。此时接口传入的
+           ``cc_list``、``cc_position`` 不生效；通常必须传入发起人所属的 ``dept_id``。如果流程包含
+           发起人自选节点，还需要通过 ``target_select_actioners`` 指定自选节点人员。
+        2. 传入 ``approvers``，用参数中的审批人列表覆盖后台默认流程。此时可以同时指定
+           ``cc_list`` 和 ``cc_position``，而 ``dept_id`` 可以不传。该方式不支持模板的手写签名、
+           表单操作权限等高级流程设置，也不能将审批人设置为“发起人自选”。
+
+        :param process_code: 审批流模板的唯一码，可从审批模板编辑页面的URL中获取。
+        :param originator_user_id: 审批发起人的userId。传入其他企业成员的userId时，审批单将以该成员为
+            发起人；该成员须在职且有权发起此模板。
+        :param form_component_values: 表单控件值列表，最多150项。普通控件通常传
+            ``{"name": "控件名称", "value": "控件值"}``；还可按官方FormComponentValues定义传入
+            ``id``、``bizAlias``、``extValue``、``componentType`` 和递归的 ``details``。``name`` 必须与
+            模板组件的label一致，``value`` 即使承载JSON数据也必须先序列化为字符串。
+        :param dept_id: 发起人所属部门ID。复用后台审批流时必填；根部门传 ``-1``。指定的部门必须确实
+            包含该发起人。显式传入 ``approvers`` 时可不填。
+        :param approvers: 直接指定的审批节点列表，最多20项。每项格式为
+            ``{"actionType": "AND|OR|NONE", "userIds": ["审批人userId"]}``，分别表示会签、或签和
+            单人审批。传入后会覆盖OA后台配置的默认审批流。
+        :param cc_list: 抄送人userId列表，最多50人。仅在显式传入 ``approvers`` 时生效。
+        :param cc_position: 抄送时机：``START`` 表示开始时，``FINISH`` 表示结束时，
+            ``START_FINISH`` 表示开始和结束时。
+        :param target_select_actioners: 复用后台审批流时，发起人自选节点的人员列表，最多20项。每项格式为
+            ``{"actionerKey": "自选节点规则key", "actionerUserIds": ["操作人userId"]}``；
+            ``actionerKey`` 可通过“获取审批单流程中的节点信息”接口返回的actorKey取得。
+        :param microapp_agent_id: 应用AgentId。不传时自动使用创建 ``DingTalkClient`` 时配置的
+            ``agent_id``；客户端也未配置时不向钉钉传此字段。
+        :param biz_detail_page_url: 第三方审批系统的审批单详情页地址，最长1024字符。指定后，从钉钉OA审批、
+            待办或消息卡片进入时会跳转到该地址；此能力为OA高级版专享功能。
+
+        :return: 钉钉接口响应。成功时格式为 ``{"instanceId": "审批实例ID"}``。
+
+        示例：复用OA后台流程，为指定员工发起审批::
+
+            result = dingtalk.OA审批.审批实例.发起审批实例(
+                process_code="PROC-xxxxxxxx",
+                originator_user_id="manager01",
+                dept_id=123456,
+                form_component_values=[
+                    {"name": "申请事由", "value": "采购办公设备"},
+                    {"name": "申请金额", "value": "2000"},
+                ],
+                target_select_actioners=[
+                    {
+                        "actionerKey": "manual_approval_node",
+                        "actionerUserIds": ["approver01"],
+                    }
+                ],
+            )
+
+        示例：直接指定审批流程和抄送人::
+
+            result = dingtalk.OA审批.审批实例.发起审批实例(
+                process_code="PROC-xxxxxxxx",
+                originator_user_id="employee01",
+                form_component_values=[
+                    {"name": "申请事由", "value": "合同用印"},
+                ],
+                approvers=[
+                    {"actionType": "NONE", "userIds": ["leader01"]},
+                    {"actionType": "AND", "userIds": ["legal01", "legal02"]},
+                ],
+                cc_list=["assistant01"],
+                cc_position="START_FINISH",
+            )
+        """
+        payload = {
+            "processCode": process_code,
+            "originatorUserId": originator_user_id,
+            "deptId": dept_id,
+            "microappAgentId": (
+                microapp_agent_id if microapp_agent_id is not None else self.__client.agent_id
+            ),
+            "approvers": approvers,
+            "ccList": cc_list,
+            "ccPosition": cc_position,
+            "targetSelectActioners": target_select_actioners,
+            "formComponentValues": form_component_values,
+            "bizDetailPageUrl": biz_detail_page_url,
+        }
+
+        response = self.__client.api(
+            method="POST",
+            path="/v1.0/workflow/processInstances",
+            json=_remove_none_values(payload),
+        )
+        return response.json()
+
     class CommentAttachment(BaseModel):
         spaceId: str = Field(description="钉盘空间ID")
         fileSize: str = Field(description="文件大小")
