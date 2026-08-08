@@ -1659,6 +1659,64 @@ class OA审批_审批钉盘__:
     def __init__(self, _client: DingTalkClient):
         self.__client: DingTalkClient = _client
 
+    def 下载审批附件(
+            self,
+            process_instance_id: str,
+            file_id: str,
+            with_comment_attachment: bool = False,
+    ) -> dict:
+        """
+        调用本接口，获取钉钉官方OA审批实例中附件的临时下载地址。
+
+        根据文档 [下载审批附件](https://open.dingtalk.com/document/development/download-an-approval-attachment?update_at=2026-06-03)
+        修订，更新于 2026-06-03。
+
+        本方法对应官方OA审批的标准接口
+        ``POST /v1.0/workflow/processInstances/spaces/files/urls/download``，调用应用需要申请
+        ``Workflow.Instance.Write``（工作流实例写权限），不是OA高级版专享接口。
+
+        接口只负责授权并返回 ``downloadUri``，不会在本次调用中直接返回附件文件内容。下载地址的有效期为
+        15分钟，调用方应在有效期内自行发起HTTP GET请求下载文件，不应将该地址长期保存。
+
+        :param process_instance_id: 审批实例ID，可通过“发起审批实例”接口返回的 ``instanceId``，或
+            “获取审批实例ID列表”接口返回的实例ID取得。
+        :param file_id: 审批附件的fileId，可从“获取单个审批实例详情”接口返回的表单附件信息中取得。
+            默认仅支持审批表单组件中上传的附件；评论中上传的附件fileId不支持按普通表单附件方式获取
+            下载地址。
+        :param with_comment_attachment: 是否将评论中的附件纳入查找范围。默认为 ``False``，即忽略评论附件。
+            Python参数使用正确拼写 ``attachment``，请求时会映射为钉钉接口定义的字段名
+            ``withCommentAttatchment``（官方字段中的 ``Attatchment`` 即为该接口的原始拼写）。
+
+        :return: 钉钉接口响应。成功时格式如下::
+
+            {
+                "success": True,
+                "result": {
+                    "spaceId": 123456,
+                    "fileId": "file-id",
+                    "downloadUri": "https://..."
+                }
+            }
+
+        示例::
+
+            result = dingtalk.OA审批.审批钉盘.下载审批附件(
+                process_instance_id="approval-instance-id",
+                file_id="approval-file-id",
+            )
+            download_uri = result["result"]["downloadUri"]
+        """
+        response = self.__client.api(
+            method="POST",
+            path="/v1.0/workflow/processInstances/spaces/files/urls/download",
+            json={
+                "processInstanceId": process_instance_id,
+                "fileId": file_id,
+                "withCommentAttatchment": with_comment_attachment,
+            },
+        )
+        return response.json()
+
     def 获取审批钉盘空间信息(self, user_id: str) -> dict:
         """
         调用本接口，获取审批钉盘空间的ID并授予当前用户上传附件的权限。
